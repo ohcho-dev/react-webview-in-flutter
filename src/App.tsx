@@ -1,9 +1,10 @@
-import "./App.css";
+import CommonTest from "./components/CommonTest";
+import "./scss/_global.scss";
 
 function App() {
   return (
     <div className="App">
-      <span>hello there</span>
+      <CommonTest />
     </div>
   );
 }
