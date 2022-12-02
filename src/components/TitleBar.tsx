@@ -2,16 +2,17 @@ import styled from "styled-components";
 
 const TitleBarWrap = styled.section`
   width: 100%;
-  height: 16vw;
-  padding: 5.333vw;
+  height: 6rem;
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  border-bottom: 0.133vw solid rgba(0, 0, 0, 0.15);
+  border-bottom: 0.05rem solid rgba(0, 0, 0, 0.15);
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 10;
 `;
 const ProfileWrap = styled.div`
   display: flex;
@@ -20,21 +21,26 @@ const ProfileWrap = styled.div`
   width: 100%;
 `;
 const ProfileImageWrap = styled.div`
-  width: 8.533vw;
+  width: 3.2rem;
 `;
 const ChildrenName = styled.div`
-  margin-left: 2.133vw;
+  max-width: 19rem;
+  height: 1.9rem;
+  margin-left: 0.8rem;
   font-weight: 600;
-  font-size: 4.267vw;
-  line-height: 5.067vw;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
   color: #000000;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 const ArrowWrap = styled.div`
-  width: 2.133vw;
-  margin-left: 1.867vw;
+  width: 0.8rem;
+  margin-left: 0.7rem;
 `;
 const PushIconWrap = styled.div`
-  width: 7.467vw;
+  width: 2.8rem;
 `;
 
 const MainTitleBar = () => {

@@ -1,12 +1,14 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Home = () => {
   return (
-    <div style={{ fontSize: "500px" }}>
-      home!
-      <br />
-      scroll <br /> test <br />
-    </div>
+    <Link to="/detail">
+      <div style={{ fontSize: "3rem", background: "#f00" }}>
+        home!
+        <br />
+        scroll <br /> test <br />
+      </div>
+    </Link>
   );
 };
 

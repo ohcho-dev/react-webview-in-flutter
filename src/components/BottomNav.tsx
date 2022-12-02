@@ -4,32 +4,30 @@ import styled from "styled-components";
 
 const BottomNavWrap = styled.ul`
   width: 100%;
-  height: 16vw;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   background: #fff;
-  border-top: 0.133vw solid rgba(0, 0, 0, 0.15);
-  padding-bottom: calc(env(safe-area-inset-bottom) - 1.333vw);
-  padding-bottom: calc(constant(safe-area-inset-button) - 1.333vw);
+  border-top: 0.05rem solid rgba(0, 0, 0, 0.15);
   position: fixed;
   bottom: 0;
-  z-index: 10;
+  z-index: 20;
 `;
 const Lists = styled.li`
   width: 100%;
   text-align: center;
-  padding-top: 2.16vw;
+  padding-top: 0.8rem;
 `;
 const ImageWrap = styled.div`
-  width: 8vw;
-  height: 8vw;
+  width: 3rem;
+  height: 3rem;
   margin: 0 auto;
 `;
 const Text = styled.div`
   font-weight: 500;
-  font-size: 2.933vw;
-  line-height: 5.867vw;
-  letter-spacing: 0.107vw;
+  font-size: 1.1rem;
+  line-height: 2.2rem;
+  letter-spacing: 0.04rem;
   color: #747474;
 `;
 

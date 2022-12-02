@@ -1,33 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import LayoutBasePage from "./LayoutBasePage";
-import BottomNav from "../components/BottomNav";
+import { useLocation } from "react-router-dom";
+
 import MainTitleBar from "../components/TitleBar";
+import BottomNav from "../components/BottomNav";
+import LayoutBasePage from "./LayoutBasePage";
+
+import MainTransition from "../components/transition/MainTransition";
 
 const MainPage = styled.div``;
 const MarginTopBox = styled.div`
   width: 100%;
-  height: 16vw;
+  height: 6rem;
 `;
-const Contents = styled.main`
-  overflow-x: hidden;
-  overflow-y: auto;
-  padding-bottom: calc(env(safe-area-inset-bottom) - 1.333vw + 20vw);
-  padding-bottom: calc(constant(safe-area-inset-button) - 1.333vw + 20vw);
-`;
+const Contents = styled.main``;
 
 interface LayoutMainPageProps {
   children?: React.ReactNode;
 }
 
 const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
+  const location = useLocation();
   return (
     <LayoutBasePage>
       <MainPage>
         <MainTitleBar />
-        <MarginTopBox />
-        <Contents>{children}</Contents>
         <BottomNav />
+
+        <MainTransition transitionKey={location.pathname}>
+          <>
+            <MarginTopBox />
+            <Contents>{children}</Contents>
+          </>
+        </MainTransition>
       </MainPage>
     </LayoutBasePage>
   );
