@@ -1,6 +1,6 @@
 # Repo 소개
 
-쑥토어 웹뷰를 위한 repository입니다.
+엘턴 앱(쑥토어) 웹뷰를 위한 repository입니다.
 
 ## 목차
 
@@ -8,6 +8,7 @@
 2. [개발 규칙](#dev-rules)
    1. [브랜치](#branch)
    2. [커밋 메시지 형식](#commit)
+3. [CSS 규칙](#css)
 
 ## 프로젝트 빌드 <a name="how-to-use"></a>
 
@@ -21,7 +22,7 @@ $ git checkout dev
 **npm 설치**
 
 ```
-npm install --force or npm install --legacy-peer-deps
+npm install
 ```
 
 **개발 환경 실행**
@@ -63,6 +64,21 @@ npm run build
 - Chore: 기타 todo
 - Rese: 조사 할 것 들
 
-### 쑥토어 피그마
+## CSS 규칙<a name="css"></a>
 
-- https://www.figma.com/file/J9CtDX2VB2OoFyCoF8cVYK/%EA%B8%B0%ED%9A%8D
+**Z-index**
+애니메이션 효과를 위해 모든 부분에 position: fixed; 를 적용
+
+- 10 - TitleBar
+- 20 - BottomBar
+- 100 - 상세페이지 진입
+
+**반응형 기준**
+
+- html { font-size: 2.66666667vw } 적용 (핸드폰 가로일 경우는 font-size: 62.5%)
+- rem 단위 사용 (1rem = 10px)
+
+## 쑥토어 피그마
+
+- 설계: https://www.figma.com/file/J9CtDX2VB2OoFyCoF8cVYK/%EA%B8%B0%ED%9A%8D
+- 디자인: https://www.figma.com/file/A6oZ2ekhqiuwF4UZMSKjoS/%EB%94%94%EC%9E%90%EC%9D%B8?node-id=103%3A18&t=PadbO6Py0kOBOyvz-0
