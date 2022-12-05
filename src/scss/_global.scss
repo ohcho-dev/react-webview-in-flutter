@@ -3,7 +3,11 @@ $main-color: #f00;
 html {
   font-size: 2.66666667vw;
 }
-
+@media (orientation: landscape) {
+  html {
+    font-size: 62.5%;
+  }
+}
 body {
   margin: 0;
   font-family: "Pretendard Variable", Pretendard, Cafe24ClassicType-Regular,
