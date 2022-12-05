@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const BottomNavWrap = styled.ul`
   width: 100%;
-  height: 6rem;
+  height: 9rem;
   display: flex;
   justify-content: space-between;
   background: #fff;
@@ -13,16 +13,19 @@ const BottomNavWrap = styled.ul`
   bottom: 0;
   z-index: 20;
 `;
+
 const Lists = styled.li`
   width: 100%;
   text-align: center;
   padding-top: 0.8rem;
 `;
+
 const ImageWrap = styled.div`
   width: 3rem;
   height: 3rem;
   margin: 0 auto;
 `;
+
 const Text = styled.div`
   font-weight: 500;
   font-size: 1.1rem;
