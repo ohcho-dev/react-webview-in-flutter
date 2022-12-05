@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -74,13 +73,12 @@ const bottomNavData = [
 
 const BottomNav = () => {
   const { pathname } = useLocation();
-
   return (
     <BottomNavWrap>
       {bottomNavData.map((item) => {
         return (
           <Lists key={item.id}>
-            <NavLink to={item.link}>
+            <NavLink to={item.link} replace={true}>
               <ImageWrap>
                 <img
                   src={

@@ -106,7 +106,9 @@ const App: React.FC = () => {
   useEffect(() => {
     // if (localStorage.getItem('jwt')) {
     let path = window.location.pathname;
-    path === "/" ? navigate("/home") : navigate(path);
+    path === "/"
+      ? navigate("/home", { replace: true })
+      : navigate(path, { replace: true });
     // } else {
     //   navigate('/login');
     // }
@@ -126,7 +128,7 @@ const App: React.FC = () => {
   };
 
   let classNames = "";
-  if (navigationType === "PUSH") {
+  if (navigationType === "PUSH" || navigationType === "REPLACE") {
     classNames = "forward-" + getSceneConfig(location).enter;
   } else if (navigationType === "POP") {
     classNames = "back-" + getSceneConfig(oldLocation).exit;
