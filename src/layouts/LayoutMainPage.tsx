@@ -6,8 +6,7 @@ import MainTitleBar from "../components/TitleBar";
 import BottomNav from "../components/BottomNav";
 import LayoutBasePage from "./LayoutBasePage";
 
-const MainPage = styled.div``;
-const Content = styled.main`
+const MainPage = styled.main`
   width: 100%;
   height: calc(100vh - 6rem);
   position: fixed;
@@ -15,6 +14,9 @@ const Content = styled.main`
   left: 0;
   overflow-y: scroll;
   overflow-x: hidden;
+`;
+const Content = styled.div`
+  margin-bottom: 6rem;
 `;
 
 interface LayoutMainPageProps {

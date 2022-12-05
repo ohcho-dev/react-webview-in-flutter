@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -42,6 +43,9 @@ const ArrowWrap = styled.div`
 const PushIconWrap = styled.div`
   width: 2.8rem;
 `;
+const HistoryBackIconWrap = styled.div`
+  width: 2.8rem;
+`;
 
 const MainTitleBar = () => {
   return (
@@ -63,7 +67,14 @@ const MainTitleBar = () => {
 };
 
 export const DetailTitleBar = () => {
-  return <TitleBarWrap></TitleBarWrap>;
+  const navigate = useNavigate();
+  return (
+    <TitleBarWrap>
+      <HistoryBackIconWrap onClick={() => navigate(-1)}>
+        <img src="/images/icon-back.svg" width="100%" />
+      </HistoryBackIconWrap>
+    </TitleBarWrap>
+  );
 };
 
 export default MainTitleBar;
