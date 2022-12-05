@@ -65,7 +65,7 @@ const bottomNavData = [
     name: "MY",
     imgUrl: "/images/my_off.svg",
     selectedImgUrl: "/images/my_on.svg",
-    link: "/mypage",
+    link: "/my",
   },
 ];
 
@@ -73,29 +73,27 @@ const BottomNav = () => {
   const { pathname } = useLocation();
 
   return (
-    <nav>
-      <BottomNavWrap>
-        {bottomNavData.map((item) => {
-          return (
-            <Lists key={item.id}>
-              <NavLink to={item.link}>
-                <ImageWrap>
-                  <img
-                    src={
-                      pathname === item.link ? item.selectedImgUrl : item.imgUrl
-                    }
-                    width="90%"
-                  />
-                </ImageWrap>
-                <Text style={pathname === item.link ? { color: "#000" } : {}}>
-                  {item.name}
-                </Text>
-              </NavLink>
-            </Lists>
-          );
-        })}
-      </BottomNavWrap>
-    </nav>
+    <BottomNavWrap>
+      {bottomNavData.map((item) => {
+        return (
+          <Lists key={item.id}>
+            <NavLink to={item.link}>
+              <ImageWrap>
+                <img
+                  src={
+                    pathname === item.link ? item.selectedImgUrl : item.imgUrl
+                  }
+                  width="90%"
+                />
+              </ImageWrap>
+              <Text style={pathname === item.link ? { color: "#000" } : {}}>
+                {item.name}
+              </Text>
+            </NavLink>
+          </Lists>
+        );
+      })}
+    </BottomNavWrap>
   );
 };
 

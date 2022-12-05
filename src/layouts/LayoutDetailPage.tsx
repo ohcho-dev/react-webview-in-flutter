@@ -4,10 +4,17 @@ import { useLocation } from "react-router-dom";
 
 import LayoutBasePage from "./LayoutBasePage";
 
-const DetailPage = styled.div`
+const DetailPage = styled.main`
   border: solid 1px #f00;
   background: #f00;
-  height: 50vh;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  overflow-y: scroll;
+  overflow-x: hidden;
 `;
 
 interface LayoutDetailPageProps {
