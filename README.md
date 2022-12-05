@@ -66,14 +66,15 @@ npm run build
 
 ## CSS 규칙<a name="css"></a>
 
-**Z-index**
+### Z-index
+
 애니메이션 효과를 위해 모든 부분에 position: fixed; 를 적용
 
 - 10 - TitleBar
 - 20 - BottomBar
 - 100 - 상세페이지 진입
 
-**반응형 기준**
+### 반응형 기준
 
 - html { font-size: 2.66666667vw } 적용 (핸드폰 가로일 경우는 font-size: 62.5%)
 - rem 단위 사용 (1rem = 10px)
