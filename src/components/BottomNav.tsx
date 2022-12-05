@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const BottomNavWrap = styled.ul`
   width: 100%;
-  height: 9rem;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   background: #fff;
