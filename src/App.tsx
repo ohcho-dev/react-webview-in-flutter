@@ -1,4 +1,4 @@
-import React, { Component, ReactNode, useEffect } from "react";
+import React, { Component, ReactNode, Suspense, useEffect } from "react";
 import {
   Route,
   Routes,
@@ -15,6 +15,7 @@ import "./scss/_slideTransition.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueryErrorResetBoundary } from "react-query";
+import LoadingSpinner from "./components/common/LoadingSpinner";
 
 let oldLocation: any = null;
 
@@ -54,7 +55,7 @@ interface State {
   hasError: boolean;
 }
 
-class ErrorBoundary extends Component<Props, State> {
+export class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,
   };
@@ -143,13 +144,15 @@ const App: React.FC = () => {
     >
       <CSSTransition timeout={300} key={location.pathname}>
         <div style={{ width: "100%", height: "100vh" }}>
-          <ErrorBoundary onReset={reset}>
-            <Routes location={location}>
-              {RouterConfig.map((config, index) => {
-                return <Route key={index} {...config} />;
-              })}
-            </Routes>
-          </ErrorBoundary>
+          <Suspense fallback={<LoadingSpinner />}>
+            <ErrorBoundary onReset={reset}>
+              <Routes location={location}>
+                {RouterConfig.map((config, index) => {
+                  return <Route key={index} {...config} />;
+                })}
+              </Routes>
+            </ErrorBoundary>
+          </Suspense>
         </div>
       </CSSTransition>
     </TransitionGroup>

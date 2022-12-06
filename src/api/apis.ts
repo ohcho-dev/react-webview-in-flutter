@@ -9,7 +9,7 @@ const api = axios.create({
 });
 
 export const apis = {
-  // getList: () => api.get("https://pokeapi.co/api/v2/pokemon/ditto"),
+  getList: () => api.get("https://pokeapi.co/api/v2/pokemon/ditto"),
   getBerry: () => api.get("/call"),
   // ... more apis
 };
