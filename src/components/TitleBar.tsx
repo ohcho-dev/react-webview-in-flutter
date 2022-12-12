@@ -47,6 +47,18 @@ const HistoryBackIconWrap = styled.div`
   width: 2.8rem;
 `;
 
+const ButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
+
+  div {
+    margin-left: 8px;
+  }
+`;
+const ShareBtn = styled.div`
+  width: 2.8rem;
+`;
+
 const MainTitleBar = () => {
   return (
     <TitleBarWrap>
@@ -66,13 +78,23 @@ const MainTitleBar = () => {
   );
 };
 
-export const DetailTitleBar = () => {
+interface DetailTitleBarProps {
+  useShare?: boolean;
+}
+export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ useShare }) => {
   const navigate = useNavigate();
   return (
     <TitleBarWrap>
       <HistoryBackIconWrap onClick={() => navigate(-1)}>
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>
+      <ButtonWrap>
+        {useShare && (
+          <ShareBtn>
+            <img src="/images/icon-share.svg" width="100%" />
+          </ShareBtn>
+        )}
+      </ButtonWrap>
     </TitleBarWrap>
   );
 };
