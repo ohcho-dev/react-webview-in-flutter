@@ -30,7 +30,7 @@ const NotePage = () => {
         content="주어진 과제를 모두 끝내야만 결과지를 준비해드릴 수 있어요."
         isOpen={modalIsOpen}
         okBtnName="확인"
-        okBtnClick={handleOkBtnClick}
+        okBtnClick={openModal}
       />
     </LayoutMainPage>
   );

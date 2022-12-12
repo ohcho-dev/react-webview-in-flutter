@@ -7,7 +7,7 @@ const HomePage = () => {
     <>
       <LayoutMainPage>
         <div style={{ fontSize: "3rem", background: "#f00" }}>
-          <button onClick={() => navigate("/detail")}>123</button>
+          <button onClick={() => navigate("/home/detail")}>123</button>
           HomePage!
           <br />
           scroll <br /> test <br />

@@ -4,7 +4,7 @@ import LayoutMainPage from "../layouts/LayoutMainPage";
 const MyPage = () => {
   return (
     <LayoutMainPage>
-      <Link to="/detail">
+      <Link to="/home/detail">
         <div style={{ fontSize: "3rem", background: "#f00" }}>
           MyPage!
           <br />

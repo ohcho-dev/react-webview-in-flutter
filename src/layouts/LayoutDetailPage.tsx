@@ -3,11 +3,10 @@ import styled from "styled-components";
 import { useLocation } from "react-router-dom";
 
 import LayoutBasePage from "./LayoutBasePage";
-import { DetailTitleBar } from "../components/TitleBar";
+// import { DetailTitleBar } from "../components/TitleBar";
 
 const DetailPage = styled.main`
-  border: solid 1px #f00;
-  background: #f00;
+  background: #0f0;
   height: 100vh;
   position: fixed;
   top: 6rem;
@@ -27,7 +26,6 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({ children }) => {
   const location = useLocation();
   return (
     <LayoutBasePage>
-      <DetailTitleBar />
       <DetailPage>{children}</DetailPage>
     </LayoutBasePage>
   );

@@ -57,7 +57,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/detail",
+    path: "/home/detail",
     element: <DetailPage />,
     sceneConfig: {
       enter: "from-bottom",

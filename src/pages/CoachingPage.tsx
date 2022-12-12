@@ -4,7 +4,7 @@ import LayoutMainPage from "../layouts/LayoutMainPage";
 const CoachingPage = () => {
   return (
     <LayoutMainPage>
-      <Link to="/detail">
+      <Link to="/home/detail">
         <div style={{ fontSize: "3rem", background: "#f00" }}>
           CoachingPage!
           <br />
