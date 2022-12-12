@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 interface buttonProps {
   theme: "black" | "white" | "grey";
-  onClick: () => void;
+  onClick?: () => void;
   style?: object;
   content: string;
   [rest: string]: any;
