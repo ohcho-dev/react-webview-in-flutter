@@ -13,7 +13,7 @@
   main {
     opacity: 1;
     transform: translateX(0);
-    transition: all 300ms;
+    transition: all 400ms;
   }
 }
 
@@ -25,7 +25,7 @@
 .forward-from-right-exit-active {
   main {
     opacity: 0.3;
-    transition: all 300ms;
+    transition: all 400ms;
   }
 }
 
@@ -38,7 +38,7 @@
   main {
     opacity: 1;
     transform: translateX(0);
-    transition: all 300ms;
+    transition: all 400ms;
   }
 }
 
@@ -53,7 +53,7 @@
   main {
     opacity: 0;
     transform: translate(100%);
-    transition: all 300ms;
+    transition: all 400ms;
   }
 }
 
@@ -68,7 +68,7 @@
   main {
     opacity: 1;
     transform: translateY(0);
-    transition: all 300ms;
+    transition: all 400ms;
   }
 }
 
@@ -79,20 +79,20 @@
 }
 .forward-from-bottom-exit-active {
   main {
-    opacity: 0.3;
-    transition: all 300ms;
+    opacity: 1;
+    transition: all 400ms;
   }
 }
 
 .back-to-bottom-enter {
   main {
-    opacity: 0.3;
+    opacity: 1;
   }
 }
 .back-to-bottom-enter-active {
   main {
     opacity: 1;
-    transition: all 300ms;
+    transition: all 400ms;
   }
 }
 
@@ -107,6 +107,27 @@
   main {
     opacity: 0;
     transform: translateY(100%);
-    transition: all 300ms;
+    transition: all 400ms;
+  }
+}
+
+.fadein-moveTop {
+  opacity: 1;
+  position: relative;
+  bottom: 0;
+  animation: fadein-moveTop 0.3s linear alternate;
+}
+@keyframes fadein-moveTop {
+  0% {
+    opacity: 0;
+    bottom: -100px;
+  }
+  60% {
+    opacity: 0.7;
+    bottom: -20px;
+  }
+  100% {
+    opacity: 1;
+    bottom: 0;
   }
 }

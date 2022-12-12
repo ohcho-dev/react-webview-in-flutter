@@ -142,7 +142,7 @@ const App: React.FC = () => {
       className={"router-wrapper"}
       childFactory={(child) => React.cloneElement(child, { classNames })}
     >
-      <CSSTransition timeout={300} key={location.pathname}>
+      <CSSTransition timeout={200} key={location.pathname}>
         <div style={{ width: "100%", height: "100vh" }}>
           <Suspense fallback={<LoadingSpinner />}>
             <ErrorBoundary onReset={reset}>
