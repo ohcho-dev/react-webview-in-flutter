@@ -26,7 +26,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({ children }) => {
   const location = useLocation();
   return (
     <LayoutBasePage>
-      <DetailPage>{children}</DetailPage>
+      <DetailPage id="main">{children}</DetailPage>
     </LayoutBasePage>
   );
 };

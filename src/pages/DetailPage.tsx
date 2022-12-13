@@ -33,7 +33,9 @@ const Main: React.FC = () => {
       <div style={{ width: "100%", fontSize: "4rem" }}>detail page example</div>
       <div style={{ width: "100%", fontSize: "4rem" }}>detail page example</div>
       {/* <BottomFixBtnWrap></BottomFixBtnWrap> */}
-      {toggle && <CustomBottomModal handleToggle={handleToggle} />}
+      {toggle && (
+        <CustomBottomModal toggle={toggle} handleToggle={handleToggle} />
+      )}
     </LayoutDetailPage>
   );
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import MainTitleBar, { DetailTitleBar } from "../components/TitleBar";
 import { useLocation } from "react-router-dom";
-import BottomNav from "../components/BottomNav";
 
 const BasePage = styled.div``;
 

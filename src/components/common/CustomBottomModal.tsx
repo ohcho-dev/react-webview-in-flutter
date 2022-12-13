@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
 const handleFade = keyframes`
@@ -33,14 +35,48 @@ const Modal = styled.div`
   bottom: 0;
 `;
 interface CustomBottomModalProps {
+  toggle: boolean;
   handleToggle: () => void;
 }
 const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
+  toggle,
   handleToggle,
 }) => {
+  const navigate = useNavigate();
+
+  // 모달 오픈 시 스크롤 잠금
+  useEffect(() => {
+    document.getElementById("main")?.classList.add("scroll_lock");
+    return () => {
+      document.getElementById("main")?.classList.remove("scroll_lock");
+    };
+  }, []);
+
+  const handleBackSpace = () => {
+    handleToggle();
+    navigate(-1);
+  };
+
+  // 뒤로가기 제어
+  useEffect(() => {
+    // 개발 환경에서는 strict mode로 인해 렌더링이 2번 진행됨에 따라 뒤로가기를 2번 해야함.
+    // 배포 환경에서는 이상 없음.
+    if (toggle) {
+      window.history.pushState(null, "", window.location.href); // 현재 페이지 history stack 한개 더 쌓기
+      window.onpopstate = () => {
+        // 뒤로가기가 실행될 경우 추가 action 등록
+        handleToggle();
+      };
+    } else {
+      window.onpopstate = () => {
+        // 초기화
+      };
+    }
+  }, [toggle]);
+
   return (
     <BottomModalWrap>
-      <Dimmed onClick={handleToggle} />
+      <Dimmed onClick={handleBackSpace} />
       <Modal className="fadein-moveTop">123</Modal>
     </BottomModalWrap>
   );

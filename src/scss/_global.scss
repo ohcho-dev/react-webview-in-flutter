@@ -40,3 +40,10 @@ code {
   -webkit-touch-callout: inherit;
   -webkit-touch-callout: unset;
 }
+
+.scroll_lock {
+  position: fixed;
+  top: 0;
+  overflow: hidden !important;
+  width: 100%;
+}
