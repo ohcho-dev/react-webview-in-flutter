@@ -1,11 +1,12 @@
-import { ReactElement } from "react";
-import styled from "styled-components";
+import { ReactElement, useEffect, useLayoutEffect, useState } from "react";
+import styled, { keyframes } from "styled-components";
 import Modal from "react-modal";
 import Button from "./Button";
+import { createBrowserHistory } from "history";
 
 interface ModalProps {
   isOpen: boolean;
-  toggleModal?: () => void;
+  toggleModal: () => void;
   topImage?: ReactElement;
   title?: string;
   content?: string;
@@ -14,6 +15,24 @@ interface ModalProps {
   okBtnClick?: () => void;
   cancelBtnClick?: () => void;
 }
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const fadeOut = keyframes`
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+`;
 
 const customStyles = {
   content: {
@@ -30,6 +49,23 @@ const customStyles = {
     zIndex: "200",
   },
 };
+
+const ModalStyle = styled.div`
+  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)}
+    0.2s ease-in;
+    visibility: ${(prop: { isOpen: boolean }) =>
+      prop.isOpen ? "visible" : "hidden"}
+    transition: visibility 0.2s ease-out;
+  
+`;
+
+const OverlayStyle = styled.div`
+  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)}
+    0.2s ease-in;
+  visibility: ${(prop: { isOpen: boolean }) =>
+    prop.isOpen ? "visible" : "hidden"};
+  transition: visibility 0.2s ease-out;
+`;
 
 const ModalWrapper = styled.div`
   width: 100%;
@@ -82,8 +118,51 @@ const CustomModal = (props: ModalProps) => {
     cancelBtnClick,
     topImage,
   } = props;
+
+  const history = createBrowserHistory();
+  // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
+  const [visible, setVisible] = useState(false);
+
+  const handleClick = () => {
+    history.back();
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      window.history.pushState(null, "", window.location.href);
+    }
+    setVisible(isOpen);
+  }, [isOpen]);
+
+  useLayoutEffect(() => {
+    const event = history.listen((listener) => {
+      if (listener.action === "POP") {
+        history.back();
+        setVisible(false);
+        setTimeout(() => {
+          toggleModal();
+          if (okBtnClick) okBtnClick();
+        }, 200);
+      }
+    });
+    return event;
+  }, [history]);
+
   return (
-    <Modal isOpen={isOpen} style={customStyles}>
+    <Modal
+      isOpen={isOpen}
+      style={customStyles}
+      contentElement={(props, children) => (
+        <ModalStyle isOpen={visible} {...props}>
+          {children}
+        </ModalStyle>
+      )}
+      overlayElement={(props, contentElement) => (
+        <OverlayStyle isOpen={visible} {...props}>
+          {contentElement}
+        </OverlayStyle>
+      )}
+    >
       <ModalWrapper>
         <ModalContentWrapper>
           {topImage && <ModalImageWrapper>{topImage}</ModalImageWrapper>}
@@ -100,7 +179,7 @@ const CustomModal = (props: ModalProps) => {
           )}
           <Button
             theme={"black"}
-            onClick={okBtnClick ? okBtnClick : toggleModal}
+            onClick={handleClick}
             content={okBtnName ? okBtnName : "확인"}
           />
         </ModalBtnsWrapper>
