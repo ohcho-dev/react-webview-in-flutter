@@ -6,7 +6,8 @@ import CustomModal from "../components/common/CustomModal";
 import LayoutMainPage from "../layouts/LayoutMainPage";
 
 const NotePage = () => {
-  const { data, isLoading } = useQuery("check", apis.getList);
+  const { data, isLoading } = useQuery("event", () => apis.getChildrenList());
+
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
     setIsOpen(!modalIsOpen);

@@ -1,27 +1,30 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL,
-  headers: {
-    "Content-type": "application/json; charset=UTF-8",
-    accept: "application/json,",
-  },
-});
+// axios 기본 설정
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.headers.common[
+  "Authorization"
+] = `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`;
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
-export const apis = {
-  getList: () => api.get("https://pokeapi.co/api/v2/pokemon/ditto"),
-  getBerry: () => api.get("/call"),
-  // ... more apis
+const request = async (config: AxiosRequestConfig) => {
+  try {
+    const response = await axios(config);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
 };
 
-// const request = async (config: AxiosRequestConfig) => {
-//   try {
-//     const response = await axios(config);
-//     return response.data;
-//   } catch (error) {
-//     // 에러 처리
-//     throw Error("에러 메세지");
-//   }
-// };
-
-// export default request;
+export const apis = {
+  getChildrenList: (param?: object) => {
+    return request({ method: "GET", url: "/v1/children", params: param });
+  },
+  getSelectedChild: (id: string) => {
+    return request({ method: "GET", url: `/v1/children/${id}` });
+  },
+  createChild: (data: object) => {
+    return request({ method: "POST", url: "/v1/children", data });
+  },
+  // ... more apis
+};
