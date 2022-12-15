@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import AlarmBadge from "./AlarmBadge";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -40,9 +41,6 @@ const ArrowWrap = styled.div`
   width: 0.8rem;
   margin-left: 0.7rem;
 `;
-const PushIconWrap = styled.div`
-  width: 2.8rem;
-`;
 const HistoryBackIconWrap = styled.div`
   width: 2.8rem;
 `;
@@ -71,9 +69,7 @@ const MainTitleBar = () => {
           <img src="/images/icon-arrow-down.svg" width="100%" />
         </ArrowWrap>
       </ProfileWrap>
-      <PushIconWrap>
-        <img src="/images/icon-push.svg" width="100%" />
-      </PushIconWrap>
+      <AlarmBadge />
     </TitleBarWrap>
   );
 };
