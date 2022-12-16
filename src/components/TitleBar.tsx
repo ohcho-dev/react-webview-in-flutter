@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import AlarmBadge from "./AlarmBadge";
+import {
+  openChildSelectModalState,
+  selectedChildInfoState,
+} from "../utils/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -58,13 +63,20 @@ const ShareBtn = styled.div`
 `;
 
 const MainTitleBar = () => {
+  const selectedChildInfo = useRecoilValue(selectedChildInfoState);
+  const setOpenModal = useSetRecoilState(openChildSelectModalState);
+  const handleChildNameClick = () => {
+    setOpenModal(true);
+  };
   return (
     <TitleBarWrap>
       <ProfileWrap>
         <ProfileImageWrap>
           <img src="/images/icon-profile-default.svg" width="100%" />
         </ProfileImageWrap>
-        <ChildrenName>김나나</ChildrenName>
+        <ChildrenName onClick={handleChildNameClick}>
+          {selectedChildInfo.name}
+        </ChildrenName>
         <ArrowWrap>
           <img src="/images/icon-arrow-down.svg" width="100%" />
         </ArrowWrap>

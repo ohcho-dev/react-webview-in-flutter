@@ -14,8 +14,13 @@ import "./scss/_global.scss";
 import "./scss/_slideTransition.scss";
 
 import { RouterConfig } from "./RouteConfig";
-import { useQueryErrorResetBoundary } from "react-query";
+import { useQuery, useQueryErrorResetBoundary } from "react-query";
 import LoadingSpinner from "./components/common/LoadingSpinner";
+import { apis } from "./api/apis";
+import { useSetRecoilState } from "recoil";
+import { childrenListState, selectedChildInfoState } from "./utils/atom";
+import { childType } from "./utils/type";
+import QUERY_KEY from "./constant/queryKeys";
 
 let oldLocation: any = null;
 
@@ -103,6 +108,15 @@ const App: React.FC = () => {
   const location = useLocation();
   const { pathname } = location;
   const { reset } = useQueryErrorResetBoundary();
+  const { data } = useQuery(
+    QUERY_KEY.CHILDREN_LIST,
+    () => apis.getChildrenList(),
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+  const setSelectedChild = useSetRecoilState(selectedChildInfoState);
+  const setChildrenList = useSetRecoilState(childrenListState);
 
   useEffect(() => {
     // if (localStorage.getItem('jwt')) {
@@ -114,6 +128,22 @@ const App: React.FC = () => {
     //   navigate('/login');
     // }
   }, []);
+
+  useEffect(() => {
+    if (data[0].length) {
+      let id =
+        window.localStorage.getItem("child_id") || data[0][0].id.toString();
+      setSelectedChild(
+        data[0].filter((child: childType) => child.id.toString() === id)[0]
+      );
+
+      if (!window.localStorage.getItem("child_id")) {
+        window.localStorage.setItem("child_id", id);
+      }
+
+      setChildrenList(data[0]);
+    }
+  }, [data]);
 
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-right",

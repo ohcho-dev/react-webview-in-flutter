@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { ReactNode, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
@@ -33,14 +33,18 @@ const Modal = styled.div`
   background: #fff;
   position: absolute;
   bottom: 0;
+
+  border-radius: 1.8rem 1.8rem 0 0;
 `;
 interface CustomBottomModalProps {
   toggle: boolean;
-  handleToggle: () => void;
+  handleToggle?: () => void;
+  children?: ReactNode;
 }
 const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
   toggle,
   handleToggle,
+  children,
 }) => {
   const navigate = useNavigate();
 
@@ -53,7 +57,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
   }, []);
 
   const handleBackSpace = () => {
-    handleToggle();
+    if (handleToggle) handleToggle();
     navigate(-1);
   };
 
@@ -65,7 +69,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
       window.history.pushState(null, "", window.location.href); // 현재 페이지 history stack 한개 더 쌓기
       window.onpopstate = () => {
         // 뒤로가기가 실행될 경우 추가 action 등록
-        handleToggle();
+        if (handleToggle) handleToggle();
       };
     } else {
       window.onpopstate = () => {
@@ -77,7 +81,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
   return (
     <BottomModalWrap>
       <Dimmed onClick={handleBackSpace} />
-      <Modal className="fadein-moveTop">123</Modal>
+      <Modal className="fadein-moveTop">{children}</Modal>
     </BottomModalWrap>
   );
 };

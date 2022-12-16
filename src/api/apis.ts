@@ -9,7 +9,10 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
 const request = async (config: AxiosRequestConfig) => {
   try {
-    const response = await axios(config);
+    const response = await axios({
+      ...config,
+      headers: { child_id: window.localStorage.getItem("child_id") },
+    });
     return response.data;
   } catch (error) {
     throw error;
@@ -18,7 +21,11 @@ const request = async (config: AxiosRequestConfig) => {
 
 export const apis = {
   getChildrenList: (param?: object) => {
-    return request({ method: "GET", url: "/v1/children", params: param });
+    return request({
+      method: "GET",
+      url: "/v1/children",
+      params: param,
+    });
   },
   getSelectedChild: (id: string) => {
     return request({ method: "GET", url: `/v1/children/${id}` });

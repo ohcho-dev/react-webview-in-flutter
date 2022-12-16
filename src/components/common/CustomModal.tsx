@@ -121,7 +121,7 @@ const CustomModal = (props: ModalProps) => {
 
   const history = createBrowserHistory();
   // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState<boolean>(false);
 
   const handleClick = () => {
     history.back();
