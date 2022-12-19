@@ -1,26 +1,20 @@
-import React, { Component, ReactNode, Suspense, useEffect } from "react";
-import {
-  Route,
-  Routes,
-  useNavigate,
-  useNavigationType,
-  useLocation,
-} from "react-router-dom";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
-import styled from "styled-components";
+import React, { Component, ReactNode, Suspense, useEffect } from 'react';
+import { Route, Routes, useNavigate, useNavigationType, useLocation } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import styled from 'styled-components';
 
-import "./scss/_reset.scss";
-import "./scss/_global.scss";
-import "./scss/_slideTransition.scss";
+import './scss/_reset.scss';
+import './scss/_global.scss';
+import './scss/_slideTransition.scss';
 
-import { RouterConfig } from "./RouteConfig";
-import { useQuery, useQueryErrorResetBoundary } from "react-query";
-import LoadingSpinner from "./components/common/LoadingSpinner";
-import { apis } from "./api/apis";
-import { useSetRecoilState } from "recoil";
-import { childrenListState, selectedChildInfoState } from "./utils/atom";
-import { childType } from "./utils/type";
-import QUERY_KEY from "./constant/queryKeys";
+import { RouterConfig } from './RouteConfig';
+import { useQuery, useQueryErrorResetBoundary } from 'react-query';
+import LoadingSpinner from './components/common/LoadingSpinner';
+import { apis } from './api/apis';
+import { useSetRecoilState } from 'recoil';
+import { childrenListState, selectedChildInfoState } from './utils/atom';
+import { childType } from './utils/type';
+import QUERY_KEY from './constant/queryKeys';
 
 let oldLocation: any = null;
 
@@ -91,9 +85,7 @@ export class ErrorBoundary extends Component<Props, State> {
         <ErrorSection>
           <img src="/images/icon-sad.svg" alt="sad icon" />
           <FailSentence>요청사항을 처리하는데 실패하였습니다.</FailSentence>
-          <RetryButton onClick={this.onResetErrorBoundary}>
-            다시 시도하기
-          </RetryButton>
+          <RetryButton onClick={this.onResetErrorBoundary}>다시 시도하기</RetryButton>
         </ErrorSection>
       );
     }
@@ -106,24 +98,17 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const navigationType = useNavigationType();
   const location = useLocation();
-  const { pathname } = location;
   const { reset } = useQueryErrorResetBoundary();
-  const { data } = useQuery(
-    QUERY_KEY.CHILDREN_LIST,
-    () => apis.getChildrenList(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
+  const { data } = useQuery(QUERY_KEY.CHILDREN_LIST, () => apis.getChildrenList(), {
+    refetchOnWindowFocus: false,
+  });
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
   const setChildrenList = useSetRecoilState(childrenListState);
 
   useEffect(() => {
     // if (localStorage.getItem('jwt')) {
     let path = window.location.pathname;
-    path === "/"
-      ? navigate("/home", { replace: true })
-      : navigate(path, { replace: true });
+    path === '/' ? navigate('/home', { replace: true }) : navigate(path, { replace: true });
     // } else {
     //   navigate('/login');
     // }
@@ -131,14 +116,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (data[0].length) {
-      let id =
-        window.localStorage.getItem("child_id") || data[0][0].id.toString();
-      setSelectedChild(
-        data[0].filter((child: childType) => child.id.toString() === id)[0]
-      );
+      let id = window.localStorage.getItem('child_id') || data[0][0].id.toString();
+      setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
 
-      if (!window.localStorage.getItem("child_id")) {
-        window.localStorage.setItem("child_id", id);
+      if (!window.localStorage.getItem('child_id')) {
+        window.localStorage.setItem('child_id', id);
       }
 
       setChildrenList(data[0]);
@@ -146,34 +128,41 @@ const App: React.FC = () => {
   }, [data]);
 
   const DEFAULT_SCENE_CONFIG = {
-    enter: "from-right",
-    exit: "to-exit",
+    enter: 'from-bottom',
+    exit: 'to-bottom',
   };
 
-  const getSceneConfig = (location: object) => {
-    const matchedRoute = RouterConfig.find((config) =>
-      new RegExp(`^${config.path}$`).test(pathname)
-    );
+  const getSceneConfig = (location: {
+    pathname: string;
+    search: string;
+    hash: string;
+    state: null;
+    key: string;
+  }) => {
+    // 동적페이지의 경우 비교 로직이 필요하지만 무조건 상세페이지로 사용될 것으로 예상되어 따로 로직을 만들지 않고 default 값을 bottom으로 지정하여 해결
+    const matchedRoute =
+      location &&
+      RouterConfig.find(config => new RegExp(`^${config.path}$`).test(location.pathname));
 
     return (matchedRoute && matchedRoute.sceneConfig) || DEFAULT_SCENE_CONFIG;
   };
 
-  let classNames = "";
-  if (navigationType === "PUSH" || navigationType === "REPLACE") {
-    classNames = "forward-" + getSceneConfig(location).enter;
-  } else if (navigationType === "POP") {
-    classNames = "back-" + getSceneConfig(oldLocation).exit;
+  let classNames = '';
+  if (navigationType === 'PUSH' || navigationType === 'REPLACE') {
+    classNames = 'forward-' + getSceneConfig(location).enter;
+  } else if (navigationType === 'POP') {
+    classNames = 'back-' + getSceneConfig(oldLocation).exit;
   }
 
   oldLocation = location;
 
   return (
     <TransitionGroup
-      className={"router-wrapper"}
-      childFactory={(child) => React.cloneElement(child, { classNames })}
+      className={'router-wrapper'}
+      childFactory={child => React.cloneElement(child, { classNames })}
     >
-      <CSSTransition timeout={200} key={location.pathname}>
-        <div style={{ width: "100%", height: "100vh" }}>
+      <CSSTransition timeout={150} key={location.pathname}>
+        <div style={{ width: '100%', height: '100vh' }}>
           <Suspense fallback={<LoadingSpinner />}>
             <ErrorBoundary onReset={reset}>
               <Routes location={location}>
