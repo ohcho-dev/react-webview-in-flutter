@@ -5,63 +5,80 @@ import {
   ProgramPage,
   MyPage,
   DetailPage,
-} from "./pages/index";
+  ProgramDetailPage,
+} from './pages/index';
 
 export const RouterConfig = [
   {
-    path: "/",
+    path: '/',
     element: <HomePage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: 'from-right',
+      exit: 'to-right',
     },
   },
   {
-    path: "/home",
+    path: '/home',
     element: <HomePage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: 'from-right',
+      exit: 'to-right',
     },
   },
   {
-    path: "/note",
+    path: '/note',
     element: <NotePage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: 'from-right',
+      exit: 'to-right',
     },
   },
   {
-    path: "/coaching",
+    path: '/coaching',
     element: <CoachingPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: 'from-right',
+      exit: 'to-right',
     },
   },
   {
-    path: "/program",
+    path: '/program',
     element: <ProgramPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: 'from-right',
+      exit: 'to-right',
     },
   },
   {
-    path: "/my",
+    path: '/my',
     element: <MyPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: 'from-right',
+      exit: 'to-right',
     },
   },
   {
-    path: "/home/detail",
+    path: '/home/detail',
     element: <DetailPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: 'from-bottom',
+      exit: 'to-bottom',
+    },
+  },
+  {
+    path: '/program/coaching/:coachingid',
+    element: <ProgramDetailPage />,
+    sceneConfig: {
+      enter: 'from-bottom',
+      exit: 'to-bottom',
+    },
+  },
+  {
+    path: '/program/class/:classid',
+    element: <ProgramDetailPage />,
+    sceneConfig: {
+      enter: 'from-bottom',
+      exit: 'to-bottom',
     },
   },
 ];
