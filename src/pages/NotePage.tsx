@@ -1,18 +1,34 @@
-import React from "react";
-import { useQuery } from "react-query";
-import { Link } from "react-router-dom";
-import { apis } from "../api/apis";
+import { useState } from "react";
+import CustomModal from "../components/common/CustomModal";
+
 import LayoutMainPage from "../layouts/LayoutMainPage";
+
 const NotePage = () => {
-  //const { data } = useQuery("check", apis.getBerry);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(!modalIsOpen);
+  }
+  const handleOkBtnClick = () => {
+    console.log("click");
+  };
+
   return (
     <LayoutMainPage>
-      <Link to="/detail">
-        <div style={{ fontSize: "3rem", background: "#f00" }}>
-          NotePage!
-          <br />
-        </div>
-      </Link>
+      <button onClick={openModal}>Open Modal</button>
+      <CustomModal
+        topImage={
+          <img
+            src={"/images/reject-eltern.svg"}
+            alt="character"
+            style={{ width: "9.5rem" }}
+          />
+        }
+        toggleModal={openModal}
+        title="과제를 먼저 끝내주세요!"
+        content="주어진 과제를 모두 끝내야만 결과지를 준비해드릴 수 있어요."
+        isOpen={modalIsOpen}
+        okBtnName="확인"
+      />
     </LayoutMainPage>
   );
 };

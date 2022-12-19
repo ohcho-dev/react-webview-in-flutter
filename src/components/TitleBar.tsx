@@ -1,5 +1,11 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import AlarmBadge from "./AlarmBadge";
+import {
+  openChildSelectModalState,
+  selectedChildInfoState,
+} from "../utils/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -40,39 +46,63 @@ const ArrowWrap = styled.div`
   width: 0.8rem;
   margin-left: 0.7rem;
 `;
-const PushIconWrap = styled.div`
-  width: 2.8rem;
-`;
 const HistoryBackIconWrap = styled.div`
   width: 2.8rem;
 `;
 
+const ButtonWrap = styled.div`
+  display: flex;
+  align-items: center;
+
+  div {
+    margin-left: 8px;
+  }
+`;
+const ShareBtn = styled.div`
+  width: 2.8rem;
+`;
+
 const MainTitleBar = () => {
+  const selectedChildInfo = useRecoilValue(selectedChildInfoState);
+  const setOpenModal = useSetRecoilState(openChildSelectModalState);
+  const handleChildNameClick = () => {
+    setOpenModal(true);
+  };
   return (
     <TitleBarWrap>
       <ProfileWrap>
         <ProfileImageWrap>
           <img src="/images/icon-profile-default.svg" width="100%" />
         </ProfileImageWrap>
-        <ChildrenName>김나나</ChildrenName>
+        <ChildrenName onClick={handleChildNameClick}>
+          {selectedChildInfo.name}
+        </ChildrenName>
         <ArrowWrap>
           <img src="/images/icon-arrow-down.svg" width="100%" />
         </ArrowWrap>
       </ProfileWrap>
-      <PushIconWrap>
-        <img src="/images/icon-push.svg" width="100%" />
-      </PushIconWrap>
+      <AlarmBadge />
     </TitleBarWrap>
   );
 };
 
-export const DetailTitleBar = () => {
+interface DetailTitleBarProps {
+  useShare?: boolean;
+}
+export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ useShare }) => {
   const navigate = useNavigate();
   return (
     <TitleBarWrap>
       <HistoryBackIconWrap onClick={() => navigate(-1)}>
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>
+      <ButtonWrap>
+        {useShare && (
+          <ShareBtn>
+            <img src="/images/icon-share.svg" width="100%" />
+          </ShareBtn>
+        )}
+      </ButtonWrap>
     </TitleBarWrap>
   );
 };
