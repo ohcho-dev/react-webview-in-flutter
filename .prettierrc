@@ -12,7 +12,7 @@
   "semi": true,
 
   "_comment4": "작은 따옴표 사용",
-  "singleQuote": true,
+  "singleQuote": false,
 
   "_comment5": "꼬리 콤마 사용",
   "trailingComma": "all",

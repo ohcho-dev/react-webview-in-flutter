@@ -53,17 +53,14 @@ const customStyles = {
 const ModalStyle = styled.div`
   animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)}
     0.2s ease-in;
-    visibility: ${(prop: { isOpen: boolean }) =>
-      prop.isOpen ? "visible" : "hidden"}
+    visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")}
     transition: visibility 0.2s ease-out;
   
 `;
 
 const OverlayStyle = styled.div`
-  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)}
-    0.2s ease-in;
-  visibility: ${(prop: { isOpen: boolean }) =>
-    prop.isOpen ? "visible" : "hidden"};
+  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.2s ease-in;
+  visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")};
   transition: visibility 0.2s ease-out;
 `;
 
@@ -135,7 +132,7 @@ const CustomModal = (props: ModalProps) => {
   }, [isOpen]);
 
   useLayoutEffect(() => {
-    const event = history.listen((listener) => {
+    const event = history.listen(listener => {
       if (listener.action === "POP") {
         history.back();
         setVisible(false);
@@ -171,17 +168,9 @@ const CustomModal = (props: ModalProps) => {
         </ModalContentWrapper>
         <ModalBtnsWrapper>
           {cancelBtnName && (
-            <Button
-              theme={"white"}
-              onClick={cancelBtnClick}
-              content={cancelBtnName}
-            />
+            <Button theme={"white"} onClick={cancelBtnClick} content={cancelBtnName} />
           )}
-          <Button
-            theme={"black"}
-            onClick={handleClick}
-            content={okBtnName ? okBtnName : "확인"}
-          />
+          <Button theme={"black"} onClick={handleClick} content={okBtnName ? okBtnName : "확인"} />
         </ModalBtnsWrapper>
       </ModalWrapper>
     </Modal>
