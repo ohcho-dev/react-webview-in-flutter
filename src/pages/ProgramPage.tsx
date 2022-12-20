@@ -4,6 +4,7 @@ import ProgramCard from '../components/ProgramCard';
 import LayoutMainPage from '../layouts/LayoutMainPage';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
+import { useNavigate } from 'react-router-dom';
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ const SliderContainer = styled.div`
 `;
 
 const ProgramPage = () => {
+  const navigate = useNavigate();
   const settings = {
     dots: false,
     arrows: false,
@@ -61,6 +63,7 @@ const ProgramPage = () => {
   };
   const handleCardClick = (title: string) => {
     console.log(title);
+    title === '우리아이 양육 코칭' && navigate('/program/coaching/1');
   };
 
   return (
