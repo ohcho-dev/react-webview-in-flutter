@@ -10,11 +10,11 @@ import './scss/_slideTransition.scss';
 import { RouterConfig } from './RouteConfig';
 import { useQuery, useQueryErrorResetBoundary } from 'react-query';
 import LoadingSpinner from './components/common/LoadingSpinner';
-import { apis } from './api/apis';
 import { useSetRecoilState } from 'recoil';
 import { childrenListState, selectedChildInfoState } from './recoil/atom';
 import { childType } from './utils/type';
 import { queryKeys } from './constant/queryKeys';
+import { getChildrenList } from './api/childApi';
 
 let oldLocation: any = null;
 
@@ -99,7 +99,7 @@ const App: React.FC = () => {
   const navigationType = useNavigationType();
   const location = useLocation();
   const { reset } = useQueryErrorResetBoundary();
-  const { data } = useQuery(queryKeys.childrenList, () => apis.getChildrenList(), {
+  const { data } = useQuery(queryKeys.childrenList, () => getChildrenList(), {
     refetchOnWindowFocus: false,
   });
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
