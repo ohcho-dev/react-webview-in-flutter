@@ -143,7 +143,7 @@ const ProgramDetailPage = () => {
   return (
     <LayoutDetailPage bottomBtn>
       {coachingid && <DetailCoaching />}
-      {classid && <DetailClass />}
+      {classid && <DetailClass id={classid} />}
       <PaymentBtnWrap>
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />

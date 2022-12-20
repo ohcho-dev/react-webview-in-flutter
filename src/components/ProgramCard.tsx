@@ -86,6 +86,7 @@ const ProgramPriceSection = styled.div`
 `;
 
 interface ProgramCardProps {
+  id: string;
   programImage: string;
   title: string;
   isDeadlineComingUp?: boolean;
@@ -114,10 +115,11 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
     dateTime,
     handleCardClick,
     isCoaching,
+    id,
   } = props;
 
   return (
-    <ProgramCardWrapper onClick={() => handleCardClick(title)}>
+    <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id}>
       <ProgramImageSection>
         <img alt="program image" src={programImage} />
         {isDeadlineComingUp && <div>마감임박</div>}
