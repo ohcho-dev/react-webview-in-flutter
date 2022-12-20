@@ -1,26 +1,31 @@
-import { atom } from "recoil";
+import { atom } from 'recoil';
 
-export const openChildSelectModalState = atom({
-  key: "childSelectModal",
+let openChildSelectModalState = atom({
+  key: 'childSelectModal',
   default: false,
 });
 
-export const selectedChildInfoState = atom({
-  key: "selectedChild",
+let selectedChildInfoState = atom({
+  key: 'selectedChild',
   default: {
     id: 0,
-    name: "",
+    name: '',
     parent_id: 0,
     premature_flag: 0,
-    gender: "",
-    due_date: "",
-    birth_date: "",
+    gender: '',
+    due_date: '',
+    birth_date: '',
   },
 });
 
-export const childrenListState = atom({
-  key: "childrenList",
+let childrenListState = atom({
+  key: 'childrenList',
   default: [],
 });
 
+let useShareState = atom({
+  key: 'share',
+  default: false,
+});
 
+export { openChildSelectModalState, selectedChildInfoState, childrenListState, useShareState };

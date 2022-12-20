@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
-import LayoutBasePage from "./LayoutBasePage";
+import LayoutBasePage from './LayoutBasePage';
 // import { DetailTitleBar } from "../components/TitleBar";
 
 const DetailPage = styled.main`
-  background: #0f0;
+  background: #fff;
   height: 100vh;
   position: fixed;
   top: 6rem;

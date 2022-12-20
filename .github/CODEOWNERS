@@ -4,7 +4,7 @@
 
 # 프로젝트 내 모든 디렉토리 및 파일 대상으로 오너를 inyong-e로 지정할 경우.
 # * @inyong-e
-* @chohlumanlab @eunji-lumanlab @HakmyeongKim
+* @chohlumanlab @eunji-lumanlab @hmkim-lumanlab @HakmyeongKim
 
 # JS 파일에 관련된 오너로 inyong-e와 other-js-owner 두명으로 지정 할 경우.
 # *.js @inyong-e @other-js-owner
