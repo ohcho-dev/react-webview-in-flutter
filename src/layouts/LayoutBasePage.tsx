@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import MainTitleBar, { DetailTitleBar } from '../components/TitleBar';
 import { useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { useShare } from '../utils/atom';
+import { useShareState } from '../recoil/atom';
 
 const BasePage = styled.div``;
 
@@ -13,7 +13,7 @@ interface LayoutBasePageProps {
 const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
   const { pathname } = useLocation();
   const [pathState, setPathState] = useState(0);
-  const share = useRecoilValue(useShare);
+  const share = useRecoilValue(useShareState);
 
   useEffect(() => {
     let count = pathname.split('/').length - 1;

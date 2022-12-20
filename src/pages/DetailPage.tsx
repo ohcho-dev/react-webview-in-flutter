@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { useShare } from '../utils/atom';
+import { useShareState } from '../recoil/atom';
 
 import CustomBottomModal from '../components/common/CustomBottomModal';
 import LayoutDetailPage from '../layouts/LayoutDetailPage';
@@ -9,7 +9,7 @@ import LayoutDetailPage from '../layouts/LayoutDetailPage';
 const Main: React.FC = () => {
   const [toggle, setToggle] = useState(false);
 
-  const [share, setShare] = useRecoilState(useShare);
+  const [share, setShare] = useRecoilState(useShareState);
 
   const handleToggle = () => {
     setToggle(!toggle);

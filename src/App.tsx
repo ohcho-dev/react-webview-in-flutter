@@ -12,9 +12,9 @@ import { useQuery, useQueryErrorResetBoundary } from 'react-query';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import { apis } from './api/apis';
 import { useSetRecoilState } from 'recoil';
-import { childrenListState, selectedChildInfoState } from './utils/atom';
+import { childrenListState, selectedChildInfoState } from './recoil/atom';
 import { childType } from './utils/type';
-import QUERY_KEY from './constant/queryKeys';
+import { queryKeys } from './constant/queryKeys';
 
 let oldLocation: any = null;
 
@@ -99,7 +99,7 @@ const App: React.FC = () => {
   const navigationType = useNavigationType();
   const location = useLocation();
   const { reset } = useQueryErrorResetBoundary();
-  const { data } = useQuery(QUERY_KEY.CHILDREN_LIST, () => apis.getChildrenList(), {
+  const { data } = useQuery(queryKeys.childrenList, () => apis.getChildrenList(), {
     refetchOnWindowFocus: false,
   });
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);

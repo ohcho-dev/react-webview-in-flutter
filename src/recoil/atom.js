@@ -23,9 +23,9 @@ let childrenListState = atom({
   default: [],
 });
 
-let useShare = atom({
+let useShareState = atom({
   key: 'share',
   default: false,
 });
 
-export { openChildSelectModalState, selectedChildInfoState, childrenListState, useShare };
+export { openChildSelectModalState, selectedChildInfoState, childrenListState, useShareState };
