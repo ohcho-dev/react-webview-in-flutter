@@ -10,7 +10,7 @@ import {
   childrenListState,
   openChildSelectModalState,
   selectedChildInfoState,
-} from "../utils/atom";
+} from "../recoil/atom";
 import { childType } from "../utils/type";
 
 const MainPage = styled.main`

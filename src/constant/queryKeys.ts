@@ -1,5 +1,9 @@
-const QUERY_KEY = {
-  CHILDREN_LIST: "children-list",
+export const queryKeys = {
+  childrenList: "children-list",
 };
 
-export default QUERY_KEY;
+export const mutationKeys={
+
+}
+
+
