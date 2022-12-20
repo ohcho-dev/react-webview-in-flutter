@@ -4,7 +4,7 @@ import AlarmBadge from "./AlarmBadge";
 import {
   openChildSelectModalState,
   selectedChildInfoState,
-} from "../utils/atom";
+} from "../recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const TitleBarWrap = styled.section`

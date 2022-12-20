@@ -1,11 +1,11 @@
 import { atom } from "recoil";
 
-let openChildSelectModalState = atom({
+export const openChildSelectModalState = atom({
   key: "childSelectModal",
   default: false,
 });
 
-let selectedChildInfoState = atom({
+export const selectedChildInfoState = atom({
   key: "selectedChild",
   default: {
     id: 0,
@@ -18,9 +18,9 @@ let selectedChildInfoState = atom({
   },
 });
 
-let childrenListState = atom({
+export const childrenListState = atom({
   key: "childrenList",
   default: [],
 });
 
-export { openChildSelectModalState, selectedChildInfoState, childrenListState };
+
