@@ -19,7 +19,7 @@ const ProgramDetailPage = () => {
   return (
     <LayoutDetailPage>
       {coachingid && <DetailCoaching />}
-      {classid && <DetailClass />}
+      {classid && <DetailClass id={classid} />}
     </LayoutDetailPage>
   );
 };

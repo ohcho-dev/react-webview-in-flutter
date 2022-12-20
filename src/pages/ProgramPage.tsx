@@ -4,6 +4,7 @@ import ProgramCard from '../components/ProgramCard';
 import LayoutMainPage from '../layouts/LayoutMainPage';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
+import { useNavigate } from 'react-router-dom';
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -47,6 +48,7 @@ const SliderContainer = styled.div`
 `;
 
 const ProgramPage = () => {
+  const navigate = useNavigate();
   const settings = {
     dots: false,
     arrows: false,
@@ -59,8 +61,9 @@ const ProgramPage = () => {
     mobileFirst: false,
     cssEase: 'ease-out',
   };
-  const handleCardClick = (title: string) => {
-    console.log(title);
+
+  const handleCardClick = (id: string) => {
+    navigate(`/program/class/${id}`);
   };
 
   return (
@@ -87,6 +90,7 @@ const ProgramPage = () => {
         <CouchingSection>
           <ProgramTitle>📄 전문 검사와 함께하는 코칭</ProgramTitle>
           <ProgramCard
+            id={'1'}
             handleCardClick={handleCardClick}
             programImage="/images/program-image.svg"
             isDeadlineComingUp
@@ -100,6 +104,7 @@ const ProgramPage = () => {
         <ClassSection>
           <ProgramTitle>🤖 전문가와 함께하는 클래스</ProgramTitle>
           <ProgramCard
+            id={'3'}
             handleCardClick={handleCardClick}
             programImage="/images/program-image.svg"
             isDeadlineComingUp
@@ -115,6 +120,7 @@ const ProgramPage = () => {
           {/* Divider 마지막 index에서만 숨김처리하기 */}
           <Divider />
           <ProgramCard
+            id={'2'}
             handleCardClick={handleCardClick}
             programImage="/images/program-image.svg"
             isDeadlineComingUp
