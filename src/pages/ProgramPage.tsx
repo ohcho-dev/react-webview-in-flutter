@@ -61,10 +61,10 @@ const ProgramPage = () => {
     mobileFirst: false,
     cssEase: 'ease-out',
   };
-  
+
   const handleCardClick = (id: string) => {
-     navigate(`/program/class/${id}`);
-     navigate('/program/coaching/${id}');
+    navigate(`/program/class/${id}`);
+    navigate(`/program/coaching/${id}`);
   };
 
   return (
