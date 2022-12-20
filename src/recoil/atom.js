@@ -28,4 +28,14 @@ let useShareState = atom({
   default: false,
 });
 
-export { openChildSelectModalState, selectedChildInfoState, childrenListState, useShareState };
+let openCheckChildInfoModalState = atom({
+  key: 'checkChildInfo',
+  default: false,
+});
+export {
+  openChildSelectModalState,
+  selectedChildInfoState,
+  childrenListState,
+  useShareState,
+  openCheckChildInfoModalState,
+};

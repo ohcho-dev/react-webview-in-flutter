@@ -13,7 +13,6 @@ interface LayoutBasePageProps {
 const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
   const { pathname } = useLocation();
   const [pathState, setPathState] = useState(0);
-  const share = useRecoilValue(useShareState);
 
   useEffect(() => {
     let count = pathname.split('/').length - 1;
@@ -23,7 +22,7 @@ const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
   return (
     <BasePage id="body">
       {pathState === 1 && <MainTitleBar />}
-      {pathState > 1 && <DetailTitleBar useShare={share} />}
+      {pathState > 1 && <DetailTitleBar />}
       {children}
     </BasePage>
   );
