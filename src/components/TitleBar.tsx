@@ -1,11 +1,8 @@
-import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
-import AlarmBadge from "./AlarmBadge";
-import {
-  openChildSelectModalState,
-  selectedChildInfoState,
-} from "../recoil/atom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+import AlarmBadge from './AlarmBadge';
+import { openChildSelectModalState, selectedChildInfoState, useShareState } from '../recoil/atom';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -74,9 +71,7 @@ const MainTitleBar = () => {
         <ProfileImageWrap>
           <img src="/images/icon-profile-default.svg" width="100%" />
         </ProfileImageWrap>
-        <ChildrenName onClick={handleChildNameClick}>
-          {selectedChildInfo.name}
-        </ChildrenName>
+        <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>
         <ArrowWrap>
           <img src="/images/icon-arrow-down.svg" width="100%" />
         </ArrowWrap>
@@ -86,18 +81,18 @@ const MainTitleBar = () => {
   );
 };
 
-interface DetailTitleBarProps {
-  useShare?: boolean;
-}
-export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ useShare }) => {
+interface DetailTitleBarProps {}
+
+export const DetailTitleBar: React.FC<DetailTitleBarProps> = () => {
   const navigate = useNavigate();
+  const share = useRecoilValue(useShareState);
   return (
     <TitleBarWrap>
       <HistoryBackIconWrap onClick={() => navigate(-1)}>
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>
       <ButtonWrap>
-        {useShare && (
+        {share && (
           <ShareBtn>
             <img src="/images/icon-share.svg" width="100%" />
           </ShareBtn>
