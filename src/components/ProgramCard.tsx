@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import ProgramPrice from './ProgramPrice';
 
 const ProgramCardWrapper = styled.div`
   display: flex;
@@ -70,8 +71,7 @@ const ProgramTitle = styled.div`
   font-weight: 600;
   font-size: 1.8rem;
 
-  margin-top: ${(props: { topMargin: boolean }) =>
-    props.topMargin ? "1rem" : "0"};
+  margin-top: ${(props: { topMargin: boolean }) => (props.topMargin ? '1rem' : '0')};
 `;
 
 const ProgramLocation = styled.div`
@@ -82,29 +82,7 @@ const ProgramLocation = styled.div`
 `;
 
 const ProgramPriceSection = styled.div`
-  display: flex;
-  column-gap: 0.5rem;
-  align-items: center;
-
   margin: 1.2rem 0;
-
-  font-weight: 700;
-  font-size: 1.8rem;
-
-  span:nth-child(1) {
-    color: #fd7473;
-  }
-
-  span:nth-child(2) {
-    color: #0a0a0a;
-  }
-
-  span:nth-child(3) {
-    font-weight: 400;
-    font-size: 1.6rem;
-    color: #9d9d9d;
-    text-decoration: line-through;
-  }
 `;
 
 interface ProgramCardProps {
@@ -115,14 +93,14 @@ interface ProgramCardProps {
   isOnline?: boolean;
   location?: string;
   originalPrice: number;
-  discountPrice: number;
+  price: number;
   discountPercentage?: number;
   dateTime?: string;
   isCoaching: boolean;
   handleCardClick: (title: string) => void;
 }
 
-export const ProgramCard: React.FC<ProgramCardProps> = (props) => {
+export const ProgramCard: React.FC<ProgramCardProps> = props => {
   const {
     programImage,
     isDeadlineComingUp = false,
@@ -131,13 +109,12 @@ export const ProgramCard: React.FC<ProgramCardProps> = (props) => {
     title,
     location,
     originalPrice,
-    discountPrice,
+    price,
     discountPercentage,
     dateTime,
     handleCardClick,
     isCoaching,
   } = props;
-  const numberFormatter = new Intl.NumberFormat("ko");
 
   return (
     <ProgramCardWrapper onClick={() => handleCardClick(title)}>
@@ -147,7 +124,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = (props) => {
       </ProgramImageSection>
       {!isCoaching && (
         <ClassInfoSection>
-          <span>{isOnline ? "온라인" : "오프라인"}</span>
+          <span>{isOnline ? '온라인' : '오프라인'}</span>
           <span>{ageRange}</span>
         </ClassInfoSection>
       )}
@@ -155,9 +132,11 @@ export const ProgramCard: React.FC<ProgramCardProps> = (props) => {
       {location && <ProgramLocation>{location}</ProgramLocation>}
       {dateTime && <ProgramLocation>{dateTime}</ProgramLocation>}
       <ProgramPriceSection>
-        <span>{discountPercentage}%</span>
-        <span>{numberFormatter.format(discountPrice)}원</span>
-        <span>{numberFormatter.format(originalPrice)}원</span>
+        <ProgramPrice
+          discountPercentage={discountPercentage}
+          price={price}
+          originalPrice={originalPrice}
+        />
       </ProgramPriceSection>
     </ProgramCardWrapper>
   );

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import ProgramCard from "../components/ProgramCard";
-import LayoutMainPage from "../layouts/LayoutMainPage";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import ProgramCard from '../components/ProgramCard';
+import LayoutMainPage from '../layouts/LayoutMainPage';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -57,7 +57,7 @@ const ProgramPage = () => {
     speed: 2000,
     autoplaySpeed: 5000,
     mobileFirst: false,
-    cssEase: "ease-out",
+    cssEase: 'ease-out',
   };
   const handleCardClick = (title: string) => {
     console.log(title);
@@ -70,14 +70,14 @@ const ProgramPage = () => {
           <Slider {...settings}>
             <SliderContainer
               onClick={() => {
-                console.log("1");
+                console.log('1');
               }}
             >
               <img alt="banner 1" src="/images/banner-1.svg" />
             </SliderContainer>
             <SliderContainer
               onClick={() => {
-                console.log("2");
+                console.log('2');
               }}
             >
               <img alt="banner 1" src="/images/banner-example.png" />
@@ -92,7 +92,7 @@ const ProgramPage = () => {
             isDeadlineComingUp
             title="우리아이 양육 코칭"
             originalPrice={150000}
-            discountPrice={29900}
+            price={29900}
             discountPercentage={85}
             isCoaching
           />
@@ -108,7 +108,7 @@ const ProgramPage = () => {
             title="[모집 10명] 아빠랑 같이 하는 모래놀이 클래스"
             location="서울시 송파구 어린이 문화회관"
             originalPrice={150000}
-            discountPrice={29900}
+            price={29900}
             discountPercentage={85}
             isCoaching={false}
           />
@@ -122,7 +122,7 @@ const ProgramPage = () => {
             title="[모집 10명] 아빠랑 같이 하는 모래놀이 클래스"
             dateTime="2022.11.22(화) 21:00"
             originalPrice={150000}
-            discountPrice={29900}
+            price={29900}
             discountPercentage={85}
             isCoaching={false}
           />
