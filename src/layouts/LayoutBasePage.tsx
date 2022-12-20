@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import MainTitleBar, { DetailTitleBar } from "../components/TitleBar";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import MainTitleBar, { DetailTitleBar } from '../components/TitleBar';
+import { useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { useShareState } from '../recoil/atom';
 
 const BasePage = styled.div``;
 
@@ -13,7 +15,7 @@ const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
   const [pathState, setPathState] = useState(0);
 
   useEffect(() => {
-    let count = pathname.split("/").length - 1;
+    let count = pathname.split('/').length - 1;
     setPathState(count);
   }, [pathname]);
 
