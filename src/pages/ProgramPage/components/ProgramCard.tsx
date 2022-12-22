@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ProgramPrice from './ProgramPrice';
+import { AgeRange, OnlineOffline } from './styled';
 
 const ProgramCardWrapper = styled.div`
   display: flex;
@@ -45,26 +46,6 @@ const ClassInfoSection = styled.div`
   margin: 1rem 0;
   display: flex;
   align-items: center;
-
-  span:nth-child(1) {
-    margin-right: 1rem;
-    font-weight: 700;
-    font-size: 1.4rem;
-
-    color: rgba(10, 10, 10, 0.5);
-  }
-
-  span:nth-child(2) {
-    height: 1.8rem;
-    border: 0.5px solid rgba(10, 10, 10, 0.4);
-    border-radius: 2px;
-
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: rgba(10, 10, 10, 0.5);
-
-    padding: 0.3rem;
-  }
 `;
 
 const ProgramTitle = styled.div`
@@ -126,8 +107,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
       </ProgramImageSection>
       {!isCoaching && (
         <ClassInfoSection>
-          <span>{isOnline ? '온라인' : '오프라인'}</span>
-          <span>{ageRange}</span>
+          <OnlineOffline>{isOnline ? '온라인' : '오프라인'}</OnlineOffline>
+          <AgeRange>{ageRange}</AgeRange>
         </ClassInfoSection>
       )}
       <ProgramTitle topMargin={isCoaching}>{title}</ProgramTitle>
