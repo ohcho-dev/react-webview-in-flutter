@@ -1,3 +1,4 @@
+import ApplyClassPage from './pages/ApplyClassPage';
 import {
   HomePage,
   NotePage,
@@ -76,6 +77,14 @@ export const RouterConfig = [
   {
     path: '/program/class/:classid',
     element: <ProgramDetailPage />,
+    sceneConfig: {
+      enter: 'from-bottom',
+      exit: 'to-bottom',
+    },
+  },
+  {
+    path: '/program/class/apply-class/:classid',
+    element: <ApplyClassPage />,
     sceneConfig: {
       enter: 'from-bottom',
       exit: 'to-bottom',

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import ProgramPrice from '../../../components/ProgramPrice';
+import ProgramPrice from '../../ProgramPage/components/ProgramPrice';
 
 const DetailCoachingContainer = styled.div``;
 const Thumbnail = styled.div`
