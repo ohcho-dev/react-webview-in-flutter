@@ -1,7 +1,8 @@
-import styled from 'styled-components';
-import ProgramPrice from './ProgramPrice';
-import Dday from '../utils/Dday';
-import { useEffect, useState } from 'react';
+import styled from "styled-components";
+import ProgramPrice from "./ProgramPrice";
+import { useEffect, useState } from "react";
+import { AgeRange, OnlineOffline } from "./styled";
+import Dday from "../../../utils/Dday";
 
 const ProgramCardWrapper = styled.div`
   display: flex;
@@ -43,26 +44,6 @@ const ClassInfoSection = styled.div`
   margin: 1rem 0;
   display: flex;
   align-items: center;
-
-  span:nth-child(1) {
-    margin-right: 1rem;
-    font-weight: 700;
-    font-size: 1.4rem;
-
-    color: rgba(10, 10, 10, 0.5);
-  }
-
-  span:nth-child(2) {
-    height: 1.8rem;
-    border: 0.5px solid rgba(10, 10, 10, 0.4);
-    border-radius: 2rem;
-
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: rgba(10, 10, 10, 0.5);
-
-    padding: 0.3rem;
-  }
 `;
 
 const ProgramTitle = styled.div`
@@ -70,7 +51,7 @@ const ProgramTitle = styled.div`
   font-size: 1.8rem;
   line-height: 2.2rem;
 
-  margin-top: ${(props: { topMargin: boolean }) => (props.topMargin ? '0' : '1rem')};
+  margin-top: ${(props: { topMargin: boolean }) => (props.topMargin ? "0" : "1rem")};
 
   // 2줄까지만 노출하면 넘어가면 말줄임 표기
   overflow: hidden;
@@ -180,8 +161,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
       </ProgramImageSection>
       {utilVisible && (
         <ClassInfoSection>
-          <span>{isOnline ? '온라인' : '오프라인'}</span>
-          <span>{ageRange}</span>
+          <OnlineOffline>{isOnline ? "온라인" : "오프라인"}</OnlineOffline>
+          <AgeRange>{ageRange}</AgeRange>
         </ClassInfoSection>
       )}
       <ProgramTitle topMargin={utilVisible}>{title}</ProgramTitle>
@@ -198,8 +179,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
       )}
       {purchased && (
         <ProgramStatus>
-          <ProceedStatus color={DDay < 0 ? '#8D8D8D' : '#00c7b1'}>
-            {DDay < 0 ? '종료' : '진행중'}
+          <ProceedStatus color={DDay < 0 ? "#8D8D8D" : "#00c7b1"}>
+            {DDay < 0 ? "종료" : "진행중"}
           </ProceedStatus>
           <span>
             {startDate}~{expiryDate}

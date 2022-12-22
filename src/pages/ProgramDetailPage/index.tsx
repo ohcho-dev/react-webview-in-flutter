@@ -1,20 +1,21 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   openCheckChildInfoModalState,
   selectedChildInfoState,
   useShareState,
-} from '../../recoil/atom';
+} from "../../recoil/atom";
 
-import LayoutDetailPage from '../../layouts/LayoutDetailPage';
-import DetailClass from './components/DetailClass';
-import DetailCoaching from './components/DetailCoaching';
-import styled from 'styled-components';
-import CustomBottomModal from '../../components/common/CustomBottomModal';
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import DetailClass from "./components/DetailClass";
+import DetailCoaching from "./components/DetailCoaching";
+import styled from "styled-components";
+import CustomBottomModal from "../../components/common/CustomBottomModal";
+import Button from "../../components/common/Button";
 
-const PaymentBtnWrap = styled.div`
+export const PaymentBtnWrap = styled.div`
   width: 100%;
   height: 7.4rem;
   padding: 1.2rem 2rem;
@@ -26,6 +27,7 @@ const PaymentBtnWrap = styled.div`
   display: flex;
   align-items: center;
 `;
+
 const GiftBtn = styled.div`
   min-width: 5rem;
   height: 5rem;
@@ -36,20 +38,6 @@ const GiftBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-const PayBtn = styled.div`
-  width: 100%;
-  height: 5rem;
-  background: #000;
-  border-radius: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.4px;
-  color: rgba(255, 255, 255, 0.9);
 `;
 
 const TitleText = styled.h2`
@@ -129,30 +117,50 @@ const ProgramDetailPage = () => {
   const navigate = useNavigate();
   const { coachingid, classid } = useParams();
   const [share, setShare] = useRecoilState(useShareState);
+  const [applyBtnClick, setApplyBtnClick] = useState(false);
 
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openCheckChildInfoModalState);
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
 
-  const handleChildClick = () => {
-    setOpenBottomModal(!openBottomModal);
+  const handleApplyBtnClick = () => {
+    // 코칭 선택시
+    if (coachingid) {
+      setOpenBottomModal(!openBottomModal);
+    }
+
+    // 클래스 선택시
+    if (classid) {
+      setApplyBtnClick(true);
+    }
+  };
+
+  const setApplyBtnState = () => {
+    setApplyBtnClick(false);
   };
 
   useEffect(() => {
     setShare(true);
   }, []);
+
   return (
     <LayoutDetailPage bottomBtn>
       {coachingid && <DetailCoaching />}
-      {classid && <DetailClass id={classid} />}
+      {classid && (
+        <DetailClass
+          id={classid}
+          isApplyBtnClick={applyBtnClick}
+          setApplyBtnState={setApplyBtnState}
+        />
+      )}
       <PaymentBtnWrap>
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
-        <PayBtn onClick={handleChildClick}>신청하기</PayBtn>
+        <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
       </PaymentBtnWrap>
 
       {openBottomModal && (
-        <CustomBottomModal toggle={openBottomModal} handleToggle={handleChildClick}>
+        <CustomBottomModal toggle={openBottomModal} handleToggle={handleApplyBtnClick}>
           <TitleText>신청 정보를 확인해 주세요.</TitleText>
           <SubText>아래 정보로 신청하시겠어요?</SubText>
           <ChildInfoWrap>
@@ -168,7 +176,7 @@ const ProgramDetailPage = () => {
           <ButtonWrap>
             <div
               onClick={() => {
-                handleChildClick();
+                handleApplyBtnClick();
                 navigate(-1);
               }}
             >

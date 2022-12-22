@@ -52,7 +52,7 @@ const customStyles = {
 
 const ModalStyle = styled.div`
   animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)}
-    0.2s ease-in;
+   0.2s ease-in;
     visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")}
     transition: visibility 0.2s ease-out;
   
@@ -120,8 +120,13 @@ const CustomModal = (props: ModalProps) => {
   // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
   const [visible, setVisible] = useState<boolean>(false);
 
-  const handleClick = () => {
+  const closeModal = () => {
     history.back();
+    setVisible(false);
+    setTimeout(() => {
+      toggleModal();
+      if (okBtnClick) okBtnClick();
+    }, 200);
   };
 
   useEffect(() => {
@@ -134,12 +139,7 @@ const CustomModal = (props: ModalProps) => {
   useLayoutEffect(() => {
     const event = history.listen(listener => {
       if (listener.action === "POP") {
-        history.back();
-        setVisible(false);
-        setTimeout(() => {
-          toggleModal();
-          if (okBtnClick) okBtnClick();
-        }, 200);
+        closeModal();
       }
     });
     return event;
@@ -170,7 +170,7 @@ const CustomModal = (props: ModalProps) => {
           {cancelBtnName && (
             <Button theme={"white"} onClick={cancelBtnClick} content={cancelBtnName} />
           )}
-          <Button theme={"black"} onClick={handleClick} content={okBtnName ? okBtnName : "확인"} />
+          <Button theme={"black"} onClick={closeModal} content={okBtnName ? okBtnName : "확인"} />
         </ModalBtnsWrapper>
       </ModalWrapper>
     </Modal>

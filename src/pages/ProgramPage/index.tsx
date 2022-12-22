@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ProgramCard from '../components/ProgramCard';
-import LayoutMainPage from '../layouts/LayoutMainPage';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import { useNavigate } from 'react-router-dom';
+import LayoutMainPage from '../../layouts/LayoutMainPage';
+import ProgramCard from './components/ProgramCard';
 
 const ProgramPageWrapper = styled.div`
   display: flex;

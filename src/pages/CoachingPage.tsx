@@ -1,15 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ProgramCard from '../components/ProgramCard';
-import LayoutMainPage from '../layouts/LayoutMainPage';
+import React from "react";
+import { Link } from "react-router-dom";
+import LayoutMainPage from "../layouts/LayoutMainPage";
+import ProgramCard from "./ProgramPage/components/ProgramCard";
 const CoachingPage = () => {
   const handleCardClick = () => {
-    alert('click!');
+    alert("click!");
   };
   return (
     <LayoutMainPage>
       <ProgramCard
-        id={'1'}
+        id={"1"}
         handleCardClick={handleCardClick}
         programImage="/images/program-image.svg"
         title="[모집 10명] 아빠랑 같이 하는 모래놀이 클래스"
