@@ -12,6 +12,7 @@ import {
   selectedChildInfoState,
 } from "../recoil/atom";
 import { childType } from "../utils/type";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = styled.main`
   width: 100%;
@@ -102,18 +103,15 @@ interface LayoutMainPageProps {
 }
 
 const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
+  const navigate = useNavigate();
   const [openModal, setOpenModal] = useRecoilState(openChildSelectModalState);
-  const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(
-    selectedChildInfoState
-  );
+  const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
 
   const handleChildClick = (evt: React.MouseEvent<HTMLElement>) => {
     const childId = (evt.currentTarget as HTMLButtonElement).id;
     setSelectedChildInfo(
-      childrenList.filter(
-        (child: childType) => child.id.toString() === childId
-      )[0]
+      childrenList.filter((child: childType) => child.id.toString() === childId)[0],
     );
     window.localStorage.setItem("child_id", childId);
     setOpenModal(false);
@@ -126,17 +124,17 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
       </MainPage>
       <BottomNav />
       {openModal && (
-        <CustomBottomModal
-          toggle={openModal}
-          handleToggle={() => setOpenModal(!openModal)}
-        >
+        <CustomBottomModal toggle={openModal} handleToggle={() => setOpenModal(!openModal)}>
           <ChildrenListModalWrapper>
             <ChildrenListModalTitleSection>
               <span>아이 선택</span>
               <img
                 alt="close icon"
                 src="/images/icon-close.svg"
-                onClick={() => setOpenModal(!openModal)}
+                onClick={() => {
+                  setOpenModal(!openModal);
+                  navigate(-1);
+                }}
               />
             </ChildrenListModalTitleSection>
             {childrenList.slice(0, 5).map((child: childType, index: number) => {
@@ -147,10 +145,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
                   key={child.id.toString()}
                 >
                   <div>
-                    <img
-                      alt="profile icon"
-                      src={`/images/profile-${index}.svg`}
-                    />
+                    <img alt="profile icon" src={`/images/profile-${index}.svg`} />
                     <ChildName>{child.name}</ChildName>
                     <ChildInfo>
                       <span>({child.birth_date}) </span>

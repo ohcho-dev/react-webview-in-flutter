@@ -126,13 +126,13 @@ const ButtonWrap = styled.div`
 `;
 
 const ProgramDetailPage = () => {
+  const navigate = useNavigate();
   const { coachingid, classid } = useParams();
   const [share, setShare] = useRecoilState(useShareState);
 
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openCheckChildInfoModalState);
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
 
-  console.log(selectedChildInfo);
   const handleChildClick = () => {
     setOpenBottomModal(!openBottomModal);
   };
@@ -152,10 +152,7 @@ const ProgramDetailPage = () => {
       </PaymentBtnWrap>
 
       {openBottomModal && (
-        <CustomBottomModal
-          toggle={openBottomModal}
-          handleToggle={() => setOpenBottomModal(!openBottomModal)}
-        >
+        <CustomBottomModal toggle={openBottomModal} handleToggle={handleChildClick}>
           <TitleText>신청 정보를 확인해 주세요.</TitleText>
           <SubText>아래 정보로 신청하시겠어요?</SubText>
           <ChildInfoWrap>
@@ -169,7 +166,14 @@ const ProgramDetailPage = () => {
           </ChildInfoWrap>
 
           <ButtonWrap>
-            <div onClick={() => setOpenBottomModal(!openBottomModal)}>취소</div>
+            <div
+              onClick={() => {
+                handleChildClick();
+                navigate(-1);
+              }}
+            >
+              취소
+            </div>
 
             {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
             <div onClick={() => {}}>신청하기</div>
