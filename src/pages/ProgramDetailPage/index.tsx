@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   openCheckChildInfoModalState,
   selectedChildInfoState,
   useShareState,
-} from '../../recoil/atom';
+} from "../../recoil/atom";
 
-import LayoutDetailPage from '../../layouts/LayoutDetailPage';
-import DetailClass from './components/DetailClass';
-import DetailCoaching from './components/DetailCoaching';
-import styled from 'styled-components';
-import CustomBottomModal from '../../components/common/CustomBottomModal';
-import Button from '../../components/common/Button';
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import DetailClass from "./components/DetailClass";
+import DetailCoaching from "./components/DetailCoaching";
+import styled from "styled-components";
+import CustomBottomModal from "../../components/common/CustomBottomModal";
+import Button from "../../components/common/Button";
 
 export const PaymentBtnWrap = styled.div`
   width: 100%;
@@ -114,6 +114,7 @@ const ButtonWrap = styled.div`
 `;
 
 const ProgramDetailPage = () => {
+  const navigate = useNavigate();
   const { coachingid, classid } = useParams();
   const [share, setShare] = useRecoilState(useShareState);
   const [applyBtnClick, setApplyBtnClick] = useState(false);
@@ -155,14 +156,11 @@ const ProgramDetailPage = () => {
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
-        <Button theme={'black'} content={'신청하기'} onClick={handleApplyBtnClick} />
+        <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
       </PaymentBtnWrap>
 
       {openBottomModal && (
-        <CustomBottomModal
-          toggle={openBottomModal}
-          handleToggle={() => setOpenBottomModal(!openBottomModal)}
-        >
+        <CustomBottomModal toggle={openBottomModal} handleToggle={handleApplyBtnClick}>
           <TitleText>신청 정보를 확인해 주세요.</TitleText>
           <SubText>아래 정보로 신청하시겠어요?</SubText>
           <ChildInfoWrap>
@@ -176,7 +174,14 @@ const ProgramDetailPage = () => {
           </ChildInfoWrap>
 
           <ButtonWrap>
-            <div onClick={() => setOpenBottomModal(!openBottomModal)}>취소</div>
+            <div
+              onClick={() => {
+                handleApplyBtnClick();
+                navigate(-1);
+              }}
+            >
+              취소
+            </div>
 
             {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
             <div onClick={() => {}}>신청하기</div>
