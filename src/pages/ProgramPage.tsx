@@ -99,7 +99,7 @@ const ProgramPage = () => {
             originalPrice={150000}
             price={29900}
             discountPercentage={85}
-            isCoaching
+            utilVisible={false}
           />
         </CouchingSection>
         <ClassSection>
@@ -116,7 +116,7 @@ const ProgramPage = () => {
             originalPrice={150000}
             price={29900}
             discountPercentage={85}
-            isCoaching={false}
+            utilVisible
           />
           {/* Divider 마지막 index에서만 숨김처리하기 */}
           <Divider />
@@ -131,7 +131,7 @@ const ProgramPage = () => {
             originalPrice={150000}
             price={29900}
             discountPercentage={85}
-            isCoaching={false}
+            utilVisible
           />
         </ClassSection>
       </ProgramPageWrapper>
