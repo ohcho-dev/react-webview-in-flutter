@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  openCheckChildInfoModalState,
-  selectedChildInfoState,
-  useShareState,
-} from "../../recoil/atom";
+import { openBottomModalState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import DetailClass from "./components/DetailClass";
@@ -119,7 +115,7 @@ const ProgramDetailPage = () => {
   const [share, setShare] = useRecoilState(useShareState);
   const [applyBtnClick, setApplyBtnClick] = useState(false);
 
-  const [openBottomModal, setOpenBottomModal] = useRecoilState(openCheckChildInfoModalState);
+  const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
 
   const handleApplyBtnClick = () => {
@@ -159,35 +155,33 @@ const ProgramDetailPage = () => {
         <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
       </PaymentBtnWrap>
 
-      {openBottomModal && (
-        <CustomBottomModal toggle={openBottomModal} handleToggle={handleApplyBtnClick}>
-          <TitleText>신청 정보를 확인해 주세요.</TitleText>
-          <SubText>아래 정보로 신청하시겠어요?</SubText>
-          <ChildInfoWrap>
-            <ProfileImageWrap>
-              <img src="/images/icon-profile-default.svg" width="100%" />
-            </ProfileImageWrap>
-            <div>
-              {selectedChildInfo.name}
-              <BirthDate>({selectedChildInfo.birth_date})</BirthDate>
-            </div>
-          </ChildInfoWrap>
+      <CustomBottomModal toggle={openBottomModal} handleToggle={handleApplyBtnClick}>
+        <TitleText>신청 정보를 확인해 주세요.</TitleText>
+        <SubText>아래 정보로 신청하시겠어요?</SubText>
+        <ChildInfoWrap>
+          <ProfileImageWrap>
+            <img src="/images/icon-profile-default.svg" width="100%" />
+          </ProfileImageWrap>
+          <div>
+            {selectedChildInfo.name}
+            <BirthDate>({selectedChildInfo.birth_date})</BirthDate>
+          </div>
+        </ChildInfoWrap>
 
-          <ButtonWrap>
-            <div
-              onClick={() => {
-                handleApplyBtnClick();
-                navigate(-1);
-              }}
-            >
-              취소
-            </div>
+        <ButtonWrap>
+          <div
+            onClick={() => {
+              handleApplyBtnClick();
+              navigate(-1);
+            }}
+          >
+            취소
+          </div>
 
-            {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
-            <div onClick={() => {}}>신청하기</div>
-          </ButtonWrap>
-        </CustomBottomModal>
-      )}
+          {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
+          <div onClick={() => {}}>신청하기</div>
+        </ButtonWrap>
+      </CustomBottomModal>
     </LayoutDetailPage>
   );
 };

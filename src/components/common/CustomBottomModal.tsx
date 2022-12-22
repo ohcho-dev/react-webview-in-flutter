@@ -50,11 +50,13 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
 
   // 모달 오픈 시 스크롤 잠금
   useEffect(() => {
-    document.getElementById("main")?.classList.add("scroll_lock");
-    return () => {
-      document.getElementById("main")?.classList.remove("scroll_lock");
-    };
-  }, []);
+    if (toggle) {
+      document.getElementById("main")?.classList.add("scroll_lock");
+      return () => {
+        document.getElementById("main")?.classList.remove("scroll_lock");
+      };
+    }
+  }, [toggle]);
 
   const handleBackSpace = () => {
     if (handleToggle) handleToggle();
@@ -79,10 +81,14 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
   }, [toggle]);
 
   return (
-    <BottomModalWrap>
-      <Dimmed onClick={handleBackSpace} />
-      <Modal className="fadein-moveTop">{children}</Modal>
-    </BottomModalWrap>
+    <>
+      {toggle && (
+        <BottomModalWrap>
+          <Dimmed onClick={handleBackSpace} />
+          <Modal className="fadein-moveTop">{children}</Modal>
+        </BottomModalWrap>
+      )}
+    </>
   );
 };
 

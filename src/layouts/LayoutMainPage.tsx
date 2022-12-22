@@ -6,11 +6,7 @@ import BottomNav from "../components/BottomNav";
 import LayoutBasePage from "./LayoutBasePage";
 import CustomBottomModal from "../components/common/CustomBottomModal";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  childrenListState,
-  openChildSelectModalState,
-  selectedChildInfoState,
-} from "../recoil/atom";
+import { childrenListState, openBottomModalState, selectedChildInfoState } from "../recoil/atom";
 import { childType } from "../utils/type";
 import { useNavigate } from "react-router-dom";
 
@@ -104,7 +100,7 @@ interface LayoutMainPageProps {
 
 const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useRecoilState(openChildSelectModalState);
+  const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
 
@@ -123,49 +119,47 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
         <Content>{children}</Content>
       </MainPage>
       <BottomNav />
-      {openModal && (
-        <CustomBottomModal toggle={openModal} handleToggle={() => setOpenModal(!openModal)}>
-          <ChildrenListModalWrapper>
-            <ChildrenListModalTitleSection>
-              <span>아이 선택</span>
-              <img
-                alt="close icon"
-                src="/images/icon-close.svg"
-                onClick={() => {
-                  setOpenModal(!openModal);
-                  navigate(-1);
-                }}
-              />
-            </ChildrenListModalTitleSection>
-            {childrenList.slice(0, 5).map((child: childType, index: number) => {
-              return (
-                <ChildInfoWrapper
-                  onClick={handleChildClick}
-                  id={child.id.toString()}
-                  key={child.id.toString()}
-                >
-                  <div>
-                    <img alt="profile icon" src={`/images/profile-${index}.svg`} />
-                    <ChildName>{child.name}</ChildName>
-                    <ChildInfo>
-                      <span>({child.birth_date}) </span>
-                      <span>{child.gender === "M" ? "남아" : "여아"}</span>
-                    </ChildInfo>
-                  </div>
+      <CustomBottomModal toggle={openModal} handleToggle={() => setOpenModal(!openModal)}>
+        <ChildrenListModalWrapper>
+          <ChildrenListModalTitleSection>
+            <span>아이 선택</span>
+            <img
+              alt="close icon"
+              src="/images/icon-close.svg"
+              onClick={() => {
+                setOpenModal(!openModal);
+                navigate(-1);
+              }}
+            />
+          </ChildrenListModalTitleSection>
+          {childrenList.slice(0, 5).map((child: childType, index: number) => {
+            return (
+              <ChildInfoWrapper
+                onClick={handleChildClick}
+                id={child.id.toString()}
+                key={child.id.toString()}
+              >
+                <div>
+                  <img alt="profile icon" src={`/images/profile-${index}.svg`} />
+                  <ChildName>{child.name}</ChildName>
+                  <ChildInfo>
+                    <span>({child.birth_date}) </span>
+                    <span>{child.gender === "M" ? "남아" : "여아"}</span>
+                  </ChildInfo>
+                </div>
 
-                  {selectedChildInfo.id === child.id && (
-                    <img alt="selected-icon" src="/images/icon-selected.svg" />
-                  )}
-                </ChildInfoWrapper>
-              );
-            })}
-            <MoveToChildManagementBtn>
-              <span>아이관리로 이동하기</span>
-              <img alt="left icon" src="/images/icon-arrow-right-small.svg" />
-            </MoveToChildManagementBtn>
-          </ChildrenListModalWrapper>
-        </CustomBottomModal>
-      )}
+                {selectedChildInfo.id === child.id && (
+                  <img alt="selected-icon" src="/images/icon-selected.svg" />
+                )}
+              </ChildInfoWrapper>
+            );
+          })}
+          <MoveToChildManagementBtn>
+            <span>아이관리로 이동하기</span>
+            <img alt="left icon" src="/images/icon-arrow-right-small.svg" />
+          </MoveToChildManagementBtn>
+        </ChildrenListModalWrapper>
+      </CustomBottomModal>
     </LayoutBasePage>
   );
 };
