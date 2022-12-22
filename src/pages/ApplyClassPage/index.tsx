@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useSetRecoilState } from 'recoil';
-import styled from 'styled-components';
-import Button from '../../components/common/Button';
-import LayoutDetailPage from '../../layouts/LayoutDetailPage';
-import { useShareState } from '../../recoil/atom';
-import { PaymentBtnWrap } from '../ProgramDetailPage';
-import PriceSection from './components/PriceSection';
-import ProgramSection from './components/ProgramSection';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import styled from "styled-components";
+import Button from "../../components/common/Button";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { useShareState } from "../../recoil/atom";
+import { PaymentBtnWrap } from "../ProgramDetailPage";
+import PriceSection from "./components/PriceSection";
+import ProgramSection from "./components/ProgramSection";
 
 interface requeiredInfo {
   childId: string;
@@ -31,7 +31,7 @@ const Base = styled.div`
 `;
 
 const UserSection = styled(Base)`
-  height: 35rem;
+  height: 37rem;
 `;
 
 const SelectChildBtn = styled.div`
@@ -85,9 +85,9 @@ const ApplyClassPage = () => {
   const { classid } = useParams();
   const setShareBtnVisibility = useSetRecoilState(useShareState);
   const [requiredInfo, setRequiredInfo] = useState<requeiredInfo>({
-    childId: '',
-    parentName: '',
-    parentPhoneNumber: '',
+    childId: "",
+    parentName: "",
+    parentPhoneNumber: "",
   });
 
   useEffect(() => {
@@ -97,19 +97,19 @@ const ApplyClassPage = () => {
   const handleSelectChildBtnClick = () => {};
 
   return (
-    <LayoutDetailPage style={{ background: '#f6f6f6' }}>
+    <LayoutDetailPage style={{ background: "#f6f6f6" }} bottomBtn>
       <ProgramSection />
       <PriceSection />
       <UserSection>
-        <Title style={{ display: 'flex' }}>
-          아이 정보<div style={{ color: '#FD7473' }}>*</div>
+        <Title style={{ display: "flex" }}>
+          아이 정보<div style={{ color: "#FD7473" }}>*</div>
         </Title>
         <SelectChildBtn onClick={handleSelectChildBtnClick}>
           <span>아이를 선택해 주세요.</span>
           <img alt="icon-arrow-down" src="/images/icon-arrow-down-bg.svg" />
         </SelectChildBtn>
-        <Title style={{ display: 'flex' }}>
-          보호자 정보<div style={{ color: '#FD7473' }}>*</div>
+        <Title style={{ display: "flex" }}>
+          보호자 정보<div style={{ color: "#FD7473" }}>*</div>
         </Title>
         <InputTitle>이름</InputTitle>
         <InputBox placeholder="이름을 입력해주세요." />
@@ -117,7 +117,7 @@ const ApplyClassPage = () => {
         <InputBox placeholder="번호를 입력해주세요." />
       </UserSection>
       <PaymentBtnWrap>
-        <Button theme={'black'} content={'신청하기'} />
+        <Button theme={"black"} content={"신청하기"} />
       </PaymentBtnWrap>
     </LayoutDetailPage>
   );
