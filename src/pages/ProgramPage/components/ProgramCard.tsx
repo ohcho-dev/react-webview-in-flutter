@@ -109,7 +109,7 @@ const ProceedStatus = styled.span`
 `;
 
 interface ProgramCardProps {
-  id: string;
+  id: number;
   programImage: string;
   title: string;
   isDeadlineComingUp?: boolean;
@@ -124,7 +124,7 @@ interface ProgramCardProps {
   purchased?: boolean;
   startDate?: string;
   expiryDate?: string;
-  handleCardClick: (title: string) => void;
+  handleCardClick: (id: number) => void;
 }
 
 export const ProgramCard: React.FC<ProgramCardProps> = props => {
@@ -155,7 +155,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
   }, [expiryDate]);
 
   return (
-    <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id}>
+    <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id.toString()}>
       <ProgramImageSection imgUrl={programImage}>
         {isDeadlineComingUp && <div>마감임박</div>}
       </ProgramImageSection>

@@ -5,6 +5,11 @@ import "slick-carousel/slick/slick.css";
 import { useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import ProgramCard from "./components/ProgramCard";
+import { useQuery } from "react-query";
+import { getCoachingList } from "../../api/programApi";
+import { queryKeys } from "../../constant/queryKeys";
+import { coachingType } from "../../utils/type";
+import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -62,7 +67,9 @@ const ProgramPage = () => {
     cssEase: "ease-out",
   };
 
-  const handleCardClick = (id: string, category: "coaching" | "class") => {
+  const { data } = useQuery(queryKeys.coachingList, () => getCoachingList());
+
+  const handleCardClick = (id: number, category: "coaching" | "class") => {
     if (category === "coaching") {
       navigate(`/program/coaching/${id}`);
     } else {
@@ -93,23 +100,30 @@ const ProgramPage = () => {
         </CarouselSection>
         <CouchingSection>
           <ProgramTitle>📄 전문 검사와 함께하는 코칭</ProgramTitle>
-          <ProgramCard
-            id={"1"}
-            handleCardClick={() => handleCardClick("1", "coaching")}
-            programImage="/images/program-image.svg"
-            isDeadlineComingUp
-            title="우리아이 양육 코칭"
-            originalPrice={150000}
-            price={29900}
-            discountPercentage={85}
-            utilVisible={false}
-          />
+          {data[0].map((coaching: coachingType, index: number) => {
+            return (
+              <>
+                <ProgramCard
+                  id={coaching.id}
+                  handleCardClick={() => handleCardClick(coaching.id, "coaching")}
+                  programImage={coaching.main_image}
+                  isDeadlineComingUp
+                  title={coaching.name}
+                  originalPrice={coaching.base_price}
+                  price={coaching.price}
+                  discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
+                  utilVisible={false}
+                />
+                {index !== data[0].length - 1 && <Divider />}
+              </>
+            );
+          })}
         </CouchingSection>
         <ClassSection>
           <ProgramTitle>🤖 전문가와 함께하는 클래스</ProgramTitle>
           <ProgramCard
-            id={"2"}
-            handleCardClick={() => handleCardClick("2", "class")}
+            id={2}
+            handleCardClick={() => handleCardClick(2, "class")}
             programImage="/images/program-image.svg"
             isDeadlineComingUp
             isOnline
@@ -124,8 +138,8 @@ const ProgramPage = () => {
           {/* Divider 마지막 index에서만 숨김처리하기 */}
           <Divider />
           <ProgramCard
-            id={"3"}
-            handleCardClick={() => handleCardClick("3", "class")}
+            id={3}
+            handleCardClick={() => handleCardClick(3, "class")}
             programImage="/images/program-image.svg"
             isDeadlineComingUp
             ageRange="전체 연령"

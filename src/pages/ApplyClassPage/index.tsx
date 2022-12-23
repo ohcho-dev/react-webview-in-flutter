@@ -242,7 +242,7 @@ const ApplyClassPage = () => {
           />
         }
         title="신청이 마감되었어요."
-        isOpen={true}
+        isOpen={false}
         contentMarkup={
           <ApplicationCloseModalContent>
             <span>신청자가 많아 모집이 마감되었습니다.</span>
