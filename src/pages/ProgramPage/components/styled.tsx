@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const OnlineOffline = styled.span`
   margin-right: 0.5rem;
@@ -18,4 +18,17 @@ export const AgeRange = styled.span`
   color: rgba(10, 10, 10, 0.5);
 
   padding: 0.3rem;
+`;
+
+export const BottomBtnWrap = styled.div`
+  width: 100%;
+  height: 7.4rem;
+  padding: 1.2rem 2rem;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+
+  display: flex;
+  align-items: center;
 `;

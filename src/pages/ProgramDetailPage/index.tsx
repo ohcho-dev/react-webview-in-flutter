@@ -10,19 +10,7 @@ import DetailCoaching from "./components/DetailCoaching";
 import styled from "styled-components";
 import CustomBottomModal from "../../components/common/CustomBottomModal";
 import Button from "../../components/common/Button";
-
-export const PaymentBtnWrap = styled.div`
-  width: 100%;
-  height: 7.4rem;
-  padding: 1.2rem 2rem;
-  box-sizing: border-box;
-  position: fixed;
-  bottom: 0;
-  background: #fff;
-
-  display: flex;
-  align-items: center;
-`;
+import { BottomBtnWrap } from "../ProgramPage/components/styled";
 
 const GiftBtn = styled.div`
   min-width: 5rem;
@@ -148,12 +136,12 @@ const ProgramDetailPage = () => {
           setApplyBtnState={setApplyBtnState}
         />
       )}
-      <PaymentBtnWrap>
+      <BottomBtnWrap>
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
         <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
-      </PaymentBtnWrap>
+      </BottomBtnWrap>
 
       <CustomBottomModal toggle={openBottomModal} handleToggle={handleApplyBtnClick}>
         <TitleText>신청 정보를 확인해 주세요.</TitleText>

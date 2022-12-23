@@ -10,6 +10,7 @@ interface ModalProps {
   topImage?: ReactElement;
   title?: string;
   content?: string;
+  contentMarkup?: ReactElement;
   okBtnName?: string;
   cancelBtnName?: string;
   okBtnClick?: () => void;
@@ -114,6 +115,7 @@ const CustomModal = (props: ModalProps) => {
     okBtnClick,
     cancelBtnClick,
     topImage,
+    contentMarkup,
   } = props;
 
   const history = createBrowserHistory();
@@ -164,7 +166,7 @@ const CustomModal = (props: ModalProps) => {
         <ModalContentWrapper>
           {topImage && <ModalImageWrapper>{topImage}</ModalImageWrapper>}
           <ModalTitle>{title}</ModalTitle>
-          <ModalContent>{content}</ModalContent>
+          <ModalContent>{content ? content : contentMarkup}</ModalContent>
         </ModalContentWrapper>
         <ModalBtnsWrapper>
           {cancelBtnName && (
