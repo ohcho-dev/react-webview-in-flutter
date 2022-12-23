@@ -51,16 +51,13 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
         <Content>{children}</Content>
       </MainPage>
       <BottomNav />
-
-      {openModal && (
-        <ChildSelectBottomModal
-          selectedChildInfo={selectedChildInfo}
-          childrenList={childrenList}
-          openModal={openModal}
-          toggleModal={() => setOpenModal(!openModal)}
-          handleChildClick={handleChildClick}
-        />
-      )}
+      <ChildSelectBottomModal
+        selectedChildInfo={selectedChildInfo}
+        childrenList={childrenList}
+        openModal={openModal}
+        toggleModal={() => setOpenModal(!openModal)}
+        handleChildClick={handleChildClick}
+      />
     </LayoutBasePage>
   );
 };
