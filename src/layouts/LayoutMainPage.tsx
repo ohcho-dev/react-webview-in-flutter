@@ -6,11 +6,7 @@ import BottomNav from "../components/BottomNav";
 import LayoutBasePage from "./LayoutBasePage";
 import CustomBottomModal from "../components/common/CustomBottomModal";
 import { useRecoilState, useRecoilValue } from "recoil";
-import {
-  childrenListState,
-  openChildSelectModalState,
-  selectedChildInfoState,
-} from "../recoil/atom";
+import { childrenListState, openBottomModalState, selectedChildInfoState } from "../recoil/atom";
 import { childType } from "../utils/type";
 import { useNavigate } from "react-router-dom";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
@@ -36,7 +32,7 @@ interface LayoutMainPageProps {
 
 const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
   const navigate = useNavigate();
-  const [openModal, setOpenModal] = useRecoilState(openChildSelectModalState);
+  const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
 
@@ -55,6 +51,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
         <Content>{children}</Content>
       </MainPage>
       <BottomNav />
+
       {openModal && (
         <ChildSelectBottomModal
           selectedChildInfo={selectedChildInfo}
