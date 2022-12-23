@@ -9,7 +9,7 @@ const CoachingPage = () => {
   return (
     <LayoutMainPage>
       <ProgramCard
-        id={"1"}
+        id={1}
         handleCardClick={handleCardClick}
         programImage="/images/program-image.svg"
         title="[모집 10명] 아빠랑 같이 하는 모래놀이 클래스"

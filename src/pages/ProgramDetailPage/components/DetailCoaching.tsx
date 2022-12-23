@@ -1,13 +1,17 @@
-import { useState } from 'react';
-import styled from 'styled-components';
-import ProgramPrice from '../../ProgramPage/components/ProgramPrice';
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import { getSelectedCoachingInfo } from "../../../api/programApi";
+import { queryKeys } from "../../../constant/queryKeys";
+import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
+import { coachingType } from "../../../utils/type";
+import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 
 const DetailCoachingContainer = styled.div``;
-const Thumbnail = styled.div`
-  width: 100%;
+const Thumbnail = styled.img`
+  width: 37.5rem;
   height: 25rem;
-  background: url(/images/program-product-default.svg) 50% 50% no-repeat;
-  background-size: cover;
 `;
 
 const ProductMainInfo = styled.div`
@@ -40,20 +44,42 @@ const ImageWrap = styled.div`
 `;
 
 const DetailCoaching = () => {
+  const { coachingid } = useParams();
   const [favorites, setFavorites] = useState(false);
+  const { data } = useQuery(queryKeys.selectedCoacingInfo, () =>
+    getSelectedCoachingInfo(coachingid),
+  );
+  const [coachingInfo, setCoachingInfo] = useState<coachingType>();
+
+  useEffect(() => {
+    if (data.length) {
+      setCoachingInfo(data[0]);
+    }
+  }, [data]);
   return (
     <DetailCoachingContainer>
-      <Thumbnail />
+      <Thumbnail
+        alt="thumnail"
+        src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.svg"}
+      />{" "}
+      :
       <ProductMainInfo>
-        <ProductName>우리아이 양육 코칭</ProductName>
+        <ProductName>{coachingInfo?.name}</ProductName>
         <PriceWrap>
-          <ProgramPrice discountPercentage={85} originalPrice={150000} price={29900} />
+          <ProgramPrice
+            discountPercentage={getDiscountPercentage(
+              coachingInfo?.base_price,
+              coachingInfo?.price,
+            )}
+            originalPrice={coachingInfo?.base_price}
+            price={coachingInfo?.price ? coachingInfo.price : 0}
+          />
         </PriceWrap>
 
         {/* 즐겨찾기 : 아직 기능 구현 안됐습니다 */}
         <Favorites onClick={() => setFavorites(!favorites)}>
           <img
-            src={favorites ? '/images/icon-favorites-on.svg' : '/images/icon-favorites-off.svg'}
+            src={favorites ? "/images/icon-favorites-on.svg" : "/images/icon-favorites-off.svg"}
             alt="즐겨찾기"
           />
         </Favorites>

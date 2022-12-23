@@ -70,31 +70,7 @@ const BirthDate = styled.span`
 const ButtonWrap = styled.div`
   display: flex;
   align-items: center;
-
-  div {
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.4rem;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.04rem;
-
-    &:first-child {
-      background: #ffffff;
-      border: 1px solid #a8a8a8;
-      color: rgba(0, 0, 0, 0.9);
-    }
-
-    &:last-child {
-      background: #000000;
-      color: rgba(255, 255, 255, 0.9);
-      margin-left: 1.1rem;
-    }
-  }
+  column-gap: 1rem;
 `;
 
 const ProgramDetailPage = () => {
@@ -157,17 +133,17 @@ const ProgramDetailPage = () => {
         </ChildInfoWrap>
 
         <ButtonWrap>
-          <div
+          <Button
+            theme="white"
             onClick={() => {
               handleApplyBtnClick();
               navigate(-1);
             }}
-          >
-            취소
-          </div>
+            content={"취소"}
+          />
 
           {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
-          <div onClick={() => {}}>신청하기</div>
+          <Button theme="black" content="신청하기" onClick={() => {}} />
         </ButtonWrap>
       </CustomBottomModal>
     </LayoutDetailPage>
