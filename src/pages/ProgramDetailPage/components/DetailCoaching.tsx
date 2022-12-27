@@ -46,16 +46,30 @@ const ImageWrap = styled.div`
 const DetailCoaching = () => {
   const { coachingid } = useParams();
   const [favorites, setFavorites] = useState(false);
-  const { data } = useQuery(queryKeys.selectedCoacingInfo, () =>
+  const { data: selectedCoachingInfo } = useQuery(queryKeys.selectedCoacingInfo, () =>
     getSelectedCoachingInfo(coachingid),
   );
-  const [coachingInfo, setCoachingInfo] = useState<coachingType>();
+  const [coachingInfo, setCoachingInfo] = useState<coachingType>({
+    base_price: 0,
+    code: "",
+    content_image: "",
+    counsel_flag: 0,
+    created_at: "",
+    display_flag: 0,
+    id: 0,
+    main_image: "",
+    name: "",
+    price: 0,
+    updated_at: "",
+    valid_day: 0,
+  });
 
   useEffect(() => {
-    if (data.length) {
-      setCoachingInfo(data[0]);
+    if (selectedCoachingInfo.length) {
+      setCoachingInfo(selectedCoachingInfo[0]);
     }
-  }, [data]);
+  }, [selectedCoachingInfo]);
+
   return (
     <DetailCoachingContainer>
       <Thumbnail
@@ -67,11 +81,8 @@ const DetailCoaching = () => {
         <ProductName>{coachingInfo?.name}</ProductName>
         <PriceWrap>
           <ProgramPrice
-            discountPercentage={getDiscountPercentage(
-              coachingInfo?.base_price,
-              coachingInfo?.price,
-            )}
-            originalPrice={coachingInfo?.base_price}
+            discountPercentage={getDiscountPercentage(coachingInfo.base_price, coachingInfo.price)}
+            originalPrice={coachingInfo.base_price ? coachingInfo.base_price : 0}
             price={coachingInfo?.price ? coachingInfo.price : 0}
           />
         </PriceWrap>

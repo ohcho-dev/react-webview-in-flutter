@@ -1,14 +1,26 @@
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
-import CustomModal from '../../../components/common/CustomModal';
-import ProgramPrice from '../../ProgramPage/components/ProgramPrice';
-import { AgeRange, OnlineOffline } from '../../ProgramPage/components/styled';
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+import { getSelectedClassInfo } from "../../../api/programApi";
+import CustomModal from "../../../components/common/CustomModal";
+import { queryKeys } from "../../../constant/queryKeys";
+import { commonCodeState } from "../../../recoil/atom";
+import { getDateTime } from "../../../utils/getDateTime";
+import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
+import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
+import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
 interface DetailClassProps {
   id: string;
   isApplyBtnClick: boolean;
   setApplyBtnState: () => void;
+}
+
+interface MonthRangeType {
+  month_start: number;
+  month_end: number;
 }
 
 const ClassWrapper = styled.div`
@@ -54,27 +66,20 @@ const Divider = styled.div`
 const DetailClass: React.FC<DetailClassProps> = props => {
   const navigate = useNavigate();
   const { id, isApplyBtnClick, setApplyBtnState } = props;
-  const [classInfo, setClassInfo] = useState({
-    isOnline: true,
-    ageRange: '12~15개월',
-    title: '[모집10명] 아빠랑 같이 하는 모래놀이 클래스',
-    location: '서울 송파구 어린이 문화회관',
-    price: 70000,
-    originalPrice: 150000,
-    discountPercentage: 53,
-    perNum: '1회당',
-    dateTime: '2022.11.22(화) 21:00',
-  });
   const [openInformForPaymentModal, setOpenInformForPaymentModal] = useState(false);
+  const { data: selectedClassInfo } = useQuery(queryKeys.selectedClassInfo, () =>
+    getSelectedClassInfo(id),
+  );
+  const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
   const toggleInformPaymentModal = () => {
     setOpenInformForPaymentModal(!openInformForPaymentModal);
   };
 
   useEffect(() => {
-    if (!classInfo.isOnline && isApplyBtnClick) {
+    if (selectedClassInfo.place_type !== "CLPLT_ONLINE" && isApplyBtnClick) {
       toggleInformPaymentModal();
-    } else if (classInfo.isOnline && isApplyBtnClick) {
+    } else if (selectedClassInfo.place_type === "CLPLT_ONLINE" && isApplyBtnClick) {
       navigate(`/program/class/apply-class/${id}`);
     }
   }, [isApplyBtnClick]);
@@ -86,24 +91,38 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   return (
     <>
       <ClassWrapper>
-        <img alt="class image" src="/images/class-img.png" />
+        <img alt="class image" src={selectedClassInfo.main_image} />
         <ClassInfoWrapper>
           <ClassInfo>
-            <OnlineOffline>{classInfo.isOnline ? '온라인' : '오프라인'}</OnlineOffline>
-            <AgeRange>{classInfo.ageRange}</AgeRange>
+            <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
+            <AgeRange>
+              {selectedClassInfo.month_level.map(
+                (month: MonthRangeType, index: number) =>
+                  `${month.month_start}~${month.month_end}${
+                    index === selectedClassInfo.month_level.length - 1 ? "개월" : ","
+                  }`,
+              )}
+            </AgeRange>
           </ClassInfo>
-          <ClassTitle>{classInfo.title}</ClassTitle>
+          <ClassTitle>{selectedClassInfo.name}</ClassTitle>
           <ClassSubSection>
-            {classInfo.isOnline ? classInfo.dateTime : classInfo.location}
+            {selectedClassInfo.place_type === "CLPLT_ONLINE"
+              ? getDateTime(selectedClassInfo.class_datetime)
+              : selectedClassInfo.location}
           </ClassSubSection>
           <ProgramPrice
-            price={classInfo.price}
-            discountPercentage={classInfo.discountPercentage}
-            originalPrice={classInfo.originalPrice}
-            perNum={'1회당'}
+            discountPercentage={getDiscountPercentage(
+              selectedClassInfo.base_price,
+              selectedClassInfo.price,
+            )}
+            price={selectedClassInfo.price}
+            originalPrice={selectedClassInfo.base_price}
           />
         </ClassInfoWrapper>
         <Divider />
+        {selectedClassInfo.content_image && (
+          <img alt="content image" src={selectedClassInfo.content_image} />
+        )}
       </ClassWrapper>
       <CustomModal
         isOpen={openInformForPaymentModal}

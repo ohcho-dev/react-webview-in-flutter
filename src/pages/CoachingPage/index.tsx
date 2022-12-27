@@ -63,6 +63,10 @@ const data = [
   { onGoing: true },
   { onGoing: false },
 ];
+
+// TODO: 1.코칭 리스트에서 진행중 선택 > 코칭 상세 페이지로 이동 > 상세 페이지 상단의 뒤로가기 선택 > 다시 코칭 리스트로 돌아왔을 때 : 진행중
+// 2. 코칭 리스트에서 진행중 선택 > 하단 다른 메뉴 선택하여 메뉴 이동 > 하단 메뉴 선택하여 코칭 리스트로 돌아왔을 때 : 기본 전체
+// 공수 많이 들어가면 디폴트 '전체'
 const CoachingPage = () => {
   const [selectedMenu, setSelectedMenu] = useState<MenuType>("all");
   // TODO: lastIndex 초기값은 coachingList.length
@@ -103,6 +107,7 @@ const CoachingPage = () => {
     setCoachingList(newList);
     setLastIndex(newList.length > 5 ? 5 : newList.length);
   }, [selectedMenu]);
+
   return (
     <LayoutMainPage>
       <CoachingTabWrapper>
@@ -122,10 +127,10 @@ const CoachingPage = () => {
           </ProgressChip>
         </ChipWrapper>
         {coachingList.slice(0, lastIndex).map((coaching, index) => (
-          <>
+          <div key={index}>
             <CoachingCard coaching={coaching} key={index} />
             {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
-          </>
+          </div>
         ))}
       </CoachingTabWrapper>
       {lastIndex < coachingList.length - 1 && (

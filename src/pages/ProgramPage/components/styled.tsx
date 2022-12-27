@@ -10,6 +10,11 @@ export const OnlineOffline = styled.span`
 
 export const AgeRange = styled.span`
   height: 1.8rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   border: 0.5px solid rgba(10, 10, 10, 0.4);
   border-radius: 2px;
 

@@ -11,11 +11,12 @@ import { RouterConfig } from "./RouteConfig";
 import { useQuery, useQueryErrorResetBoundary } from "react-query";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { useSetRecoilState } from "recoil";
-import { childrenListState, selectedChildInfoState } from "./recoil/atom";
+import { childrenListState, commonCodeState, selectedChildInfoState } from "./recoil/atom";
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
 import { CHILD_ID_FIELD } from "./constant/localStorage";
+import { getCommonCodeList } from "./api/commonApi";
 
 let oldLocation: any = null;
 
@@ -100,11 +101,11 @@ const App: React.FC = () => {
   const navigationType = useNavigationType();
   const location = useLocation();
   const { reset } = useQueryErrorResetBoundary();
-  const { data } = useQuery(queryKeys.childrenList, () => getChildrenList(), {
-    refetchOnWindowFocus: false,
-  });
+  const { data } = useQuery(queryKeys.childrenList, () => getChildrenList());
+  const { data: commonCodeList } = useQuery(queryKeys.commonCodeList, () => getCommonCodeList());
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
   const setChildrenList = useSetRecoilState(childrenListState);
+  const setCommonCodeList = useSetRecoilState(commonCodeState);
 
   useEffect(() => {
     // if (localStorage.getItem('jwt')) {
@@ -126,6 +127,17 @@ const App: React.FC = () => {
       setChildrenList(data[0]);
     }
   }, [data]);
+
+  useEffect(() => {
+    let codeObj: { [key: string]: string | number | object } = {};
+
+    if (commonCodeList[0].length) {
+      commonCodeList[0].map(
+        (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
+      );
+      setCommonCodeList(codeObj);
+    }
+  }, [commonCodeList]);
 
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",
