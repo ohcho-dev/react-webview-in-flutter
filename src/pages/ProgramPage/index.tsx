@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import ProgramCard from "./components/ProgramCard";
 import { useQuery } from "react-query";
-import { getCoachingList } from "../../api/programApi";
+import { getClassList, getCoachingList } from "../../api/programApi";
 import { queryKeys } from "../../constant/queryKeys";
 import { coachingType } from "../../utils/type";
 import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
@@ -64,7 +64,8 @@ const ProgramPage = () => {
     cssEase: "ease-out",
   };
 
-  const { data } = useQuery(queryKeys.coachingList, () => getCoachingList());
+  const { data: coachingList } = useQuery(queryKeys.coachingList, () => getCoachingList());
+  const { data: classList } = useQuery(queryKeys.classList, () => getClassList());
 
   const handleCardClick = (id: number, category: "coaching" | "class") => {
     if (category === "coaching") {
@@ -97,56 +98,46 @@ const ProgramPage = () => {
         </CarouselSection>
         <CouchingSection>
           <ProgramTitle>📄 전문 검사와 함께하는 코칭</ProgramTitle>
-          {data[0].map((coaching: coachingType, index: number) => {
+          {coachingList[0].map((coaching: coachingType, index: number) => {
             return (
-              <>
+              <div key={index}>
                 <ProgramCard
                   id={coaching.id}
                   handleCardClick={() => handleCardClick(coaching.id, "coaching")}
                   programImage={coaching.main_image}
-                  isDeadlineComingUp
                   title={coaching.name}
                   originalPrice={coaching.base_price}
                   price={coaching.price}
                   discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
                   utilVisible={false}
                 />
-                {index !== data[0].length - 1 && <Divider />}
-              </>
+                {index !== coachingList[0].length - 1 && <Divider />}
+              </div>
             );
           })}
         </CouchingSection>
         <ClassSection>
           <ProgramTitle>🤖 전문가와 함께하는 클래스</ProgramTitle>
-          <ProgramCard
-            id={2}
-            handleCardClick={() => handleCardClick(2, "class")}
-            programImage="/images/program-image.svg"
-            isDeadlineComingUp
-            isOnline
-            ageRange="12~15개월"
-            title="[모집 10명] 아빠랑 같이 하는 모래놀이 클래스"
-            location="서울시 송파구 어린이 문화회관"
-            originalPrice={150000}
-            price={29900}
-            discountPercentage={85}
-            utilVisible
-          />
-          {/* Divider 마지막 index에서만 숨김처리하기 */}
-          <Divider />
-          <ProgramCard
-            id={3}
-            handleCardClick={() => handleCardClick(3, "class")}
-            programImage="/images/program-image.svg"
-            isDeadlineComingUp
-            ageRange="전체 연령"
-            title="[모집 10명] 아빠랑 같이 하는 모래놀이 클래스"
-            dateTime="2022.11.22(화) 21:00"
-            originalPrice={150000}
-            price={29900}
-            discountPercentage={85}
-            utilVisible
-          />
+          {classList.map((singleClass: { [key: string]: any }, index: number) => {
+            return (
+              <div key={index}>
+                <ProgramCard
+                  id={singleClass.id}
+                  handleCardClick={() => handleCardClick(singleClass.id, "class")}
+                  programImage={singleClass.main_image}
+                  title={singleClass.name}
+                  originalPrice={singleClass.base_price}
+                  price={singleClass.price}
+                  discountPercentage={getDiscountPercentage(
+                    singleClass.base_price,
+                    singleClass.price,
+                  )}
+                  utilVisible={false}
+                />
+                {index !== classList.length - 1 && <Divider />}
+              </div>
+            );
+          })}
         </ClassSection>
       </ProgramPageWrapper>
     </LayoutMainPage>

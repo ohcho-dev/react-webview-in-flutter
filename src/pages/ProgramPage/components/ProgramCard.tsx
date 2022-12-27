@@ -116,9 +116,9 @@ interface ProgramCardProps {
   ageRange?: string;
   isOnline?: boolean;
   location?: string;
-  originalPrice?: number;
-  price?: number;
-  discountPercentage?: number;
+  originalPrice: number;
+  price: number;
+  discountPercentage: number;
   dateTime?: string;
   utilVisible: boolean;
   purchased?: boolean;
@@ -157,7 +157,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
   return (
     <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id.toString()}>
       <ProgramImageSection imgUrl={programImage}>
-        {isDeadlineComingUp && <div>마감임박</div>}
+        {/* {isDeadlineComingUp && <div>마감임박</div>} */}
       </ProgramImageSection>
       {utilVisible && (
         <ClassInfoSection>

@@ -1,9 +1,9 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 interface ProgramPriceProps {
-  originalPrice?: number;
+  originalPrice: number;
   price: number;
-  discountPercentage?: number;
+  discountPercentage: number;
   percentageStyle?: object;
   originalPriceStyle?: object;
   priceStyle?: object;
@@ -52,11 +52,11 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
     priceStyle,
     perNum,
   } = props;
-  const numberFormatter = new Intl.NumberFormat('ko');
+  const numberFormatter = new Intl.NumberFormat("ko");
 
   return (
     <ProgramPriceSection>
-      {discountPercentage && (
+      {discountPercentage > 0 && (
         <DiscountPercentage style={{ ...percentageStyle }}>
           {discountPercentage}%
         </DiscountPercentage>
@@ -64,7 +64,7 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
       <Price style={{ ...priceStyle }}>
         {numberFormatter.format(price)}원{perNum && <PerActivity>({perNum})</PerActivity>}
       </Price>
-      {originalPrice && (
+      {originalPrice > 0 && (
         <OriginalPrice style={{ ...originalPriceStyle }}>
           {numberFormatter.format(originalPrice)}원
         </OriginalPrice>

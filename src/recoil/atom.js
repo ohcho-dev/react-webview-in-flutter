@@ -1,11 +1,16 @@
 import { atom } from "recoil";
 
-let openBottomModalState = atom({
+export const commonCodeState = atom({
+  key: "commonCodeList",
+  default: {},
+});
+
+export const openBottomModalState = atom({
   key: "bottomModal",
   default: false,
 });
 
-let selectedChildInfoState = atom({
+export const selectedChildInfoState = atom({
   key: "selectedChild",
   default: {
     id: 0,
@@ -18,14 +23,12 @@ let selectedChildInfoState = atom({
   },
 });
 
-let childrenListState = atom({
+export const childrenListState = atom({
   key: "childrenList",
   default: [],
 });
 
-let useShareState = atom({
+export const useShareState = atom({
   key: "share",
   default: false,
 });
-
-export { openBottomModalState, selectedChildInfoState, childrenListState, useShareState };
