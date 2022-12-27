@@ -10,6 +10,7 @@ import { getCoachingList } from "../../api/programApi";
 import { queryKeys } from "../../constant/queryKeys";
 import { coachingType } from "../../utils/type";
 import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
+import { Divider } from "./components/styled";
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -38,10 +39,6 @@ const ProgramTitle = styled.span`
   font-size: 2rem;
 `;
 
-const Divider = styled.div`
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
-`;
-
 const SliderContainer = styled.div`
   width: 31.5rem;
   height: 14rem;
@@ -61,7 +58,7 @@ const ProgramPage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 2000,
+    speed: 3000,
     autoplaySpeed: 5000,
     mobileFirst: false,
     cssEase: "ease-out",

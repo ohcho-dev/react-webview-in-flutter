@@ -32,3 +32,7 @@ export const BottomBtnWrap = styled.div`
   display: flex;
   align-items: center;
 `;
+
+export const Divider = styled.div`
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+`;
