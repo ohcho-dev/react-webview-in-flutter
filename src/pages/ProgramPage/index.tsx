@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import { Suspense } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
-import { useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import ProgramCard from "./components/ProgramCard";
-import { useQuery } from "react-query";
-import { getClassList, getCoachingList } from "../../api/programApi";
-import { queryKeys } from "../../constant/queryKeys";
-import { coachingType } from "../../utils/type";
-import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
-import { Divider } from "./components/styled";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
+import CoachingList from "./CoachingList";
+import ClassList from "./ClassList";
+import { ErrorBoundary } from "../ErrorPage";
+import { useQueryErrorResetBoundary } from "react-query";
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -50,7 +47,8 @@ const SliderContainer = styled.div`
 `;
 
 const ProgramPage = () => {
-  const navigate = useNavigate();
+  const { reset } = useQueryErrorResetBoundary();
+
   const settings = {
     dots: false,
     arrows: false,
@@ -58,21 +56,10 @@ const ProgramPage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 3000,
-    autoplaySpeed: 5000,
+    speed: 1500,
+    autoplaySpeed: 4000,
     mobileFirst: false,
     cssEase: "ease-out",
-  };
-
-  const { data: coachingList } = useQuery(queryKeys.coachingList, () => getCoachingList());
-  const { data: classList } = useQuery(queryKeys.classList, () => getClassList());
-
-  const handleCardClick = (id: number, category: "coaching" | "class") => {
-    if (category === "coaching") {
-      navigate(`/program/coaching/${id}`);
-    } else {
-      navigate(`/program/class/${id}`);
-    }
   };
 
   return (
@@ -96,48 +83,23 @@ const ProgramPage = () => {
             </SliderContainer>
           </Slider>
         </CarouselSection>
+
         <CouchingSection>
           <ProgramTitle>📄 전문 검사와 함께하는 코칭</ProgramTitle>
-          {coachingList[0].map((coaching: coachingType, index: number) => {
-            return (
-              <div key={index}>
-                <ProgramCard
-                  id={coaching.id}
-                  handleCardClick={() => handleCardClick(coaching.id, "coaching")}
-                  programImage={coaching.main_image}
-                  title={coaching.name}
-                  originalPrice={coaching.base_price}
-                  price={coaching.price}
-                  discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
-                  utilVisible={false}
-                />
-                {index !== coachingList[0].length - 1 && <Divider />}
-              </div>
-            );
-          })}
+          <ErrorBoundary onReset={reset}>
+            <Suspense fallback={<LoadingSpinner />}>
+              <CoachingList />
+            </Suspense>
+          </ErrorBoundary>
         </CouchingSection>
+
         <ClassSection>
           <ProgramTitle>🤖 전문가와 함께하는 클래스</ProgramTitle>
-          {classList.map((singleClass: { [key: string]: any }, index: number) => {
-            return (
-              <div key={index}>
-                <ProgramCard
-                  id={singleClass.id}
-                  handleCardClick={() => handleCardClick(singleClass.id, "class")}
-                  programImage={singleClass.main_image}
-                  title={singleClass.name}
-                  originalPrice={singleClass.base_price}
-                  price={singleClass.price}
-                  discountPercentage={getDiscountPercentage(
-                    singleClass.base_price,
-                    singleClass.price,
-                  )}
-                  utilVisible={false}
-                />
-                {index !== classList.length - 1 && <Divider />}
-              </div>
-            );
-          })}
+          <ErrorBoundary onReset={reset}>
+            <Suspense fallback={<LoadingSpinner />}>
+              <ClassList />
+            </Suspense>
+          </ErrorBoundary>
         </ClassSection>
       </ProgramPageWrapper>
     </LayoutMainPage>

@@ -1,15 +1,14 @@
-import React, { Component, ReactNode, Suspense, useEffect } from "react";
+import React, { Suspense, useEffect, useState, useTransition } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Cookies from "js-cookie";
-import styled from "styled-components";
 
 import "./scss/_reset.scss";
 import "./scss/_global.scss";
 import "./scss/_slideTransition.scss";
 
 import { RouterConfig } from "./RouteConfig";
-import { useQuery, useQueryErrorResetBoundary } from "react-query";
+import { useQueries, useQueryErrorResetBoundary } from "react-query";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { useSetRecoilState } from "recoil";
 import { childrenListState, commonCodeState, selectedChildInfoState } from "./recoil/atom";
@@ -19,136 +18,72 @@ import { getChildrenList } from "./api/childApi";
 import { CHILD_ID_FIELD } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { getLoginDev } from "./api/loginDevApi";
+import { ErrorBoundary } from "./pages/ErrorPage";
+import MainTitleBar, { DetailTitleBar } from "./components/TitleBar";
 
 let oldLocation: any = null;
-
-const ErrorSection = styled.div`
-  width: 100%;
-  height: 100%;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 30%;
-  }
-`;
-
-const FailSentence = styled.span`
-  font-size: 1.6rem;
-  margin: 3rem 0;
-`;
-
-const RetryButton = styled.button`
-  width: 60%;
-  height: 5rem;
-  border: none;
-  color: white;
-  background-color: black;
-  font-size: 1.6rem;
-`;
-
-interface Props {
-  children?: ReactNode;
-  onReset?: () => void;
-}
-
-interface State {
-  hasError: boolean;
-}
-
-export class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
-    hasError: false,
-  };
-
-  // 다음 렌더링에서 폴백 UI가 보이도록 상태를 업데이트
-  public static getDerivedStateFromError(_: Error): State {
-    return { hasError: true };
-  }
-
-  // 에러 기록
-  // public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-  //   console.error("Uncaught error:", error, errorInfo);
-  // }
-
-  onResetErrorBoundary = () => {
-    const { onReset } = this.props;
-    onReset == null ? void 0 : onReset();
-    this.reset();
-  };
-
-  reset() {
-    this.setState({ hasError: false });
-  }
-
-  public render() {
-    if (this.state.hasError) {
-      return (
-        <ErrorSection>
-          <img src="/images/icon-sad.svg" alt="sad icon" />
-          <FailSentence>요청사항을 처리하는데 실패하였습니다.</FailSentence>
-          <RetryButton onClick={this.onResetErrorBoundary}>다시 시도하기</RetryButton>
-        </ErrorSection>
-      );
-    }
-
-    return this.props.children;
-  }
-}
 
 const App: React.FC = () => {
   const navigate = useNavigate();
   const navigationType = useNavigationType();
   const location = useLocation();
   const { reset } = useQueryErrorResetBoundary();
-  const { data: loginToken } = useQuery(queryKeys.loginDev, () => getLoginDev());
-  const { data } = useQuery(queryKeys.childrenList, () => getChildrenList());
-  const { data: commonCodeList } = useQuery(queryKeys.commonCodeList, () => getCommonCodeList());
+
+  const { pathname } = useLocation();
+  const [pathState, setPathState] = useState(0);
+  useEffect(() => {
+    let count = pathname.split("/").length - 1;
+    setPathState(count);
+  }, [pathname]);
+
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
   const setChildrenList = useSetRecoilState(childrenListState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
 
+  useQueries([
+    {
+      queryKey: queryKeys.loginDev,
+      queryFn: () => getLoginDev(),
+      onSuccess: async (loginToken: { access_token: string }) => {
+        await Cookies.set("token", loginToken.access_token);
+      },
+    },
+    {
+      queryKey: queryKeys.childrenList,
+      queryFn: () => getChildrenList(),
+      onSuccess: (data: any[]) => {
+        if (data[0].length) {
+          let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0][0].id.toString();
+          setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
+
+          if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
+            window.localStorage.setItem(CHILD_ID_FIELD, id);
+          }
+          setChildrenList(data[0]);
+        }
+      },
+    },
+    {
+      queryKey: queryKeys.commonCodeList,
+      queryFn: () => getCommonCodeList(),
+      onSuccess: (commonCodeList: any[]) => {
+        let codeObj: { [key: string]: string | number | object } = {};
+
+        if (commonCodeList[0].length) {
+          commonCodeList[0].map(
+            (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
+          );
+          setCommonCodeList(codeObj);
+        }
+      },
+    },
+  ]);
+
   useEffect(() => {
-    // if (localStorage.getItem('jwt')) {
     let path = window.location.pathname;
     path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
-    // } else {
-    //   navigate('/login');
-    // }
   }, []);
 
-  useEffect(() => {
-    if (loginToken.access_token) {
-      Cookies.set("token", loginToken.access_token);
-    }
-  }, [loginToken]);
-
-  useEffect(() => {
-    if (Cookies.get("token") && data[0].length) {
-      let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0][0].id.toString();
-      setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
-
-      if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
-        window.localStorage.setItem(CHILD_ID_FIELD, id);
-      }
-      setChildrenList(data[0]);
-    }
-  }, [Cookies.get("token"), data]);
-
-  useEffect(() => {
-    let codeObj: { [key: string]: string | number | object } = {};
-
-    if (commonCodeList[0].length) {
-      commonCodeList[0].map(
-        (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
-      );
-      setCommonCodeList(codeObj);
-    }
-  }, [commonCodeList]);
-
-  console.log(commonCodeList);
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",
     exit: "to-bottom",
@@ -179,24 +114,28 @@ const App: React.FC = () => {
   oldLocation = location;
 
   return (
-    <TransitionGroup
-      className={"router-wrapper"}
-      childFactory={child => React.cloneElement(child, { classNames })}
-    >
-      <CSSTransition timeout={150} key={location.pathname}>
-        <div style={{ width: "100%", height: "100vh" }}>
-          <Suspense fallback={<LoadingSpinner />}>
-            <ErrorBoundary onReset={reset}>
-              <Routes location={location}>
-                {RouterConfig.map((config, index) => {
-                  return <Route key={index} {...config} />;
-                })}
-              </Routes>
-            </ErrorBoundary>
-          </Suspense>
-        </div>
-      </CSSTransition>
-    </TransitionGroup>
+    <>
+      {pathState === 1 && <MainTitleBar />}
+      {pathState > 1 && <DetailTitleBar />}
+      {/* <ErrorBoundary onReset={reset}>
+        <Suspense fallback={<LoadingSpinner />}> */}
+      <TransitionGroup
+        className={"router-wrapper"}
+        childFactory={child => React.cloneElement(child, { classNames })}
+      >
+        <CSSTransition timeout={150} key={location.pathname}>
+          <div style={{ width: "100%", height: "100vh" }}>
+            <Routes location={location}>
+              {RouterConfig.map((config, index) => {
+                return <Route key={index} {...config} />;
+              })}
+            </Routes>
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
+      {/* </Suspense>
+      </ErrorBoundary> */}
+    </>
   );
 };
 

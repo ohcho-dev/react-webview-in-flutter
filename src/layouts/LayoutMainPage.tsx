@@ -1,14 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-// import MainTitleBar from "../components/TitleBar";
 import BottomNav from "../components/BottomNav";
 import LayoutBasePage from "./LayoutBasePage";
-import CustomBottomModal from "../components/common/CustomBottomModal";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { childrenListState, openBottomModalState, selectedChildInfoState } from "../recoil/atom";
 import { childType } from "../utils/type";
-import { useNavigate } from "react-router-dom";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
 
@@ -31,7 +28,6 @@ interface LayoutMainPageProps {
 }
 
 const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
-  const navigate = useNavigate();
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
