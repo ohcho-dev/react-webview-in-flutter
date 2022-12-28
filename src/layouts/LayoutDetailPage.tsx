@@ -1,9 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
 
-import LayoutBasePage from './LayoutBasePage';
-// import { DetailTitleBar } from "../components/TitleBar";
+import LayoutBasePage from "./LayoutBasePage";
 
 const DetailPage = styled.main`
   background: #fff;
@@ -12,7 +10,7 @@ const DetailPage = styled.main`
   left: 0;
   width: 100%;
   height: ${(props: { bottomBtn?: boolean }) =>
-    props.bottomBtn ? 'calc(100vh - 13.4rem)' : 'calc(100vh - 6rem)'};
+    props.bottomBtn ? "calc(100vh - 13.4rem)" : "calc(100vh - 6rem)"};
   z-index: 100;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -29,7 +27,6 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   bottomBtn = false,
   style,
 }) => {
-  const location = useLocation();
   return (
     <LayoutBasePage>
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={style}>

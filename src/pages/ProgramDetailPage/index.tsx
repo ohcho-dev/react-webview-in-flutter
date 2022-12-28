@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -11,6 +11,7 @@ import styled from "styled-components";
 import CustomBottomModal from "../../components/common/CustomBottomModal";
 import Button from "../../components/common/Button";
 import { BottomBtnWrap } from "../ProgramPage/components/styled";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 
 const GiftBtn = styled.div`
   min-width: 5rem;
@@ -104,14 +105,16 @@ const ProgramDetailPage = () => {
 
   return (
     <LayoutDetailPage bottomBtn>
-      {coachingid && <DetailCoaching />}
-      {classid && (
-        <DetailClass
-          id={classid}
-          isApplyBtnClick={applyBtnClick}
-          setApplyBtnState={setApplyBtnState}
-        />
-      )}
+      <Suspense fallback={<LoadingSpinner />}>{coachingid && <DetailCoaching />}</Suspense>
+      <Suspense fallback={<LoadingSpinner />}>
+        {classid && (
+          <DetailClass
+            id={classid}
+            isApplyBtnClick={applyBtnClick}
+            setApplyBtnState={setApplyBtnState}
+          />
+        )}
+      </Suspense>
       <BottomBtnWrap>
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />

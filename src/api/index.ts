@@ -10,14 +10,38 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export const request = async (config: AxiosRequestConfig) => {
   let token = Cookies.get("token");
 
-  if (token) {
-    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  // 토큰 처리로 임시로 적용
+  if (!token) {
+    try {
+      const response = await axios({
+        ...config,
+        headers: {},
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+  // 토큰 처리로 임시로 적용
+  if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
+    try {
+      const response = await axios({
+        ...config,
+        headers: { Autorization: `Bearer ${token}` },
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
   }
 
   try {
     const response = await axios({
       ...config,
-      headers: { "child-id": window.localStorage.getItem(CHILD_ID_FIELD) },
+      headers: {
+        "child-id": window.localStorage.getItem(CHILD_ID_FIELD),
+        Autorization: `Bearer ${token}`,
+      },
     });
     return response.data;
   } catch (error) {
