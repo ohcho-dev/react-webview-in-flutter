@@ -1,6 +1,7 @@
 import React, { Component, ReactNode, Suspense, useEffect } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import Cookies from "js-cookie";
 import styled from "styled-components";
 
 import "./scss/_reset.scss";
@@ -17,6 +18,7 @@ import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
 import { CHILD_ID_FIELD } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
+import { getLoginDev } from "./api/loginDevApi";
 
 let oldLocation: any = null;
 
@@ -101,6 +103,7 @@ const App: React.FC = () => {
   const navigationType = useNavigationType();
   const location = useLocation();
   const { reset } = useQueryErrorResetBoundary();
+  const { data: loginToken } = useQuery(queryKeys.loginDev, () => getLoginDev());
   const { data } = useQuery(queryKeys.childrenList, () => getChildrenList());
   const { data: commonCodeList } = useQuery(queryKeys.commonCodeList, () => getCommonCodeList());
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
@@ -117,7 +120,13 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (data[0].length) {
+    if (loginToken.access_token) {
+      Cookies.set("token", loginToken.access_token);
+    }
+  }, [loginToken]);
+
+  useEffect(() => {
+    if (Cookies.get("token") && data[0].length) {
       let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0][0].id.toString();
       setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
 
@@ -126,7 +135,7 @@ const App: React.FC = () => {
       }
       setChildrenList(data[0]);
     }
-  }, [data]);
+  }, [Cookies.get("token"), data]);
 
   useEffect(() => {
     let codeObj: { [key: string]: string | number | object } = {};
@@ -139,6 +148,7 @@ const App: React.FC = () => {
     }
   }, [commonCodeList]);
 
+  console.log(commonCodeList);
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",
     exit: "to-bottom",

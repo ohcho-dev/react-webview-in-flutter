@@ -1,4 +1,5 @@
 export const queryKeys = {
+  loginDev: "login-token",
   commonCodeList: "common-code-list",
 
   childrenList: "children-list",
