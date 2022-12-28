@@ -1,15 +1,16 @@
-import axios, { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from "axios";
+import { CHILD_ID_FIELD } from "../constant/localStorage";
 
 // axios 기본 설정
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;
-axios.defaults.headers.common['Authorization'] = `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`;
-axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common["Authorization"] = `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`;
+axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
 export const request = async (config: AxiosRequestConfig) => {
   try {
     const response = await axios({
       ...config,
-      headers: { child_id: window.localStorage.getItem('child_id') },
+      headers: { "child-id": window.localStorage.getItem(CHILD_ID_FIELD) },
     });
     return response.data;
   } catch (error) {

@@ -1,31 +1,17 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-import {
-  openCheckChildInfoModalState,
-  selectedChildInfoState,
-  useShareState,
-} from '../../recoil/atom';
+import { useRecoilState, useRecoilValue } from "recoil";
+import { openBottomModalState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 
-import LayoutDetailPage from '../../layouts/LayoutDetailPage';
-import DetailClass from './components/DetailClass';
-import DetailCoaching from './components/DetailCoaching';
-import styled from 'styled-components';
-import CustomBottomModal from '../../components/common/CustomBottomModal';
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import DetailClass from "./components/DetailClass";
+import DetailCoaching from "./components/DetailCoaching";
+import styled from "styled-components";
+import CustomBottomModal from "../../components/common/CustomBottomModal";
+import Button from "../../components/common/Button";
+import { BottomBtnWrap } from "../ProgramPage/components/styled";
 
-const PaymentBtnWrap = styled.div`
-  width: 100%;
-  height: 7.4rem;
-  padding: 1.2rem 2rem;
-  box-sizing: border-box;
-  position: fixed;
-  bottom: 0;
-  background: #fff;
-
-  display: flex;
-  align-items: center;
-`;
 const GiftBtn = styled.div`
   min-width: 5rem;
   height: 5rem;
@@ -36,20 +22,6 @@ const GiftBtn = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-const PayBtn = styled.div`
-  width: 100%;
-  height: 5rem;
-  background: #000;
-  border-radius: 0.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 22px;
-  letter-spacing: -0.4px;
-  color: rgba(255, 255, 255, 0.9);
 `;
 
 const TitleText = styled.h2`
@@ -98,84 +70,82 @@ const BirthDate = styled.span`
 const ButtonWrap = styled.div`
   display: flex;
   align-items: center;
-
-  div {
-    width: 100%;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 0.4rem;
-    font-weight: 500;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.04rem;
-
-    &:first-child {
-      background: #ffffff;
-      border: 1px solid #a8a8a8;
-      color: rgba(0, 0, 0, 0.9);
-    }
-
-    &:last-child {
-      background: #000000;
-      color: rgba(255, 255, 255, 0.9);
-      margin-left: 1.1rem;
-    }
-  }
+  column-gap: 1rem;
 `;
 
 const ProgramDetailPage = () => {
+  const navigate = useNavigate();
   const { coachingid, classid } = useParams();
   const [share, setShare] = useRecoilState(useShareState);
+  const [applyBtnClick, setApplyBtnClick] = useState(false);
 
-  const [openBottomModal, setOpenBottomModal] = useRecoilState(openCheckChildInfoModalState);
+  const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
 
-  console.log(selectedChildInfo);
-  const handleChildClick = () => {
-    setOpenBottomModal(!openBottomModal);
+  const handleApplyBtnClick = () => {
+    // 코칭 선택시
+    if (coachingid) {
+      setOpenBottomModal(!openBottomModal);
+    }
+
+    // 클래스 선택시
+    if (classid) {
+      setApplyBtnClick(true);
+    }
+  };
+
+  const setApplyBtnState = () => {
+    setApplyBtnClick(false);
   };
 
   useEffect(() => {
     setShare(true);
   }, []);
+
   return (
     <LayoutDetailPage bottomBtn>
       {coachingid && <DetailCoaching />}
-      {classid && <DetailClass />}
-      <PaymentBtnWrap>
+      {classid && (
+        <DetailClass
+          id={classid}
+          isApplyBtnClick={applyBtnClick}
+          setApplyBtnState={setApplyBtnState}
+        />
+      )}
+      <BottomBtnWrap>
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
-        <PayBtn onClick={handleChildClick}>신청하기</PayBtn>
-      </PaymentBtnWrap>
+        <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
+      </BottomBtnWrap>
 
-      {openBottomModal && (
-        <CustomBottomModal
-          toggle={openBottomModal}
-          handleToggle={() => setOpenBottomModal(!openBottomModal)}
-        >
-          <TitleText>신청 정보를 확인해 주세요.</TitleText>
-          <SubText>아래 정보로 신청하시겠어요?</SubText>
-          <ChildInfoWrap>
-            <ProfileImageWrap>
-              <img src="/images/icon-profile-default.svg" width="100%" />
-            </ProfileImageWrap>
-            <div>
-              {selectedChildInfo.name}
-              <BirthDate>({selectedChildInfo.birth_date})</BirthDate>
-            </div>
-          </ChildInfoWrap>
+      <CustomBottomModal toggle={openBottomModal} handleToggle={handleApplyBtnClick}>
+        <TitleText>신청 정보를 확인해 주세요.</TitleText>
+        <SubText>아래 정보로 신청하시겠어요?</SubText>
+        <ChildInfoWrap>
+          <ProfileImageWrap>
+            <img src="/images/icon-profile-default.svg" width="100%" />
+          </ProfileImageWrap>
+          <div>
+            {selectedChildInfo.name}
+            <BirthDate>({selectedChildInfo.birth_date})</BirthDate>
+          </div>
+        </ChildInfoWrap>
 
-          <ButtonWrap>
-            <div onClick={() => setOpenBottomModal(!openBottomModal)}>취소</div>
+        <ButtonWrap>
+          <Button
+            theme="white"
+            onClick={() => {
+              handleApplyBtnClick();
+              navigate(-1);
+            }}
+            content={"취소"}
+          />
 
-            {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
-            <div onClick={() => {}}>신청하기</div>
-          </ButtonWrap>
-        </CustomBottomModal>
-      )}
+          {/* 결제조건 별 로직 필요 1.월령확인  2.구매불가(해당 월령 구매한 동일상품) 3.월령변경구간확인 */}
+          <Button theme="black" content="신청하기" onClick={() => {}} />
+        </ButtonWrap>
+      </CustomBottomModal>
     </LayoutDetailPage>
   );
 };

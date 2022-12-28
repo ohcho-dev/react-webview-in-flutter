@@ -11,6 +11,7 @@ const queryClient = new QueryClient({
     queries: {
       retry: 0,
       useErrorBoundary: true,
+      refetchOnWindowFocus: false,
       suspense: true,
     },
     mutations: {
@@ -20,9 +21,7 @@ const queryClient = new QueryClient({
   },
 });
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 Modal.setAppElement("#root");
 
@@ -35,5 +34,5 @@ root.render(
         </BrowserRouter>
       </RecoilRoot>
     </QueryClientProvider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );

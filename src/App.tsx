@@ -1,20 +1,22 @@
-import React, { Component, ReactNode, Suspense, useEffect } from 'react';
-import { Route, Routes, useNavigate, useNavigationType, useLocation } from 'react-router-dom';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import styled from 'styled-components';
+import React, { Component, ReactNode, Suspense, useEffect } from "react";
+import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+import styled from "styled-components";
 
-import './scss/_reset.scss';
-import './scss/_global.scss';
-import './scss/_slideTransition.scss';
+import "./scss/_reset.scss";
+import "./scss/_global.scss";
+import "./scss/_slideTransition.scss";
 
-import { RouterConfig } from './RouteConfig';
-import { useQuery, useQueryErrorResetBoundary } from 'react-query';
-import LoadingSpinner from './components/common/LoadingSpinner';
-import { useSetRecoilState } from 'recoil';
-import { childrenListState, selectedChildInfoState } from './recoil/atom';
-import { childType } from './utils/type';
-import { queryKeys } from './constant/queryKeys';
-import { getChildrenList } from './api/childApi';
+import { RouterConfig } from "./RouteConfig";
+import { useQuery, useQueryErrorResetBoundary } from "react-query";
+import LoadingSpinner from "./components/common/LoadingSpinner";
+import { useSetRecoilState } from "recoil";
+import { childrenListState, commonCodeState, selectedChildInfoState } from "./recoil/atom";
+import { childType } from "./utils/type";
+import { queryKeys } from "./constant/queryKeys";
+import { getChildrenList } from "./api/childApi";
+import { CHILD_ID_FIELD } from "./constant/localStorage";
+import { getCommonCodeList } from "./api/commonApi";
 
 let oldLocation: any = null;
 
@@ -99,16 +101,16 @@ const App: React.FC = () => {
   const navigationType = useNavigationType();
   const location = useLocation();
   const { reset } = useQueryErrorResetBoundary();
-  const { data } = useQuery(queryKeys.childrenList, () => getChildrenList(), {
-    refetchOnWindowFocus: false,
-  });
+  const { data } = useQuery(queryKeys.childrenList, () => getChildrenList());
+  const { data: commonCodeList } = useQuery(queryKeys.commonCodeList, () => getCommonCodeList());
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
   const setChildrenList = useSetRecoilState(childrenListState);
+  const setCommonCodeList = useSetRecoilState(commonCodeState);
 
   useEffect(() => {
     // if (localStorage.getItem('jwt')) {
     let path = window.location.pathname;
-    path === '/' ? navigate('/home', { replace: true }) : navigate(path, { replace: true });
+    path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
     // } else {
     //   navigate('/login');
     // }
@@ -116,20 +118,30 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (data[0].length) {
-      let id = window.localStorage.getItem('child_id') || data[0][0].id.toString();
+      let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0][0].id.toString();
       setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
 
-      if (!window.localStorage.getItem('child_id')) {
-        window.localStorage.setItem('child_id', id);
+      if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
+        window.localStorage.setItem(CHILD_ID_FIELD, id);
       }
-
       setChildrenList(data[0]);
     }
   }, [data]);
 
+  useEffect(() => {
+    let codeObj: { [key: string]: string | number | object } = {};
+
+    if (commonCodeList[0].length) {
+      commonCodeList[0].map(
+        (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
+      );
+      setCommonCodeList(codeObj);
+    }
+  }, [commonCodeList]);
+
   const DEFAULT_SCENE_CONFIG = {
-    enter: 'from-bottom',
-    exit: 'to-bottom',
+    enter: "from-bottom",
+    exit: "to-bottom",
   };
 
   const getSceneConfig = (location: {
@@ -147,22 +159,22 @@ const App: React.FC = () => {
     return (matchedRoute && matchedRoute.sceneConfig) || DEFAULT_SCENE_CONFIG;
   };
 
-  let classNames = '';
-  if (navigationType === 'PUSH' || navigationType === 'REPLACE') {
-    classNames = 'forward-' + getSceneConfig(location).enter;
-  } else if (navigationType === 'POP') {
-    classNames = 'back-' + getSceneConfig(oldLocation).exit;
+  let classNames = "";
+  if (navigationType === "PUSH" || navigationType === "REPLACE") {
+    classNames = "forward-" + getSceneConfig(location).enter;
+  } else if (navigationType === "POP") {
+    classNames = "back-" + getSceneConfig(oldLocation).exit;
   }
 
   oldLocation = location;
 
   return (
     <TransitionGroup
-      className={'router-wrapper'}
+      className={"router-wrapper"}
       childFactory={child => React.cloneElement(child, { classNames })}
     >
       <CSSTransition timeout={150} key={location.pathname}>
-        <div style={{ width: '100%', height: '100vh' }}>
+        <div style={{ width: "100%", height: "100vh" }}>
           <Suspense fallback={<LoadingSpinner />}>
             <ErrorBoundary onReset={reset}>
               <Routes location={location}>

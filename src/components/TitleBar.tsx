@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import AlarmBadge from './AlarmBadge';
-import { openChildSelectModalState, selectedChildInfoState, useShareState } from '../recoil/atom';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import AlarmBadge from "./AlarmBadge";
+import { openBottomModalState, selectedChildInfoState, useShareState } from "../recoil/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -61,7 +61,7 @@ const ShareBtn = styled.div`
 
 const MainTitleBar = () => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
-  const setOpenModal = useSetRecoilState(openChildSelectModalState);
+  const setOpenModal = useSetRecoilState(openBottomModalState);
   const handleChildNameClick = () => {
     setOpenModal(true);
   };

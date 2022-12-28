@@ -11,7 +11,7 @@ const DetailPage = styled.main`
   top: 6rem;
   left: 0;
   width: 100%;
-  height: ${(props: { bottomBtn: boolean }) =>
+  height: ${(props: { bottomBtn?: boolean }) =>
     props.bottomBtn ? 'calc(100vh - 13.4rem)' : 'calc(100vh - 6rem)'};
   z-index: 100;
   overflow-y: scroll;
@@ -21,13 +21,18 @@ const DetailPage = styled.main`
 interface LayoutDetailPageProps {
   children?: React.ReactNode;
   bottomBtn?: Boolean;
+  style?: object;
 }
 
-const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({ children, bottomBtn = false }) => {
+const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
+  children,
+  bottomBtn = false,
+  style,
+}) => {
   const location = useLocation();
   return (
     <LayoutBasePage>
-      <DetailPage id="main" bottomBtn={bottomBtn ? true : false}>
+      <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={style}>
         {children}
       </DetailPage>
     </LayoutBasePage>
