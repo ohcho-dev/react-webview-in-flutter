@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState, useTransition } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Cookies from "js-cookie";
@@ -9,7 +9,6 @@ import "./scss/_slideTransition.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryErrorResetBoundary } from "react-query";
-import LoadingSpinner from "./components/common/LoadingSpinner";
 import { useSetRecoilState } from "recoil";
 import { childrenListState, commonCodeState, selectedChildInfoState } from "./recoil/atom";
 import { childType } from "./utils/type";
@@ -18,7 +17,6 @@ import { getChildrenList } from "./api/childApi";
 import { CHILD_ID_FIELD } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { getLoginDev } from "./api/loginDevApi";
-import { ErrorBoundary } from "./pages/ErrorPage";
 import MainTitleBar, { DetailTitleBar } from "./components/TitleBar";
 
 let oldLocation: any = null;
@@ -27,7 +25,6 @@ const App: React.FC = () => {
   const navigate = useNavigate();
   const navigationType = useNavigationType();
   const location = useLocation();
-  const { reset } = useQueryErrorResetBoundary();
 
   const { pathname } = useLocation();
   const [pathState, setPathState] = useState(0);
@@ -117,8 +114,6 @@ const App: React.FC = () => {
     <>
       {pathState === 1 && <MainTitleBar />}
       {pathState > 1 && <DetailTitleBar />}
-      {/* <ErrorBoundary onReset={reset}>
-        <Suspense fallback={<LoadingSpinner />}> */}
       <TransitionGroup
         className={"router-wrapper"}
         childFactory={child => React.cloneElement(child, { classNames })}
@@ -133,8 +128,6 @@ const App: React.FC = () => {
           </div>
         </CSSTransition>
       </TransitionGroup>
-      {/* </Suspense>
-      </ErrorBoundary> */}
     </>
   );
 };
