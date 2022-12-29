@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { getSelectedClassInfo } from "../../api/programApi";
 import ChildSelectBottomModal from "../../components/ChildSelectBottomModal";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, useShareState } from "../../recoil/atom";
 import { childType } from "../../utils/type";
@@ -114,6 +117,9 @@ const ApplicationCloseModalContent = styled.div`
 const ApplyClassPage = () => {
   const { classid } = useParams();
   const navigate = useNavigate();
+  const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
+    getSelectedClassInfo(classid),
+  );
   const setShareBtnVisibility = useSetRecoilState(useShareState);
   const [openChildrenModal, setOpenChildrenModal] = useState<boolean>(false);
   const [openValidationMoadl, setOpenValidationModal] = useState<boolean>(false);
@@ -140,10 +146,6 @@ const ApplyClassPage = () => {
       setRequiredInfo({ ...requiredInfo, childId: selectedChildInfo.id.toString() });
     }
   }, [selectedChildInfo]);
-
-  const handleSelectChildBtnClick = () => {
-    toggleModal();
-  };
 
   const toggleModal = () => {
     setOpenChildrenModal(!openChildrenModal);
@@ -179,13 +181,13 @@ const ApplyClassPage = () => {
 
   return (
     <LayoutDetailPage style={{ background: "#f6f6f6" }} bottomBtn>
-      <ProgramSection />
-      <PriceSection />
+      <ProgramSection classInfo={classInfo} />
+      <PriceSection classInfo={classInfo} />
       <UserSection>
         <Title style={{ display: "flex" }}>
           아이 정보<div style={{ color: "#FD7473" }}>*</div>
         </Title>
-        <SelectChildBtn onClick={handleSelectChildBtnClick}>
+        <SelectChildBtn onClick={() => toggleModal()}>
           {selectedChildInfo.id ? (
             <SelectedChildInfo>
               <img alt="icon-profile" src="/images/profile-0.svg" />

@@ -9,6 +9,7 @@ import { queryKeys } from "../../../constant/queryKeys";
 import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
+import { getMonthLevelString } from "../../../utils/getMonthLevelString";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
@@ -16,11 +17,6 @@ interface DetailClassProps {
   id: string;
   isApplyBtnClick: boolean;
   setApplyBtnState: () => void;
-}
-
-interface MonthRangeType {
-  month_start: number;
-  month_end: number;
 }
 
 const ClassWrapper = styled.div`
@@ -77,9 +73,9 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   };
 
   useEffect(() => {
-    if (selectedClassInfo.place_type !== "CLPLT_ONLINE" && isApplyBtnClick) {
+    if (selectedClassInfo.payment_type === "CLPYT_ONSITE" && isApplyBtnClick) {
       toggleInformPaymentModal();
-    } else if (selectedClassInfo.place_type === "CLPLT_ONLINE" && isApplyBtnClick) {
+    } else if (selectedClassInfo.payment_type === "CLPYT_DIRECT" && isApplyBtnClick) {
       navigate(`/program/class/apply-class/${id}`);
     }
   }, [isApplyBtnClick]);
@@ -95,14 +91,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
         <ClassInfoWrapper>
           <ClassInfo>
             <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
-            <AgeRange>
-              {selectedClassInfo.month_level.map(
-                (month: MonthRangeType, index: number) =>
-                  `${month.month_start}~${month.month_end}${
-                    index === selectedClassInfo.month_level.length - 1 ? "개월" : ","
-                  }`,
-              )}
-            </AgeRange>
+            <AgeRange>{getMonthLevelString(selectedClassInfo.month_level)}</AgeRange>
           </ClassInfo>
           <ClassTitle>{selectedClassInfo.name}</ClassTitle>
           <ClassSubSection>
@@ -117,6 +106,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
             )}
             price={selectedClassInfo.price}
             originalPrice={selectedClassInfo.base_price}
+            perNum={selectedClassInfo.total_session}
           />
         </ClassInfoWrapper>
         <Divider />
@@ -124,12 +114,12 @@ const DetailClass: React.FC<DetailClassProps> = props => {
           <img alt="content image" src={selectedClassInfo.content_image} />
         )}
       </ClassWrapper>
-      <CustomModal
+      {/* <CustomModal
         isOpen={openInformForPaymentModal}
         toggleModal={toggleInformPaymentModal}
         title="현장 결제 프로그램입니다."
         content="신청 시 예약만 진행됩니다."
-      />
+      /> */}
     </>
   );
 };
