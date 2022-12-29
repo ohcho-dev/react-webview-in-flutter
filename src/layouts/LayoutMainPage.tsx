@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 
 import BottomNav from "../components/BottomNav";
@@ -8,6 +8,7 @@ import { childrenListState, openBottomModalState, selectedChildInfoState } from 
 import { childType } from "../utils/type";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const MainPage = styled.main`
   width: 100%;
@@ -44,7 +45,9 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
   return (
     <LayoutBasePage>
       <MainPage>
-        <Content>{children}</Content>
+        <Suspense fallback={<LoadingSpinner />}>
+          <Content>{children}</Content>
+        </Suspense>
       </MainPage>
       <BottomNav />
       <ChildSelectBottomModal
