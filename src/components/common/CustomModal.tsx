@@ -131,6 +131,15 @@ const CustomModal = (props: ModalProps) => {
     }, 200);
   };
 
+  const handleCancelBtnClick = () => {
+    history.back();
+    setVisible(false);
+    setTimeout(() => {
+      toggleModal();
+      if (cancelBtnClick) cancelBtnClick();
+    }, 200);
+  };
+
   useEffect(() => {
     if (isOpen) {
       window.history.pushState(null, "", window.location.href);
@@ -170,7 +179,7 @@ const CustomModal = (props: ModalProps) => {
         </ModalContentWrapper>
         <ModalBtnsWrapper>
           {cancelBtnName && (
-            <Button theme={"white"} onClick={cancelBtnClick} content={cancelBtnName} />
+            <Button theme={"white"} onClick={handleCancelBtnClick} content={cancelBtnName} />
           )}
           <Button theme={"black"} onClick={closeModal} content={okBtnName ? okBtnName : "확인"} />
         </ModalBtnsWrapper>
