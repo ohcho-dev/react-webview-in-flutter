@@ -57,7 +57,7 @@ const ProgramPage = () => {
     slidesToScroll: 1,
     autoplay: true,
     speed: 1500,
-    autoplaySpeed: 4000,
+    autoplaySpeed: 5000,
     mobileFirst: false,
     cssEase: "ease-out",
   };
