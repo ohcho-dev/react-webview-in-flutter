@@ -1,5 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
+import LoadingSpinner from "../components/common/LoadingSpinner";
 
 import LayoutBasePage from "./LayoutBasePage";
 
@@ -30,7 +31,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   return (
     <LayoutBasePage>
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={style}>
-        {children}
+        <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </DetailPage>
     </LayoutBasePage>
   );

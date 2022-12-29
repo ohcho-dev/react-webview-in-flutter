@@ -18,6 +18,7 @@ import { CHILD_ID_FIELD } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { getLoginDev } from "./api/loginDevApi";
 import MainTitleBar, { DetailTitleBar } from "./components/TitleBar";
+import { ErrorBoundary } from "./pages/ErrorPage";
 
 let oldLocation: any = null;
 
@@ -26,8 +27,11 @@ const App: React.FC = () => {
   const navigationType = useNavigationType();
   const location = useLocation();
 
+  const { reset } = useQueryErrorResetBoundary();
+
   const { pathname } = useLocation();
   const [pathState, setPathState] = useState(0);
+
   useEffect(() => {
     let count = pathname.split("/").length - 1;
     setPathState(count);
@@ -59,6 +63,7 @@ const App: React.FC = () => {
           setChildrenList(data[0]);
         }
       },
+      enabled: !!Cookies.get("token"),
     },
     {
       queryKey: queryKeys.commonCodeList,
@@ -73,6 +78,7 @@ const App: React.FC = () => {
           setCommonCodeList(codeObj);
         }
       },
+      enabled: !!Cookies.get("token"),
     },
   ]);
 
@@ -114,20 +120,22 @@ const App: React.FC = () => {
     <>
       {pathState === 1 && <MainTitleBar />}
       {pathState > 1 && <DetailTitleBar />}
-      <TransitionGroup
-        className={"router-wrapper"}
-        childFactory={child => React.cloneElement(child, { classNames })}
-      >
-        <CSSTransition timeout={150} key={location.pathname}>
-          <div style={{ width: "100%", height: "100vh" }}>
-            <Routes location={location}>
-              {RouterConfig.map((config, index) => {
-                return <Route key={index} {...config} />;
-              })}
-            </Routes>
-          </div>
-        </CSSTransition>
-      </TransitionGroup>
+      <ErrorBoundary onReset={reset}>
+        <TransitionGroup
+          className={"router-wrapper"}
+          childFactory={child => React.cloneElement(child, { classNames })}
+        >
+          <CSSTransition timeout={150} key={location.pathname}>
+            <div style={{ width: "100%", height: "100vh" }}>
+              <Routes location={location}>
+                {RouterConfig.map((config, index) => {
+                  return <Route key={index} {...config} />;
+                })}
+              </Routes>
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
+      </ErrorBoundary>
     </>
   );
 };

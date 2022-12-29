@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import React, { Suspense } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,8 +6,6 @@ import LayoutMainPage from "../../layouts/LayoutMainPage";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import CoachingList from "./CoachingList";
 import ClassList from "./ClassList";
-import { ErrorBoundary } from "../ErrorPage";
-import { useQueryErrorResetBoundary } from "react-query";
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -47,8 +45,6 @@ const SliderContainer = styled.div`
 `;
 
 const ProgramPage = () => {
-  const { reset } = useQueryErrorResetBoundary();
-
   const settings = {
     dots: false,
     arrows: false,
@@ -86,20 +82,16 @@ const ProgramPage = () => {
 
         <CouchingSection>
           <ProgramTitle>📄 전문 검사와 함께하는 코칭</ProgramTitle>
-          <ErrorBoundary onReset={reset}>
-            <Suspense fallback={<LoadingSpinner />}>
-              <CoachingList />
-            </Suspense>
-          </ErrorBoundary>
+          <Suspense fallback={<LoadingSpinner height="30vw" />}>
+            <CoachingList />
+          </Suspense>
         </CouchingSection>
 
         <ClassSection>
           <ProgramTitle>🤖 전문가와 함께하는 클래스</ProgramTitle>
-          <ErrorBoundary onReset={reset}>
-            <Suspense fallback={<LoadingSpinner />}>
-              <ClassList />
-            </Suspense>
-          </ErrorBoundary>
+          <Suspense fallback={<LoadingSpinner height="30vw" />}>
+            <ClassList />
+          </Suspense>
         </ClassSection>
       </ProgramPageWrapper>
     </LayoutMainPage>
