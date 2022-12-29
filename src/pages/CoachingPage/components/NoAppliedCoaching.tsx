@@ -43,7 +43,7 @@ const NoAppliedCoaching = () => {
       <ProgramTitle>⭐️ 나나를 위한 코칭 추천</ProgramTitle>
       {data[0].map((coaching: coachingType, index: number) => {
         return (
-          <>
+          <div key={index}>
             <ProgramCard
               id={coaching.id}
               handleCardClick={() => handleCardClick(coaching.id)}
@@ -56,7 +56,7 @@ const NoAppliedCoaching = () => {
               utilVisible={false}
             />
             {index !== data[0].length - 1 && <Divider />}
-          </>
+          </div>
         );
       })}
     </div>

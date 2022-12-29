@@ -77,7 +77,7 @@ const CoachingPage = () => {
   // 3. 종료: 종료일이 최신순
 
   // TODO: api로 리스트 받아오면 coachingList 지역상태 저장
-  const [coachingList, setCoachingList] = useState(data);
+  const [coachingList, setCoachingList] = useState<{ onGoing: boolean }[]>(data);
   const handleCardClick = () => {
     alert("click!");
   };
@@ -111,27 +111,38 @@ const CoachingPage = () => {
   return (
     <LayoutMainPage>
       <CoachingTabWrapper>
-        {/* <NoAppliedCoaching /> */}
-        <ChipWrapper>
-          <ProgressChip isSelected={selectedMenu === "all"} onClick={() => setSelectedMenu("all")}>
-            전체
-          </ProgressChip>
-          <ProgressChip
-            isSelected={selectedMenu === "ongoing"}
-            onClick={() => setSelectedMenu("ongoing")}
-          >
-            진행중
-          </ProgressChip>
-          <ProgressChip isSelected={selectedMenu === "end"} onClick={() => setSelectedMenu("end")}>
-            종료
-          </ProgressChip>
-        </ChipWrapper>
-        {coachingList.slice(0, lastIndex).map((coaching, index) => (
-          <div key={index}>
-            <CoachingCard coaching={coaching} key={index} />
-            {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
-          </div>
-        ))}
+        {coachingList.length ? (
+          <>
+            <ChipWrapper>
+              <ProgressChip
+                isSelected={selectedMenu === "all"}
+                onClick={() => setSelectedMenu("all")}
+              >
+                전체
+              </ProgressChip>
+              <ProgressChip
+                isSelected={selectedMenu === "ongoing"}
+                onClick={() => setSelectedMenu("ongoing")}
+              >
+                진행중
+              </ProgressChip>
+              <ProgressChip
+                isSelected={selectedMenu === "end"}
+                onClick={() => setSelectedMenu("end")}
+              >
+                종료
+              </ProgressChip>
+            </ChipWrapper>
+            {coachingList.slice(0, lastIndex).map((coaching, index) => (
+              <div key={index}>
+                <CoachingCard coaching={coaching} key={index} />
+                {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
+              </div>
+            ))}
+          </>
+        ) : (
+          <NoAppliedCoaching />
+        )}
       </CoachingTabWrapper>
       {lastIndex < coachingList.length - 1 && (
         <MoreBtn onClick={handleMoreBtnClick}>
