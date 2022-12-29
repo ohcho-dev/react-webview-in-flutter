@@ -62,7 +62,7 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
         </DiscountPercentage>
       )}
       <Price style={{ ...priceStyle }}>
-        {numberFormatter.format(price)}원{perNum && <PerActivity>({perNum})</PerActivity>}
+        {numberFormatter.format(price)}원{perNum && <PerActivity>({perNum}회)</PerActivity>}
       </Price>
       {originalPrice > 0 && (
         <OriginalPrice style={{ ...originalPriceStyle }}>
