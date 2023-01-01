@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
 
@@ -21,6 +21,10 @@ export const request = async (config: AxiosRequestConfig) => {
     });
     return response.data;
   } catch (error) {
+    const { response } = error as unknown as AxiosError;
+    if (response?.status === 400) {
+      return response.data;
+    }
     throw error;
   }
 };

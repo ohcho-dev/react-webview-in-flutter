@@ -73,9 +73,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   };
 
   useEffect(() => {
-    if (selectedClassInfo.payment_type === "CLPYT_ONSITE" && isApplyBtnClick) {
-      toggleInformPaymentModal();
-    } else if (selectedClassInfo.payment_type === "CLPYT_DIRECT" && isApplyBtnClick) {
+    if (isApplyBtnClick) {
       navigate(`/program/class/apply-class/${id}`);
     }
   }, [isApplyBtnClick]);

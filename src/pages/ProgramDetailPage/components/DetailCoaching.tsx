@@ -1,16 +1,20 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { getSelectedCoachingInfo } from "../../../api/programApi";
+import {
+  applyCoaching,
+  checkValidCoachingToApply,
+  getSelectedCoachingInfo,
+} from "../../../api/programApi";
 import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
-import { coachingType } from "../../../utils/type";
+import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 
 interface DetailCoachingProps {
@@ -54,7 +58,7 @@ const Favorites = styled.div`
 `;
 
 const ImageWrap = styled.div`
-  width: 100%:
+  width: 100%;
   margin: 0 auto;
 `;
 
@@ -126,10 +130,8 @@ const ButtonWrap = styled.div`
 const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const navigate = useNavigate();
   const { isApplyBtnClick, setApplyBtnState, id } = props;
-  const [favorites, setFavorites] = useState(false);
-  const { data: selectedCoachingInfo } = useQuery(queryKeys.selectedCoacingInfo, () =>
-    getSelectedCoachingInfo(id),
-  );
+  const [favorites, setFavorites] = useState<boolean>(false);
+  const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const [openSameCoachingModal, setOpenSameCoachingModal] = useState(false);
   const [openCheckUsageDuration, setOpenUsageDuration] = useState(false);
@@ -147,6 +149,21 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     price: 0,
     updated_at: "",
     valid_day: 0,
+  });
+  const { data: selectedCoachingInfo } = useQuery(queryKeys.selectedCoacingInfo, () =>
+    getSelectedCoachingInfo(id),
+  );
+  const { data: res } = useQuery<ApiErrorResponseType>(queryKeys.checkValidCoachingToApply, () =>
+    checkValidCoachingToApply(id),
+  );
+  const { mutate: callApplyCoaching } = useMutation(() => applyCoaching(id), {
+    onSuccess: () => {
+      navigate("/program/class/apply-coaching/success");
+      setOpenBottomModal(!openBottomModal);
+    },
+    onError: error => {
+      throw error;
+    },
   });
 
   useEffect(() => {
@@ -169,7 +186,18 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   };
 
   const handleApplyBtnClick = () => {
-    //TODO: 결제조건 별 로직 필요 1.구매불가(해당 월령 구매한 동일상품) 2.월령변경구간확인 */
+    if (res?.message === "OK") {
+      callApplyCoaching();
+    } else {
+      if (res?.code === "ONGOING_COACHING") {
+        // 1.구매불가(해당 월령 구매한 동일상품)
+        setOpenSameCoachingModal(true);
+      } else if (res?.code === "ALMOST_MONTH_LIMIT") {
+        // 2.경고(월령 변경까지 얼마 남지 않음)
+        setOpenUsageDuration(true);
+        setLeftDays(res?.detail?.left_days || 0);
+      }
+    }
   };
 
   const handleSameCoachingModalBtnClick = () => {
@@ -244,9 +272,9 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         title="이용기간을 확인해주세요!"
         contentMarkup={
           <div style={{ lineHeight: "2.2rem" }}>
-            7일 내에 아이 검사 월령 구간이 변경됩니다. 지금 신청하시는 경우, 코칭 종료 전 월령이
+            {`${leftDays}일 내에 아이 검사 월령 구간이 변경됩니다. 지금 신청하시는 경우, 코칭 종료 전 월령이
             변경되더라도 신청 지점 월령을 기준으로 결과지가 작성됩니다. 위의 내용에 동의하신다면
-            신청을 선택해주세요.
+            신청을 선택해주세요.`}
           </div>
         }
         isOpen={openCheckUsageDuration}
