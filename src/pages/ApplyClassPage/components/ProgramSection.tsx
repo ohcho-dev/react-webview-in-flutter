@@ -46,6 +46,8 @@ const ProgramInfo = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
 
+  line-height: 1.6rem;
+
   color: rgba(10, 10, 10, 0.8);
 `;
 

@@ -3,6 +3,9 @@ import { Title } from "..";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 
 const PriceSectionWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
   background: white;
   width: 100%;
 
@@ -45,11 +48,16 @@ const TotalPriceSection = styled.div`
   margin-top: 1rem;
 
   display: flex;
+
   justify-content: space-between;
   align-items: center;
 
   font-size: 1.6rem;
   font-weight: 700;
+`;
+
+const InformImg = styled.img`
+  margin-top: 2rem;
 `;
 
 const Num = styled.div`
@@ -85,6 +93,9 @@ const PriceSection = (props: { [key: string]: any }): JSX.Element => {
           <span>{numberFormatter.format(classInfo.price)}원</span>
         </div>
       </TotalPriceSection>
+      {classInfo.payment_type === "CLPYT_ONSITE" && (
+        <InformImg alt="inform payment" src="/images/inform-pay-onsite-img.svg" />
+      )}
     </PriceSectionWrapper>
   );
 };

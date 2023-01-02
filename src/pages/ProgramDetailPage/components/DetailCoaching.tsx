@@ -156,7 +156,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const { data: res } = useQuery<ApiErrorResponseType>(queryKeys.checkValidCoachingToApply, () =>
     checkValidCoachingToApply(id),
   );
-  const { mutate: callApplyCoaching } = useMutation(() => applyCoaching(id), {
+  const callApplyCoaching = useMutation(() => applyCoaching(id), {
     onSuccess: () => {
       navigate("/program/class/apply-coaching/success");
       setOpenBottomModal(!openBottomModal);
@@ -187,7 +187,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
 
   const handleApplyBtnClick = () => {
     if (res?.message === "OK") {
-      callApplyCoaching();
+      callApplyCoaching.mutate();
     } else {
       if (res?.code === "ONGOING_COACHING") {
         // 1.구매불가(해당 월령 구매한 동일상품)

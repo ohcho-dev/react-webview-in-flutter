@@ -1,24 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { getSelectedClassInfo } from "../../api/programApi";
+import { applyClass, getSelectedClassInfo } from "../../api/programApi";
 import ChildSelectBottomModal from "../../components/ChildSelectBottomModal";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState, useShareState } from "../../recoil/atom";
-import { childType } from "../../utils/type";
+import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
+import { applyClassBodyType, childType } from "../../utils/type";
 import { BottomBtnWrap } from "../ProgramPage/components/styled";
+import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
 
 interface requeiredInfo {
-  childId: string;
-  parentName: string;
-  parentPhoneNumber: string;
+  id: string;
+  parent_name: string;
+  parent_phone: string;
 }
 
 export const Title = styled.div`
@@ -106,27 +107,19 @@ const SelectedChildInfo = styled.div`
   }
 `;
 
-const ApplicationCloseModalContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2.2rem;
-`;
-
 const ApplyClassPage = () => {
   const { classid } = useParams();
   const navigate = useNavigate();
-  const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
-    getSelectedClassInfo(classid),
-  );
+  const defaultChild = useRecoilValue(selectedChildInfoState);
   const setShareBtnVisibility = useSetRecoilState(useShareState);
+  const childrenList = useRecoilValue(childrenListState);
   const [openChildrenModal, setOpenChildrenModal] = useState<boolean>(false);
   const [openValidationMoadl, setOpenValidationModal] = useState<boolean>(false);
-  const [requiredInfo, setRequiredInfo] = useState<requeiredInfo>({
-    childId: "",
-    parentName: "",
-    parentPhoneNumber: "",
+  const [requiredInfo, setRequiredInfo] = useState<applyClassBodyType>({
+    child_id: "",
+    class_id: "",
+    parent_name: "",
+    parent_phone: "",
   });
   const [selectedChildInfo, setSelectedChildInfo] = useState<childType>({
     id: 0,
@@ -135,15 +128,39 @@ const ApplyClassPage = () => {
     gender: "",
     birth_date: "",
   });
-  const childrenList = useRecoilValue(childrenListState);
+  const [errorCode, setErrorCode] = useState<
+    "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
+  >("MONTH_NOT_ACCEPTABLE");
+  const [openRejectModal, setOpenRejectModal] = useState(false);
+  const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
+    getSelectedClassInfo(classid),
+  );
+  const callApplyClasses = useMutation(applyClass, {
+    onSuccess: res => {
+      console.log(res.purchase_id);
+      if (res.purchase_id) {
+        navigate("/program/class/apply-class/success");
+      } else {
+        if (res.code === "MONTH_NOT_ACCEPTABLE") {
+          setErrorCode("MONTH_NOT_ACCEPTABLE");
+        } else if (res.code === "CLASS_STUDENT_FULL") {
+          setErrorCode("CLASS_STUDENT_FULL");
+        } else if (res.code === "CLASS_ALREADY_APPLIED") {
+          setErrorCode("CLASS_ALREADY_APPLIED");
+        }
+        setOpenRejectModal(true);
+      }
+    },
+  });
 
   useEffect(() => {
     setShareBtnVisibility(false);
+    setSelectedChildInfo(defaultChild);
   }, []);
 
   useEffect(() => {
     if (selectedChildInfo.id) {
-      setRequiredInfo({ ...requiredInfo, childId: selectedChildInfo.id.toString() });
+      setRequiredInfo({ ...requiredInfo, child_id: selectedChildInfo.id.toString() });
     }
   }, [selectedChildInfo]);
 
@@ -160,10 +177,9 @@ const ApplyClassPage = () => {
   };
 
   const handleApplyBtnClick = () => {
-    const { childId, parentName, parentPhoneNumber } = requiredInfo;
-    if (childId && parentName && parentPhoneNumber) {
-      // TODO: 클래스 신청이 아직 마감되지 않았는지 조건 추가하기
-      navigate("/program/class/apply-class/success");
+    const { child_id, parent_name, parent_phone } = requiredInfo;
+    if (child_id && parent_name && parent_phone && classid) {
+      callApplyClasses.mutate({ ...requiredInfo, class_id: classid.toString() });
     } else {
       setOpenValidationModal(true);
     }
@@ -173,9 +189,9 @@ const ApplyClassPage = () => {
     const id = evt.target.id;
     const value = evt.target.value;
     if (id === "parentName") {
-      setRequiredInfo({ ...requiredInfo, parentName: value });
+      setRequiredInfo({ ...requiredInfo, parent_name: value });
     } else if (id === "parentPhoneNumber") {
-      setRequiredInfo({ ...requiredInfo, parentPhoneNumber: value });
+      setRequiredInfo({ ...requiredInfo, parent_phone: value });
     }
   };
 
@@ -235,23 +251,14 @@ const ApplyClassPage = () => {
         isOpen={openValidationMoadl}
         toggleModal={() => setOpenValidationModal(!openValidationMoadl)}
       />
-      <CustomModal
-        topImage={
-          <img
-            alt="sad icon"
-            src="/images/icon-sad-circle.svg"
-            style={{ width: "9.5rem", marginBottom: "1.5rem" }}
-          />
-        }
-        title="신청이 마감되었어요."
-        isOpen={false}
-        contentMarkup={
-          <ApplicationCloseModalContent>
-            <span>신청자가 많아 모집이 마감되었습니다.</span>
-            <span>다른 프로그램을 신청해주세요.</span>
-          </ApplicationCloseModalContent>
-        }
-        toggleModal={() => setOpenValidationModal(!openValidationMoadl)}
+
+      <ClassRejectModal
+        theme={errorCode}
+        openModal={openRejectModal}
+        toggleModal={() => {
+          setOpenRejectModal(!openRejectModal);
+          navigate("/program");
+        }}
       />
     </LayoutDetailPage>
   );
