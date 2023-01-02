@@ -1,32 +1,42 @@
 import { Method } from "axios";
 import { request } from ".";
+import { applyClassBodyType } from "../utils/type";
 
 // 코칭 상품 목록 (GET)
 export const getCoachingList = () => {
-  return request({ method: "GET" as Method, url: "/v1/coaching" });
+  return request({ method: "GET" as Method, url: "/v1/program/coaching" });
 };
 
 // 코칭 상품 조회 (GET)
 export const getSelectedCoachingInfo = (id: string | undefined) => {
-  return request({ method: "GET" as Method, url: `/v1/coaching/${id}` });
+  return request({ method: "GET" as Method, url: `/v1/program/coaching/${id}` });
 };
 
 // 클래스 상품 목록 (GET)
 export const getClassList = () => {
-  return request({ method: "GET" as Method, url: `/v1/classes` });
+  return request({ method: "GET" as Method, url: `/v1/program/classes` });
 };
 
 // 클래스 상품 조회 (GET)
 export const getSelectedClassInfo = (id: string | undefined) => {
-  return request({ method: "GET" as Method, url: `/v1/classes/${id}` });
+  return request({ method: "GET" as Method, url: `/v1/program/classes/${id}` });
 };
 
 // 코칭 상품 신청 가능여부 확인 (GET)
 export const checkValidCoachingToApply = (id: string | undefined) => {
-  return request({ method: "GET" as Method, url: `/v1/coaching/${id}/valid` });
+  return request({ method: "GET" as Method, url: `/v1/program/coaching/${id}/valid` });
 };
 
 // 코칭 상품 신청 (POST)
 export const applyCoaching = (id: string | undefined) => {
-  return request({ method: "POST" as Method, url: `/v1/coaching/${id}` });
+  return request({ method: "POST" as Method, url: `/v1/program/coaching/${id}` });
+};
+
+// 클래스 상품 신청(POST)
+export const applyClass = (body: applyClassBodyType) => {
+  return request({
+    method: "POST" as Method,
+    url: `/v1/program/classes/${body.class_id}`,
+    data: body,
+  });
 };
