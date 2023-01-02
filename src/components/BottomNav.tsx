@@ -73,6 +73,8 @@ const bottomNavData = [
 
 const BottomNav = () => {
   const { pathname } = useLocation();
+  let firstPath = pathname.split("/")[1];
+
   return (
     <BottomNavWrap>
       {bottomNavData.map(item => {
@@ -81,12 +83,12 @@ const BottomNav = () => {
             <NavLink to={item.link} replace={true}>
               <ImageWrap>
                 <img
-                  src={pathname === item.link ? item.selectedImgUrl : item.imgUrl}
+                  src={`/${firstPath}` === item.link ? item.selectedImgUrl : item.imgUrl}
                   width="90%"
                   alt="bottom nav icon"
                 />
               </ImageWrap>
-              <Text style={pathname === item.link ? { color: "#000" } : {}}>{item.name}</Text>
+              <Text style={`${firstPath}` === item.link ? { color: "#000" } : {}}>{item.name}</Text>
             </NavLink>
           </Lists>
         );
