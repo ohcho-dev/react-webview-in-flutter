@@ -73,7 +73,6 @@ const ContentItem: React.FC<ContentItemProps> = ({ imgUrl, chipStatus, name, use
       <ItemDesc>
         <ChipLayout>
           {chipStatus.map((chip, index) => {
-            console.log(chip);
             return <Chip key={index} status={chip} />;
           })}
         </ChipLayout>
