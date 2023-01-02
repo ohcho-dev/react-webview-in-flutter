@@ -1,15 +1,7 @@
 import styled from "styled-components";
 
 interface chipProps {
-  status:
-    | "waiting"
-    | "survey"
-    | "video"
-    | "progressing"
-    | "success"
-    | "checking"
-    | "reRegistration"
-    | "issuedCompleted";
+  status: string;
   style?: object;
 }
 
@@ -28,14 +20,12 @@ const STATUS: {
 
 const CustomChip = styled.div`
   height: 2.2rem;
-  width: ${(prop: { customWidth: string | undefined }) =>
-    prop.customWidth || "4.3rem"};
-  color: ${(prop) => prop.color};
-  border: 1px solid
-    ${(prop) => (prop.color === "#FFFFFF" ? "#282828" : prop.color)};
-  background-color: ${(prop) =>
-    prop.color === "#FFFFFF" ? "#282828" : "none"};
-  display: flex;
+  width: ${(prop: { customWidth: string | undefined }) => prop.customWidth || "4.3rem"};
+  color: ${prop => prop.color};
+  border: 1px solid ${prop => (prop.color === "#FFFFFF" ? "#282828" : prop.color)};
+  border-radius: 0.2rem;
+  background-color: ${prop => (prop.color === "#FFFFFF" ? "#282828" : "none")};
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
@@ -45,11 +35,7 @@ const CustomChip = styled.div`
 const Chip = (props: chipProps) => {
   const { status, style } = props;
   return (
-    <CustomChip
-      color={STATUS[status].color}
-      customWidth={STATUS[status].width}
-      style={style}
-    >
+    <CustomChip color={STATUS[status].color} customWidth={STATUS[status].width} style={style}>
       {STATUS[status].name}
     </CustomChip>
   );

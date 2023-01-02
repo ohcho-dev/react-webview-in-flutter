@@ -1,5 +1,6 @@
 import ApplyClassPage from "./pages/ApplyClassPage";
 import ApplySuccessPage from "./pages/ApplyClassPage/components/ApplySuccessPage";
+import CoachingDetailPage from "./pages/CoachingDetailPage";
 import {
   HomePage,
   NotePage,
@@ -105,6 +106,14 @@ export const RouterConfig = [
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
+    },
+  },
+  {
+    path: "/coaching/coaching-detail/:id",
+    element: <CoachingDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
     },
   },
 ];

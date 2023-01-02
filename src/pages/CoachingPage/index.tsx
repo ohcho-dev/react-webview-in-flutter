@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { Divider } from "../ProgramPage/components/styled";
@@ -68,6 +69,7 @@ const data = [
 // 2. 코칭 리스트에서 진행중 선택 > 하단 다른 메뉴 선택하여 메뉴 이동 > 하단 메뉴 선택하여 코칭 리스트로 돌아왔을 때 : 기본 전체
 // 공수 많이 들어가면 디폴트 '전체'
 const CoachingPage = () => {
+  const navigate = useNavigate();
   const [selectedMenu, setSelectedMenu] = useState<MenuType>("all");
   // TODO: lastIndex 초기값은 coachingList.length
   const [lastIndex, setLastIndex] = useState<number>(5);
@@ -79,7 +81,7 @@ const CoachingPage = () => {
   // TODO: api로 리스트 받아오면 coachingList 지역상태 저장
   const [coachingList, setCoachingList] = useState<{ onGoing: boolean }[]>(data);
   const handleCardClick = () => {
-    alert("click!");
+    navigate("/coaching/coaching-detail/1");
   };
 
   const handleMoreBtnClick = () => {
@@ -134,7 +136,7 @@ const CoachingPage = () => {
               </ProgressChip>
             </ChipWrapper>
             {coachingList.slice(0, lastIndex).map((coaching, index) => (
-              <div key={index}>
+              <div key={index} onClick={handleCardClick}>
                 <CoachingCard coaching={coaching} key={index} />
                 {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
               </div>
