@@ -1,6 +1,10 @@
-import styled from 'styled-components';
-import { Title } from '..';
-import { AgeRange, OnlineOffline } from '../../ProgramPage/components/styled';
+import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+import { Title } from "..";
+import { commonCodeState } from "../../../recoil/atom";
+import { getDateTime } from "../../../utils/getDateTime";
+import { getMonthLevelString } from "../../../utils/getMonthLevelString";
+import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
 const ProgramSectionWrapper = styled.div`
   background: white;
@@ -8,11 +12,19 @@ const ProgramSectionWrapper = styled.div`
 
   padding: 2.5rem;
   margin-bottom: 1rem;
-  height: 19.5rem;
+  height: 18rem;
+`;
+
+const ClassInfoSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 5rem;
+  justify-content: space-between;
 `;
 
 const ProgramInfoSection = styled.div`
   display: flex;
+  justify-content: space-between;
   column-gap: 2.5rem;
 
   img {
@@ -30,25 +42,40 @@ const ProgramTitle = styled.div`
   margin-bottom: 0.5rem;
 `;
 
-const ProgramLocation = styled.div`
+const ProgramInfo = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
 
   color: rgba(10, 10, 10, 0.8);
 `;
 
-const ProgramSection = () => {
+const TopWrapper = styled.div`
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+`;
+
+const ProgramSection = (props: { [key: string]: any }): JSX.Element => {
+  const { classInfo } = props;
+  const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
+
   return (
     <ProgramSectionWrapper>
       <Title>프로그램</Title>
       <ProgramInfoSection>
         <div>
-          <div style={{ marginBottom: '1rem' }}>
-            <OnlineOffline>오프라인</OnlineOffline>
-            <AgeRange>12~15개월</AgeRange>
-          </div>
-          <ProgramTitle>[모집10명] 아빠랑 같이 하는 모래놀이 클래스</ProgramTitle>
-          <ProgramLocation>서울 송파구 어린이 문화회관</ProgramLocation>
+          <TopWrapper>
+            <OnlineOffline>{commonCodeList[classInfo.place_type]}</OnlineOffline>
+            <AgeRange>{getMonthLevelString(classInfo.month_level)}</AgeRange>
+          </TopWrapper>
+          <ClassInfoSection>
+            <ProgramTitle>{classInfo.name}</ProgramTitle>
+            {classInfo.place_type === "CLPLT_ONLINE" ? (
+              <ProgramInfo>{getDateTime(classInfo.class_datetime)}</ProgramInfo>
+            ) : (
+              <ProgramInfo>{classInfo.location}</ProgramInfo>
+            )}
+          </ClassInfoSection>
         </div>
         <img alt="program image" src="/images/banner-example.png" />
       </ProgramInfoSection>

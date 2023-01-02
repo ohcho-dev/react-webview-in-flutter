@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getCoachingList } from "../../api/programApi";
@@ -15,7 +16,7 @@ const CoachingList = () => {
     queryKeys.coachingList,
     () => getCoachingList(),
     {
-      enabled: !!window.localStorage.getItem(CHILD_ID_FIELD),
+      enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
     },
   );
 

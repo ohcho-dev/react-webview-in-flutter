@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import { Title } from '..';
+import styled from "styled-components";
+import { Title } from "..";
+import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 
 const PriceSectionWrapper = styled.div`
-  height: 16rem;
   background: white;
   width: 100%;
 
@@ -11,6 +11,7 @@ const PriceSectionWrapper = styled.div`
 `;
 
 const DiscountSection = styled.div`
+  height: 3rem;
   padding-bottom: 1rem;
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
 
@@ -41,10 +42,11 @@ const DiscountPercentage = styled.div`
 
 const TotalPriceSection = styled.div`
   height: 2rem;
-  padding-top: 1rem;
+  margin-top: 1rem;
 
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   font-size: 1.6rem;
   font-weight: 700;
@@ -59,22 +61,28 @@ const Num = styled.div`
   padding-top: 0.2rem;
 `;
 
-const PriceSection = () => {
+const PriceSection = (props: { [key: string]: any }): JSX.Element => {
+  const { classInfo } = props;
+  const numberFormatter = new Intl.NumberFormat("ko");
   return (
     <PriceSectionWrapper>
       <Title>가격</Title>
-      <DiscountSection>
-        <span>할인</span>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <OriginalPrice>150000원</OriginalPrice>
-          <DiscountPercentage>53%</DiscountPercentage>
-        </div>
-      </DiscountSection>
+      {classInfo.base_price > 0 && (
+        <DiscountSection>
+          <span>할인</span>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <OriginalPrice>{numberFormatter.format(classInfo.base_price)}원</OriginalPrice>
+            <DiscountPercentage>
+              {getDiscountPercentage(classInfo.base_price, classInfo.price)}%
+            </DiscountPercentage>
+          </div>
+        </DiscountSection>
+      )}
       <TotalPriceSection>
         <span>결제 가격</span>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Num>1회</Num>
-          <span>70000원</span>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Num>{classInfo.total_session}회</Num>
+          <span>{numberFormatter.format(classInfo.price)}원</span>
         </div>
       </TotalPriceSection>
     </PriceSectionWrapper>

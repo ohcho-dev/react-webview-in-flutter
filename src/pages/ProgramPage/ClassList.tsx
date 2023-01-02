@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { getClassList } from "../../api/programApi";
@@ -11,7 +12,7 @@ import { Divider } from "./components/styled";
 const ClassList = () => {
   const navigate = useNavigate();
   const { status, data: classList = [] } = useQuery(queryKeys.classList, () => getClassList(), {
-    enabled: !!window.localStorage.getItem(CHILD_ID_FIELD),
+    enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
   });
 
   const handleCardClick = (id: number) => {

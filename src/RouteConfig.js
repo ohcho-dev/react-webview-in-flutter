@@ -99,4 +99,12 @@ export const RouterConfig = [
       exit: "to-bottom",
     },
   },
+  {
+    path: "/program/class/apply-coaching/success",
+    element: <ApplySuccessPage />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
 ];

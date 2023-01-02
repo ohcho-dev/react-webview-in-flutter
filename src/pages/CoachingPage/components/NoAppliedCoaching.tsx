@@ -11,15 +11,15 @@ import { Divider } from "../../ProgramPage/components/styled";
 
 const InformImageSection = styled.div`
   height: 31rem;
-  width:100%;
+  width: 100%;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  img{
-    26rem;
-    17rem;
+  img {
+    width: 26rem;
+    height: 17rem;
   }
 `;
 const ProgramTitle = styled.span`
@@ -43,7 +43,7 @@ const NoAppliedCoaching = () => {
       <ProgramTitle>⭐️ 나나를 위한 코칭 추천</ProgramTitle>
       {data[0].map((coaching: coachingType, index: number) => {
         return (
-          <>
+          <div key={index}>
             <ProgramCard
               id={coaching.id}
               handleCardClick={() => handleCardClick(coaching.id)}
@@ -56,7 +56,7 @@ const NoAppliedCoaching = () => {
               utilVisible={false}
             />
             {index !== data[0].length - 1 && <Divider />}
-          </>
+          </div>
         );
       })}
     </div>

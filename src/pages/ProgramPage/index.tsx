@@ -6,6 +6,7 @@ import LayoutMainPage from "../../layouts/LayoutMainPage";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import CoachingList from "./CoachingList";
 import ClassList from "./ClassList";
+import UseEmoji from "../../utils/UseEmoji";
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -32,6 +33,13 @@ const ClassSection = styled.div`
 const ProgramTitle = styled.span`
   font-weight: 700;
   font-size: 2rem;
+  line-height: 2rem;
+  display: flex;
+  align-items: center;
+`;
+
+const Title = styled.span`
+  margin-left: 0.4rem;
 `;
 
 const SliderContainer = styled.div`
@@ -81,14 +89,20 @@ const ProgramPage = () => {
         </CarouselSection>
 
         <CouchingSection>
-          <ProgramTitle>📄 전문 검사와 함께하는 코칭</ProgramTitle>
+          <ProgramTitle>
+            <UseEmoji emojiName="page-facing-up" />
+            <Title>전문 검사와 함께하는 코칭</Title>
+          </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <CoachingList />
           </Suspense>
         </CouchingSection>
 
         <ClassSection>
-          <ProgramTitle>🤖 전문가와 함께하는 클래스</ProgramTitle>
+          <ProgramTitle>
+            <UseEmoji emojiName="robot" />
+            <Title>전문가와 함께하는 클래스</Title>
+          </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <ClassList />
           </Suspense>
