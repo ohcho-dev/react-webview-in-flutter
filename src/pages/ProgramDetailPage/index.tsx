@@ -18,18 +18,6 @@ const ProgramDetailPage = () => {
   const setShare = useSetRecoilState(useShareState);
   const [applyBtnClick, setApplyBtnClick] = useState(false);
 
-  const handleApplyBtnClick = () => {
-    // 코칭 선택시
-    if (coachingid) {
-      setApplyBtnClick(true);
-    }
-
-    // 클래스 선택시
-    if (classid) {
-      setApplyBtnClick(true);
-    }
-  };
-
   const setApplyBtnState = () => {
     setApplyBtnClick(false);
   };
@@ -62,7 +50,7 @@ const ProgramDetailPage = () => {
         {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
-        <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
+        <Button theme={"black"} content={"신청하기"} onClick={() => setApplyBtnClick(true)} />
       </BottomBtnWrap>
     </LayoutDetailPage>
   );

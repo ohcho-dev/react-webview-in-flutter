@@ -1,3 +1,9 @@
+export interface ApiErrorResponseType {
+  message: string;
+  code?: string;
+  detail: { [key: string]: any };
+}
+
 export interface childType {
   id: Number;
   parent_id: Number;

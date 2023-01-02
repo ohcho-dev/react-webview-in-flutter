@@ -52,11 +52,9 @@ const customStyles = {
 };
 
 const ModalStyle = styled.div`
-  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)}
-   0.2s ease-in;
-    visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")}
-    transition: visibility 0.2s ease-out;
-  
+  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.2s ease-in;
+  visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")};
+  transition: visibility 0.2s ease-out;
 `;
 
 const OverlayStyle = styled.div`

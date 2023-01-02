@@ -11,15 +11,15 @@ import { Divider } from "../../ProgramPage/components/styled";
 
 const InformImageSection = styled.div`
   height: 31rem;
-  width:100%;
+  width: 100%;
 
-  display:flex;
-  justify-content:center;
-  align-items:center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  img{
-    26rem;
-    17rem;
+  img {
+    width: 26rem;
+    height: 17rem;
   }
 `;
 const ProgramTitle = styled.span`

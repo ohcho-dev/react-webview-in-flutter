@@ -9,7 +9,7 @@ const NotePage = () => {
     setIsOpen(!modalIsOpen);
   }
   const handleOkBtnClick = () => {
-    console.log("click");
+    //console.log("click");
   };
 
   return (
@@ -17,11 +17,7 @@ const NotePage = () => {
       <button onClick={openModal}>Open Modal</button>
       <CustomModal
         topImage={
-          <img
-            src={"/images/reject-eltern.svg"}
-            alt="character"
-            style={{ width: "9.5rem" }}
-          />
+          <img src={"/images/reject-eltern.svg"} alt="character" style={{ width: "9.5rem" }} />
         }
         toggleModal={openModal}
         title="과제를 먼저 끝내주세요!"
