@@ -1,8 +1,14 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import AlarmBadge from "./AlarmBadge";
-import { openBottomModalState, selectedChildInfoState, useShareState } from "../recoil/atom";
+import {
+  childrenListState,
+  openBottomModalState,
+  selectedChildInfoState,
+  useShareState,
+} from "../recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useEffect, useState } from "react";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -58,6 +64,39 @@ const ButtonWrap = styled.div`
 const ShareBtn = styled.div`
   width: 2.8rem;
 `;
+const MypageTitleWrap = styled.div`
+  width: 100%;
+  background: #fff;
+  padding: 3.5rem 2.5rem 2rem;
+  border-bottom: solid 1rem #f6f6f6;
+  position: fixed;
+  top: 0;
+  left: 0;
+`;
+const Title = styled.div`
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 3.2rem;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.04rem;
+  color: #0a0a0a;
+  margin-bottom: 2.2rem;
+`;
+const LoginInfo = styled.div`
+  display: flex;
+  align-items: center;
+
+  span {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: -0.04rem;
+    color: rgba(10, 10, 10, 0.8);
+  }
+`;
 
 const MainTitleBar = () => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
@@ -99,6 +138,29 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = () => {
         )}
       </ButtonWrap>
     </TitleBarWrap>
+  );
+};
+
+interface MypageTitleBarProps {}
+
+export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
+  const [firstRegistChildInfo, setFirstRegistChildInfo] = useState({ name: "" });
+  const childrenList = useRecoilValue(childrenListState);
+
+  useEffect(() => {
+    if (childrenList.length > 0) {
+      setFirstRegistChildInfo(childrenList[0]);
+    }
+  }, [childrenList]);
+
+  return (
+    <MypageTitleWrap>
+      <Title>{firstRegistChildInfo.name} 보호자님, 안녕하세요.</Title>
+      <LoginInfo>
+        <img src="/images/icon-mypage-kakao.svg" />
+        <span>카카오 로그인</span>
+      </LoginInfo>
+    </MypageTitleWrap>
   );
 };
 

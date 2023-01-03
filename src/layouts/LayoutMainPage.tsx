@@ -20,7 +20,8 @@ const MainPage = styled.main`
   z-index: 20;
   overflow-y: scroll;
   overflow-x: hidden;
-  margin-top: ${(prop: { marginTop?: string }) => prop.marginTop || "0"};
+  margin-top: ${(prop: { marginTop?: string; bgColor?: string }) => prop.marginTop || "0"};
+  background: ${(prop: { bgColor?: string }) => prop.bgColor || "#fff"};
 `;
 const Content = styled.div`
   margin-bottom: 6rem;
@@ -29,9 +30,10 @@ const Content = styled.div`
 interface LayoutMainPageProps {
   children?: React.ReactNode;
   marginTop?: string;
+  bgColor?: string;
 }
 
-const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop }) => {
+const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bgColor }) => {
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
@@ -47,7 +49,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop }) 
 
   return (
     <LayoutBasePage>
-      <MainPage marginTop={marginTop}>
+      <MainPage marginTop={marginTop} bgColor={bgColor}>
         <Suspense fallback={<LoadingSpinner />}>
           <Content>{children}</Content>
         </Suspense>
