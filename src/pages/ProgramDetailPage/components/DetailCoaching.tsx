@@ -16,11 +16,10 @@ import { openBottomModalState, selectedChildInfoState } from "../../../recoil/at
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
+import { BottomBtnWrap } from "../../ProgramPage/components/styled";
 
 interface DetailCoachingProps {
   id: string;
-  isApplyBtnClick: boolean;
-  setApplyBtnState: () => void;
 }
 
 const DetailCoachingContainer = styled.div``;
@@ -129,7 +128,7 @@ const ButtonWrap = styled.div`
 
 const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const navigate = useNavigate();
-  const { isApplyBtnClick, setApplyBtnState, id } = props;
+  const { id } = props;
   const [favorites, setFavorites] = useState<boolean>(false);
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
@@ -171,14 +170,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
       setCoachingInfo(selectedCoachingInfo[0]);
     }
   }, [selectedCoachingInfo]);
-
-  useEffect(() => {
-    if (isApplyBtnClick) setOpenBottomModal(!openBottomModal);
-  }, [isApplyBtnClick]);
-
-  useEffect(() => {
-    if (!openBottomModal) setApplyBtnState();
-  }, [openBottomModal]);
 
   const closeBottomModal = () => {
     navigate(-1);
@@ -240,6 +231,12 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
       <ImageWrap>
         <img src="/images/program-product-detail-default.png" width="100%" />
       </ImageWrap>
+      <BottomBtnWrap>
+        {/* <GiftBtn>
+          <img src="/images/icon-gift.svg" alt="선물하기" />
+        </GiftBtn> */}
+        <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
+      </BottomBtnWrap>
       <CustomBottomModal
         toggle={openBottomModal}
         handleToggle={() => setOpenBottomModal(!openBottomModal)}
