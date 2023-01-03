@@ -137,17 +137,10 @@ const ApplyClassPage = () => {
   );
   const callApplyClasses = useMutation(applyClass, {
     onSuccess: res => {
-      console.log(res.purchase_id);
       if (res.purchase_id) {
         navigate("/program/class/apply-class/success");
       } else {
-        if (res.code === "MONTH_NOT_ACCEPTABLE") {
-          setErrorCode("MONTH_NOT_ACCEPTABLE");
-        } else if (res.code === "CLASS_STUDENT_FULL") {
-          setErrorCode("CLASS_STUDENT_FULL");
-        } else if (res.code === "CLASS_ALREADY_APPLIED") {
-          setErrorCode("CLASS_ALREADY_APPLIED");
-        }
+        setErrorCode(res.code);
         setOpenRejectModal(true);
       }
     },

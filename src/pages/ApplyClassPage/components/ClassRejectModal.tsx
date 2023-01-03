@@ -32,8 +32,9 @@ const CLASS_STUDENT_FULL_CONTENT = {
 };
 
 const CLASS_ALREADY_APPLIED_CONTENT = {
-  title: "진행 중인 클래스가 있어요!",
-  content: "동일한 클래스는 동시에 진행할 수 없어요.",
+  title: "이미 신청한 클래스에요!",
+  content:
+    "동일한 클래스는 동시에 진행할 수 없어요. 진행 중인 클래스 완료 후 다시 신청하시거나 다른 클래스에 신청해주세요.",
 };
 
 const ClassRejectModal = (props: rejectModalProps): JSX.Element => {
@@ -53,11 +54,13 @@ const ClassRejectModal = (props: rejectModalProps): JSX.Element => {
   return (
     <CustomModal
       topImage={
-        <img
-          alt="sad icon"
-          src="/images/icon-sad-circle.svg"
-          style={{ width: "9.5rem", marginBottom: "1.5rem" }}
-        />
+        theme !== "CLASS_ALREADY_APPLIED" ? (
+          <img
+            alt="sad icon"
+            src="/images/icon-sad-circle.svg"
+            style={{ width: "9.5rem", marginBottom: "1.5rem" }}
+          />
+        ) : undefined
       }
       title={content.title}
       content={content.content}
