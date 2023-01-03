@@ -28,8 +28,8 @@ export const checkValidCoachingToApply = (id: string | undefined) => {
 };
 
 // 코칭 상품 신청 (POST)
-export const applyCoaching = (id: string | undefined) => {
-  return request({ method: "POST" as Method, url: `/v1/program/coaching/${id}` });
+export const applyCoaching = (body: { id: string }) => {
+  return request({ method: "POST" as Method, url: `/v1/program/coaching/${body.id}` });
 };
 
 // 클래스 상품 신청(POST)

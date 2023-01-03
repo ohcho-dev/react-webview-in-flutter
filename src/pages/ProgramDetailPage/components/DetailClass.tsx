@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -61,7 +61,7 @@ const Divider = styled.div`
 
 const DetailClass: React.FC<DetailClassProps> = props => {
   const navigate = useNavigate();
-  const { id, isApplyBtnClick, setApplyBtnState } = props;
+  const { id, isApplyBtnClick } = props;
   const { data: selectedClassInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(id),
   );
