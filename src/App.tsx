@@ -17,7 +17,7 @@ import { getChildrenList } from "./api/childApi";
 import { CHILD_ID_FIELD } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { getLoginDev } from "./api/loginDevApi";
-import MainTitleBar, { DetailTitleBar } from "./components/TitleBar";
+import MainTitleBar, { DetailTitleBar, MypageTitleBar } from "./components/TitleBar";
 import { ErrorBoundary } from "./pages/ErrorPage";
 
 let oldLocation: any = null;
@@ -31,10 +31,13 @@ const App: React.FC = () => {
 
   const { pathname } = useLocation();
   const [pathState, setPathState] = useState(0);
+  const [firstPath, setFirstPath] = useState("");
 
   useEffect(() => {
     let count = pathname.split("/").length - 1;
+    let firstPath = pathname.split("/")[1];
     setPathState(count);
+    setFirstPath(firstPath);
   }, [pathname]);
 
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
@@ -115,11 +118,12 @@ const App: React.FC = () => {
   }
 
   oldLocation = location;
-
   return (
     <>
-      {pathState === 1 && <MainTitleBar />}
+      {pathState === 1 && firstPath !== "my" && <MainTitleBar />}
+      {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
       {pathState > 1 && <DetailTitleBar />}
+
       <ErrorBoundary onReset={reset}>
         <TransitionGroup
           className={"router-wrapper"}

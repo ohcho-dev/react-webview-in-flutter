@@ -12,13 +12,16 @@ import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const MainPage = styled.main`
   width: 100%;
-  height: calc(100vh - 6rem);
+  height: ${(prop: { marginTop?: string }) =>
+    prop.marginTop ? `calc(100vh - 6rem - ${prop.marginTop})` : "calc(100vh - 6rem)"};
   position: fixed;
   top: 6rem;
   left: 0;
   z-index: 20;
   overflow-y: scroll;
   overflow-x: hidden;
+  margin-top: ${(prop: { marginTop?: string; bgColor?: string }) => prop.marginTop || "0"};
+  background: ${(prop: { bgColor?: string }) => prop.bgColor || "#fff"};
 `;
 const Content = styled.div`
   margin-bottom: 6rem;
@@ -26,9 +29,11 @@ const Content = styled.div`
 
 interface LayoutMainPageProps {
   children?: React.ReactNode;
+  marginTop?: string;
+  bgColor?: string;
 }
 
-const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
+const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bgColor }) => {
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
@@ -44,7 +49,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children }) => {
 
   return (
     <LayoutBasePage>
-      <MainPage>
+      <MainPage marginTop={marginTop} bgColor={bgColor}>
         <Suspense fallback={<LoadingSpinner />}>
           <Content>{children}</Content>
         </Suspense>

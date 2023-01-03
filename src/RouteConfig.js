@@ -1,5 +1,6 @@
 import ApplyClassPage from "./pages/ApplyClassPage";
 import ApplySuccessPage from "./pages/ApplyClassPage/components/ApplySuccessPage";
+import CoachingDetailPage from "./pages/CoachingDetailPage";
 import {
   HomePage,
   NotePage,
@@ -9,6 +10,13 @@ import {
   DetailPage,
   ProgramDetailPage,
 } from "./pages/index";
+import Inquiry from "./pages/MypageDetailPage/Inquiry";
+import ManagementAlarm from "./pages/MypageDetailPage/ManagementAlarm";
+import ManagementChild, {
+  UpdateChild,
+  CreateChild,
+} from "./pages/MypageDetailPage/ManagementChild";
+import Notice, { NoticeDetail } from "./pages/MypageDetailPage/Notice";
 
 export const RouterConfig = [
   {
@@ -102,6 +110,87 @@ export const RouterConfig = [
   {
     path: "/program/class/apply-coaching/success",
     element: <ApplySuccessPage />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/coaching/coaching-detail/:id",
+    element: <CoachingDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+
+  {
+    path: "/coaching/coaching-detail/:id",
+    element: <CoachingDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/my/inquiry",
+    element: <Inquiry />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/notice",
+    element: <Notice />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/notice/id",
+    element: <NoticeDetail />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/management-alarm",
+    element: <ManagementAlarm />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/management-child",
+    element: <ManagementChild />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/management-child/:id",
+    element: <UpdateChild />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/management-child/register",
+    element: <CreateChild />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/applied-program-list",
+    element: <CreateChild />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",

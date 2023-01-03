@@ -26,3 +26,10 @@ export interface coachingType {
   updated_at: string;
   valid_day: number;
 }
+
+export interface applyClassBodyType {
+  class_id: string;
+  child_id: string;
+  parent_name: string;
+  parent_phone: string;
+}

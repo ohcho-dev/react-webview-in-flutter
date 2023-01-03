@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getSelectedClassInfo } from "../../../api/programApi";
-import CustomModal from "../../../components/common/CustomModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";
@@ -49,6 +48,7 @@ const ClassTitle = styled.div`
 const ClassSubSection = styled.div`
   font-weight: 400;
   font-size: 1.6rem;
+
   color: rgba(10, 10, 10, 0.8);
 
   margin: 1rem 0;
@@ -62,25 +62,16 @@ const Divider = styled.div`
 const DetailClass: React.FC<DetailClassProps> = props => {
   const navigate = useNavigate();
   const { id, isApplyBtnClick, setApplyBtnState } = props;
-  const [openInformForPaymentModal, setOpenInformForPaymentModal] = useState(false);
   const { data: selectedClassInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(id),
   );
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
-
-  const toggleInformPaymentModal = () => {
-    setOpenInformForPaymentModal(!openInformForPaymentModal);
-  };
 
   useEffect(() => {
     if (isApplyBtnClick) {
       navigate(`/program/class/apply-class/${id}`);
     }
   }, [isApplyBtnClick]);
-
-  useEffect(() => {
-    if (!openInformForPaymentModal) setApplyBtnState();
-  }, [openInformForPaymentModal]);
 
   return (
     <>
@@ -112,12 +103,6 @@ const DetailClass: React.FC<DetailClassProps> = props => {
           <img alt="content image" src={selectedClassInfo.content_image} />
         )}
       </ClassWrapper>
-      {/* <CustomModal
-        isOpen={openInformForPaymentModal}
-        toggleModal={toggleInformPaymentModal}
-        title="현장 결제 프로그램입니다."
-        content="신청 시 예약만 진행됩니다."
-      /> */}
     </>
   );
 };
