@@ -152,9 +152,11 @@ const ApplyClassPage = () => {
   useEffect(() => {
     setShareBtnVisibility(false);
     setSelectedChildInfo(defaultChild);
-    document.addEventListener("resize", () => {
-      alert("resize");
-    });
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", () => {
+        alert("trigger event");
+      });
+    }
   }, []);
 
   useEffect(() => {
