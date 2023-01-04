@@ -152,7 +152,6 @@ const ApplyClassPage = () => {
   useEffect(() => {
     setShareBtnVisibility(false);
     setSelectedChildInfo(defaultChild);
-    alert(window.visualViewport?.height);
   }, []);
 
   useEffect(() => {
@@ -195,8 +194,8 @@ const ApplyClassPage = () => {
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
     if (current !== null) {
-      if (current.style.height !== "60rem") {
-        current.style.height = "60rem";
+      if (current.style.height !== "58rem") {
+        current.style.height = "58rem";
         ref.current?.scrollIntoView({ behavior: "smooth" });
       }
     }
@@ -206,6 +205,15 @@ const ApplyClassPage = () => {
     const { current } = sectionRef;
     if (current !== null) {
       // current.style.height = "37rem";
+    }
+  };
+
+  const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
+    if (evt.key === "Enter") {
+      const { current } = sectionRef;
+      if (current !== null) {
+        current.style.height = "37rem";
+      }
     }
   };
 
@@ -244,6 +252,7 @@ const ApplyClassPage = () => {
           </Title>
           <InputTitle ref={nameInputRef}>이름</InputTitle>
           <InputBox
+            onKeyDown={handleKeyDown}
             onBlur={() => handleBlurInput(nameInputRef)}
             onFocus={() => handleFocusInput(nameInputRef)}
             placeholder="이름을 입력해주세요."
@@ -252,6 +261,7 @@ const ApplyClassPage = () => {
           />
           <InputTitle ref={phoneNumberInputRef}>휴대전화 번호</InputTitle>
           <InputBox
+            onKeyDown={handleKeyDown}
             onBlur={() => handleBlurInput(phoneNumberInputRef)}
             onFocus={() => handleFocusInput(phoneNumberInputRef)}
             placeholder="번호를 입력해주세요."
