@@ -1,5 +1,6 @@
 import ApplyClassPage from "./pages/ApplyClassPage";
 import ApplySuccessPage from "./pages/ApplyClassPage/components/ApplySuccessPage";
+import ApplyCoachingSuccess from "./pages/ProgramDetailPage/components/ApplyCoachingSuccess";
 import CoachingDetailPage from "./pages/CoachingDetailPage";
 import {
   HomePage,
@@ -109,7 +110,7 @@ export const RouterConfig = [
   },
   {
     path: "/program/class/apply-coaching/success",
-    element: <ApplySuccessPage />,
+    element: <ApplyCoachingSuccess />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",

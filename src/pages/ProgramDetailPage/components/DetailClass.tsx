@@ -1,21 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getSelectedClassInfo } from "../../../api/programApi";
+import Button from "../../../components/common/Button";
 import { queryKeys } from "../../../constant/queryKeys";
+import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { getMonthLevelString } from "../../../utils/getMonthLevelString";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
-import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
+import { AgeRange, BottomBtnWrap, OnlineOffline } from "../../ProgramPage/components/styled";
 
 interface DetailClassProps {
   id: string;
-  isApplyBtnClick: boolean;
-  setApplyBtnState: () => void;
 }
 
 const ClassWrapper = styled.div`
@@ -61,20 +61,28 @@ const Divider = styled.div`
 
 const DetailClass: React.FC<DetailClassProps> = props => {
   const navigate = useNavigate();
-  const { id, isApplyBtnClick, setApplyBtnState } = props;
+  const { id } = props;
   const { data: selectedClassInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(id),
   );
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
-  useEffect(() => {
-    if (isApplyBtnClick) {
-      navigate(`/program/class/apply-class/${id}`);
-    }
-  }, [isApplyBtnClick]);
-
   return (
-    <>
+    <LayoutDetailPage
+      bottomBtn
+      bottomBtnElement={
+        <>
+          {/* <GiftBtn>
+          <img src="/images/icon-gift.svg" alt="선물하기" />
+        </GiftBtn> */}
+          <Button
+            theme={"black"}
+            content={"신청하기"}
+            onClick={() => navigate(`/program/class/apply-class/${id}`)}
+          />
+        </>
+      }
+    >
       <ClassWrapper>
         <img alt="class image" src={selectedClassInfo.main_image} />
         <ClassInfoWrapper>
@@ -103,7 +111,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
           <img alt="content image" src={selectedClassInfo.content_image} />
         )}
       </ClassWrapper>
-    </>
+    </LayoutDetailPage>
   );
 };
 

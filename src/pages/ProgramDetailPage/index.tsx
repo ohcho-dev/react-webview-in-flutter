@@ -27,32 +27,12 @@ const ProgramDetailPage = () => {
   }, []);
 
   return (
-    <LayoutDetailPage bottomBtn>
+    <>
       <Suspense fallback={<LoadingSpinner />}>
-        {coachingid && (
-          <DetailCoaching
-            id={coachingid}
-            isApplyBtnClick={applyBtnClick}
-            setApplyBtnState={setApplyBtnState}
-          />
-        )}
+        {coachingid && <DetailCoaching id={coachingid} />}
       </Suspense>
-      <Suspense fallback={<LoadingSpinner />}>
-        {classid && (
-          <DetailClass
-            id={classid}
-            isApplyBtnClick={applyBtnClick}
-            setApplyBtnState={setApplyBtnState}
-          />
-        )}
-      </Suspense>
-      <BottomBtnWrap>
-        {/* <GiftBtn>
-          <img src="/images/icon-gift.svg" alt="선물하기" />
-        </GiftBtn> */}
-        <Button theme={"black"} content={"신청하기"} onClick={() => setApplyBtnClick(true)} />
-      </BottomBtnWrap>
-    </LayoutDetailPage>
+      <Suspense fallback={<LoadingSpinner />}>{classid && <DetailClass id={classid} />}</Suspense>
+    </>
   );
 };
 

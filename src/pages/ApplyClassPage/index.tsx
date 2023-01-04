@@ -137,17 +137,10 @@ const ApplyClassPage = () => {
   );
   const callApplyClasses = useMutation(applyClass, {
     onSuccess: res => {
-      console.log(res.purchase_id);
       if (res.purchase_id) {
         navigate("/program/class/apply-class/success");
       } else {
-        if (res.code === "MONTH_NOT_ACCEPTABLE") {
-          setErrorCode("MONTH_NOT_ACCEPTABLE");
-        } else if (res.code === "CLASS_STUDENT_FULL") {
-          setErrorCode("CLASS_STUDENT_FULL");
-        } else if (res.code === "CLASS_ALREADY_APPLIED") {
-          setErrorCode("CLASS_ALREADY_APPLIED");
-        }
+        setErrorCode(res.code);
         setOpenRejectModal(true);
       }
     },
@@ -196,48 +189,53 @@ const ApplyClassPage = () => {
   };
 
   return (
-    <LayoutDetailPage style={{ background: "#f6f6f6" }} bottomBtn>
-      <ProgramSection classInfo={classInfo} />
-      <PriceSection classInfo={classInfo} />
-      <UserSection>
-        <Title style={{ display: "flex" }}>
-          아이 정보<div style={{ color: "#FD7473" }}>*</div>
-        </Title>
-        <SelectChildBtn onClick={() => toggleModal()}>
-          {selectedChildInfo.id ? (
-            <SelectedChildInfo>
-              <img alt="icon-profile" src="/images/profile-0.svg" />
-              <span>{selectedChildInfo.name}</span>
-              <span>{`(${selectedChildInfo.birth_date}) ${
-                selectedChildInfo.gender === "W" ? "여아" : "남아"
-              }`}</span>
-            </SelectedChildInfo>
-          ) : (
-            <span>아이를 선택해 주세요.</span>
-          )}
+    <>
+      <LayoutDetailPage
+        style={{ background: "#f6f6f6" }}
+        bottomBtn
+        bottomBtnElement={
+          <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
+        }
+      >
+        <ProgramSection classInfo={classInfo} />
+        <PriceSection classInfo={classInfo} />
+        <UserSection>
+          <Title style={{ display: "flex" }}>
+            아이 정보<div style={{ color: "#FD7473" }}>*</div>
+          </Title>
+          <SelectChildBtn onClick={() => toggleModal()}>
+            {selectedChildInfo.id ? (
+              <SelectedChildInfo>
+                <img alt="icon-profile" src="/images/profile-0.svg" />
+                <span>{selectedChildInfo.name}</span>
+                <span>{`(${selectedChildInfo.birth_date}) ${
+                  selectedChildInfo.gender === "W" ? "여아" : "남아"
+                }`}</span>
+              </SelectedChildInfo>
+            ) : (
+              <span>아이를 선택해 주세요.</span>
+            )}
 
-          <img alt="icon-arrow-down" src="/images/icon-arrow-down-bg.svg" />
-        </SelectChildBtn>
-        <Title style={{ display: "flex" }}>
-          보호자 정보<div style={{ color: "#FD7473" }}>*</div>
-        </Title>
-        <InputTitle>이름</InputTitle>
-        <InputBox
-          placeholder="이름을 입력해주세요."
-          id="parentName"
-          onChange={handleTypeInformation}
-        />
-        <InputTitle>휴대전화 번호</InputTitle>
-        <InputBox
-          placeholder="번호를 입력해주세요."
-          type={"number"}
-          id="parentPhoneNumber"
-          onChange={handleTypeInformation}
-        />
-      </UserSection>
-      <BottomBtnWrap>
-        <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
-      </BottomBtnWrap>
+            <img alt="icon-arrow-down" src="/images/icon-arrow-down-bg.svg" />
+          </SelectChildBtn>
+          <Title style={{ display: "flex" }}>
+            보호자 정보<div style={{ color: "#FD7473" }}>*</div>
+          </Title>
+          <InputTitle>이름</InputTitle>
+          <InputBox
+            placeholder="이름을 입력해주세요."
+            id="parentName"
+            onChange={handleTypeInformation}
+          />
+          <InputTitle>휴대전화 번호</InputTitle>
+          <InputBox
+            placeholder="번호를 입력해주세요."
+            type={"number"}
+            id="parentPhoneNumber"
+            onChange={handleTypeInformation}
+          />
+        </UserSection>
+      </LayoutDetailPage>
       <ChildSelectBottomModal
         selectedChildInfo={selectedChildInfo}
         childrenList={childrenList}
@@ -260,7 +258,7 @@ const ApplyClassPage = () => {
           navigate("/program");
         }}
       />
-    </LayoutDetailPage>
+    </>
   );
 };
 
