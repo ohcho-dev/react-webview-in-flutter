@@ -209,6 +209,7 @@ const ApplyClassPage = () => {
   };
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
+    alert(evt.key);
     if (evt.key === "Enter") {
       const { current } = sectionRef;
       if (current !== null) {
