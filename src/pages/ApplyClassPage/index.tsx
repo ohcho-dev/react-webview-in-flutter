@@ -194,8 +194,8 @@ const ApplyClassPage = () => {
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
     if (current !== null) {
-      if (current.style.height !== "58rem") {
-        current.style.height = "58rem";
+      if (current.style.height !== "59rem") {
+        current.style.height = "59rem";
         ref.current?.scrollIntoView({ behavior: "smooth" });
       }
     }
@@ -204,12 +204,11 @@ const ApplyClassPage = () => {
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
     if (current !== null) {
-      // current.style.height = "37rem";
+      alert("focus out");
     }
   };
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
-    alert(evt.key);
     if (evt.key === "Enter") {
       const { current } = sectionRef;
       if (current !== null) {
