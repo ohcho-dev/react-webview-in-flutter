@@ -152,9 +152,10 @@ const ApplyClassPage = () => {
   useEffect(() => {
     setShareBtnVisibility(false);
     setSelectedChildInfo(defaultChild);
-    if (window.visualViewport) {
+    if (window.visualViewport && nameInputRef.current) {
       window.visualViewport.addEventListener("resize", () => {
-        alert("trigger event");
+        const currentVisualViewport = window.visualViewport?.height;
+        alert(currentVisualViewport);
       });
     }
   }, []);
@@ -209,7 +210,7 @@ const ApplyClassPage = () => {
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
     if (current !== null) {
-      current.style.height = "37rem";
+      // current.style.height = "37rem";
     }
   };
 
