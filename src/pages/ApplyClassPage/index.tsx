@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -110,6 +110,9 @@ const SelectedChildInfo = styled.div`
 const ApplyClassPage = () => {
   const { classid } = useParams();
   const navigate = useNavigate();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const phoneNumberInputRef = useRef<HTMLInputElement>(null);
   const defaultChild = useRecoilValue(selectedChildInfoState);
   const setShareBtnVisibility = useSetRecoilState(useShareState);
   const childrenList = useRecoilValue(childrenListState);
@@ -149,6 +152,7 @@ const ApplyClassPage = () => {
   useEffect(() => {
     setShareBtnVisibility(false);
     setSelectedChildInfo(defaultChild);
+    alert(window.visualViewport?.height);
   }, []);
 
   useEffect(() => {
@@ -188,6 +192,23 @@ const ApplyClassPage = () => {
     }
   };
 
+  const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
+    const { current } = sectionRef;
+    if (current !== null) {
+      if (current.style.height !== "60rem") {
+        current.style.height = "60rem";
+        ref.current?.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
+
+  const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
+    const { current } = sectionRef;
+    if (current !== null) {
+      // current.style.height = "37rem";
+    }
+  };
+
   return (
     <>
       <LayoutDetailPage
@@ -199,7 +220,7 @@ const ApplyClassPage = () => {
       >
         <ProgramSection classInfo={classInfo} />
         <PriceSection classInfo={classInfo} />
-        <UserSection>
+        <UserSection ref={sectionRef}>
           <Title style={{ display: "flex" }}>
             아이 정보<div style={{ color: "#FD7473" }}>*</div>
           </Title>
@@ -221,14 +242,18 @@ const ApplyClassPage = () => {
           <Title style={{ display: "flex" }}>
             보호자 정보<div style={{ color: "#FD7473" }}>*</div>
           </Title>
-          <InputTitle>이름</InputTitle>
+          <InputTitle ref={nameInputRef}>이름</InputTitle>
           <InputBox
+            onBlur={() => handleBlurInput(nameInputRef)}
+            onFocus={() => handleFocusInput(nameInputRef)}
             placeholder="이름을 입력해주세요."
             id="parentName"
             onChange={handleTypeInformation}
           />
-          <InputTitle>휴대전화 번호</InputTitle>
+          <InputTitle ref={phoneNumberInputRef}>휴대전화 번호</InputTitle>
           <InputBox
+            onBlur={() => handleBlurInput(phoneNumberInputRef)}
+            onFocus={() => handleFocusInput(phoneNumberInputRef)}
             placeholder="번호를 입력해주세요."
             type={"number"}
             id="parentPhoneNumber"

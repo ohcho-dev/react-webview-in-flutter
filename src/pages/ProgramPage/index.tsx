@@ -87,7 +87,6 @@ const ProgramPage = () => {
             </SliderContainer>
           </Slider>
         </CarouselSection>
-
         <CouchingSection>
           <ProgramTitle>
             <UseEmoji emojiName="page-facing-up" />
@@ -97,7 +96,6 @@ const ProgramPage = () => {
             <CoachingList />
           </Suspense>
         </CouchingSection>
-
         <ClassSection>
           <ProgramTitle>
             <UseEmoji emojiName="robot" />
