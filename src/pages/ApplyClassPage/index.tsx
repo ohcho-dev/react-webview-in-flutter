@@ -232,6 +232,7 @@ const ApplyClassPage = () => {
             placeholder="번호를 입력해주세요."
             type={"number"}
             id="parentPhoneNumber"
+            pattern="[0-9]*"
             onChange={handleTypeInformation}
           />
         </UserSection>
