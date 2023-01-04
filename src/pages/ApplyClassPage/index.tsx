@@ -152,6 +152,9 @@ const ApplyClassPage = () => {
   useEffect(() => {
     setShareBtnVisibility(false);
     setSelectedChildInfo(defaultChild);
+    document.addEventListener("resize", () => {
+      alert("resize");
+    });
   }, []);
 
   useEffect(() => {
@@ -204,7 +207,7 @@ const ApplyClassPage = () => {
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
     if (current !== null) {
-      alert("focus out");
+      current.style.height = "37rem";
     }
   };
 
