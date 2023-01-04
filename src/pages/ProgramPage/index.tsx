@@ -91,7 +91,7 @@ const ProgramPage = () => {
         <CouchingSection>
           <ProgramTitle>
             <UseEmoji emojiName="page-facing-up" />
-            <Title>전문 검사와 함께하는 코칭칭</Title>
+            <Title>전문 검사와 함께하는 코칭</Title>
           </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <CoachingList />
