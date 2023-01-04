@@ -1,6 +1,8 @@
-import React, { Suspense } from "react";
+import React, { ReactElement, Suspense } from "react";
 import styled from "styled-components";
+import Button from "../components/common/Button";
 import LoadingSpinner from "../components/common/LoadingSpinner";
+import { BottomBtnWrap } from "../pages/ProgramPage/components/styled";
 
 import LayoutBasePage from "./LayoutBasePage";
 
@@ -13,6 +15,7 @@ const DetailPage = styled.main`
   height: ${(props: { bottomBtn?: boolean }) =>
     props.bottomBtn ? "calc(100vh - 13.4rem)" : "calc(100vh - 6rem)"};
   z-index: 100;
+  transform: translate3d(0, 0, 0);
   overflow-y: scroll;
   overflow-x: hidden;
 `;
@@ -20,12 +23,14 @@ const DetailPage = styled.main`
 interface LayoutDetailPageProps {
   children?: React.ReactNode;
   bottomBtn?: Boolean;
+  bottomBtnElement?: ReactElement;
   style?: object;
 }
 
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   children,
   bottomBtn = false,
+  bottomBtnElement,
   style,
 }) => {
   return (
@@ -33,6 +38,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={style}>
         <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </DetailPage>
+      {bottomBtn && <BottomBtnWrap>{bottomBtnElement}</BottomBtnWrap>}
     </LayoutBasePage>
   );
 };

@@ -12,6 +12,7 @@ import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
 import { queryKeys } from "../../../constant/queryKeys";
+import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
@@ -177,6 +178,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   };
 
   const handleApplyBtnClick = () => {
+    closeBottomModal();
     if (res?.message === "OK") {
       callApplyCoaching.mutate({ id: coachingInfo.id.toString() });
     } else {
@@ -193,50 +195,54 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
 
   const handleSameCoachingModalBtnClick = () => {
     setOpenSameCoachingModal(false);
-    closeBottomModal();
     navigate(-1);
   };
 
   const handleUsageDurationModalBtnClick = () => {
     setOpenUsageDuration(false);
-    closeBottomModal();
     navigate(-1);
   };
 
   return (
-    <DetailCoachingContainer>
-      <Thumbnail
-        alt="thumnail"
-        src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.svg"}
-      />{" "}
-      :
-      <ProductMainInfo>
-        <ProductName>{coachingInfo?.name}</ProductName>
-        <PriceWrap>
-          <ProgramPrice
-            discountPercentage={getDiscountPercentage(coachingInfo.base_price, coachingInfo.price)}
-            originalPrice={coachingInfo.base_price ? coachingInfo.base_price : 0}
-            price={coachingInfo?.price ? coachingInfo.price : 0}
-          />
-        </PriceWrap>
+    <>
+      <LayoutDetailPage
+        bottomBtn
+        bottomBtnElement={
+          <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
+        }
+      >
+        <DetailCoachingContainer>
+          <Thumbnail
+            alt="thumnail"
+            src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.svg"}
+          />{" "}
+          :
+          <ProductMainInfo>
+            <ProductName>{coachingInfo?.name}</ProductName>
+            <PriceWrap>
+              <ProgramPrice
+                discountPercentage={getDiscountPercentage(
+                  coachingInfo.base_price,
+                  coachingInfo.price,
+                )}
+                originalPrice={coachingInfo.base_price ? coachingInfo.base_price : 0}
+                price={coachingInfo?.price ? coachingInfo.price : 0}
+              />
+            </PriceWrap>
 
-        {/* TODO: 즐겨찾기기능 구현하기 */}
-        <Favorites onClick={() => setFavorites(!favorites)}>
-          <img
-            src={favorites ? "/images/icon-favorites-on.svg" : "/images/icon-favorites-off.svg"}
-            alt="즐겨찾기"
-          />
-        </Favorites>
-      </ProductMainInfo>
-      <ImageWrap>
-        <img src="/images/program-product-detail-default.png" width="100%" />
-      </ImageWrap>
-      <BottomBtnWrap>
-        {/* <GiftBtn>
-          <img src="/images/icon-gift.svg" alt="선물하기" />
-        </GiftBtn> */}
-        <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
-      </BottomBtnWrap>
+            {/* TODO: 즐겨찾기기능 구현하기 */}
+            <Favorites onClick={() => setFavorites(!favorites)}>
+              <img
+                src={favorites ? "/images/icon-favorites-on.svg" : "/images/icon-favorites-off.svg"}
+                alt="즐겨찾기"
+              />
+            </Favorites>
+          </ProductMainInfo>
+          <ImageWrap>
+            <img src="/images/program-product-detail-default.png" width="100%" />
+          </ImageWrap>
+        </DetailCoachingContainer>
+      </LayoutDetailPage>
       <CustomBottomModal
         toggle={openBottomModal}
         handleToggle={() => setOpenBottomModal(!openBottomModal)}
@@ -281,7 +287,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         cancelBtnName="취소"
         okBtnName="신청하기"
       />
-    </DetailCoachingContainer>
+    </>
   );
 };
 

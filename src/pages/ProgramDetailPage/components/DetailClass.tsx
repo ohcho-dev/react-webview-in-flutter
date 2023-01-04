@@ -6,6 +6,7 @@ import styled from "styled-components";
 import { getSelectedClassInfo } from "../../../api/programApi";
 import Button from "../../../components/common/Button";
 import { queryKeys } from "../../../constant/queryKeys";
+import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
@@ -67,44 +68,50 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
   return (
-    <ClassWrapper>
-      <img alt="class image" src={selectedClassInfo.main_image} />
-      <ClassInfoWrapper>
-        <ClassInfo>
-          <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
-          <AgeRange>{getMonthLevelString(selectedClassInfo.month_level)}</AgeRange>
-        </ClassInfo>
-        <ClassTitle>{selectedClassInfo.name}</ClassTitle>
-        <ClassSubSection>
-          {selectedClassInfo.place_type === "CLPLT_ONLINE"
-            ? getDateTime(selectedClassInfo.class_datetime)
-            : selectedClassInfo.location}
-        </ClassSubSection>
-        <ProgramPrice
-          discountPercentage={getDiscountPercentage(
-            selectedClassInfo.base_price,
-            selectedClassInfo.price,
-          )}
-          price={selectedClassInfo.price}
-          originalPrice={selectedClassInfo.base_price}
-          perNum={selectedClassInfo.total_session}
-        />
-      </ClassInfoWrapper>
-      <Divider />
-      {selectedClassInfo.content_image && (
-        <img alt="content image" src={selectedClassInfo.content_image} />
-      )}
-      <BottomBtnWrap>
-        {/* <GiftBtn>
+    <LayoutDetailPage
+      bottomBtn
+      bottomBtnElement={
+        <>
+          {/* <GiftBtn>
           <img src="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
-        <Button
-          theme={"black"}
-          content={"신청하기"}
-          onClick={() => navigate(`/program/class/apply-class/${id}`)}
-        />
-      </BottomBtnWrap>
-    </ClassWrapper>
+          <Button
+            theme={"black"}
+            content={"신청하기"}
+            onClick={() => navigate(`/program/class/apply-class/${id}`)}
+          />
+        </>
+      }
+    >
+      <ClassWrapper>
+        <img alt="class image" src={selectedClassInfo.main_image} />
+        <ClassInfoWrapper>
+          <ClassInfo>
+            <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
+            <AgeRange>{getMonthLevelString(selectedClassInfo.month_level)}</AgeRange>
+          </ClassInfo>
+          <ClassTitle>{selectedClassInfo.name}</ClassTitle>
+          <ClassSubSection>
+            {selectedClassInfo.place_type === "CLPLT_ONLINE"
+              ? getDateTime(selectedClassInfo.class_datetime)
+              : selectedClassInfo.location}
+          </ClassSubSection>
+          <ProgramPrice
+            discountPercentage={getDiscountPercentage(
+              selectedClassInfo.base_price,
+              selectedClassInfo.price,
+            )}
+            price={selectedClassInfo.price}
+            originalPrice={selectedClassInfo.base_price}
+            perNum={selectedClassInfo.total_session}
+          />
+        </ClassInfoWrapper>
+        <Divider />
+        {selectedClassInfo.content_image && (
+          <img alt="content image" src={selectedClassInfo.content_image} />
+        )}
+      </ClassWrapper>
+    </LayoutDetailPage>
   );
 };
 

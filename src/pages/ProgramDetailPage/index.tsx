@@ -27,12 +27,12 @@ const ProgramDetailPage = () => {
   }, []);
 
   return (
-    <LayoutDetailPage bottomBtn>
+    <>
       <Suspense fallback={<LoadingSpinner />}>
         {coachingid && <DetailCoaching id={coachingid} />}
       </Suspense>
       <Suspense fallback={<LoadingSpinner />}>{classid && <DetailClass id={classid} />}</Suspense>
-    </LayoutDetailPage>
+    </>
   );
 };
 

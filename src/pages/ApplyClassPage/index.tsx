@@ -190,7 +190,13 @@ const ApplyClassPage = () => {
 
   return (
     <>
-      <LayoutDetailPage style={{ background: "#f6f6f6" }} bottomBtn>
+      <LayoutDetailPage
+        style={{ background: "#f6f6f6" }}
+        bottomBtn
+        bottomBtnElement={
+          <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
+        }
+      >
         <ProgramSection classInfo={classInfo} />
         <PriceSection classInfo={classInfo} />
         <UserSection>
@@ -229,9 +235,6 @@ const ApplyClassPage = () => {
             onChange={handleTypeInformation}
           />
         </UserSection>
-        <BottomBtnWrap>
-          <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
-        </BottomBtnWrap>
       </LayoutDetailPage>
       <ChildSelectBottomModal
         selectedChildInfo={selectedChildInfo}
