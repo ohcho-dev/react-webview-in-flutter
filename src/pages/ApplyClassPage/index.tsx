@@ -113,6 +113,7 @@ const ApplyClassPage = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const nameInputRef = useRef<HTMLInputElement>(null);
   const phoneNumberInputRef = useRef<HTMLInputElement>(null);
+  const fullHeight = useRef<number>(window.innerHeight);
   const defaultChild = useRecoilValue(selectedChildInfoState);
   const setShareBtnVisibility = useSetRecoilState(useShareState);
   const childrenList = useRecoilValue(childrenListState);
@@ -152,12 +153,39 @@ const ApplyClassPage = () => {
   useEffect(() => {
     setShareBtnVisibility(false);
     setSelectedChildInfo(defaultChild);
-    if (window.visualViewport && nameInputRef.current) {
-      window.visualViewport.addEventListener("resize", () => {
-        const currentVisualViewport = window.visualViewport?.height;
-        alert(currentVisualViewport);
-      });
+    fullHeight.current = window.innerHeight;
+
+    if (window.visualViewport) {
+      const handleResize = (event: any) => {
+        const os = navigator.userAgent.toLowerCase();
+        const { height: visualViewportHeight } = event.target;
+
+        let eventName = "";
+        let keyboardHeight = 0;
+
+        if (os.indexOf("android") > -1) {
+          eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
+          keyboardHeight = fullHeight.current - window.innerHeight;
+        } else if (os.indexOf("iphone") > -1 || os.indexOf("ipad") > -1) {
+          eventName = fullHeight.current > visualViewportHeight ? "keyboardopen" : "keyboardclose";
+          keyboardHeight = fullHeight.current - visualViewportHeight;
+        }
+
+        alert(`${eventName} ${keyboardHeight}`);
+      };
+      window.visualViewport.addEventListener("resize", handleResize);
     }
+    // if (window.visualViewport) {
+    //   window.visualViewport.addEventListener("resize", () => {
+    //     if (window.visualViewport?.height) {
+    //       console.log("check");
+    //       console.log("full" + fullHeight.current);
+    //       console.log("visual" + window.visualViewport.height);
+    //       if (fullHeight.current - window?.visualViewport?.height > 0) {
+    //       }
+    //     }
+    //   });
+    // }
   }, []);
 
   useEffect(() => {
