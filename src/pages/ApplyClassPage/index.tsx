@@ -231,16 +231,16 @@ const ApplyClassPage = () => {
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
     activeInputref.current = ref.current;
-    console.log(activeInputref.current?.getBoundingClientRect());
     //setTest(true);
   };
 
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
-    if (current !== null) {
-      current.style.height = "37rem";
-    }
-    setTest(false);
+    console.log(document.activeElement?.tagName === "Input");
+    // if (current !== null) {
+    //   current.style.height = "37rem";
+    // }
+    // setTest(false);
   };
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
