@@ -181,11 +181,10 @@ const ApplyClassPage = () => {
           const keyboardHeight = fullHeight.current - visualViewportHeight;
           if (current !== null) {
             if (fullHeight.current > visualViewportHeight) {
-              alert(keyboardHeight);
               current.style.height = `${
                 USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
               }rem`;
-              activeInputref.current?.scrollIntoView({ behavior: "smooth", block: "end" });
+              activeInputref.current?.scrollIntoView({ behavior: "smooth" });
             } else {
               current.style.height = `${USER_SECTION_HEIGHT}rem`;
             }
