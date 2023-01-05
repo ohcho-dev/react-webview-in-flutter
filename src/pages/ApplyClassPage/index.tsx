@@ -190,7 +190,7 @@ const ApplyClassPage = () => {
           }
         }
 
-        //alert(`${eventName} ${keyboardHeight}`);
+        alert(`${eventName} ${keyboardHeight}`);
       };
       window.visualViewport.addEventListener("resize", handleResize);
     }
