@@ -11,7 +11,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 import { applyClassBodyType, childType } from "../../utils/type";
-import { BottomBtnWrap } from "../ProgramPage/components/styled";
+import { BOTTOM_BTN_WRAP_HEIGHT } from "../ProgramPage/components/styled";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
@@ -37,8 +37,9 @@ const Base = styled.div`
   margin-bottom: 1rem;
 `;
 
+const USER_SECTION_HEIGHT = 37;
 const UserSection = styled(Base)`
-  height: 37rem;
+  height: ${USER_SECTION_HEIGHT}rem;
 `;
 
 const SelectChildBtn = styled.div`
@@ -180,10 +181,12 @@ const ApplyClassPage = () => {
           const keyboardHeight = fullHeight.current - visualViewportHeight;
           if (current !== null) {
             if (fullHeight.current > visualViewportHeight) {
-              current.style.height = `${37 + keyboardHeight / 10 - 7}rem`;
+              current.style.height = `${
+                USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT
+              }rem`;
               activeInputref.current?.scrollIntoView({ behavior: "smooth" });
             } else {
-              current.style.height = "37rem";
+              current.style.height = `${USER_SECTION_HEIGHT}rem`;
             }
           }
         }
@@ -231,23 +234,15 @@ const ApplyClassPage = () => {
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
     activeInputref.current = ref.current;
-    //setTest(true);
   };
 
-  const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
-    const { current } = sectionRef;
-    console.log(document.activeElement?.tagName === "Input");
-    // if (current !== null) {
-    //   current.style.height = "37rem";
-    // }
-    // setTest(false);
-  };
+  const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {};
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
     if (evt.key === "Enter") {
       const { current } = sectionRef;
       if (current !== null) {
-        current.style.height = "37rem";
+        current.style.height = `${USER_SECTION_HEIGHT}rem`;
       }
     }
   };

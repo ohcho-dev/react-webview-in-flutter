@@ -25,9 +25,10 @@ export const AgeRange = styled.span`
   padding: 0.3rem;
 `;
 
+export const BOTTOM_BTN_WRAP_HEIGHT = 7.4;
 export const BottomBtnWrap = styled.div`
   width: 100%;
-  height: 7.4rem;
+  height: ${BOTTOM_BTN_WRAP_HEIGHT}rem;
   padding: 1.2rem 2rem;
   box-sizing: border-box;
   position: fixed;
