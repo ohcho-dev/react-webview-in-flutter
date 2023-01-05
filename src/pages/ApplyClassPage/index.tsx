@@ -181,7 +181,7 @@ const ApplyClassPage = () => {
           if (current !== null) {
             if (fullHeight.current > visualViewportHeight) {
               current.style.height = `${37 + keyboardHeight / 10}rem`;
-              window.scrollTo(0, document.body.scrollHeight);
+              window.scrollTo(0, document.body.scrollHeight + keyboardHeight);
               // activeInputref.current?.scrollIntoView({ behavior: "smooth" });
             } else {
               current.style.height = "37rem";
