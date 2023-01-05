@@ -34,18 +34,21 @@ const ApplyCoachingSuccess = (): JSX.Element => {
   const location = useLocation();
 
   return (
-    <LayoutDetailPage bottomBtn style={{ overflow: "hidden" }}>
-      <ContentWrapper>
-        <SuccessImg src="/images/apply-coaching-success-img.svg" alt="apply coaching success img" />
-        <FloatingImg src="/images/apply-coaching-success-floating-img.svg" alt="floating img" />
-      </ContentWrapper>
-      <BottomBtnWrap style={{ background: "none" }}>
+    <LayoutDetailPage
+      bottomBtn
+      style={{ overflow: "hidden" }}
+      bottomBtnElement={
         <Button
           theme={"black"}
           content={"코칭 시작하기"}
           onClick={() => navigate(`/coaching/coaching-detail/${location.state.id}`)}
         />
-      </BottomBtnWrap>
+      }
+    >
+      <ContentWrapper>
+        <SuccessImg src="/images/apply-coaching-success-img.svg" alt="apply coaching success img" />
+        <FloatingImg src="/images/apply-coaching-success-floating-img.svg" alt="floating img" />
+      </ContentWrapper>
     </LayoutDetailPage>
   );
 };

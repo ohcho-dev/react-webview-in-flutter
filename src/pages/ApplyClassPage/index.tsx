@@ -136,6 +136,7 @@ const ApplyClassPage = () => {
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
+  const [keyboardOpen, setKeyboardOpen] = useState(false);
   const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
   );
@@ -159,34 +160,48 @@ const ApplyClassPage = () => {
       const handleResize = (event: any) => {
         const os = navigator.userAgent.toLowerCase();
         const { height: visualViewportHeight } = event.target;
-
+        const { current } = sectionRef;
         let eventName = "";
         let keyboardHeight = 0;
 
         if (os.indexOf("android") > -1) {
           eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
           keyboardHeight = fullHeight.current - window.innerHeight;
+          if (current !== null) {
+            if (fullHeight.current > window.innerHeight) {
+              current.style.height = `${37 + keyboardHeight / 10}rem`;
+            } else {
+              current.style.height = "37rem";
+            }
+          }
         } else if (os.indexOf("iphone") > -1 || os.indexOf("ipad") > -1) {
           eventName = fullHeight.current > visualViewportHeight ? "keyboardopen" : "keyboardclose";
           keyboardHeight = fullHeight.current - visualViewportHeight;
+          if (current !== null) {
+            if (fullHeight.current > visualViewportHeight) {
+              current.style.height = `${37 + keyboardHeight / 10}rem`;
+            } else {
+              current.style.height = "37rem";
+            }
+          }
         }
 
-        alert(`${eventName} ${keyboardHeight}`);
+        //alert(`${eventName} ${keyboardHeight}`);
       };
       window.visualViewport.addEventListener("resize", handleResize);
     }
-    // if (window.visualViewport) {
-    //   window.visualViewport.addEventListener("resize", () => {
-    //     if (window.visualViewport?.height) {
-    //       console.log("check");
-    //       console.log("full" + fullHeight.current);
-    //       console.log("visual" + window.visualViewport.height);
-    //       if (fullHeight.current - window?.visualViewport?.height > 0) {
-    //       }
-    //     }
-    //   });
-    // }
   }, []);
+
+  useEffect(() => {
+    const { current } = sectionRef;
+
+    if (keyboardOpen) {
+      if (current !== null) {
+        current.style.height = "37rem";
+      }
+    } else {
+    }
+  }, [keyboardOpen]);
 
   useEffect(() => {
     if (selectedChildInfo.id) {
@@ -226,13 +241,14 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
-    const { current } = sectionRef;
-    if (current !== null) {
-      if (current.style.height !== "59rem") {
-        current.style.height = "59rem";
-        ref.current?.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+    ref.current?.scrollIntoView({ behavior: "smooth" });
+    // const { current } = sectionRef;
+    // if (current !== null) {
+    //   if (current.style.height !== "59rem") {
+    //     current.style.height = "59rem";
+    //     ref.current?.scrollIntoView({ behavior: "smooth" });
+    //   }
+    // }
   };
 
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
