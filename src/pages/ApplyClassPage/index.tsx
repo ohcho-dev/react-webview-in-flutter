@@ -136,6 +136,7 @@ const ApplyClassPage = () => {
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
+  const [test, setTest] = useState(false);
   const activeInputref = useRef<HTMLInputElement | null>(null);
   const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
@@ -176,15 +177,12 @@ const ApplyClassPage = () => {
         //   }
         // }
         if (os.indexOf("iphone") > -1) {
-          let location = 0;
           const keyboardHeight = fullHeight.current - visualViewportHeight;
           if (current !== null) {
             if (fullHeight.current > visualViewportHeight) {
               current.style.height = `${37 + keyboardHeight / 10}rem`;
-              if (activeInputref.current) {
-                location = activeInputref.current?.getBoundingClientRect().bottom + keyboardHeight;
-              }
-              window.scrollTo(0, location);
+              window.scrollTo(0, document.body.scrollHeight);
+              // activeInputref.current?.scrollIntoView({ behavior: "smooth" });
             } else {
               current.style.height = "37rem";
             }
@@ -234,6 +232,8 @@ const ApplyClassPage = () => {
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
     activeInputref.current = ref.current;
+    console.log(activeInputref.current?.getBoundingClientRect());
+    //setTest(true);
   };
 
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
@@ -241,6 +241,7 @@ const ApplyClassPage = () => {
     if (current !== null) {
       current.style.height = "37rem";
     }
+    setTest(false);
   };
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
@@ -305,6 +306,7 @@ const ApplyClassPage = () => {
             pattern="[0-9]*"
             onChange={handleTypeInformation}
           />
+          {test && <div style={{ width: "100%", height: "20rem", backgroundColor: "pink" }}></div>}
         </UserSection>
       </LayoutDetailPage>
       <ChildSelectBottomModal
