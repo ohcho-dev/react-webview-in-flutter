@@ -11,7 +11,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 import { applyClassBodyType, childType } from "../../utils/type";
-import { BottomBtnWrap } from "../ProgramPage/components/styled";
+import { BOTTOM_BTN_WRAP_HEIGHT } from "../ProgramPage/components/styled";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
@@ -37,8 +37,9 @@ const Base = styled.div`
   margin-bottom: 1rem;
 `;
 
+const USER_SECTION_HEIGHT = 37;
 const UserSection = styled(Base)`
-  height: 37rem;
+  height: ${USER_SECTION_HEIGHT}rem;
 `;
 
 const SelectChildBtn = styled.div`
@@ -136,6 +137,8 @@ const ApplyClassPage = () => {
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
+  const [test, setTest] = useState(false);
+  const activeInputref = useRef<HTMLInputElement | null>(null);
   const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
   );
@@ -159,33 +162,37 @@ const ApplyClassPage = () => {
       const handleResize = (event: any) => {
         const os = navigator.userAgent.toLowerCase();
         const { height: visualViewportHeight } = event.target;
+        const { current } = sectionRef;
 
-        let eventName = "";
-        let keyboardHeight = 0;
-
-        if (os.indexOf("android") > -1) {
-          eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
-          keyboardHeight = fullHeight.current - window.innerHeight;
-        } else if (os.indexOf("iphone") > -1 || os.indexOf("ipad") > -1) {
-          eventName = fullHeight.current > visualViewportHeight ? "keyboardopen" : "keyboardclose";
-          keyboardHeight = fullHeight.current - visualViewportHeight;
+        // if (os.indexOf("android") > -1) {
+        //   eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
+        //   keyboardHeight = fullHeight.current - window.innerHeight;
+        //   if (current !== null) {
+        //     if (fullHeight.current > window.innerHeight) {
+        //       current.style.height = `${37 + keyboardHeight / 10}rem`;
+        //       reff.current?.scrollIntoView({ behavior: "smooth" });
+        //       console.log(current.style.height);
+        //     } else {
+        //       current.style.height = "37rem";
+        //     }
+        //   }
+        // }
+        if (os.indexOf("iphone") > -1) {
+          const keyboardHeight = fullHeight.current - visualViewportHeight;
+          if (current !== null) {
+            if (fullHeight.current > visualViewportHeight) {
+              current.style.height = `${
+                USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
+              }rem`;
+              activeInputref.current?.scrollIntoView({ behavior: "smooth" });
+            } else {
+              current.style.height = `${USER_SECTION_HEIGHT}rem`;
+            }
+          }
         }
-
-        alert(`${eventName} ${keyboardHeight}`);
       };
       window.visualViewport.addEventListener("resize", handleResize);
     }
-    // if (window.visualViewport) {
-    //   window.visualViewport.addEventListener("resize", () => {
-    //     if (window.visualViewport?.height) {
-    //       console.log("check");
-    //       console.log("full" + fullHeight.current);
-    //       console.log("visual" + window.visualViewport.height);
-    //       if (fullHeight.current - window?.visualViewport?.height > 0) {
-    //       }
-    //     }
-    //   });
-    // }
   }, []);
 
   useEffect(() => {
@@ -226,27 +233,17 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
-    const { current } = sectionRef;
-    if (current !== null) {
-      if (current.style.height !== "59rem") {
-        current.style.height = "59rem";
-        ref.current?.scrollIntoView({ behavior: "smooth" });
-      }
-    }
+    activeInputref.current = ref.current;
   };
 
-  const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
-    const { current } = sectionRef;
-    if (current !== null) {
-      // current.style.height = "37rem";
-    }
-  };
+  const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {};
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
     if (evt.key === "Enter") {
-      const { current } = sectionRef;
-      if (current !== null) {
-        current.style.height = "37rem";
+      const { current: section } = sectionRef;
+      if (section !== null) {
+        section.style.height = `${USER_SECTION_HEIGHT}rem`;
+        (document.activeElement as HTMLElement).blur();
       }
     }
   };
@@ -304,6 +301,7 @@ const ApplyClassPage = () => {
             pattern="[0-9]*"
             onChange={handleTypeInformation}
           />
+          {test && <div style={{ width: "100%", height: "20rem", backgroundColor: "pink" }}></div>}
         </UserSection>
       </LayoutDetailPage>
       <ChildSelectBottomModal

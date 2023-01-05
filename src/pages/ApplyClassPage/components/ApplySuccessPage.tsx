@@ -28,14 +28,16 @@ const ContentWrapper = styled.div`
 const ApplySuccessPage = () => {
   const navigate = useNavigate();
   return (
-    <LayoutDetailPage bottomBtn>
+    <LayoutDetailPage
+      bottomBtn
+      bottomBtnElement={
+        <Button theme={"black"} content={"확인"} onClick={() => navigate("/program")} />
+      }
+    >
       <ContentWrapper>
         <img alt="apply success image" src="/images/apply-success-img.svg" />
         <img alt="success next step image" src="/images/success-next-step-img.svg" />
       </ContentWrapper>
-      <BottomBtnWrap>
-        <Button theme={"black"} content={"확인"} onClick={() => navigate("/program")} />
-      </BottomBtnWrap>
     </LayoutDetailPage>
   );
 };
