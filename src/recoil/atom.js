@@ -32,3 +32,7 @@ export const useShareState = atom({
   key: "share",
   default: false,
 });
+
+// 현재 os
+
+// keyboard 오픈 여부
