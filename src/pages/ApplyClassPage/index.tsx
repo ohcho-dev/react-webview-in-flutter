@@ -242,10 +242,9 @@ const ApplyClassPage = () => {
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
     if (evt.key === "Enter") {
       const { current: section } = sectionRef;
-      const { current: input } = activeInputref;
-      if (section !== null && input !== null) {
+      if (section !== null) {
         section.style.height = `${USER_SECTION_HEIGHT}rem`;
-        input.blur();
+        (document.activeElement as HTMLElement).blur();
       }
     }
   };
