@@ -183,7 +183,7 @@ const ApplyClassPage = () => {
             if (fullHeight.current > visualViewportHeight) {
               alert(keyboardHeight);
               current.style.height = `${
-                USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT
+                USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
               }rem`;
               activeInputref.current?.scrollIntoView({ behavior: "smooth" });
             } else {
@@ -244,6 +244,7 @@ const ApplyClassPage = () => {
       const { current } = sectionRef;
       if (current !== null) {
         current.style.height = `${USER_SECTION_HEIGHT}rem`;
+        activeInputref.current?.blur();
       }
     }
   };
