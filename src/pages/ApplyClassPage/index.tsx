@@ -183,6 +183,7 @@ const ApplyClassPage = () => {
           if (current !== null) {
             if (fullHeight.current > visualViewportHeight) {
               current.style.height = `${37 + keyboardHeight / 10}rem`;
+              reff.current?.scrollIntoView({ behavior: "smooth" });
             } else {
               current.style.height = "37rem";
             }
