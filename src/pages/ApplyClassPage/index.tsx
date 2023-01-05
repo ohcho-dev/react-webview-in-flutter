@@ -136,8 +136,7 @@ const ApplyClassPage = () => {
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
-  const [keyboardOpen, setKeyboardOpen] = useState(false);
-  const reff = useRef<HTMLInputElement | null>(null);
+  const activeInputref = useRef<HTMLInputElement | null>(null);
   const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
   );
@@ -162,58 +161,39 @@ const ApplyClassPage = () => {
         const os = navigator.userAgent.toLowerCase();
         const { height: visualViewportHeight } = event.target;
         const { current } = sectionRef;
-        let eventName = "";
-        let keyboardHeight = 0;
 
-        if (os.indexOf("android") > -1) {
-          eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
-          keyboardHeight = fullHeight.current - window.innerHeight;
-          if (current !== null) {
-            if (fullHeight.current > window.innerHeight) {
-              current.style.height = `${37 + keyboardHeight / 10}rem`;
-              reff.current?.scrollIntoView({ behavior: "smooth" });
-              console.log(current.style.height);
-            } else {
-              current.style.height = "37rem";
-            }
-          }
-        } else if (os.indexOf("iphone") > -1 || os.indexOf("ipad") > -1) {
-          eventName = fullHeight.current > visualViewportHeight ? "keyboardopen" : "keyboardclose";
-          keyboardHeight = fullHeight.current - visualViewportHeight;
+        // if (os.indexOf("android") > -1) {
+        //   eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
+        //   keyboardHeight = fullHeight.current - window.innerHeight;
+        //   if (current !== null) {
+        //     if (fullHeight.current > window.innerHeight) {
+        //       current.style.height = `${37 + keyboardHeight / 10}rem`;
+        //       reff.current?.scrollIntoView({ behavior: "smooth" });
+        //       console.log(current.style.height);
+        //     } else {
+        //       current.style.height = "37rem";
+        //     }
+        //   }
+        // }
+        if (os.indexOf("iphone") > -1) {
+          let location = 0;
+          const keyboardHeight = fullHeight.current - visualViewportHeight;
           if (current !== null) {
             if (fullHeight.current > visualViewportHeight) {
               current.style.height = `${37 + keyboardHeight / 10}rem`;
-              reff.current?.scrollIntoView({ behavior: "smooth" });
+              if (activeInputref.current) {
+                location = activeInputref.current?.getBoundingClientRect().bottom + keyboardHeight;
+              }
+              window.scrollTo(0, location);
             } else {
               current.style.height = "37rem";
             }
           }
         }
-
-        alert(`${eventName} ${keyboardHeight}`);
       };
       window.visualViewport.addEventListener("resize", handleResize);
     }
-
-    // const handleWindowResize = () => {
-    //   const os = navigator.userAgent.toLowerCase();
-    //   alert(
-    //     `fullHeight: ${fullHeight.current} / innerHeight: ${window.innerHeight} / viewportHeight: ${window.visualViewport?.height} / os: ${os}`,
-    //   );
-    // };
-    // window.addEventListener("resize", handleWindowResize);
   }, []);
-
-  // useEffect(() => {
-  //   const { current } = sectionRef;
-
-  //   if (keyboardOpen) {
-  //     if (current !== null) {
-  //       current.style.height = "37rem";
-  //     }
-  //   } else {
-  //   }
-  // }, [keyboardOpen]);
 
   useEffect(() => {
     if (selectedChildInfo.id) {
@@ -253,29 +233,13 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
-    reff.current = ref.current;
-    const os = navigator.userAgent.toLowerCase();
-
-    if (os.indexOf("android") > -1) {
-      alert(
-        `fullHeight: ${fullHeight.current} / innerHeight: ${window.innerHeight} / viewportHeight: ${window.visualViewport?.height} / os: ${os}`,
-      );
-    }
-
-    //ref.current?.scrollIntoView({ behavior: "smooth" });
-    // const { current } = sectionRef;
-    // if (current !== null) {
-    //   if (current.style.height !== "59rem") {
-    //     current.style.height = "59rem";
-    //     ref.current?.scrollIntoView({ behavior: "smooth" });
-    //   }
-    // }
+    activeInputref.current = ref.current;
   };
 
   const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {
     const { current } = sectionRef;
     if (current !== null) {
-      // current.style.height = "37rem";
+      current.style.height = "37rem";
     }
   };
 
