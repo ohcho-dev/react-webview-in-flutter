@@ -185,7 +185,7 @@ const ApplyClassPage = () => {
               current.style.height = `${
                 USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
               }rem`;
-              activeInputref.current?.scrollIntoView({ behavior: "smooth" });
+              activeInputref.current?.scrollIntoView({ behavior: "smooth", block: "end" });
             } else {
               current.style.height = `${USER_SECTION_HEIGHT}rem`;
             }
@@ -241,10 +241,11 @@ const ApplyClassPage = () => {
 
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
     if (evt.key === "Enter") {
-      const { current } = sectionRef;
-      if (current !== null) {
-        current.style.height = `${USER_SECTION_HEIGHT}rem`;
-        activeInputref.current?.blur();
+      const { current: section } = sectionRef;
+      const { current: input } = activeInputref;
+      if (section !== null && input !== null) {
+        section.style.height = `${USER_SECTION_HEIGHT}rem`;
+        input.blur();
       }
     }
   };
