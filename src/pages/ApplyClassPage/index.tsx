@@ -137,6 +137,7 @@ const ApplyClassPage = () => {
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
   const [keyboardOpen, setKeyboardOpen] = useState(false);
+  const reff = useRef<HTMLInputElement | null>(null);
   const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
   );
@@ -170,6 +171,8 @@ const ApplyClassPage = () => {
           if (current !== null) {
             if (fullHeight.current > window.innerHeight) {
               current.style.height = `${37 + keyboardHeight / 10}rem`;
+              reff.current?.scrollIntoView({ behavior: "smooth" });
+              console.log(current.style.height);
             } else {
               current.style.height = "37rem";
             }
@@ -241,7 +244,8 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
+    reff.current = ref.current;
+    //ref.current?.scrollIntoView({ behavior: "smooth" });
     // const { current } = sectionRef;
     // if (current !== null) {
     //   if (current.style.height !== "59rem") {
