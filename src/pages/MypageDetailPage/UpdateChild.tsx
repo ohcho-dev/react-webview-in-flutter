@@ -95,7 +95,6 @@ const UpdateChild = () => {
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   useEffect(() => {
-    console.log(data[0], childData);
     if (
       data[0].name === childData.name &&
       data[0].gender === childData.gender &&
@@ -183,7 +182,6 @@ const UpdateChild = () => {
   }, [childData.due_date]);
 
   useEffect(() => {
-    console.log(data[0].due_date, childData.due_date);
     if (childData.premature_flag === 0) {
       setChildData(current => {
         const { due_date, ...rest } = current;
