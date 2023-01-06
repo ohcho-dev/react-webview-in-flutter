@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import BottomNav from "../components/BottomNav";
@@ -31,9 +31,10 @@ interface LayoutMainPageProps {
   children?: React.ReactNode;
   marginTop?: string;
   bgColor?: string;
+  style?: object;
 }
 
-const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bgColor }) => {
+const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bgColor, style }) => {
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
@@ -49,10 +50,8 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bg
 
   return (
     <LayoutBasePage>
-      <MainPage marginTop={marginTop} bgColor={bgColor}>
-        <Suspense fallback={<LoadingSpinner />}>
-          <Content>{children}</Content>
-        </Suspense>
+      <MainPage marginTop={marginTop} bgColor={bgColor} style={style}>
+        <Content>{children}</Content>
       </MainPage>
       <BottomNav />
       <ChildSelectBottomModal

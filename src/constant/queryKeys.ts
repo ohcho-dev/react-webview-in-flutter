@@ -1,7 +1,7 @@
 export const queryKeys = {
   loginDev: "login-token",
   commonCodeList: "common-code-list",
-
+  updatedChildInfo: "selected-child-info",
   childrenList: "children-list",
   coachingList: "coaching-list",
   selectedCoacingInfo: "selected-coaching-info",

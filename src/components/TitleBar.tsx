@@ -18,7 +18,8 @@ const TitleBarWrap = styled.section`
   align-items: center;
   justify-content: space-between;
   background: #fff;
-  border-bottom: 0.05rem solid rgba(0, 0, 0, 0.15);
+  border-bottom: ${(prop: { border?: boolean }) =>
+    prop.border ? "0.05rem solid rgba(0, 0, 0, 0.15)" : "0"};
   position: fixed;
   top: 0;
   left: 0;
@@ -105,7 +106,7 @@ const MainTitleBar = () => {
     setOpenModal(true);
   };
   return (
-    <TitleBarWrap>
+    <TitleBarWrap border={true}>
       <ProfileWrap>
         <ProfileImageWrap>
           <img src="/images/icon-profile-default.svg" width="100%" alt="child icon" />
@@ -120,13 +121,15 @@ const MainTitleBar = () => {
   );
 };
 
-interface DetailTitleBarProps {}
+interface DetailTitleBarProps {
+  border?: boolean;
+}
 
-export const DetailTitleBar: React.FC<DetailTitleBarProps> = () => {
+export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ border }) => {
   const navigate = useNavigate();
   const share = useRecoilValue(useShareState);
   return (
-    <TitleBarWrap>
+    <TitleBarWrap border={border}>
       <HistoryBackIconWrap onClick={() => navigate(-1)}>
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>
