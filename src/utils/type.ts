@@ -6,10 +6,12 @@ export interface ApiErrorResponseType {
 
 export interface childType {
   id: Number;
-  parent_id: Number;
+  parent_id?: Number;
   name: string;
   gender: string;
   birth_date: string;
+  premature_flag: number;
+  due_date?: string;
 }
 
 export interface coachingType {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Cookies from "js-cookie";
@@ -19,6 +19,7 @@ import { getCommonCodeList } from "./api/commonApi";
 import { getLoginDev } from "./api/loginDevApi";
 import MainTitleBar, { DetailTitleBar, MypageTitleBar } from "./components/TitleBar";
 import { ErrorBoundary } from "./pages/ErrorPage";
+import LoadingSpinner from "./components/common/LoadingSpinner";
 
 let oldLocation: any = null;
 
@@ -32,12 +33,15 @@ const App: React.FC = () => {
   const { pathname } = useLocation();
   const [pathState, setPathState] = useState(0);
   const [firstPath, setFirstPath] = useState("");
+  const [secondPath, setSecontPath] = useState("");
 
   useEffect(() => {
     let count = pathname.split("/").length - 1;
     let firstPath = pathname.split("/")[1];
+    let secondPath = pathname.split("/")[2];
     setPathState(count);
     setFirstPath(firstPath);
+    secondPath && setSecontPath(secondPath);
   }, [pathname]);
 
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
@@ -122,24 +126,31 @@ const App: React.FC = () => {
     <>
       {pathState === 1 && firstPath !== "my" && <MainTitleBar />}
       {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
-      {pathState > 1 && <DetailTitleBar />}
+      {pathState > 1 && firstPath !== "my" && secondPath !== "coaching-detail" && (
+        <DetailTitleBar border={true} />
+      )}
+      {pathState > 1 && (firstPath === "my" || secondPath === "coaching-detail") && (
+        <DetailTitleBar border={false} />
+      )}
 
-      <ErrorBoundary onReset={reset}>
-        <TransitionGroup
-          className={"router-wrapper"}
-          childFactory={child => React.cloneElement(child, { classNames })}
-        >
-          <CSSTransition timeout={150} key={location.pathname}>
-            <div style={{ width: "100%", height: "100vh" }}>
-              <Routes location={location}>
-                {RouterConfig.map((config, index) => {
-                  return <Route key={index} {...config} />;
-                })}
-              </Routes>
-            </div>
-          </CSSTransition>
-        </TransitionGroup>
-      </ErrorBoundary>
+      <TransitionGroup
+        className={"router-wrapper"}
+        childFactory={child => React.cloneElement(child, { classNames })}
+      >
+        <CSSTransition timeout={150} key={location.pathname}>
+          <div style={{ width: "100%", height: "100vh" }}>
+            <ErrorBoundary onReset={reset}>
+              <Suspense fallback={<LoadingSpinner />}>
+                <Routes location={location}>
+                  {RouterConfig.map((config, index) => {
+                    return <Route key={index} {...config} />;
+                  })}
+                </Routes>
+              </Suspense>
+            </ErrorBoundary>
+          </div>
+        </CSSTransition>
+      </TransitionGroup>
     </>
   );
 };

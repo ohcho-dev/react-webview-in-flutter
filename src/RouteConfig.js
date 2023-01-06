@@ -11,12 +11,11 @@ import {
   DetailPage,
   ProgramDetailPage,
 } from "./pages/index";
+import AppliedProgramList from "./pages/MypageDetailPage/AppliedProgramList";
 import Inquiry from "./pages/MypageDetailPage/Inquiry";
 import ManagementAlarm from "./pages/MypageDetailPage/ManagementAlarm";
-import ManagementChild, {
-  UpdateChild,
-  CreateChild,
-} from "./pages/MypageDetailPage/ManagementChild";
+import ManagementChild from "./pages/MypageDetailPage/ManagementChild";
+import UpdateChild from "./pages/MypageDetailPage/UpdateChild";
 import Notice, { NoticeDetail } from "./pages/MypageDetailPage/Notice";
 
 export const RouterConfig = [
@@ -174,7 +173,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/my/management-child/:id",
+    path: "/my/management-child/:childid",
     element: <UpdateChild />,
     sceneConfig: {
       enter: "from-bottom",
@@ -183,7 +182,7 @@ export const RouterConfig = [
   },
   {
     path: "/my/management-child/register",
-    element: <CreateChild />,
+    element: <UpdateChild />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
@@ -191,7 +190,7 @@ export const RouterConfig = [
   },
   {
     path: "/my/applied-program-list",
-    element: <CreateChild />,
+    element: <AppliedProgramList />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
