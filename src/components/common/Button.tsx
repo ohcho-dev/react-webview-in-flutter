@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface buttonProps {
-  theme: "black" | "white" | "grey";
+  theme: "black" | "white" | "disabled";
   onClick?: () => void;
   style?: object;
   content: string;
@@ -9,7 +9,7 @@ interface buttonProps {
 }
 
 const Button = (props: buttonProps) => {
-  const { theme, onClick, style, content, ...rest } = props;
+  const { theme, onClick, style, content, disabled, ...rest } = props;
   const [themeColor, setThemeColor] = useState({});
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Button = (props: buttonProps) => {
         };
         break;
 
-      case "grey":
+      case "disabled":
         colorPalette = {
           color: "white",
           backgroundColor: "#DCDCDC",
@@ -51,7 +51,12 @@ const Button = (props: buttonProps) => {
   }, [theme]);
 
   return (
-    <button style={{ ...themeColor, ...style }} onClick={onClick} {...rest}>
+    <button
+      style={{ ...themeColor, ...style }}
+      onClick={onClick}
+      {...rest}
+      disabled={theme === "disabled"}
+    >
       {content}
     </button>
   );

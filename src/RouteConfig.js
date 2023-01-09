@@ -19,6 +19,9 @@ import ManagementChild, {
 } from "./pages/MypageDetailPage/ManagementChild";
 import Notice, { NoticeDetail } from "./pages/MypageDetailPage/Notice";
 
+import Questionnaire from "./pages/Questionnaire";
+import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
+
 export const RouterConfig = [
   {
     path: "/",
@@ -124,10 +127,25 @@ export const RouterConfig = [
       exit: "to-right",
     },
   },
-
   {
     path: "/coaching/coaching-detail/:id",
     element: <CoachingDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/questionnarie/:id",
+    element: <Questionnaire />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/questionnarie/form/:id",
+    element: <QuestionnaireForm />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

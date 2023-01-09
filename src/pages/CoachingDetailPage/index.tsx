@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import ContentItem from "./components/ContentItem";
@@ -67,6 +68,7 @@ const ProceedStatus = styled.span`
 `;
 
 const CoachingDetailPage = () => {
+  const navigate = useNavigate();
   return (
     <>
       <LayoutMainPage marginTop="10rem">
@@ -85,6 +87,7 @@ const CoachingDetailPage = () => {
           chipStatus={["waiting", "success"]}
           name="123"
           useArrowBtn={true}
+          handleClick={() => navigate("/coaching/questionnarie/1")}
         />
         <ContentTitle emoji="check-mark-button" name="과제" />
 
@@ -93,34 +96,7 @@ const CoachingDetailPage = () => {
           chipStatus={["waiting", "success"]}
           name="123"
           useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
+          handleClick={() => navigate("/coaching/questionnarie/1")}
         />
       </LayoutMainPage>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Cookies from "js-cookie";
@@ -123,7 +123,6 @@ const App: React.FC = () => {
       {pathState === 1 && firstPath !== "my" && <MainTitleBar />}
       {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
       {pathState > 1 && <DetailTitleBar />}
-
       <ErrorBoundary onReset={reset}>
         <TransitionGroup
           className={"router-wrapper"}

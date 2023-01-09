@@ -35,7 +35,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
 }) => {
   return (
     <LayoutBasePage>
-      <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={style}>
+      <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
         <Suspense fallback={<LoadingSpinner />}>{children}</Suspense>
       </DetailPage>
       {bottomBtn && <BottomBtnWrap>{bottomBtnElement}</BottomBtnWrap>}
