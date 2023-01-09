@@ -132,6 +132,7 @@ const ApplyClassPage = () => {
     parent_id: 0,
     gender: "",
     birth_date: "",
+    premature_flag: 0,
   });
   const [errorCode, setErrorCode] = useState<
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"

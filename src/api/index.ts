@@ -17,6 +17,7 @@ export const request = async (config: AxiosRequestConfig) => {
       headers: {
         "child-id": childId,
         Authorization: `Bearer ${token}`,
+        ContentType: config.method === "PUT" ? "application/json" : "",
       },
     });
     return response.data;

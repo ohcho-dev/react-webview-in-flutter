@@ -16,6 +16,7 @@ const ItemWrap = styled.div`
     margin-bottom: 8rem;
   }
 `;
+
 const ImageWrap = styled.div`
   min-width: 9.8rem;
   min-height: 8.6rem;
@@ -28,6 +29,7 @@ const ImageWrap = styled.div`
   border-radius: 0.8rem;
   margin-right: 1.4rem;
 `;
+
 const ItemDesc = styled.div`
   margin-top: 0.6rem;
   max-width: 60%;
@@ -62,11 +64,18 @@ interface ContentItemProps {
   chipStatus: Array<string>;
   name: string;
   useArrowBtn?: boolean;
+  handleClick: () => void;
 }
 
-const ContentItem: React.FC<ContentItemProps> = ({ imgUrl, chipStatus, name, useArrowBtn }) => {
+const ContentItem: React.FC<ContentItemProps> = ({
+  imgUrl,
+  chipStatus,
+  name,
+  useArrowBtn,
+  handleClick,
+}) => {
   return (
-    <ItemWrap>
+    <ItemWrap onClick={handleClick}>
       <ImageWrap>
         <img src={imgUrl} width="60%" />
       </ImageWrap>

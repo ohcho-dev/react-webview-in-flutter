@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import ContentItem from "./components/ContentItem";
@@ -12,7 +13,7 @@ const PageTitleWrap = styled.div`
   background: #fff;
   border-bottom: solid 0.2rem #f5f5f5;
   padding: 2rem 2.5rem;
-  z-index: 10;
+  z-index: 100;
 `;
 const ShadowBox = styled.div`
   position: fixed;
@@ -21,7 +22,6 @@ const ShadowBox = styled.div`
   width: 100%;
   height: 1px;
   box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.5);
-  background: #f00;
 `;
 const Title = styled.div`
   font-weight: 600;
@@ -67,24 +67,26 @@ const ProceedStatus = styled.span`
 `;
 
 const CoachingDetailPage = () => {
+  const navigate = useNavigate();
   return (
     <>
-      <LayoutMainPage marginTop="10rem">
-        <PageTitleWrap>
-          <Title>우리아이 양육 코칭 23~24개월</Title>
-          <ProgramStatus>
-            <ProceedStatus color={"#00c7b1"}>{"진행중"}</ProceedStatus>
-            <span>~2022.11.14</span>
-            <span>12일 남음</span>
-          </ProgramStatus>
-        </PageTitleWrap>
-        <ShadowBox />
+      <PageTitleWrap>
+        <Title>우리아이 양육 코칭 23~24개월</Title>
+        <ProgramStatus>
+          <ProceedStatus color={"#00c7b1"}>{"진행중"}</ProceedStatus>
+          <span>~2022.11.14</span>
+          <span>12일 남음</span>
+        </ProgramStatus>
+      </PageTitleWrap>
+      <ShadowBox />
+      <LayoutMainPage style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}>
         <ContentTitle emoji="flag-in-hole" name="결과지" />
         <ContentItem
           imgUrl="/images/coaching-detail-default-img.svg"
           chipStatus={["waiting", "success"]}
-          name="123"
+          name="1233"
           useArrowBtn={true}
+          handleClick={() => navigate("/coaching/questionnarie/1")}
         />
         <ContentTitle emoji="check-mark-button" name="과제" />
 
@@ -93,34 +95,7 @@ const CoachingDetailPage = () => {
           chipStatus={["waiting", "success"]}
           name="123"
           useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
-        />
-
-        <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
-          name="123"
-          useArrowBtn={true}
+          handleClick={() => navigate("/coaching/questionnarie/1")}
         />
       </LayoutMainPage>
     </>
