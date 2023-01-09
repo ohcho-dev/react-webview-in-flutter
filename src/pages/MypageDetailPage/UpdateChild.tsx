@@ -95,22 +95,21 @@ const UpdateChild = () => {
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   useEffect(() => {
-    if (
-      data[0].name === childData.name &&
-      data[0].gender === childData.gender &&
-      data[0].birth_date === childData.birth_date &&
-      data[0].premature_flag === childData.premature_flag
-    ) {
-      window.onpopstate = () => {
-        navigate("/my/management-child");
-      };
-    } else {
-      window.history.pushState(null, "", window.location.href); // 현재 페이지 history stack 한개 더 쌓기
-      window.onpopstate = () => {
-        // 뒤로가기가 실행될 경우 추가 action 등록
-        setOpenBackModal(true);
-      };
-    }
+    // 뒤로가기 보류
+    // console.log("p 0", data[0], childData);
+    // if (
+    //   data[0].name !== childData.name ||
+    //   data[0].gender !== childData.gender ||
+    //   data[0].birth_date !== childData.birth_date ||
+    //   data[0].premature_flag !== childData.premature_flag
+    // ) {
+    //   console.log("수정됨");
+    //   window.history.pushState(null, "", ""); // 현재 페이지 history stack 한개 더 쌓기
+    //   window.onpopstate = () => {
+    //     // 뒤로가기가 실행될 경우 추가 action 등록
+    //     setOpenBackModal(true);
+    //   };
+    // }
   }, [childData]);
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
@@ -279,7 +278,7 @@ const UpdateChild = () => {
         okBtnName="수정"
         okBtnClick={() => setOpenBackModal(!openBackModal)}
         cancelBtnName="나가기"
-        cancelBtnClick={() => navigate("/my/management-child")}
+        cancelBtnClick={() => navigate(-1)}
       />
     </LayoutDetailPage>
   );
