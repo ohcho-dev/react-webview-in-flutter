@@ -1,13 +1,17 @@
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { MenuType } from "..";
 import { getCoachingList } from "../../../api/programApi";
 import { queryKeys } from "../../../constant/queryKeys";
-import LayoutMainPage from "../../../layouts/LayoutMainPage";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { coachingType } from "../../../utils/type";
 import ProgramCard from "../../ProgramPage/components/ProgramCard";
 import { Divider } from "../../ProgramPage/components/styled";
+
+interface NoAppliedCoachingPropsType {
+  selectedMenu?: MenuType;
+}
 
 const InformImageSection = styled.div`
   height: 31rem;
@@ -27,7 +31,8 @@ const ProgramTitle = styled.span`
   font-size: 2rem;
 `;
 
-const NoAppliedCoaching = () => {
+const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
+  const { selectedMenu } = props;
   const navigate = useNavigate();
   const { data } = useQuery(queryKeys.coachingList, () => getCoachingList());
 
@@ -38,7 +43,11 @@ const NoAppliedCoaching = () => {
   return (
     <div>
       <InformImageSection>
-        <img alt="inform-image" src="/images/no-applied-coaching-img.svg" />
+        {selectedMenu === "end" ? (
+          <img alt="inform-image" src="/images/no-end-coaching-img.svg" />
+        ) : (
+          <img alt="inform-image" src="/images/no-applied-coaching-img.svg" />
+        )}
       </InformImageSection>
       <ProgramTitle>⭐️ 나나를 위한 코칭 추천</ProgramTitle>
       {data[0].map((coaching: coachingType, index: number) => {

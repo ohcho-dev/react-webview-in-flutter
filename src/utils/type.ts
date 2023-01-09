@@ -43,3 +43,19 @@ export interface applyClassBodyType {
   parent_name: string;
   parent_phone: string;
 }
+
+export interface MonthRangeType {
+  month_start: number;
+  month_end: number;
+}
+
+export interface appliedCoachingType {
+  coaching_name: string;
+  end_date: string;
+  id: number;
+  main_image: string | null;
+  month_level: MonthRangeType[] | MonthRangeType;
+  start_date: string;
+  status: string;
+  status_label: string;
+}
