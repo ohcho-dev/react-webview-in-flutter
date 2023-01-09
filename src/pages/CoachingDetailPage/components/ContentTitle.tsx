@@ -12,7 +12,6 @@ const TitleWrap = styled.div`
   padding: 2.6rem 2rem 1.7rem;
   display: flex;
   align-items: center;
-  justify-cotent: center;
 `;
 const TitleName = styled.div`
   font-weight: 700;
