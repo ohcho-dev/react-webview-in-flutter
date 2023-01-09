@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useQueries, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getChildrenList } from "../../api/childApi";
+import BottomFixBtnWrap from "../../components/common/BottomFixBtnWrap";
 import Button from "../../components/common/Button";
+import CustomModal from "../../components/common/CustomModal";
 import { CHILD_ID_FIELD } from "../../constant/localStorage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
@@ -47,7 +50,14 @@ const ChildrenListWrap = styled.div`
 export const ManagementChild = () => {
   const navigate = useNavigate();
   const { data: childrenList } = useQuery(queryKeys.childrenList, () => getChildrenList());
-
+  const [openBreakModal, setOpenBreakModal] = useState(false);
+  const handleCreateCHildBtn = () => {
+    if (childrenList[0].length > 0) {
+      setOpenBreakModal(!openBreakModal);
+      return;
+    }
+    navigate("/my/management-child/register");
+  };
   return (
     <LayoutDetailPage>
       <PageTitle title="아이 관리" />
@@ -69,13 +79,21 @@ export const ManagementChild = () => {
         ))}
       </PageLayout>
 
-      <BottomBtnWrap>
-        <Button
-          theme={"black"}
-          content={"아이 추가하기"}
-          onClick={() => navigate("/my/management-child/register")}
-        />
-      </BottomBtnWrap>
+      <BottomFixBtnWrap>
+        <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
+      </BottomFixBtnWrap>
+
+      <CustomModal
+        topImage={
+          <img src={"/images/icon-sad-circle.svg"} alt="character" style={{ width: "9.5rem" }} />
+        }
+        title="아이를 더 이상 추가할 수 없어요."
+        content="아이는 최대 5명까지 등록할 수 있어요."
+        isOpen={openBreakModal}
+        toggleModal={() => setOpenBreakModal(!openBreakModal)}
+        okBtnName="확인"
+        okBtnClick={() => setOpenBreakModal(!openBreakModal)}
+      />
     </LayoutDetailPage>
   );
 };

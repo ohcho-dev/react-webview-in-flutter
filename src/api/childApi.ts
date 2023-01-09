@@ -14,8 +14,14 @@ export const getSelectedChild = (id: string | undefined) => {
   return request({ method: "GET", url: `/v1/children/${id}` });
 };
 
-export const createChild = (data: object) => {
-  return request({ method: "POST", url: "/v1/children", data });
+export const createChild = (body: {
+  name: string;
+  gender: string;
+  birth_date: string;
+  premature_flag: number;
+  due_date?: string;
+}) => {
+  return request({ method: "POST", url: "/v1/children", data: body });
 };
 
 export const updateChild = (body: {
