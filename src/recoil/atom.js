@@ -33,6 +33,7 @@ export const useShareState = atom({
   default: false,
 });
 
-// 현재 os
-
-// keyboard 오픈 여부
+export const questionnarieState = atom({
+  key: "questionnaire",
+  default: [],
+});

@@ -35,8 +35,8 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
 }) => {
   return (
     <LayoutBasePage>
-      <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={style}>
-        {children}
+      <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
+      {children}
       </DetailPage>
       {bottomBtn && <BottomBtnWrap>{bottomBtnElement}</BottomBtnWrap>}
     </LayoutBasePage>
