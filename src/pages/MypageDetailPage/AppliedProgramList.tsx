@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { getPurchaseClasses, getPurchaseCoaching } from "../../api/mypage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import getGender from "../../utils/getGender";
 import PageTitle from "./components/PageTitle";
 
 const TabValue = ["코칭", "클래스"];
@@ -191,12 +192,15 @@ const AppliedProgramList = () => {
                       <ListContent>
                         <div>
                           <Title>{detailData.coaching_name}</Title>
-                          <Price>{detailData.payment_price}</Price>
+                          {detailData.payment_price && (
+                            <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                          )}
                           <ChildInfo>
-                            신청아이 : {detailData.child_name} ({detailData.child_birth_date})
+                            신청아이 : {detailData.child_name} ({detailData.child_birth_date}){" "}
+                            {getGender(detailData.child_gender)}아
                           </ChildInfo>
                         </div>
-                        <Thumbnail />
+                        <Thumbnail imgUrl={detailData.main_image} />
                       </ListContent>
                     </ListWrap>
                   );
@@ -217,12 +221,15 @@ const AppliedProgramList = () => {
                       <ListContent>
                         <div>
                           <Title>{detailData.class_name}</Title>
-                          <Price>{detailData.payment_price}</Price>
+                          {detailData.payment_price && (
+                            <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                          )}
                           <ChildInfo>
-                            신청아이 : {detailData.child_name} ({detailData.child_birth_date})
+                            신청아이 : {detailData.child_name} ({detailData.child_birth_date}){" "}
+                            {getGender(detailData.child_gender)}아
                           </ChildInfo>
                         </div>
-                        <Thumbnail />
+                        <Thumbnail imgUrl={detailData.main_image} />
                       </ListContent>
                     </ListWrap>
                   );
