@@ -15,3 +15,18 @@ export const getPurchaseClasses = (param?: object) => {
     params: param,
   });
 };
+
+export const getAlarmConfig = (param?: object) => {
+  return request({
+    method: "GET",
+    url: "/v1/notification/config",
+    params: param,
+  });
+};
+
+export const updateAlarmConfig = (body: {
+  type: string | undefined;
+  value: number | undefined;
+}) => {
+  return request({ method: "PUT", url: `/v1/notification/config`, data: body });
+};

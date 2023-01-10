@@ -59,3 +59,10 @@ export interface appliedCoachingType {
   status: string;
   status_label: string;
 }
+
+export interface alarmType {
+  type: string;
+  type_label: string;
+  value: number;
+  newData?: boolean;
+}
