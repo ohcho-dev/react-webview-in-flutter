@@ -1,9 +1,7 @@
 import styled from "styled-components";
+import { getDate } from "../../../utils/getDateTime";
 import { getLeftDaysFromCurrentTime } from "../../../utils/getLeftDaysFromCurrentTime";
-
-interface CoachingCardProps {
-  coaching: { onGoing: boolean };
-}
+import { appliedCoachingType } from "../../../utils/type";
 
 const CoachingCardWrapper = styled.div`
   display: flex;
@@ -55,19 +53,20 @@ const LeftDays = styled.div`
   font-size: 1.6rem;
 `;
 
-const CoachingCard: React.FC<CoachingCardProps> = props => {
-  const { coaching } = props;
+const CoachingCard = (props: { coaching: appliedCoachingType }): JSX.Element => {
+  const { status, coaching_name, start_date, end_date } = props.coaching;
+
   return (
-    <CoachingCardWrapper progressing={coaching.onGoing}>
+    <CoachingCardWrapper progressing={status === "COSTAT_ONGOING" ? true : false}>
       <img alt="coaching-thumnail" src="/images/banner-example.png" />
-      <CoachingTitle>우리아이 양육 코칭</CoachingTitle>
+      <CoachingTitle>{coaching_name}</CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
-        <ProgressChip progressing={coaching.onGoing}>
-          {coaching.onGoing ? "진행중" : "종료"}
+        <ProgressChip progressing={status === "COSTAT_ONGOING" ? true : false}>
+          {status === "COSTAT_ONGOING" ? "진행중" : "종료"}
         </ProgressChip>
-        <Duration>2022.10.28~2022.11.14</Duration>
-        {coaching.onGoing && (
-          <LeftDays>{getLeftDaysFromCurrentTime("2022-12-23T18:21:06.000000Z")}일 남음</LeftDays>
+        <Duration>{`${getDate(start_date)}~${getDate(end_date)}`}</Duration>
+        {status === "COSTAT_ONGOING" && (
+          <LeftDays>{getLeftDaysFromCurrentTime(end_date)}일 남음</LeftDays>
         )}
       </div>
     </CoachingCardWrapper>

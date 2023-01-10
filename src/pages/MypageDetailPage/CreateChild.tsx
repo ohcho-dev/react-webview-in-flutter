@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
-import { useMutation, useQuery } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useMutation } from "react-query";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getSelectedChild, updateChild } from "../../api/childApi";
+import { createChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childType } from "../../utils/type";
+import { createChildType } from "../../utils/type";
 import { BottomBtnWrap } from "../ProgramPage/components/styled";
 import PageTitle from "./components/PageTitle";
 import DatePicker from "react-datepicker";
@@ -15,13 +15,11 @@ import { ForwardedInput } from "./components/DatePickerInput";
 import moment from "moment";
 import { ko } from "date-fns/esm/locale";
 import CustomModal from "../../components/common/CustomModal";
-import { queryKeys } from "../../constant/queryKeys";
 
 const DEFAULT_CHILD_TYPE = {
-  id: 0,
   name: "",
-  gender: "",
-  birth_date: "",
+  gender: "F",
+  birth_date: moment(new Date()).format("YYYY-MM-DD"),
   premature_flag: 0,
   due_date: "",
 };
@@ -80,38 +78,18 @@ const InputBox = styled.input`
   }
 `;
 
-const UpdateChild = () => {
-  const { childid } = useParams();
+const CreateChild = () => {
   const navigate = useNavigate();
-  const [childData, setChildData] = useState<childType>(DEFAULT_CHILD_TYPE);
+  const [childData, setChildData] = useState<createChildType>(DEFAULT_CHILD_TYPE);
 
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
   const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
-  const [openBackModal, setOpenBackModal] = useState(false);
   const inputRef = useRef(null);
-  const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
-  useEffect(() => {
-    // 뒤로가기 보류
-    // console.log("p 0", data[0], childData);
-    // if (
-    //   data[0].name !== childData.name ||
-    //   data[0].gender !== childData.gender ||
-    //   data[0].birth_date !== childData.birth_date ||
-    //   data[0].premature_flag !== childData.premature_flag
-    // ) {
-    //   console.log("수정됨");
-    //   window.history.pushState(null, "", ""); // 현재 페이지 history stack 한개 더 쌓기
-    //   window.onpopstate = () => {
-    //     // 뒤로가기가 실행될 경우 추가 action 등록
-    //     setOpenBackModal(true);
-    //   };
-    // }
-  }, [childData]);
-  const callUpdateChildInfo = useMutation(updateChild, {
+  const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
       setOpenModal(true);
     },
@@ -120,25 +98,14 @@ const UpdateChild = () => {
     },
   });
 
+  //   생일 날짜 string으로 변환
   useEffect(() => {
-    setChildData(data[0]);
-    // 생일 날짜 date 형식으로 변환
-    setBirthDate(new Date(data[0].birth_date));
-    data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
-  }, [data]);
-
-  // 생일 날짜 string으로 변환
-  useEffect(() => {
-    if (childData.name) {
-      setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });
-    }
+    setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });
   }, [birthDate]);
 
   // 이른둥이 출산일 날짜 string으로 변환
   useEffect(() => {
-    if (childData.name) {
-      setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
-    }
+    setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
   }, [dueDate]);
 
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -162,13 +129,6 @@ const UpdateChild = () => {
   };
 
   useEffect(() => {
-    setDefaultGender(Genders.filter(gender => gender.value === data[0].gender)[0]);
-    setDefaultPremature(
-      Prematures.filter(premature => premature.value === data[0].premature_flag)[0],
-    );
-  }, [childData]);
-
-  useEffect(() => {
     if (childData.premature_flag === 0) {
       setChildData(current => {
         const { due_date, ...rest } = current;
@@ -184,27 +144,24 @@ const UpdateChild = () => {
     if (childData.premature_flag === 0) {
       setChildData(current => {
         const { due_date, ...rest } = current;
-
         return rest;
       });
-    } else if (childData.premature_flag === 1 && data[0].due_date && !childData.due_date) {
-      setChildData({ ...childData, due_date: moment(data[0].due_date).format("YYYY-MM-DD") });
-    } else if (childData.premature_flag === 1 && data[0].due_date !== childData.due_date) {
-      setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
+    } else if (childData.premature_flag === 1 && !childData.due_date) {
+      setChildData({ ...childData, due_date: moment(childData.due_date).format("YYYY-MM-DD") });
     }
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    callUpdateChildInfo.mutate({ ...childData, id: String(childid) });
+    console.log(childData);
+    callCreateChildInfo.mutate(childData);
   };
 
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });
-
   return (
     <LayoutDetailPage>
-      <PageTitle title={"아이 정보 수정"} />
+      <PageTitle title={"아이 등록"} />
       <PageLayout>
         <FormWrap>
           <InputTitle>아이 이름</InputTitle>
@@ -259,28 +216,19 @@ const UpdateChild = () => {
         </FormWrap>
       </PageLayout>
       <BottomBtnWrap>
-        <Button theme={"black"} content={"아이 정보 수정하기"} onClick={handleSubmit} />
+        <Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />
       </BottomBtnWrap>
 
       <CustomModal
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
-        toggleModal={() => navigate("/my/management-child")}
+        toggleModal={() => navigate(-1)}
         okBtnName="확인"
-        okBtnClick={() => navigate("/my/management-child")}
-      />
-      <CustomModal
-        title="수정사항 저장이 필요해요."
-        content="수정 사항을 저장하지않았습니다. 저장없이 나가시겠어요?"
-        isOpen={openBackModal}
-        toggleModal={() => setOpenBackModal(!openBackModal)}
-        okBtnName="수정"
-        okBtnClick={() => setOpenBackModal(!openBackModal)}
-        cancelBtnName="나가기"
-        cancelBtnClick={() => navigate(-1)}
+        okBtnClick={() => navigate(-1)}
       />
     </LayoutDetailPage>
   );
 };
-export default UpdateChild;
+
+export default CreateChild;

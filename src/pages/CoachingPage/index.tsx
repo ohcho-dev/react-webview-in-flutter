@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { getAppliedCoachingList } from "../../api/coachingApi";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
+import { commonCodeState } from "../../recoil/atom";
+import { appliedCoachingType } from "../../utils/type";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
 import NoAppliedCoaching from "./components/NoAppliedCoaching";
 
-type MenuType = "ongoing" | "all" | "end";
+export type MenuType = "ongoing" | "all" | "end";
 
 const CoachingTabWrapper = styled.div`
   padding: 2rem;
@@ -52,36 +58,25 @@ const MoreBtn = styled.div`
     margin-left: 1rem;
   }
 `;
-const data = [
-  { onGoing: true },
-  { onGoing: false },
-  { onGoing: false },
-  { onGoing: true },
-  { onGoing: true },
-  { onGoing: true },
-  { onGoing: true },
-  { onGoing: true },
-  { onGoing: true },
-  { onGoing: false },
-];
 
 // TODO: 1.코칭 리스트에서 진행중 선택 > 코칭 상세 페이지로 이동 > 상세 페이지 상단의 뒤로가기 선택 > 다시 코칭 리스트로 돌아왔을 때 : 진행중
 // 2. 코칭 리스트에서 진행중 선택 > 하단 다른 메뉴 선택하여 메뉴 이동 > 하단 메뉴 선택하여 코칭 리스트로 돌아왔을 때 : 기본 전체
 // 공수 많이 들어가면 디폴트 '전체'
 const CoachingPage = () => {
   const navigate = useNavigate();
+  const commonCode = useRecoilValue<{ [key: string]: any }>(commonCodeState);
   const [selectedMenu, setSelectedMenu] = useState<MenuType>("all");
-  // TODO: lastIndex 초기값은 coachingList.length
-  const [lastIndex, setLastIndex] = useState<number>(5);
-  // TODO: 구매 상품 있을때
-  // 1. 진행중 > 종료
-  // 2. 진행중: 종료일이 많이 남은 순
-  // 3. 종료: 종료일이 최신순
+  const [lastIndex, setLastIndex] = useState<number>(0);
+  const [coachingList, setCoachingList] = useState<appliedCoachingType[]>([]);
+  const [ongoingList, setOngoingList] = useState<appliedCoachingType[]>([]);
+  const [endList, setEndList] = useState<appliedCoachingType[]>([]);
+  const { data: appliedCoachingList } = useQuery(
+    queryKeys.appliedCoachingList,
+    getAppliedCoachingList,
+  );
 
-  // TODO: api로 리스트 받아오면 coachingList 지역상태 저장
-  const [coachingList, setCoachingList] = useState<{ onGoing: boolean }[]>(data);
-  const handleCardClick = () => {
-    navigate("/coaching/coaching-detail/1");
+  const handleCardClick = (id: number) => {
+    navigate(`/coaching/coaching-detail/${id}`);
   };
 
   const handleMoreBtnClick = () => {
@@ -96,24 +91,49 @@ const CoachingPage = () => {
   };
 
   useEffect(() => {
-    let newList: { onGoing: boolean }[] = [];
+    let newList: appliedCoachingType[] = [];
 
     if (selectedMenu === "end") {
-      newList = data.filter(coaching => !coaching.onGoing);
+      newList = endList;
     } else if (selectedMenu === "ongoing") {
-      newList = data.filter(coaching => coaching.onGoing);
+      newList = ongoingList;
     } else if (selectedMenu === "all") {
-      newList = data;
+      newList = [...ongoingList, ...endList];
     }
 
     setCoachingList(newList);
     setLastIndex(newList.length > 5 ? 5 : newList.length);
   }, [selectedMenu]);
 
+  useEffect(() => {
+    // 구매 상품 있을때
+    // 1. 진행중 > 종료
+    // 2. 진행중: 종료일이 많이 남은 순
+    // 3. 종료: 종료일이 최신순
+    if (appliedCoachingList.data.length) {
+      const ongoingArr: appliedCoachingType[] = appliedCoachingList.data
+        .filter((coaching: appliedCoachingType) => coaching.status === "COSTAT_ONGOING")
+        .sort((a: appliedCoachingType, b: appliedCoachingType): number => {
+          return new Date(b.end_date).getTime() - new Date(a.end_date).getTime();
+        });
+
+      const endArr: appliedCoachingType[] = appliedCoachingList.data
+        .filter((coaching: appliedCoachingType) => coaching.status === "COSTAT_END")
+        .sort((a: appliedCoachingType, b: appliedCoachingType): number => {
+          return new Date(b.end_date).getTime() - new Date(a.end_date).getTime();
+        });
+
+      setOngoingList(ongoingArr);
+      setEndList(endArr);
+      setCoachingList([...ongoingArr, ...endArr]);
+      setLastIndex([...ongoingArr, ...endArr].length > 5 ? 5 : [...ongoingArr, ...endArr].length);
+    }
+  }, [appliedCoachingList]);
+
   return (
     <LayoutMainPage>
       <CoachingTabWrapper>
-        {coachingList.length ? (
+        {appliedCoachingList.data.length ? (
           <>
             <ChipWrapper>
               <ProgressChip
@@ -126,21 +146,35 @@ const CoachingPage = () => {
                 isSelected={selectedMenu === "ongoing"}
                 onClick={() => setSelectedMenu("ongoing")}
               >
-                진행중
+                {commonCode["COSTAT_ONGOING"]}
               </ProgressChip>
               <ProgressChip
                 isSelected={selectedMenu === "end"}
                 onClick={() => setSelectedMenu("end")}
               >
-                종료
+                {commonCode["COSTAT_END"]}
               </ProgressChip>
             </ChipWrapper>
-            {coachingList.slice(0, lastIndex).map((coaching, index) => (
-              <div key={index} onClick={handleCardClick}>
-                <CoachingCard coaching={coaching} key={index} />
-                {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
-              </div>
-            ))}
+            {!coachingList.length && selectedMenu === "end" && (
+              <NoAppliedCoaching selectedMenu="end" />
+            )}
+            {!coachingList.length && selectedMenu === "ongoing" && <NoAppliedCoaching />}
+            {coachingList.length > 0 &&
+              coachingList
+                .slice(0, lastIndex)
+                .map((coaching: appliedCoachingType, index: number) => (
+                  <div
+                    key={index}
+                    onClick={() => {
+                      if (coaching.status === "COSTAT_ONGOING") {
+                        handleCardClick(coaching.id);
+                      }
+                    }}
+                  >
+                    <CoachingCard coaching={coaching} />
+                    {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
+                  </div>
+                ))}
           </>
         ) : (
           <NoAppliedCoaching />

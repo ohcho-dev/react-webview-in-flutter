@@ -17,6 +17,7 @@ import ManagementAlarm from "./pages/MypageDetailPage/ManagementAlarm";
 import ManagementChild from "./pages/MypageDetailPage/ManagementChild";
 import UpdateChild from "./pages/MypageDetailPage/UpdateChild";
 import Notice, { NoticeDetail } from "./pages/MypageDetailPage/Notice";
+import CreateChild from "./pages/MypageDetailPage/CreateChild";
 
 import Questionnaire from "./pages/Questionnaire";
 import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
@@ -200,7 +201,7 @@ export const RouterConfig = [
   },
   {
     path: "/my/management-child/register",
-    element: <UpdateChild />,
+    element: <CreateChild />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",

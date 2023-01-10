@@ -8,6 +8,10 @@ export const queryKeys = {
   classList: "class-list",
   selectedClassInfo: "selected-class-info",
   checkValidCoachingToApply: "check-valid-coaching-to-apply",
+  appliedCoachingList: "applied-coaching-list",
+  purchaseCoaching: "purchase-coaching",
+  purchaseClasses: "purchase-classes",
+  alarmConfig: "alarm-config",
 };
 
 export const mutationKeys = {};
