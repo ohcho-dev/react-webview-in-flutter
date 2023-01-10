@@ -12,6 +12,8 @@ export const queryKeys = {
   purchaseCoaching: "purchase-coaching",
   purchaseClasses: "purchase-classes",
   alarmConfig: "alarm-config",
+  noticeList: "notice-list",
+  noticeDetail: "notice-detail",
 };
 
 export const mutationKeys = {};
