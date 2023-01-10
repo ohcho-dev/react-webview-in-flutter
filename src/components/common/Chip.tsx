@@ -24,7 +24,7 @@ const CustomChip = styled.div`
   color: ${prop => prop.color};
   border: 1px solid ${prop => (prop.color === "#FFFFFF" ? "#282828" : prop.color)};
   border-radius: 0.2rem;
-  background-color: ${prop => (prop.color === "#FFFFFF" ? "#282828" : "none")};
+  background-color: ${prop => (prop.color === "#FFFFFF" ? "#282828" : "white")};
   display: inline-flex;
   align-items: center;
   justify-content: center;

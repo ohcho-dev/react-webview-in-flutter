@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import ContentItem from "./components/ContentItem";
@@ -68,6 +68,8 @@ const ProceedStatus = styled.span`
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
+  const { id } = useParams();
+
   return (
     <>
       <PageTitleWrap>
@@ -82,20 +84,26 @@ const CoachingDetailPage = () => {
       <LayoutMainPage style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}>
         <ContentTitle emoji="flag-in-hole" name="결과지" />
         <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
+          coachingMethod="result"
           chipStatus={["waiting", "success"]}
           name="1233"
           useArrowBtn={true}
-          handleClick={() => navigate("/coaching/questionnarie/1")}
+          handleClick={() => navigate("/coaching/questionnarie/1", { state: { coachingId: id } })}
         />
         <ContentTitle emoji="check-mark-button" name="과제" />
-
         <ContentItem
-          imgUrl="/images/coaching-detail-default-img.svg"
-          chipStatus={["waiting", "success"]}
+          coachingMethod="survey"
+          chipStatus={["survey", "success"]}
           name="123"
           useArrowBtn={true}
-          handleClick={() => navigate("/coaching/questionnarie/1")}
+          handleClick={() => navigate("/coaching/questionnarie/1", { state: { coachingId: id } })}
+        />
+        <ContentItem
+          coachingMethod="video"
+          chipStatus={["video", "success"]}
+          name="123"
+          useArrowBtn={true}
+          handleClick={() => navigate("/coaching/questionnarie/1", { state: { coachingId: id } })}
         />
       </LayoutMainPage>
     </>

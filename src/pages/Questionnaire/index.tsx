@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../components/common/Button";
 import Chip from "../../components/common/Chip";
@@ -29,8 +29,16 @@ const QuestionnarieDescription = styled.div`
   margin-bottom: 4rem;
 `;
 
+const HowToSection = styled.div`
+  img {
+    width: 100%;
+  }
+`;
+
 const Questionnaire = (): JSX.Element => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+
   return (
     <LayoutDetailPage
       bottomBtn
@@ -38,7 +46,7 @@ const Questionnaire = (): JSX.Element => {
         <Button
           content="설문하기"
           theme="black"
-          onClick={() => navigate("/coaching/questionnarie/form/1")}
+          onClick={() => navigate("/coaching/questionnarie/form/1", { state: state.coachingId })}
         />
       }
     >
@@ -49,6 +57,9 @@ const Questionnaire = (): JSX.Element => {
           아이가 낙서하는 모습을 기록해볼까요?모습을 기록하면 발달 과정을 확인하고 또래 친구들의
           발달은 어느 정도인지 알아볼 수 있어요.
         </QuestionnarieDescription>
+        <HowToSection>
+          <img alt="how to img" src="/images/how-to-img.svg" />
+        </HowToSection>
       </QuestionnarieWrapper>
     </LayoutDetailPage>
   );

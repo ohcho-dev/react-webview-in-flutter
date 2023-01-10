@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
@@ -29,17 +30,22 @@ const QuestionGap = styled.div`
 `;
 
 const QuestionnaireForm = (): JSX.Element => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const questionList = [
     {
+      id: 1,
       question: "부모님이 말하면 반응하여 옹알이를 하거나 웃어요",
       answers: [{ title: "잘해요" }, { title: "때때로 잘 할수 있어요." }, { title: "못해요" }],
     },
     {
+      id: 2,
       question: "짏문2",
       answers: [{ title: "잘해요" }, { title: "때때로 잘 할수 있어요." }, { title: "못해요" }],
     },
     {
+      id: 3,
       question: "질문3",
       answers: [{ title: "잘해요" }, { title: "때때로 잘 할수 있어요." }, { title: "못해요" }],
     },
@@ -60,21 +66,23 @@ const QuestionnaireForm = (): JSX.Element => {
           </FormTitle>
           {questionList.map((question, index: number) => {
             return (
-              <>
+              <div key={`${question.question + question.id}`}>
                 <Question questionNumber={index + 1} />
-                {index !== questionList.length - 1 && <QuestionGap />}
-              </>
+                {index !== questionList.length - 1 && (
+                  <QuestionGap key={`${question.question + question.id}`} />
+                )}
+              </div>
             );
           })}
         </FormWrapper>
-        <CustomModal
-          content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
-          isOpen={openSuccessModal}
-          toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
-          title="설문 답변을 완료했어요."
-          okBtnClick={() => setOpenSuccessModal(!openSuccessModal)}
-        />
       </LayoutDetailPage>
+      <CustomModal
+        content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
+        isOpen={openSuccessModal}
+        okBtnClick={() => navigate(`/coaching/coaching-detail/${state.coachingId}`)}
+        toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
+        title="설문 답변을 완료했어요."
+      />
     </>
   );
 };
