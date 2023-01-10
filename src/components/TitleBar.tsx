@@ -25,15 +25,18 @@ const TitleBarWrap = styled.section`
   left: 0;
   z-index: 10;
 `;
+
 const ProfileWrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
   width: 100%;
 `;
+
 const ProfileImageWrap = styled.div`
   width: 3.2rem;
 `;
+
 const ChildrenName = styled.div`
   max-width: 19rem;
   height: 1.9rem;
@@ -46,10 +49,12 @@ const ChildrenName = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
 `;
+
 const ArrowWrap = styled.div`
   width: 0.8rem;
   margin-left: 0.7rem;
 `;
+
 const HistoryBackIconWrap = styled.div`
   width: 2.8rem;
 `;
@@ -62,9 +67,11 @@ const ButtonWrap = styled.div`
     margin-left: 8px;
   }
 `;
+
 const ShareBtn = styled.div`
   width: 2.8rem;
 `;
+
 const MypageTitleWrap = styled.div`
   width: 100%;
   background: #fff;
@@ -74,6 +81,7 @@ const MypageTitleWrap = styled.div`
   top: 0;
   left: 0;
 `;
+
 const Title = styled.div`
   font-weight: 700;
   font-size: 2.2rem;
@@ -84,6 +92,7 @@ const Title = styled.div`
   color: #0a0a0a;
   margin-bottom: 2.2rem;
 `;
+
 const LoginInfo = styled.div`
   display: flex;
   align-items: center;

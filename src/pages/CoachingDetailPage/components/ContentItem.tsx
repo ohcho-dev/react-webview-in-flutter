@@ -18,15 +18,6 @@ const ItemWrap = styled.div`
 `;
 
 const ImageWrap = styled.div`
-  min-width: 9.8rem;
-  min-height: 8.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ffffff;
-  mix-blend-mode: normal;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.8rem;
   margin-right: 1.4rem;
 `;
 
@@ -52,6 +43,7 @@ const ItemTitle = styled.div`
   line-height: 2.1rem;
   color: #282828;
 `;
+
 const ArrowBtn = styled.img`
   position: absolute;
   top: 50%;
@@ -60,24 +52,24 @@ const ArrowBtn = styled.img`
 `;
 
 interface ContentItemProps {
-  imgUrl: string;
   chipStatus: Array<string>;
   name: string;
+  coachingMethod: "result" | "survey" | "video";
   useArrowBtn?: boolean;
   handleClick: () => void;
 }
 
 const ContentItem: React.FC<ContentItemProps> = ({
-  imgUrl,
   chipStatus,
   name,
   useArrowBtn,
   handleClick,
+  coachingMethod,
 }) => {
   return (
     <ItemWrap onClick={handleClick}>
       <ImageWrap>
-        <img src={imgUrl} width="60%" />
+        <img src={`/images/icon-coaching-${coachingMethod}.svg`} />
       </ImageWrap>
       <ItemDesc>
         <ChipLayout>
