@@ -24,12 +24,12 @@ const StyledLabel = styled.label<{ checked: boolean }>`
   }
 `;
 
-interface CustomToggleSwitch {
+interface CustomToggleSwitchProps {
   data: { type: string; value: number };
   handleValue: () => void;
 }
 
-const CustomToggleSwitch: React.FC<CustomToggleSwitch> = ({ data, handleValue }) => {
+const CustomToggleSwitch: React.FC<CustomToggleSwitchProps> = ({ data, handleValue }) => {
   const [switchState, setSwitchState] = useState(true);
 
   useEffect(() => {
