@@ -76,9 +76,12 @@ const PaymentStatus = styled.span`
   line-height: 1.8rem;
   text-align: center;
   letter-spacing: -0.04rem;
-  color: #5ac4b1;
+  color: ${(prop: { status?: string }) =>
+    prop.status === "결제 취소" ? "rgba(10, 10, 10, 0.5)" : "#5ac4b1"};
   background: #ffffff;
-  border: 0.5px solid #5ac4b1;
+  border: 0.5px solid
+    ${(prop: { status?: string }) =>
+      prop.status === "결제 취소" ? "rgba(10, 10, 10, 0.5)" : "#5ac4b1"};
   border-radius: 0.2rem;
   padding: 0 0.4rem;
   margin-left: 0.5rem;
@@ -179,7 +182,9 @@ const AppliedProgramList = () => {
                       <ListHeader>
                         <div>
                           <PurchaseDate>{item.purchase_date}</PurchaseDate>
-                          <PaymentStatus>{detailData.payment_status_label}</PaymentStatus>
+                          <PaymentStatus status={detailData.payment_status_label}>
+                            {detailData.payment_status_label}
+                          </PaymentStatus>
                         </div>
                         <PaymentCode>{detailData.payment_code}</PaymentCode>
                       </ListHeader>
