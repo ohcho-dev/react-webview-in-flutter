@@ -1,19 +1,15 @@
 import { useState } from "react";
-import { useQueries, useQuery } from "react-query";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getChildrenList } from "../../api/childApi";
 import BottomFixBtnWrap from "../../components/common/BottomFixBtnWrap";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
-import { CHILD_ID_FIELD } from "../../constant/localStorage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState } from "../../recoil/atom";
 import getGender from "../../utils/getGender";
 import { childType } from "../../utils/type";
-import { BottomBtnWrap } from "../ProgramPage/components/styled";
 import PageTitle from "./components/PageTitle";
 
 const PageLayout = styled.div`
@@ -58,6 +54,7 @@ export const ManagementChild = () => {
     }
     navigate("/my/management-child/register");
   };
+
   return (
     <LayoutDetailPage>
       <PageTitle title="아이 관리" />
