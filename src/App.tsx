@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 import "./scss/_reset.scss";
 import "./scss/_global.scss";
 import "./scss/_slideTransition.scss";
+import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryErrorResetBoundary } from "react-query";

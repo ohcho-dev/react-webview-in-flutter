@@ -91,26 +91,21 @@ const UpdateChild = () => {
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [openBackModal, setOpenBackModal] = useState(false);
+  const [updateStatus, setUpdateStatus] = useState(false);
   const inputRef = useRef(null);
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   useEffect(() => {
     // 뒤로가기 보류
-    // console.log("p 0", data[0], childData);
-    // if (
-    //   data[0].name !== childData.name ||
-    //   data[0].gender !== childData.gender ||
-    //   data[0].birth_date !== childData.birth_date ||
-    //   data[0].premature_flag !== childData.premature_flag
-    // ) {
-    //   console.log("수정됨");
-    //   window.history.pushState(null, "", ""); // 현재 페이지 history stack 한개 더 쌓기
-    //   window.onpopstate = () => {
-    //     // 뒤로가기가 실행될 경우 추가 action 등록
-    //     setOpenBackModal(true);
-    //   };
-    // }
-  }, [childData]);
+    if (updateStatus) {
+      window.history.pushState(null, "");
+      window.onpopstate = function (event) {
+        console.log(window.history);
+        setOpenBackModal(true);
+      };
+    }
+  }, [updateStatus]);
+
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
       setOpenModal(true);
@@ -144,11 +139,13 @@ const UpdateChild = () => {
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setChildData({ ...childData, gender: value });
+    setUpdateStatus(true);
   };
 
   const handlePrematureValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const value = evt.target.value;
     setChildData({ ...childData, premature_flag: Number(value) });
+    setUpdateStatus(true);
   };
 
   const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -159,6 +156,7 @@ const UpdateChild = () => {
     } else if (id === "childBirth") {
       setChildData({ ...childData, birth_date: value });
     }
+    setUpdateStatus(true);
   };
 
   useEffect(() => {
@@ -201,7 +199,6 @@ const UpdateChild = () => {
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });
-
   return (
     <LayoutDetailPage>
       <PageTitle title={"아이 정보 수정"} />
@@ -225,13 +222,17 @@ const UpdateChild = () => {
 
           <InputTitle>아이 생년월일</InputTitle>
           <DatePicker
+            popperPlacement="auto"
             showYearDropdown
             locale={ko}
             dateFormat="yyyy-MM-dd"
             showPopperArrow={false}
             selected={birthDate}
             customInput={<CustomInput inputRef={inputRef} />}
-            onChange={(date: Date | null) => setBirthDate(date)}
+            onChange={(date: Date | null) => {
+              setBirthDate(date);
+              setUpdateStatus(true);
+            }}
           />
 
           <InputTitle>아이 출산일</InputTitle>
@@ -246,13 +247,17 @@ const UpdateChild = () => {
             <>
               <InputTitle>이른둥이 출산일 선택</InputTitle>
               <DatePicker
+                popperPlacement="auto"
                 showYearDropdown
                 locale={ko}
                 dateFormat="yyyy-MM-dd"
                 showPopperArrow={false}
                 selected={dueDate}
                 customInput={<CustomInput inputRef={inputRef} />}
-                onChange={(date: Date | null) => setDueDate(date)}
+                onChange={(date: Date | null) => {
+                  setDueDate(date);
+                  setUpdateStatus(true);
+                }}
               />
             </>
           )}
@@ -266,9 +271,9 @@ const UpdateChild = () => {
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
-        toggleModal={() => navigate("/my/management-child")}
+        toggleModal={() => navigate("/my/management-child", { replace: true })}
         okBtnName="확인"
-        okBtnClick={() => navigate("/my/management-child")}
+        okBtnClick={() => navigate("/my/management-child", { replace: true })}
       />
       <CustomModal
         title="수정사항 저장이 필요해요."
@@ -278,7 +283,10 @@ const UpdateChild = () => {
         okBtnName="수정"
         okBtnClick={() => setOpenBackModal(!openBackModal)}
         cancelBtnName="나가기"
-        cancelBtnClick={() => navigate(-1)}
+        cancelBtnClick={() => {
+          setOpenBackModal(!openBackModal);
+          navigate("/my/management-child", { replace: true });
+        }}
       />
     </LayoutDetailPage>
   );
