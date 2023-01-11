@@ -168,7 +168,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/my/notice/id",
+    path: "/my/notice/:noticeid",
     element: <NoticeDetail />,
     sceneConfig: {
       enter: "from-bottom",
