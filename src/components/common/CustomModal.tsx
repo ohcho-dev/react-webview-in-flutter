@@ -1,8 +1,8 @@
-import { ReactElement, useEffect, useLayoutEffect, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
 import Modal from "react-modal";
 import Button from "./Button";
-import { createBrowserHistory } from "history";
+import { useNavigate } from "react-router-dom";
 
 interface ModalProps {
   isOpen: boolean;
@@ -116,43 +116,28 @@ const CustomModal = (props: ModalProps) => {
     contentMarkup,
   } = props;
 
-  const history = createBrowserHistory();
+  const navigate = useNavigate();
   // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
   const [visible, setVisible] = useState<boolean>(false);
-
-  const closeModal = () => {
-    history.back();
-    setVisible(false);
-    setTimeout(() => {
-      toggleModal();
-      if (okBtnClick) okBtnClick();
-    }, 200);
-  };
-
-  const handleCancelBtnClick = () => {
-    history.back();
-    setVisible(false);
-    setTimeout(() => {
-      toggleModal();
-      if (cancelBtnClick) cancelBtnClick();
-    }, 200);
-  };
+  const [okBtnClickFlag, setOkBtnClickFlag] = useState<boolean>(false);
 
   useEffect(() => {
     if (isOpen) {
       window.history.pushState(null, "", window.location.href);
+      window.onpopstate = () => {
+        setVisible(false);
+        setTimeout(() => {
+          toggleModal();
+          if (okBtnClickFlag) {
+            if (okBtnClick) okBtnClick();
+          } else {
+            if (cancelBtnClick) cancelBtnClick();
+          }
+        }, 200);
+      };
     }
     setVisible(isOpen);
-  }, [isOpen]);
-
-  useLayoutEffect(() => {
-    const event = history.listen(listener => {
-      if (listener.action === "POP") {
-        closeModal();
-      }
-    });
-    return event;
-  }, [history]);
+  }, [isOpen, okBtnClickFlag]);
 
   return (
     <Modal
@@ -177,9 +162,23 @@ const CustomModal = (props: ModalProps) => {
         </ModalContentWrapper>
         <ModalBtnsWrapper>
           {cancelBtnName && (
-            <Button theme={"white"} onClick={handleCancelBtnClick} content={cancelBtnName} />
+            <Button
+              theme={"white"}
+              onClick={() => {
+                navigate(-1);
+                setOkBtnClickFlag(false);
+              }}
+              content={cancelBtnName}
+            />
           )}
-          <Button theme={"black"} onClick={closeModal} content={okBtnName ? okBtnName : "확인"} />
+          <Button
+            theme={"black"}
+            onClick={() => {
+              navigate(-1);
+              setOkBtnClickFlag(true);
+            }}
+            content={okBtnName ? okBtnName : "확인"}
+          />
         </ModalBtnsWrapper>
       </ModalWrapper>
     </Modal>

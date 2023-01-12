@@ -6,11 +6,17 @@ import Cookies from "js-cookie";
 import "./scss/_reset.scss";
 import "./scss/_global.scss";
 import "./scss/_slideTransition.scss";
+import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryErrorResetBoundary } from "react-query";
-import { useSetRecoilState } from "recoil";
-import { childrenListState, commonCodeState, selectedChildInfoState } from "./recoil/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  childrenListState,
+  commonCodeState,
+  mainPageScrollValueState,
+  selectedChildInfoState,
+} from "./recoil/atom";
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
@@ -47,6 +53,7 @@ const App: React.FC = () => {
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
   const setChildrenList = useSetRecoilState(childrenListState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
+  const scroll = useRecoilValue(mainPageScrollValueState);
 
   useQueries([
     {
@@ -124,7 +131,10 @@ const App: React.FC = () => {
   oldLocation = location;
   return (
     <>
-      {pathState === 1 && firstPath !== "my" && <MainTitleBar />}
+      {pathState === 1 && firstPath !== "my" && firstPath !== "home" && <MainTitleBar />}
+      {pathState === 1 && firstPath === "home" && (
+        <MainTitleBar style={scroll === 0 ? { background: "none", borderBottom: "0" } : {}} />
+      )}
       {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
       {pathState > 1 && firstPath !== "my" && secondPath !== "coaching-detail" && (
         <DetailTitleBar border={true} />

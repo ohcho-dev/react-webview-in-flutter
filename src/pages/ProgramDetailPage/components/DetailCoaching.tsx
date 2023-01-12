@@ -173,7 +173,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   }, [selectedCoachingInfo]);
 
   const closeBottomModal = () => {
-    navigate(-1);
     setOpenBottomModal(!openBottomModal);
   };
 
@@ -193,14 +192,8 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     }
   };
 
-  const handleSameCoachingModalBtnClick = () => {
-    setOpenSameCoachingModal(false);
-    navigate(-1);
-  };
-
   const handleUsageDurationModalBtnClick = () => {
     setOpenUsageDuration(false);
-    navigate(-1);
   };
 
   return (
@@ -229,7 +222,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
                 price={coachingInfo?.price ? coachingInfo.price : 0}
               />
             </PriceWrap>
-
             {/* TODO: 즐겨찾기기능 구현하기 */}
             <Favorites onClick={() => setFavorites(!favorites)}>
               <img
@@ -260,15 +252,22 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         </ChildInfoWrap>
         <ButtonWrap>
           <Button theme="white" onClick={closeBottomModal} content={"취소"} />
-          <Button theme="black" content="신청하기" onClick={handleApplyBtnClick} />
+          <Button
+            theme="black"
+            content="신청하기"
+            onClick={() => {
+              handleApplyBtnClick();
+            }}
+          />
         </ButtonWrap>
       </CustomBottomModal>
       <CustomModal
         title="진행 중인 코칭이 있어요!"
         content="동일한 코칭은 동시에 진행할 수 없어요. 진행 중인 코칭 완료 후 다음 월령에 다시 신청해주세요."
         isOpen={openSameCoachingModal}
-        toggleModal={() => setOpenSameCoachingModal(!openSameCoachingModal)}
-        okBtnClick={handleSameCoachingModalBtnClick}
+        toggleModal={() => {
+          setOpenSameCoachingModal(!openSameCoachingModal);
+        }}
       />
       <CustomModal
         topImage={<img alt="warning icon" src="/images/icon-alert.svg" />}
@@ -282,7 +281,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         }
         isOpen={openCheckUsageDuration}
         toggleModal={() => setOpenUsageDuration(!openCheckUsageDuration)}
-        okBtnClick={handleSameCoachingModalBtnClick}
+        okBtnClick={() => callApplyCoaching.mutate({ id: coachingInfo.id.toString() })}
         cancelBtnClick={handleUsageDurationModalBtnClick}
         cancelBtnName="취소"
         okBtnName="신청하기"

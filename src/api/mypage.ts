@@ -30,3 +30,18 @@ export const updateAlarmConfig = (body: {
 }) => {
   return request({ method: "PUT", url: `/v1/notification/config`, data: body });
 };
+
+export const getNoticeList = (param?: object) => {
+  return request({
+    method: "GET",
+    url: "/v1/notice",
+    params: param,
+  });
+};
+
+export const getNoticeDetail = (id: string | undefined) => {
+  return request({
+    method: "GET",
+    url: `/v1/notice/${id}`,
+  });
+};
