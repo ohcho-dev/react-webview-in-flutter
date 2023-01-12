@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useQueries } from "react-query";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getPurchaseClasses, getPurchaseCoaching } from "../../api/mypage";
 import { queryKeys } from "../../constant/queryKeys";
@@ -134,7 +135,50 @@ const Thumbnail = styled.div`
   background-position: 50% 50%;
 `;
 
+const NotFoundData = styled.div`
+  width: 100%;
+  text-align: center;
+
+  img {
+    margin-top: 11rem;
+  }
+`;
+
+const NotFoundTitle = styled.div`
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.04rem;
+  color: #0a0a0a;
+  margin-top: 2.9rem;
+`;
+const NotFoundDesc = styled.div`
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  letter-spacing: -0.04rem;
+  color: rgba(10, 10, 10, 0.45);
+  margin-top: 0.6rem;
+`;
+const LinkBtn = styled.div`
+  width: 100%;
+  height: 5rem;
+  background: #000;
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  letter-spacing: -0.04rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 2.5rem;
+`;
+
 const AppliedProgramList = () => {
+  const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(TabValue[0]);
   const [purchaseCoachingData, setPurchaseCoachingData] = useState<object[]>([]);
   const [purchaseClassesData, setPurchaseClassesData] = useState<object[]>([]);
@@ -175,7 +219,19 @@ const AppliedProgramList = () => {
 
         <ListScroll>
           <>
+            {selectedTab === "코칭" && purchaseCoachingData.length === 0 && (
+              <NotFoundData>
+                <img src="/images/icon-sparkle.svg" alt="thumbnail" />
+                <NotFoundTitle>아직 신청한 {selectedTab}이 없어요.</NotFoundTitle>
+                <NotFoundDesc>우리아이 맞춤 {selectedTab}을 신청해 보세요.</NotFoundDesc>
+                <LinkBtn onClick={() => navigate("/program", { replace: true })}>
+                  프로그램 보러가기
+                </LinkBtn>
+              </NotFoundData>
+            )}
+
             {selectedTab === "코칭" &&
+              purchaseCoachingData.length > 0 &&
               purchaseCoachingData.map((item: { [key: string]: any }) =>
                 item.data.map((detailData: { [key: string]: any }) => {
                   return (
@@ -206,7 +262,20 @@ const AppliedProgramList = () => {
                   );
                 }),
               )}
+
+            {selectedTab === "클래스" && purchaseClassesData.length === 0 && (
+              <NotFoundData>
+                <img src="/images/icon-sparkle.svg" alt="thumbnail" />
+                <NotFoundTitle>아직 신청한 {selectedTab}이 없어요.</NotFoundTitle>
+                <NotFoundDesc>우리아이 맞춤 {selectedTab}을 신청해 보세요.</NotFoundDesc>
+                <LinkBtn onClick={() => navigate("/program", { replace: true })}>
+                  프로그램 보러가기
+                </LinkBtn>
+              </NotFoundData>
+            )}
+
             {selectedTab === "클래스" &&
+              purchaseClassesData.length > 0 &&
               purchaseClassesData.map((item: { [key: string]: any }) =>
                 item.data.map((detailData: { [key: string]: any }) => {
                   return (
