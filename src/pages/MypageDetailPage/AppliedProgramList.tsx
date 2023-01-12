@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQueries } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -44,7 +44,17 @@ const TabItem = styled.div`
 const ListScroll = styled.div`
   padding: 0 2.5rem 1rem;
   height: calc(100vh - 20rem);
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  &::-webkit-scrollbar-thumb {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 const ListWrap = styled.div`
   width: 100%;
@@ -200,6 +210,10 @@ const AppliedProgramList = () => {
     },
   ]);
 
+  useEffect(() => {
+    document.getElementById("list-scroll")?.scrollTo({ top: 0 });
+  }, [selectedTab]);
+
   return (
     <LayoutDetailPage>
       <PageTitle title="프로그램 신청 내역" />
@@ -217,7 +231,7 @@ const AppliedProgramList = () => {
           ))}
         </TabWrapper>
 
-        <ListScroll>
+        <ListScroll id="list-scroll">
           <>
             {selectedTab === "코칭" && purchaseCoachingData.length === 0 && (
               <NotFoundData>

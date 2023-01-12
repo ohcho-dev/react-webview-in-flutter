@@ -23,7 +23,8 @@ const TitleBarWrap = styled.section`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 30;
+  transition: background-color 0.3s ease;
 `;
 
 const ProfileWrap = styled.div`
@@ -107,15 +108,18 @@ const LoginInfo = styled.div`
     color: rgba(10, 10, 10, 0.8);
   }
 `;
+interface MainTitleBarProps {
+  style?: object;
+}
 
-const MainTitleBar = () => {
+const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
   const setOpenModal = useSetRecoilState(openBottomModalState);
   const handleChildNameClick = () => {
     setOpenModal(true);
   };
   return (
-    <TitleBarWrap border={true}>
+    <TitleBarWrap border={true} style={{ ...style }}>
       <ProfileWrap>
         <ProfileImageWrap>
           <img src="/images/icon-profile-default.svg" width="100%" alt="child icon" />
