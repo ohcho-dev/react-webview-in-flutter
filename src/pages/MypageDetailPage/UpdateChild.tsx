@@ -100,7 +100,6 @@ const UpdateChild = () => {
     if (updateStatus) {
       window.history.pushState(null, "");
       window.onpopstate = function (event) {
-        console.log(window.history);
         setOpenBackModal(true);
       };
     }

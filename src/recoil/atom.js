@@ -37,3 +37,8 @@ export const questionnarieState = atom({
   key: "questionnaire",
   default: [],
 });
+
+export const mainPageScrollValueState = atom({
+  key: "mainPageScrollValue",
+  default: 0,
+});

@@ -18,6 +18,15 @@ const DetailPage = styled.main`
   transform: translate3d(0, 0, 0);
   overflow-y: scroll;
   overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  &::-webkit-scrollbar-thumb {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 
 interface LayoutDetailPageProps {
@@ -36,7 +45,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   return (
     <LayoutBasePage>
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
-      {children}
+        {children}
       </DetailPage>
       {bottomBtn && <BottomBtnWrap>{bottomBtnElement}</BottomBtnWrap>}
     </LayoutBasePage>

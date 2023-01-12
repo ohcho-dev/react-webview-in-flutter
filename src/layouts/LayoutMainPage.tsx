@@ -3,12 +3,16 @@ import styled from "styled-components";
 
 import BottomNav from "../components/BottomNav";
 import LayoutBasePage from "./LayoutBasePage";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { childrenListState, openBottomModalState, selectedChildInfoState } from "../recoil/atom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import {
+  childrenListState,
+  mainPageScrollValueState,
+  openBottomModalState,
+  selectedChildInfoState,
+} from "../recoil/atom";
 import { childType } from "../utils/type";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
-import LoadingSpinner from "../components/common/LoadingSpinner";
 
 const MainPage = styled.main`
   width: 100%;
@@ -22,6 +26,15 @@ const MainPage = styled.main`
   overflow-x: hidden;
   margin-top: ${(prop: { marginTop?: string; bgColor?: string }) => prop.marginTop || "0"};
   background: ${(prop: { bgColor?: string }) => prop.bgColor || "#fff"};
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+  }
+  &::-webkit-scrollbar-thumb {
+    display: none; /* Chrome, Safari, Opera*/
+  }
 `;
 const Content = styled.div`
   margin-bottom: 6rem;
@@ -38,6 +51,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bg
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
+  const setScroll = useSetRecoilState(mainPageScrollValueState);
 
   const handleChildClick = (evt: React.MouseEvent<HTMLElement>) => {
     const childId = (evt.currentTarget as HTMLButtonElement).id;
@@ -50,7 +64,14 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bg
 
   return (
     <LayoutBasePage>
-      <MainPage marginTop={marginTop} bgColor={bgColor} style={style}>
+      <MainPage
+        marginTop={marginTop}
+        bgColor={bgColor}
+        style={style}
+        onScroll={(e: React.UIEvent<HTMLElement>) => {
+          setScroll(e.currentTarget.scrollTop);
+        }}
+      >
         <Content>{children}</Content>
       </MainPage>
       <BottomNav />
