@@ -87,13 +87,19 @@ const Title = styled.div`
   font-weight: 700;
   font-size: 2.2rem;
   line-height: 3.2rem;
-  display: flex;
-  align-items: center;
   letter-spacing: -0.04rem;
   color: #0a0a0a;
   margin-bottom: 2.2rem;
+  display: flex;
+  align-items: center;
 `;
-
+const ChildName = styled.span`
+  display: inline-block;
+  overflow: hidden;
+  width: 13rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
 const LoginInfo = styled.div`
   display: flex;
   align-items: center;
@@ -171,7 +177,9 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
 
   return (
     <MypageTitleWrap>
-      <Title>{firstRegistChildInfo.name} 보호자님, 안녕하세요.</Title>
+      <Title>
+        <ChildName>{firstRegistChildInfo.name}</ChildName> <span>보호자님, 안녕하세요.</span>
+      </Title>
       <LoginInfo>
         <img src="/images/icon-mypage-kakao.svg" />
         <span>카카오 로그인</span>

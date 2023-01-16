@@ -54,20 +54,22 @@ const ArrowBtn = styled.img`
 interface ContentItemProps {
   chipStatus: Array<string>;
   name: string;
-  coachingMethod: "result" | "survey" | "video";
+  coachingMethod: string;
   useArrowBtn?: boolean;
+  key: number;
   handleClick: () => void;
 }
 
 const ContentItem: React.FC<ContentItemProps> = ({
   chipStatus,
   name,
+  key,
   useArrowBtn,
   handleClick,
   coachingMethod,
 }) => {
   return (
-    <ItemWrap onClick={handleClick}>
+    <ItemWrap onClick={handleClick} key={key + name}>
       <ImageWrap>
         <img src={`/images/icon-coaching-${coachingMethod}.svg`} />
       </ImageWrap>
