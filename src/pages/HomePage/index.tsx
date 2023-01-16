@@ -34,36 +34,39 @@ const HomePage = () => {
   }, [headers]);
   useEffect(() => {
     console.log("1111");
-    // window.addEventListener("flutter_inappwebview", function (event) {
-    //   const value = "/coachingVideoDetail";
-    //   window.flutter_inappwebview.callHandler("routeNativeScreen", value);
-    // });
-    // execute inside the "flutterInAppWebViewPlatformReady" event listener
-    //   const offToMission = event => {
-    //     console.log(window.postMessage);
-    //   };
+    const eventFromFlutter = (event: any): void => {
+      event("/coachingVideoDetail");
+    };
 
-    // useEffect(() => {
-    //   window.addEventListener('routeNativeScreen', offToMission);
+    window.addEventListener("routeNativeScreen", eventFromFlutter);
 
-    //   return () => {
-    //     window.removeEventListener('routeNativeScreen', offToMission);
-    //   };
-    //   // const eventFromFlutter = event => {
-    //   //   event.postMessage("${value.m_id}");
-    //   // };
-
-    //   // window.addEventListener("routeNativeScreen", eventFromFlutter);
-
-    //   // return () => {
-    //   //   window.removeEventListener("routeNativeScreen", eventFromFlutter);
-    //   // };
+    return () => {
+      window.removeEventListener("routeNativeScreen", eventFromFlutter);
+    };
   }, [btn1]);
   useEffect(() => {
     console.log("2222");
+    const eventFromFlutter = (event: any): void => {
+      event("on");
+    };
+
+    window.addEventListener("routeNativeScreen", eventFromFlutter);
+
+    return () => {
+      window.removeEventListener("routeNativeScreen", eventFromFlutter);
+    };
   }, [btn2]);
   useEffect(() => {
     console.log("3333");
+    const eventFromFlutter = (event: any): void => {
+      event(Number(80));
+    };
+
+    window.addEventListener("routeNativeScreen", eventFromFlutter);
+
+    return () => {
+      window.removeEventListener("routeNativeScreen", eventFromFlutter);
+    };
   }, [btn3]);
 
   useEffect(() => {
