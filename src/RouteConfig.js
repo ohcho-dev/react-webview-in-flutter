@@ -144,7 +144,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/questionnarie/form/:id",
+    path: "/coaching/questionnarie/form/:order",
     element: <QuestionnaireForm />,
     sceneConfig: {
       enter: "from-right",
