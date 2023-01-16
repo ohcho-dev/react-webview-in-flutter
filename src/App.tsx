@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useEffect, useLayoutEffect, useState } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Cookies from "js-cookie";
@@ -25,13 +25,12 @@ import { getCommonCodeList } from "./api/commonApi";
 import MainTitleBar, { DetailTitleBar, MypageTitleBar } from "./components/TitleBar";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { getLoginDev } from "./api/loginDevApi";
 
 let oldLocation: any = null;
 
 const App: React.FC = () => {
-  const headers = new Headers();
   const navigate = useNavigate();
+  const params = new URLSearchParams(window.location.search);
   const navigationType = useNavigationType();
   const location = useLocation();
 
@@ -41,7 +40,7 @@ const App: React.FC = () => {
   const [pathState, setPathState] = useState(0);
   const [firstPath, setFirstPath] = useState("");
   const [secondPath, setSecontPath] = useState("");
-
+  const [token, setToken] = useState("");
   useEffect(() => {
     let count = pathname.split("/").length - 1;
     let firstPath = pathname.split("/")[1];
@@ -57,13 +56,6 @@ const App: React.FC = () => {
   const scroll = useRecoilValue(mainPageScrollValueState);
 
   useQueries([
-    {
-      queryKey: queryKeys.loginDev,
-      queryFn: () => getLoginDev(),
-      onSuccess: async (loginToken: { access_token: string }) => {
-        await Cookies.set("token", loginToken.access_token);
-      },
-    },
     {
       queryKey: queryKeys.childrenList,
       queryFn: () => getChildrenList(),
@@ -98,9 +90,25 @@ const App: React.FC = () => {
   ]);
 
   useEffect(() => {
-    let path = window.location.pathname;
-    path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
-  }, []);
+    if (params.get("token")) {
+      Cookies.set("token", String(params.get("token")));
+    }
+  }, [params]);
+
+  useEffect(() => {
+    if (Cookies.get("token")) {
+      setToken(String(params.get("token")));
+    }
+  }, [Cookies.get("token")]);
+
+  useEffect(() => {
+    if (token) {
+      if (params.get("token") === token) {
+        let path = window.location.pathname;
+        path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
+      }
+    }
+  }, [token]);
 
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",

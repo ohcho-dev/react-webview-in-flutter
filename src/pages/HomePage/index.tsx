@@ -1,5 +1,4 @@
-import Cookies from "js-cookie";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
@@ -20,18 +19,6 @@ const HomePage = () => {
   const [btn2, setBtn2] = useState(false);
   const [btn3, setBtn3] = useState(false);
 
-  const [header, setHeader] = useState("");
-  useEffect(() => {
-    // alert(window.navigator.userAgent);
-    // alert(document.referer);
-    const req = new XMLHttpRequest();
-    req.open("GET", "http://localhost:3000", false);
-    req.send(null);
-    const reqHeaders = req.getAllResponseHeaders();
-    const reqHeadersAccessToken = req.getResponseHeader("access_token");
-    reqHeaders && setHeader(reqHeaders);
-    reqHeadersAccessToken && Cookies.set("token", reqHeadersAccessToken);
-  }, [headers]);
   useEffect(() => {
     console.log("1111");
     const eventFromFlutter = (event: any): void => {
@@ -91,7 +78,6 @@ const HomePage = () => {
     <>
       <LayoutMainPage marginTop="-6rem">
         <ChildInfo childData={childData} />
-        {header}
         <div>
           신규방식
           <button
