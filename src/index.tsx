@@ -21,6 +21,13 @@ const queryClient = new QueryClient({
   },
 });
 
+export let flutterInAppWebViewPlatformReady = false;
+window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
+  flutterInAppWebViewPlatformReady = true;
+  console.log(`@@flutterInAppWebViewPlatformReady: ${flutterInAppWebViewPlatformReady}`);
+});
+
+
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 Modal.setAppElement("#root");

@@ -5,6 +5,7 @@ import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { selectedChildInfoState } from "../../recoil/atom";
 import ChildInfo from "./components/ChildInfo";
 import RecommendActivity from "./components/RecommendActivity";
+import {flutterInAppWebViewPlatformReady} from "../../index";
 
 const Devider = styled.div`
   width: 100%;
@@ -12,49 +13,29 @@ const Devider = styled.div`
   background: #f6f6f6;
 `;
 
+const flutterJavaScriptHandlerName = 'routeNativeScreen';
+
 const HomePage = () => {
   const headers = new Headers();
   const childData = useRecoilValue(selectedChildInfoState);
-  const [btn1, setBtn1] = useState(false);
-  const [btn2, setBtn2] = useState(false);
-  const [btn3, setBtn3] = useState(false);
 
-  useEffect(() => {
-    console.log("1111");
-    const eventFromFlutter = (event: any): void => {
-      event("/coachingVideoDetail");
-    };
+  const event = (value: String) => {
+    if(flutterInAppWebViewPlatformReady){
+      // @ts-ignore
+      if (window.flutter_inappwebview.callHandler){
+        console.log("@@flutter callHandler value:" + value);
+        // @ts-ignore
+        window.flutter_inappwebview.callHandler(flutterJavaScriptHandlerName, value);
 
-    window.addEventListener("routeNativeScreen", eventFromFlutter);
-
-    return () => {
-      window.removeEventListener("routeNativeScreen", eventFromFlutter);
-    };
-  }, [btn1]);
-  useEffect(() => {
-    console.log("2222");
-    const eventFromFlutter = (event: any): void => {
-      event("on");
-    };
-
-    window.addEventListener("routeNativeScreen", eventFromFlutter);
-
-    return () => {
-      window.removeEventListener("routeNativeScreen", eventFromFlutter);
-    };
-  }, [btn2]);
-  useEffect(() => {
-    console.log("3333");
-    const eventFromFlutter = (event: any): void => {
-      event(Number(80));
-    };
-
-    window.addEventListener("routeNativeScreen", eventFromFlutter);
-
-    return () => {
-      window.removeEventListener("routeNativeScreen", eventFromFlutter);
-    };
-  }, [btn3]);
+      }else{
+        console.log("@@flutter _callHandler value:" + value);
+        // @ts-ignore
+        window.flutter_inappwebview._callHandler(flutterJavaScriptHandlerName, value);
+      }
+    }else{
+      console.error('flutterInAppWebViewPlatformReady not Ready!!')
+    }
+  }
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -82,21 +63,21 @@ const HomePage = () => {
           신규방식
           <button
             onClick={() => {
-              setBtn1(true);
+              event("/coachingVideoDetail");
             }}
           >
             "/coachingVideoDetail"
           </button>
           <button
             onClick={() => {
-              setBtn2(true);
+              event("on");
             }}
           >
             "on"
           </button>
           <button
             onClick={() => {
-              setBtn3(true);
+              event("80");
             }}
           >
             80
