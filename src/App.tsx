@@ -25,7 +25,6 @@ import { getCommonCodeList } from "./api/commonApi";
 import MainTitleBar, { DetailTitleBar, MypageTitleBar } from "./components/TitleBar";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { getLoginDev } from "./api/loginDevApi";
 
 let oldLocation: any = null;
 
@@ -55,19 +54,6 @@ const App: React.FC = () => {
   const setChildrenList = useSetRecoilState(childrenListState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const scroll = useRecoilValue(mainPageScrollValueState);
-
-  useEffect(() => {
-    // alert(window.navigator.userAgent);
-    // alert(document.referer);
-    const req = new XMLHttpRequest();
-    req.open("GET", "http://localhost:3000", false);
-    req.send(null);
-    const reqHeaders = req.getAllResponseHeaders();
-    const reqHeadersAccessToken = req.getResponseHeader("access_token");
-    alert(reqHeaders);
-    console.log(reqHeadersAccessToken);
-    reqHeadersAccessToken && Cookies.set("token", reqHeadersAccessToken);
-  }, [headers]);
 
   useQueries([
     // {
