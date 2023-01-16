@@ -33,14 +33,25 @@ const ChildrenListWrap = styled.div`
     img {
     }
 
-    span {
+    div {
       font-weight: 400;
       font-size: 1.6rem;
       line-height: 1.9rem;
       color: #000000;
       margin-left: 0.8rem;
+      display: flex;
+      align-items: center;
     }
   }
+`;
+
+const ChildName = styled.span`
+  display: inline-block;
+  overflow: hidden;
+  max-width: 8rem;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  margin-right: 0.5rem;
 `;
 
 export const ManagementChild = () => {
@@ -66,10 +77,12 @@ export const ManagementChild = () => {
           >
             <div>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />
-              <span>
-                <b style={{ fontWeight: "600" }}>{child.name}</b> ({child.birth_date}){" "}
-                {getGender(child.gender)}아
-              </span>
+              <div>
+                <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
+                <span>
+                  ({child.birth_date}) {getGender(child.gender)}아
+                </span>
+              </div>
             </div>
             <img src="/images/icon-mypage-arrow.svg" />
           </ChildrenListWrap>
