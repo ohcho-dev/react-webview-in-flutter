@@ -14,6 +14,7 @@ export const queryKeys = {
   alarmConfig: "alarm-config",
   noticeList: "notice-list",
   noticeDetail: "notice-detail",
+  surveyQuestionList: "survey-question-list",
 };
 
 export const mutationKeys = {};

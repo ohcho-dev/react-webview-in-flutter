@@ -66,3 +66,43 @@ export interface alarmType {
   value: number;
   newData?: boolean;
 }
+
+export interface QuestionnaireType {
+  id: number;
+  name: string;
+  target_score: number;
+  start_survey_id: number;
+  survey: SurveyInfoType[];
+}
+
+export interface AnswerType {
+  task_id: number;
+  survey: SurveyAnswerType[];
+}
+
+export interface SurveyAnswerType {
+  id: number;
+  score: number;
+  question: { id: number; item_id: number }[];
+}
+
+export interface SurveyInfoType {
+  id: number;
+  name: string;
+  order: number;
+  question: QuestionType[];
+}
+
+export interface QuestionType {
+  content: string;
+  id: number;
+  item: QuestionItemType[];
+  order: number;
+}
+
+export interface QuestionItemType {
+  id: number;
+  order: number;
+  content: string;
+  score: number;
+}
