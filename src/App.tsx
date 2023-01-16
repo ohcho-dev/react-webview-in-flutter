@@ -25,6 +25,7 @@ import { getCommonCodeList } from "./api/commonApi";
 import MainTitleBar, { DetailTitleBar, MypageTitleBar } from "./components/TitleBar";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
+import { getLoginDev } from "./api/loginDevApi";
 
 let oldLocation: any = null;
 
@@ -56,13 +57,13 @@ const App: React.FC = () => {
   const scroll = useRecoilValue(mainPageScrollValueState);
 
   useQueries([
-    // {
-    //   queryKey: queryKeys.loginDev,
-    //   queryFn: () => getLoginDev(),
-    //   onSuccess: async (loginToken: { access_token: string }) => {
-    //     await Cookies.set("token", loginToken.access_token);
-    //   },
-    // },
+    {
+      queryKey: queryKeys.loginDev,
+      queryFn: () => getLoginDev(),
+      onSuccess: async (loginToken: { access_token: string }) => {
+        await Cookies.set("token", loginToken.access_token);
+      },
+    },
     {
       queryKey: queryKeys.childrenList,
       queryFn: () => getChildrenList(),
