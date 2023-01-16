@@ -8,13 +8,13 @@ interface chipProps {
 const STATUS: {
   [key: string]: { name: string; color: string; width?: string };
 } = {
-  waiting: { name: "대기중", color: "rgba(10,10,10,0.5)" },
-  survey: { name: "설문", color: "#FF8A00", width: "3.3rem" },
-  video: { name: "동영상", color: "#8873F7" },
-  progressing: { name: "진행중", color: "rgba(0, 94, 236,0.7)" },
-  success: { name: "완료", color: "rgba(92, 165, 37,0.9)", width: "3.3rem" },
-  checking: { name: "확인중", color: "#5AC4B1" },
-  reRegistration: { name: "재등록요청", color: "#FF6B6B", width: "6.3rem" },
+  TTPST_PENDING: { name: "대기중", color: "rgba(10,10,10,0.5)" },
+  TSTY_SURVEY: { name: "설문", color: "#FF8A00", width: "3.3rem" },
+  TSTY_VIDEO: { name: "동영상", color: "#8873F7" },
+  TSST_ONGOING: { name: "진행중", color: "rgba(0, 94, 236,0.7)" },
+  TSST_COMPLETE: { name: "완료", color: "rgba(92, 165, 37,0.9)", width: "3.3rem" },
+  TSST_UPLOAD: { name: "확인중", color: "#5AC4B1" },
+  TSST_REJECT: { name: "재등록요청", color: "#FF6B6B", width: "6.3rem" },
   issuedCompleted: { name: "발급완료", color: "#FFFFFF", width: "5.3rem" },
 };
 
