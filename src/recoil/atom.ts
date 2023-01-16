@@ -58,3 +58,8 @@ export const startQuestionOrderNumState = atom({
   key: "startQuestionOrderNum",
   default: 0,
 });
+
+export const mainPageScrollValueState = atom({
+  key: "mainPageScrollValue",
+  default: 0,
+});
