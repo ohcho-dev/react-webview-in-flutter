@@ -106,3 +106,26 @@ export interface QuestionItemType {
   content: string;
   score: number;
 }
+
+export interface CoachingStatusType {
+  id: number;
+  name: string;
+  status: string;
+  status_label: string | null;
+}
+
+export interface TaskStatusType extends CoachingStatusType {
+  task_type: string;
+  task_type_label: string;
+}
+
+export interface DetailCoachingType {
+  date_remain: number;
+  end_date: string;
+  id: number;
+  name: string;
+  result_paper: CoachingStatusType[];
+  status: string;
+  status_label: string;
+  task: TaskStatusType[];
+}

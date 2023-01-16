@@ -504,7 +504,7 @@ const Questionnaire = (): JSX.Element => {
     >
       <QuestionnarieWrapper>
         <QuestionnarieTitle>{data.name}</QuestionnarieTitle>
-        <Chip status="survey" />
+        <Chip status="TSTY_SURVEY" />
         <QuestionnarieDescription>
           아이가 낙서하는 모습을 기록해볼까요?모습을 기록하면 발달 과정을 확인하고 또래 친구들의
           발달은 어느 정도인지 알아볼 수 있어요.
