@@ -71,7 +71,7 @@ export interface QuestionnaireType {
   id: number;
   name: string;
   target_score: number;
-  start_survey_id: number;
+  first_survey_id: number;
   survey: SurveyInfoType[];
 }
 
