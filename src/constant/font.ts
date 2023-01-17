@@ -6,7 +6,7 @@ export const STB_20 = styled.span`
   line-height: 3rem;
 `;
 
-export const Body_1 = styled.span`
+export const BODY_1 = styled.span`
   font-weight: 500;
   font-size: 1.8rem;
   line-height: 2.4rem;

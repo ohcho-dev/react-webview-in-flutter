@@ -16,6 +16,7 @@ export const queryKeys = {
   noticeList: "notice-list",
   noticeDetail: "notice-detail",
   surveyQuestionList: "survey-question-list",
+  selectedTaskInfo: "selected-task-info",
 };
 
 export const mutationKeys = {};
