@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
@@ -98,8 +97,8 @@ const CoachingDetailPage = () => {
             name={paper.name}
             useArrowBtn={paper.status !== "TTPST_PENDING"}
             handleClick={() => {
-              if (paper.status !== "TTPST_PENDING")
-                navigate(`/coaching/questionnarie/1`, { state: { coachingId: id } });
+              // if (paper.status !== "TTPST_PENDING")
+              navigate(`/coaching/result/1111`);
             }}
           />
         ))}

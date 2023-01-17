@@ -1,0 +1,37 @@
+import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
+
+const IframeWrap = styled.div`
+  padding-bottom: 56.25%;
+  position: relative;
+  display: block;
+  width: 100%;
+`;
+const Iframe = styled.iframe`
+  width: 100%;
+  height: 100vh;
+  margin-top: -6rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
+const ResultPaper = () => {
+  const { paperid } = useParams();
+
+  return (
+    <LayoutDetailPage>
+      <IframeWrap>
+        <Iframe
+          id="result-paper"
+          // ref={setScroll}
+          frameBorder={0}
+          src={`http://coaching.eltern.kr/eltern/${paperid}`}
+        ></Iframe>
+      </IframeWrap>
+    </LayoutDetailPage>
+  );
+};
+
+export default ResultPaper;

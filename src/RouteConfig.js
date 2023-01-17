@@ -22,6 +22,7 @@ import CreateChild from "./pages/MypageDetailPage/CreateChild";
 import Questionnaire from "./pages/Questionnaire";
 import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
 import VideoAssignmentPage from "./pages/VideoAssignmentPage";
+import ResultPaper from "./pages/CoachingDetailPage/components/ResultPaper";
 
 export const RouterConfig = [
   {
@@ -219,6 +220,14 @@ export const RouterConfig = [
   {
     path: "/my/applied-program-list",
     element: <AppliedProgramList />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/coaching/result/:paperid",
+    element: <ResultPaper />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
