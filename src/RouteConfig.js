@@ -21,6 +21,7 @@ import CreateChild from "./pages/MypageDetailPage/CreateChild";
 
 import Questionnaire from "./pages/Questionnaire";
 import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
+import VideoAssignmentPage from "./pages/VideoAssignmentPage";
 
 export const RouterConfig = [
   {
@@ -146,6 +147,14 @@ export const RouterConfig = [
   {
     path: "/coaching/questionnarie/form/:order",
     element: <QuestionnaireForm />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/videoAssignment/:id",
+    element: <VideoAssignmentPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
