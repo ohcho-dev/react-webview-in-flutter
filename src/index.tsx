@@ -27,7 +27,6 @@ window.addEventListener("flutterInAppWebViewPlatformReady", function (event) {
   console.log(`@@flutterInAppWebViewPlatformReady: ${flutterInAppWebViewPlatformReady}`);
 });
 
-
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
 Modal.setAppElement("#root");
