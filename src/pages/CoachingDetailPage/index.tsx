@@ -114,6 +114,8 @@ const CoachingDetailPage = () => {
             handleClick={() => {
               if (task.task_type === "TSTY_SURVEY") {
                 navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
+              } else if (task.task_type === "TSTY_VIDEO") {
+                navigate(`/coaching/videoAssignment/${task.id}`, { state: { coachingId: id } });
               }
             }}
           />
