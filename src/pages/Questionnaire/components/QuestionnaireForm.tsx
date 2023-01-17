@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { createSurveyAnswerData } from "../../../api/questionnaireApi";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
@@ -53,6 +55,13 @@ const QuestionnaireForm = (): JSX.Element => {
   const [surveyTempAnswer, setSurveyTempAnswer] = useRecoilState(surveyTempAnswerState);
   const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyAnswerState);
   const startQuestionOrderNum = useRecoilValue(startQuestionOrderNumState);
+  const saveSurveyAnswer = useMutation(createSurveyAnswerData, {
+    onSuccess: res => {
+      if (res.test_result_id) {
+        setOpenSuccessModal(true);
+      }
+    },
+  });
 
   useEffect(() => {
     if (order) {
@@ -61,11 +70,11 @@ const QuestionnaireForm = (): JSX.Element => {
   }, [order]);
 
   const finishSurvey = (updatedSurveyAnswer: SurveyAnswerType) => {
-    setOpenSuccessModal(true);
-    console.log({
+    saveSurveyAnswer.mutate({
       ...surveyAnswer,
       survey: [...surveyAnswer.survey, updatedSurveyAnswer],
     });
+    setSurveyTempAnswer([]);
   };
 
   const setDataForNextSurvey = (updatedSurveyAnswer: SurveyAnswerType, nextOrder: boolean) => {

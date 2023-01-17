@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styled, { css, keyframes } from "styled-components";
 import Button from "../../components/common/Button";
-import { Body_1, STB_20 } from "../../constant/font";
+import { BODY_1, STB_20 } from "../../constant/font";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import ReactPlayer from "react-player";
 
@@ -230,7 +230,7 @@ const VideoAssignmentPage = (): JSX.Element => {
             />
           </VideoWrapper>
           <VideoInfoSection collapse={collapse}>
-            <Body_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>색연필로 낙서하기</Body_1>
+            <BODY_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>색연필로 낙서하기</BODY_1>
             <RecordDate>촬영일: 2022.10.21</RecordDate>
           </VideoInfoSection>
         </VideoSection>

@@ -36,7 +36,7 @@ export const useShareState = atom({
 
 export const questionnarieState = atom<QuestionnaireType>({
   key: "questionnaire",
-  default: { id: 0, name: "", target_score: 0, start_survey_id: 0, survey: [] },
+  default: { id: 0, name: "", target_score: 0, first_survey_id: 0, survey: [] },
 });
 
 export const surveyAnswerState = atom<AnswerType>({
