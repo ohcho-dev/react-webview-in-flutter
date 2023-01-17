@@ -23,12 +23,7 @@ const ResultPaper = () => {
   return (
     <LayoutDetailPage>
       <IframeWrap>
-        <Iframe
-          id="result-paper"
-          // ref={setScroll}
-          frameBorder={0}
-          src={`http://coaching.eltern.kr/eltern/${paperid}`}
-        ></Iframe>
+        <Iframe frameBorder={0} src={`http://coaching.eltern.kr/eltern/${paperid}`}></Iframe>
       </IframeWrap>
     </LayoutDetailPage>
   );

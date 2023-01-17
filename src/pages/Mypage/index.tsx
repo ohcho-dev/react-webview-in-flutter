@@ -106,19 +106,19 @@ const linkItem = [
     id: 4,
     imgUrl: "/images/icon-mypage-docs.svg",
     name: "이용 약관",
-    url: "#",
+    url: "/my/terms",
   },
   {
     id: 5,
     imgUrl: "/images/icon-mypage-docs.svg",
     name: "개인정보 처리방침",
-    url: "#",
+    url: "/my/privacy",
   },
   {
     id: 6,
     imgUrl: "/images/icon-mypage-docs.svg",
     name: "민감정보 처리방침",
-    url: "#",
+    url: "/my/sensitive",
   },
   {
     id: 7,
