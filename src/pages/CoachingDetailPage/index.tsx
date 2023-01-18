@@ -87,7 +87,9 @@ const CoachingDetailPage = () => {
         </ProgramStatus>
       </PageTitleWrap>
       <ShadowBox />
-      <LayoutMainPage style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}>
+      <LayoutMainPage
+        style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)", zIndex: 30 }}
+      >
         <ContentTitle emoji="flag-in-hole" name="결과지" />
         {coachingInfo.result_paper.map((paper: CoachingStatusType) => (
           <ContentItem

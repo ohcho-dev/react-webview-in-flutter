@@ -249,7 +249,7 @@ const AppliedProgramList = () => {
               purchaseCoachingData.map((item: { [key: string]: any }) =>
                 item.data.map((detailData: { [key: string]: any }) => {
                   return (
-                    <ListWrap key={detailData.payment_code}>
+                    <ListWrap key={detailData.id}>
                       <ListHeader>
                         <div>
                           <PurchaseDate>{item.purchase_date}</PurchaseDate>
@@ -293,7 +293,7 @@ const AppliedProgramList = () => {
               purchaseClassesData.map((item: { [key: string]: any }) =>
                 item.data.map((detailData: { [key: string]: any }) => {
                   return (
-                    <ListWrap key={detailData.payment_code}>
+                    <ListWrap key={detailData.id}>
                       <ListHeader>
                         <div>
                           <PurchaseDate>{item.purchase_date}</PurchaseDate>

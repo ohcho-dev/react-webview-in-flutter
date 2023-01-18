@@ -128,8 +128,8 @@ export const RouterConfig = [
     path: "/coaching/coaching-detail/:id",
     element: <CoachingDetailPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: "from-bottom",
+      exit: "to-bottom",
     },
   },
   {
