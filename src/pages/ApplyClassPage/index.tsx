@@ -252,7 +252,7 @@ const ApplyClassPage = () => {
   return (
     <>
       <LayoutDetailPage
-        style={{ background: "#f6f6f6" }}
+        style={{ background: "#f6f6f6", zIndex: 110 }}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />

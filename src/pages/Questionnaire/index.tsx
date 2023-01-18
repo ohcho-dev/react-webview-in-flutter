@@ -78,6 +78,7 @@ const Questionnaire = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
+      style={{ zIndex: 110 }}
       bottomBtn
       bottomBtnElement={
         <Button
