@@ -1,30 +1,28 @@
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { useState, useEffect } from "react";
+
+// We installed earlier. This will render content data fetched from the Notion.
 import { NotionRenderer } from "react-notion";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
+// For styling markdown content
 import "react-notion/src/styles.css";
-import "prismjs/themes/prism-tomorrow.css"; // only needed for code highlighting
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 
-const Privacy = () => {
-  const [response, setResponse] = useState({});
+function Privacy() {
+  const [data, setData] = useState({});
 
   useEffect(() => {
-    const NOTION_PAGE_ID = "e9bc8c9f913a42359a50777a86d6880d";
-    if (NOTION_PAGE_ID) {
-      axios.get(`https://notion-api.splitbee.io/v1/page/${NOTION_PAGE_ID}`).then(({ data }) => {
-        setResponse(data);
-      });
-    }
+    // notion-api-worker
+    fetch("https://notion-api.splitbee.io/v1/page/e9bc8c9f913a42359a50777a86d6880d")
+      .then(res => res.json())
+      .then(data => setData(data));
   }, []);
 
   return (
     <LayoutDetailPage>
-      {response && Object.keys(response).length && (
-        <NotionRenderer blockMap={response} fullPage={true} />
-      )}
+      {/* Mount NotionRenderer and pass in data to render */}
+      <NotionRenderer blockMap={data} fullPage={true} />
     </LayoutDetailPage>
   );
-};
+}
 
 export default Privacy;
