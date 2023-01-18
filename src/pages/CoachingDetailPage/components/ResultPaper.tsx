@@ -23,7 +23,7 @@ const ResultPaper = () => {
   return (
     <LayoutDetailPage>
       <IframeWrap>
-        <Iframe frameBorder={0} src={`http://coaching.eltern.kr/eltern/${paperid}`}></Iframe>
+        <Iframe frameBorder={0} src={`https://coaching.eltern.kr/eltern/${paperid}`}></Iframe>
       </IframeWrap>
     </LayoutDetailPage>
   );

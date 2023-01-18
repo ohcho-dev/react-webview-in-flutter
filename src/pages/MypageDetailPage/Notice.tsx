@@ -84,7 +84,7 @@ export const NoticeList = () => {
       <PageLayout>
         <ListScroll>
           {noticeList[0].map((notice: { [key: string]: any }) => (
-            <NoticeItem onClick={() => navigate(`/my/notice/${notice.id}`)}>
+            <NoticeItem key={notice.id} onClick={() => navigate(`/my/notice/${notice.id}`)}>
               <Subject>{notice.subject}</Subject>
               <CreateDate>{notice.created_at.substr(0, 10)}</CreateDate>
               <img src="/images/icon-mypage-arrow.svg" />
@@ -101,7 +101,7 @@ export const NoticeDetail = () => {
   const { data: noticeData } = useQuery(queryKeys.noticeDetail, () => getNoticeDetail(noticeid));
 
   return (
-    <LayoutDetailPage>
+    <LayoutDetailPage style={{ zIndex: 110 }}>
       <PageLayout style={{ margin: "0 2.5rem" }}>
         <TitleWrap>
           <SubjectDetail>{noticeData[0].subject}</SubjectDetail>
