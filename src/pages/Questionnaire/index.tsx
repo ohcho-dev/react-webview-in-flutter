@@ -1,8 +1,21 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { getSelectedTaskInfo } from "../../api/coachingApi";
+import { getSurveyQuestionList } from "../../api/questionnaireApi";
 import Button from "../../components/common/Button";
 import Chip from "../../components/common/Chip";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import {
+  questionnarieState,
+  startQuestionOrderNumState,
+  surveyAnswerState,
+  surveyCoachingIdState,
+} from "../../recoil/atom";
+import { QuestionnaireType, SurveyInfoType } from "../../utils/type";
 
 interface QuestionnaireProps {}
 
@@ -38,6 +51,30 @@ const HowToSection = styled.div`
 const Questionnaire = (): JSX.Element => {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { id } = useParams();
+  const setQuestionnaireState = useSetRecoilState(questionnarieState);
+  const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyAnswerState);
+  const setSurveyCoachingId = useSetRecoilState(surveyCoachingIdState);
+  const [startOrderNum, setStartQuestionOrderNum] = useRecoilState(startQuestionOrderNumState);
+  const { data: surveyQuestionList } = useQuery(queryKeys.surveyQuestionList, () =>
+    getSurveyQuestionList(id),
+  );
+  const { data: selectedTaskInfo } = useQuery(queryKeys.selectedTaskInfo, () =>
+    getSelectedTaskInfo(id),
+  );
+
+  useEffect(() => {
+    if (surveyQuestionList.survey.length) {
+      setQuestionnaireState(surveyQuestionList);
+      setSurveyAnswer({ survey: [], task_id: surveyQuestionList.id });
+      setSurveyCoachingId(state.coachingId);
+      const selectedSurvey: SurveyInfoType[] = surveyQuestionList.survey.filter(
+        (survey: SurveyInfoType) =>
+          survey.id.toString() === surveyQuestionList.first_survey_id.toString(),
+      );
+      setStartQuestionOrderNum(selectedSurvey[0].order);
+    }
+  }, [surveyQuestionList]);
 
   return (
     <LayoutDetailPage
@@ -46,17 +83,14 @@ const Questionnaire = (): JSX.Element => {
         <Button
           content="설문하기"
           theme="black"
-          onClick={() => navigate("/coaching/questionnarie/form/1", { state: state.coachingId })}
+          onClick={() => navigate(`/coaching/questionnarie/form/${startOrderNum}`)}
         />
       }
     >
       <QuestionnarieWrapper>
-        <QuestionnarieTitle>12개월 발달검사</QuestionnarieTitle>
-        <Chip status="survey" />
-        <QuestionnarieDescription>
-          아이가 낙서하는 모습을 기록해볼까요?모습을 기록하면 발달 과정을 확인하고 또래 친구들의
-          발달은 어느 정도인지 알아볼 수 있어요.
-        </QuestionnarieDescription>
+        <QuestionnarieTitle>{selectedTaskInfo.name}</QuestionnarieTitle>
+        <Chip status="TSTY_SURVEY" />
+        <QuestionnarieDescription>{selectedTaskInfo.description}</QuestionnarieDescription>
         <HowToSection>
           <img alt="how to img" src="/images/how-to-img.svg" />
         </HowToSection>

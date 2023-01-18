@@ -1,7 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { getAppliedCoachingInfo } from "../../api/coachingApi";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
+import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
 import ContentTitle from "./components/ContentTitle";
 
@@ -69,42 +72,53 @@ const ProceedStatus = styled.span`
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
+    getAppliedCoachingInfo(id),
+  );
 
   return (
     <>
       <PageTitleWrap>
-        <Title>우리아이 양육 코칭 23~24개월</Title>
+        <Title>{coachingInfo.name}</Title>
         <ProgramStatus>
           <ProceedStatus color={"#00c7b1"}>{"진행중"}</ProceedStatus>
-          <span>~2022.11.14</span>
-          <span>12일 남음</span>
+          <span>~{coachingInfo.end_date}</span>
+          <span>{coachingInfo.date_remain}일 남음</span>
         </ProgramStatus>
       </PageTitleWrap>
       <ShadowBox />
       <LayoutMainPage style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}>
         <ContentTitle emoji="flag-in-hole" name="결과지" />
-        <ContentItem
-          coachingMethod="result"
-          chipStatus={["waiting", "success"]}
-          name="1233"
-          useArrowBtn={true}
-          handleClick={() => navigate("/coaching/questionnarie/1", { state: { coachingId: id } })}
-        />
+        {coachingInfo.result_paper.map((paper: CoachingStatusType) => (
+          <ContentItem
+            key={paper.id}
+            coachingMethod="result"
+            chipStatus={[paper.status]}
+            name={paper.name}
+            useArrowBtn={paper.status !== "TTPST_PENDING"}
+            handleClick={() => {
+              // if (paper.status !== "TTPST_PENDING")
+              navigate(`/coaching/result/1111`);
+            }}
+          />
+        ))}
         <ContentTitle emoji="check-mark-button" name="과제" />
-        <ContentItem
-          coachingMethod="survey"
-          chipStatus={["survey", "success"]}
-          name="123"
-          useArrowBtn={true}
-          handleClick={() => navigate("/coaching/questionnarie/1", { state: { coachingId: id } })}
-        />
-        <ContentItem
-          coachingMethod="video"
-          chipStatus={["video", "success"]}
-          name="123"
-          useArrowBtn={true}
-          handleClick={() => navigate("/coaching/questionnarie/1", { state: { coachingId: id } })}
-        />
+        {coachingInfo.task.map((task: TaskStatusType) => (
+          <ContentItem
+            key={task.id}
+            coachingMethod={task.task_type}
+            chipStatus={[task.status, task.task_type]}
+            name={task.name}
+            useArrowBtn={true}
+            handleClick={() => {
+              if (task.task_type === "TSTY_SURVEY") {
+                navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
+              } else if (task.task_type === "TSTY_VIDEO") {
+                navigate(`/coaching/videoAssignment/${task.id}`, { state: { coachingId: id } });
+              }
+            }}
+          />
+        ))}
       </LayoutMainPage>
     </>
   );

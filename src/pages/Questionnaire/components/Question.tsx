@@ -1,9 +1,13 @@
 import { useState } from "react";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { COLOR_PALETTE } from "../../../constant/color";
+import { surveyTempAnswerState } from "../../../recoil/atom";
+import { QuestionItemType, QuestionType } from "../../../utils/type";
 
 interface QuestionPropsType {
   questionNumber: number;
+  question: QuestionType;
 }
 
 const QuestionWrapper = styled.div`
@@ -64,26 +68,42 @@ const Answer = styled.div`
 `;
 
 const Question = (props: QuestionPropsType): JSX.Element => {
-  const { questionNumber } = props;
-
+  const { questionNumber, question } = props;
   const [selectedAnswer, setSelectedAnswer] = useState("0");
+  const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyTempAnswerState);
+
+  const handleAnswerClick = (item: QuestionItemType) => {
+    let updatedArr: { id: number; score: number; item_id: number }[] = [];
+    setSelectedAnswer(item.id.toString());
+    const foundAnswer = surveyAnswer.find(answer => answer.id === question.id);
+    if (foundAnswer) {
+      updatedArr = surveyAnswer.map(answer =>
+        answer.id === question.id ? { ...answer, item_id: item.id, score: item.score } : answer,
+      );
+    } else {
+      updatedArr = [...surveyAnswer, { id: question.id, item_id: item.id, score: item.score }];
+    }
+    setSurveyAnswer([...updatedArr]);
+  };
+
   return (
     <QuestionWrapper>
       <QuestionNumber>
         <span>{questionNumber < 10 ? `0${questionNumber}` : questionNumber}</span>
-        <span>/12</span>
+        <span>/{question.item.length}</span>
       </QuestionNumber>
-      <QuestionTitle>부모님이 말하면 반응하여 옹알이를 하거나 웃어요.</QuestionTitle>
+      <QuestionTitle>{question.content}</QuestionTitle>
       <AnswerSection>
-        <Answer id={"1"} selected={selectedAnswer === "1"} onClick={() => setSelectedAnswer("1")}>
-          잘해요
-        </Answer>
-        <Answer id={"2"} selected={selectedAnswer === "2"} onClick={() => setSelectedAnswer("2")}>
-          때때로 잘 할 수 있어요
-        </Answer>
-        <Answer id={"3"} selected={selectedAnswer === "3"} onClick={() => setSelectedAnswer("3")}>
-          못해요
-        </Answer>
+        {question.item.map((item: QuestionItemType) => (
+          <Answer
+            id={item.id.toString()}
+            selected={selectedAnswer === item.id.toString()}
+            onClick={() => handleAnswerClick(item)}
+            key={item.id}
+          >
+            {item.content}
+          </Answer>
+        ))}
       </AnswerSection>
     </QuestionWrapper>
   );

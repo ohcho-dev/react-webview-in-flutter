@@ -66,3 +66,66 @@ export interface alarmType {
   value: number;
   newData?: boolean;
 }
+
+export interface QuestionnaireType {
+  id: number;
+  name: string;
+  target_score: number;
+  first_survey_id: number;
+  survey: SurveyInfoType[];
+}
+
+export interface AnswerType {
+  task_id: number;
+  survey: SurveyAnswerType[];
+}
+
+export interface SurveyAnswerType {
+  id: number;
+  score: number;
+  question: { id: number; item_id: number }[];
+}
+
+export interface SurveyInfoType {
+  id: number;
+  name: string;
+  order: number;
+  question: QuestionType[];
+}
+
+export interface QuestionType {
+  content: string;
+  id: number;
+  item: QuestionItemType[];
+  order: number;
+}
+
+export interface QuestionItemType {
+  id: number;
+  order: number;
+  content: string;
+  score: number;
+}
+
+export interface CoachingStatusType {
+  id: number;
+  name: string;
+  status: string;
+  status_label: string | null;
+}
+
+export interface TaskStatusType extends CoachingStatusType {
+  task_type: string;
+  task_type_label: string;
+}
+
+export interface DetailCoachingType {
+  date_remain: number;
+  end_date: string;
+  id: number;
+  name: string;
+  result_paper: CoachingStatusType[];
+  status: string;
+  status_label: string;
+  task: TaskStatusType[];
+}
