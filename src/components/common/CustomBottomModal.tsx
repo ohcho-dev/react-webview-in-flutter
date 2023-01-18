@@ -16,7 +16,7 @@ const BottomModalWrap = styled.div`
   left: 0;
   width: 100%;
   height: 100vh;
-  z-index: 1000;
+  z-index: 150;
 `;
 const Dimmed = styled.div`
   width: 100%;
@@ -26,6 +26,7 @@ const Dimmed = styled.div`
   transform: all;
   animation: ${handleFade} 0.2s linear alternate;
 `;
+
 const Modal = styled.div`
   width: 100%;
   max-height: 50rem;
@@ -36,6 +37,7 @@ const Modal = styled.div`
 
   border-radius: 1.8rem 1.8rem 0 0;
 `;
+
 interface CustomBottomModalProps {
   toggle: boolean;
   handleToggle?: () => void;
@@ -53,6 +55,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
     if (toggle) {
       document.getElementById("main")?.classList.add("scroll_lock");
       return () => {
+        navigate(-1);
         document.getElementById("main")?.classList.remove("scroll_lock");
       };
     }
@@ -60,7 +63,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
 
   const handleBackSpace = () => {
     if (handleToggle) handleToggle();
-    navigate(-1);
+    //navigate(-1);
   };
 
   // 뒤로가기 제어
@@ -72,10 +75,6 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
       window.onpopstate = () => {
         // 뒤로가기가 실행될 경우 추가 action 등록
         if (handleToggle) handleToggle();
-      };
-    } else {
-      window.onpopstate = () => {
-        // 초기화
       };
     }
   }, [toggle]);

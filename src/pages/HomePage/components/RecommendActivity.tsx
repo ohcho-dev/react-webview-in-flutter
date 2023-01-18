@@ -102,10 +102,10 @@ const BannerDesc = styled.div`
 `;
 
 const data = [
-  { id: 0, imgUrl: "/images/recommend-default.svg", text: "123대근육 발달에 필요한 산책" },
-  { id: 1, imgUrl: "/images/recommend-default.svg", text: "대근육 발달에 필요한 산책" },
-  { id: 2, imgUrl: "/images/recommend-default.svg", text: "대근육 발달에 필요한 산책" },
-  { id: 3, imgUrl: "/images/recommend-default.svg", text: "대근육 발달에 필요한 산책" },
+  { id: 0, imgUrl: "/images/recommend-default.png", text: "123대근육 발달에 필요한 산책" },
+  { id: 1, imgUrl: "/images/recommend-default.png", text: "대근육 발달에 필요한 산책" },
+  { id: 2, imgUrl: "/images/recommend-default.png", text: "대근육 발달에 필요한 산책" },
+  { id: 3, imgUrl: "/images/recommend-default.png", text: "대근육 발달에 필요한 산책" },
 ];
 
 const RecommendActivity = () => {
