@@ -112,6 +112,7 @@ const VideoWrapper = styled.div`
 
   .react-player {
     border-radius: 0.8rem 0.8rem 0rem 0rem;
+    position: relative;
     overflow: hidden;
   }
 `;
@@ -212,7 +213,7 @@ const VideoAssignmentPage = (): JSX.Element => {
           <img
             alt="arrow"
             src={
-              collapse === "open"
+              collapse === "open" || collapse === ""
                 ? `/images/icon-videoAssignment-arrow-up.svg`
                 : `/images/icon-videoAssignment-arrow-down.svg`
             }

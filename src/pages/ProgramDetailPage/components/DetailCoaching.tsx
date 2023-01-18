@@ -157,8 +157,8 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     checkValidCoachingToApply(id),
   );
   const callApplyCoaching = useMutation(applyCoaching, {
-    onSuccess: () => {
-      navigate("/program/class/apply-coaching/success", { state: { id: coachingInfo.id } });
+    onSuccess: res => {
+      navigate("/program/class/apply-coaching/success", { state: { id: res.purchase_id } });
       setOpenBottomModal(!openBottomModal);
     },
     onError: error => {
