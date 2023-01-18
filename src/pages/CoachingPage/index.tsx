@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { getAppliedCoachingList } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import { commonCodeState } from "../../recoil/atom";
+import { commonCodeState, selectedChildInfoState } from "../../recoil/atom";
 import { appliedCoachingType } from "../../utils/type";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
@@ -70,7 +70,8 @@ const CoachingPage = () => {
   const [coachingList, setCoachingList] = useState<appliedCoachingType[]>([]);
   const [ongoingList, setOngoingList] = useState<appliedCoachingType[]>([]);
   const [endList, setEndList] = useState<appliedCoachingType[]>([]);
-  const { data: appliedCoachingList } = useQuery(
+  const { id } = useRecoilValue(selectedChildInfoState);
+  const { data: appliedCoachingList, refetch } = useQuery(
     queryKeys.appliedCoachingList,
     getAppliedCoachingList,
   );
@@ -89,6 +90,10 @@ const CoachingPage = () => {
 
     setLastIndex(index);
   };
+
+  useEffect(() => {
+    if (id) refetch();
+  }, [id]);
 
   useEffect(() => {
     let newList: appliedCoachingType[] = [];
