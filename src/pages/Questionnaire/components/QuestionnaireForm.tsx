@@ -156,7 +156,7 @@ const QuestionnaireForm = (): JSX.Element => {
   return (
     <>
       <LayoutDetailPage
-        style={{ borderBottom: "none" }}
+        style={{ borderBottom: "none", zIndex: 110 }}
         bottomBtn
         bottomBtnElement={
           <Button

@@ -160,7 +160,7 @@ const CreateChild = () => {
     return <ForwardedInput {...props} ref={ref} />;
   });
   return (
-    <LayoutDetailPage>
+    <LayoutDetailPage style={{ zIndex: 110 }}>
       <PageTitle title={"아이 등록"} />
       <PageLayout>
         <FormWrap>
