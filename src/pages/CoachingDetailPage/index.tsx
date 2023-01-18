@@ -112,7 +112,11 @@ const CoachingDetailPage = () => {
             useArrowBtn={true}
             handleClick={() => {
               if (task.task_type === "TSTY_SURVEY") {
-                navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
+                if (task.status === "TSST_ONGOING") {
+                  navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
+                } else if (task.status === "TSST_COMPLETE") {
+                  navigate(`/coaching/questionnarie/detail/${task.id}`);
+                }
               } else if (task.task_type === "TSTY_VIDEO") {
                 navigate(`/coaching/videoAssignment/${task.id}`, { state: { coachingId: id } });
               }
