@@ -22,6 +22,10 @@ import CreateChild from "./pages/MypageDetailPage/CreateChild";
 import Questionnaire from "./pages/Questionnaire";
 import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
 import VideoAssignmentPage from "./pages/VideoAssignmentPage";
+import ResultPaper from "./pages/CoachingDetailPage/components/ResultPaper";
+import Terms from "./pages/MypageDetailPage/Terms";
+import Privacy from "./pages/MypageDetailPage/Privacy";
+import Sensitive from "./pages/MypageDetailPage/Sensitive";
 
 export const RouterConfig = [
   {
@@ -219,6 +223,39 @@ export const RouterConfig = [
   {
     path: "/my/applied-program-list",
     element: <AppliedProgramList />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/coaching/result/:paperid",
+    element: <ResultPaper />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+
+  {
+    path: "/my/terms",
+    element: <Terms />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/privacy",
+    element: <Privacy />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/sensitive",
+    element: <Sensitive />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",
