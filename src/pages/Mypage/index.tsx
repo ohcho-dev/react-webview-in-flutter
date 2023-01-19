@@ -124,7 +124,8 @@ const linkItem = [
     id: 7,
     imgUrl: "/images/icon-mypage-chat.svg",
     name: "문의하기",
-    url: "/my/inquiry",
+    link: "https://pf.kakao.com/_xnAxjxfxj/chat",
+    url: "#",
   },
 ];
 
@@ -134,7 +135,10 @@ const MyPage = () => {
   return (
     <LayoutMainPage marginTop="7.9rem" bgColor="#f6f6f6">
       {linkItem.map(item => (
-        <LinkItemWrap key={item.id} onClick={() => navigate(item.url)}>
+        <LinkItemWrap
+          key={item.id}
+          onClick={() => (item.link ? (window.location.href = item.link) : navigate(item.url))}
+        >
           <div>
             <IconTextGroup>
               <img src={item.imgUrl} alt="" />
