@@ -41,14 +41,17 @@ const App: React.FC = () => {
   const [pathState, setPathState] = useState(0);
   const [firstPath, setFirstPath] = useState("");
   const [secondPath, setSecontPath] = useState("");
+  const [thirdPath, setThirdPath] = useState("");
   const [token, setToken] = useState("");
   useEffect(() => {
     let count = pathname.split("/").length - 1;
     let firstPath = pathname.split("/")[1];
     let secondPath = pathname.split("/")[2];
+    let thirdPath = pathname.split("/")[3];
     setPathState(count);
     setFirstPath(firstPath);
     secondPath && setSecontPath(secondPath);
+    thirdPath && setThirdPath(thirdPath);
   }, [pathname]);
 
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
@@ -163,12 +166,15 @@ const App: React.FC = () => {
         <MainTitleBar style={scroll === 0 ? { background: "none", borderBottom: "0" } : {}} />
       )}
       {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
-      {pathState > 1 && firstPath !== "my" && secondPath !== "coaching-detail" && (
-        <DetailTitleBar border={true} />
-      )}
+
+      {pathState > 1 &&
+        firstPath !== "my" &&
+        secondPath !== "coaching-detail" &&
+        thirdPath !== "form" && <DetailTitleBar border={true} />}
       {pathState > 1 && (firstPath === "my" || secondPath === "coaching-detail") && (
         <DetailTitleBar border={false} />
       )}
+      {pathState > 1 && thirdPath === "form" && <DetailTitleBar style={{ display: "none" }} />}
 
       <TransitionGroup
         className={"router-wrapper"}
