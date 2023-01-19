@@ -163,7 +163,7 @@ const CustomModal = (props: ModalProps) => {
         <ModalBtnsWrapper>
           {cancelBtnName && (
             <Button
-              theme={"white"}
+              theme={cancelBtnName === "탈퇴" ? "red" : "white"}
               onClick={() => {
                 navigate(-1);
                 setOkBtnClickFlag(false);

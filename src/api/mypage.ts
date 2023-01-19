@@ -45,3 +45,10 @@ export const getNoticeDetail = (id: string | undefined) => {
     url: `/v1/notice/${id}`,
   });
 };
+
+export const Withdrawal = () => {
+  return request({
+    method: "DELETE",
+    url: "/v1/auth/withdraw",
+  });
+};
