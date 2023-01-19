@@ -137,3 +137,14 @@ export interface DetailCoachingType {
   status_label: string;
   task: TaskStatusType[];
 }
+
+export interface VideoAssignmentResultType {
+  admin_comment: string[];
+  days_from_birth: number;
+  id: number;
+  name: string;
+  status: string;
+  status_label: string;
+  video: string;
+  video_at: string;
+}
