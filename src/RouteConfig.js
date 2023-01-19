@@ -12,7 +12,6 @@ import {
   ProgramDetailPage,
 } from "./pages/index";
 import AppliedProgramList from "./pages/MypageDetailPage/AppliedProgramList";
-import Inquiry from "./pages/MypageDetailPage/Inquiry";
 import ManagementAlarm from "./pages/MypageDetailPage/ManagementAlarm";
 import ManagementChild from "./pages/MypageDetailPage/ManagementChild";
 import UpdateChild from "./pages/MypageDetailPage/UpdateChild";
@@ -27,6 +26,7 @@ import ResultPaper from "./pages/CoachingDetailPage/components/ResultPaper";
 import Terms from "./pages/MypageDetailPage/Terms";
 import Privacy from "./pages/MypageDetailPage/Privacy";
 import Sensitive from "./pages/MypageDetailPage/Sensitive";
+import AlarmList from "./pages/MypageDetailPage/AlarmList";
 
 export const RouterConfig = [
   {
@@ -166,14 +166,6 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/my/inquiry",
-    element: <Inquiry />,
-    sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
-    },
-  },
-  {
     path: "/my/notice",
     element: <Notice />,
     sceneConfig: {
@@ -257,6 +249,14 @@ export const RouterConfig = [
   {
     path: "/my/sensitive",
     element: <Sensitive />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/alarm-list",
+    element: <AlarmList />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",

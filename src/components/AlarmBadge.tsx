@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 interface AlarmBadgeProps {}
@@ -14,8 +15,7 @@ const CustomAlarmBadge = styled.div`
     width: 0.6rem;
     height: 0.6rem;
 
-    display: ${(props: { newNotification: boolean }) =>
-      props.newNotification ? "block" : "none"};
+    display: ${(props: { newNotification: boolean }) => (props.newNotification ? "block" : "none")};
   }
 
   img:nth-child(2) {
@@ -24,10 +24,11 @@ const CustomAlarmBadge = styled.div`
   }
 `;
 
-export const AlarmBadge: React.FC<AlarmBadgeProps> = (props) => {
+export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
+  const navigate = useNavigate();
   const [newNotification, setNewNotification] = useState(true);
   return (
-    <CustomAlarmBadge newNotification={newNotification}>
+    <CustomAlarmBadge newNotification={newNotification} onClick={() => navigate("/my/alarm-list")}>
       <img alt="badge" src="/images/badge.svg" />
       <img alt="icon-bell" src="/images/icon-bell.svg" />
     </CustomAlarmBadge>
