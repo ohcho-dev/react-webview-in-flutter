@@ -18,3 +18,11 @@ export const createSurveyAnswerData = (body: AnswerType) => {
     data: body,
   });
 };
+
+// 설문 답변 보기(GET)
+export const getSurveyAnswers = (task_id: string | undefined) => {
+  return request({
+    method: "GET" as Method,
+    url: `/v1/task/${task_id}/survey/result`,
+  });
+};
