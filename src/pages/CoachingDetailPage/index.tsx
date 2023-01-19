@@ -91,9 +91,9 @@ const CoachingDetailPage = () => {
         style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)", zIndex: 30 }}
       >
         <ContentTitle emoji="flag-in-hole" name="결과지" />
-        {coachingInfo.result_paper.map((paper: CoachingStatusType) => (
+        {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
           <ContentItem
-            key={paper.id}
+            key={index + paper.name}
             coachingMethod="result"
             chipStatus={[paper.status]}
             name={paper.name}
@@ -105,9 +105,9 @@ const CoachingDetailPage = () => {
           />
         ))}
         <ContentTitle emoji="check-mark-button" name="과제" />
-        {coachingInfo.task.map((task: TaskStatusType) => (
+        {coachingInfo.task.map((task: TaskStatusType, index: number) => (
           <ContentItem
-            key={task.id}
+            key={index + task.name}
             coachingMethod={task.task_type}
             chipStatus={[task.status, task.task_type]}
             name={task.name}
@@ -120,7 +120,11 @@ const CoachingDetailPage = () => {
                   navigate(`/coaching/questionnarie/detail/${task.id}`);
                 }
               } else if (task.task_type === "TSTY_VIDEO") {
-                navigate(`/coaching/videoAssignment/${task.id}`, { state: { coachingId: id } });
+                if (task.status === "TSST_ONGOING") {
+                  console.log("ongoing");
+                } else {
+                  navigate(`/coaching/videoAssignment/${task.id}`);
+                }
               }
             }}
           />

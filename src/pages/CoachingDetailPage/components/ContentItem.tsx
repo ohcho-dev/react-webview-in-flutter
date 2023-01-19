@@ -56,20 +56,18 @@ interface ContentItemProps {
   name: string;
   coachingMethod: string;
   useArrowBtn?: boolean;
-  key: number;
   handleClick: () => void;
 }
 
 const ContentItem: React.FC<ContentItemProps> = ({
   chipStatus,
   name,
-  key,
   useArrowBtn,
   handleClick,
   coachingMethod,
 }) => {
   return (
-    <ItemWrap onClick={handleClick} key={key + name}>
+    <ItemWrap onClick={handleClick}>
       <ImageWrap>
         <img src={`/images/icon-coaching-${coachingMethod}.svg`} />
       </ImageWrap>
