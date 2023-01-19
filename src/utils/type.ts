@@ -100,11 +100,19 @@ export interface QuestionType {
   order: number;
 }
 
+export interface SurveyResultQuestionType {
+  content: string;
+  answer_id: number;
+  answered_item_id: number;
+  question_item: QuestionItemType[];
+}
+
 export interface QuestionItemType {
   id: number;
   order: number;
   content: string;
   score: number;
+  image: string | null;
 }
 
 export interface CoachingStatusType {

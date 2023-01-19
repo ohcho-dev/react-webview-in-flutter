@@ -21,6 +21,7 @@ import CreateChild from "./pages/MypageDetailPage/CreateChild";
 
 import Questionnaire from "./pages/Questionnaire";
 import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
+import QuestionnaireDetailPage from "./pages/QuestionnireDetailPage";
 import VideoAssignmentPage from "./pages/VideoAssignmentPage";
 import ResultPaper from "./pages/CoachingDetailPage/components/ResultPaper";
 import Terms from "./pages/MypageDetailPage/Terms";
@@ -133,14 +134,6 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/coaching-detail/:id",
-    element: <CoachingDetailPage />,
-    sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
-    },
-  },
-  {
     path: "/coaching/questionnarie/:id",
     element: <Questionnaire />,
     sceneConfig: {
@@ -151,6 +144,14 @@ export const RouterConfig = [
   {
     path: "/coaching/questionnarie/form/:order",
     element: <QuestionnaireForm />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/questionnarie/detail/:id",
+    element: <QuestionnaireDetailPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

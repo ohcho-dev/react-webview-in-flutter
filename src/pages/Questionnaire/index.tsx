@@ -15,9 +15,7 @@ import {
   surveyAnswerState,
   surveyCoachingIdState,
 } from "../../recoil/atom";
-import { QuestionnaireType, SurveyInfoType } from "../../utils/type";
-
-interface QuestionnaireProps {}
+import { SurveyInfoType } from "../../utils/type";
 
 const QuestionnarieWrapper = styled.div`
   display: flex;

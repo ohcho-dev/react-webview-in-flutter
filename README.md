@@ -73,6 +73,8 @@ npm run build
 - 10 - TitleBar
 - 20 - BottomBar
 - 100 - 상세페이지 진입
+- 150 - 바텀 모달
+- 200 - 공통 모달
 
 ### 반응형 기준
 
