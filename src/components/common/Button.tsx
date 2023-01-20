@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 interface buttonProps {
-  theme: "black" | "white" | "disabled";
+  theme: "black" | "white" | "disabled" | "red";
   onClick?: () => void;
   style?: object;
   content: string;
@@ -39,14 +39,22 @@ const Button = (props: buttonProps) => {
           border: "none",
         };
         break;
+
+      case "red":
+        colorPalette = {
+          color: "#FD7473",
+          background: "#fff",
+          border: "1px solid #FD7473",
+        };
+        break;
     }
 
     setThemeColor({
       ...colorPalette,
       width: "100%",
-      height: "50px",
+      height: "4.5rem",
       fontSize: "1.6rem",
-      borderRadius: "4px",
+      borderRadius: "0.4rem",
     });
   }, [theme]);
 
