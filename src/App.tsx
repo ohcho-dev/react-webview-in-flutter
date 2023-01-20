@@ -41,14 +41,17 @@ const App: React.FC = () => {
   const [pathState, setPathState] = useState(0);
   const [firstPath, setFirstPath] = useState("");
   const [secondPath, setSecontPath] = useState("");
+  const [thirdPath, setThirdPath] = useState("");
   const [token, setToken] = useState("");
   useEffect(() => {
     let count = pathname.split("/").length - 1;
     let firstPath = pathname.split("/")[1];
     let secondPath = pathname.split("/")[2];
+    let thirdPath = pathname.split("/")[3];
     setPathState(count);
     setFirstPath(firstPath);
     secondPath && setSecontPath(secondPath);
+    thirdPath && setThirdPath(thirdPath);
   }, [pathname]);
 
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
@@ -69,14 +72,14 @@ const App: React.FC = () => {
       queryKey: queryKeys.childrenList,
       queryFn: () => getChildrenList(),
       onSuccess: (data: any[]) => {
-        if (data[0].length) {
-          let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0][0].id.toString();
-          setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
+        if (data.length) {
+          let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
+          setSelectedChild(data.filter((child: childType) => child.id.toString() === id)[0]);
 
           if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
             window.localStorage.setItem(CHILD_ID_FIELD, id);
           }
-          setChildrenList(data[0]);
+          setChildrenList(data);
         }
       },
       enabled: !!Cookies.get("token"),
@@ -97,7 +100,6 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
   ]);
-
   useEffect(() => {
     if (process.env.NODE_ENV === "production" && params.get("token")) {
       Cookies.set("token", String(params.get("token")));
@@ -118,10 +120,14 @@ const App: React.FC = () => {
       }
     }
   }, [token]);
-
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",
     exit: "to-bottom",
+  };
+
+  const SURVEY_SCENE_CONFIG = {
+    enter: "from-right",
+    exit: "from-right",
   };
 
   const getSceneConfig = (location: {
@@ -136,7 +142,11 @@ const App: React.FC = () => {
       location &&
       RouterConfig.find(config => new RegExp(`^${config.path}$`).test(location.pathname));
 
-    return (matchedRoute && matchedRoute.sceneConfig) || DEFAULT_SCENE_CONFIG;
+    return matchedRoute
+      ? matchedRoute.sceneConfig
+      : secondPath === "questionnarie"
+      ? SURVEY_SCENE_CONFIG
+      : DEFAULT_SCENE_CONFIG;
   };
 
   let classNames = "";
@@ -147,6 +157,17 @@ const App: React.FC = () => {
   }
 
   oldLocation = location;
+
+  // const script = document.createElement("script");
+  // script.type = "text/javascript";
+  // script.async = true;
+  // script.innerHTML = `
+  //     function reactRoute(value){
+  //       ${navigate("/home", { replace: true })}
+  //     }
+  //   `;
+  // document.body.appendChild(script);
+
   return (
     <>
       {pathState === 1 && firstPath !== "my" && firstPath !== "home" && <MainTitleBar />}
@@ -154,12 +175,15 @@ const App: React.FC = () => {
         <MainTitleBar style={scroll === 0 ? { background: "none", borderBottom: "0" } : {}} />
       )}
       {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
-      {pathState > 1 && firstPath !== "my" && secondPath !== "coaching-detail" && (
-        <DetailTitleBar border={true} />
-      )}
+
+      {pathState > 1 &&
+        firstPath !== "my" &&
+        secondPath !== "coaching-detail" &&
+        thirdPath !== "form" && <DetailTitleBar border={true} />}
       {pathState > 1 && (firstPath === "my" || secondPath === "coaching-detail") && (
         <DetailTitleBar border={false} />
       )}
+      {pathState > 1 && thirdPath === "form" && <DetailTitleBar style={{ display: "none" }} />}
 
       <TransitionGroup
         className={"router-wrapper"}

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import styled from "styled-components";
 import { createSurveyAnswerData } from "../../../api/questionnaireApi";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
@@ -16,29 +15,7 @@ import {
 } from "../../../recoil/atom";
 import { SurveyAnswerType, SurveyInfoType } from "../../../utils/type";
 import Question from "./Question";
-
-const FormWrapper = styled.div``;
-
-const FormTitle = styled.div`
-  margin: 0 2rem;
-  padding: 1.5rem 1rem;
-
-  font-weight: 500;
-  font-size: 1.8rem;
-  color: rgba(10, 10, 10, 0.8);
-
-  border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
-
-  img {
-    margin-left: 0.5rem;
-  }
-`;
-
-const QuestionGap = styled.div`
-  width: 100%;
-  height: 1rem;
-  background-color: #f6f6f6;
-`;
+import { QuestionGap, SurveyCategoryTitle, SurveyQuestionWrapper } from "./style";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();
@@ -156,7 +133,7 @@ const QuestionnaireForm = (): JSX.Element => {
   return (
     <>
       <LayoutDetailPage
-        style={{ borderBottom: "none", zIndex: 110 }}
+        style={{ borderBottom: "none", zIndex: 110, top: 0, height: "calc(100vh - 7.4rem)" }}
         bottomBtn
         bottomBtnElement={
           <Button
@@ -168,11 +145,11 @@ const QuestionnaireForm = (): JSX.Element => {
           />
         }
       >
-        <FormWrapper>
-          <FormTitle>
+        <SurveyQuestionWrapper>
+          <SurveyCategoryTitle>
             {surveyInfo?.name}
             <img alt="form character" src="/images/form-character.svg" />
-          </FormTitle>
+          </SurveyCategoryTitle>
           {surveyInfo.question.map((question, index: number) => {
             return (
               <div key={`${question.content + question.id}`}>
@@ -183,7 +160,7 @@ const QuestionnaireForm = (): JSX.Element => {
               </div>
             );
           })}
-        </FormWrapper>
+        </SurveyQuestionWrapper>
       </LayoutDetailPage>
       <CustomModal
         content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."

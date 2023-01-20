@@ -12,7 +12,6 @@ import {
   ProgramDetailPage,
 } from "./pages/index";
 import AppliedProgramList from "./pages/MypageDetailPage/AppliedProgramList";
-import Inquiry from "./pages/MypageDetailPage/Inquiry";
 import ManagementAlarm from "./pages/MypageDetailPage/ManagementAlarm";
 import ManagementChild from "./pages/MypageDetailPage/ManagementChild";
 import UpdateChild from "./pages/MypageDetailPage/UpdateChild";
@@ -21,11 +20,13 @@ import CreateChild from "./pages/MypageDetailPage/CreateChild";
 
 import Questionnaire from "./pages/Questionnaire";
 import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
+import QuestionnaireDetailPage from "./pages/QuestionnireDetailPage";
 import VideoAssignmentPage from "./pages/VideoAssignmentPage";
 import ResultPaper from "./pages/CoachingDetailPage/components/ResultPaper";
 import Terms from "./pages/MypageDetailPage/Terms";
 import Privacy from "./pages/MypageDetailPage/Privacy";
 import Sensitive from "./pages/MypageDetailPage/Sensitive";
+import AlarmList from "./pages/MypageDetailPage/AlarmList";
 
 export const RouterConfig = [
   {
@@ -133,14 +134,6 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/coaching-detail/:id",
-    element: <CoachingDetailPage />,
-    sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
-    },
-  },
-  {
     path: "/coaching/questionnarie/:id",
     element: <Questionnaire />,
     sceneConfig: {
@@ -157,19 +150,19 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/videoAssignment/:id",
-    element: <VideoAssignmentPage />,
+    path: "/coaching/questionnarie/detail/:id",
+    element: <QuestionnaireDetailPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
     },
   },
   {
-    path: "/my/inquiry",
-    element: <Inquiry />,
+    path: "/coaching/videoAssignment/:id",
+    element: <VideoAssignmentPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
@@ -256,6 +249,14 @@ export const RouterConfig = [
   {
     path: "/my/sensitive",
     element: <Sensitive />,
+    sceneConfig: {
+      enter: "from-bottom",
+      exit: "to-bottom",
+    },
+  },
+  {
+    path: "/my/alarm-list",
+    element: <AlarmList />,
     sceneConfig: {
       enter: "from-bottom",
       exit: "to-bottom",

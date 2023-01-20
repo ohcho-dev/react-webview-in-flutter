@@ -4,6 +4,12 @@ import Button from "../../components/common/Button";
 import { BODY_1, STB_20 } from "../../constant/font";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import ReactPlayer from "react-player";
+import { useQuery } from "react-query";
+import { queryKeys } from "../../constant/queryKeys";
+import { getVideoAssignmentResult } from "../../api/coachingApi";
+import { useParams } from "react-router-dom";
+import { VideoAssignmentResultType } from "../../utils/type";
+import { getDate } from "../../utils/getDateTime";
 
 type collapseType = "" | "open" | "close";
 
@@ -173,11 +179,13 @@ const RejectReasonSection = styled.div`
 
 const Reason = styled.div`
   width: 100%;
-  height: 3.5rem;
+  height: 4.5rem;
 
   display: flex;
   justify-content: center;
   align-items: center;
+
+  line-height: 1.8rem;
 
   span {
     font-weight: 400;
@@ -194,7 +202,13 @@ const Divider = styled.div`
 
 const VideoAssignmentPage = (): JSX.Element => {
   const status: string = "";
+  const { id } = useParams();
   const [collapse, setCollapse] = useState<collapseType>("");
+  const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
+    queryKeys.videoAssignmentResult,
+    () => getVideoAssignmentResult(id),
+  );
+
   const handleArrowClick = () => {
     if (!collapse || collapse === "open") {
       setCollapse("close");
@@ -223,30 +237,33 @@ const VideoAssignmentPage = (): JSX.Element => {
         </PageTitleWrapper>
         <VideoSection collapse={collapse}>
           <VideoWrapper collapse={collapse}>
-            <ReactPlayer
-              className="react-player"
-              url={"https://youtu.be/cXCBiF67jLM"}
-              controls={true}
-              width="100%"
-              height="100%"
-            />
+            <video controls autoPlay width={"100%"} height={"100%"}>
+              <source src={videoAssignmentResult?.video} type="video/mp4"></source>
+            </video>
           </VideoWrapper>
           <VideoInfoSection collapse={collapse}>
-            <BODY_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>색연필로 낙서하기</BODY_1>
-            <RecordDate>촬영일: 2022.10.21</RecordDate>
+            <BODY_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>{videoAssignmentResult?.name}</BODY_1>
+            <RecordDate>
+              촬영일:{" "}
+              {getDate(videoAssignmentResult?.video_at ? videoAssignmentResult.video_at : "")} (
+              {videoAssignmentResult?.days_from_birth}일)
+            </RecordDate>
           </VideoInfoSection>
         </VideoSection>
         <FileInformSection>
-          <img alt="inform img" src="/images/video-pending-img.svg" />
-          <RejectReasonSection>
-            <Reason>
-              <span>손모양을 확인할 수 없습니다.</span>
-            </Reason>
-            <Divider />
-            <Reason>
-              <span>손모양을 확인할 수 없습니다.</span>
-            </Reason>
-          </RejectReasonSection>
+          <img alt="inform img" src={`/images/video-${videoAssignmentResult?.status}-img.svg`} />
+          {videoAssignmentResult?.status === "TSST_REJECT" && (
+            <RejectReasonSection>
+              {videoAssignmentResult.admin_comment.map((comment: string, index: number) => (
+                <>
+                  <Reason>
+                    <span>{comment}</span>
+                  </Reason>
+                  {index !== videoAssignmentResult.admin_comment.length - 1 && <Divider />}
+                </>
+              ))}
+            </RejectReasonSection>
+          )}
         </FileInformSection>
       </PageWrapper>
     </LayoutDetailPage>

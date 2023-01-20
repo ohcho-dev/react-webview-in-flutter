@@ -96,7 +96,7 @@ const Title = styled.div`
 const ChildName = styled.span`
   display: inline-block;
   overflow: hidden;
-  width: 13rem;
+  max-width: 13rem;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
@@ -142,13 +142,14 @@ const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
 
 interface DetailTitleBarProps {
   border?: boolean;
+  style?: object;
 }
 
-export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ border }) => {
+export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ border, style }) => {
   const navigate = useNavigate();
   const share = useRecoilValue(useShareState);
   return (
-    <TitleBarWrap border={border}>
+    <TitleBarWrap border={border} style={{ ...style }}>
       <HistoryBackIconWrap onClick={() => navigate(-1)}>
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>

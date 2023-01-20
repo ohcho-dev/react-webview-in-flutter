@@ -1,6 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import styled from "styled-components";
+import { Withdrawal } from "../../api/mypage";
+import { NativeFunction } from "../../utils/NativeFunction";
+import CustomModal from "../../components/common/CustomModal";
+import { useState } from "react";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -124,17 +128,31 @@ const linkItem = [
     id: 7,
     imgUrl: "/images/icon-mypage-chat.svg",
     name: "문의하기",
-    url: "/my/inquiry",
+    link: "https://pf.kakao.com/_xnAxjxfxj/chat",
+    url: "#",
   },
 ];
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const [openModal, setOpenModal] = useState(false);
+
+  const clickLogout = () => {
+    NativeFunction("routeNativeScreen", "/logout");
+  };
+
+  const clickWithDrawal = async () => {
+    await Withdrawal();
+    await NativeFunction("routeNativeScreen", "/reset");
+  };
 
   return (
     <LayoutMainPage marginTop="7.9rem" bgColor="#f6f6f6">
       {linkItem.map(item => (
-        <LinkItemWrap key={item.id} onClick={() => navigate(item.url)}>
+        <LinkItemWrap
+          key={item.id}
+          onClick={() => (item.link ? (window.location.href = item.link) : navigate(item.url))}
+        >
           <div>
             <IconTextGroup>
               <img src={item.imgUrl} alt="" />
@@ -148,10 +166,27 @@ const MyPage = () => {
       <BottomArea>
         <span>앱 버전 1.0.12</span>
         <BtnWrap>
-          <div>로그아웃</div>
-          <div>탈퇴하기</div>
+          <div onClick={clickLogout}>로그아웃</div>
+          <div onClick={() => setOpenModal(!openModal)}>탈퇴하기</div>
         </BtnWrap>
       </BottomArea>
+
+      <CustomModal
+        isOpen={openModal}
+        toggleModal={() => setOpenModal(!openModal)}
+        topImage={<img src="/images/icon-sad-circle.svg" />}
+        title="정말로 탈퇴하시겠어요?"
+        contentMarkup={
+          <>
+            <div>탈퇴 시 입력하신 모든 정보와 기록이 삭제되고 복구할 수 없습니다.</div>
+            <div>그래도 탈퇴하시겠어요?</div>
+          </>
+        }
+        cancelBtnName="탈퇴"
+        cancelBtnClick={clickWithDrawal}
+        okBtnName="취소"
+        okBtnClick={() => setOpenModal(!openModal)}
+      />
     </LayoutMainPage>
   );
 };

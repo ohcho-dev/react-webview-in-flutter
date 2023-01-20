@@ -24,3 +24,11 @@ export const getSelectedTaskInfo = (task_id: string | undefined) => {
     url: `/v1/task/${task_id}`,
   });
 };
+
+// 동영상 결과 보기(GET)
+export const getVideoAssignmentResult = (task_id: string | undefined) => {
+  return request({
+    method: "GET" as Method,
+    url: `/v1/task/${task_id}/video`,
+  });
+};

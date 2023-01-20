@@ -17,6 +17,8 @@ export const queryKeys = {
   noticeDetail: "notice-detail",
   surveyQuestionList: "survey-question-list",
   selectedTaskInfo: "selected-task-info",
+  surveyAnswerList: "survey-answer-list",
+  videoAssignmentResult: "video-assignment-result",
 };
 
 export const mutationKeys = {};

@@ -100,11 +100,19 @@ export interface QuestionType {
   order: number;
 }
 
+export interface SurveyResultQuestionType {
+  content: string;
+  answer_id: number;
+  answered_item_id: number;
+  question_item: QuestionItemType[];
+}
+
 export interface QuestionItemType {
   id: number;
   order: number;
   content: string;
   score: number;
+  image: string | null;
 }
 
 export interface CoachingStatusType {
@@ -128,4 +136,15 @@ export interface DetailCoachingType {
   status: string;
   status_label: string;
   task: TaskStatusType[];
+}
+
+export interface VideoAssignmentResultType {
+  admin_comment: string[];
+  days_from_birth: number;
+  id: number;
+  name: string;
+  status: string;
+  status_label: string;
+  video: string;
+  video_at: string;
 }

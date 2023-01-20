@@ -72,6 +72,7 @@ const ChildInfo = styled.div`
 const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
   const { openModal, toggleModal, childrenList, selectedChildInfo, handleChildClick } = props;
   const navigate = useNavigate();
+
   return (
     <CustomBottomModal toggle={openModal} handleToggle={toggleModal}>
       <ChildrenListModalWrapper>
@@ -82,7 +83,6 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
             src="/images/icon-close.svg"
             onClick={() => {
               toggleModal();
-              navigate(-1);
             }}
           />
         </ChildrenListModalTitleSection>
