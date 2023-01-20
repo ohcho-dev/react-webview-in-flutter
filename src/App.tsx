@@ -60,14 +60,14 @@ const App: React.FC = () => {
   const scroll = useRecoilValue(mainPageScrollValueState);
 
   useQueries([
-    {
-      queryKey: queryKeys.loginDev,
-      queryFn: () => getLoginDev(),
-      onSuccess: async (loginToken: { access_token: string }) => {
-        process.env.NODE_ENV === "development" &&
-          (await Cookies.set("token", loginToken.access_token));
-      },
-    },
+    // {
+    //   queryKey: queryKeys.loginDev,
+    //   queryFn: () => getLoginDev(),
+    //   onSuccess: async (loginToken: { access_token: string }) => {
+    //     process.env.NODE_ENV === "development" &&
+    //       (await Cookies.set("token", loginToken.access_token));
+    //   },
+    // },
     {
       queryKey: queryKeys.childrenList,
       queryFn: () => getChildrenList(),
@@ -101,7 +101,7 @@ const App: React.FC = () => {
     },
   ]);
   useEffect(() => {
-    if (process.env.NODE_ENV === "production" && params.get("token")) {
+    if (params.get("token")) {
       Cookies.set("token", String(params.get("token")));
     }
   }, [params]);
