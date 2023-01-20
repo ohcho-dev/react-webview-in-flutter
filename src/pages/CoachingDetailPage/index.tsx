@@ -1,9 +1,12 @@
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
+import { selectedChildInfoState } from "../../recoil/atom";
+import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
 import ContentTitle from "./components/ContentTitle";
@@ -75,6 +78,7 @@ const CoachingDetailPage = () => {
   const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
     getAppliedCoachingInfo(id),
   );
+  const childInfo = useRecoilValue(selectedChildInfoState);
 
   return (
     <>
@@ -121,7 +125,10 @@ const CoachingDetailPage = () => {
                 }
               } else if (task.task_type === "TSTY_VIDEO") {
                 if (task.status === "TSST_ONGOING") {
-                  console.log("ongoing");
+                  NativeFunction(
+                    "routeNativeScreen",
+                    `/coachingVideoDetail/${task.id}/${childInfo.id}`,
+                  );
                 } else {
                   navigate(`/coaching/videoAssignment/${task.id}`);
                 }
