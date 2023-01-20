@@ -59,7 +59,7 @@ export const ManagementChild = () => {
   const { data: childrenList } = useQuery(queryKeys.childrenList, () => getChildrenList());
   const [openBreakModal, setOpenBreakModal] = useState(false);
   const handleCreateCHildBtn = () => {
-    if (childrenList[0].length > 0) {
+    if (childrenList.length > 0) {
       setOpenBreakModal(!openBreakModal);
       return;
     }
@@ -70,7 +70,7 @@ export const ManagementChild = () => {
     <LayoutDetailPage>
       <PageTitle title="아이 관리" />
       <PageLayout>
-        {childrenList[0].map((child: childType, index: number) => (
+        {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
             onClick={() => navigate(`/my/management-child/${child.id}`)}

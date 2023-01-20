@@ -26,7 +26,7 @@ export const selectedChildInfoState = atom({
 
 export const childrenListState = atom({
   key: "childrenList",
-  default: [],
+  default: [] as any,
 });
 
 export const useShareState = atom({
