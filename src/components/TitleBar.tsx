@@ -96,7 +96,7 @@ const Title = styled.div`
 const ChildName = styled.span`
   display: inline-block;
   overflow: hidden;
-  width: 13rem;
+  max-width: 13rem;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;

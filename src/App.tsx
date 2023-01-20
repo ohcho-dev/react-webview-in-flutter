@@ -72,14 +72,14 @@ const App: React.FC = () => {
       queryKey: queryKeys.childrenList,
       queryFn: () => getChildrenList(),
       onSuccess: (data: any[]) => {
-        if (data[0].length) {
-          let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0][0].id.toString();
-          setSelectedChild(data[0].filter((child: childType) => child.id.toString() === id)[0]);
+        if (data.length) {
+          let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
+          setSelectedChild(data.filter((child: childType) => child.id.toString() === id)[0]);
 
           if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
             window.localStorage.setItem(CHILD_ID_FIELD, id);
           }
-          setChildrenList(data[0]);
+          setChildrenList(data);
         }
       },
       enabled: !!Cookies.get("token"),
@@ -100,7 +100,6 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
   ]);
-
   useEffect(() => {
     if (process.env.NODE_ENV === "production" && params.get("token")) {
       Cookies.set("token", String(params.get("token")));
@@ -121,7 +120,6 @@ const App: React.FC = () => {
       }
     }
   }, [token]);
-
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",
     exit: "to-bottom",
@@ -159,6 +157,17 @@ const App: React.FC = () => {
   }
 
   oldLocation = location;
+
+  // const script = document.createElement("script");
+  // script.type = "text/javascript";
+  // script.async = true;
+  // script.innerHTML = `
+  //     function reactRoute(value){
+  //       ${navigate("/home", { replace: true })}
+  //     }
+  //   `;
+  // document.body.appendChild(script);
+
   return (
     <>
       {pathState === 1 && firstPath !== "my" && firstPath !== "home" && <MainTitleBar />}
