@@ -9,6 +9,9 @@ import {
 } from "../recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import { queryKeys } from "../constant/queryKeys";
+import { getUserInfo } from "../api/mypage";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -168,7 +171,19 @@ interface MypageTitleBarProps {}
 
 export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
   const [firstRegistChildInfo, setFirstRegistChildInfo] = useState({ name: "" });
+  const [sns, setSns] = useState("");
   const childrenList = useRecoilValue(childrenListState);
+
+  const { data: userInfo } = useQuery(queryKeys.userInfo, () => getUserInfo());
+
+  useEffect(() => {
+    if (userInfo.sns_kind) {
+      let sns = userInfo.sns_kind;
+      sns === "SNS_KAKAO" && setSns("카카오");
+      sns === "SNS_GOOGLE" && setSns("구글");
+      sns === "SNS_APPLE" && setSns("애플");
+    }
+  }, [userInfo]);
 
   useEffect(() => {
     if (childrenList.length > 0) {
@@ -183,7 +198,7 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
       </Title>
       <LoginInfo>
         <img src="/images/icon-mypage-kakao.svg" />
-        <span>카카오 로그인</span>
+        <span>{sns} 로그인</span>
       </LoginInfo>
     </MypageTitleWrap>
   );

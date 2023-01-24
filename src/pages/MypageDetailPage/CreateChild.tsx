@@ -152,13 +152,13 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    console.log(childData);
     callCreateChildInfo.mutate(childData);
   };
 
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });
+
   return (
     <LayoutDetailPage style={{ zIndex: 110 }}>
       <PageTitle title={"아이 등록"} />

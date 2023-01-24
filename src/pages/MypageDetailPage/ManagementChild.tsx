@@ -59,7 +59,7 @@ export const ManagementChild = () => {
   const { data: childrenList } = useQuery(queryKeys.childrenList, () => getChildrenList());
   const [openBreakModal, setOpenBreakModal] = useState(false);
   const handleCreateCHildBtn = () => {
-    if (childrenList.length > 0) {
+    if (childrenList.length >= 5) {
       setOpenBreakModal(!openBreakModal);
       return;
     }

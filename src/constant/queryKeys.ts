@@ -19,6 +19,7 @@ export const queryKeys = {
   selectedTaskInfo: "selected-task-info",
   surveyAnswerList: "survey-answer-list",
   videoAssignmentResult: "video-assignment-result",
+  userInfo: "user-info",
 };
 
 export const mutationKeys = {};

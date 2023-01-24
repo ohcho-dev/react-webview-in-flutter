@@ -1,10 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import styled from "styled-components";
 import { Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -136,6 +136,11 @@ const linkItem = [
 const MyPage = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
+  const [appVersion, setAppVersion] = useState("");
+
+  useEffect(() => {
+    AppVersion();
+  }, []);
 
   const clickLogout = () => {
     NativeFunction("routeNativeScreen", "/logout");
@@ -144,6 +149,10 @@ const MyPage = () => {
   const clickWithDrawal = async () => {
     await Withdrawal();
     await NativeFunction("routeNativeScreen", "/reset");
+  };
+
+  const AppVersion = () => {
+    setAppVersion(`${NativeFunction("routeNativeScreen", "/appVersion")}`);
   };
 
   return (
@@ -164,7 +173,7 @@ const MyPage = () => {
       ))}
 
       <BottomArea>
-        <span>앱 버전 1.0.12</span>
+        <span>앱 버전 {appVersion}</span>
         <BtnWrap>
           <div onClick={clickLogout}>로그아웃</div>
           <div onClick={() => setOpenModal(!openModal)}>탈퇴하기</div>
