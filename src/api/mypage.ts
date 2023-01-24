@@ -52,3 +52,10 @@ export const Withdrawal = () => {
     url: "/v1/auth/withdraw",
   });
 };
+
+export const getUserInfo = () => {
+  return request({
+    method: "POST",
+    url: "v1/auth/me",
+  });
+};

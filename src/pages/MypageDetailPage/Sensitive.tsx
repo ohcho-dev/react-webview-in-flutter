@@ -12,7 +12,7 @@ function Sensitive() {
 
   useEffect(() => {
     // notion-api-worker
-    fetch("https://notion-api.splitbee.io/v1/page/5c9b3351983749cf9c61c274376eef67")
+    fetch("https://notion-api.splitbee.io/v1/page/5c87f9b9683a40ef866fc76118d04849")
       .then(res => res.json())
       .then(data => setData(data));
   }, []);
