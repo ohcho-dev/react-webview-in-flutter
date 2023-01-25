@@ -3,7 +3,6 @@ import styled, { css, keyframes } from "styled-components";
 import Button from "../../components/common/Button";
 import { BODY_1, STB_20 } from "../../constant/font";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import ReactPlayer from "react-player";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
 import { getVideoAssignmentResult } from "../../api/coachingApi";
