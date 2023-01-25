@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -138,8 +138,8 @@ const MyPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [appVersion, setAppVersion] = useState("");
 
-  useEffect(() => {
-    AppVersion();
+  useLayoutEffect(() => {
+    setAppVersion(`${NativeFunction("routeNativeScreen", "/appVersion")}`);
   }, []);
 
   const clickLogout = () => {
@@ -149,10 +149,6 @@ const MyPage = () => {
   const clickWithDrawal = async () => {
     await Withdrawal();
     await NativeFunction("routeNativeScreen", "/reset");
-  };
-
-  const AppVersion = () => {
-    setAppVersion(`${NativeFunction("routeNativeScreen", "/appVersion")}`);
   };
 
   return (
