@@ -106,8 +106,8 @@ const CoachingDetailPage = () => {
             name={paper.name}
             useArrowBtn={paper.status !== "TTPST_PENDING"}
             handleClick={() => {
-              // if (paper.status !== "TTPST_PENDING")
-              navigate(`/coaching/result/1111`);
+              if (paper.status === "TTPST_COMPLETE")
+                navigate(`/coaching/result/${coachingInfo.paper_url}`);
             }}
           />
         ))}
