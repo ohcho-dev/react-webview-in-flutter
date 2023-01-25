@@ -10,7 +10,7 @@ interface ChildInfoType {
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;
   background: url("/images/bg-home.svg") no-repeat 50% 0;
-  background-size: cover;
+  background-size: 100%;
 `;
 
 const FlexBox = styled.div`
