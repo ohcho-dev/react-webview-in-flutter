@@ -21,11 +21,11 @@ const QuestionnaireDetailPage = (): JSX.Element => {
       result_id: number;
       question: SurveyResultQuestionType[];
     }[];
-  }>(queryKeys.surveyQuestionList, () => getSurveyAnswers(id));
+  }>(queryKeys.surveyAnswerList, () => getSurveyAnswers(id));
   const [answerList, setAnswerList] = useState<SurveyResultQuestionType[]>([]);
 
   useEffect(() => {
-    if (surveyAnswerInfo) {
+    if (surveyAnswerInfo?.survey.length) {
       let tempAnswerList: SurveyResultQuestionType[] = [];
       surveyAnswerInfo?.survey.map(survey => {
         survey.question.map(question => {
@@ -45,7 +45,7 @@ const QuestionnaireDetailPage = (): JSX.Element => {
         </SurveyCategoryTitle>
         {answerList.map((question: SurveyResultQuestionType, index: number) => {
           return (
-            <div key={`${question.content + question.answer_id}`}>
+            <div key={`${question.content + question.answer_id + index}`}>
               <ResultQuestion
                 questionNumber={index + 1}
                 question={question}

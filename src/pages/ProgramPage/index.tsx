@@ -27,7 +27,7 @@ const CouchingSection = styled.div`
 
 const ClassSection = styled.div`
   width: 100%;
-  margin-top: 5rem;
+  margin-top: 2rem;
 `;
 
 const ProgramTitle = styled.span`
@@ -60,8 +60,8 @@ const ProgramPage = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 1500,
-    autoplaySpeed: 5000,
+    speed: 1300,
+    autoplaySpeed: 3000,
     mobileFirst: false,
     cssEase: "ease-out",
   };
