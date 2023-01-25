@@ -4,7 +4,9 @@ import styled from "styled-components";
 import { Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { appVersionState } from "../../recoil/atom";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -136,12 +138,8 @@ const linkItem = [
 const MyPage = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const [appVersion, setAppVersion] = useState("");
-
-  useLayoutEffect(() => {
-    alert(NativeFunction("routeNativeScreen", "/appVersion"));
-    setAppVersion(`${NativeFunction("routeNativeScreen", "/appVersion")}`);
-  }, []);
+  const appVersion = useRecoilValue(appVersionState);
+  NativeFunction("routeNativeScreen", "/appVersion");
 
   const clickLogout = () => {
     NativeFunction("routeNativeScreen", "/logout");
