@@ -155,11 +155,7 @@ const CustomModal = (props: ModalProps) => {
               content={cancelBtnName}
             />
           )}
-          <Button
-            theme={"black"}
-            onClick={() => navigate("/my/management-child", { replace: true })}
-            content={okBtnName ? okBtnName : "확인"}
-          />
+          <Button theme={"black"} onClick={okBtnClick} content={okBtnName ? okBtnName : "확인"} />
         </ModalBtnsWrapper>
       </ModalWrapper>
     </Modal>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation, useQuery } from "react-query";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSelectedChild, updateChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
@@ -82,6 +82,7 @@ const InputBox = styled.input`
 
 const UpdateChild = () => {
   const { childid } = useParams();
+  const { state } = useLocation();
   const navigate = useNavigate();
   const [childData, setChildData] = useState<childType>(DEFAULT_CHILD_TYPE);
 
@@ -91,6 +92,8 @@ const UpdateChild = () => {
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [openBackModal, setOpenBackModal] = useState(false);
+  const [openValidModal, setOpenValidModal] = useState(false);
+  const [openSameNameModal, setOpenSameNameModal] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(false);
   const inputRef = useRef(null);
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
@@ -199,6 +202,15 @@ const UpdateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
+    let validCheck = state.find((aaa: any) => aaa.name === childData.name);
+    if (!childData.name) {
+      setOpenValidModal(true);
+      return;
+    }
+    if (validCheck && data[0].name !== validCheck.name) {
+      setOpenSameNameModal(true);
+      return;
+    }
     callUpdateChildInfo.mutate({ ...childData, id: String(childid) });
   };
 
@@ -274,18 +286,36 @@ const UpdateChild = () => {
       </BottomBtnWrap>
 
       <CustomModal
+        title="아이 이름을 입력해주세요."
+        isOpen={openValidModal}
+        toggleModal={() => {
+          setOpenValidModal(false);
+        }}
+        okBtnName="확인"
+        okBtnClick={() => {
+          setOpenValidModal(false);
+        }}
+      />
+      <CustomModal
+        title="같은 이름의 아이를 등록할 수 없습니다."
+        isOpen={openSameNameModal}
+        toggleModal={() => {
+          setOpenSameNameModal(false);
+        }}
+        okBtnName="확인"
+        okBtnClick={() => {
+          setOpenSameNameModal(false);
+        }}
+      />
+      <CustomModal
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
         toggleModal={() => {
-          navigate(-1);
-          setOpenBackModal(false);
           navigate("/my/management-child");
         }}
         okBtnName="확인"
         okBtnClick={() => {
-          navigate(-1);
-          setOpenBackModal(false);
           navigate("/my/management-child");
         }}
       />
@@ -295,9 +325,12 @@ const UpdateChild = () => {
         content="수정 사항을 저장하지않았습니다. 저장없이 나가시겠어요?"
         isOpen={openBackModal}
         toggleModal={() => setOpenBackModal(!openBackModal)}
-        okBtnName="수정"
-        okBtnClick={() => setOpenBackModal(!openBackModal)}
-        cancelBtnName="나가기"
+        okBtnName="수정사항 저장"
+        okBtnClick={() => {
+          setOpenBackModal(!openBackModal);
+          handleSubmit();
+        }}
+        cancelBtnName="그냥 나가기"
         cancelBtnClick={() => {
           navigate("/my/management-child");
         }}

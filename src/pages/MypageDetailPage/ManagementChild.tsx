@@ -63,7 +63,7 @@ export const ManagementChild = () => {
       setOpenBreakModal(!openBreakModal);
       return;
     }
-    navigate("/my/management-child/register");
+    navigate("/my/management-child/register", { state: childrenList });
   };
 
   useEffect(() => {
@@ -81,7 +81,7 @@ export const ManagementChild = () => {
         {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
-            onClick={() => navigate(`/my/management-child/${child.id}`)}
+            onClick={() => navigate(`/my/management-child/${child.id}`, { state: childrenList })}
           >
             <div>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { createChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
@@ -80,6 +80,7 @@ const InputBox = styled.input`
 
 const CreateChild = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [childData, setChildData] = useState<createChildType>(DEFAULT_CHILD_TYPE);
 
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
@@ -156,8 +157,22 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
+    let validCheck = state.find((aaa: any) => aaa.name === childData.name);
+
+    if (state.length >= 5) {
+      setModalTitle("아이는 최대 5명 이상 등록할 수 없습니다.");
+      setModalClose(setOpenModal(!openModal));
+      setOpenModal(!openModal);
+      return;
+    }
     if (!childData.name) {
       setModalTitle("아이 이름을 입력해주세요.");
+      setModalClose(setOpenModal(!openModal));
+      setOpenModal(!openModal);
+      return;
+    }
+    if (validCheck) {
+      setModalTitle("같은 이름의 아이를 등록할 수 없습니다.");
       setModalClose(setOpenModal(!openModal));
       setOpenModal(!openModal);
       return;
