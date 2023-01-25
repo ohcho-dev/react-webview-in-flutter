@@ -139,6 +139,7 @@ const MyPage = () => {
   const [appVersion, setAppVersion] = useState("");
 
   useLayoutEffect(() => {
+    alert(NativeFunction("routeNativeScreen", "/appVersion"));
     setAppVersion(`${NativeFunction("routeNativeScreen", "/appVersion")}`);
   }, []);
 
