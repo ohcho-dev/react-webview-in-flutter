@@ -87,10 +87,14 @@ const CreateChild = () => {
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalClose, setModalClose] = useState(() => {});
   const inputRef = useRef(null);
 
   const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
+      setModalTitle("아이등록이 완료됐어요.");
+      setModalClose(navigate(-1));
       setOpenModal(true);
     },
     onError: error => {
@@ -152,6 +156,12 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
+    if (!childData.name) {
+      setModalTitle("아이 이름을 입력해주세요.");
+      setModalClose(setOpenModal(!openModal));
+      setOpenModal(!openModal);
+      return;
+    }
     callCreateChildInfo.mutate(childData);
   };
 
@@ -220,12 +230,11 @@ const CreateChild = () => {
       </BottomBtnWrap>
 
       <CustomModal
-        title="저장이 완료됐어요."
-        content="수정사항을 저장했어요."
+        title={modalTitle}
         isOpen={openModal}
-        toggleModal={() => navigate(-1)}
+        toggleModal={() => modalClose}
         okBtnName="확인"
-        okBtnClick={() => navigate(-1)}
+        okBtnClick={() => modalClose}
       />
     </LayoutDetailPage>
   );

@@ -14,7 +14,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
 import moment from "moment";
 import { ko } from "date-fns/esm/locale";
-import CustomModal from "../../components/common/CustomModal";
+import CustomModal from "./components/ChildUpdateModal";
 import { queryKeys } from "../../constant/queryKeys";
 
 const DEFAULT_CHILD_TYPE = {
@@ -96,10 +96,17 @@ const UpdateChild = () => {
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   useEffect(() => {
-    // 뒤로가기 보류
+    const backControl = () => {
+      navigate("/my/management-child");
+    };
+    window.addEventListener("popstate", backControl);
+    return window.removeEventListener("popstate", backControl);
+  }, []);
+
+  useEffect(() => {
     if (updateStatus) {
       window.history.pushState(null, "");
-      window.onpopstate = function (event) {
+      window.onpopstate = function () {
         setOpenBackModal(true);
       };
     }
@@ -270,10 +277,19 @@ const UpdateChild = () => {
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
-        toggleModal={() => navigate("/my/management-child", { replace: true })}
+        toggleModal={() => {
+          navigate(-1);
+          setOpenBackModal(false);
+          navigate("/my/management-child");
+        }}
         okBtnName="확인"
-        okBtnClick={() => navigate("/my/management-child", { replace: true })}
+        okBtnClick={() => {
+          navigate(-1);
+          setOpenBackModal(false);
+          navigate("/my/management-child");
+        }}
       />
+
       <CustomModal
         title="수정사항 저장이 필요해요."
         content="수정 사항을 저장하지않았습니다. 저장없이 나가시겠어요?"
@@ -283,8 +299,7 @@ const UpdateChild = () => {
         okBtnClick={() => setOpenBackModal(!openBackModal)}
         cancelBtnName="나가기"
         cancelBtnClick={() => {
-          setOpenBackModal(!openBackModal);
-          navigate("/my/management-child", { replace: true });
+          navigate("/my/management-child");
         }}
       />
     </LayoutDetailPage>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -65,6 +65,14 @@ export const ManagementChild = () => {
     }
     navigate("/my/management-child/register");
   };
+
+  useEffect(() => {
+    const backControl = () => {
+      navigate("/my", { replace: true });
+    };
+    window.addEventListener("popstate", backControl);
+    return window.removeEventListener("popstate", backControl);
+  }, []);
 
   return (
     <LayoutDetailPage>

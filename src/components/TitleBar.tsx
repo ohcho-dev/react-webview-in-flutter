@@ -172,6 +172,7 @@ interface MypageTitleBarProps {}
 export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
   const [firstRegistChildInfo, setFirstRegistChildInfo] = useState({ name: "" });
   const [sns, setSns] = useState("");
+  const [icon, setIcon] = useState("");
   const childrenList = useRecoilValue(childrenListState);
 
   const { data: userInfo } = useQuery(queryKeys.userInfo, () => getUserInfo());
@@ -179,9 +180,18 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
   useEffect(() => {
     if (userInfo.sns_kind) {
       let sns = userInfo.sns_kind;
-      sns === "SNS_KAKAO" && setSns("카카오");
-      sns === "SNS_GOOGLE" && setSns("구글");
-      sns === "SNS_APPLE" && setSns("애플");
+      if (sns === "SNS_KAKAO") {
+        setSns("카카오");
+        setIcon("/images/icon-mypage-kakao.svg");
+      }
+      if (sns === "SNS_GOOGLE") {
+        setSns("구글");
+        setIcon("/images/icon-mypage-google.svg");
+      }
+      if (sns === "SNS_APPLE") {
+        setSns("애플");
+        setIcon("/images/icon-mypage-apple.svg");
+      }
     }
   }, [userInfo]);
 
@@ -197,7 +207,7 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
         <ChildName>{firstRegistChildInfo.name}</ChildName> <span>보호자님, 안녕하세요.</span>
       </Title>
       <LoginInfo>
-        <img src="/images/icon-mypage-kakao.svg" />
+        <img src={icon} />
         <span>{sns} 로그인</span>
       </LoginInfo>
     </MypageTitleWrap>
