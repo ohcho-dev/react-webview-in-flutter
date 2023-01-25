@@ -21,6 +21,7 @@ const PageTitleWrap = styled.div`
   padding: 2rem 2.5rem;
   z-index: 100;
 `;
+
 const ShadowBox = styled.div`
   position: fixed;
   top: 16.2rem;
@@ -29,6 +30,7 @@ const ShadowBox = styled.div`
   height: 1px;
   box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.5);
 `;
+
 const Title = styled.div`
   font-weight: 600;
   font-size: 2.2rem;
@@ -97,6 +99,7 @@ const CoachingDetailPage = () => {
         <ContentTitle emoji="flag-in-hole" name="결과지" />
         {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
           <ContentItem
+            style={{ marginBottom: "0" }}
             key={index + paper.name}
             coachingMethod="result"
             chipStatus={[paper.status]}
@@ -113,7 +116,7 @@ const CoachingDetailPage = () => {
           <ContentItem
             key={index + task.name}
             coachingMethod={task.task_type}
-            chipStatus={[task.status, task.task_type]}
+            chipStatus={[task.task_type, task.status]}
             name={task.name}
             useArrowBtn={true}
             handleClick={() => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -63,8 +63,16 @@ export const ManagementChild = () => {
       setOpenBreakModal(!openBreakModal);
       return;
     }
-    navigate("/my/management-child/register");
+    navigate("/my/management-child/register", { state: childrenList });
   };
+
+  useEffect(() => {
+    const backControl = () => {
+      navigate("/my", { replace: true });
+    };
+    window.addEventListener("popstate", backControl);
+    return window.removeEventListener("popstate", backControl);
+  }, []);
 
   return (
     <LayoutDetailPage>
@@ -73,7 +81,7 @@ export const ManagementChild = () => {
         {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
-            onClick={() => navigate(`/my/management-child/${child.id}`)}
+            onClick={() => navigate(`/my/management-child/${child.id}`, { state: childrenList })}
           >
             <div>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />

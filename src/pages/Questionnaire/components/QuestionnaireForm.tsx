@@ -150,16 +150,17 @@ const QuestionnaireForm = (): JSX.Element => {
             {surveyInfo?.name}
             <img alt="form character" src="/images/form-character.svg" />
           </SurveyCategoryTitle>
-          {surveyInfo.question.map((question, index: number) => {
-            return (
-              <div key={`${question.content + question.id}`}>
-                <Question questionNumber={index + 1} question={question} />
-                {index !== surveyInfo.question.length - 1 && (
-                  <QuestionGap key={`${question.content + question.id}`} />
-                )}
-              </div>
-            );
-          })}
+          {surveyInfo.question.length &&
+            surveyInfo.question.map((question, index: number) => {
+              return (
+                <div key={`${question.content + question.id}`}>
+                  <Question questionNumber={index + 1} question={question} />
+                  {index !== surveyInfo.question.length - 1 && (
+                    <QuestionGap key={`${question.content + question.id}`} />
+                  )}
+                </div>
+              );
+            })}
         </SurveyQuestionWrapper>
       </LayoutDetailPage>
       <CustomModal

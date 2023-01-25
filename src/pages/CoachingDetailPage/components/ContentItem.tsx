@@ -57,6 +57,7 @@ interface ContentItemProps {
   coachingMethod: string;
   useArrowBtn?: boolean;
   handleClick: () => void;
+  style?: object;
 }
 
 const ContentItem: React.FC<ContentItemProps> = ({
@@ -65,9 +66,10 @@ const ContentItem: React.FC<ContentItemProps> = ({
   useArrowBtn,
   handleClick,
   coachingMethod,
+  style,
 }) => {
   return (
-    <ItemWrap onClick={handleClick}>
+    <ItemWrap onClick={handleClick} style={style}>
       <ImageWrap>
         <img src={`/images/icon-coaching-${coachingMethod}.svg`} />
       </ImageWrap>

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { createChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
@@ -80,6 +80,7 @@ const InputBox = styled.input`
 
 const CreateChild = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
   const [childData, setChildData] = useState<createChildType>(DEFAULT_CHILD_TYPE);
 
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
@@ -87,10 +88,14 @@ const CreateChild = () => {
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalClose, setModalClose] = useState(() => {});
   const inputRef = useRef(null);
 
   const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
+      setModalTitle("아이등록이 완료됐어요.");
+      setModalClose(navigate(-1));
       setOpenModal(true);
     },
     onError: error => {
@@ -152,6 +157,26 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
+    let validCheck = state.find((aaa: any) => aaa.name === childData.name);
+
+    if (state.length >= 5) {
+      setModalTitle("아이는 최대 5명 이상 등록할 수 없습니다.");
+      setModalClose(setOpenModal(!openModal));
+      setOpenModal(!openModal);
+      return;
+    }
+    if (!childData.name) {
+      setModalTitle("아이 이름을 입력해주세요.");
+      setModalClose(setOpenModal(!openModal));
+      setOpenModal(!openModal);
+      return;
+    }
+    if (validCheck) {
+      setModalTitle("같은 이름의 아이를 등록할 수 없습니다.");
+      setModalClose(setOpenModal(!openModal));
+      setOpenModal(!openModal);
+      return;
+    }
     callCreateChildInfo.mutate(childData);
   };
 
@@ -220,12 +245,11 @@ const CreateChild = () => {
       </BottomBtnWrap>
 
       <CustomModal
-        title="저장이 완료됐어요."
-        content="수정사항을 저장했어요."
+        title={modalTitle}
         isOpen={openModal}
-        toggleModal={() => navigate(-1)}
+        toggleModal={() => modalClose}
         okBtnName="확인"
-        okBtnClick={() => navigate(-1)}
+        okBtnClick={() => modalClose}
       />
     </LayoutDetailPage>
   );

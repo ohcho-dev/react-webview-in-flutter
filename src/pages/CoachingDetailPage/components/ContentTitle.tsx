@@ -9,7 +9,7 @@ interface ContentTitleProps {
 }
 
 const TitleWrap = styled.div`
-  padding: 2.6rem 2rem 1.7rem;
+  padding: 2.6rem 2rem 1.2rem;
   display: flex;
   align-items: center;
 `;

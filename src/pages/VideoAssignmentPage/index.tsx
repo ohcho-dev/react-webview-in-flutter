@@ -3,7 +3,6 @@ import styled, { css, keyframes } from "styled-components";
 import Button from "../../components/common/Button";
 import { BODY_1, STB_20 } from "../../constant/font";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import ReactPlayer from "react-player";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
 import { getVideoAssignmentResult } from "../../api/coachingApi";
@@ -237,7 +236,7 @@ const VideoAssignmentPage = (): JSX.Element => {
         </PageTitleWrapper>
         <VideoSection collapse={collapse}>
           <VideoWrapper collapse={collapse}>
-            <video controls autoPlay width={"100%"} height={"100%"}>
+            <video controls autoPlay width={"100%"} height={"100%"} webkit-playsinline="">
               <source src={videoAssignmentResult?.video} type="video/mp4"></source>
             </video>
           </VideoWrapper>
@@ -255,12 +254,12 @@ const VideoAssignmentPage = (): JSX.Element => {
           {videoAssignmentResult?.status === "TSST_REJECT" && (
             <RejectReasonSection>
               {videoAssignmentResult.admin_comment.map((comment: string, index: number) => (
-                <>
+                <div key={comment + index}>
                   <Reason>
                     <span>{comment}</span>
                   </Reason>
                   {index !== videoAssignmentResult.admin_comment.length - 1 && <Divider />}
-                </>
+                </div>
               ))}
             </RejectReasonSection>
           )}

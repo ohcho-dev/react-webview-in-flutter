@@ -219,15 +219,15 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
               />
             </PriceWrap>
             {/* TODO: 즐겨찾기기능 구현하기 */}
-            <Favorites onClick={() => setFavorites(!favorites)}>
+            {/* <Favorites onClick={() => setFavorites(!favorites)}>
               <img
                 src={favorites ? "/images/icon-favorites-on.svg" : "/images/icon-favorites-off.svg"}
                 alt="즐겨찾기"
               />
-            </Favorites>
+            </Favorites> */}
           </ProductMainInfo>
           <ImageWrap>
-            <img src="/images/program-product-detail-default.png" width="100%" />
+            <img src={selectedCoachingInfo[0].content_image} width="100%" />
           </ImageWrap>
         </DetailCoachingContainer>
       </LayoutDetailPage>
