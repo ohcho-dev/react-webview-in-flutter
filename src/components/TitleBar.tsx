@@ -150,18 +150,18 @@ interface DetailTitleBarProps {
 
 export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ border, style }) => {
   const navigate = useNavigate();
-  const share = useRecoilValue(useShareState);
+  // const share = useRecoilValue(useShareState);
   return (
     <TitleBarWrap border={border} style={{ ...style }}>
       <HistoryBackIconWrap onClick={() => navigate(-1)}>
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>
       <ButtonWrap>
-        {share && (
+        {/* {share && (
           <ShareBtn>
             <img src="/images/icon-share.svg" width="100%" />
           </ShareBtn>
-        )}
+        )} */}
       </ButtonWrap>
     </TitleBarWrap>
   );
