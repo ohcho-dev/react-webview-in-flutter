@@ -129,7 +129,7 @@ const linkItem = [
     id: 7,
     imgUrl: "/images/icon-mypage-chat.svg",
     name: "문의하기",
-    link: "/kakaoTack/_xnAxjxfxj/chat",
+    link: "/kakaoTalk/_xnAxjxfxj/chat",
     url: "#",
   },
 ];
