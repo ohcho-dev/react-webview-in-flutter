@@ -121,6 +121,7 @@ export interface CoachingStatusType {
   name: string;
   status: string;
   status_label: string | null;
+  paper_url: string;
 }
 
 export interface TaskStatusType extends CoachingStatusType {

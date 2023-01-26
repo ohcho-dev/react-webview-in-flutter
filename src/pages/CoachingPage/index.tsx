@@ -7,6 +7,7 @@ import { getAppliedCoachingList } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { commonCodeState, selectedChildInfoState } from "../../recoil/atom";
+import Dday from "../../utils/Dday";
 import { appliedCoachingType } from "../../utils/type";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
@@ -171,7 +172,7 @@ const CoachingPage = () => {
                   <div
                     key={index}
                     onClick={() => {
-                      if (coaching.status === "COSTAT_ONGOING") {
+                      if (Dday(coaching.end_date) > 0) {
                         handleCardClick(coaching.id);
                       }
                     }}
