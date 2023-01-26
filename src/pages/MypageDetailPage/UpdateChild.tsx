@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation, useQuery } from "react-query";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { getSelectedChild, updateChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
@@ -16,6 +16,8 @@ import moment from "moment";
 import { ko } from "date-fns/esm/locale";
 import CustomModal from "./components/ChildUpdateModal";
 import { queryKeys } from "../../constant/queryKeys";
+import { useRecoilValue } from "recoil";
+import { childrenListState } from "../../recoil/atom";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -82,7 +84,6 @@ const InputBox = styled.input`
 
 const UpdateChild = () => {
   const { childid } = useParams();
-  const { state } = useLocation();
   const navigate = useNavigate();
   const [childData, setChildData] = useState<childType>(DEFAULT_CHILD_TYPE);
 
@@ -95,20 +96,20 @@ const UpdateChild = () => {
   const [openValidModal, setOpenValidModal] = useState(false);
   const [openSameNameModal, setOpenSameNameModal] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(false);
+  const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   useEffect(() => {
-    const backControl = () => {
-      navigate("/my/management-child");
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+      navigate("/my/management-child", { replace: true });
     };
-    window.addEventListener("popstate", backControl);
-    return window.removeEventListener("popstate", backControl);
   }, []);
 
   useEffect(() => {
     if (updateStatus) {
-      window.history.pushState(null, "");
+      window.history.pushState(null, "", window.location.href);
       window.onpopstate = function () {
         setOpenBackModal(true);
       };
@@ -202,7 +203,7 @@ const UpdateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    let validCheck = state.find((aaa: any) => aaa.name === childData.name);
+    let validCheck = childList.find((aaa: any) => aaa.name === childData.name);
     if (!childData.name) {
       setOpenValidModal(true);
       return;
@@ -312,11 +313,11 @@ const UpdateChild = () => {
         content="수정사항을 저장했어요."
         isOpen={openModal}
         toggleModal={() => {
-          navigate("/my/management-child");
+          navigate("/my/management-child", { replace: true });
         }}
         okBtnName="확인"
         okBtnClick={() => {
-          navigate("/my/management-child");
+          navigate("/my/management-child", { replace: true });
         }}
       />
 
@@ -332,7 +333,7 @@ const UpdateChild = () => {
         }}
         cancelBtnName="그냥 나가기"
         cancelBtnClick={() => {
-          navigate("/my/management-child");
+          navigate("/my/management-child", { replace: true });
         }}
       />
     </LayoutDetailPage>
