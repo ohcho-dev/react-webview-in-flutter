@@ -63,8 +63,3 @@ export const mainPageScrollValueState = atom({
   key: "mainPageScrollValue",
   default: 0,
 });
-
-export const appVersionState = atom({
-  key: "appVersionState",
-  default: "",
-});

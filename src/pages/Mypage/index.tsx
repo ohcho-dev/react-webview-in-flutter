@@ -4,9 +4,8 @@ import styled from "styled-components";
 import { Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
-import { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { appVersionState } from "../../recoil/atom";
+import { useEffect, useState } from "react";
+import { flutterInAppWebViewPlatformReady } from "../..";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -130,7 +129,7 @@ const linkItem = [
     id: 7,
     imgUrl: "/images/icon-mypage-chat.svg",
     name: "문의하기",
-    link: "https://pf.kakao.com/_xnAxjxfxj/chat",
+    link: "/kakaoTack/_xnAxjxfxj/chat",
     url: "#",
   },
 ];
@@ -138,9 +137,30 @@ const linkItem = [
 const MyPage = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
-  const appVersion = useRecoilValue(appVersionState);
-  NativeFunction("routeNativeScreen", "/appVersion");
+  const [version, setVersion] = useState("");
 
+  useEffect(() => {
+    getNativeValue("appVersion");
+  }, []);
+
+  const getNativeValue = (value: string) => {
+    if (flutterInAppWebViewPlatformReady) {
+      // @ts-ignore
+      if (window.flutter_inappwebview.callHandler) {
+        // @ts-ignore
+        window.flutter_inappwebview.callHandler("routeNativeScreen", value).then(res => {
+          setVersion(res);
+        });
+      } else {
+        // @ts-ignore
+        window.flutter_inappwebview._callHandler("routeNativeScreen", value).then(res => {
+          setVersion(res);
+        });
+      }
+    } else {
+      console.error("flutterInAppWebViewPlatformReady not Ready!!");
+    }
+  };
   const clickLogout = () => {
     NativeFunction("routeNativeScreen", "/logout");
   };
@@ -155,7 +175,9 @@ const MyPage = () => {
       {linkItem.map(item => (
         <LinkItemWrap
           key={item.id}
-          onClick={() => (item.link ? (window.location.href = item.link) : navigate(item.url))}
+          onClick={() =>
+            item.link ? NativeFunction("routeNativeScreen", item.link) : navigate(item.url)
+          }
         >
           <div>
             <IconTextGroup>
@@ -168,7 +190,7 @@ const MyPage = () => {
       ))}
 
       <BottomArea>
-        <span>앱 버전 {appVersion}</span>
+        <span>앱 버전 {version}</span>
         <BtnWrap>
           <div onClick={clickLogout}>로그아웃</div>
           <div onClick={() => setOpenModal(!openModal)}>탈퇴하기</div>
