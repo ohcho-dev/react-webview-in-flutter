@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
 import { getLeftDaysFromCurrentTime } from "../../../utils/getLeftDaysFromCurrentTime";
 import { appliedCoachingType } from "../../../utils/type";
@@ -57,17 +58,16 @@ const CoachingCard = (props: { coaching: appliedCoachingType }): JSX.Element => 
   const { status, coaching_name, start_date, end_date } = props.coaching;
 
   return (
-    <CoachingCardWrapper progressing={status === "COSTAT_ONGOING" ? true : false}>
+    <CoachingCardWrapper progressing={Dday(end_date) >= 30 ? true : false}>
       <img alt="coaching-thumnail" src="/images/banner-example.png" />
       <CoachingTitle>{coaching_name}</CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
-        <ProgressChip progressing={status === "COSTAT_ONGOING" ? true : false}>
-          {status === "COSTAT_ONGOING" ? "진행중" : "종료"}
+        <ProgressChip progressing={Dday(end_date) >= 0 ? true : false}>
+          {Dday(end_date) > 0 ? "진행중" : "종료"}
         </ProgressChip>
         <Duration>{`${getDate(start_date)}~${getDate(end_date)}`}</Duration>
-        {status === "COSTAT_ONGOING" && (
-          <LeftDays>{getLeftDaysFromCurrentTime(end_date)}일 남음</LeftDays>
-        )}
+        {Dday(end_date) > 0 && <LeftDays>{Dday(end_date)}일 남음</LeftDays>}
+        {Dday(end_date) === 0 && <LeftDays>오늘까지!</LeftDays>}
       </div>
     </CoachingCardWrapper>
   );

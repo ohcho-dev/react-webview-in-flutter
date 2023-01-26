@@ -95,6 +95,7 @@ const App: React.FC = () => {
         }
       },
       enabled: !!Cookies.get("token"),
+      refetchOnWindowFocus: true,
     },
     {
       queryKey: queryKeys.commonCodeList,

@@ -105,10 +105,10 @@ const CoachingDetailPage = () => {
             coachingMethod="result"
             chipStatus={[paper.status]}
             name={paper.name}
-            useArrowBtn={paper.status !== "TTPST_PENDING"}
+            useArrowBtn={paper.status === "TTPST_COMPLETE"}
             handleClick={() => {
               if (paper.status === "TTPST_COMPLETE")
-                navigate(`/coaching/result/${coachingInfo.paper_url}`);
+                navigate(`/coaching/result/${paper.paper_url}`);
             }}
           />
         ))}
