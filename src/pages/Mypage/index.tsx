@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { flutterInAppWebViewPlatformReady } from "../..";
 
 const LinkItemWrap = styled.div`
@@ -139,8 +139,8 @@ const MyPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [version, setVersion] = useState("");
 
-  useEffect(() => {
-    getNativeValue("appVersion");
+  useLayoutEffect(() => {
+    getNativeValue("/appVersion");
   }, []);
 
   const getNativeValue = (value: string) => {
