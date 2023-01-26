@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useLayoutEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import Cookies from "js-cookie";
@@ -10,19 +10,13 @@ import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryErrorResetBoundary } from "react-query";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import {
-  childrenListState,
-  commonCodeState,
-  mainPageScrollValueState,
-  selectedChildInfoState,
-} from "./recoil/atom";
+import { useSetRecoilState } from "recoil";
+import { childrenListState, commonCodeState, selectedChildInfoState } from "./recoil/atom";
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
 import { CHILD_ID_FIELD } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
-import MainTitleBar, { DetailTitleBar, MypageTitleBar } from "./components/TitleBar";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { getLoginDev } from "./api/loginDevApi";
@@ -57,7 +51,6 @@ const App: React.FC = () => {
   const setSelectedChild = useSetRecoilState(selectedChildInfoState);
   const setChildrenList = useSetRecoilState(childrenListState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
-  const scroll = useRecoilValue(mainPageScrollValueState);
 
   useQueries([
     // {
@@ -170,21 +163,6 @@ const App: React.FC = () => {
 
   return (
     <>
-      {pathState === 1 && firstPath !== "my" && firstPath !== "home" && <MainTitleBar />}
-      {pathState === 1 && firstPath === "home" && (
-        <MainTitleBar style={scroll === 0 ? { background: "none", borderBottom: "0" } : {}} />
-      )}
-      {pathState === 1 && firstPath === "my" && <MypageTitleBar />}
-
-      {pathState > 1 &&
-        firstPath !== "my" &&
-        secondPath !== "coaching-detail" &&
-        thirdPath !== "form" && <DetailTitleBar border={true} />}
-      {pathState > 1 && (firstPath === "my" || secondPath === "coaching-detail") && (
-        <DetailTitleBar border={false} />
-      )}
-      {pathState > 1 && thirdPath === "form" && <DetailTitleBar style={{ display: "none" }} />}
-
       <TransitionGroup
         className={"router-wrapper"}
         childFactory={child => React.cloneElement(child, { classNames })}

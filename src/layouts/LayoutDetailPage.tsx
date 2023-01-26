@@ -1,7 +1,6 @@
 import React, { ReactElement } from "react";
 import styled from "styled-components";
-import Button from "../components/common/Button";
-import LoadingSpinner from "../components/common/LoadingSpinner";
+import { DetailTitleBar } from "../components/TitleBar";
 import { BottomBtnWrap } from "../pages/ProgramPage/components/styled";
 
 import LayoutBasePage from "./LayoutBasePage";
@@ -30,20 +29,27 @@ const DetailPage = styled.main`
 `;
 
 interface LayoutDetailPageProps {
+  hideTitleBar?: boolean;
   children?: React.ReactNode;
   bottomBtn?: Boolean;
   bottomBtnElement?: ReactElement;
   style?: object;
+  leftBtn?: React.ReactNode;
+  goBackURL?: string;
 }
 
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   children,
+  hideTitleBar = false,
   bottomBtn = false,
   bottomBtnElement,
   style,
+  leftBtn,
+  goBackURL = "",
 }) => {
   return (
     <LayoutBasePage>
+      {!hideTitleBar && <DetailTitleBar leftBtn={leftBtn} goBackURL={goBackURL} />}
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
         {children}
       </DetailPage>

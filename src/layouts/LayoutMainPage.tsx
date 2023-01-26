@@ -13,6 +13,8 @@ import {
 import { childType } from "../utils/type";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
+import MainTitleBar from "../components/TitleBar";
+import { useLocation } from "react-router-dom";
 
 const MainPage = styled.main`
   width: 100%;
@@ -42,16 +44,25 @@ const Content = styled.div`
 
 interface LayoutMainPageProps {
   children?: React.ReactNode;
+  customTitleBar?: React.ReactNode;
   marginTop?: string;
   bgColor?: string;
+  hideTitleBar?: boolean;
   style?: object;
 }
 
-const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bgColor, style }) => {
+const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
+  children,
+  marginTop,
+  bgColor,
+  style,
+  hideTitleBar,
+}) => {
+  const { pathname } = useLocation();
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
   const childrenList = useRecoilValue(childrenListState);
-  const setScroll = useSetRecoilState(mainPageScrollValueState);
+  const [scroll, setScroll] = useRecoilState(mainPageScrollValueState);
 
   const handleChildClick = (evt: React.MouseEvent<HTMLElement>) => {
     const childId = (evt.currentTarget as HTMLButtonElement).id;
@@ -64,6 +75,16 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({ children, marginTop, bg
 
   return (
     <LayoutBasePage>
+      {!hideTitleBar && (
+        <MainTitleBar
+          style={
+            scroll === 0 && pathname === "/home"
+              ? { background: "rgba(238, 249, 247, 0)", borderBottom: "0" }
+              : { background: "white" }
+          }
+        />
+      )}
+
       <MainPage
         marginTop={marginTop}
         bgColor={bgColor}

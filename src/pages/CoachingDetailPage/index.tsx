@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { selectedChildInfoState } from "../../recoil/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
@@ -93,7 +94,7 @@ const CoachingDetailPage = () => {
         </ProgramStatus>
       </PageTitleWrap>
       <ShadowBox />
-      <LayoutMainPage
+      <LayoutDetailPage
         style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)", zIndex: 30 }}
       >
         <ContentTitle emoji="flag-in-hole" name="결과지" />
@@ -139,7 +140,7 @@ const CoachingDetailPage = () => {
             }}
           />
         ))}
-      </LayoutMainPage>
+      </LayoutDetailPage>
     </>
   );
 };

@@ -1,12 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import AlarmBadge from "./AlarmBadge";
-import {
-  childrenListState,
-  openBottomModalState,
-  selectedChildInfoState,
-  useShareState,
-} from "../recoil/atom";
+import { childrenListState, openBottomModalState, selectedChildInfoState } from "../recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -72,10 +67,6 @@ const ButtonWrap = styled.div`
   }
 `;
 
-const ShareBtn = styled.div`
-  width: 2.8rem;
-`;
-
 const MypageTitleWrap = styled.div`
   width: 100%;
   background: #fff;
@@ -121,7 +112,7 @@ interface MainTitleBarProps {
   style?: object;
 }
 
-const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
+export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
   const setOpenModal = useSetRecoilState(openBottomModalState);
   const handleChildNameClick = () => {
@@ -146,23 +137,28 @@ const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
 interface DetailTitleBarProps {
   border?: boolean;
   style?: object;
+  leftBtn?: React.ReactNode;
+  goBackURL?: string;
 }
 
-export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({ border, style }) => {
+export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
+  border,
+  style,
+  leftBtn,
+  goBackURL = "",
+}) => {
   const navigate = useNavigate();
-  // const share = useRecoilValue(useShareState);
+  console.log(goBackURL);
   return (
     <TitleBarWrap border={border} style={{ ...style }}>
-      <HistoryBackIconWrap onClick={() => navigate(-1)}>
+      <HistoryBackIconWrap
+        onClick={() => {
+          goBackURL ? navigate(goBackURL) : navigate(-1);
+        }}
+      >
         <img src="/images/icon-back.svg" width="100%" />
       </HistoryBackIconWrap>
-      <ButtonWrap>
-        {/* {share && (
-          <ShareBtn>
-            <img src="/images/icon-share.svg" width="100%" />
-          </ShareBtn>
-        )} */}
-      </ButtonWrap>
+      {leftBtn && <ButtonWrap>{leftBtn}</ButtonWrap>}
     </TitleBarWrap>
   );
 };
