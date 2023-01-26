@@ -29,6 +29,7 @@ const ApplySuccessPage = () => {
   const navigate = useNavigate();
   return (
     <LayoutDetailPage
+      goBackURL="/program"
       bottomBtn
       bottomBtnElement={
         <Button theme={"black"} content={"확인"} onClick={() => navigate("/program")} />
