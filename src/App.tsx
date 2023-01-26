@@ -96,6 +96,7 @@ const App: React.FC = () => {
       },
       enabled: !!Cookies.get("token"),
       refetchOnWindowFocus: true,
+      refetchInterval: 1000,
     },
     {
       queryKey: queryKeys.commonCodeList,

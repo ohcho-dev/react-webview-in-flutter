@@ -86,6 +86,7 @@ const UploadImage = styled.img`
   height: 18.5rem;
   border-radius: 10rem;
   border: solid 1rem #fff;
+  box-shadow: 0px 0.4rem 0.8rem rgba(0, 0, 0, 0.12);
 `;
 
 const NoticeWrap = styled.div`
