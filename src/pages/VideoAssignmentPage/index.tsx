@@ -115,7 +115,7 @@ const VideoWrapper = styled.div`
     }
   }};
 
-  .react-player {
+  video {
     border-radius: 0.8rem 0.8rem 0rem 0rem;
     /* position: relative; */
     isolation: isolate;
