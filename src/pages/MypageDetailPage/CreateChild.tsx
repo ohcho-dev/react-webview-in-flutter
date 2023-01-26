@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation } from "react-query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { createChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
@@ -14,7 +14,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
 import moment from "moment";
 import { ko } from "date-fns/esm/locale";
-import CustomModal from "../../components/common/CustomModal";
+import CustomModal from "./components/ChildUpdateModal";
+import { useRecoilValue } from "recoil";
+import { childrenListState } from "../../recoil/atom";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
@@ -80,7 +82,6 @@ const InputBox = styled.input`
 
 const CreateChild = () => {
   const navigate = useNavigate();
-  const { state } = useLocation();
   const [childData, setChildData] = useState<createChildType>(DEFAULT_CHILD_TYPE);
 
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
@@ -88,20 +89,28 @@ const CreateChild = () => {
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
-  const [modalTitle, setModalTitle] = useState("");
-  const [modalClose, setModalClose] = useState(() => {});
+  const [openLengthModal, setOpenLengthModal] = useState(false);
+  const [openNameCheckModal, setOpenNameCheckModal] = useState(false);
+  const [openSameNameCheckModal, setOpenSameNameCheckModal] = useState(false);
+  const [openSaveModal, setOpenSaveModal] = useState(false);
   const inputRef = useRef(null);
+  const childrenList = useRecoilValue(childrenListState);
 
   const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
-      setModalTitle("아이등록이 완료됐어요.");
-      setModalClose(navigate(-1));
-      setOpenModal(true);
+      setOpenSaveModal(true);
     },
     onError: error => {
       throw error;
     },
   });
+
+  useEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
+      navigate("/my/management-child", { replace: true });
+    };
+  }, []);
 
   //   생일 날짜 string으로 변환
   useEffect(() => {
@@ -157,24 +166,18 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    let validCheck = state.find((aaa: any) => aaa.name === childData.name);
+    let validCheck = childrenList.find((aaa: any) => aaa.name === childData.name);
 
-    if (state.length >= 5) {
-      setModalTitle("아이는 최대 5명 이상 등록할 수 없습니다.");
-      setModalClose(setOpenModal(!openModal));
-      setOpenModal(!openModal);
+    if (childrenList.length >= 5) {
+      setOpenLengthModal(true);
       return;
     }
     if (!childData.name) {
-      setModalTitle("아이 이름을 입력해주세요.");
-      setModalClose(setOpenModal(!openModal));
-      setOpenModal(!openModal);
+      setOpenNameCheckModal(true);
       return;
     }
     if (validCheck) {
-      setModalTitle("같은 이름의 아이를 등록할 수 없습니다.");
-      setModalClose(setOpenModal(!openModal));
-      setOpenModal(!openModal);
+      setOpenSameNameCheckModal(true);
       return;
     }
     callCreateChildInfo.mutate(childData);
@@ -245,11 +248,34 @@ const CreateChild = () => {
       </BottomBtnWrap>
 
       <CustomModal
-        title={modalTitle}
-        isOpen={openModal}
-        toggleModal={() => modalClose}
+        title="아이는 최대 5명 이상 등록할 수 없습니다."
+        isOpen={openLengthModal}
+        toggleModal={() => setOpenLengthModal(!openLengthModal)}
         okBtnName="확인"
-        okBtnClick={() => modalClose}
+        okBtnClick={() => setOpenLengthModal(!openLengthModal)}
+      />
+      <CustomModal
+        title="아이 이름을 입력해주세요."
+        isOpen={openNameCheckModal}
+        toggleModal={() => setOpenNameCheckModal(!openNameCheckModal)}
+        okBtnName="확인"
+        okBtnClick={() => setOpenNameCheckModal(!openNameCheckModal)}
+      />
+
+      <CustomModal
+        title="같은 이름의 아이를 등록할 수 없습니다."
+        isOpen={openSameNameCheckModal}
+        toggleModal={() => setOpenSameNameCheckModal(!openSameNameCheckModal)}
+        okBtnName="확인"
+        okBtnClick={() => setOpenSameNameCheckModal(!openSameNameCheckModal)}
+      />
+
+      <CustomModal
+        title="아이등록이 완료됐어요."
+        isOpen={openSaveModal}
+        toggleModal={() => navigate("/my/management-child", { replace: true })}
+        okBtnName="확인"
+        okBtnClick={() => navigate("/my/management-child", { replace: true })}
       />
     </LayoutDetailPage>
   );
