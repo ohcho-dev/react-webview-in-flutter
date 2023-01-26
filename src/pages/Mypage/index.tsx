@@ -6,7 +6,7 @@ import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
 import { useLayoutEffect, useState } from "react";
 import { flutterInAppWebViewPlatformReady } from "../..";
-
+import { MypageTitleBar } from "../../components/TitleBar";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
