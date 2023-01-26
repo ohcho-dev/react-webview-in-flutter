@@ -6,6 +6,7 @@ import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
 import { useLayoutEffect, useState } from "react";
 import { flutterInAppWebViewPlatformReady } from "../..";
+import { MypageTitleBar } from "../../components/TitleBar";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -171,7 +172,8 @@ const MyPage = () => {
   };
 
   return (
-    <LayoutMainPage marginTop="7.9rem" bgColor="#f6f6f6">
+    <LayoutMainPage marginTop="7.9rem" bgColor="#f6f6f6" hideTitleBar>
+      <MypageTitleBar />
       {linkItem.map(item => (
         <LinkItemWrap
           key={item.id}
