@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
+import { NativeFunction } from "../../../utils/NativeFunction";
 import { childType } from "../../../utils/type";
 
 interface ChildInfoType {
@@ -134,10 +135,21 @@ const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
             <span>일</span>
           </DdayValue>
         </div>
-        <ProfileImageWrap>
-          <img src="/images/profile-default.svg" alt="프로필 사진" />
-          <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
-        </ProfileImageWrap>
+        {!childData.image && (
+          <ProfileImageWrap
+            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${childData.id}`)}
+          >
+            <img src="/images/profile-default.svg" alt="프로필 사진" />
+            <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
+          </ProfileImageWrap>
+        )}
+        {childData.image && (
+          <ProfileImageWrap
+            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${childData.id}`)}
+          >
+            <img src={childData.image} alt="프로필 사진" />
+          </ProfileImageWrap>
+        )}
       </FlexBox>
       <NoticeWrap>
         <NoticeTitle>이 시기에 아이는</NoticeTitle>
