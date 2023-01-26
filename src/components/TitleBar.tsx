@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 import AlarmBadge from "./AlarmBadge";
 import {
+  childrenKeyState,
   childrenListState,
   openBottomModalState,
   selectedChildInfoState,
@@ -124,6 +125,7 @@ interface MainTitleBarProps {
 const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
   const setOpenModal = useSetRecoilState(openBottomModalState);
+  const childrenKey = useRecoilValue(childrenKeyState);
   const { pathname } = useLocation();
   const handleChildNameClick = () => {
     setOpenModal(true);
@@ -133,7 +135,11 @@ const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
       <ProfileWrap>
         {pathname !== "/home" && (
           <ProfileImageWrap>
-            <img src="/images/icon-profile-default.svg" width="100%" alt="child icon" />
+            <img
+              src={selectedChildInfo.image || `/images/profile-${childrenKey}.svg`}
+              width="100%"
+              alt="child icon"
+            />
           </ProfileImageWrap>
         )}
         <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>

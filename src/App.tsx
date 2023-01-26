@@ -10,8 +10,9 @@ import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryErrorResetBoundary } from "react-query";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
+  childrenKeyState,
   childrenListState,
   commonCodeState,
   mainPageScrollValueState,
@@ -54,10 +55,23 @@ const App: React.FC = () => {
     thirdPath && setThirdPath(thirdPath);
   }, [pathname]);
 
-  const setSelectedChild = useSetRecoilState(selectedChildInfoState);
-  const setChildrenList = useSetRecoilState(childrenListState);
+  const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
+  const [childrenList, setChildrenList] = useRecoilState(childrenListState);
+  const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const scroll = useRecoilValue(mainPageScrollValueState);
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.type = "text/javascript";
+    script.async = true;
+    script.innerHTML = `
+      function reactRefrash(value) {
+        window.location.reload();
+      }
+    `;
+    document.body.appendChild(script);
+  }, []);
 
   useQueries([
     // {
@@ -120,6 +134,15 @@ const App: React.FC = () => {
       }
     }
   }, [token]);
+  useEffect(() => {
+    if (childrenList.length) {
+      let profileKey = Object.keys(childrenList).find(
+        key => childrenList[key].id === selectedChild.id,
+      );
+      setChildrenKey(String(profileKey));
+    }
+  }, [childrenList, window.localStorage.getItem(CHILD_ID_FIELD)]);
+
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-bottom",
     exit: "to-bottom",
@@ -157,16 +180,6 @@ const App: React.FC = () => {
   }
 
   oldLocation = location;
-
-  // const script = document.createElement("script");
-  // script.type = "text/javascript";
-  // script.async = true;
-  // script.innerHTML = `
-  //     function reactRoute(value){
-  //       ${navigate("/home", { replace: true })}
-  //     }
-  //   `;
-  // document.body.appendChild(script);
 
   return (
     <>
