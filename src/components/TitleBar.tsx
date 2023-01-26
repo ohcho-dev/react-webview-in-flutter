@@ -40,6 +40,12 @@ const ProfileWrap = styled.div`
 
 const ProfileImageWrap = styled.div`
   width: 3.2rem;
+
+  img {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 1.6rem;
+  }
 `;
 
 const ChildrenName = styled.div`
