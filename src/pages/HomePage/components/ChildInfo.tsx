@@ -81,6 +81,12 @@ const ProfileImageWrap = styled.div`
     bottom: 2.5rem;
   }
 `;
+const UploadImage = styled.img`
+  width: 18.5rem;
+  height: 18.5rem;
+  border-radius: 10rem;
+  border: solid 1rem #fff;
+`;
 
 const NoticeWrap = styled.div`
   margin-top: 0.6rem;
@@ -147,7 +153,7 @@ const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
           <ProfileImageWrap
             onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${childData.id}`)}
           >
-            <img src={childData.image} alt="프로필 사진" />
+            <UploadImage src={childData.image} alt="프로필 사진 테두리" />
           </ProfileImageWrap>
         )}
       </FlexBox>

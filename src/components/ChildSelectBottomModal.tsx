@@ -43,6 +43,12 @@ const ChildInfoWrapper = styled.div`
   div {
     display: flex;
     align-items: center;
+
+    img {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 1.6rem;
+    }
   }
 `;
 
