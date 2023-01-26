@@ -15,6 +15,7 @@ export const selectedChildInfoState = atom({
   key: "selectedChild",
   default: {
     id: 0,
+    image: "",
     name: "",
     parent_id: 0,
     premature_flag: 0,
@@ -27,6 +28,11 @@ export const selectedChildInfoState = atom({
 export const childrenListState = atom({
   key: "childrenList",
   default: [] as any,
+});
+
+export const childrenKeyState = atom({
+  key: "childrenKey",
+  default: "",
 });
 
 export const useShareState = atom({
@@ -62,9 +68,4 @@ export const startQuestionOrderNumState = atom({
 export const mainPageScrollValueState = atom({
   key: "mainPageScrollValue",
   default: 0,
-});
-
-export const appVersionState = atom({
-  key: "appVersionState",
-  default: "",
 });

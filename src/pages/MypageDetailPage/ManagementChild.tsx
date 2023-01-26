@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { getChildrenList } from "../../api/childApi";
 import BottomFixBtnWrap from "../../components/common/BottomFixBtnWrap";
 import Button from "../../components/common/Button";
-import CustomModal from "../../components/common/CustomModal";
+import CustomModal from "./components/ChildUpdateModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import getGender from "../../utils/getGender";
@@ -63,15 +63,14 @@ export const ManagementChild = () => {
       setOpenBreakModal(!openBreakModal);
       return;
     }
-    navigate("/my/management-child/register", { state: childrenList });
+    navigate("/my/management-child/register", { replace: true });
   };
 
   useEffect(() => {
-    const backControl = () => {
+    window.history.pushState(null, "", window.location.href);
+    window.onpopstate = function () {
       navigate("/my", { replace: true });
     };
-    window.addEventListener("popstate", backControl);
-    return window.removeEventListener("popstate", backControl);
   }, []);
 
   return (
@@ -81,7 +80,7 @@ export const ManagementChild = () => {
         {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
-            onClick={() => navigate(`/my/management-child/${child.id}`, { state: childrenList })}
+            onClick={() => navigate(`/my/management-child/${child.id}`, { replace: true })}
           >
             <div>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />

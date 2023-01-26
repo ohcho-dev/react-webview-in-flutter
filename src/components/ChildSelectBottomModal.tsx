@@ -94,7 +94,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
               key={child.id.toString()}
             >
               <div>
-                <img alt="profile icon" src={`/images/profile-${index}.svg`} />
+                <img alt="profile icon" src={child.image || `/images/profile-${index}.svg`} />
                 <ChildName>{child.name}</ChildName>
                 <ChildInfo>
                   <span>({child.birth_date}) </span>

@@ -1,7 +1,13 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import AlarmBadge from "./AlarmBadge";
-import { childrenListState, openBottomModalState, selectedChildInfoState } from "../recoil/atom";
+import {
+  childrenKeyState,
+  childrenListState,
+  openBottomModalState,
+  selectedChildInfoState,
+  useShareState,
+} from "../recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
@@ -115,15 +121,23 @@ interface MainTitleBarProps {
 export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
   const setOpenModal = useSetRecoilState(openBottomModalState);
+  const childrenKey = useRecoilValue(childrenKeyState);
+  const { pathname } = useLocation();
   const handleChildNameClick = () => {
     setOpenModal(true);
   };
   return (
     <TitleBarWrap border={true} style={{ ...style }}>
       <ProfileWrap>
-        <ProfileImageWrap>
-          <img src="/images/icon-profile-default.svg" width="100%" alt="child icon" />
-        </ProfileImageWrap>
+        {pathname !== "/home" && (
+          <ProfileImageWrap>
+            <img
+              src={selectedChildInfo.image || `/images/profile-${childrenKey}.svg`}
+              width="100%"
+              alt="child icon"
+            />
+          </ProfileImageWrap>
+        )}
         <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>
         <ArrowWrap>
           <img src="/images/icon-arrow-down.svg" width="100%" alt="arrow down icon" />
