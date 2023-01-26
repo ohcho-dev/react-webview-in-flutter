@@ -115,7 +115,7 @@ const VideoWrapper = styled.div`
     }
   }};
 
-  .react-player {
+  video {
     border-radius: 0.8rem 0.8rem 0rem 0rem;
     /* position: relative; */
     isolation: isolate;
@@ -236,7 +236,7 @@ const VideoAssignmentPage = (): JSX.Element => {
         </PageTitleWrapper>
         <VideoSection collapse={collapse}>
           <VideoWrapper collapse={collapse}>
-            <video controls autoPlay width={"100%"} height={"100%"} webkit-playsinline="">
+            <video controls autoPlay width={"100%"} height={"100%"} playsInline>
               <source src={videoAssignmentResult?.video} type="video/mp4"></source>
             </video>
           </VideoWrapper>
