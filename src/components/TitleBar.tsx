@@ -81,6 +81,8 @@ const ButtonWrap = styled.div`
 
 const MypageTitleWrap = styled.div`
   width: 100%;
+  height: 14.5rem;
+
   background: #fff;
   padding: 3.5rem 2.5rem 2rem;
   border-bottom: solid 1rem #f6f6f6;
