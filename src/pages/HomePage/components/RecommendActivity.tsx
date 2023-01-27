@@ -1,7 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { HomeData } from "../../../utils/type";
 import UseEmoji from "../../../utils/UseEmoji";
-
+interface HomeDataType {
+  childData: HomeData;
+}
 const ActivityWrap = styled.div`
   padding: 3.5rem 0;
 `;
@@ -50,6 +53,7 @@ const ItemWrap = styled.div`
 
   img {
     border-radius: 0.8rem;
+    border: solid 1px #efefef;
   }
 `;
 const ItemTitle = styled.div`
@@ -101,14 +105,7 @@ const BannerDesc = styled.div`
   color: rgba(10, 10, 10, 0.8);
 `;
 
-const data = [
-  { id: 0, imgUrl: "/images/recommend-default.png", text: "123대근육 발달에 필요한 산책" },
-  { id: 1, imgUrl: "/images/recommend-default.png", text: "대근육 발달에 필요한 산책" },
-  { id: 2, imgUrl: "/images/recommend-default.png", text: "대근육 발달에 필요한 산책" },
-  { id: 3, imgUrl: "/images/recommend-default.png", text: "대근육 발달에 필요한 산책" },
-];
-
-const RecommendActivity = () => {
+const RecommendActivity: React.FC<HomeDataType> = ({ childData }) => {
   const navigate = useNavigate();
 
   return (
@@ -119,10 +116,10 @@ const RecommendActivity = () => {
       </ActivityTitle>
       <ActivityContent>
         <>
-          {data.map(item => (
-            <ItemWrap key={item.id}>
-              <img src={item.imgUrl} alt={item.text} />
-              <ItemTitle>{item.text}</ItemTitle>
+          {childData.month_level_content.map((item: any) => (
+            <ItemWrap key={item.id} onClick={() => window.open(item.url)}>
+              <img src={item.image} alt={item.subject} />
+              <ItemTitle>{item.subject}</ItemTitle>
             </ItemWrap>
           ))}
         </>

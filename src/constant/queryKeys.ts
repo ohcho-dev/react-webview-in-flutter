@@ -20,6 +20,7 @@ export const queryKeys = {
   surveyAnswerList: "survey-answer-list",
   videoAssignmentResult: "video-assignment-result",
   userInfo: "user-info",
+  homeData: "home-data",
 };
 
 export const mutationKeys = {};
