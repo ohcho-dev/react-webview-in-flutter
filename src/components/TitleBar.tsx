@@ -6,7 +6,6 @@ import {
   childrenListState,
   openBottomModalState,
   selectedChildInfoState,
-  useShareState,
 } from "../recoil/atom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
@@ -86,9 +85,6 @@ const MypageTitleWrap = styled.div`
   background: #fff;
   padding: 3.5rem 2.5rem 2rem;
   border-bottom: solid 1rem #f6f6f6;
-  position: fixed;
-  top: 0;
-  left: 0;
 `;
 
 const Title = styled.div`
@@ -170,7 +166,7 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   goBackURL = "",
 }) => {
   const navigate = useNavigate();
-  console.log(goBackURL);
+
   return (
     <TitleBarWrap border={border} style={{ ...style }}>
       <HistoryBackIconWrap

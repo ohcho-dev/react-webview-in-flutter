@@ -12,7 +12,7 @@ const Devider = styled.div`
 const HomePage = () => {
   return (
     <>
-      <LayoutMainPage marginTop="-6rem">
+      <LayoutMainPage>
         <ChildInfo />
         <Devider />
         <RecommendActivity />
