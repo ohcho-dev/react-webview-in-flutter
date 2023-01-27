@@ -2,7 +2,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Button from "../../../components/common/Button";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { BottomBtnWrap } from "../../ProgramPage/components/styled";
 
 const floatingMove = keyframes`
 	 0%{transform:translate(0,0);}
@@ -35,6 +34,7 @@ const ApplyCoachingSuccess = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
+      handleBackBtnClick={() => navigate("/program")}
       bottomBtn
       style={{ overflow: "hidden" }}
       bottomBtnElement={

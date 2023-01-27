@@ -156,14 +156,14 @@ interface DetailTitleBarProps {
   border?: boolean;
   style?: object;
   leftBtn?: React.ReactNode;
-  goBackURL?: string;
+  handleBackBtnClick?: () => void | undefined;
 }
 
 export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   border,
   style,
   leftBtn,
-  goBackURL = "",
+  handleBackBtnClick,
 }) => {
   const navigate = useNavigate();
 
@@ -171,7 +171,7 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
     <TitleBarWrap border={border} style={{ ...style }}>
       <HistoryBackIconWrap
         onClick={() => {
-          goBackURL ? navigate(goBackURL) : navigate(-1);
+          handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
         }}
       >
         <img src="/images/icon-back.svg" width="100%" />
