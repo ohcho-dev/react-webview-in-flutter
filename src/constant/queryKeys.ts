@@ -21,6 +21,7 @@ export const queryKeys = {
   videoAssignmentResult: "video-assignment-result",
   userInfo: "user-info",
   homeData: "home-data",
+  updateSelectedChildId: "update-selected-child-id",
 };
 
 export const mutationKeys = {};

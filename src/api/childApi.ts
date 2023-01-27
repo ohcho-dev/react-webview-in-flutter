@@ -34,3 +34,11 @@ export const updateChild = (body: {
 }) => {
   return request({ method: "PUT", url: `/v1/children/${body.id}`, data: body });
 };
+
+export const updateSelectedChildIdApi = (body: { id: string }) => {
+  return request({
+    method: "POST",
+    url: `/v1/children/${body.id}/selected`,
+    data: body,
+  });
+};
