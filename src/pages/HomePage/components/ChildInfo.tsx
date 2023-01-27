@@ -1,11 +1,13 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { selectedChildInfoState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
 import { NativeFunction } from "../../../utils/NativeFunction";
-import { childType } from "../../../utils/type";
+import { HomeData } from "../../../utils/type";
 
 interface ChildInfoType {
-  childData: childType;
+  childData: HomeData;
 }
 
 const ChildInfoWrap = styled.div`
@@ -109,6 +111,7 @@ const NoticeDesc = styled.div`
   margin-top: 0.8rem;
 
   span {
+    display: inline-block;
     font-weight: 400;
     font-size: 1.4rem;
     line-height: 2rem;
@@ -116,6 +119,12 @@ const NoticeDesc = styled.div`
     color: rgba(10, 10, 10, 0.5);
     list-style-type: disc;
     position: relative;
+    margin-bottom: 0.8rem;
+    word-break: keep-all;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
 
     &:before {
       content: ".";
@@ -129,6 +138,8 @@ const NoticeDesc = styled.div`
   }
 `;
 const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
+  const { id } = useRecoilValue(selectedChildInfoState);
+
   return (
     <ChildInfoWrap>
       <FlexBox>
@@ -144,7 +155,7 @@ const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
         </div>
         {!childData.image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${childData.id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${id}`)}
           >
             <img src="/images/profile-default.svg" alt="프로필 사진" />
             <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
@@ -152,7 +163,7 @@ const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
         )}
         {childData.image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${childData.id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${id}`)}
           >
             <UploadImage src={childData.image} alt="프로필 사진 테두리" />
           </ProfileImageWrap>
@@ -160,8 +171,11 @@ const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
       </FlexBox>
       <NoticeWrap>
         <NoticeTitle>이 시기에 아이는</NoticeTitle>
+
         <NoticeDesc>
-          <span>스스로 몸을 움직여 주변을 탐색하고 학습을 시작하는 시기입니다.</span>
+          {childData.month_level_info.map((item, key) => (
+            <span key={key}>{item}</span>
+          ))}
         </NoticeDesc>
       </NoticeWrap>
     </ChildInfoWrap>

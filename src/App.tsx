@@ -58,6 +58,7 @@ const App: React.FC = () => {
   const [childrenList, setChildrenList] = useRecoilState(childrenListState);
   const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
+  const [imageUpload, setImageUpload] = useState(false);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -65,13 +66,20 @@ const App: React.FC = () => {
     script.async = true;
     script.innerHTML = `
       function reactRefrash(value) {
-        window.location.reload();
+        setImageUpload(true);
       }
     `;
     document.body.appendChild(script);
   }, []);
 
-  useQueries([
+  useEffect(() => {
+    if (imageUpload) {
+      getBaseData[0].refetch();
+      setImageUpload(false);
+    }
+  }, [imageUpload]);
+
+  const getBaseData = useQueries([
     // {
     //   queryKey: queryKeys.loginDev,
     //   queryFn: () => getLoginDev(),
@@ -95,7 +103,6 @@ const App: React.FC = () => {
         }
       },
       enabled: !!Cookies.get("token"),
-      refetchInterval: 1000,
     },
     {
       queryKey: queryKeys.commonCodeList,
@@ -113,6 +120,7 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
   ]);
+
   useEffect(() => {
     if (params.get("token")) {
       Cookies.set("token", String(params.get("token")));

@@ -150,3 +150,12 @@ export interface VideoAssignmentResultType {
   video: string;
   video_at: string;
 }
+
+export interface HomeData {
+  birth_date: string;
+  days_from_birth: number;
+  image: string;
+  month_level_content: object[];
+  month_level_info: [];
+  name: string;
+}

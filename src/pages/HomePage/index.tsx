@@ -1,7 +1,13 @@
-import { useRecoilValue } from "recoil";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+import { useQuery } from "react-query";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { getHomeData } from "../../api/homeApi";
+import { CHILD_ID_FIELD } from "../../constant/localStorage";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import { selectedChildInfoState } from "../../recoil/atom";
+import { childrenListState, selectedChildInfoState } from "../../recoil/atom";
 import ChildInfo from "./components/ChildInfo";
 import RecommendActivity from "./components/RecommendActivity";
 
@@ -12,14 +18,23 @@ const Devider = styled.div`
 `;
 
 const HomePage = () => {
-  const childData = useRecoilValue(selectedChildInfoState);
+  const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
+  const [childrenList, setChildrenList] = useRecoilState(childrenListState);
+  const { data, refetch } = useQuery(queryKeys.homeData, () => getHomeData(), {
+    enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
+    refetchOnWindowFocus: true,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [selectedChild.id]);
 
   return (
     <>
       <LayoutMainPage marginTop="-6rem">
-        <ChildInfo childData={childData} />
+        <ChildInfo childData={data} />
         <Devider />
-        <RecommendActivity />
+        <RecommendActivity childData={data} />
       </LayoutMainPage>
     </>
   );
