@@ -8,7 +8,6 @@ import {
   CoachingPage,
   ProgramPage,
   MyPage,
-  DetailPage,
   ProgramDetailPage,
 } from "./pages/index";
 import AppliedProgramList from "./pages/MypageDetailPage/AppliedProgramList";
@@ -75,14 +74,6 @@ export const RouterConfig = [
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
-    },
-  },
-  {
-    path: "/home/detail",
-    element: <DetailPage />,
-    sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
     },
   },
   {

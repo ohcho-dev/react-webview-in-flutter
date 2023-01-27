@@ -59,3 +59,10 @@ export const getUserInfo = () => {
     url: "v1/auth/me",
   });
 };
+
+export const logoutApi = () => {
+  return request({
+    method: "POST",
+    url: "v1/auth/logout",
+  });
+};

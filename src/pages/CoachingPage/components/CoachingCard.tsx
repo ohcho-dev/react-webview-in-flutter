@@ -58,11 +58,11 @@ const CoachingCard = (props: { coaching: appliedCoachingType }): JSX.Element => 
   const { status, coaching_name, start_date, end_date } = props.coaching;
 
   return (
-    <CoachingCardWrapper progressing={Dday(end_date) >= 30 ? true : false}>
+    <CoachingCardWrapper progressing={Dday(end_date) >= 0}>
       <img alt="coaching-thumnail" src="/images/banner-example.png" />
       <CoachingTitle>{coaching_name}</CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
-        <ProgressChip progressing={Dday(end_date) >= 0 ? true : false}>
+        <ProgressChip progressing={Dday(end_date) >= 0}>
           {Dday(end_date) > 0 ? "진행중" : "종료"}
         </ProgressChip>
         <Duration>{`${getDate(start_date)}~${getDate(end_date)}`}</Duration>

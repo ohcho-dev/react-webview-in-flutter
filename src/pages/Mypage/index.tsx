@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import styled from "styled-components";
-import { Withdrawal } from "../../api/mypage";
+import { logoutApi, Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
 import { useLayoutEffect, useState } from "react";
@@ -12,9 +12,9 @@ const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
   background: #fff;
 
-  &:nth-child(3),
-  &:nth-child(7),
-  &:nth-child(8) {
+  &:nth-child(4),
+  &:nth-child(8),
+  &:nth-child(9) {
     border-bottom: solid 1rem #f6f6f6;
 
     > div {
@@ -56,7 +56,7 @@ const IconTextGroup = styled.div`
 const BottomArea = styled.div`
   width: 100%;
   background: #f6f6f6;
-  padding: 0 2.5rem 4rem;
+  padding: 0 2.5rem;
 
   text-align: right;
   span {
@@ -162,8 +162,9 @@ const MyPage = () => {
       console.error("flutterInAppWebViewPlatformReady not Ready!!");
     }
   };
-  const clickLogout = () => {
-    NativeFunction("routeNativeScreen", "/logout");
+  const clickLogout = async () => {
+    await logoutApi();
+    await NativeFunction("routeNativeScreen", "/logout");
   };
 
   const clickWithDrawal = async () => {
@@ -172,7 +173,7 @@ const MyPage = () => {
   };
 
   return (
-    <LayoutMainPage marginTop="7.9rem" bgColor="#f6f6f6" hideTitleBar>
+    <LayoutMainPage bgColor="#f6f6f6" hideTitleBar>
       <MypageTitleBar />
       {linkItem.map(item => (
         <LinkItemWrap

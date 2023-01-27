@@ -158,8 +158,8 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   );
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {
-      navigate("/program/class/apply-coaching/success", { state: { id: res.purchase_id } });
       setOpenBottomModal(!openBottomModal);
+      navigate("/program/class/apply-coaching/success", { state: { id: res.purchase_id } });
     },
     onError: error => {
       throw error;
@@ -247,11 +247,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
           </div>
         </ChildInfoWrap>
         <ButtonWrap>
-          <Button
-            theme="white"
-            onClick={() => setOpenBottomModal(!openBottomModal)}
-            content={"취소"}
-          />
+          <Button theme="white" onClick={() => setOpenBottomModal(false)} content={"취소"} />
           <Button theme="black" content="신청하기" onClick={handleApplyBtnClick} />
         </ButtonWrap>
       </CustomBottomModal>

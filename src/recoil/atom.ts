@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { AnswerType, QuestionnaireType } from "../utils/type";
+import { AnswerType, HomeData, QuestionnaireType } from "../utils/type";
 
 export const commonCodeState = atom({
   key: "commonCodeList",
@@ -22,6 +22,17 @@ export const selectedChildInfoState = atom({
     gender: "",
     due_date: "",
     birth_date: "",
+  },
+});
+export const selectedHomeDataState = atom<HomeData>({
+  key: "selectedHomeData",
+  default: {
+    birth_date: "",
+    days_from_birth: 0,
+    image: "",
+    month_level_content: [],
+    month_level_info: [],
+    name: "",
   },
 });
 

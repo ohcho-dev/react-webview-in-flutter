@@ -9,7 +9,7 @@ import "./scss/_slideTransition.scss";
 import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
-import { useQueries, useQueryErrorResetBoundary } from "react-query";
+import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-query";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   childrenKeyState,
@@ -17,6 +17,7 @@ import {
   commonCodeState,
   mainPageScrollValueState,
   selectedChildInfoState,
+  selectedHomeDataState,
 } from "./recoil/atom";
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
@@ -26,11 +27,14 @@ import { getCommonCodeList } from "./api/commonApi";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { getLoginDev } from "./api/loginDevApi";
+import { getUserInfo } from "./api/mypage";
+import { getHomeData } from "./api/homeApi";
 
 let oldLocation: any = null;
 
 const App: React.FC = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const params = new URLSearchParams(window.location.search);
   const navigationType = useNavigationType();
   const location = useLocation();
@@ -38,56 +42,42 @@ const App: React.FC = () => {
   const { reset } = useQueryErrorResetBoundary();
 
   const { pathname } = useLocation();
-  const [pathState, setPathState] = useState(0);
-  const [firstPath, setFirstPath] = useState("");
   const [secondPath, setSecontPath] = useState("");
-  const [thirdPath, setThirdPath] = useState("");
-  const [token, setToken] = useState("");
-  useEffect(() => {
-    let count = pathname.split("/").length - 1;
-    let firstPath = pathname.split("/")[1];
-    let secondPath = pathname.split("/")[2];
-    let thirdPath = pathname.split("/")[3];
-    setPathState(count);
-    setFirstPath(firstPath);
-    secondPath && setSecontPath(secondPath);
-    thirdPath && setThirdPath(thirdPath);
-  }, [pathname]);
 
+  const [token, setToken] = useState("");
   const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
+  const [selectedHomeData, setSelectedHomeData] = useRecoilState(selectedHomeDataState);
   const [childrenList, setChildrenList] = useRecoilState(childrenListState);
   const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const [imageUpload, setImageUpload] = useState(false);
 
   useEffect(() => {
-    const script = document.createElement("script");
-    script.type = "text/javascript";
-    script.async = true;
-    script.innerHTML = `
-      function reactRefrash(value) {
-        setImageUpload(true);
-      }
-    `;
-    document.body.appendChild(script);
-  }, []);
+    let paramsToken = params.get("token");
+    if (paramsToken) {
+      Cookies.set("token", String(paramsToken));
+      setToken(String(paramsToken));
+    }
+  }, [params]);
 
   useEffect(() => {
-    if (imageUpload) {
-      getBaseData[0].refetch();
-      setImageUpload(false);
+    if (token) {
+      if (params.get("token") === token) {
+        let path = window.location.pathname;
+        path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
+      }
     }
-  }, [imageUpload]);
+  }, [token]);
 
   const getBaseData = useQueries([
-    // {
-    //   queryKey: queryKeys.loginDev,
-    //   queryFn: () => getLoginDev(),
-    //   onSuccess: async (loginToken: { access_token: string }) => {
-    //     process.env.NODE_ENV === "development" &&
-    //       (await Cookies.set("token", loginToken.access_token));
-    //   },
-    // },
+    {
+      queryKey: queryKeys.userInfo,
+      queryFn: () => getUserInfo(),
+      onSuccess: (data: any) => {
+        window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
+      },
+      enabled: !!Cookies.get("token"),
+    },
     {
       queryKey: queryKeys.childrenList,
       queryFn: () => getChildrenList(),
@@ -96,13 +86,20 @@ const App: React.FC = () => {
           let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
           setSelectedChild(data.filter((child: childType) => child.id.toString() === id)[0]);
 
-          if (!window.localStorage.getItem(CHILD_ID_FIELD)) {
-            window.localStorage.setItem(CHILD_ID_FIELD, id);
-          }
           setChildrenList(data);
         }
       },
       enabled: !!Cookies.get("token"),
+    },
+    {
+      queryKey: queryKeys.homeData,
+      queryFn: () => getHomeData(),
+      onSuccess: (data: any) => {
+        if (data) {
+          setSelectedHomeData(data);
+        }
+      },
+      enabled: !!selectedChild && !!window.localStorage.getItem(CHILD_ID_FIELD),
     },
     {
       queryKey: queryKeys.commonCodeList,
@@ -122,25 +119,16 @@ const App: React.FC = () => {
   ]);
 
   useEffect(() => {
-    if (params.get("token")) {
-      Cookies.set("token", String(params.get("token")));
-    }
-  }, [params]);
+    let secondPath = pathname.split("/")[2];
+    secondPath && setSecontPath(secondPath);
+  }, [pathname]);
 
   useEffect(() => {
-    if (Cookies.get("token")) {
-      setToken(String(params.get("token")));
-    }
-  }, [Cookies.get("token")]);
+    window.addEventListener("refetchChildData", () => {
+      queryClient.invalidateQueries(queryKeys.childrenList);
+    });
+  }, []);
 
-  useEffect(() => {
-    if (token) {
-      if (params.get("token") === token) {
-        let path = window.location.pathname;
-        path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
-      }
-    }
-  }, [token]);
   useEffect(() => {
     if (childrenList.length) {
       let profileKey = Object.keys(childrenList).find(
@@ -167,7 +155,6 @@ const App: React.FC = () => {
     state: null;
     key: string;
   }) => {
-    // 동적페이지의 경우 비교 로직이 필요하지만 무조건 상세페이지로 사용될 것으로 예상되어 따로 로직을 만들지 않고 default 값을 bottom으로 지정하여 해결
     const matchedRoute =
       location &&
       RouterConfig.find(config => new RegExp(`^${config.path}$`).test(location.pathname));
