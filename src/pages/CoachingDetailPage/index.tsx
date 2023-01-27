@@ -83,6 +83,8 @@ const CoachingDetailPage = () => {
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
 
+  console.log(coachingInfo);
+
   return (
     <>
       <PageTitleWrap>

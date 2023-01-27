@@ -172,7 +172,7 @@ const MyPage = () => {
   };
 
   return (
-    <LayoutMainPage marginTop="7.9rem" bgColor="#f6f6f6" hideTitleBar>
+    <LayoutMainPage bgColor="#f6f6f6" hideTitleBar>
       <MypageTitleBar />
       {linkItem.map(item => (
         <LinkItemWrap

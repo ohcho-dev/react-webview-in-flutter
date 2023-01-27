@@ -31,7 +31,7 @@ const HomePage = () => {
 
   return (
     <>
-      <LayoutMainPage marginTop="-6rem">
+      <LayoutMainPage>
         <ChildInfo childData={data} />
         <Devider />
         <RecommendActivity childData={data} />

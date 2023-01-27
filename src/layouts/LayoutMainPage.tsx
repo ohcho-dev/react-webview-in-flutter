@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import BottomNav from "../components/BottomNav";
 import LayoutBasePage from "./LayoutBasePage";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   childrenListState,
   mainPageScrollValueState,
@@ -21,13 +21,12 @@ const MainPage = styled.main`
   height: ${(prop: { marginTop?: string }) =>
     prop.marginTop ? `calc(100vh - 6rem - ${prop.marginTop})` : "calc(100vh - 6rem)"};
   position: fixed;
-  top: 6rem;
+  top: ${(prop: MainPageStyleProps) => (prop.hideTitleBar ? "0rem" : "6rem")};
   left: 0;
   z-index: 20;
   overflow-y: scroll;
   overflow-x: hidden;
-  margin-top: ${(prop: { marginTop?: string; bgColor?: string }) => prop.marginTop || "0"};
-  background: ${(prop: { bgColor?: string }) => prop.bgColor || "#fff"};
+  background: ${(prop: MainPageStyleProps) => prop.bgColor || "#fff"};
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 
@@ -49,6 +48,12 @@ interface LayoutMainPageProps {
   bgColor?: string;
   hideTitleBar?: boolean;
   style?: object;
+}
+
+interface MainPageStyleProps {
+  bgColor?: string;
+  marginTop?: string;
+  hideTitleBar?: boolean;
 }
 
 const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
@@ -92,6 +97,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
         onScroll={(e: React.UIEvent<HTMLElement>) => {
           setScroll(e.currentTarget.scrollTop);
         }}
+        hideTitleBar={hideTitleBar}
       >
         <Content>{children}</Content>
       </MainPage>
