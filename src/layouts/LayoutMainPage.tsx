@@ -16,8 +16,7 @@ import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
 import MainTitleBar from "../components/TitleBar";
 import { useLocation } from "react-router-dom";
-import { useMutation, useQuery } from "react-query";
-import { queryKeys } from "../constant/queryKeys";
+import { useMutation } from "react-query";
 import { updateSelectedChildIdApi } from "../api/childApi";
 
 const MainPage = styled.main`
@@ -92,8 +91,8 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
         <MainTitleBar
           style={
             scroll === 0 && pathname === "/home"
-              ? { background: "rgba(238, 249, 247, 0)", borderBottom: "0" }
-              : { background: "white" }
+              ? { background: "rgba(238, 249, 247, 0)", borderBottom: "0", zIndex: 21 }
+              : { background: "white", zIndex: 22 }
           }
         />
       )}
