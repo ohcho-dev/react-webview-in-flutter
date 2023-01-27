@@ -25,6 +25,7 @@ const MainPage = styled.main`
     prop.marginTop ? `calc(100vh - 6rem - ${prop.marginTop})` : "calc(100vh - 6rem)"};
   position: fixed;
   top: ${(prop: MainPageStyleProps) => (prop.hideTitleBar ? "0rem" : "6rem")};
+  margin-top: ${(prop: { marginTop?: string }) => prop.marginTop};
   left: 0;
   z-index: 20;
   overflow-y: scroll;

@@ -12,9 +12,9 @@ const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
   background: #fff;
 
-  &:nth-child(3),
-  &:nth-child(7),
-  &:nth-child(8) {
+  &:nth-child(4),
+  &:nth-child(8),
+  &:nth-child(9) {
     border-bottom: solid 1rem #f6f6f6;
 
     > div {
@@ -56,7 +56,7 @@ const IconTextGroup = styled.div`
 const BottomArea = styled.div`
   width: 100%;
   background: #f6f6f6;
-  padding: 0 2.5rem 4rem;
+  padding: 0 2.5rem;
 
   text-align: right;
   span {
