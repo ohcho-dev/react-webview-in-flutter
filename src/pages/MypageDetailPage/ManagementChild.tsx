@@ -25,33 +25,30 @@ const ChildrenListWrap = styled.div`
 
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0.8rem;
+`;
 
-  div {
-    display: flex;
-    align-items: center;
+const ChildInfoSection = styled.div`
+  display: grid;
+  align-items: center;
+  grid-template-columns: 3rem 6rem auto;
 
-    img {
-    }
+  width: 100%;
 
-    div {
-      font-weight: 400;
-      font-size: 1.6rem;
-      line-height: 1.9rem;
-      color: #000000;
-      margin-left: 0.8rem;
-      display: flex;
-      align-items: center;
-    }
-  }
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 1.9rem;
+  color: #000000;
+  margin-left: 0.8rem;
 `;
 
 const ChildName = styled.span`
   display: inline-block;
   overflow: hidden;
-  max-width: 8rem;
   white-space: nowrap;
   text-overflow: ellipsis;
+
   margin-right: 0.5rem;
+  margin-left: 1rem;
 `;
 
 export const ManagementChild = () => {
@@ -82,15 +79,13 @@ export const ManagementChild = () => {
             key={index}
             onClick={() => navigate(`/my/management-child/${child.id}`, { replace: true })}
           >
-            <div>
+            <ChildInfoSection>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />
-              <div>
-                <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
-                <span>
-                  ({child.birth_date}) {getGender(child.gender)}아
-                </span>
-              </div>
-            </div>
+              <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
+              <span>
+                ({child.birth_date}) {getGender(child.gender)}아
+              </span>
+            </ChildInfoSection>
             <img src="/images/icon-mypage-arrow.svg" />
           </ChildrenListWrap>
         ))}
