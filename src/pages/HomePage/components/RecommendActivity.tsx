@@ -1,10 +1,9 @@
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { HomeData } from "../../../utils/type";
+import { selectedHomeDataState } from "../../../recoil/atom";
 import UseEmoji from "../../../utils/UseEmoji";
-interface HomeDataType {
-  childData: HomeData;
-}
+
 const ActivityWrap = styled.div`
   padding: 3.5rem 0;
 `;
@@ -105,8 +104,9 @@ const BannerDesc = styled.div`
   color: rgba(10, 10, 10, 0.8);
 `;
 
-const RecommendActivity: React.FC<HomeDataType> = ({ childData }) => {
+const RecommendActivity = () => {
   const navigate = useNavigate();
+  const homeData = useRecoilValue(selectedHomeDataState);
 
   return (
     <ActivityWrap>
@@ -116,7 +116,7 @@ const RecommendActivity: React.FC<HomeDataType> = ({ childData }) => {
       </ActivityTitle>
       <ActivityContent>
         <>
-          {childData.month_level_content.map((item: any) => (
+          {homeData.month_level_content.map((item: any) => (
             <ItemWrap key={item.id} onClick={() => window.open(item.url)}>
               <img src={item.image} alt={item.subject} />
               <ItemTitle>{item.subject}</ItemTitle>

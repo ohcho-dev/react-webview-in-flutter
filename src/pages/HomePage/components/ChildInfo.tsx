@@ -1,14 +1,14 @@
+import { useEffect } from "react";
+import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { selectedChildInfoState } from "../../../recoil/atom";
+import { flutterInAppWebViewPlatformReady } from "../../..";
+import { queryKeys } from "../../../constant/queryKeys";
+import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
 import { NativeFunction } from "../../../utils/NativeFunction";
 import { HomeData } from "../../../utils/type";
-
-interface ChildInfoType {
-  childData: HomeData;
-}
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;
@@ -137,35 +137,41 @@ const NoticeDesc = styled.div`
     }
   }
 `;
-const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
-  const { id } = useRecoilValue(selectedChildInfoState);
+const ChildInfo = () => {
+  const queryClient = useQueryClient();
+  const homeData = useRecoilValue(selectedHomeDataState);
+  const selectedChild = useRecoilValue(selectedChildInfoState);
+
+  useEffect(() => {
+    queryClient.invalidateQueries(queryKeys.homeData);
+  }, [selectedChild.id]);
 
   return (
     <ChildInfoWrap>
       <FlexBox>
         <div>
           <BirthDateChip>
-            탄생일<span>{childData.birth_date && getDate(childData.birth_date)}</span>
+            탄생일<span>{selectedChild.birth_date && getDate(selectedChild.birth_date)}</span>
           </BirthDateChip>
           <DdayLabel>우리아이 태어난지</DdayLabel>
           <DdayValue>
-            <span>{childData.birth_date && Math.abs(Dday(childData.birth_date)) + 1}</span>
+            <span>{selectedChild.birth_date && Math.abs(Dday(selectedChild.birth_date)) + 1}</span>
             <span>일</span>
           </DdayValue>
         </div>
-        {!childData.image && (
+        {!selectedChild.image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${selectedChild.id}`)}
           >
             <img src="/images/profile-default.svg" alt="프로필 사진" />
             <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
           </ProfileImageWrap>
         )}
-        {childData.image && (
+        {selectedChild.image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${selectedChild.id}`)}
           >
-            <UploadImage src={childData.image} alt="프로필 사진 테두리" />
+            <UploadImage src={selectedChild.image} alt="프로필 사진" />
           </ProfileImageWrap>
         )}
       </FlexBox>
@@ -173,7 +179,7 @@ const ChildInfo: React.FC<ChildInfoType> = ({ childData }) => {
         <NoticeTitle>이 시기에 아이는</NoticeTitle>
 
         <NoticeDesc>
-          {childData.month_level_info.map((item, key) => (
+          {homeData.month_level_info.map((item, key) => (
             <span key={key}>{item}</span>
           ))}
         </NoticeDesc>
