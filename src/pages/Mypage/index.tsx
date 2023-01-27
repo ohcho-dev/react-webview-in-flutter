@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import styled from "styled-components";
-import { Withdrawal } from "../../api/mypage";
+import { logoutApi, Withdrawal } from "../../api/mypage";
 import { NativeFunction } from "../../utils/NativeFunction";
 import CustomModal from "../../components/common/CustomModal";
 import { useLayoutEffect, useState } from "react";
@@ -162,8 +162,9 @@ const MyPage = () => {
       console.error("flutterInAppWebViewPlatformReady not Ready!!");
     }
   };
-  const clickLogout = () => {
-    NativeFunction("routeNativeScreen", "/logout");
+  const clickLogout = async () => {
+    await logoutApi();
+    await NativeFunction("routeNativeScreen", "/logout");
   };
 
   const clickWithDrawal = async () => {
