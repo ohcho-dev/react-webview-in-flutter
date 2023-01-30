@@ -78,12 +78,14 @@ const ProceedStatus = styled.span`
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
-    getAppliedCoachingInfo(id),
+  const { data: coachingInfo } = useQuery(
+    queryKeys.appliedCoachingInfo,
+    () => getAppliedCoachingInfo(id),
+    {
+      refetchOnWindowFocus: true,
+    },
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
-
-  console.log(coachingInfo);
 
   return (
     <>
@@ -97,8 +99,8 @@ const CoachingDetailPage = () => {
       </PageTitleWrap>
       <ShadowBox />
       <LayoutDetailPage
-        handleBackBtnClick={() => navigate("/coaching")}
         style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}
+        handleBackBtnClick={() => navigate("/coaching")}
       >
         <ContentTitle emoji="flag-in-hole" name="결과지" />
         {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (

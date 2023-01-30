@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -75,7 +75,7 @@ export const ManagementChild = () => {
         {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
-            onClick={() => navigate(`/my/management-child/${child.id}`, { replace: true })}
+            onClick={() => navigate(`/my/management-child/${child.id}`)}
           >
             <ChildInfoSection>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />

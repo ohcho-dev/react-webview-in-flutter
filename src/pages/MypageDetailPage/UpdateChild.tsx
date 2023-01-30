@@ -305,9 +305,7 @@ const UpdateChild = () => {
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
-        toggleModal={() => {
-          navigate("/my/management-child", { replace: true });
-        }}
+        toggleModal={() => setOpenModal(!openModal)}
         okBtnName="확인"
         okBtnClick={() => {
           navigate("/my/management-child", { replace: true });
