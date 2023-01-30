@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getChildrenList } from "../../api/childApi";
-import BottomFixBtnWrap from "../../components/common/BottomFixBtnWrap";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
@@ -64,7 +63,12 @@ export const ManagementChild = () => {
   };
 
   return (
-    <LayoutDetailPage>
+    <LayoutDetailPage
+      bottomBtn
+      bottomBtnElement={
+        <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
+      }
+    >
       <PageTitle title="아이 관리" />
       <PageLayout>
         {childrenList.map((child: childType, index: number) => (
@@ -83,10 +87,6 @@ export const ManagementChild = () => {
           </ChildrenListWrap>
         ))}
       </PageLayout>
-
-      <BottomFixBtnWrap>
-        <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
-      </BottomFixBtnWrap>
 
       <CustomModal
         topImage={

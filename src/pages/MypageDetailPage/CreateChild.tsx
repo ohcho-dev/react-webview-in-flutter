@@ -7,7 +7,6 @@ import Button from "../../components/common/Button";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { createChildType } from "../../utils/type";
-import { BottomBtnWrap } from "../ProgramPage/components/styled";
 import PageTitle from "./components/PageTitle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -181,7 +180,10 @@ const CreateChild = () => {
   });
 
   return (
-    <LayoutDetailPage style={{ zIndex: 110 }}>
+    <LayoutDetailPage
+      bottomBtn
+      bottomBtnElement={<Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />}
+    >
       <PageTitle title={"아이 등록"} />
       <PageLayout>
         <FormWrap>
@@ -236,9 +238,6 @@ const CreateChild = () => {
           )}
         </FormWrap>
       </PageLayout>
-      <BottomBtnWrap>
-        <Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />
-      </BottomBtnWrap>
 
       <CustomModal
         title="아이는 최대 5명 이상 등록할 수 없습니다."

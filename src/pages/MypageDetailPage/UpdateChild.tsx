@@ -212,7 +212,7 @@ const UpdateChild = () => {
     return <ForwardedInput {...props} ref={ref} />;
   });
   return (
-    <LayoutDetailPage style={{ zIndex: 110 }}>
+    <LayoutDetailPage>
       <PageTitle title={"아이 정보 수정"} />
       <PageLayout>
         <FormWrap>

@@ -134,7 +134,7 @@ const QuestionnaireForm = (): JSX.Element => {
     <>
       <LayoutDetailPage
         hideTitleBar
-        style={{ borderBottom: "none", zIndex: 110, top: 0, height: "calc(100vh - 7.4rem)" }}
+        style={{ borderBottom: "none", top: 0, height: "calc(100vh - 7.4rem)" }}
         bottomBtn
         bottomBtnElement={
           <Button
