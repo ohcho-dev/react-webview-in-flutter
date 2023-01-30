@@ -68,6 +68,7 @@ export const ManagementChild = () => {
       bottomBtnElement={
         <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
       }
+      handleBackBtnClick={() => navigate("/my")}
     >
       <PageTitle title="아이 관리" />
       <PageLayout>

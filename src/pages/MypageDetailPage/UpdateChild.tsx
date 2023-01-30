@@ -211,8 +211,17 @@ const UpdateChild = () => {
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });
+
+  const handleBackBtn = () => {
+    if (updateStatus) {
+      setOpenBackModal(!openBackModal);
+    } else {
+      navigate("/my/management-child", { replace: true });
+    }
+  };
+
   return (
-    <LayoutDetailPage>
+    <LayoutDetailPage handleBackBtnClick={handleBackBtn}>
       <PageTitle title={"아이 정보 수정"} />
       <PageLayout>
         <FormWrap>
