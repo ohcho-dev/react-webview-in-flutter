@@ -10,6 +10,10 @@ const ActivityWrap = styled.div`
 `;
 const ActivityTitle = styled.div`
   padding: 0 2rem 2.5rem;
+
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -115,8 +119,7 @@ const RecommendActivity = () => {
       {homeData.month_level_content.length > 0 && (
         <>
           <ActivityTitle>
-            <UseEmoji emojiName="thumbs-up" />
-            <span>이 시기에 도움이 되는 활동</span>
+            👍 <span>이 시기에 도움이 되는 활동</span>
           </ActivityTitle>
           <ActivityContent>
             <>
