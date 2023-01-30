@@ -63,13 +63,6 @@ export const ManagementChild = () => {
     navigate("/my/management-child/register", { replace: true });
   };
 
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-      navigate("/my", { replace: true });
-    };
-  }, []);
-
   return (
     <LayoutDetailPage>
       <PageTitle title="아이 관리" />

@@ -105,13 +105,6 @@ const CreateChild = () => {
     },
   });
 
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-      navigate("/my/management-child", { replace: true });
-    };
-  }, []);
-
   //   생일 날짜 string으로 변환
   useEffect(() => {
     setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });

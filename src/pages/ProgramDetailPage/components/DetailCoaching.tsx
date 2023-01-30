@@ -195,6 +195,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   return (
     <>
       <LayoutDetailPage
+        handleBackBtnClick={() => navigate("/program")}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />

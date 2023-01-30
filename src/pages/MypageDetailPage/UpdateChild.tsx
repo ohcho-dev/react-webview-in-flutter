@@ -101,13 +101,6 @@ const UpdateChild = () => {
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-      navigate("/my/management-child", { replace: true });
-    };
-  }, []);
-
-  useEffect(() => {
     if (updateStatus) {
       window.history.pushState(null, "", window.location.href);
       window.onpopstate = function () {
