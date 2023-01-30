@@ -181,6 +181,7 @@ const CreateChild = () => {
 
   return (
     <LayoutDetailPage
+      handleBackBtnClick={() => navigate("/my/management-child")}
       bottomBtn
       bottomBtnElement={<Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />}
     >
