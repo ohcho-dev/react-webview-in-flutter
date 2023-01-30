@@ -136,7 +136,7 @@ const RecommendActivity = () => {
       <LinkBanner onClick={() => navigate("/program")}>
         <BannerTitle>우리 아이 잘 자라고 있는걸까?</BannerTitle>
         <BannerDesc>발달에 맞는 전문 코칭을 받아보세요.</BannerDesc>
-        <img src="/images/banner-home.svg" alt="프로그램 바로가기" />
+        <img src="/images/banner-home.png" alt="프로그램 바로가기" />
       </LinkBanner>
     </ActivityWrap>
   );

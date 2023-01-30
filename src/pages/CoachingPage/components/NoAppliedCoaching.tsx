@@ -43,13 +43,14 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const handleCardClick = (id: number) => {
     navigate(`/program/coaching/${id}`, { state: pathname });
   };
+
   return (
     <div>
       <InformImageSection>
         {selectedMenu === "end" ? (
-          <img alt="inform-image" src="/images/no-end-coaching-img.svg" />
+          <img alt="inform-image" src="/images/no-end-coaching-img.png" />
         ) : (
-          <img alt="inform-image" src="/images/no-applied-coaching-img.svg" />
+          <img alt="inform-image" src="/images/no-applied-coaching-img.png" />
         )}
       </InformImageSection>
       <ProgramTitle>⭐️ {selectedChildInfo.name}를 위한 코칭 추천</ProgramTitle>
