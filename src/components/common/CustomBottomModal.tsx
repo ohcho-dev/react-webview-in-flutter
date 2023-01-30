@@ -48,13 +48,6 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
   handleToggle,
   children,
 }) => {
-  const navigate = useNavigate();
-
-  const closeModal = () => {
-    handleToggle();
-    navigate(-1);
-  };
-
   // 뒤로가기 제어
   useEffect(() => {
     // 개발 환경에서는 strict mode로 인해 렌더링이 2번 진행됨에 따라 뒤로가기를 2번 해야함.
@@ -64,7 +57,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
       window.history.pushState(null, "", window.location.href); // 현재 페이지 history stack 한개 더 쌓기
       window.onpopstate = () => {
         // 뒤로가기가 실행될 경우 추가 action 등록
-        closeModal();
+        handleToggle();
       };
       return () => {
         document.getElementById("main")?.classList.remove("scroll_lock");
@@ -76,7 +69,7 @@ const CustomBottomModal: React.FC<CustomBottomModalProps> = ({
     <>
       {toggle && (
         <BottomModalWrap>
-          <Dimmed onClick={closeModal} />
+          <Dimmed onClick={handleToggle} />
           <Modal className="fadein-moveTop">{children}</Modal>
         </BottomModalWrap>
       )}

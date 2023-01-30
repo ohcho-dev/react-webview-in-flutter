@@ -14,9 +14,9 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
 import moment from "moment";
 import { ko } from "date-fns/esm/locale";
-import CustomModal from "./components/ChildUpdateModal";
 import { useRecoilValue } from "recoil";
 import { childrenListState } from "../../recoil/atom";
+import CustomModal from "../../components/common/CustomModal";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
