@@ -10,12 +10,11 @@ import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-query";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import {
   childrenKeyState,
   childrenListState,
   commonCodeState,
-  mainPageScrollValueState,
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./recoil/atom";
@@ -126,6 +125,14 @@ const App: React.FC = () => {
   useEffect(() => {
     window.addEventListener("refetchChildData", () => {
       queryClient.invalidateQueries(queryKeys.childrenList);
+    });
+
+    window.addEventListener("coachingResult", (res: any) => {
+      console.log("coaching" + res);
+    });
+
+    window.addEventListener("coachingVideoAssignment", (res: any) => {
+      console.log("video" + res);
     });
   }, []);
 

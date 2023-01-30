@@ -139,7 +139,9 @@ const CoachingDetailPage = () => {
                     `/coachingVideoDetail/${task.id}/${childInfo.id}`,
                   );
                 } else {
-                  navigate(`/coaching/videoAssignment/${task.id}`);
+                  navigate(`/coaching/videoAssignment/${task.id}`, {
+                    state: { task_id: task.id },
+                  });
                 }
               }
             }}
