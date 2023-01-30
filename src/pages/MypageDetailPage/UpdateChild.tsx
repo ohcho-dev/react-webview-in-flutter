@@ -100,15 +100,6 @@ const UpdateChild = () => {
   const inputRef = useRef(null);
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
-  useEffect(() => {
-    if (updateStatus) {
-      window.history.pushState(null, "", window.location.href);
-      window.onpopstate = function () {
-        setOpenBackModal(true);
-      };
-    }
-  }, [updateStatus]);
-
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
       setOpenModal(true);

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { selectedHomeDataState } from "../../../recoil/atom";
+import { NativeFunction } from "../../../utils/NativeFunction";
 import UseEmoji from "../../../utils/UseEmoji";
 
 const ActivityWrap = styled.div`
@@ -117,7 +118,7 @@ const RecommendActivity = () => {
       <ActivityContent>
         <>
           {homeData.month_level_content.map((item: any) => (
-            <ItemWrap key={item.id} onClick={() => window.open(item.url)}>
+            <ItemWrap key={item.id} onClick={() => NativeFunction("childRecommend", item.url)}>
               <img src={item.image} alt={item.subject} />
               <ItemTitle>{item.subject}</ItemTitle>
             </ItemWrap>
