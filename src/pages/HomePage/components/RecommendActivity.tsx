@@ -109,7 +109,7 @@ const BannerDesc = styled.div`
 const RecommendActivity = () => {
   const navigate = useNavigate();
   const homeData = useRecoilValue(selectedHomeDataState);
-  console.log(homeData);
+
   return (
     <ActivityWrap>
       {homeData.month_level_content.length > 0 && (

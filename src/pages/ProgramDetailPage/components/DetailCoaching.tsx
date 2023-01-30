@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import {
@@ -130,6 +130,7 @@ const ButtonWrap = styled.div`
 const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const navigate = useNavigate();
   const { id } = props;
+  const { state } = useLocation();
   const [favorites, setFavorites] = useState<boolean>(false);
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
@@ -191,11 +192,20 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     setOpenUsageDuration(false);
     setOpenBottomModal(false);
   };
+  console.log();
+
+  const handleBackBtn = () => {
+    if (state === "/coaching") {
+      navigate("/coaching");
+    } else if (state === "/program") {
+      navigate("/program");
+    }
+  };
 
   return (
     <>
       <LayoutDetailPage
-        handleBackBtnClick={() => navigate("/program")}
+        handleBackBtnClick={handleBackBtn}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
