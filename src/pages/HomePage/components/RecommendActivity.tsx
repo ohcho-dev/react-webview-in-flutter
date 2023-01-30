@@ -126,7 +126,7 @@ const RecommendActivity = () => {
               {homeData.month_level_content.map((item: any) => (
                 <ItemWrap
                   key={item.id}
-                  onClick={() => NativeFunction("routeNativeScreen", `/childRecommend/${item.url}`)}
+                  onClick={() => NativeFunction("routeNativeScreen", `childRecommend@${item.url}`)}
                 >
                   {item.image ? <img src={item.image} alt={item.subject} /> : "이미지가 없어요.."}
                   <ItemTitle>{item.subject}</ItemTitle>

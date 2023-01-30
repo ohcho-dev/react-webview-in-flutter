@@ -141,7 +141,7 @@ const MyPage = () => {
   const [version, setVersion] = useState("");
 
   useLayoutEffect(() => {
-    getNativeValue("/appVersion");
+    getNativeValue("appVersion");
   }, []);
 
   const getNativeValue = (value: string) => {
@@ -164,12 +164,12 @@ const MyPage = () => {
   };
   const clickLogout = async () => {
     await logoutApi();
-    await NativeFunction("routeNativeScreen", "/logout");
+    await NativeFunction("routeNativeScreen", "logout");
   };
 
   const clickWithDrawal = async () => {
     await Withdrawal();
-    await NativeFunction("routeNativeScreen", "/reset");
+    await NativeFunction("routeNativeScreen", "reset");
   };
 
   return (

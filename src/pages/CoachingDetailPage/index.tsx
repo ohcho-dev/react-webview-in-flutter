@@ -136,7 +136,7 @@ const CoachingDetailPage = () => {
                 if (task.status === "TSST_ONGOING") {
                   NativeFunction(
                     "routeNativeScreen",
-                    `/coachingVideoDetail/${task.id}/${childInfo.id}`,
+                    `coachingVideoDetail@${task.id}@${childInfo.id}`,
                   );
                 } else {
                   navigate(`/coaching/videoAssignment/${task.id}`, {
