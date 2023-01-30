@@ -129,10 +129,12 @@ const App: React.FC = () => {
 
     window.addEventListener("coachingResult", (res: any) => {
       console.log("coaching" + res);
+      console.log("coaching" + res.detail.id);
     });
 
     window.addEventListener("coachingVideoAssignment", (res: any) => {
       console.log("video" + res);
+      console.log("coaching" + res.detail.id);
     });
   }, []);
 
