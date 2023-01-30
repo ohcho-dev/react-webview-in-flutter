@@ -96,7 +96,10 @@ const CoachingDetailPage = () => {
         </ProgramStatus>
       </PageTitleWrap>
       <ShadowBox />
-      <LayoutDetailPage style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}>
+      <LayoutDetailPage
+        handleBackBtnClick={() => navigate("/coaching")}
+        style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}
+      >
         <ContentTitle emoji="flag-in-hole" name="결과지" />
         {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
           <ContentItem
