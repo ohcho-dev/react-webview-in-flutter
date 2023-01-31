@@ -6,7 +6,7 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
 import { getVideoAssignmentResult } from "../../api/coachingApi";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
@@ -205,6 +205,7 @@ const Divider = styled.div`
 const VideoAssignmentPage = (): JSX.Element => {
   const { state } = useLocation();
   const { id } = useParams();
+  const navigate = useNavigate();
   const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
   const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
@@ -232,6 +233,7 @@ const VideoAssignmentPage = (): JSX.Element => {
               "routeNativeScreen",
               `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
             );
+            navigate(-1);
           }}
         />
       }
