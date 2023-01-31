@@ -7,12 +7,11 @@ import {
   openBottomModalState,
   selectedChildInfoState,
 } from "../recoil/atom";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { queryKeys } from "../constant/queryKeys";
 import { getUserInfo } from "../api/mypage";
-import { getNotificationList } from "../api/notificationApi";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -104,6 +103,7 @@ const ChildName = styled.span`
   max-width: 13rem;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-right: 0.5rem;
 `;
 const LoginInfo = styled.div`
   display: flex;
@@ -220,7 +220,8 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
   return (
     <MypageTitleWrap>
       <Title>
-        <ChildName>{firstRegistChildInfo.name}</ChildName> <span>보호자님, 안녕하세요.</span>
+        <ChildName>{firstRegistChildInfo.name}</ChildName>
+        <span>보호자님, 안녕하세요.</span>
       </Title>
       <LoginInfo>
         <img src={icon} />
