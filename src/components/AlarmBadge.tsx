@@ -1,6 +1,11 @@
-import { useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { getNotificationList } from "../api/notificationApi";
+import { queryKeys } from "../constant/queryKeys";
+import { newNotificationFlagstate, notificationListstate } from "../recoil/atom";
+import { NotificationType } from "../utils/type";
 
 interface AlarmBadgeProps {}
 
@@ -26,9 +31,35 @@ const CustomAlarmBadge = styled.div`
 
 export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const navigate = useNavigate();
-  const [newNotification, setNewNotification] = useState(true);
+  const notificationList = useRecoilValue(notificationListstate);
+  const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
+  const { data } = useQuery(queryKeys.notificationList, getNotificationList, {
+    onSuccess: data => {
+      const previousIdArr: number[] = [];
+      let matchedIdNum: number = 0;
+
+      if (notificationList.length) {
+        notificationList.map((noti: NotificationType) => {
+          previousIdArr.push(noti.id);
+        });
+
+        data.map((noti: NotificationType) => {
+          if (previousIdArr.includes(noti.id)) {
+            matchedIdNum++;
+          }
+        });
+
+        if (data.length !== matchedIdNum) {
+          setNewNotificationFlag(true);
+        }
+      }
+    },
+  });
   return (
-    <CustomAlarmBadge newNotification={newNotification} onClick={() => navigate("/my/alarm-list")}>
+    <CustomAlarmBadge
+      newNotification={newNotificationFlag}
+      onClick={() => navigate("/my/alarm-list")}
+    >
       <img alt="badge" src="/images/badge.svg" />
       <img alt="icon-bell" src="/images/icon-bell.svg" />
     </CustomAlarmBadge>
