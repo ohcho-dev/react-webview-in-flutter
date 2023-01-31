@@ -166,3 +166,13 @@ export interface MonthContent {
   subject: string;
   url: string;
 }
+
+export interface NotificationType {
+  id: number;
+  parent_id: number;
+  type: string;
+  title: string;
+  body: string;
+  created_at: string;
+  updated_at: string;
+}

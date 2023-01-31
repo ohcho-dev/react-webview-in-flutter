@@ -81,7 +81,9 @@ const Questionnaire = (): JSX.Element => {
         <Button
           content="설문하기"
           theme="black"
-          onClick={() => navigate(`/coaching/questionnarie/form/${startOrderNum}`)}
+          onClick={() =>
+            navigate(`/coaching/questionnarie/form/${startOrderNum}`, { replace: true })
+          }
         />
       }
     >

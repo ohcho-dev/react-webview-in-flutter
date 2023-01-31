@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { selectedChildInfoState } from "../../recoil/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";

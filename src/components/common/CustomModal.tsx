@@ -126,6 +126,7 @@ const CustomModal = (props: ModalProps) => {
     }
   }, [isOpen]);
 
+
   return (
     <Modal
       isOpen={isOpen}
