@@ -96,7 +96,7 @@ const AlarmList = () => {
               <div>
                 <Title>{noti.title}</Title>
                 <Desc>{noti.body}</Desc>
-                <Date>{getDate(noti.created_at)}</Date>
+                <Date>{getDate(noti.created_at.substring(0, 10))}</Date>
               </div>
             </AlarmListWrap>
           ))
