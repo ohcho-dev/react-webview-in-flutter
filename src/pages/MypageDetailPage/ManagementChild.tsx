@@ -68,14 +68,14 @@ export const ManagementChild = () => {
       bottomBtnElement={
         <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
       }
-      handleBackBtnClick={() => navigate("/my", { replace: true })}
+      handleBackBtnClick={() => navigate("/my")}
     >
       <PageTitle title="아이 관리" />
       <PageLayout>
         {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
-            onClick={() => navigate(`/my/management-child/${child.id}`)}
+            onClick={() => navigate(`/my/management-child/${child.id}`, { replace: true })}
           >
             <ChildInfoSection>
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />

@@ -4,14 +4,16 @@ import AlarmBadge from "./AlarmBadge";
 import {
   childrenKeyState,
   childrenListState,
+  notificationListstate,
   openBottomModalState,
   selectedChildInfoState,
 } from "../recoil/atom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { queryKeys } from "../constant/queryKeys";
 import { getUserInfo } from "../api/mypage";
+import { getNotificationList } from "../api/notificationApi";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -130,6 +132,7 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const handleChildNameClick = () => {
     setOpenModal(true);
   };
+
   return (
     <TitleBarWrap border={true} style={{ ...style }}>
       <ProfileWrap>

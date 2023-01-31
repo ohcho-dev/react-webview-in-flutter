@@ -122,9 +122,9 @@ const CustomModal = (props: ModalProps) => {
   const [okBtnClickFlag, setOkBtnClickFlag] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isOpen) {
-      window.history.pushState(null, "", window.location.href);
-      window.onpopstate = () => {
+    if (isOpen) window.history.pushState(null, "", window.location.href);
+    window.onpopstate = () => {
+      if (isOpen) {
         setVisible(false);
         setTimeout(() => {
           toggleModal();
@@ -134,8 +134,9 @@ const CustomModal = (props: ModalProps) => {
             if (cancelBtnClick) cancelBtnClick();
           }
         }, 200);
-      };
-    }
+      }
+    };
+
     setVisible(isOpen);
   }, [isOpen, okBtnClickFlag]);
 

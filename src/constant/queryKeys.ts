@@ -22,6 +22,5 @@ export const queryKeys = {
   userInfo: "user-info",
   homeData: "home-data",
   updateSelectedChildId: "update-selected-child-id",
+  notificationList: "notification-list",
 };
-
-export const mutationKeys = {};
