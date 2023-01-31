@@ -4,7 +4,6 @@ import AlarmBadge from "./AlarmBadge";
 import {
   childrenKeyState,
   childrenListState,
-  notificationListstate,
   openBottomModalState,
   selectedChildInfoState,
 } from "../recoil/atom";

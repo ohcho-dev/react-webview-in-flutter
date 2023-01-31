@@ -81,12 +81,6 @@ export const mainPageScrollValueState = atom({
   default: 0,
 });
 
-// 기존에 있는 알람리스트
-export const notificationListstate = atom({
-  key: "notificationList",
-  default: [],
-});
-
 // 새로운 알람 플래그
 export const newNotificationFlagstate = atom({
   key: "newNotificationFlag",

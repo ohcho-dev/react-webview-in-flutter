@@ -1,24 +1,35 @@
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useEffect } from "react";
+import { useMutation, useQuery } from "react-query";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { getNotificationList } from "../../api/notificationApi";
+import { getNotificationList, updateNotificationCheckTime } from "../../api/notificationApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { newNotificationFlagstate, notificationListstate } from "../../recoil/atom";
+import { newNotificationFlagstate } from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";
 import { NotificationType } from "../../utils/type";
 import PageTitle from "./components/PageTitle";
 
-const PageLayout = styled.div`
-  margin-top: 7rem;
+const ImgWrap = styled.div`
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const NoneImg = styled.img`
-  width: 100%;
-  margin-top: 12rem;
+  width: 26rem;
+  height: 17rem;
 `;
 
 const AlarmListWrap = styled.div`
+  height: 100%;
+  overflow-y: auto;
+  margin-top: 6rem;
+`;
+
+const AlarmWrap = styled.div`
   width: 100%;
   padding: 2rem 2.5rem;
   display: flex;
@@ -56,54 +67,38 @@ const Date = styled.div`
   margin-top: 0.5rem;
 `;
 
-/**
- * 알람 리스트 로직
- * 1. 이전 notificationListState에 있던 알람 아이디들을 previousIdList에 push
- * 2. 새로 호출한 api 데이터를 notificationListState에 할당
- * 3. 리스트 그릴때 previousIdList안에 notificationListState에 있는 아이디가 없으면 new를 true로 할당
- */
-
 const AlarmList = () => {
-  const [notificationListState, setNotificationList] = useRecoilState(notificationListstate);
   const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
-  const [previousIdList, setPreviousIdList] = useState<number[]>([]);
-  const { data } = useQuery(queryKeys.notificationList, getNotificationList, {
-    onSuccess: data => {
-      const previousIdArr: number[] = [];
-
-      if (notificationListState.length) {
-        notificationListState.map((noti: NotificationType) => {
-          previousIdArr.push(noti.id);
-        });
-      }
-      setPreviousIdList(previousIdArr);
-      setNotificationList(data);
-    },
-  });
+  const { data } = useQuery(queryKeys.notificationList, getNotificationList);
+  const setNotificationTime = useMutation(updateNotificationCheckTime);
 
   useEffect(() => {
     setNewNotificationFlag(false);
+    // last_checked_at api 호출
+    setNotificationTime.mutate();
   }, []);
 
   return (
     <LayoutDetailPage>
       <PageTitle title={"알림"} />
-      <PageLayout>
-        {notificationListState.length ? (
-          notificationListState.map((noti: NotificationType) => (
-            <AlarmListWrap new={!previousIdList.includes(noti.id)}>
+      {data.list.length ? (
+        <AlarmListWrap>
+          {data.list.map((noti: NotificationType) => (
+            <AlarmWrap new={noti.created_at > data.last_checked_at}>
               <img src={`/images/icon-alarm-${noti.type}.svg`} />
               <div>
                 <Title>{noti.title}</Title>
                 <Desc>{noti.body}</Desc>
                 <Date>{getDate(noti.created_at.substring(0, 10))}</Date>
               </div>
-            </AlarmListWrap>
-          ))
-        ) : (
+            </AlarmWrap>
+          ))}
+        </AlarmListWrap>
+      ) : (
+        <ImgWrap>
           <NoneImg src="/images/alarmlist-none-img.svg" alt="도착한 알림이 없어요." />
-        )}
-      </PageLayout>
+        </ImgWrap>
+      )}
     </LayoutDetailPage>
   );
 };

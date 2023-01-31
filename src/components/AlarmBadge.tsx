@@ -1,15 +1,12 @@
 import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { getNotificationList } from "../api/notificationApi";
 import { queryKeys } from "../constant/queryKeys";
-import { newNotificationFlagstate, notificationListstate } from "../recoil/atom";
+import { newNotificationFlagstate } from "../recoil/atom";
 import { NotificationType } from "../utils/type";
-import LoadingSpinner from "./common/LoadingSpinner";
-
-interface AlarmBadgeProps {}
 
 const CustomAlarmBadge = styled.div`
   width: 2.8rem;
@@ -31,30 +28,40 @@ const CustomAlarmBadge = styled.div`
   }
 `;
 
+interface AlarmBadgeProps {}
+
 export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const navigate = useNavigate();
-  const notificationList = useRecoilValue(notificationListstate);
+  //const notificationList = useRecoilValue(notificationListstate);
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
-  const { data, status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
+  const { status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
+    refetchOnWindowFocus: true,
     onSuccess: data => {
-      const previousIdArr: number[] = [];
-      let matchedIdNum: number = 0;
-
-      if (notificationList.length) {
-        notificationList.map((noti: NotificationType) => {
-          previousIdArr.push(noti.id);
-        });
-
-        data.map((noti: NotificationType) => {
-          if (previousIdArr.includes(noti.id)) {
-            matchedIdNum++;
+      data.list.map((noti: NotificationType) => {
+        if (data.last_checked_at) {
+          if (noti.created_at > data.last_checked_at) {
+            setNewNotificationFlag(true);
           }
-        });
-
-        if (data.length !== matchedIdNum) {
+        } else {
           setNewNotificationFlag(true);
         }
-      }
+      });
+
+      // if (notificationList.length) {
+      //   notificationList.map((noti: NotificationType) => {
+      //     previousIdArr.push(noti.id);
+      //   });
+
+      //   data.map((noti: NotificationType) => {
+      //     if (previousIdArr.includes(noti.id)) {
+      //       matchedIdNum++;
+      //     }
+      //   });
+
+      //   if (data.length !== matchedIdNum) {
+      //     setNewNotificationFlag(true);
+      //   }
+      // }
     },
     enabled: !!Cookies.get("token"),
   });

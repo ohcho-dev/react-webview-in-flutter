@@ -5,3 +5,8 @@ import { request } from ".";
 export const getNotificationList = () => {
   return request({ method: "GET" as Method, url: `/v1/notification/list` });
 };
+
+// 알림 리스트 시간 확인 (POST)
+export const updateNotificationCheckTime = () => {
+  return request({ method: "POST" as Method, url: `/v1/notification/check` });
+};
