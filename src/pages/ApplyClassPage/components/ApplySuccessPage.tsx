@@ -13,8 +13,8 @@ const ContentWrapper = styled.div`
   align-items: center;
 
   img:nth-child(1) {
-    width: 30rem;
-    height: 19rem;
+    width: 29.7rem;
+    height: 16.9rem;
 
     margin-bottom: 2.5rem;
   }
@@ -36,7 +36,7 @@ const ApplySuccessPage = () => {
       }
     >
       <ContentWrapper>
-        <img alt="apply success image" src="/images/apply-success-img.svg" />
+        <img alt="apply success image" src="/images/apply-success-img.png" />
         <img alt="success next step image" src="/images/success-next-step-img.svg" />
       </ContentWrapper>
     </LayoutDetailPage>
