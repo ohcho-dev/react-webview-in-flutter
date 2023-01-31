@@ -48,7 +48,7 @@ const ApplyCoachingSuccess = (): JSX.Element => {
     >
       <ContentWrapper>
         <SuccessImg src="/images/apply-coaching-success-img.png" alt="apply coaching success img" />
-        <FloatingImg src="/images/apply-coaching-success-floating-img.svg" alt="floating img" />
+        <FloatingImg src="/images/apply-coaching-success-floating-img.png" alt="floating img" />
       </ContentWrapper>
     </LayoutDetailPage>
   );
