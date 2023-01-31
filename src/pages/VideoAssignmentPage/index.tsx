@@ -229,11 +229,11 @@ const VideoAssignmentPage = (): JSX.Element => {
           theme="black"
           content="다시 촬영하기"
           onClick={() => {
+            navigate(-1);
             NativeFunction(
               "routeNativeScreen",
               `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
             );
-            navigate(-1);
           }}
         />
       }

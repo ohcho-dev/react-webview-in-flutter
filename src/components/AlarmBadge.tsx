@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
@@ -34,44 +35,31 @@ export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const navigate = useNavigate();
   //const notificationList = useRecoilValue(notificationListstate);
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
+  const [newFlag, setNewFlag] = useState(newNotificationFlag);
   const { status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
     refetchOnWindowFocus: true,
     onSuccess: data => {
       if (data.last_checked_at) {
         data.list.map((noti: NotificationType) => {
           if (new Date(noti.created_at) > new Date(data.last_checked_at)) {
-            setNewNotificationFlag(true);
+            setNewFlag(true);
           }
         });
       } else {
-        setNewNotificationFlag(true);
+        setNewFlag(true);
       }
-
-      // if (notificationList.length) {
-      //   notificationList.map((noti: NotificationType) => {
-      //     previousIdArr.push(noti.id);
-      //   });
-
-      //   data.map((noti: NotificationType) => {
-      //     if (previousIdArr.includes(noti.id)) {
-      //       matchedIdNum++;
-      //     }
-      //   });
-
-      //   if (data.length !== matchedIdNum) {
-      //     setNewNotificationFlag(true);
-      //   }
-      // }
     },
     enabled: !!Cookies.get("token"),
   });
+
+  useEffect(() => {
+    setNewNotificationFlag(newFlag);
+  }, [newFlag]);
+
   return (
     <>
       {(status === "idle" || isFetching) && null}
-      <CustomAlarmBadge
-        newNotification={newNotificationFlag}
-        onClick={() => navigate("/my/alarm-list")}
-      >
+      <CustomAlarmBadge newNotification={newFlag} onClick={() => navigate("/my/alarm-list")}>
         <img alt="badge" src="/images/badge.svg" />
         <img alt="icon-bell" src="/images/icon-bell.svg" />
       </CustomAlarmBadge>
