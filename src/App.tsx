@@ -127,14 +127,26 @@ const App: React.FC = () => {
       queryClient.invalidateQueries(queryKeys.childrenList);
     });
 
+    window.addEventListener("videoReUpload", async () => {
+      console.log(
+        "refetchChildData:: ",
+        "확인버튼 누르고 과제 데이터 재호출 및 route -1 하는 함수",
+      );
+      await queryClient.invalidateQueries(queryKeys.childrenList);
+      await navigate(-1);
+    });
+
     window.addEventListener("coachingResult", (res: any) => {
-      console.log("coaching" + res);
-      console.log("coaching" + res.detail.id);
+      console.log("coachingResult:: ", "푸시 알림 클릭 시 결과지 페이지로 웹뷰 이동시키는 함수");
+      console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
     });
 
     window.addEventListener("coachingVideoAssignment", (res: any) => {
-      console.log("video" + res);
-      console.log("coaching" + res.detail.id);
+      console.log(
+        "coachingResult:: ",
+        "푸시 알림 클릭 시 비디오 다시 촬영하기 페이지로 웹뷰 이동시키는 함수",
+      );
+      console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
     });
   }, []);
 
