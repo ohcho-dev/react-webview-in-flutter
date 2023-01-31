@@ -226,7 +226,9 @@ const VideoAssignmentPage = (): JSX.Element => {
       "routeNativeScreen",
       `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
     );
-    await navigate(-1);
+    setTimeout(() => {
+      navigate(-1);
+    }, 2000);
   };
 
   return (
