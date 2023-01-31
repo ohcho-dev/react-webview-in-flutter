@@ -79,8 +79,9 @@ const BottomNav = () => {
 
   useLayoutEffect(() => {
     window.history.pushState(null, "", window.location.href);
-    window.addEventListener("popstate", () => NativeFunction("routeNativeScreen", "off"));
-    return window.removeEventListener("popstate", () => NativeFunction("routeNativeScreen", "off"));
+    window.onpopstate = () => {
+      NativeFunction("routeNativeScreen", "off");
+    };
   }, []);
 
   return (
