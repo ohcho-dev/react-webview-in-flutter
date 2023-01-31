@@ -1,5 +1,7 @@
+import { useEffect, useLayoutEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { NativeFunction } from "../utils/NativeFunction";
 
 const BottomNavWrap = styled.ul`
   width: 100%;
@@ -74,6 +76,12 @@ const bottomNavData = [
 const BottomNav = () => {
   const { pathname } = useLocation();
   let firstPath = pathname.split("/")[1];
+
+  useLayoutEffect(() => {
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", () => NativeFunction("routeNativeScreen", "off"));
+    return window.removeEventListener("popstate", () => NativeFunction("routeNativeScreen", "off"));
+  }, []);
 
   return (
     <BottomNavWrap>
