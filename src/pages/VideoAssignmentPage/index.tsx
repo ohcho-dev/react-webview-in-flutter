@@ -6,9 +6,12 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
 import { getVideoAssignmentResult } from "../../api/coachingApi";
-import { useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
+import { NativeFunction } from "../../utils/NativeFunction";
+import { useRecoilValue } from "recoil";
+import { selectedChildInfoState } from "../../recoil/atom";
 
 type collapseType = "" | "open" | "close";
 
@@ -200,8 +203,10 @@ const Divider = styled.div`
 `;
 
 const VideoAssignmentPage = (): JSX.Element => {
-  const status: string = "";
+  const { state } = useLocation();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
   const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
     queryKeys.videoAssignmentResult,
@@ -218,8 +223,19 @@ const VideoAssignmentPage = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
-      bottomBtn={status === "TSVST_REJECT"}
-      bottomBtnElement={<Button theme="black" content="다시 촬영하기" />}
+      bottomBtn={videoAssignmentResult?.status === "TSST_REJECT"}
+      bottomBtnElement={
+        <Button
+          theme="black"
+          content="다시 촬영하기"
+          onClick={() =>
+            NativeFunction(
+              "routeNativeScreen",
+              `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
+            )
+          }
+        />
+      }
     >
       <PageWrapper>
         <PageTitleWrapper>
@@ -244,8 +260,10 @@ const VideoAssignmentPage = (): JSX.Element => {
             <BODY_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>{videoAssignmentResult?.name}</BODY_1>
             <RecordDate>
               촬영일:{" "}
-              {getDate(videoAssignmentResult?.video_at ? videoAssignmentResult.video_at : "")} (
-              {videoAssignmentResult?.days_from_birth}일)
+              {videoAssignmentResult &&
+                videoAssignmentResult.video_at &&
+                getDate(videoAssignmentResult.video_at)}{" "}
+              ({videoAssignmentResult?.days_from_birth}일)
             </RecordDate>
           </VideoInfoSection>
         </VideoSection>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import {
@@ -26,8 +26,8 @@ interface DetailCoachingProps {
 const DetailCoachingContainer = styled.div``;
 
 const Thumbnail = styled.img`
-  width: 37.5rem;
-  height: 25rem;
+  width: ${(prop: { image: string }) => (prop.image ? "37.5rem" : "25.9rem")};
+  height: ${(prop: { image: string }) => (prop.image ? "25rem" : "9rem")};
 `;
 
 const ProductMainInfo = styled.div`
@@ -130,6 +130,7 @@ const ButtonWrap = styled.div`
 const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const navigate = useNavigate();
   const { id } = props;
+  const { state } = useLocation();
   const [favorites, setFavorites] = useState<boolean>(false);
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
@@ -159,7 +160,10 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {
       setOpenBottomModal(!openBottomModal);
-      navigate("/program/class/apply-coaching/success", { state: { id: res.purchase_id } });
+      navigate("/program/class/apply-coaching/success", {
+        state: { id: res.purchase_id },
+        replace: true,
+      });
     },
     onError: error => {
       throw error;
@@ -191,10 +195,20 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     setOpenUsageDuration(false);
     setOpenBottomModal(false);
   };
+  console.log();
+
+  const handleBackBtn = () => {
+    if (state === "/coaching") {
+      navigate("/coaching");
+    } else if (state === "/program") {
+      navigate("/program");
+    }
+  };
 
   return (
     <>
       <LayoutDetailPage
+        handleBackBtnClick={handleBackBtn}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
@@ -203,7 +217,8 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         <DetailCoachingContainer>
           <Thumbnail
             alt="thumnail"
-            src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.svg"}
+            src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.png"}
+            image={coachingInfo?.main_image}
           />{" "}
           :
           <ProductMainInfo>

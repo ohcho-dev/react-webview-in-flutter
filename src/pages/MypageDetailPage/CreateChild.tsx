@@ -7,16 +7,15 @@ import Button from "../../components/common/Button";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { createChildType } from "../../utils/type";
-import { BottomBtnWrap } from "../ProgramPage/components/styled";
 import PageTitle from "./components/PageTitle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
 import moment from "moment";
 import { ko } from "date-fns/esm/locale";
-import CustomModal from "./components/ChildUpdateModal";
 import { useRecoilValue } from "recoil";
 import { childrenListState } from "../../recoil/atom";
+import CustomModal from "../../components/common/CustomModal";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
@@ -105,13 +104,6 @@ const CreateChild = () => {
     },
   });
 
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-      navigate("/my/management-child", { replace: true });
-    };
-  }, []);
-
   //   생일 날짜 string으로 변환
   useEffect(() => {
     setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });
@@ -188,7 +180,11 @@ const CreateChild = () => {
   });
 
   return (
-    <LayoutDetailPage style={{ zIndex: 110 }}>
+    <LayoutDetailPage
+      handleBackBtnClick={() => navigate("/my/management-child", { replace: true })}
+      bottomBtn
+      bottomBtnElement={<Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />}
+    >
       <PageTitle title={"아이 등록"} />
       <PageLayout>
         <FormWrap>
@@ -243,9 +239,6 @@ const CreateChild = () => {
           )}
         </FormWrap>
       </PageLayout>
-      <BottomBtnWrap>
-        <Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />
-      </BottomBtnWrap>
 
       <CustomModal
         title="아이는 최대 5명 이상 등록할 수 없습니다."

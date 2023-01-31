@@ -1,8 +1,13 @@
-import { useState } from "react";
+import Cookies from "js-cookie";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import styled from "styled-components";
-
-interface AlarmBadgeProps {}
+import { getNotificationList } from "../api/notificationApi";
+import { queryKeys } from "../constant/queryKeys";
+import { newNotificationFlagstate } from "../recoil/atom";
+import { NotificationType } from "../utils/type";
 
 const CustomAlarmBadge = styled.div`
   width: 2.8rem;
@@ -24,14 +29,41 @@ const CustomAlarmBadge = styled.div`
   }
 `;
 
+interface AlarmBadgeProps {}
+
 export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const navigate = useNavigate();
-  const [newNotification, setNewNotification] = useState(true);
+  //const notificationList = useRecoilValue(notificationListstate);
+  const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
+  const [newFlag, setNewFlag] = useState(newNotificationFlag);
+  const { status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
+    refetchOnWindowFocus: true,
+    onSuccess: data => {
+      if (data.last_checked_at) {
+        data.list.map((noti: NotificationType) => {
+          if (new Date(noti.created_at) > new Date(data.last_checked_at)) {
+            setNewFlag(true);
+          }
+        });
+      } else {
+        setNewFlag(true);
+      }
+    },
+    enabled: !!Cookies.get("token"),
+  });
+
+  useEffect(() => {
+    setNewNotificationFlag(newFlag);
+  }, [newFlag]);
+
   return (
-    <CustomAlarmBadge newNotification={newNotification} onClick={() => navigate("/my/alarm-list")}>
-      <img alt="badge" src="/images/badge.svg" />
-      <img alt="icon-bell" src="/images/icon-bell.svg" />
-    </CustomAlarmBadge>
+    <>
+      {(status === "idle" || isFetching) && null}
+      <CustomAlarmBadge newNotification={newFlag} onClick={() => navigate("/my/alarm-list")}>
+        <img alt="badge" src="/images/badge.svg" />
+        <img alt="icon-bell" src="/images/icon-bell.svg" />
+      </CustomAlarmBadge>
+    </>
   );
 };
 

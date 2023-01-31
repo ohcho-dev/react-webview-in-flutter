@@ -66,6 +66,7 @@ const QuestionnaireForm = (): JSX.Element => {
     );
     navigate(
       `/coaching/questionnarie/form/${nextOrder ? surveyInfo.order + 1 : surveyInfo.order - 1}`,
+      { replace: true },
     );
     // 임시 설문 데이터 삭제
     setSurveyTempAnswer([]);
@@ -134,7 +135,7 @@ const QuestionnaireForm = (): JSX.Element => {
     <>
       <LayoutDetailPage
         hideTitleBar
-        style={{ borderBottom: "none", zIndex: 110, top: 0, height: "calc(100vh - 7.4rem)" }}
+        style={{ borderBottom: "none", top: 0, height: "calc(100vh - 7.4rem)" }}
         bottomBtn
         bottomBtnElement={
           <Button
@@ -167,7 +168,9 @@ const QuestionnaireForm = (): JSX.Element => {
       <CustomModal
         content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
         isOpen={openSuccessModal}
-        okBtnClick={() => navigate(`/coaching/coaching-detail/${surveyCoachingId}`)}
+        okBtnClick={() =>
+          navigate(`/coaching/coaching-detail/${surveyCoachingId}`, { replace: true })
+        }
         toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
         title="설문 답변을 완료했어요."
       />

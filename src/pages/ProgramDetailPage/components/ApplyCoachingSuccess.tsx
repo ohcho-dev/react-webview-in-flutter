@@ -2,11 +2,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Button from "../../../components/common/Button";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { BottomBtnWrap } from "../../ProgramPage/components/styled";
 
 const floatingMove = keyframes`
 	 0%{transform:translate(0,0);}
-   100%{transform:translate(0,-10px);}
+   100%{transform:translate(0,-1rem);}
 `;
 
 const ContentWrapper = styled.div`
@@ -18,13 +17,14 @@ const ContentWrapper = styled.div`
 `;
 
 const SuccessImg = styled.img`
-  width: 30rem;
-  height: 17rem;
+  width: 29.7rem;
+  height: 16.9rem;
 `;
 
 const FloatingImg = styled.img`
   position: absolute;
-  bottom: -1.5rem;
+  bottom: -1rem;
+  width: 33.5rem;
 
   animation: ${floatingMove} 1s alternate infinite ease-in-out;
 `;
@@ -35,6 +35,7 @@ const ApplyCoachingSuccess = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
+      handleBackBtnClick={() => navigate("/program")}
       bottomBtn
       style={{ overflow: "hidden" }}
       bottomBtnElement={
@@ -46,8 +47,8 @@ const ApplyCoachingSuccess = (): JSX.Element => {
       }
     >
       <ContentWrapper>
-        <SuccessImg src="/images/apply-coaching-success-img.svg" alt="apply coaching success img" />
-        <FloatingImg src="/images/apply-coaching-success-floating-img.svg" alt="floating img" />
+        <SuccessImg src="/images/apply-coaching-success-img.png" alt="apply coaching success img" />
+        <FloatingImg src="/images/apply-coaching-success-floating-img.png" alt="floating img" />
       </ContentWrapper>
     </LayoutDetailPage>
   );

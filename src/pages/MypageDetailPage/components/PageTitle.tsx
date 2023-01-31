@@ -18,7 +18,11 @@ const TitleWrap = styled.div`
 const Container = styled.div`
   padding: 0.8rem 2.5rem 3rem;
 `;
-const PageTitle = ({ title = "" }) => {
+
+interface PageTitlePropsType {
+  title: string;
+}
+const PageTitle = ({ title = "" }: PageTitlePropsType) => {
   const [share, setShare] = useRecoilState(useShareState);
 
   useEffect(() => {

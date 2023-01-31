@@ -35,7 +35,7 @@ interface LayoutDetailPageProps {
   bottomBtnElement?: ReactElement;
   style?: object;
   leftBtn?: React.ReactNode;
-  goBackURL?: string;
+  handleBackBtnClick?: () => void | undefined;
 }
 
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
@@ -45,11 +45,13 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   bottomBtnElement,
   style,
   leftBtn,
-  goBackURL = "",
+  handleBackBtnClick,
 }) => {
   return (
     <LayoutBasePage>
-      {!hideTitleBar && <DetailTitleBar leftBtn={leftBtn} goBackURL={goBackURL} />}
+      {!hideTitleBar && (
+        <DetailTitleBar leftBtn={leftBtn} handleBackBtnClick={handleBackBtnClick} />
+      )}
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
         {children}
       </DetailPage>

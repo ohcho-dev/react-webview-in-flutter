@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getChildrenList } from "../../api/childApi";
-import BottomFixBtnWrap from "../../components/common/BottomFixBtnWrap";
 import Button from "../../components/common/Button";
-import CustomModal from "./components/ChildUpdateModal";
+import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import getGender from "../../utils/getGender";
@@ -63,15 +62,14 @@ export const ManagementChild = () => {
     navigate("/my/management-child/register", { replace: true });
   };
 
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-      navigate("/my", { replace: true });
-    };
-  }, []);
-
   return (
-    <LayoutDetailPage>
+    <LayoutDetailPage
+      bottomBtn
+      bottomBtnElement={
+        <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
+      }
+      handleBackBtnClick={() => navigate("/my")}
+    >
       <PageTitle title="아이 관리" />
       <PageLayout>
         {childrenList.map((child: childType, index: number) => (
@@ -90,10 +88,6 @@ export const ManagementChild = () => {
           </ChildrenListWrap>
         ))}
       </PageLayout>
-
-      <BottomFixBtnWrap>
-        <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
-      </BottomFixBtnWrap>
 
       <CustomModal
         topImage={

@@ -13,6 +13,6 @@ export const getDateTime: getDateTimeFuncType = date => {
 };
 
 export const getDate: getDateFuncType = date => {
-  const d = new Date(date);
+  const d = new Date(date.replace(/-/g, "/"));
   return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}`;
 };

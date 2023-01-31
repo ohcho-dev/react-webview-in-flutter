@@ -101,7 +101,7 @@ export const NoticeDetail = () => {
   const { data: noticeData } = useQuery(queryKeys.noticeDetail, () => getNoticeDetail(noticeid));
 
   return (
-    <LayoutDetailPage style={{ zIndex: 110 }}>
+    <LayoutDetailPage>
       <PageLayout style={{ margin: "0 2.5rem" }}>
         <TitleWrap>
           <SubjectDetail>{noticeData[0].subject}</SubjectDetail>

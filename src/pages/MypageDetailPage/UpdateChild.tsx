@@ -14,10 +14,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
 import moment from "moment";
 import { ko } from "date-fns/esm/locale";
-import CustomModal from "./components/ChildUpdateModal";
 import { queryKeys } from "../../constant/queryKeys";
 import { useRecoilValue } from "recoil";
 import { childrenListState } from "../../recoil/atom";
+import CustomModal from "../../components/common/CustomModal";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -99,22 +99,6 @@ const UpdateChild = () => {
   const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
-
-  useEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = function () {
-      navigate("/my/management-child", { replace: true });
-    };
-  }, []);
-
-  useEffect(() => {
-    if (updateStatus) {
-      window.history.pushState(null, "", window.location.href);
-      window.onpopstate = function () {
-        setOpenBackModal(true);
-      };
-    }
-  }, [updateStatus]);
 
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
@@ -218,8 +202,17 @@ const UpdateChild = () => {
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });
+
+  const handleBackBtn = () => {
+    if (updateStatus) {
+      setOpenBackModal(!openBackModal);
+    } else {
+      navigate("/my/management-child", { replace: true });
+    }
+  };
+
   return (
-    <LayoutDetailPage style={{ zIndex: 110 }}>
+    <LayoutDetailPage handleBackBtnClick={handleBackBtn}>
       <PageTitle title={"아이 정보 수정"} />
       <PageLayout>
         <FormWrap>
@@ -312,9 +305,7 @@ const UpdateChild = () => {
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
-        toggleModal={() => {
-          navigate("/my/management-child", { replace: true });
-        }}
+        toggleModal={() => setOpenModal(!openModal)}
         okBtnName="확인"
         okBtnClick={() => {
           navigate("/my/management-child", { replace: true });
@@ -333,6 +324,7 @@ const UpdateChild = () => {
         }}
         cancelBtnName="그냥 나가기"
         cancelBtnClick={() => {
+          setOpenBackModal(!openBackModal);
           navigate("/my/management-child", { replace: true });
         }}
       />

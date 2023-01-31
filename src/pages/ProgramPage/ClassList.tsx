@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { getClassList } from "../../api/programApi";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
@@ -14,6 +14,7 @@ import { Divider } from "./components/styled";
 
 const ClassList = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
 
   const {
@@ -30,7 +31,7 @@ const ClassList = () => {
   }, [id]);
 
   const handleCardClick = (id: number) => {
-    navigate(`/program/class/${id}`);
+    navigate(`/program/class/${id}`, { state: pathname });
   };
 
   return (

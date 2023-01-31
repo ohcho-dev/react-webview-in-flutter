@@ -69,6 +69,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
 
   return (
     <LayoutDetailPage
+      handleBackBtnClick={() => navigate("/program")}
       bottomBtn
       bottomBtnElement={
         <>

@@ -76,13 +76,14 @@ const Questionnaire = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
-      style={{ zIndex: 110 }}
       bottomBtn
       bottomBtnElement={
         <Button
           content="설문하기"
           theme="black"
-          onClick={() => navigate(`/coaching/questionnarie/form/${startOrderNum}`)}
+          onClick={() =>
+            navigate(`/coaching/questionnarie/form/${startOrderNum}`, { replace: true })
+          }
         />
       }
     >

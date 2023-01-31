@@ -103,6 +103,7 @@ const ChildName = styled.span`
   max-width: 13rem;
   white-space: nowrap;
   text-overflow: ellipsis;
+  margin-right: 0.5rem;
 `;
 const LoginInfo = styled.div`
   display: flex;
@@ -130,6 +131,7 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const handleChildNameClick = () => {
     setOpenModal(true);
   };
+
   return (
     <TitleBarWrap border={true} style={{ ...style }}>
       <ProfileWrap>
@@ -156,14 +158,14 @@ interface DetailTitleBarProps {
   border?: boolean;
   style?: object;
   leftBtn?: React.ReactNode;
-  goBackURL?: string;
+  handleBackBtnClick?: () => void | undefined;
 }
 
 export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   border,
   style,
   leftBtn,
-  goBackURL = "",
+  handleBackBtnClick,
 }) => {
   const navigate = useNavigate();
 
@@ -171,7 +173,7 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
     <TitleBarWrap border={border} style={{ ...style }}>
       <HistoryBackIconWrap
         onClick={() => {
-          goBackURL ? navigate(goBackURL) : navigate(-1);
+          handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
         }}
       >
         <img src="/images/icon-back.svg" width="100%" />
@@ -218,7 +220,8 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
   return (
     <MypageTitleWrap>
       <Title>
-        <ChildName>{firstRegistChildInfo.name}</ChildName> <span>보호자님, 안녕하세요.</span>
+        <ChildName>{firstRegistChildInfo.name}</ChildName>
+        <span>보호자님, 안녕하세요.</span>
       </Title>
       <LoginInfo>
         <img src={icon} />

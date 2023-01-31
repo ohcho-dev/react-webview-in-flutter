@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { selectedChildInfoState } from "../../recoil/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
@@ -75,15 +74,25 @@ const ProceedStatus = styled.span`
   color: #00c7b1;
 `;
 
+const DetailTitle = styled.span`
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 3rem;
+  display: flex;
+  align-items: center;
+  padding: 2.6rem 2rem 1.2rem;
+`;
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
-    getAppliedCoachingInfo(id),
+  const { data: coachingInfo } = useQuery(
+    queryKeys.appliedCoachingInfo,
+    () => getAppliedCoachingInfo(id),
+    {
+      refetchOnWindowFocus: true,
+    },
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
-
-  console.log(coachingInfo);
 
   return (
     <>
@@ -97,9 +106,10 @@ const CoachingDetailPage = () => {
       </PageTitleWrap>
       <ShadowBox />
       <LayoutDetailPage
-        style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)", zIndex: 30 }}
+        style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}
+        handleBackBtnClick={() => navigate("/coaching")}
       >
-        <ContentTitle emoji="flag-in-hole" name="결과지" />
+        <DetailTitle>⛳️ 과제</DetailTitle>
         {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
           <ContentItem
             style={{ marginBottom: "0" }}
@@ -114,7 +124,7 @@ const CoachingDetailPage = () => {
             }}
           />
         ))}
-        <ContentTitle emoji="check-mark-button" name="과제" />
+        <DetailTitle>✅ 결과지</DetailTitle>
         {coachingInfo.task.map((task: TaskStatusType, index: number) => (
           <ContentItem
             key={index + task.name}
@@ -133,10 +143,12 @@ const CoachingDetailPage = () => {
                 if (task.status === "TSST_ONGOING") {
                   NativeFunction(
                     "routeNativeScreen",
-                    `/coachingVideoDetail/${task.id}/${childInfo.id}`,
+                    `coachingVideoDetail@${task.id}@${childInfo.id}`,
                   );
                 } else {
-                  navigate(`/coaching/videoAssignment/${task.id}`);
+                  navigate(`/coaching/videoAssignment/${task.id}`, {
+                    state: { task_id: task.id },
+                  });
                 }
               }
             }}

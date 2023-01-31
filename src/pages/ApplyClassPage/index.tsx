@@ -178,19 +178,19 @@ const ApplyClassPage = () => {
         //     }
         //   }
         // }
-        if (os.indexOf("iphone") > -1) {
-          const keyboardHeight = fullHeight.current - visualViewportHeight;
-          if (current !== null) {
-            if (fullHeight.current > visualViewportHeight) {
-              current.style.height = `${
-                USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
-              }rem`;
-              activeInputref.current?.scrollIntoView({ behavior: "smooth" });
-            } else {
-              current.style.height = `${USER_SECTION_HEIGHT}rem`;
-            }
-          }
-        }
+        // if (os.indexOf("iphone") > -1) {
+        //   const keyboardHeight = fullHeight.current - visualViewportHeight;
+        //   if (current !== null) {
+        //     if (fullHeight.current > visualViewportHeight) {
+        //       current.style.height = `${
+        //         USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
+        //       }rem`;
+        //       activeInputref.current?.scrollIntoView({ behavior: "smooth" });
+        //     } else {
+        //       current.style.height = `${USER_SECTION_HEIGHT}rem`;
+        //     }
+        //   }
+        // }
       };
       window.visualViewport.addEventListener("resize", handleResize);
     }
@@ -234,6 +234,7 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
+    document.getElementById("main")?.scrollTo();
     activeInputref.current = ref.current;
   };
 
@@ -252,7 +253,7 @@ const ApplyClassPage = () => {
   return (
     <>
       <LayoutDetailPage
-        style={{ background: "#f6f6f6", zIndex: 110 }}
+        style={{ background: "#f6f6f6" }}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />

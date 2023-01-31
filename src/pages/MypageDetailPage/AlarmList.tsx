@@ -1,22 +1,41 @@
+import { useEffect } from "react";
+import { useMutation, useQuery } from "react-query";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
+import { getNotificationList, updateNotificationCheckTime } from "../../api/notificationApi";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { newNotificationFlagstate } from "../../recoil/atom";
+import { getDate } from "../../utils/getDateTime";
+import { NotificationType } from "../../utils/type";
 import PageTitle from "./components/PageTitle";
 
-const PageLayout = styled.div`
-  margin-top: 7rem;
+const ImgWrap = styled.div`
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const NoneImg = styled.img`
-  width: 100%;
-  margin-top: 12rem;
+  width: 26rem;
+  height: 17rem;
 `;
 
 const AlarmListWrap = styled.div`
+  height: 100%;
+  overflow-y: auto;
+  margin-top: 6rem;
+`;
+
+const AlarmWrap = styled.div`
   width: 100%;
   padding: 2rem 2.5rem;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  background: ${(prop: { new: boolean }) => (prop.new ? "#EEF9F7" : "fff")};
+  background: ${(prop: { new: any }) => (prop.new ? "#EEF9F7" : "fff")};
 
   img {
     width: 2.8rem;
@@ -40,7 +59,7 @@ const Desc = styled.div`
   margin-top: 0.5rem;
 `;
 
-const Date = styled.div`
+const DateTime = styled.div`
   font-weight: 400;
   font-size: 1.2rem;
   line-height: 1.8rem;
@@ -49,62 +68,38 @@ const Date = styled.div`
 `;
 
 const AlarmList = () => {
+  const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
+  const { data } = useQuery(queryKeys.notificationList, getNotificationList);
+  const setNotificationTime = useMutation(updateNotificationCheckTime);
+
+  useEffect(() => {
+    console.log("call");
+    setNewNotificationFlag(false);
+    // last_checked_at api 호출
+    setNotificationTime.mutate();
+  }, []);
+
   return (
     <LayoutDetailPage>
       <PageTitle title={"알림"} />
-
-      <PageLayout>
-        {/* <NoneImg src="/images/alarmlist-none-img.svg" alt="도착한 알림이 없어요." /> */}
-
-        <AlarmListWrap new={true}>
-          <img src="/images/icon-alarm-1.svg" />
-          <div>
-            <Title>영상 재등록이 필요해요.</Title>
-            <Desc>나나의 소근육 검사 영상 재등록이 필요합니다.</Desc>
-            <Date>2022.09.20</Date>
-          </div>
+      {data.list.length ? (
+        <AlarmListWrap>
+          {data.list.map((noti: any) => (
+            <AlarmWrap new={new Date(noti.created_at) > new Date(data.last_checked_at)}>
+              <img src={`/images/icon-alarm-${noti.type}.svg`} />
+              <div>
+                <Title>{noti.title}</Title>
+                <Desc>{noti.body}</Desc>
+                <DateTime>{getDate(noti.created_at.substring(0, 10))}</DateTime>
+              </div>
+            </AlarmWrap>
+          ))}
         </AlarmListWrap>
-        <AlarmListWrap new={true}>
-          <img src="/images/icon-alarm-1.svg" />
-          <div>
-            <Title>영상 재등록이 필요해요.</Title>
-            <Desc>나나의 소근육 검사 영상 재등록이 필요합니다.</Desc>
-            <Date>2022.09.20</Date>
-          </div>
-        </AlarmListWrap>
-        <AlarmListWrap new={true}>
-          <img src="/images/icon-alarm-1.svg" />
-          <div>
-            <Title>영상 재등록이 필요해요.</Title>
-            <Desc>나나의 소근육 검사 영상 재등록이 필요합니다.</Desc>
-            <Date>2022.09.20</Date>
-          </div>
-        </AlarmListWrap>
-        <AlarmListWrap new={true}>
-          <img src="/images/icon-alarm-1.svg" />
-          <div>
-            <Title>영상 재등록이 필요해요.</Title>
-            <Desc>나나의 소근육 검사 영상 재등록이 필요합니다.</Desc>
-            <Date>2022.09.20</Date>
-          </div>
-        </AlarmListWrap>
-        <AlarmListWrap new={true}>
-          <img src="/images/icon-alarm-1.svg" />
-          <div>
-            <Title>영상 재등록이 필요해요.</Title>
-            <Desc>나나의 소근육 검사 영상 재등록이 필요합니다.</Desc>
-            <Date>2022.09.20</Date>
-          </div>
-        </AlarmListWrap>
-        <AlarmListWrap new={true}>
-          <img src="/images/icon-alarm-1.svg" />
-          <div>
-            <Title>영상 재등록이 필요해요.</Title>
-            <Desc>나나의 소근육 검사 영상 재등록이 필요합니다.</Desc>
-            <Date>2022.09.20</Date>
-          </div>
-        </AlarmListWrap>
-      </PageLayout>
+      ) : (
+        <ImgWrap>
+          <NoneImg src="/images/alarmlist-none-img.svg" alt="도착한 알림이 없어요." />
+        </ImgWrap>
+      )}
     </LayoutDetailPage>
   );
 };

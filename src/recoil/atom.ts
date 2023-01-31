@@ -80,3 +80,9 @@ export const mainPageScrollValueState = atom({
   key: "mainPageScrollValue",
   default: 0,
 });
+
+// 새로운 알람 플래그
+export const newNotificationFlagstate = atom({
+  key: "newNotificationFlag",
+  default: false,
+});
