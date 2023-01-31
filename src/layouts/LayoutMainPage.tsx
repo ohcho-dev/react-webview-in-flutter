@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 import BottomNav from "../components/BottomNav";
@@ -90,6 +90,11 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
     updateSelectedChildId.mutate({ id: childId });
     setOpenModal(false);
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    setScroll(0);
+  }, []);
 
   return (
     <LayoutBasePage>
