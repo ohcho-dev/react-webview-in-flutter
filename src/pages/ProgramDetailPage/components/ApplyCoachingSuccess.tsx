@@ -23,7 +23,8 @@ const SuccessImg = styled.img`
 
 const FloatingImg = styled.img`
   position: absolute;
-  bottom: -2rem;
+  bottom: -3rem;
+  z-index: 100;
 
   animation: ${floatingMove} 1s alternate infinite ease-in-out;
 `;
