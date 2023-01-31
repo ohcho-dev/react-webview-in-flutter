@@ -234,6 +234,8 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
+    let scrollHeight = document.getElementById("main")?.scrollHeight;
+    document.getElementById("main")?.scrollTo({ top: scrollHeight });
     activeInputref.current = ref.current;
   };
 
