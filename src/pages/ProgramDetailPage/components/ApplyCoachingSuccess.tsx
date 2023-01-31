@@ -5,7 +5,7 @@ import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 
 const floatingMove = keyframes`
 	 0%{transform:translate(0,0);}
-   100%{transform:translate(0,-10px);}
+   100%{transform:translate(0,-1rem);}
 `;
 
 const ContentWrapper = styled.div`
@@ -23,8 +23,8 @@ const SuccessImg = styled.img`
 
 const FloatingImg = styled.img`
   position: absolute;
-  bottom: -3rem;
-  z-index: 100;
+  bottom: -1rem;
+  width: 33.5rem;
 
   animation: ${floatingMove} 1s alternate infinite ease-in-out;
 `;

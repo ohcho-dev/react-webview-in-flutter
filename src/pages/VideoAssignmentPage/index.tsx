@@ -259,8 +259,10 @@ const VideoAssignmentPage = (): JSX.Element => {
             <BODY_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>{videoAssignmentResult?.name}</BODY_1>
             <RecordDate>
               촬영일:{" "}
-              {getDate(videoAssignmentResult?.video_at ? videoAssignmentResult.video_at : "")} (
-              {videoAssignmentResult?.days_from_birth}일)
+              {videoAssignmentResult &&
+                videoAssignmentResult.video_at &&
+                getDate(videoAssignmentResult.video_at)}{" "}
+              ({videoAssignmentResult?.days_from_birth}일)
             </RecordDate>
           </VideoInfoSection>
         </VideoSection>
