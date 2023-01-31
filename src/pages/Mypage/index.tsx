@@ -212,7 +212,7 @@ const MyPage = () => {
           </>
         }
         cancelBtnName="탈퇴"
-        cancelBtnClick={clickWithDrawal}
+        cancelBtnClick={() => clickWithDrawal()}
         okBtnName="취소"
         okBtnClick={() => setOpenModal(!openModal)}
       />

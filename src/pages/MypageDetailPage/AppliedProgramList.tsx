@@ -235,9 +235,9 @@ const AppliedProgramList = () => {
           <>
             {selectedTab === "코칭" && purchaseCoachingData.length === 0 && (
               <NotFoundData>
-                <img src="/images/icon-sparkle.svg" alt="thumbnail" />
-                <NotFoundTitle>아직 신청한 {selectedTab}이 없어요.</NotFoundTitle>
-                <NotFoundDesc>우리아이 맞춤 {selectedTab}을 신청해 보세요.</NotFoundDesc>
+                <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                <NotFoundTitle>아직 신청한 {selectedTab + "이"} 없어요.</NotFoundTitle>
+                <NotFoundDesc>우리아이 맞춤 {selectedTab + "을"} 신청해 보세요.</NotFoundDesc>
                 <LinkBtn onClick={() => navigate("/program", { replace: true })}>
                   프로그램 보러가기
                 </LinkBtn>
@@ -279,9 +279,9 @@ const AppliedProgramList = () => {
 
             {selectedTab === "클래스" && purchaseClassesData.length === 0 && (
               <NotFoundData>
-                <img src="/images/icon-sparkle.svg" alt="thumbnail" />
-                <NotFoundTitle>아직 신청한 {selectedTab}이 없어요.</NotFoundTitle>
-                <NotFoundDesc>우리아이 맞춤 {selectedTab}을 신청해 보세요.</NotFoundDesc>
+                <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
+                <NotFoundDesc>우리아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
                 <LinkBtn onClick={() => navigate("/program", { replace: true })}>
                   프로그램 보러가기
                 </LinkBtn>

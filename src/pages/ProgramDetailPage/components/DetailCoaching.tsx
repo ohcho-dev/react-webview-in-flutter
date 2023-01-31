@@ -214,7 +214,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         <DetailCoachingContainer>
           <Thumbnail
             alt="thumnail"
-            src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.svg"}
+            src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.png"}
           />{" "}
           :
           <ProductMainInfo>
