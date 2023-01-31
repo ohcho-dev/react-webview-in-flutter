@@ -119,26 +119,13 @@ const CustomModal = (props: ModalProps) => {
   const navigate = useNavigate();
   // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
   const [visible, setVisible] = useState<boolean>(false);
-  const [okBtnClickFlag, setOkBtnClickFlag] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isOpen) window.history.pushState(null, "", window.location.href);
-    window.onpopstate = () => {
-      if (isOpen) {
-        setVisible(false);
-        setTimeout(() => {
-          toggleModal();
-          if (okBtnClickFlag) {
-            if (okBtnClick) okBtnClick();
-          } else {
-            if (cancelBtnClick) cancelBtnClick();
-          }
-        }, 200);
-      }
-    };
+    if (isOpen) {
+      setVisible(isOpen);
+    }
+  }, [isOpen]);
 
-    setVisible(isOpen);
-  }, [isOpen, okBtnClickFlag]);
 
   return (
     <Modal
@@ -165,19 +152,13 @@ const CustomModal = (props: ModalProps) => {
           {cancelBtnName && (
             <Button
               theme={cancelBtnName === "탈퇴" ? "red" : "white"}
-              onClick={() => {
-                navigate(-1);
-                setOkBtnClickFlag(false);
-              }}
+              onClick={cancelBtnClick}
               content={cancelBtnName}
             />
           )}
           <Button
             theme={"black"}
-            onClick={() => {
-              navigate(-1);
-              setOkBtnClickFlag(true);
-            }}
+            onClick={okBtnClick || toggleModal}
             content={okBtnName ? okBtnName : "확인"}
           />
         </ModalBtnsWrapper>

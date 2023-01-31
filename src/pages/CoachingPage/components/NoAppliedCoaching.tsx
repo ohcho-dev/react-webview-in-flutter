@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { MenuType } from "..";
@@ -36,20 +36,21 @@ const ProgramTitle = styled.span`
 const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const { selectedMenu } = props;
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { data } = useQuery(queryKeys.coachingList, () => getCoachingList());
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
 
   const handleCardClick = (id: number) => {
-    navigate(`/program/coaching/${id}`);
+    navigate(`/program/coaching/${id}`, { state: pathname });
   };
 
   return (
     <div>
       <InformImageSection>
         {selectedMenu === "end" ? (
-          <img alt="inform-image" src="/images/no-end-coaching-img.svg" />
+          <img alt="inform-image" src="/images/no-end-coaching-img.png" />
         ) : (
-          <img alt="inform-image" src="/images/no-applied-coaching-img.svg" />
+          <img alt="inform-image" src="/images/no-applied-coaching-img.png" />
         )}
       </InformImageSection>
       <ProgramTitle>⭐️ {selectedChildInfo.name}를 위한 코칭 추천</ProgramTitle>

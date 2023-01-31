@@ -17,13 +17,14 @@ const ContentWrapper = styled.div`
 `;
 
 const SuccessImg = styled.img`
-  width: 30rem;
-  height: 17rem;
+  width: 29.7rem;
+  height: 16.9rem;
 `;
 
 const FloatingImg = styled.img`
   position: absolute;
-  bottom: -1.5rem;
+  bottom: -3rem;
+  z-index: 100;
 
   animation: ${floatingMove} 1s alternate infinite ease-in-out;
 `;
@@ -46,8 +47,8 @@ const ApplyCoachingSuccess = (): JSX.Element => {
       }
     >
       <ContentWrapper>
-        <SuccessImg src="/images/apply-coaching-success-img.svg" alt="apply coaching success img" />
-        <FloatingImg src="/images/apply-coaching-success-floating-img.svg" alt="floating img" />
+        <SuccessImg src="/images/apply-coaching-success-img.png" alt="apply coaching success img" />
+        <FloatingImg src="/images/apply-coaching-success-floating-img.png" alt="floating img" />
       </ContentWrapper>
     </LayoutDetailPage>
   );

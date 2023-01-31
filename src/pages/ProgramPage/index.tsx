@@ -89,8 +89,7 @@ const ProgramPage = () => {
         </CarouselSection>
         <CouchingSection>
           <ProgramTitle>
-            <UseEmoji emojiName="page-facing-up" />
-            <Title>전문 검사와 함께하는 코칭</Title>
+            📄 <Title>전문 검사와 함께하는 코칭</Title>
           </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <CoachingList />
@@ -98,8 +97,7 @@ const ProgramPage = () => {
         </CouchingSection>
         <ClassSection>
           <ProgramTitle>
-            <UseEmoji emojiName="robot" />
-            <Title>전문가와 함께하는 클래스</Title>
+            🤖 <Title>전문가와 함께하는 클래스</Title>
           </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <ClassList />

@@ -10,6 +10,10 @@ const ActivityWrap = styled.div`
 `;
 const ActivityTitle = styled.div`
   padding: 0 2rem 2.5rem;
+
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -29,6 +33,7 @@ const ActivityContent = styled.div`
   white-space: nowrap;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  margin-bottom: 3.5rem;
 
   &::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Opera*/
@@ -72,7 +77,7 @@ const ItemTitle = styled.div`
 `;
 
 const LinkBanner = styled.div`
-  margin: 3.5rem 2rem 0;
+  margin: 0 2rem;
   padding: 2.2rem 2rem 2.1rem;
   background: #efefef;
   border-radius: 0.8rem;
@@ -111,25 +116,30 @@ const RecommendActivity = () => {
 
   return (
     <ActivityWrap>
-      <ActivityTitle>
-        <UseEmoji emojiName="thumbs-up" />
-        <span>이 시기에 도움이 되는 활동</span>
-      </ActivityTitle>
-      <ActivityContent>
+      {homeData.month_level_content.length > 0 && (
         <>
-          {homeData.month_level_content.map((item: any) => (
-            <ItemWrap key={item.id} onClick={() => NativeFunction("childRecommend", item.url)}>
-              <img src={item.image} alt={item.subject} />
-              <ItemTitle>{item.subject}</ItemTitle>
-            </ItemWrap>
-          ))}
+          <ActivityTitle>
+            👍 <span>이 시기에 도움이 되는 활동</span>
+          </ActivityTitle>
+          <ActivityContent>
+            <>
+              {homeData.month_level_content.map((item: any) => (
+                <ItemWrap
+                  key={item.id}
+                  onClick={() => NativeFunction("routeNativeScreen", `childRecommend@${item.url}`)}
+                >
+                  {item.image ? <img src={item.image} alt={item.subject} /> : "이미지가 없어요.."}
+                  <ItemTitle>{item.subject}</ItemTitle>
+                </ItemWrap>
+              ))}
+            </>
+          </ActivityContent>
         </>
-      </ActivityContent>
-
+      )}
       <LinkBanner onClick={() => navigate("/program")}>
         <BannerTitle>우리 아이 잘 자라고 있는걸까?</BannerTitle>
         <BannerDesc>발달에 맞는 전문 코칭을 받아보세요.</BannerDesc>
-        <img src="/images/banner-home.svg" alt="프로그램 바로가기" />
+        <img src="/images/banner-home.png" alt="프로그램 바로가기" />
       </LinkBanner>
     </ActivityWrap>
   );

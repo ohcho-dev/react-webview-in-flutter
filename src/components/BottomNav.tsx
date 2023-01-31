@@ -10,7 +10,7 @@ const BottomNavWrap = styled.ul`
   border-top: 0.05rem solid rgba(0, 0, 0, 0.15);
   position: fixed;
   bottom: 0;
-  z-index: 20;
+  z-index: 110;
 `;
 
 const Lists = styled.li`

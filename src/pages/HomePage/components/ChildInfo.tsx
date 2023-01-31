@@ -161,7 +161,7 @@ const ChildInfo = () => {
         </div>
         {!selectedChild.image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${selectedChild.id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
           >
             <img src="/images/profile-default.svg" alt="프로필 사진" />
             <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
@@ -169,7 +169,7 @@ const ChildInfo = () => {
         )}
         {selectedChild.image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `/imageUpload/${selectedChild.id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
           >
             <UploadImage src={selectedChild.image} alt="프로필 사진" />
           </ProfileImageWrap>

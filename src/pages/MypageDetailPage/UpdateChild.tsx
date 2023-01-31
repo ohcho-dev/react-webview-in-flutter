@@ -324,6 +324,7 @@ const UpdateChild = () => {
         }}
         cancelBtnName="그냥 나가기"
         cancelBtnClick={() => {
+          setOpenBackModal(!openBackModal);
           navigate("/my/management-child", { replace: true });
         }}
       />

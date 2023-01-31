@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { useQuery } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { getCoachingList } from "../../api/programApi";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
@@ -15,6 +15,7 @@ import { Divider } from "./components/styled";
 
 const CoachingList = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
 
   const {
@@ -31,7 +32,7 @@ const CoachingList = () => {
   }, [id]);
 
   const handleCardClick = (id: number) => {
-    navigate(`/program/coaching/${id}`);
+    navigate(`/program/coaching/${id}`, { state: pathname });
   };
 
   return (
