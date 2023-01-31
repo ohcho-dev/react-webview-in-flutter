@@ -35,7 +35,7 @@ const AlarmWrap = styled.div`
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  background: ${(prop: { new: boolean }) => (prop.new ? "#EEF9F7" : "fff")};
+  background: ${(prop: { new: any }) => (prop.new ? "#EEF9F7" : "fff")};
 
   img {
     width: 2.8rem;
@@ -59,7 +59,7 @@ const Desc = styled.div`
   margin-top: 0.5rem;
 `;
 
-const Date = styled.div`
+const DateTime = styled.div`
   font-weight: 400;
   font-size: 1.2rem;
   line-height: 1.8rem;
@@ -73,6 +73,7 @@ const AlarmList = () => {
   const setNotificationTime = useMutation(updateNotificationCheckTime);
 
   useEffect(() => {
+    console.log("call");
     setNewNotificationFlag(false);
     // last_checked_at api 호출
     setNotificationTime.mutate();
@@ -83,13 +84,13 @@ const AlarmList = () => {
       <PageTitle title={"알림"} />
       {data.list.length ? (
         <AlarmListWrap>
-          {data.list.map((noti: NotificationType) => (
-            <AlarmWrap new={noti.created_at > data.last_checked_at}>
+          {data.list.map((noti: any) => (
+            <AlarmWrap new={new Date(noti.created_at) > new Date(data.last_checked_at)}>
               <img src={`/images/icon-alarm-${noti.type}.svg`} />
               <div>
                 <Title>{noti.title}</Title>
                 <Desc>{noti.body}</Desc>
-                <Date>{getDate(noti.created_at.substring(0, 10))}</Date>
+                <DateTime>{getDate(noti.created_at.substring(0, 10))}</DateTime>
               </div>
             </AlarmWrap>
           ))}

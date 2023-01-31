@@ -37,15 +37,15 @@ export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const { status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
     refetchOnWindowFocus: true,
     onSuccess: data => {
-      data.list.map((noti: NotificationType) => {
-        if (data.last_checked_at) {
-          if (noti.created_at > data.last_checked_at) {
+      if (data.last_checked_at) {
+        data.list.map((noti: NotificationType) => {
+          if (new Date(noti.created_at) > new Date(data.last_checked_at)) {
             setNewNotificationFlag(true);
           }
-        } else {
-          setNewNotificationFlag(true);
-        }
-      });
+        });
+      } else {
+        setNewNotificationFlag(true);
+      }
 
       // if (notificationList.length) {
       //   notificationList.map((noti: NotificationType) => {
