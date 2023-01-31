@@ -1,3 +1,4 @@
+import Cookies from "js-cookie";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
@@ -6,6 +7,7 @@ import { getNotificationList } from "../api/notificationApi";
 import { queryKeys } from "../constant/queryKeys";
 import { newNotificationFlagstate, notificationListstate } from "../recoil/atom";
 import { NotificationType } from "../utils/type";
+import LoadingSpinner from "./common/LoadingSpinner";
 
 interface AlarmBadgeProps {}
 
@@ -33,7 +35,7 @@ export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const navigate = useNavigate();
   const notificationList = useRecoilValue(notificationListstate);
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
-  const { data } = useQuery(queryKeys.notificationList, getNotificationList, {
+  const { data, status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
     onSuccess: data => {
       const previousIdArr: number[] = [];
       let matchedIdNum: number = 0;
@@ -54,15 +56,19 @@ export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
         }
       }
     },
+    enabled: !!Cookies.get("token"),
   });
   return (
-    <CustomAlarmBadge
-      newNotification={newNotificationFlag}
-      onClick={() => navigate("/my/alarm-list")}
-    >
-      <img alt="badge" src="/images/badge.svg" />
-      <img alt="icon-bell" src="/images/icon-bell.svg" />
-    </CustomAlarmBadge>
+    <>
+      {(status === "idle" || isFetching) && null}
+      <CustomAlarmBadge
+        newNotification={newNotificationFlag}
+        onClick={() => navigate("/my/alarm-list")}
+      >
+        <img alt="badge" src="/images/badge.svg" />
+        <img alt="icon-bell" src="/images/icon-bell.svg" />
+      </CustomAlarmBadge>
+    </>
   );
 };
 
