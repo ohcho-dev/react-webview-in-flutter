@@ -26,8 +26,8 @@ interface DetailCoachingProps {
 const DetailCoachingContainer = styled.div``;
 
 const Thumbnail = styled.img`
-  width: 37.5rem;
-  height: 25rem;
+  width: ${(prop: { image: string }) => (prop.image ? "37.5rem" : "25.9rem")};
+  height: ${(prop: { image: string }) => (prop.image ? "25rem" : "9rem")};
 `;
 
 const ProductMainInfo = styled.div`
@@ -215,6 +215,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
           <Thumbnail
             alt="thumnail"
             src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.png"}
+            image={coachingInfo?.main_image}
           />{" "}
           :
           <ProductMainInfo>

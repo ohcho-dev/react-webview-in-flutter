@@ -150,6 +150,8 @@ const NotFoundData = styled.div`
   text-align: center;
 
   img {
+    width: 25.9rem;
+    height: 9rem;
     margin-top: 11rem;
   }
 `;
