@@ -221,21 +221,19 @@ const VideoAssignmentPage = (): JSX.Element => {
     }
   };
 
+  const handleNativeFunction = async () => {
+    await NativeFunction(
+      "routeNativeScreen",
+      `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
+    );
+    await navigate(-1);
+  };
+
   return (
     <LayoutDetailPage
       bottomBtn={videoAssignmentResult?.status === "TSST_REJECT"}
       bottomBtnElement={
-        <Button
-          theme="black"
-          content="다시 촬영하기"
-          onClick={() => {
-            navigate(-1);
-            NativeFunction(
-              "routeNativeScreen",
-              `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
-            );
-          }}
-        />
+        <Button theme="black" content="다시 촬영하기" onClick={() => handleNativeFunction()} />
       }
     >
       <PageWrapper>

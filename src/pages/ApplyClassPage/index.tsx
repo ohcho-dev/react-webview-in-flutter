@@ -234,6 +234,7 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
+    document.getElementById("main")?.scrollTo();
     activeInputref.current = ref.current;
   };
 
