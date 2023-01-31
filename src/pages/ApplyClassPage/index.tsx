@@ -178,19 +178,19 @@ const ApplyClassPage = () => {
         //     }
         //   }
         // }
-        if (os.indexOf("iphone") > -1) {
-          const keyboardHeight = fullHeight.current - visualViewportHeight;
-          if (current !== null) {
-            if (fullHeight.current > visualViewportHeight) {
-              current.style.height = `${
-                USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
-              }rem`;
-              activeInputref.current?.scrollIntoView({ behavior: "smooth" });
-            } else {
-              current.style.height = `${USER_SECTION_HEIGHT}rem`;
-            }
-          }
-        }
+        // if (os.indexOf("iphone") > -1) {
+        //   const keyboardHeight = fullHeight.current - visualViewportHeight;
+        //   if (current !== null) {
+        //     if (fullHeight.current > visualViewportHeight) {
+        //       current.style.height = `${
+        //         USER_SECTION_HEIGHT + keyboardHeight / 10 - BOTTOM_BTN_WRAP_HEIGHT - 1.5
+        //       }rem`;
+        //       activeInputref.current?.scrollIntoView({ behavior: "smooth" });
+        //     } else {
+        //       current.style.height = `${USER_SECTION_HEIGHT}rem`;
+        //     }
+        //   }
+        // }
       };
       window.visualViewport.addEventListener("resize", handleResize);
     }
@@ -234,8 +234,6 @@ const ApplyClassPage = () => {
   };
 
   const handleFocusInput = (ref: RefObject<HTMLInputElement>) => {
-    let scrollHeight = document.getElementById("main")?.scrollHeight;
-    document.getElementById("main")?.scrollTo({ top: scrollHeight });
     activeInputref.current = ref.current;
   };
 
