@@ -240,7 +240,8 @@ const VideoAssignmentPage = (): JSX.Element => {
           content="다시 촬영하기"
           onClick={async () =>
             await callNativeFunction().then(function () {
-              navigate(`/coaching-detail/${state.coaching_id}`);
+              navigate(`/coaching/coaching-detail/${state.coaching_id}`);
+              refetch();
             })
           }
         />
