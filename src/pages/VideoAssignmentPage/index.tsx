@@ -223,7 +223,7 @@ const VideoAssignmentPage = (): JSX.Element => {
 
   function goBack() {
     return new Promise(function (resolve, reject) {
-      navigate(-1);
+      NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
     });
   }
 
@@ -236,10 +236,7 @@ const VideoAssignmentPage = (): JSX.Element => {
           content="다시 촬영하기"
           onClick={async () =>
             await goBack().then(function () {
-              NativeFunction(
-                "routeNativeScreen",
-                `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
-              );
+              navigate(-1);
             })
           }
         />
