@@ -144,6 +144,10 @@ const App: React.FC = () => {
       });
     });
 
+    window.addEventListener("refetchPushList", () => {
+      queryClient.invalidateQueries(queryKeys.notificationList);
+    });
+
     window.addEventListener("coachingResult", (res: any) => {
       console.log("coachingResult:: ", "푸시 알림 클릭 시 결과지 페이지로 웹뷰 이동시키는 함수");
       console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
