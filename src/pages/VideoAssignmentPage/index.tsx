@@ -236,7 +236,7 @@ const VideoAssignmentPage = (): JSX.Element => {
           content="다시 촬영하기"
           onClick={async () =>
             await goBack().then(function () {
-              navigate(-1);
+              navigate("/coaching");
             })
           }
         />
