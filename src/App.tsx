@@ -140,7 +140,9 @@ const App: React.FC = () => {
       alert("네이티브 호출 확인 alert");
       await refetchData().then(function () {
         alert(`"refetch 함수.then 확인 및 코칭페이지로 이동" ${pathname} ${secondPath}`);
-        pathname && secondPath && alert(pathname + secondPath);
+        setTimeout(() => {
+          alert(`setTimeout ${currentTaskId}`);
+        }, 300);
         secondPath === "videoAssignment" && navigate(-1);
       });
     });
