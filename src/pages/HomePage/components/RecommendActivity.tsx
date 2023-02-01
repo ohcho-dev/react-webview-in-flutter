@@ -61,6 +61,16 @@ const ItemWrap = styled.div`
     border: solid 1px #efefef;
   }
 `;
+
+const ImageWrap = styled.div`
+  width: 22rem;
+  height: 14rem;
+  border-radius: 0.8rem;
+  border: solid 1px #efefef;
+
+  background: url(${(prop: { image: string }) => prop.image}) no-repeat 50% 50%;
+  background-size: cover;
+`;
 const ItemTitle = styled.div`
   margin-top: 1.3rem;
   font-weight: 600;
@@ -128,7 +138,7 @@ const RecommendActivity = () => {
                   key={item.id}
                   onClick={() => NativeFunction("routeNativeScreen", `childRecommend@${item.url}`)}
                 >
-                  {item.image ? <img src={item.image} alt={item.subject} /> : "이미지가 없어요.."}
+                  {item.image ? <ImageWrap image={item.image} /> : "이미지가 없어요.."}
                   <ItemTitle>{item.subject}</ItemTitle>
                 </ItemWrap>
               ))}
