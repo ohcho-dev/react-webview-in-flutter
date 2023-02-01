@@ -139,10 +139,8 @@ const App: React.FC = () => {
     window.addEventListener("videoReUpload", async () => {
       alert("네이티브 호출 확인 alert");
       await refetchData().then(function () {
-        alert(
-          `"refetch 함수.then 확인 및 코칭페이지로 이동" /coaching/coaching-detail/${currentTaskId}`,
-        );
-        navigate(`/coaching/coaching-detail/90`);
+        alert(`"refetch 함수.then 확인 및 코칭페이지로 이동" ${pathname} ${secondPath}`);
+        // pathname === "" navigate(-1) : ;
       });
     });
 
