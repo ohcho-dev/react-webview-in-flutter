@@ -57,8 +57,6 @@ const App: React.FC = () => {
     return new Promise(function (resolve, reject) {
       queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
       resolve("success");
-      alert("refetch success 확인");
-      navigate(`/coaching/coaching-detail/${currentTaskId}`);
     });
   }
 
@@ -134,16 +132,19 @@ const App: React.FC = () => {
   }, [pathname]);
 
   useEffect(() => {
+    console.log("addevent");
+    if (currentTaskId) {
+      window.addEventListener("videoReUpload", async () => {
+        await refetchData().then(function () {
+          navigate(`/coaching/coaching-detail/${currentTaskId}`);
+        });
+      });
+    }
+  }, [currentTaskId]);
+
+  useEffect(() => {
     window.addEventListener("refetchChildData", () => {
       queryClient.invalidateQueries(queryKeys.childrenList);
-    });
-
-    window.addEventListener("videoReUpload", async () => {
-      alert("네이티브 호출 확인 alert");
-      await refetchData().then(function () {
-        alert(`"refetch 함수.then 확인 및 코칭페이지로 이동" ${currentTaskId} ${secondPath}`);
-        // secondPath === "videoAssignment" && navigate(-1);
-      });
     });
 
     window.addEventListener("refetchPushList", () => {
