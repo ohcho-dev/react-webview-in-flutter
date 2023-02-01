@@ -10,11 +10,12 @@ import "./scss/_customReactDatepicker.scss";
 
 import { RouterConfig } from "./RouteConfig";
 import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-query";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import {
   childrenKeyState,
   childrenListState,
   commonCodeState,
+  currentTaskIdState,
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./recoil/atom";
@@ -49,6 +50,7 @@ const App: React.FC = () => {
   const [childrenList, setChildrenList] = useRecoilState(childrenListState);
   const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
+  const currentTaskId = useRecoilValue(currentTaskIdState);
   const [imageUpload, setImageUpload] = useState(false);
 
   useEffect(() => {
@@ -128,12 +130,8 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("videoReUpload", async () => {
-      console.log(
-        "refetchChildData:: ",
-        "확인버튼 누르고 과제 데이터 재호출 및 route -1 하는 함수",
-      );
-      await queryClient.invalidateQueries(queryKeys.childrenList);
-      await navigate(-1);
+      navigate(`/coaching/coaching-detail/${currentTaskId}`);
+      queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
     });
 
     window.addEventListener("coachingResult", (res: any) => {

@@ -5,13 +5,13 @@ import { BODY_1, STB_20 } from "../../constant/font";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
-import { getAppliedCoachingInfo, getVideoAssignmentResult } from "../../api/coachingApi";
+import { getVideoAssignmentResult } from "../../api/coachingApi";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { useRecoilValue } from "recoil";
-import { selectedChildInfoState } from "../../recoil/atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { currentTaskIdState, selectedChildInfoState } from "../../recoil/atom";
 
 type collapseType = "" | "open" | "close";
 
@@ -205,15 +205,12 @@ const Divider = styled.div`
 const VideoAssignmentPage = (): JSX.Element => {
   const { state } = useLocation();
   const { id } = useParams();
-  const navigate = useNavigate();
+  const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
   const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
   const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
     queryKeys.videoAssignmentResult,
     () => getVideoAssignmentResult(id),
-  );
-  const { refetch } = useQuery(queryKeys.appliedCoachingInfo, () =>
-    getAppliedCoachingInfo(state.coaching_id),
   );
 
   const handleArrowClick = () => {
@@ -224,12 +221,12 @@ const VideoAssignmentPage = (): JSX.Element => {
     }
   };
 
-  function callNativeFunction() {
-    return new Promise(function (resolve, reject) {
-      NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
-      resolve("success");
-    });
-  }
+  // function callNativeFunction() {
+  //   return new Promise(function (resolve, reject) {
+  //     NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
+  //     resolve("success");
+  //   });
+  // }
 
   return (
     <LayoutDetailPage
@@ -238,11 +235,18 @@ const VideoAssignmentPage = (): JSX.Element => {
         <Button
           theme="black"
           content="다시 촬영하기"
-          onClick={async () =>
-            await callNativeFunction().then(function () {
-              navigate(`/coaching/coaching-detail/${state.coaching_id}`);
-            })
-          }
+          onClick={() => {
+            NativeFunction(
+              "routeNativeScreen",
+              `coachingVideoDetail@${state.task_id}@${childInfo.id}@reject`,
+            );
+            setCurrentTaskId(state.task_id);
+          }}
+          // onClick={async () =>
+          //   await callNativeFunction().then(function () {
+          //     navigate(`/coaching/coaching-detail/${state.coaching_id}`);
+          //   })
+          // }
         />
       }
     >

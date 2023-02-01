@@ -86,3 +86,9 @@ export const newNotificationFlagstate = atom({
   key: "newNotificationFlag",
   default: false,
 });
+
+// task id 저장
+export const currentTaskIdState = atom({
+  key: "currentTaskId",
+  default: "",
+});
