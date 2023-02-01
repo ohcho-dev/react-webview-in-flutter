@@ -85,12 +85,8 @@ const DetailTitle = styled.span`
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: coachingInfo } = useQuery(
-    queryKeys.appliedCoachingInfo,
-    () => getAppliedCoachingInfo(id),
-    {
-      refetchOnWindowFocus: true,
-    },
+  const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
+    getAppliedCoachingInfo(id),
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
 
@@ -147,7 +143,7 @@ const CoachingDetailPage = () => {
                   );
                 } else {
                   navigate(`/coaching/videoAssignment/${task.id}`, {
-                    state: { task_id: task.id },
+                    state: { task_id: task.id, coaching_id: id },
                   });
                 }
               }

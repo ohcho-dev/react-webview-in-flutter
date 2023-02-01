@@ -5,7 +5,7 @@ import { BODY_1, STB_20 } from "../../constant/font";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
-import { getVideoAssignmentResult } from "../../api/coachingApi";
+import { getAppliedCoachingInfo, getVideoAssignmentResult } from "../../api/coachingApi";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
@@ -212,6 +212,9 @@ const VideoAssignmentPage = (): JSX.Element => {
     queryKeys.videoAssignmentResult,
     () => getVideoAssignmentResult(id),
   );
+  const { refetch } = useQuery(queryKeys.appliedCoachingInfo, () =>
+    getAppliedCoachingInfo(state.coaching_id),
+  );
 
   const handleArrowClick = () => {
     if (!collapse || collapse === "open") {
@@ -221,7 +224,7 @@ const VideoAssignmentPage = (): JSX.Element => {
     }
   };
 
-  function goBack() {
+  function callNativeFunction() {
     return new Promise(function (resolve, reject) {
       NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
       resolve("success");
@@ -236,8 +239,9 @@ const VideoAssignmentPage = (): JSX.Element => {
           theme="black"
           content="다시 촬영하기"
           onClick={async () =>
-            await goBack().then(function () {
-              navigate("/coaching");
+            await callNativeFunction().then(function () {
+              navigate(-1);
+              refetch();
             })
           }
         />
