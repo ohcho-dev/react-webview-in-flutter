@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { selectedChildInfoState } from "../../recoil/atom";
+import { currentTaskIdState, selectedChildInfoState } from "../../recoil/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
@@ -90,7 +90,11 @@ const CoachingDetailPage = () => {
     getAppliedCoachingInfo(id),
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
+  const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
 
+  useEffect(() => {
+    id && setCurrentTaskId(id);
+  }, [id]);
   return (
     <>
       <PageTitleWrap>

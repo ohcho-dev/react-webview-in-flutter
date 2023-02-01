@@ -56,6 +56,7 @@ const App: React.FC = () => {
     return new Promise(function (resolve, reject) {
       queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
       resolve("success");
+      alert("refetch success 확인");
     });
   }
 
@@ -136,7 +137,9 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("videoReUpload", async () => {
+      alert("네이티브 호출 확인 alert");
       await refetchData().then(function () {
+        alert("refetch 함수.then 확인");
         navigate(`/coaching/coaching-detail/${currentTaskId}`);
       });
     });

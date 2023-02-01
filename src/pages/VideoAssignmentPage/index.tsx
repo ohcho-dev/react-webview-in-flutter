@@ -10,8 +10,8 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { currentTaskIdState, selectedChildInfoState } from "../../recoil/atom";
+import { useRecoilValue } from "recoil";
+import { selectedChildInfoState } from "../../recoil/atom";
 
 type collapseType = "" | "open" | "close";
 
@@ -205,7 +205,6 @@ const Divider = styled.div`
 const VideoAssignmentPage = (): JSX.Element => {
   const { state } = useLocation();
   const { id } = useParams();
-  const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
   const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
   const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
@@ -240,7 +239,6 @@ const VideoAssignmentPage = (): JSX.Element => {
               "routeNativeScreen",
               `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
             );
-            setCurrentTaskId(state.task_id);
           }}
           // onClick={async () =>
           //   await callNativeFunction().then(function () {
