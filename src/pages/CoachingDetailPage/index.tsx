@@ -95,7 +95,7 @@ const CoachingDetailPage = () => {
     if (id) {
       refetch();
     }
-  }, [id]);
+  }, []);
 
   return (
     <>
