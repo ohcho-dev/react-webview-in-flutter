@@ -45,7 +45,7 @@ const ProgramStatus = styled.div`
 
   span:nth-child(2) {
     margin-left: 0.5rem;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1.6rem;
     line-height: 2.2rem;
     letter-spacing: -0.04rem;
@@ -54,7 +54,7 @@ const ProgramStatus = styled.div`
 
   span:nth-child(3) {
     margin-left: 0.5rem;
-    font-weight: 300;
+    font-weight: 400;
     font-size: 1.6rem;
     line-height: 2.2rem;
     letter-spacing: -0.04rem;
@@ -72,7 +72,7 @@ const ProceedStatus = styled.span`
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: -0.04rem;
-  color: #00c7b1;
+  color: ${(props: { color: string }) => props.color};
 `;
 
 const DetailTitle = styled.span`
@@ -102,9 +102,14 @@ const CoachingDetailPage = () => {
       <PageTitleWrap>
         <Title>{coachingInfo.name}</Title>
         <ProgramStatus>
-          <ProceedStatus color={"#00c7b1"}>{"진행중"}</ProceedStatus>
+          <ProceedStatus color={coachingInfo.date_remain >= 0 ? "#00c7b1" : "#8D8D8D"}>
+            {coachingInfo.date_remain >= 0 ? "진행중" : "종료"}
+          </ProceedStatus>
           <span>~{coachingInfo.end_date}</span>
-          <span>{coachingInfo.date_remain}일 남음</span>
+          <span>
+            {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
+            {coachingInfo.date_remain === 0 && "오늘까지!"}
+          </span>
         </ProgramStatus>
       </PageTitleWrap>
       <ShadowBox />
@@ -132,22 +137,30 @@ const CoachingDetailPage = () => {
           <ContentItem
             key={index + task.name}
             coachingMethod={task.task_type}
-            chipStatus={[task.task_type, task.status]}
+            chipStatus={
+              coachingInfo.date_remain >= 0
+                ? [task.task_type, task.status]
+                : [task.task_type, "EXPIRED"]
+            }
             name={task.name}
-            useArrowBtn={true}
+            useArrowBtn={
+              coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
+            }
             handleClick={() => {
               if (task.task_type === "TSTY_SURVEY") {
                 if (task.status === "TSST_ONGOING") {
-                  navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
+                  coachingInfo.date_remain >= 0 &&
+                    navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
                 } else if (task.status === "TSST_COMPLETE") {
                   navigate(`/coaching/questionnarie/detail/${task.id}`);
                 }
               } else if (task.task_type === "TSTY_VIDEO") {
                 if (task.status === "TSST_ONGOING") {
-                  NativeFunction(
-                    "routeNativeScreen",
-                    `coachingVideoDetail@${task.id}@${childInfo.id}`,
-                  );
+                  coachingInfo.date_remain >= 0 &&
+                    NativeFunction(
+                      "routeNativeScreen",
+                      `coachingVideoDetail@${task.id}@${childInfo.id}`,
+                    );
                 } else {
                   navigate(`/coaching/videoAssignment/${task.id}`, {
                     state: { task_id: task.id, coaching_id: id },
