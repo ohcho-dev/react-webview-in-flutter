@@ -224,6 +224,7 @@ const VideoAssignmentPage = (): JSX.Element => {
   function goBack() {
     return new Promise(function (resolve, reject) {
       NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
+      resolve("success");
     });
   }
 
