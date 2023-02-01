@@ -52,11 +52,13 @@ const App: React.FC = () => {
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const currentTaskId = useRecoilValue(currentTaskIdState);
   const [imageUpload, setImageUpload] = useState(false);
+
   function refetchData() {
     return new Promise(function (resolve, reject) {
       queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
       resolve("success");
       alert("refetch success 확인");
+      navigate(`/coaching/coaching-detail/${currentTaskId}`);
     });
   }
 
@@ -139,11 +141,8 @@ const App: React.FC = () => {
     window.addEventListener("videoReUpload", async () => {
       alert("네이티브 호출 확인 alert");
       await refetchData().then(function () {
-        alert(`"refetch 함수.then 확인 및 코칭페이지로 이동" ${pathname} ${secondPath}`);
-        setTimeout(() => {
-          alert(`setTimeout ${currentTaskId}`);
-        }, 300);
-        secondPath === "videoAssignment" && navigate(-1);
+        alert(`"refetch 함수.then 확인 및 코칭페이지로 이동" ${currentTaskId} ${secondPath}`);
+        // secondPath === "videoAssignment" && navigate(-1);
       });
     });
 
