@@ -138,9 +138,9 @@ const CoachingDetailPage = () => {
             key={index + task.name}
             coachingMethod={task.task_type}
             chipStatus={
-              coachingInfo.date_remain >= 0
-                ? [task.task_type, task.status]
-                : [task.task_type, "EXPIRED"]
+              coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
+                ? [task.task_type, "EXPIRED"]
+                : [task.task_type, task.status]
             }
             name={task.name}
             useArrowBtn={
