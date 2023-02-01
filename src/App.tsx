@@ -52,6 +52,12 @@ const App: React.FC = () => {
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const currentTaskId = useRecoilValue(currentTaskIdState);
   const [imageUpload, setImageUpload] = useState(false);
+  function refetchData() {
+    return new Promise(function (resolve, reject) {
+      queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
+      resolve("success");
+    });
+  }
 
   useEffect(() => {
     let paramsToken = params.get("token");
@@ -130,8 +136,9 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("videoReUpload", async () => {
-      navigate(`/coaching/coaching-detail/${currentTaskId}`);
-      queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
+      await refetchData().then(function () {
+        navigate(`/coaching/coaching-detail/${currentTaskId}`);
+      });
     });
 
     window.addEventListener("coachingResult", (res: any) => {

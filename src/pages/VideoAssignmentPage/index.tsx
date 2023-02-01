@@ -238,7 +238,7 @@ const VideoAssignmentPage = (): JSX.Element => {
           onClick={() => {
             NativeFunction(
               "routeNativeScreen",
-              `coachingVideoDetail@${state.task_id}@${childInfo.id}@reject`,
+              `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
             );
             setCurrentTaskId(state.task_id);
           }}
