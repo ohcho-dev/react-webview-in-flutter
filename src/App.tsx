@@ -142,7 +142,7 @@ const App: React.FC = () => {
         alert(
           `"refetch 함수.then 확인 및 코칭페이지로 이동" /coaching/coaching-detail/${currentTaskId}`,
         );
-        navigate(`/coaching/coaching-detail/${currentTaskId}`);
+        navigate(`/coaching/coaching-detail/90`);
       });
     });
 
