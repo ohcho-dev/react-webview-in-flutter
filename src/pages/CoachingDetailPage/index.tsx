@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -85,10 +86,16 @@ const DetailTitle = styled.span`
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
+  const { data: coachingInfo, refetch } = useQuery(queryKeys.appliedCoachingInfo, () =>
     getAppliedCoachingInfo(id),
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
+
+  useEffect(() => {
+    if (id) {
+      refetch();
+    }
+  }, [id]);
 
   return (
     <>

@@ -241,7 +241,6 @@ const VideoAssignmentPage = (): JSX.Element => {
           onClick={async () =>
             await callNativeFunction().then(function () {
               navigate(`/coaching/coaching-detail/${state.coaching_id}`);
-              refetch();
             })
           }
         />
