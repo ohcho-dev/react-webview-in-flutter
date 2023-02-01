@@ -221,6 +221,12 @@ const VideoAssignmentPage = (): JSX.Element => {
     }
   };
 
+  function goBack() {
+    return new Promise(function (resolve, reject) {
+      navigate(-1);
+    });
+  }
+
   return (
     <LayoutDetailPage
       bottomBtn={videoAssignmentResult?.status === "TSST_REJECT"}
@@ -228,11 +234,13 @@ const VideoAssignmentPage = (): JSX.Element => {
         <Button
           theme="black"
           content="다시 촬영하기"
-          onClick={() =>
-            NativeFunction(
-              "routeNativeScreen",
-              `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
-            )
+          onClick={async () =>
+            await goBack().then(function () {
+              NativeFunction(
+                "routeNativeScreen",
+                `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
+              );
+            })
           }
         />
       }
