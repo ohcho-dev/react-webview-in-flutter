@@ -117,7 +117,7 @@ const CoachingDetailPage = () => {
         style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}
         handleBackBtnClick={() => navigate("/coaching")}
       >
-        <DetailTitle>⛳️ 과제</DetailTitle>
+        <DetailTitle>⛳️ 결과지</DetailTitle>
         {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
           <ContentItem
             style={{ marginBottom: "0" }}
@@ -132,7 +132,7 @@ const CoachingDetailPage = () => {
             }}
           />
         ))}
-        <DetailTitle>✅ 결과지</DetailTitle>
+        <DetailTitle>✅ 과제</DetailTitle>
         {coachingInfo.task.map((task: TaskStatusType, index: number) => (
           <ContentItem
             key={index + task.name}
