@@ -2,7 +2,6 @@ import { useEffect } from "react";
 import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { flutterInAppWebViewPlatformReady } from "../../..";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
@@ -86,6 +85,7 @@ const ProfileImageWrap = styled.div`
 const UploadImage = styled.img`
   width: 18.5rem;
   height: 18.5rem;
+  object-fit: cover;
   border-radius: 10rem;
   border: solid 1rem #fff;
   box-shadow: 0px 0.4rem 0.8rem rgba(0, 0, 0, 0.12);
