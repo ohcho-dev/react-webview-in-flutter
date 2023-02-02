@@ -273,47 +273,47 @@ const AppliedProgramList = () => {
                   </LinkBtn>
                 </NotFoundData>
               ))}
-            {selectedTab === "클래스" && purchasedClassList[0]?.length ? (
-              purchasedClassList[0].map((item: { [key: string]: any }) =>
-                item.data.map((detailData: { [key: string]: any }) => {
-                  return (
-                    <ListWrap key={detailData.id}>
-                      <ListHeader>
-                        <div>
-                          <PurchaseDate>{getDate(item.purchase_date)}</PurchaseDate>
-                          <PaymentStatus>{detailData.payment_status_label}</PaymentStatus>
-                        </div>
-                        <PaymentCode>{detailData.class_place_type_label}</PaymentCode>
-                      </ListHeader>
-                      <ListContent>
-                        <div>
-                          <Title>{detailData.class_name}</Title>
-                          {detailData.payment_price && (
-                            <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
-                          )}
-                          <ChildInfo>
-                            신청아이 : {detailData.child_name} (
-                            {getDate(detailData.child_birth_date)}){" "}
-                            {getGender(detailData.child_gender)}아
-                          </ChildInfo>
-                        </div>
-                        <Thumbnail imgUrl={detailData.main_image} />
-                      </ListContent>
-                    </ListWrap>
-                  );
-                }),
-              )
-            ) : (
-              <NotFoundData>
-                <img src="/images/icon-sparkle.png" alt="thumbnail" />
-                <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
-                <NotFoundDesc>우리아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
-                <LinkBtn onClick={() => navigate("/program", { replace: true })}>
-                  프로그램 보러가기
-                </LinkBtn>
-              </NotFoundData>
-            )}
-
+            {selectedTab === "클래스" &&
+              (purchasedClassList[0]?.length ? (
+                purchasedClassList[0].map((item: { [key: string]: any }) =>
+                  item.data.map((detailData: { [key: string]: any }) => {
+                    return (
+                      <ListWrap key={detailData.id}>
+                        <ListHeader>
+                          <div>
+                            <PurchaseDate>{getDate(item.purchase_date)}</PurchaseDate>
+                            <PaymentStatus>{detailData.payment_status_label}</PaymentStatus>
+                          </div>
+                          <PaymentCode>{detailData.class_place_type_label}</PaymentCode>
+                        </ListHeader>
+                        <ListContent>
+                          <div>
+                            <Title>{detailData.class_name}</Title>
+                            {detailData.payment_price && (
+                              <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                            )}
+                            <ChildInfo>
+                              신청아이 : {detailData.child_name} (
+                              {getDate(detailData.child_birth_date)}){" "}
+                              {getGender(detailData.child_gender)}아
+                            </ChildInfo>
+                          </div>
+                          <Thumbnail imgUrl={detailData.main_image} />
+                        </ListContent>
+                      </ListWrap>
+                    );
+                  }),
+                )
+              ) : (
+                <NotFoundData>
+                  <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                  <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
+                  <NotFoundDesc>우리아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
+                  <LinkBtn onClick={() => navigate("/program", { replace: true })}>
+                    프로그램 보러가기
+                  </LinkBtn>
+                </NotFoundData>
+              ))}
           </Suspense>
         </ListScroll>
       </PageLayout>
