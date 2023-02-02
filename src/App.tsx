@@ -52,6 +52,8 @@ const App: React.FC = () => {
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const currentTaskId = useRecoilValue(currentTaskIdState);
   const [imageUpload, setImageUpload] = useState(false);
+  const [resultId, setResultId] = useState("");
+  const [videoId, setVideoId] = useState("");
 
   function refetchData() {
     return new Promise(function (resolve, reject) {
@@ -153,6 +155,7 @@ const App: React.FC = () => {
     window.addEventListener("coachingResult", (res: any) => {
       console.log("coachingResult:: ", "푸시 알림 클릭 시 결과지 페이지로 웹뷰 이동시키는 함수");
       console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
+      setResultId(res.detail.id);
     });
 
     window.addEventListener("coachingVideoAssignment", (res: any) => {
@@ -161,8 +164,18 @@ const App: React.FC = () => {
         "푸시 알림 클릭 시 비디오 다시 촬영하기 페이지로 웹뷰 이동시키는 함수",
       );
       console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
+      setVideoId(res.detail.id);
     });
   }, []);
+
+  useEffect(() => {
+    if (resultId) {
+      navigate(`/coaching/result/${resultId}`);
+    }
+    if (videoId) {
+      navigate(`/coaching/videoAssignment${videoId}`);
+    }
+  }, [resultId, videoId]);
 
   useEffect(() => {
     if (childrenList.length) {
