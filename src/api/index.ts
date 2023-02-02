@@ -23,7 +23,10 @@ export const request = async (config: AxiosRequestConfig) => {
     return response.data;
   } catch (error) {
     const { response } = error as unknown as AxiosError;
+
     if (response?.status === 400) {
+      return response.data;
+    } else if (response?.status === 404) {
       return response.data;
     }
     throw error;
