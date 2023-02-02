@@ -14,6 +14,7 @@ import CustomModal from "../../../components/common/CustomModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
+import { getDate } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
@@ -258,7 +259,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
           </ProfileImageWrap>
           <div>
             {selectedChildInfo.name}
-            <BirthDate>({selectedChildInfo.birth_date})</BirthDate>
+            <BirthDate>({getDate(selectedChildInfo.birth_date)})</BirthDate>
           </div>
         </ChildInfoWrap>
         <ButtonWrap>
