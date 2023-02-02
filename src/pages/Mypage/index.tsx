@@ -150,11 +150,13 @@ const MyPage = () => {
       if (window.flutter_inappwebview.callHandler) {
         // @ts-ignore
         window.flutter_inappwebview.callHandler("routeNativeScreen", value).then(res => {
+          console.log("app version 호출:: ", res);
           setVersion(res);
         });
       } else {
         // @ts-ignore
         window.flutter_inappwebview._callHandler("routeNativeScreen", value).then(res => {
+          console.log("app version 호출:: ", res);
           setVersion(res);
         });
       }
