@@ -234,9 +234,12 @@ const UpdateChild = () => {
 
           <InputTitle>아이 생년월일</InputTitle>
           <DatePicker
-            popperPlacement="auto"
             showYearDropdown
+            yearDropdownItemNumber={6}
+            scrollableYearDropdown
+            dateFormatCalendar="MMMM"
             locale={ko}
+            maxDate={new Date()}
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
             selected={birthDate}

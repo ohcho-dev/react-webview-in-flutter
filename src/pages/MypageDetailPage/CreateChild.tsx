@@ -207,10 +207,14 @@ const CreateChild = () => {
           <InputTitle>아이 생년월일</InputTitle>
           <DatePicker
             showYearDropdown
+            yearDropdownItemNumber={6}
+            scrollableYearDropdown
+            dateFormatCalendar="MMMM"
             locale={ko}
             dateFormat="yyyy-MM-dd"
             showPopperArrow={false}
             selected={birthDate}
+            maxDate={new Date()}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => setBirthDate(date)}
           />
