@@ -272,7 +272,7 @@ const ApplyClassPage = () => {
                 <img alt="icon-profile" src="/images/profile-0.svg" />
                 <span>{selectedChildInfo.name}</span>
                 <span>{`(${getDate(selectedChildInfo.birth_date)}) ${
-                  selectedChildInfo.gender === "W" ? "여아" : "남아"
+                  selectedChildInfo.gender === "F" ? "여아" : "남아"
                 }`}</span>
               </SelectedChildInfo>
             ) : (
@@ -323,6 +323,8 @@ const ApplyClassPage = () => {
 
       <ClassRejectModal
         theme={errorCode}
+        month_start={classInfo.month_level.month_start}
+        month_end={classInfo.month_level.month_end}
         openModal={openRejectModal}
         toggleModal={() => {
           setOpenRejectModal(!openRejectModal);
