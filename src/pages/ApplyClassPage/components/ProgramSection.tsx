@@ -12,18 +12,18 @@ const ProgramSectionWrapper = styled.div`
 
   padding: 2.5rem;
   margin-bottom: 1rem;
-  height: 18rem;
 `;
 
 const ClassInfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  height: 5rem;
+
   justify-content: space-between;
 `;
 
 const ProgramInfoSection = styled.div`
   display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   column-gap: 2.5rem;
 
@@ -38,21 +38,21 @@ const ProgramTitle = styled.div`
   font-weight: 500;
   font-size: 1.8rem;
   line-height: 2.4rem;
-
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.04rem;
+  color: #000000;
+  margin-bottom: 0.4rem;
 `;
 
 const ProgramInfo = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
-
-  line-height: 1.6rem;
-
+  line-height: 2rem;
+  letter-spacing: -0.04rem;
   color: rgba(10, 10, 10, 0.8);
 `;
 
 const TopWrapper = styled.div`
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
   display: flex;
   align-items: center;
 `;

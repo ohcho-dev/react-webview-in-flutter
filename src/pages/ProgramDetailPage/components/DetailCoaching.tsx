@@ -210,6 +210,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     <>
       <LayoutDetailPage
         handleBackBtnClick={handleBackBtn}
+        titleBarBorder={true}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
