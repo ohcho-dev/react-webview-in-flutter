@@ -269,7 +269,8 @@ const AppliedProgramList = () => {
                             <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
                           )}
                           <ChildInfo>
-                            신청아이 : {detailData.child_name} ({detailData.child_birth_date}){" "}
+                            신청아이 : {detailData.child_name} (
+                            {getDate(detailData.child_birth_date)}){" "}
                             {getGender(detailData.child_gender)}아
                           </ChildInfo>
                         </div>
@@ -311,7 +312,8 @@ const AppliedProgramList = () => {
                             <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
                           )}
                           <ChildInfo>
-                            신청아이 : {detailData.child_name} ({detailData.child_birth_date}){" "}
+                            신청아이 : {detailData.child_name} (
+                            {getDate(detailData.child_birth_date)}){" "}
                             {getGender(detailData.child_gender)}아
                           </ChildInfo>
                         </div>
