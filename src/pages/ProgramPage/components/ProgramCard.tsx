@@ -69,7 +69,7 @@ const ProgramLocation = styled.div`
 `;
 
 const ProgramPriceSection = styled.div`
-  margin: 1.2rem 0;
+  margin: 1rem 0;
 `;
 
 const ProgramStatus = styled.div`
@@ -168,15 +168,13 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
       <ProgramTitle topMargin={utilVisible}>{title}</ProgramTitle>
       {location && <ProgramLocation>{location}</ProgramLocation>}
       {dateTime && <ProgramLocation>{dateTime}</ProgramLocation>}
-      {price && (
-        <ProgramPriceSection>
-          <ProgramPrice
-            discountPercentage={discountPercentage}
-            price={price}
-            originalPrice={originalPrice}
-          />
-        </ProgramPriceSection>
-      )}
+      <ProgramPriceSection>
+        <ProgramPrice
+          discountPercentage={discountPercentage}
+          price={price}
+          originalPrice={originalPrice}
+        />
+      </ProgramPriceSection>
       {purchased && (
         <ProgramStatus>
           <ProceedStatus color={DDay < 0 ? "#8D8D8D" : "#00c7b1"}>
