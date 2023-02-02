@@ -237,7 +237,7 @@ const UpdateChild = () => {
             popperPlacement="auto"
             showYearDropdown
             locale={ko}
-            dateFormat="yyyy-MM-dd"
+            dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
             selected={birthDate}
             customInput={<CustomInput inputRef={inputRef} />}
@@ -262,7 +262,7 @@ const UpdateChild = () => {
                 popperPlacement="auto"
                 showYearDropdown
                 locale={ko}
-                dateFormat="yyyy-MM-dd"
+                dateFormat="yyyy.MM.dd"
                 showPopperArrow={false}
                 selected={dueDate}
                 customInput={<CustomInput inputRef={inputRef} />}

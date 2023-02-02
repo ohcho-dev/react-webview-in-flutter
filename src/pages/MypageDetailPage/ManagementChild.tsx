@@ -7,6 +7,7 @@ import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";
 import { childType } from "../../utils/type";
 import PageTitle from "./components/PageTitle";
@@ -29,7 +30,7 @@ const ChildrenListWrap = styled.div`
 const ChildInfoSection = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 3rem 6rem auto;
+  grid-template-columns: 3rem auto auto;
 
   width: 100%;
 
@@ -37,7 +38,6 @@ const ChildInfoSection = styled.div`
   font-size: 1.6rem;
   line-height: 1.9rem;
   color: #000000;
-  margin-left: 0.8rem;
 `;
 
 const ChildName = styled.span`
@@ -81,7 +81,7 @@ export const ManagementChild = () => {
               <img alt="profile icon" src={`/images/profile-${index}.svg`} />
               <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
               <span>
-                ({child.birth_date}) {getGender(child.gender)}아
+                ({getDate(child.birth_date)}) {getGender(child.gender)}아
               </span>
             </ChildInfoSection>
             <img src="/images/icon-mypage-arrow.svg" />

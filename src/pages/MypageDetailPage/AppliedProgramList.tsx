@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { getPurchaseClasses, getPurchaseCoaching } from "../../api/mypage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";
 import PageTitle from "./components/PageTitle";
 
@@ -254,7 +255,7 @@ const AppliedProgramList = () => {
                     <ListWrap key={detailData.id}>
                       <ListHeader>
                         <div>
-                          <PurchaseDate>{item.purchase_date}</PurchaseDate>
+                          <PurchaseDate>{getDate(item.purchase_date)}</PurchaseDate>
                           <PaymentStatus status={detailData.payment_status_label}>
                             {detailData.payment_status_label}
                           </PaymentStatus>
@@ -298,7 +299,7 @@ const AppliedProgramList = () => {
                     <ListWrap key={detailData.id}>
                       <ListHeader>
                         <div>
-                          <PurchaseDate>{item.purchase_date}</PurchaseDate>
+                          <PurchaseDate>{getDate(item.purchase_date)}</PurchaseDate>
                           <PaymentStatus>{detailData.payment_status_label}</PaymentStatus>
                         </div>
                         <PaymentCode>{detailData.class_place_type_label}</PaymentCode>

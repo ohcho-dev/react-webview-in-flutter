@@ -7,6 +7,7 @@ import { getAppliedCoachingInfo } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../recoil/atom";
+import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
@@ -103,7 +104,7 @@ const CoachingDetailPage = () => {
           <ProceedStatus color={coachingInfo.date_remain >= 0 ? "#00c7b1" : "#8D8D8D"}>
             {coachingInfo.date_remain >= 0 ? "진행중" : "종료"}
           </ProceedStatus>
-          <span>~{coachingInfo.end_date}</span>
+          <span>~{getDate(coachingInfo.end_date)}</span>
           <span>
             {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
             {coachingInfo.date_remain === 0 && "오늘까지!"}
