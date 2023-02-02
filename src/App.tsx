@@ -132,7 +132,6 @@ const App: React.FC = () => {
   }, [pathname]);
 
   useEffect(() => {
-    console.log("addevent");
     if (currentTaskId) {
       window.addEventListener("videoReUpload", async () => {
         await refetchData().then(function () {
