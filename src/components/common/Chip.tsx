@@ -16,6 +16,7 @@ const STATUS: {
   TSST_UPLOAD: { name: "확인중", color: "#5AC4B1" },
   TSST_REJECT: { name: "재등록요청", color: "#FF6B6B", width: "6.3rem" },
   TTPST_COMPLETE: { name: "발급완료", color: "#FFFFFF", width: "5.3rem" },
+  EXPIRED: { name: "기한만료", color: "#FFFFFF", width: "5.3rem" },
 };
 
 const CustomChip = styled.div`

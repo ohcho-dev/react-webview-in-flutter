@@ -205,7 +205,6 @@ const Divider = styled.div`
 const VideoAssignmentPage = (): JSX.Element => {
   const { state } = useLocation();
   const { id } = useParams();
-  const navigate = useNavigate();
   const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
   const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
@@ -221,6 +220,13 @@ const VideoAssignmentPage = (): JSX.Element => {
     }
   };
 
+  // function callNativeFunction() {
+  //   return new Promise(function (resolve, reject) {
+  //     NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
+  //     resolve("success");
+  //   });
+  // }
+
   return (
     <LayoutDetailPage
       bottomBtn={videoAssignmentResult?.status === "TSST_REJECT"}
@@ -228,12 +234,17 @@ const VideoAssignmentPage = (): JSX.Element => {
         <Button
           theme="black"
           content="다시 촬영하기"
-          onClick={() =>
+          onClick={() => {
             NativeFunction(
               "routeNativeScreen",
               `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
-            )
-          }
+            );
+          }}
+          // onClick={async () =>
+          //   await callNativeFunction().then(function () {
+          //     navigate(`/coaching/coaching-detail/${state.coaching_id}`);
+          //   })
+          // }
         />
       }
     >

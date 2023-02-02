@@ -172,9 +172,7 @@ const CoachingPage = () => {
                   <div
                     key={index}
                     onClick={() => {
-                      if (Dday(coaching.end_date) > 0) {
-                        handleCardClick(coaching.id);
-                      }
+                      handleCardClick(coaching.id);
                     }}
                   >
                     <CoachingCard coaching={coaching} />
