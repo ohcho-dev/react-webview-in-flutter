@@ -164,6 +164,7 @@ const App: React.FC = () => {
         "푸시 알림 클릭 시 비디오 다시 촬영하기 페이지로 웹뷰 이동시키는 함수",
       );
       console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
+      alert(res.detail.id);
       setVideoId(res.detail.id);
     });
   }, []);
