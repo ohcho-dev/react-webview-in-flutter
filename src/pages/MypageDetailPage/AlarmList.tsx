@@ -23,7 +23,7 @@ const NoneImg = styled.img`
 `;
 
 const AlarmListWrap = styled.div`
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 13rem);
   overflow-y: auto;
   margin-top: 6rem;
 `;
