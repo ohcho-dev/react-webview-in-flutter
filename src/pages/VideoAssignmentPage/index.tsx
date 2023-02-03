@@ -199,7 +199,7 @@ const Reason = styled.div`
 const Divider = styled.div`
   width: 100%;
   height: 0;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  border: 0.05rem solid rgba(0, 0, 0, 0.2);
 `;
 
 const VideoAssignmentPage = (): JSX.Element => {
