@@ -55,11 +55,11 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
   const numberFormatter = new Intl.NumberFormat("ko");
 
   return (
-    <ProgramPriceSection>
+    <>
       {price === 0 ? (
         <Price>무료{perNum && <PerActivity>({perNum}회)</PerActivity>}</Price>
       ) : (
-        <div>
+        <ProgramPriceSection>
           {discountPercentage > 0 && (
             <DiscountPercentage style={{ ...percentageStyle }}>
               {discountPercentage}%
@@ -73,9 +73,9 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
               {numberFormatter.format(originalPrice)}원
             </OriginalPrice>
           )}
-        </div>
+        </ProgramPriceSection>
       )}
-    </ProgramPriceSection>
+    </>
   );
 };
 
