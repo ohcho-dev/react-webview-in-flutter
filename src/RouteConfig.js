@@ -29,14 +29,6 @@ import AlarmList from "./pages/MypageDetailPage/AlarmList";
 
 export const RouterConfig = [
   {
-    path: "/",
-    element: <HomePage />,
-    sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
-    },
-  },
-  {
     path: "/home",
     element: <HomePage />,
     sceneConfig: {
