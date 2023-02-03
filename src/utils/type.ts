@@ -176,3 +176,9 @@ export interface NotificationType {
   created_at: string;
   updated_at: string;
 }
+
+export interface SelectBtnArrayType {
+  id: number;
+  name: string;
+  function?: () => void;
+}

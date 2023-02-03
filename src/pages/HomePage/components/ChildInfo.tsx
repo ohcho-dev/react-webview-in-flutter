@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
@@ -141,6 +142,7 @@ const ChildInfo = () => {
   const queryClient = useQueryClient();
   const homeData = useRecoilValue(selectedHomeDataState);
   const selectedChild = useRecoilValue(selectedChildInfoState);
+  const [openSelectModal, setOpenSelectModal] = useState(false);
 
   useEffect(() => {
     queryClient.invalidateQueries(queryKeys.homeData);
@@ -168,9 +170,7 @@ const ChildInfo = () => {
           </ProfileImageWrap>
         )}
         {selectedChild.image && (
-          <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
-          >
+          <ProfileImageWrap onClick={() => setOpenSelectModal(true)}>
             <UploadImage src={selectedChild.image} alt="프로필 사진" />
           </ProfileImageWrap>
         )}
@@ -184,6 +184,19 @@ const ChildInfo = () => {
           ))}
         </NoticeDesc>
       </NoticeWrap>
+      <CustomSelectModal
+        title="프로필 사진"
+        isOpen={openSelectModal}
+        toggleModal={() => setOpenSelectModal(!openSelectModal)}
+        selectBtnArray={[
+          {
+            id: 0,
+            name: "앨범에서 이미지 선택",
+            function: () => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`),
+          },
+          { id: 1, name: "기본 이미지로 변경(미완성)", function: () => {} },
+        ]}
+      />
     </ChildInfoWrap>
   );
 };
