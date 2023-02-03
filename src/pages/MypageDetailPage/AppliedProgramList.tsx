@@ -114,9 +114,11 @@ const PaymentCode = styled.div`
 `;
 
 const ListContent = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 10rem;
+  width: 100%;
 `;
+
 const Title = styled.div`
   font-weight: 400;
   font-size: 1.6rem;
@@ -142,12 +144,20 @@ const ChildInfo = styled.div`
   color: rgba(10, 10, 10, 0.5);
 `;
 
+const ThumbnailWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const Thumbnail = styled.div`
   width: 8.5rem;
   height: 7rem;
   background-image: url(${(prop: { imgUrl?: string }) => prop.imgUrl});
   background-size: cover;
   background-position: 50% 50%;
+
+  border-radius: 0.5rem;
 `;
 
 const NotFoundData = styled.div`
@@ -249,8 +259,10 @@ const AppliedProgramList = () => {
                         <ListContent>
                           <div>
                             <Title>{detailData.coaching_name}</Title>
-                            {detailData.payment_price && (
+                            {detailData.payment_price ? (
                               <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                            ) : (
+                              <Price>무료</Price>
                             )}
                             <ChildInfo>
                               신청아이 : {detailData.child_name} (
@@ -258,7 +270,9 @@ const AppliedProgramList = () => {
                               {getGender(detailData.child_gender)}아
                             </ChildInfo>
                           </div>
-                          <Thumbnail imgUrl={detailData.main_image} />
+                          <ThumbnailWrapper>
+                            <Thumbnail imgUrl={detailData.main_image} />
+                          </ThumbnailWrapper>
                         </ListContent>
                       </ListWrap>
                     );
@@ -290,8 +304,10 @@ const AppliedProgramList = () => {
                         <ListContent>
                           <div>
                             <Title>{detailData.class_name}</Title>
-                            {detailData.payment_price && (
+                            {detailData.payment_price ? (
                               <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                            ) : (
+                              <Price>무료</Price>
                             )}
                             <ChildInfo>
                               신청아이 : {detailData.child_name} (
@@ -299,7 +315,9 @@ const AppliedProgramList = () => {
                               {getGender(detailData.child_gender)}아
                             </ChildInfo>
                           </div>
-                          <Thumbnail imgUrl={detailData.main_image} />
+                          <ThumbnailWrapper>
+                            <Thumbnail imgUrl={detailData.main_image} />
+                          </ThumbnailWrapper>
                         </ListContent>
                       </ListWrap>
                     );
