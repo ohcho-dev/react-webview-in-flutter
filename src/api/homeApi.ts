@@ -7,3 +7,10 @@ export const getHomeData = (param?: object) => {
     params: param,
   });
 };
+
+export const deleteProfilImageApi = (id: string) => {
+  return request({
+    method: "DELETE",
+    url: `/v1/children/${id}/image`,
+  });
+};
