@@ -41,6 +41,10 @@ const QuestionnaireForm = (): JSX.Element => {
   });
 
   useEffect(() => {
+    setSurveyTempAnswer([]);
+  }, [questionnaireInfo]);
+
+  useEffect(() => {
     if (order) {
       setSurveyInfo(questionnaireInfo.survey[parseInt(order)]);
     }

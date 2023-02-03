@@ -25,17 +25,28 @@
 .react-datepicker__day {
   margin: 0.8rem !important;
 }
-
+.react-datepicker__header__dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
 .react-datepicker__year-dropdown {
   color: #fff !important;
   border: solid 1px #5ac4b1 !important;
 
   background: #eef9f7 !important;
   color: #00c7b1 !important;
-  .react-datepicker__year-option:first-child,
-  .react-datepicker__year-option:last-child {
-    height: 1rem;
-    a {
+  .react-datepicker__year-option {
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: solid 1px #efefef;
+
+    &:last-child {
+      display: none;
+    }
+    .react-datepicker__navigation {
       display: none;
     }
   }

@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../api/coachingApi";
+import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../recoil/atom";
+import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
@@ -91,10 +93,34 @@ const CoachingDetailPage = () => {
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
   const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
+  const [openModal, setOpenModal] = useState(false);
+  const [modalTitle, setModalTitle] = useState("");
+  const [modalContent, setModalContent] = useState("");
 
   useEffect(() => {
     id && setCurrentTaskId(id);
   }, [id]);
+
+  useEffect(() => {
+    // 과제 상테값 체크
+    let taskStatus = coachingInfo.task.find((item: any) => item.status !== "TSST_COMPLETE");
+
+    // 과제 미완성 + 기한 만료일때 modal
+    if (taskStatus && coachingInfo.status === "COSTAT_END") {
+      setModalTitle("이용기간이 종료되었습니다.");
+      setModalContent("고객센터로 문의하여 주세요.");
+      return;
+    }
+
+    // 과제 미완성 그 외
+    if (taskStatus) {
+      setModalTitle("과제를 먼저 끝내주세요!");
+      setModalContent("주어진 과제를 완료해야 결과지를 확인할 수 있어요.");
+    } else {
+      setModalTitle("결과지를 작성 중입니다!");
+      setModalContent("과제를 확인하여 결과지를 작성 중입니다. 잠시만 기다려주세요.");
+    }
+  }, [coachingInfo]);
   return (
     <>
       <PageTitleWrap>
@@ -103,7 +129,7 @@ const CoachingDetailPage = () => {
           <ProceedStatus color={coachingInfo.date_remain >= 0 ? "#00c7b1" : "#8D8D8D"}>
             {coachingInfo.date_remain >= 0 ? "진행중" : "종료"}
           </ProceedStatus>
-          <span>~{coachingInfo.end_date}</span>
+          <span>~{getDate(coachingInfo.end_date)}</span>
           <span>
             {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
             {coachingInfo.date_remain === 0 && "오늘까지!"}
@@ -123,10 +149,14 @@ const CoachingDetailPage = () => {
             coachingMethod="result"
             chipStatus={[paper.status]}
             name={paper.name}
-            useArrowBtn={paper.status === "TTPST_COMPLETE"}
+            useArrowBtn={true}
             handleClick={() => {
-              if (paper.status === "TTPST_COMPLETE")
+              // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
+              if (paper.status === "TTPST_COMPLETE") {
                 navigate(`/coaching/result/${paper.paper_url}`);
+              } else {
+                setOpenModal(true);
+              }
             }}
           />
         ))}
@@ -168,6 +198,17 @@ const CoachingDetailPage = () => {
             }}
           />
         ))}
+        <CustomModal
+          topImage={
+            <img src={"/images/icon-sad-circle.svg"} alt="character" style={{ width: "9.5rem" }} />
+          }
+          title={modalTitle}
+          content={modalContent}
+          isOpen={openModal}
+          toggleModal={() => setOpenModal(!openModal)}
+          okBtnName="확인"
+          okBtnClick={() => setOpenModal(!openModal)}
+        />
       </LayoutDetailPage>
     </>
   );

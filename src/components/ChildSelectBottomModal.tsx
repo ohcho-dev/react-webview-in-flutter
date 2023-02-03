@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { getDate } from "../utils/getDateTime";
 import { childType } from "../utils/type";
 import CustomBottomModal from "./common/CustomBottomModal";
 
@@ -103,7 +104,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
                 <img alt="profile icon" src={child.image || `/images/profile-${index}.svg`} />
                 <ChildName>{child.name}</ChildName>
                 <ChildInfo>
-                  <span>({child.birth_date}) </span>
+                  <span>({getDate(child.birth_date)}) </span>
                   <span>{child.gender === "M" ? "남아" : "여아"}</span>
                 </ChildInfo>
               </div>

@@ -15,7 +15,7 @@ export const AgeRange = styled.span`
   align-items: center;
   justify-content: center;
 
-  border: 0.5px solid rgba(10, 10, 10, 0.4);
+  border: 0.05rem solid #939393;
   border-radius: 2px;
 
   font-weight: 600;

@@ -26,7 +26,6 @@ const ClassWrapper = styled.div`
 
   img {
     width: 37.5rem;
-    height: 25rem;
   }
 `;
 
@@ -36,22 +35,25 @@ const ClassInfoWrapper = styled.div`
 
 const ClassInfo = styled.div`
   display: flex;
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.8rem 0;
   align-items: center;
 `;
 
 const ClassTitle = styled.div`
   font-weight: 500;
   font-size: 2rem;
+  line-height: 3rem;
+  letter-spacing: -0.04rem;
+  color: #000000;
 `;
 
 const ClassSubSection = styled.div`
   font-weight: 400;
   font-size: 1.6rem;
-
+  line-height: 2.2rem;
+  letter-spacing: -0.04rem;
   color: rgba(10, 10, 10, 0.8);
-
-  margin: 1rem 0;
+  margin-bottom: 0.5rem;
 `;
 
 const Divider = styled.div`
@@ -70,6 +72,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   return (
     <LayoutDetailPage
       handleBackBtnClick={() => navigate("/program")}
+      titleBarBorder={true}
       bottomBtn
       bottomBtnElement={
         <>

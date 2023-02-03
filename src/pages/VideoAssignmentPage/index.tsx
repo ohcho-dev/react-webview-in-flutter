@@ -188,6 +188,8 @@ const Reason = styled.div`
   align-items: center;
 
   line-height: 1.8rem;
+  border-bottom: ${(props: { notLastIndex: boolean }) =>
+    props.notLastIndex ? "0.1rem solid #d6d6d6" : "none"};
 
   span {
     font-weight: 400;
@@ -198,8 +200,8 @@ const Reason = styled.div`
 
 const Divider = styled.div`
   width: 100%;
-  height: 0;
-  border: 0.5px solid rgba(0, 0, 0, 0.2);
+  height: 0.5rem;
+  border: 0.5rem solid #d6d6d6;
 `;
 
 const VideoAssignmentPage = (): JSX.Element => {
@@ -263,7 +265,7 @@ const VideoAssignmentPage = (): JSX.Element => {
         </PageTitleWrapper>
         <VideoSection collapse={collapse}>
           <VideoWrapper collapse={collapse}>
-            <video controls autoPlay width={"100%"} height={"100%"} playsInline>
+            <video controls width={"100%"} height={"100%"} playsInline>
               <source src={videoAssignmentResult?.video} type="video/mp4"></source>
             </video>
           </VideoWrapper>
@@ -284,10 +286,10 @@ const VideoAssignmentPage = (): JSX.Element => {
             <RejectReasonSection>
               {videoAssignmentResult.admin_comment.map((comment: string, index: number) => (
                 <div key={comment + index}>
-                  <Reason>
+                  <Reason notLastIndex={index !== videoAssignmentResult.admin_comment.length - 1}>
                     <span>{comment}</span>
                   </Reason>
-                  {index !== videoAssignmentResult.admin_comment.length - 1 && <Divider />}
+                  {/* {index !== videoAssignmentResult.admin_comment.length - 1 && <Divider />} */}
                 </div>
               ))}
             </RejectReasonSection>

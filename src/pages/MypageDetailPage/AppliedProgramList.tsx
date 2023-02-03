@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
-import { useQueries } from "react-query";
+import { Suspense, useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getPurchaseClasses, getPurchaseCoaching } from "../../api/mypage";
+import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";
 import PageTitle from "./components/PageTitle";
 
@@ -24,6 +26,7 @@ const TabWrapper = styled.div`
   padding: 0.5rem;
   margin: 0 2.5rem 1rem;
 `;
+
 const TabItem = styled.div`
   width: 100%;
   height: 4rem;
@@ -41,6 +44,7 @@ const TabItem = styled.div`
     prop.tab === prop.selectedTab ? "#fff" : "none"};
   border-radius: 2.45rem;
 `;
+
 const ListScroll = styled.div`
   padding: 0 2.5rem 1rem;
   height: calc(100vh - 20rem);
@@ -56,6 +60,7 @@ const ListScroll = styled.div`
     display: none; /* Chrome, Safari, Opera*/
   }
 `;
+
 const ListWrap = styled.div`
   width: 100%;
   padding-bottom: 2rem;
@@ -109,9 +114,11 @@ const PaymentCode = styled.div`
 `;
 
 const ListContent = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 10rem;
+  width: 100%;
 `;
+
 const Title = styled.div`
   font-weight: 400;
   font-size: 1.6rem;
@@ -137,12 +144,20 @@ const ChildInfo = styled.div`
   color: rgba(10, 10, 10, 0.5);
 `;
 
+const ThumbnailWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+`;
+
 const Thumbnail = styled.div`
   width: 8.5rem;
   height: 7rem;
   background-image: url(${(prop: { imgUrl?: string }) => prop.imgUrl});
   background-size: cover;
   background-position: 50% 50%;
+
+  border-radius: 0.5rem;
 `;
 
 const NotFoundData = styled.div`
@@ -192,25 +207,17 @@ const LinkBtn = styled.div`
 const AppliedProgramList = () => {
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(TabValue[0]);
-  const [purchaseCoachingData, setPurchaseCoachingData] = useState<object[]>([]);
-  const [purchaseClassesData, setPurchaseClassesData] = useState<object[]>([]);
 
-  useQueries([
+  const { data: purchasedCoachingList } = useQuery(
+    queryKeys.purchaseCoaching,
+    getPurchaseCoaching,
     {
-      queryKey: queryKeys.purchaseCoaching,
-      queryFn: () => getPurchaseCoaching(),
-      onSuccess: (data: any[]) => {
-        setPurchaseCoachingData(data[0]);
-      },
+      enabled: selectedTab === "코칭",
     },
-    {
-      queryKey: queryKeys.purchaseClasses,
-      queryFn: () => getPurchaseClasses(),
-      onSuccess: (data: any[]) => {
-        setPurchaseClassesData(data[0]);
-      },
-    },
-  ]);
+  );
+  const { data: purchasedClassList } = useQuery(queryKeys.purchaseClasses, getPurchaseClasses, {
+    enabled: selectedTab === "클래스",
+  });
 
   useEffect(() => {
     document.getElementById("list-scroll")?.scrollTo({ top: 0 });
@@ -232,95 +239,101 @@ const AppliedProgramList = () => {
             </TabItem>
           ))}
         </TabWrapper>
-
         <ListScroll id="list-scroll">
-          <>
-            {selectedTab === "코칭" && purchaseCoachingData.length === 0 && (
-              <NotFoundData>
-                <img src="/images/icon-sparkle.png" alt="thumbnail" />
-                <NotFoundTitle>아직 신청한 {selectedTab + "이"} 없어요.</NotFoundTitle>
-                <NotFoundDesc>우리아이 맞춤 {selectedTab + "을"} 신청해 보세요.</NotFoundDesc>
-                <LinkBtn onClick={() => navigate("/program", { replace: true })}>
-                  프로그램 보러가기
-                </LinkBtn>
-              </NotFoundData>
-            )}
-
+          <Suspense fallback={<LoadingSpinner />}>
             {selectedTab === "코칭" &&
-              purchaseCoachingData.length > 0 &&
-              purchaseCoachingData.map((item: { [key: string]: any }) =>
-                item.data.map((detailData: { [key: string]: any }) => {
-                  return (
-                    <ListWrap key={detailData.id}>
-                      <ListHeader>
-                        <div>
-                          <PurchaseDate>{item.purchase_date}</PurchaseDate>
-                          <PaymentStatus status={detailData.payment_status_label}>
-                            {detailData.payment_status_label}
-                          </PaymentStatus>
-                        </div>
-                        <PaymentCode>{detailData.payment_code}</PaymentCode>
-                      </ListHeader>
-                      <ListContent>
-                        <div>
-                          <Title>{detailData.coaching_name}</Title>
-                          {detailData.payment_price && (
-                            <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
-                          )}
-                          <ChildInfo>
-                            신청아이 : {detailData.child_name} ({detailData.child_birth_date}){" "}
-                            {getGender(detailData.child_gender)}아
-                          </ChildInfo>
-                        </div>
-                        <Thumbnail imgUrl={detailData.main_image} />
-                      </ListContent>
-                    </ListWrap>
-                  );
-                }),
-              )}
-
-            {selectedTab === "클래스" && purchaseClassesData.length === 0 && (
-              <NotFoundData>
-                <img src="/images/icon-sparkle.png" alt="thumbnail" />
-                <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
-                <NotFoundDesc>우리아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
-                <LinkBtn onClick={() => navigate("/program", { replace: true })}>
-                  프로그램 보러가기
-                </LinkBtn>
-              </NotFoundData>
-            )}
-
+              (purchasedCoachingList[0]?.length ? (
+                purchasedCoachingList[0].map((item: { [key: string]: any }) =>
+                  item.data.map((detailData: { [key: string]: any }) => {
+                    return (
+                      <ListWrap key={detailData.id}>
+                        <ListHeader>
+                          <div>
+                            <PurchaseDate>{getDate(item.purchase_date)}</PurchaseDate>
+                            <PaymentStatus status={detailData.payment_status_label}>
+                              {detailData.payment_status_label}
+                            </PaymentStatus>
+                          </div>
+                          <PaymentCode>{detailData.payment_code}</PaymentCode>
+                        </ListHeader>
+                        <ListContent>
+                          <div>
+                            <Title>{detailData.coaching_name}</Title>
+                            {detailData.payment_price ? (
+                              <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                            ) : (
+                              <Price>무료</Price>
+                            )}
+                            <ChildInfo>
+                              신청아이 : {detailData.child_name} (
+                              {getDate(detailData.child_birth_date)}){" "}
+                              {getGender(detailData.child_gender)}아
+                            </ChildInfo>
+                          </div>
+                          <ThumbnailWrapper>
+                            <Thumbnail imgUrl={detailData.main_image} />
+                          </ThumbnailWrapper>
+                        </ListContent>
+                      </ListWrap>
+                    );
+                  }),
+                )
+              ) : (
+                <NotFoundData>
+                  <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                  <NotFoundTitle>아직 신청한 {selectedTab + "이"} 없어요.</NotFoundTitle>
+                  <NotFoundDesc>우리아이 맞춤 {selectedTab + "을"} 신청해 보세요.</NotFoundDesc>
+                  <LinkBtn onClick={() => navigate("/program", { replace: true })}>
+                    프로그램 보러가기
+                  </LinkBtn>
+                </NotFoundData>
+              ))}
             {selectedTab === "클래스" &&
-              purchaseClassesData.length > 0 &&
-              purchaseClassesData.map((item: { [key: string]: any }) =>
-                item.data.map((detailData: { [key: string]: any }) => {
-                  return (
-                    <ListWrap key={detailData.id}>
-                      <ListHeader>
-                        <div>
-                          <PurchaseDate>{item.purchase_date}</PurchaseDate>
-                          <PaymentStatus>{detailData.payment_status_label}</PaymentStatus>
-                        </div>
-                        <PaymentCode>{detailData.class_place_type_label}</PaymentCode>
-                      </ListHeader>
-                      <ListContent>
-                        <div>
-                          <Title>{detailData.class_name}</Title>
-                          {detailData.payment_price && (
-                            <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
-                          )}
-                          <ChildInfo>
-                            신청아이 : {detailData.child_name} ({detailData.child_birth_date}){" "}
-                            {getGender(detailData.child_gender)}아
-                          </ChildInfo>
-                        </div>
-                        <Thumbnail imgUrl={detailData.main_image} />
-                      </ListContent>
-                    </ListWrap>
-                  );
-                }),
-              )}
-          </>
+              (purchasedClassList[0]?.length ? (
+                purchasedClassList[0].map((item: { [key: string]: any }) =>
+                  item.data.map((detailData: { [key: string]: any }) => {
+                    return (
+                      <ListWrap key={detailData.id}>
+                        <ListHeader>
+                          <div>
+                            <PurchaseDate>{getDate(item.purchase_date)}</PurchaseDate>
+                            <PaymentStatus>{detailData.payment_status_label}</PaymentStatus>
+                          </div>
+                          <PaymentCode>{detailData.class_place_type_label}</PaymentCode>
+                        </ListHeader>
+                        <ListContent>
+                          <div>
+                            <Title>{detailData.class_name}</Title>
+                            {detailData.payment_price ? (
+                              <Price>{detailData.payment_price.toLocaleString("ko-KR")}원</Price>
+                            ) : (
+                              <Price>무료</Price>
+                            )}
+                            <ChildInfo>
+                              신청아이 : {detailData.child_name} (
+                              {getDate(detailData.child_birth_date)}){" "}
+                              {getGender(detailData.child_gender)}아
+                            </ChildInfo>
+                          </div>
+                          <ThumbnailWrapper>
+                            <Thumbnail imgUrl={detailData.main_image} />
+                          </ThumbnailWrapper>
+                        </ListContent>
+                      </ListWrap>
+                    );
+                  }),
+                )
+              ) : (
+                <NotFoundData>
+                  <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                  <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
+                  <NotFoundDesc>우리아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
+                  <LinkBtn onClick={() => navigate("/program", { replace: true })}>
+                    프로그램 보러가기
+                  </LinkBtn>
+                </NotFoundData>
+              ))}
+          </Suspense>
         </ListScroll>
       </PageLayout>
     </LayoutDetailPage>

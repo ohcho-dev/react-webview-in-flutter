@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { getNoticeDetail, getNoticeList } from "../../api/mypage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { getDate } from "../../utils/getDateTime";
 import PageTitle from "./components/PageTitle";
 
 const PageLayout = styled.div`
@@ -86,7 +87,7 @@ export const NoticeList = () => {
           {noticeList[0].map((notice: { [key: string]: any }) => (
             <NoticeItem key={notice.id} onClick={() => navigate(`/my/notice/${notice.id}`)}>
               <Subject>{notice.subject}</Subject>
-              <CreateDate>{notice.created_at.substr(0, 10)}</CreateDate>
+              <CreateDate>{getDate(notice.created_at.substr(0, 10))}</CreateDate>
               <img src="/images/icon-mypage-arrow.svg" />
             </NoticeItem>
           ))}
@@ -106,7 +107,8 @@ export const NoticeDetail = () => {
         <TitleWrap>
           <SubjectDetail>{noticeData[0].subject}</SubjectDetail>
           <CreateDate>
-            {noticeData[0].updated_at.substr(0, 10) || noticeData[0].created_at.substr(0, 10)}
+            {getDate(noticeData[0].updated_at.substr(0, 10)) ||
+              getDate(noticeData[0].created_at.substr(0, 10))}
           </CreateDate>
         </TitleWrap>
         <ContentWrap>{noticeData[0].content}</ContentWrap>

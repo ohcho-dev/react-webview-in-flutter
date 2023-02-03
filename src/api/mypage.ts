@@ -1,18 +1,16 @@
 import { request } from ".";
 
-export const getPurchaseCoaching = (param?: object) => {
+export const getPurchaseCoaching = () => {
   return request({
     method: "GET",
     url: "/v1/purchase/coaching",
-    params: param,
   });
 };
 
-export const getPurchaseClasses = (param?: object) => {
+export const getPurchaseClasses = () => {
   return request({
     method: "GET",
     url: "/v1/purchase/classes",
-    params: param,
   });
 };
 

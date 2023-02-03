@@ -1,8 +1,9 @@
-import { useEffect } from "react";
-import { useQueryClient } from "react-query";
+import { useEffect, useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { flutterInAppWebViewPlatformReady } from "../../..";
+import { deleteProfilImageApi } from "../../../api/homeApi";
+import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
@@ -86,6 +87,7 @@ const ProfileImageWrap = styled.div`
 const UploadImage = styled.img`
   width: 18.5rem;
   height: 18.5rem;
+  object-fit: cover;
   border-radius: 10rem;
   border: solid 1rem #fff;
   box-shadow: 0px 0.4rem 0.8rem rgba(0, 0, 0, 0.12);
@@ -141,6 +143,13 @@ const ChildInfo = () => {
   const queryClient = useQueryClient();
   const homeData = useRecoilValue(selectedHomeDataState);
   const selectedChild = useRecoilValue(selectedChildInfoState);
+  const [openSelectModal, setOpenSelectModal] = useState(false);
+
+  const deleteProfilImage = useMutation(deleteProfilImageApi, {
+    onSuccess: res => {
+      queryClient.invalidateQueries(queryKeys.childrenList);
+    },
+  });
 
   useEffect(() => {
     queryClient.invalidateQueries(queryKeys.homeData);
@@ -168,9 +177,7 @@ const ChildInfo = () => {
           </ProfileImageWrap>
         )}
         {selectedChild.image && (
-          <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
-          >
+          <ProfileImageWrap onClick={() => setOpenSelectModal(true)}>
             <UploadImage src={selectedChild.image} alt="프로필 사진" />
           </ProfileImageWrap>
         )}
@@ -184,6 +191,29 @@ const ChildInfo = () => {
           ))}
         </NoticeDesc>
       </NoticeWrap>
+      <CustomSelectModal
+        title="프로필 사진"
+        isOpen={openSelectModal}
+        toggleModal={() => setOpenSelectModal(!openSelectModal)}
+        selectBtnArray={[
+          {
+            id: 0,
+            name: "앨범에서 이미지 선택",
+            function: () => {
+              NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`);
+              setOpenSelectModal(false);
+            },
+          },
+          {
+            id: 1,
+            name: "기본 이미지로 변경",
+            function: () => {
+              setOpenSelectModal(false);
+              deleteProfilImage.mutate(selectedChild.id.toString());
+            },
+          },
+        ]}
+      />
     </ChildInfoWrap>
   );
 };

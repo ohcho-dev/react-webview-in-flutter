@@ -107,6 +107,8 @@ const CreateChild = () => {
   //   생일 날짜 string으로 변환
   useEffect(() => {
     setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });
+    new Date(String(dueDate)) < new Date(String(birthDate)) &&
+      setDueDate(new Date(String(birthDate)));
   }, [birthDate]);
 
   // 이른둥이 출산일 날짜 string으로 변환
@@ -207,15 +209,19 @@ const CreateChild = () => {
           <InputTitle>아이 생년월일</InputTitle>
           <DatePicker
             showYearDropdown
+            yearDropdownItemNumber={6}
+            scrollableYearDropdown
+            dateFormatCalendar="MMMM"
             locale={ko}
-            dateFormat="yyyy-MM-dd"
+            dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
             selected={birthDate}
+            maxDate={new Date()}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => setBirthDate(date)}
           />
 
-          <InputTitle>아이 출산일</InputTitle>
+          <InputTitle>이른둥이 출산 선택</InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
@@ -225,13 +231,17 @@ const CreateChild = () => {
 
           {childData.premature_flag === 1 && (
             <>
-              <InputTitle>이른둥이 출산일 선택</InputTitle>
+              <InputTitle>기존 출산 예정일</InputTitle>
               <DatePicker
                 showYearDropdown
+                scrollableYearDropdown
+                dateFormatCalendar="MMMM"
                 locale={ko}
-                dateFormat="yyyy-MM-dd"
+                dateFormat="yyyy.MM.dd"
                 showPopperArrow={false}
                 selected={dueDate}
+                minDate={new Date(String(birthDate))}
+                maxDate={new Date()}
                 customInput={<CustomInput inputRef={inputRef} />}
                 onChange={(date: Date | null) => setDueDate(date)}
               />

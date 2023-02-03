@@ -30,6 +30,7 @@ const DetailPage = styled.main`
 
 interface LayoutDetailPageProps {
   hideTitleBar?: boolean;
+  titleBarBorder?: boolean;
   children?: React.ReactNode;
   bottomBtn?: Boolean;
   bottomBtnElement?: ReactElement;
@@ -41,6 +42,7 @@ interface LayoutDetailPageProps {
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   children,
   hideTitleBar = false,
+  titleBarBorder = false,
   bottomBtn = false,
   bottomBtnElement,
   style,
@@ -50,7 +52,11 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   return (
     <LayoutBasePage>
       {!hideTitleBar && (
-        <DetailTitleBar leftBtn={leftBtn} handleBackBtnClick={handleBackBtnClick} />
+        <DetailTitleBar
+          style={titleBarBorder ? { borderBottom: "solid 0.5px rgba(0, 0, 0, 0.15)" } : {}}
+          leftBtn={leftBtn}
+          handleBackBtnClick={handleBackBtnClick}
+        />
       )}
       <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
         {children}

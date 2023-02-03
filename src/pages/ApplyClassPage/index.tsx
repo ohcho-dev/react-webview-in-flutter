@@ -10,6 +10,7 @@ import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
+import { getDate } from "../../utils/getDateTime";
 import { applyClassBodyType, childType } from "../../utils/type";
 import { BOTTOM_BTN_WRAP_HEIGHT } from "../ProgramPage/components/styled";
 import ClassRejectModal from "./components/ClassRejectModal";
@@ -254,6 +255,7 @@ const ApplyClassPage = () => {
     <>
       <LayoutDetailPage
         style={{ background: "#f6f6f6" }}
+        titleBarBorder={true}
         bottomBtn
         bottomBtnElement={
           <Button theme={"black"} content={"신청하기"} onClick={handleApplyBtnClick} />
@@ -270,8 +272,8 @@ const ApplyClassPage = () => {
               <SelectedChildInfo>
                 <img alt="icon-profile" src="/images/profile-0.svg" />
                 <span>{selectedChildInfo.name}</span>
-                <span>{`(${selectedChildInfo.birth_date}) ${
-                  selectedChildInfo.gender === "W" ? "여아" : "남아"
+                <span>{`(${getDate(selectedChildInfo.birth_date)}) ${
+                  selectedChildInfo.gender === "F" ? "여아" : "남아"
                 }`}</span>
               </SelectedChildInfo>
             ) : (
@@ -322,6 +324,8 @@ const ApplyClassPage = () => {
 
       <ClassRejectModal
         theme={errorCode}
+        month_start={classInfo.month_level.month_start}
+        month_end={classInfo.month_level.month_end}
         openModal={openRejectModal}
         toggleModal={() => {
           setOpenRejectModal(!openRejectModal);

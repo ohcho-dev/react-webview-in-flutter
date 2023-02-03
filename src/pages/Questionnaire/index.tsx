@@ -92,7 +92,7 @@ const Questionnaire = (): JSX.Element => {
         <Chip status="TSTY_SURVEY" />
         <QuestionnarieDescription>{selectedTaskInfo.description}</QuestionnarieDescription>
         <HowToSection>
-          <img alt="how to img" src="/images/how-to-img.svg" />
+          <img alt="how to img" src="/images/how-to-img.png" />
         </HowToSection>
       </QuestionnarieWrapper>
     </LayoutDetailPage>

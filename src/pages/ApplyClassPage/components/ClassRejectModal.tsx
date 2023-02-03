@@ -17,14 +17,11 @@ interface contentType {
 
 interface rejectModalProps {
   theme: "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED";
+  month_start?: number;
+  month_end?: number;
   openModal: boolean;
   toggleModal: () => void;
 }
-
-const MONTH_NOT_ACCEPTABLE_CONTENT = {
-  title: "신청을 할 수 없어요.",
-  content: "0~36개월 월령의 아이만 신청할 수 있어요.",
-};
 
 const CLASS_STUDENT_FULL_CONTENT = {
   title: "신청이 마감되었어요.",
@@ -38,8 +35,13 @@ const CLASS_ALREADY_APPLIED_CONTENT = {
 };
 
 const ClassRejectModal = (props: rejectModalProps): JSX.Element => {
-  const { theme, openModal, toggleModal } = props;
+  const { theme, month_start, month_end, openModal, toggleModal } = props;
   const [content, setContent] = useState<contentType>({ title: "", content: "" });
+
+  const MONTH_NOT_ACCEPTABLE_CONTENT = {
+    title: "신청을 할 수 없어요.",
+    content: `${month_start}~${month_end}개월 월령의 아이만 신청할 수 있어요.`,
+  };
 
   useEffect(() => {
     if (theme === "MONTH_NOT_ACCEPTABLE") {
@@ -50,7 +52,6 @@ const ClassRejectModal = (props: rejectModalProps): JSX.Element => {
       setContent(CLASS_ALREADY_APPLIED_CONTENT);
     }
   }, [theme]);
-
   return (
     <CustomModal
       topImage={
