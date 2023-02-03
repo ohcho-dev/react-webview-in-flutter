@@ -161,7 +161,7 @@ const ChildInfo = () => {
             <span>일</span>
           </DdayValue>
         </div>
-        {selectedChild.image && (
+        {!selectedChild.image && (
           <ProfileImageWrap
             onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
           >
@@ -169,7 +169,7 @@ const ChildInfo = () => {
             <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
           </ProfileImageWrap>
         )}
-        {!selectedChild.image && (
+        {selectedChild.image && (
           <ProfileImageWrap onClick={() => setOpenSelectModal(true)}>
             <UploadImage src={selectedChild.image} alt="프로필 사진" />
           </ProfileImageWrap>
