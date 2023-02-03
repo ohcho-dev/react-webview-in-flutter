@@ -31,6 +31,7 @@ const ProgramInfoSection = styled.div`
     width: 10rem;
     height: 8rem;
     border-radius: 0.6rem;
+    object-fit: cover;
   }
 `;
 
@@ -79,7 +80,7 @@ const ProgramSection = (props: { [key: string]: any }): JSX.Element => {
             )}
           </ClassInfoSection>
         </div>
-        <img alt="program image" src="/images/banner-example.png" />
+        <img alt="program image" src={classInfo.main_image} />
       </ProgramInfoSection>
     </ProgramSectionWrapper>
   );

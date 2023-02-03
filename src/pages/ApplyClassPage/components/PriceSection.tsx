@@ -64,10 +64,10 @@ const InformImg = styled.img`
 const Num = styled.div`
   font-weight: 400;
   font-size: 1.4rem;
+  line-height: 1.4rem;
   color: rgba(10, 10, 10, 0.8);
 
   margin-right: 0.5rem;
-  padding-top: 0.2rem;
 `;
 
 const PriceSection = (props: { [key: string]: any }): JSX.Element => {
@@ -89,9 +89,11 @@ const PriceSection = (props: { [key: string]: any }): JSX.Element => {
       )}
       <TotalPriceSection>
         <span>결제 가격</span>
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "flex-end" }}>
           <Num>{classInfo.total_session}회</Num>
-          <span>{numberFormatter.format(classInfo.price)}원</span>
+          <span style={{ fontSize: "1.8rem", lineHeight: "1.8rem" }}>
+            {numberFormatter.format(classInfo.price)}원
+          </span>
         </div>
       </TotalPriceSection>
       {classInfo.payment_type === "CLPYT_ONSITE" && (
