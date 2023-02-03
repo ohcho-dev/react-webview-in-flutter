@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+import { deleteProfilImageApi } from "../../../api/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
@@ -144,6 +145,12 @@ const ChildInfo = () => {
   const selectedChild = useRecoilValue(selectedChildInfoState);
   const [openSelectModal, setOpenSelectModal] = useState(false);
 
+  const deleteProfilImage = useMutation(deleteProfilImageApi, {
+    onSuccess: res => {
+      queryClient.invalidateQueries(queryKeys.childrenList);
+    },
+  });
+
   useEffect(() => {
     queryClient.invalidateQueries(queryKeys.homeData);
   }, [selectedChild.id]);
@@ -199,9 +206,10 @@ const ChildInfo = () => {
           },
           {
             id: 1,
-            name: "기본 이미지로 변경(미완성)",
+            name: "기본 이미지로 변경",
             function: () => {
               setOpenSelectModal(false);
+              deleteProfilImage.mutate(selectedChild.id.toString());
             },
           },
         ]}
