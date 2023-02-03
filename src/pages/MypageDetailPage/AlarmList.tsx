@@ -12,7 +12,6 @@ import PageTitle from "./components/PageTitle";
 
 const ImgWrap = styled.div`
   height: 100%;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +23,7 @@ const NoneImg = styled.img`
 `;
 
 const AlarmListWrap = styled.div`
-  height: 100%;
+  height: calc(100vh - 6rem);
   overflow-y: auto;
   margin-top: 6rem;
 `;
@@ -80,7 +79,7 @@ const AlarmList = () => {
   }, []);
 
   return (
-    <LayoutDetailPage>
+    <LayoutDetailPage style={{ overflowY: "hidden" }}>
       <PageTitle title={"알림"} />
       {data.list.length ? (
         <AlarmListWrap>
@@ -97,7 +96,7 @@ const AlarmList = () => {
         </AlarmListWrap>
       ) : (
         <ImgWrap>
-          <NoneImg src="/images/alarmlist-none-img.svg" alt="도착한 알림이 없어요." />
+          <NoneImg src="/images/alarmlist-none-img.png" alt="도착한 알림이 없어요." />
         </ImgWrap>
       )}
     </LayoutDetailPage>
