@@ -218,7 +218,7 @@ const UpdateChild = () => {
       <PageTitle title={"아이 정보 수정"} />
       <PageLayout>
         <FormWrap>
-          <InputTitle>아이 이름</InputTitle>
+          <InputTitle>이름</InputTitle>
           <InputBox
             placeholder="이름을 입력해주세요."
             id="childName"
@@ -226,7 +226,7 @@ const UpdateChild = () => {
             onChange={handleTypeInformation}
           />
 
-          <InputTitle>아이 성별</InputTitle>
+          <InputTitle>성별</InputTitle>
           <CustomRadioButton
             id="childGender"
             type={Genders}
@@ -234,7 +234,7 @@ const UpdateChild = () => {
             onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
           />
 
-          <InputTitle>아이 생년월일</InputTitle>
+          <InputTitle>생년월일</InputTitle>
           <DatePicker
             showYearDropdown
             yearDropdownItemNumber={6}
@@ -252,7 +252,7 @@ const UpdateChild = () => {
             }}
           />
 
-          <InputTitle>이른둥이 출산 선택</InputTitle>
+          <InputTitle>이른둥이 출산 여부</InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
