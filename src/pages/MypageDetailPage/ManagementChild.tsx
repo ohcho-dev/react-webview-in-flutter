@@ -30,7 +30,7 @@ const ChildrenListWrap = styled.div`
 const ChildInfoSection = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 3rem auto auto;
+  grid-template-columns: 3rem 8rem auto;
 
   width: 100%;
 
