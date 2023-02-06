@@ -6,7 +6,7 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
 import { getVideoAssignmentResult } from "../../api/coachingApi";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
@@ -198,12 +198,6 @@ const Reason = styled.div`
   }
 `;
 
-const Divider = styled.div`
-  width: 100%;
-  height: 0.5rem;
-  border: 0.5rem solid #d6d6d6;
-`;
-
 const VideoAssignmentPage = (): JSX.Element => {
   const { state } = useLocation();
   const { id } = useParams();
@@ -289,7 +283,6 @@ const VideoAssignmentPage = (): JSX.Element => {
                   <Reason notLastIndex={index !== videoAssignmentResult.admin_comment.length - 1}>
                     <span>{comment}</span>
                   </Reason>
-                  {/* {index !== videoAssignmentResult.admin_comment.length - 1 && <Divider />} */}
                 </div>
               ))}
             </RejectReasonSection>

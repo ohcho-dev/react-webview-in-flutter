@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import { Suspense } from "react";
 import styled from "styled-components";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -6,7 +6,6 @@ import LayoutMainPage from "../../layouts/LayoutMainPage";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import CoachingList from "./CoachingList";
 import ClassList from "./ClassList";
-import UseEmoji from "../../utils/UseEmoji";
 
 const ProgramPageWrapper = styled.div`
   display: flex;
@@ -19,6 +18,9 @@ const ProgramPageWrapper = styled.div`
 const CarouselSection = styled.div`
   width: 100%;
   margin: 0 0 3rem 0;
+  .slick-slide div {
+    outline: none;
+  }
 `;
 
 const CouchingSection = styled.div`
