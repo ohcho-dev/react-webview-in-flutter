@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +12,6 @@ import PageTitle from "./components/PageTitle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
-import moment from "moment";
 import { ko } from "date-fns/esm/locale";
 import { useRecoilValue } from "recoil";
 import { childrenListState } from "../../recoil/atom";
@@ -20,7 +20,7 @@ import CustomModal from "../../components/common/CustomModal";
 const DEFAULT_CHILD_TYPE = {
   name: "",
   gender: "F",
-  birth_date: moment(new Date()).format("YYYY-MM-DD"),
+  birth_date: dayjs(new Date()).format("YYYY-MM-DD"),
   premature_flag: 0,
   due_date: "",
 };
@@ -106,14 +106,14 @@ const CreateChild = () => {
 
   //   생일 날짜 string으로 변환
   useEffect(() => {
-    setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });
+    setChildData({ ...childData, birth_date: dayjs(birthDate).format("YYYY-MM-DD") });
     new Date(String(dueDate)) < new Date(String(birthDate)) &&
       setDueDate(new Date(String(birthDate)));
   }, [birthDate]);
 
   // 이른둥이 출산일 날짜 string으로 변환
   useEffect(() => {
-    setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
+    setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
   }, [dueDate]);
 
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
@@ -144,7 +144,7 @@ const CreateChild = () => {
         return rest;
       });
     } else {
-      setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
+      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
     }
   }, [childData.due_date]);
 
@@ -155,7 +155,7 @@ const CreateChild = () => {
         return rest;
       });
     } else if (childData.premature_flag === 1 && !childData.due_date) {
-      setChildData({ ...childData, due_date: moment(childData.due_date).format("YYYY-MM-DD") });
+      setChildData({ ...childData, due_date: dayjs(childData.due_date).format("YYYY-MM-DD") });
     }
   }, [childData.premature_flag]);
 

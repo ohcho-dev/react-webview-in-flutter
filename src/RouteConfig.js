@@ -1,31 +1,55 @@
-import ApplyClassPage from "./pages/ApplyClassPage";
-import ApplySuccessPage from "./pages/ApplyClassPage/components/ApplySuccessPage";
-import ApplyCoachingSuccess from "./pages/ProgramDetailPage/components/ApplyCoachingSuccess";
-import CoachingDetailPage from "./pages/CoachingDetailPage";
-import {
-  HomePage,
-  NotePage,
-  CoachingPage,
-  ProgramPage,
-  MyPage,
-  ProgramDetailPage,
-} from "./pages/index";
-import AppliedProgramList from "./pages/MypageDetailPage/AppliedProgramList";
-import ManagementAlarm from "./pages/MypageDetailPage/ManagementAlarm";
-import ManagementChild from "./pages/MypageDetailPage/ManagementChild";
-import UpdateChild from "./pages/MypageDetailPage/UpdateChild";
-import Notice, { NoticeDetail } from "./pages/MypageDetailPage/Notice";
-import CreateChild from "./pages/MypageDetailPage/CreateChild";
+import React from "react";
 
-import Questionnaire from "./pages/Questionnaire";
-import QuestionnaireForm from "./pages/Questionnaire/components/QuestionnaireForm";
-import QuestionnaireDetailPage from "./pages/QuestionnireDetailPage";
-import VideoAssignmentPage from "./pages/VideoAssignmentPage";
-import ResultPaper from "./pages/CoachingDetailPage/components/ResultPaper";
-import Terms from "./pages/MypageDetailPage/Terms";
-import Privacy from "./pages/MypageDetailPage/Privacy";
-import Sensitive from "./pages/MypageDetailPage/Sensitive";
-import AlarmList from "./pages/MypageDetailPage/AlarmList";
+/**
+ * 메인메뉴
+ */
+
+const HomePage = React.lazy(() => import("./pages/HomePage"));
+const CoachingPage = React.lazy(() => import("./pages/CoachingPage"));
+const ProgramPage = React.lazy(() => import("./pages/ProgramPage"));
+const MyPage = React.lazy(() => import("./pages/Mypage"));
+
+/**
+ * 코칭메뉴
+ */
+
+const CoachingDetailPage = React.lazy(() => import("./pages/CoachingDetailPage"));
+const ResultPaper = React.lazy(() => import("./pages/CoachingDetailPage/components/ResultPaper"));
+
+const Questionnaire = React.lazy(() => import("./pages/Questionnaire"));
+const QuestionnaireForm = React.lazy(() =>
+  import("./pages/Questionnaire/components/QuestionnaireForm"),
+);
+const QuestionnaireDetailPage = React.lazy(() => import("./pages/QuestionnireDetailPage"));
+const VideoAssignmentPage = React.lazy(() => import("./pages/VideoAssignmentPage"));
+
+/**
+ * 프로그램 메뉴
+ */
+
+const ApplyClassPage = React.lazy(() => import("./pages/ApplyClassPage"));
+const ApplySuccessPage = React.lazy(() =>
+  import("./pages/ApplyClassPage/components/ApplySuccessPage"),
+);
+const ApplyCoachingSuccess = React.lazy(() =>
+  import("./pages/ProgramDetailPage/components/ApplyCoachingSuccess"),
+);
+const ProgramDetailPage = React.lazy(() => import("./pages/ProgramDetailPage"));
+
+/**
+ * My 메뉴
+ */
+const AppliedProgramList = React.lazy(() => import("./pages/MypageDetailPage/AppliedProgramList"));
+const ManagementAlarm = React.lazy(() => import("./pages/MypageDetailPage/ManagementAlarm"));
+const ManagementChild = React.lazy(() => import("./pages/MypageDetailPage/ManagementChild"));
+const CreateChild = React.lazy(() => import("./pages/MypageDetailPage/CreateChild"));
+const UpdateChild = React.lazy(() => import("./pages/MypageDetailPage/UpdateChild"));
+const Notice = React.lazy(() => import("./pages/MypageDetailPage/Notice"));
+const NoticeDetail = React.lazy(() => import("./pages/MypageDetailPage/Notice"));
+const Terms = React.lazy(() => import("./pages/MypageDetailPage/Terms"));
+const Privacy = React.lazy(() => import("./pages/MypageDetailPage/Privacy"));
+const Sensitive = React.lazy(() => import("./pages/MypageDetailPage/Sensitive"));
+const AlarmList = React.lazy(() => import("./pages/MypageDetailPage/AlarmList"));
 
 export const RouterConfig = [
   {
@@ -44,14 +68,14 @@ export const RouterConfig = [
       exit: "to-right",
     },
   },
-  {
-    path: "/note",
-    element: <NotePage />,
-    sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
-    },
-  },
+  // {
+  //   path: "/note",
+  //   element: <NotePage />,
+  //   sceneConfig: {
+  //     enter: "from-right",
+  //     exit: "to-right",
+  //   },
+  // },
   {
     path: "/coaching",
     element: <CoachingPage />,
