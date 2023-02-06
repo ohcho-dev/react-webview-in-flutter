@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,7 +13,6 @@ import PageTitle from "./components/PageTitle";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
-import moment from "moment";
 import { ko } from "date-fns/esm/locale";
 import { queryKeys } from "../../constant/queryKeys";
 import { useRecoilValue } from "recoil";
@@ -119,7 +119,7 @@ const UpdateChild = () => {
   // 생일 날짜 string으로 변환
   useEffect(() => {
     if (childData.name) {
-      setChildData({ ...childData, birth_date: moment(birthDate).format("YYYY-MM-DD") });
+      setChildData({ ...childData, birth_date: dayjs(birthDate).format("YYYY-MM-DD") });
       new Date(String(dueDate)) < new Date(String(birthDate)) &&
         setDueDate(new Date(String(birthDate)));
     }
@@ -128,7 +128,7 @@ const UpdateChild = () => {
   // 이른둥이 출산일 날짜 string으로 변환
   useEffect(() => {
     if (childData.name) {
-      setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
+      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
     }
   }, [dueDate]);
 
@@ -170,7 +170,7 @@ const UpdateChild = () => {
         return rest;
       });
     } else {
-      setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
+      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
     }
   }, [childData.due_date]);
 
@@ -182,9 +182,9 @@ const UpdateChild = () => {
         return rest;
       });
     } else if (childData.premature_flag === 1 && data[0].due_date && !childData.due_date) {
-      setChildData({ ...childData, due_date: moment(data[0].due_date).format("YYYY-MM-DD") });
+      setChildData({ ...childData, due_date: dayjs(data[0].due_date).format("YYYY-MM-DD") });
     } else if (childData.premature_flag === 1 && data[0].due_date !== childData.due_date) {
-      setChildData({ ...childData, due_date: moment(dueDate).format("YYYY-MM-DD") });
+      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
     }
   }, [childData.premature_flag]);
 
@@ -218,7 +218,7 @@ const UpdateChild = () => {
       <PageTitle title={"아이 정보 수정"} />
       <PageLayout>
         <FormWrap>
-          <InputTitle>아이 이름</InputTitle>
+          <InputTitle>이름</InputTitle>
           <InputBox
             placeholder="이름을 입력해주세요."
             id="childName"
@@ -226,7 +226,7 @@ const UpdateChild = () => {
             onChange={handleTypeInformation}
           />
 
-          <InputTitle>아이 성별</InputTitle>
+          <InputTitle>성별</InputTitle>
           <CustomRadioButton
             id="childGender"
             type={Genders}
@@ -234,7 +234,7 @@ const UpdateChild = () => {
             onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
           />
 
-          <InputTitle>아이 생년월일</InputTitle>
+          <InputTitle>생년월일</InputTitle>
           <DatePicker
             showYearDropdown
             yearDropdownItemNumber={6}
@@ -252,7 +252,7 @@ const UpdateChild = () => {
             }}
           />
 
-          <InputTitle>이른둥이 출산 선택</InputTitle>
+          <InputTitle>이른둥이 출산 여부</InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}

@@ -265,7 +265,7 @@ const AppliedProgramList = () => {
                               <Price>무료</Price>
                             )}
                             <ChildInfo>
-                              신청아이 : {detailData.child_name} (
+                              신청 아이 : {detailData.child_name} (
                               {getDate(detailData.child_birth_date)}){" "}
                               {getGender(detailData.child_gender)}아
                             </ChildInfo>
@@ -282,7 +282,7 @@ const AppliedProgramList = () => {
                 <NotFoundData>
                   <img src="/images/icon-sparkle.png" alt="thumbnail" />
                   <NotFoundTitle>아직 신청한 {selectedTab + "이"} 없어요.</NotFoundTitle>
-                  <NotFoundDesc>우리아이 맞춤 {selectedTab + "을"} 신청해 보세요.</NotFoundDesc>
+                  <NotFoundDesc>우리 아이 맞춤 {selectedTab + "을"} 신청해 보세요.</NotFoundDesc>
                   <LinkBtn onClick={() => navigate("/program", { replace: true })}>
                     프로그램 보러가기
                   </LinkBtn>
@@ -310,7 +310,7 @@ const AppliedProgramList = () => {
                               <Price>무료</Price>
                             )}
                             <ChildInfo>
-                              신청아이 : {detailData.child_name} (
+                              신청 아이 : {detailData.child_name} (
                               {getDate(detailData.child_birth_date)}){" "}
                               {getGender(detailData.child_gender)}아
                             </ChildInfo>
@@ -327,7 +327,7 @@ const AppliedProgramList = () => {
                 <NotFoundData>
                   <img src="/images/icon-sparkle.png" alt="thumbnail" />
                   <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
-                  <NotFoundDesc>우리아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
+                  <NotFoundDesc>우리 아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
                   <LinkBtn onClick={() => navigate("/program", { replace: true })}>
                     프로그램 보러가기
                   </LinkBtn>
