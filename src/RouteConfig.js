@@ -45,7 +45,7 @@ const ManagementChild = React.lazy(() => import("./pages/MypageDetailPage/Manage
 const CreateChild = React.lazy(() => import("./pages/MypageDetailPage/CreateChild"));
 const UpdateChild = React.lazy(() => import("./pages/MypageDetailPage/UpdateChild"));
 const Notice = React.lazy(() => import("./pages/MypageDetailPage/Notice"));
-const NoticeDetail = React.lazy(() => import("./pages/MypageDetailPage/Notice"));
+const NoticeDetail = React.lazy(() => import("./pages/MypageDetailPage/NoticeDetail"));
 const Terms = React.lazy(() => import("./pages/MypageDetailPage/Terms"));
 const Privacy = React.lazy(() => import("./pages/MypageDetailPage/Privacy"));
 const Sensitive = React.lazy(() => import("./pages/MypageDetailPage/Sensitive"));
