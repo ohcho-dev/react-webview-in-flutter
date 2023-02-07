@@ -33,8 +33,7 @@ const Modal = styled.div`
   padding: 3rem 2.5rem 4rem;
   background: #fff;
   position: absolute;
-  bottom: 0;
-
+  bottom: -0.1rem;
   border-radius: 1.8rem 1.8rem 0 0;
 `;
 
