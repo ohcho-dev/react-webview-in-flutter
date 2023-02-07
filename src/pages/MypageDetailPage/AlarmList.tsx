@@ -18,8 +18,24 @@ const ImgWrap = styled.div`
   align-items: center;
 `;
 const NoneImg = styled.img`
-  width: 26rem;
-  height: 17rem;
+  width: 25.9rem;
+  height: 9rem;
+`;
+const NoneTitle = styled.span`
+  font-weight: 500;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  letter-spacing: -0.04rem;
+  color: #0a0a0a;
+  margin-top: 2.8rem;
+`;
+const NoneDesc = styled.span`
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  letter-spacing: -0.04rem;
+  color: rgba(10, 10, 10, 0.45);
+  margin: 0.6rem auto 2.7rem;
 `;
 
 const AlarmListWrap = styled.div`
@@ -96,7 +112,9 @@ const AlarmList = () => {
         </AlarmListWrap>
       ) : (
         <ImgWrap>
-          <NoneImg src="/images/alarmlist-none-img.png" alt="도착한 알림이 없어요." />
+          <NoneImg src="/images/icon-sparkle.png" alt="도착한 알림이 없어요." />
+          <NoneTitle>도착한 알림이 없어요.</NoneTitle>
+          <NoneDesc>중요한 정보가 생기면 바로 알려드릴게요.</NoneDesc>
         </ImgWrap>
       )}
     </LayoutDetailPage>

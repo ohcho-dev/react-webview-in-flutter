@@ -22,7 +22,7 @@ const Lists = styled.li`
 `;
 
 const ImageWrap = styled.div`
-  width: 9.3rem;
+  width: 7.5rem;
   height: 5.4rem;
   margin: 0 auto;
 `;
