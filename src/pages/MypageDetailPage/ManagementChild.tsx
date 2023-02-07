@@ -30,7 +30,7 @@ const ChildrenListWrap = styled.div`
 const ChildInfoSection = styled.div`
   display: grid;
   align-items: center;
-  grid-template-columns: 3rem 4.2rem 13rem;
+  grid-template-columns: 3rem 5.7rem 13rem;
   column-gap: 1rem;
 
   width: 100%;
@@ -82,7 +82,7 @@ export const ManagementChild = () => {
             <ChildInfoSection>
               <img alt="profile icon" src={`/images/profile-${index}.png`} />
               <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
-              <span style={{ marginLeft: "-0.5rem" }}>
+              <span style={{ marginLeft: "-1rem" }}>
                 ({getDate(child.birth_date)}) {getGender(child.gender)}아
               </span>
             </ChildInfoSection>

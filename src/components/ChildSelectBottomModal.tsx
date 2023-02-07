@@ -59,7 +59,7 @@ const ChildName = styled.span`
   font-size: 1.6rem;
   font-weight: 600;
 
-  width: 4.5rem;
+  width: 5.8rem;
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-left: 0.95rem;
