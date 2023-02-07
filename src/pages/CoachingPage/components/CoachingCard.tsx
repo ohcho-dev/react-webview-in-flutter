@@ -13,6 +13,10 @@ const CoachingCardWrapper = styled.div`
   img {
     width: 33.5rem;
     height: 16.9rem;
+
+    object-fit: cover;
+    object-position: top;
+
     border-radius: 0.8rem;
     ${(props: { progressing: boolean }) => !props.progressing && "filter: grayscale(100%)"};
   }
@@ -55,11 +59,11 @@ const LeftDays = styled.div`
 `;
 
 const CoachingCard = (props: { coaching: appliedCoachingType }): JSX.Element => {
-  const { status, coaching_name, start_date, end_date } = props.coaching;
+  const { status, coaching_name, start_date, end_date, main_image } = props.coaching;
 
   return (
     <CoachingCardWrapper progressing={status === "COSTAT_ONGOING"}>
-      <img alt="coaching-thumnail" src="/images/banner-example.png" />
+      <img alt="coaching-thumnail" src={main_image} />
       <CoachingTitle>{coaching_name}</CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
         <ProgressChip progressing={status === "COSTAT_ONGOING"}>
