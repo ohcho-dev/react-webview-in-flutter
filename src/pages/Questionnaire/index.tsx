@@ -51,7 +51,7 @@ const Questionnaire = (): JSX.Element => {
   const { state } = useLocation();
   const { id } = useParams();
   const setQuestionnaireState = useSetRecoilState(questionnarieState);
-  const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyAnswerState);
+  const setSurveyAnswer = useSetRecoilState(surveyAnswerState);
   const setSurveyCoachingId = useSetRecoilState(surveyCoachingIdState);
   const [startOrderNum, setStartQuestionOrderNum] = useRecoilState(startQuestionOrderNumState);
   const { data: surveyQuestionList } = useQuery(queryKeys.surveyQuestionList, () =>
