@@ -24,7 +24,7 @@ const TitleBarWrap = styled.section`
   border-bottom: ${(prop: { border?: boolean }) =>
     prop.border ? "0.05rem solid rgba(0, 0, 0, 0.15)" : "0"};
   position: fixed;
-  top: 0;
+  top: -0.1rem;
   left: 0;
   z-index: 30;
   transition: background-color 0.3s ease;
