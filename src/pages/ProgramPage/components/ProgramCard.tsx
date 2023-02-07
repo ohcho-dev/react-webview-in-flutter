@@ -13,13 +13,14 @@ const ProgramCardWrapper = styled.div`
   margin: 2.5rem 0 1rem 0;
 `;
 
-const ProgramImageSection = styled.div`
+const ProgramImageSection = styled.img`
   position: relative;
   border-radius: 0.8rem;
   width: 33.5rem;
   height: 17rem;
-  background: ${(props: { imgUrl: string }) => `url(${props.imgUrl}) 50% 50% no-repeat`};
-  background-size: cover;
+
+  object-fit: cover;
+  object-position: top;
 
   div {
     position: absolute;
@@ -156,9 +157,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
 
   return (
     <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id.toString()}>
-      <ProgramImageSection imgUrl={programImage}>
-        {/* {isDeadlineComingUp && <div>마감임박</div>} */}
-      </ProgramImageSection>
+      <ProgramImageSection alt="program image" src={programImage} />
+      {/* {isDeadlineComingUp && <div>마감임박</div>} */}
       {utilVisible && (
         <ClassInfoSection>
           <OnlineOffline>{isOnline ? "온라인" : "오프라인"}</OnlineOffline>
