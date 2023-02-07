@@ -252,7 +252,7 @@ const UpdateChild = () => {
             }}
           />
 
-          <InputTitle>이른둥이 출산 여부</InputTitle>
+          <InputTitle>이른둥이 여부</InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
