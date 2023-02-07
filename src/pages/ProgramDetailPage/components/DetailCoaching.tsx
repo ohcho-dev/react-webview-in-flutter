@@ -18,7 +18,6 @@ import { getDate } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
-import { BottomBtnWrap } from "../../ProgramPage/components/styled";
 
 interface DetailCoachingProps {
   id: string;
@@ -221,8 +220,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
             alt="thumnail"
             src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.png"}
             image={coachingInfo?.main_image}
-          />{" "}
-          :
+          />
           <ProductMainInfo>
             <ProductName>{coachingInfo?.name}</ProductName>
             <PriceWrap>
