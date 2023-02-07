@@ -241,6 +241,7 @@ const UpdateChild = () => {
             scrollableYearDropdown
             dateFormatCalendar="MMMM"
             locale={ko}
+            minDate={new Date("2016-01-01")}
             maxDate={new Date()}
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
@@ -265,6 +266,7 @@ const UpdateChild = () => {
               <InputTitle>기존 출산 예정일</InputTitle>
               <DatePicker
                 showYearDropdown
+                yearDropdownItemNumber={6}
                 scrollableYearDropdown
                 dateFormatCalendar="MMMM"
                 locale={ko}
