@@ -79,7 +79,7 @@ const ProgramSection = (props: { [key: string]: any }): JSX.Element => {
             )}
           </ClassInfoSection>
         </div>
-        <img alt="program image" src="/images/banner-example.png" />
+        <img alt="program image" src={classInfo.main_image} />
       </ProgramInfoSection>
     </ProgramSectionWrapper>
   );
