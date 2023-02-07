@@ -15,7 +15,7 @@ import { getUserInfo } from "../api/mypage";
 
 const TitleBarWrap = styled.section`
   width: 100%;
-  height: 6rem;
+  height: 6.1rem;
   padding: 2rem;
   display: flex;
   align-items: center;
