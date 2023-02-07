@@ -59,8 +59,8 @@ const ChildName = styled.span`
   font-size: 1.6rem;
   font-weight: 600;
 
-  width: 7rem;
-  max-width: 7rem;
+  width: 4.5rem;
+  white-space: nowrap;
   text-overflow: ellipsis;
   margin-left: 0.95rem;
 `;
@@ -72,7 +72,23 @@ const ChildInfo = styled.div`
   column-gap: 0.5rem;
 
   span:nth-child(1) {
-    width: 10.2rem;
+    width: 9rem;
+  }
+`;
+
+const GoToChildManagementBtn = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  margin-top: 1rem;
+
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: rgba(10, 10, 10, 0.5);
+
+  img {
+    margin-left: 1rem;
   }
 `;
 
@@ -101,7 +117,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
               key={child.id.toString()}
             >
               <div>
-                <img alt="profile icon" src={child.image || `/images/profile-${index}.svg`} />
+                <img alt="profile icon" src={child.image || `/images/profile-${index}.png`} />
                 <ChildName>{child.name}</ChildName>
                 <ChildInfo>
                   <span>({getDate(child.birth_date)}) </span>
@@ -115,6 +131,15 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
             </ChildInfoWrapper>
           );
         })}
+        <GoToChildManagementBtn
+          onClick={() => {
+            toggleModal();
+            navigate("/my/management-child");
+          }}
+        >
+          아이 관리로 이동하기
+          <img alt="arrow-right" src={"/images/icon-arrow-right-small.svg"} />
+        </GoToChildManagementBtn>
       </ChildrenListModalWrapper>
     </CustomBottomModal>
   );
