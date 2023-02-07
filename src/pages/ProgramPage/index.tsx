@@ -71,7 +71,7 @@ const ProgramPage = () => {
   return (
     <LayoutMainPage>
       <ProgramPageWrapper>
-        <CarouselSection>
+        {/* <CarouselSection>
           <Slider {...settings}>
             <SliderContainer
               onClick={() => {
@@ -88,7 +88,7 @@ const ProgramPage = () => {
               <img alt="banner 1" src="/images/banner-example.png" />
             </SliderContainer>
           </Slider>
-        </CarouselSection>
+        </CarouselSection> */}
         <CouchingSection>
           <ProgramTitle>
             📄 <Title>전문 검사와 함께하는 코칭</Title>
