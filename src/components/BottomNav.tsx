@@ -18,12 +18,12 @@ const BottomNavWrap = styled.ul`
 const Lists = styled.li`
   width: 100%;
   text-align: center;
-  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
 `;
 
 const ImageWrap = styled.div`
-  width: 3rem;
-  height: 3rem;
+  width: 9.3rem;
+  height: 5.4rem;
   margin: 0 auto;
 `;
 
@@ -39,36 +39,36 @@ const bottomNavData = [
   {
     id: 0,
     name: "홈",
-    imgUrl: "/images/home_off.svg",
-    selectedImgUrl: "/images/home_on.svg",
+    imgUrl: "/images/home_off.png",
+    selectedImgUrl: "/images/home_on.png",
     link: "/home",
   },
   // {
   //   id: 1,
   //   name: '기록',
-  //   imgUrl: '/images/note_off.svg',
-  //   selectedImgUrl: '/images/note_on.svg',
+  //   imgUrl: '/images/note_off.png',
+  //   selectedImgUrl: '/images/note_on.png',
   //   link: '/note',
   // },
   {
     id: 2,
     name: "코칭",
-    imgUrl: "/images/coaching_off.svg",
-    selectedImgUrl: "/images/coaching_on.svg",
+    imgUrl: "/images/coaching_off.png",
+    selectedImgUrl: "/images/coaching_on.png",
     link: "/coaching",
   },
   {
     id: 3,
     name: "프로그램",
-    imgUrl: "/images/program_off.svg",
-    selectedImgUrl: "/images/program_on.svg",
+    imgUrl: "/images/program_off.png",
+    selectedImgUrl: "/images/program_on.png",
     link: "/program",
   },
   {
     id: 4,
     name: "MY",
-    imgUrl: "/images/my_off.svg",
-    selectedImgUrl: "/images/my_on.svg",
+    imgUrl: "/images/my_off.png",
+    selectedImgUrl: "/images/my_on.png",
     link: "/my",
   },
 ];
@@ -93,11 +93,11 @@ const BottomNav = () => {
               <ImageWrap>
                 <img
                   src={`/${firstPath}` === item.link ? item.selectedImgUrl : item.imgUrl}
-                  width="90%"
-                  alt="bottom nav icon"
+                  width="100%"
+                  height="100%"
+                  alt={item.name}
                 />
               </ImageWrap>
-              <Text style={`${firstPath}` === item.link ? { color: "#000" } : {}}>{item.name}</Text>
             </NavLink>
           </Lists>
         );
