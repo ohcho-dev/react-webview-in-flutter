@@ -55,6 +55,11 @@ const NoAppliedCoachingSection = styled.div`
   }
 `;
 
+const NoEndCoachingImg = styled.img`
+  width: 26rem;
+  height: 17rem;
+`;
+
 const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const { selectedMenu } = props;
   const navigate = useNavigate();
@@ -70,7 +75,7 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
     <div>
       <InformImageSection>
         {selectedMenu === "end" ? (
-          <img alt="inform-image" src="/images/no-end-coaching-img.png" />
+          <NoEndCoachingImg alt="inform-image" src="/images/no-end-coaching.png" />
         ) : (
           <NoAppliedCoachingSection>
             <img alt="inform-image" src="/images/no-applied-coaching.svg" />

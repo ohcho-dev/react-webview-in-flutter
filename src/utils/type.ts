@@ -54,7 +54,7 @@ export interface appliedCoachingType {
   coaching_name: string;
   end_date: string;
   id: number;
-  main_image: string | null;
+  main_image: string;
   month_level: MonthRangeType[] | MonthRangeType;
   start_date: string;
   status: string;

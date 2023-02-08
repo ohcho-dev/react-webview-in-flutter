@@ -3,7 +3,6 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { selectedHomeDataState } from "../../../recoil/atom";
 import { NativeFunction } from "../../../utils/NativeFunction";
-import UseEmoji from "../../../utils/UseEmoji";
 
 const ActivityWrap = styled.div`
   padding: 3.5rem 0;

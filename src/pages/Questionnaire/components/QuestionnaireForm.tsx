@@ -160,7 +160,11 @@ const QuestionnaireForm = (): JSX.Element => {
             surveyInfo.question.map((question, index: number) => {
               return (
                 <div key={`${question.content + question.id}`}>
-                  <Question questionNumber={index + 1} question={question} />
+                  <Question
+                    questionNumber={index + 1}
+                    question={question}
+                    totalQuestionNum={surveyInfo.question.length}
+                  />
                   {index !== surveyInfo.question.length - 1 && (
                     <QuestionGap key={`${question.content + question.id}`} />
                   )}

@@ -142,7 +142,6 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
             alt="child icon"
           />
         </ProfileImageWrap>
-
         <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>
         <ArrowWrap>
           <img src="/images/icon-arrow-down.svg" width="100%" alt="arrow down icon" />
