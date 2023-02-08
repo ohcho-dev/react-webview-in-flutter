@@ -135,15 +135,13 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   return (
     <TitleBarWrap border={true} style={{ ...style }}>
       <ProfileWrap>
-        {pathname !== "/home" && (
-          <ProfileImageWrap>
-            <img
-              src={selectedChildInfo.image || `/images/profile-${childrenKey}.png`}
-              width="100%"
-              alt="child icon"
-            />
-          </ProfileImageWrap>
-        )}
+        <ProfileImageWrap>
+          <img
+            src={selectedChildInfo.image || `/images/profile-${childrenKey}.svg`}
+            width="100%"
+            alt="child icon"
+          />
+        </ProfileImageWrap>
         <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>
         <ArrowWrap>
           <img src="/images/icon-arrow-down.svg" width="100%" alt="arrow down icon" />
