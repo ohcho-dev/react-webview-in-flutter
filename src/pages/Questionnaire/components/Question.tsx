@@ -7,10 +7,11 @@ import { Answer, AnswerSection, QuestionNumber, QuestionTitle, QuestionWrapper }
 interface QuestionPropsType {
   questionNumber: number;
   question: QuestionType;
+  totalQuestionNum: number;
 }
 
 const Question = (props: QuestionPropsType): JSX.Element => {
-  const { questionNumber, question } = props;
+  const { questionNumber, question, totalQuestionNum } = props;
   const [selectedAnswer, setSelectedAnswer] = useState("0");
   const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyTempAnswerState);
 
@@ -32,7 +33,7 @@ const Question = (props: QuestionPropsType): JSX.Element => {
     <QuestionWrapper>
       <QuestionNumber>
         <span>{questionNumber < 10 ? `0${questionNumber}` : questionNumber}</span>
-        <span>/{question.item.length}</span>
+        <span>/{totalQuestionNum}</span>
       </QuestionNumber>
       <QuestionTitle>{question.content}</QuestionTitle>
       <AnswerSection>

@@ -230,6 +230,7 @@ const VideoAssignmentPage = (): JSX.Element => {
         <Button
           theme="black"
           content="다시 촬영하기"
+          style={{ height: "5rem" }}
           onClick={() => {
             NativeFunction(
               "routeNativeScreen",

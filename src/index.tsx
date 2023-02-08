@@ -5,6 +5,17 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { RecoilRoot } from "recoil";
 import Modal from "react-modal";
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: process.env.NODE_ENV === "production" ? process.env.REACT_APP_SENTRY_DSN : "",
+  release: "0.1.0",
+  environment: process.env.NODE_ENV,
+  normalizeDepth: 6,
+  tracesSampleRate: 1.0,
+  integrations: [new Integrations.BrowserTracing()],
+});
 
 const queryClient = new QueryClient({
   defaultOptions: {

@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const OnlineOffline = styled.span`
-  margin-right: 0.5rem;
   font-weight: 700;
   font-size: 1.4rem;
-
+  padding-right: 0.5rem;
   color: rgba(10, 10, 10, 0.5);
 `;
 
@@ -15,14 +14,15 @@ export const AgeRange = styled.span`
   align-items: center;
   justify-content: center;
 
-  border: 0.05rem solid #939393;
-  border-radius: 2px;
+  border: 0.1rem solid #939393;
+  border-radius: 0.2rem;
 
   font-weight: 600;
   font-size: 1.2rem;
   color: rgba(10, 10, 10, 0.5);
 
   padding: 0.3rem;
+  overflow: hidden;
 `;
 
 export const BOTTOM_BTN_WRAP_HEIGHT = 7.4;

@@ -71,7 +71,7 @@ const ProgramPage = () => {
   return (
     <LayoutMainPage>
       <ProgramPageWrapper>
-        <CarouselSection>
+        {/* <CarouselSection>
           <Slider {...settings}>
             <SliderContainer
               onClick={() => {
@@ -88,10 +88,10 @@ const ProgramPage = () => {
               <img alt="banner 1" src="/images/banner-example.png" />
             </SliderContainer>
           </Slider>
-        </CarouselSection>
+        </CarouselSection> */}
         <CouchingSection>
           <ProgramTitle>
-            📄 <Title>전문 검사와 함께하는 코칭</Title>
+            🙌🏻 <Title>전문 검사와 함께하는 코칭</Title>
           </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <CoachingList />
@@ -99,7 +99,7 @@ const ProgramPage = () => {
         </CouchingSection>
         <ClassSection>
           <ProgramTitle>
-            🤖 <Title>전문가와 함께하는 클래스</Title>
+            🧑🏻‍⚕️ <Title>전문가와 함께하는 클래스</Title>
           </ProgramTitle>
           <Suspense fallback={<LoadingSpinner height="30vw" />}>
             <ClassList />

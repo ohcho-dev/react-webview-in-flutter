@@ -216,12 +216,13 @@ const CreateChild = () => {
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
             selected={birthDate}
+            minDate={new Date("2016-01-01")}
             maxDate={new Date()}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => setBirthDate(date)}
           />
 
-          <InputTitle>이른둥이 출산 여부</InputTitle>
+          <InputTitle>이른둥이 여부</InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
@@ -234,6 +235,7 @@ const CreateChild = () => {
               <InputTitle>기존 출산 예정일</InputTitle>
               <DatePicker
                 showYearDropdown
+                yearDropdownItemNumber={6}
                 scrollableYearDropdown
                 dateFormatCalendar="MMMM"
                 locale={ko}

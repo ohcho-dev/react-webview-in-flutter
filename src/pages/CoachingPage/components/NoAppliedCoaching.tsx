@@ -22,15 +22,42 @@ const InformImageSection = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  img {
-    width: 26rem;
-    height: 17rem;
-  }
 `;
+
 const ProgramTitle = styled.span`
   font-weight: 700;
   font-size: 2rem;
+`;
+
+const NoAppliedCoachingSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    width: 26rem;
+    height: 9rem;
+    margin-bottom: 3rem;
+  }
+
+  span:nth-child(2) {
+    display: block;
+    font-weight: 500;
+    font-size: 1.8rem;
+    color: #0a0a0a;
+    margin-bottom: 1rem;
+  }
+
+  span:nth-child(3) {
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: rgba(10, 10, 10, 0.45);
+  }
+`;
+
+const NoEndCoachingImg = styled.img`
+  width: 26rem;
+  height: 17rem;
 `;
 
 const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
@@ -48,12 +75,16 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
     <div>
       <InformImageSection>
         {selectedMenu === "end" ? (
-          <img alt="inform-image" src="/images/no-end-coaching-img.png" />
+          <NoEndCoachingImg alt="inform-image" src="/images/no-end-coaching.png" />
         ) : (
-          <img alt="inform-image" src="/images/no-applied-coaching-img.png" />
+          <NoAppliedCoachingSection>
+            <img alt="inform-image" src="/images/no-applied-coaching.svg" />
+            <span>아직 신청한 코칭이 없어요.</span>
+            <span>우리 아이 맞춤 코칭을 바로 신청해 보세요.</span>
+          </NoAppliedCoachingSection>
         )}
       </InformImageSection>
-      <ProgramTitle>⭐️ {selectedChildInfo.name}를 위한 코칭 추천</ProgramTitle>
+      <ProgramTitle>⭐️ {selectedChildInfo.name}을 위한 추천 코칭</ProgramTitle>
       {data[0].map((coaching: coachingType, index: number) => {
         return (
           <div key={index}>
