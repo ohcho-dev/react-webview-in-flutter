@@ -137,7 +137,7 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
       <ProfileWrap>
         <ProfileImageWrap>
           <img
-            src={selectedChildInfo.image || `/images/profile-${childrenKey}.svg`}
+            src={selectedChildInfo.image || `/images/profile-${childrenKey}.png`}
             width="100%"
             alt="child icon"
           />
