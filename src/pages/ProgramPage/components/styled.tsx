@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const OnlineOffline = styled.span`
-  margin-right: 0.5rem;
   font-weight: 700;
   font-size: 1.4rem;
 
@@ -23,6 +22,8 @@ export const AgeRange = styled.span`
   color: rgba(10, 10, 10, 0.5);
 
   padding: 0.3rem;
+
+  margin-left: 0.5rem;
 `;
 
 export const BOTTOM_BTN_WRAP_HEIGHT = 7.4;
