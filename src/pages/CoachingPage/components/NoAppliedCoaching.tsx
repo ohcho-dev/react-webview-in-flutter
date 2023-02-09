@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -55,21 +56,22 @@ const NoCoachingSection = styled.div`
   }
 `;
 
-const NoEndCoachingImg = styled.img`
-  width: 26rem;
-  height: 17rem;
-`;
-
 const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const { selectedMenu } = props;
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { data } = useQuery(queryKeys.coachingList, () => getCoachingList());
-  const selectedChildInfo = useRecoilValue(selectedChildInfoState);
+  const { data, refetch } = useQuery(queryKeys.coachingList, getCoachingList);
+  const { id, name } = useRecoilValue(selectedChildInfoState);
 
   const handleCardClick = (id: number) => {
     navigate(`/program/coaching/${id}`, { state: pathname });
   };
+
+  useEffect(() => {
+    if (id) {
+      refetch();
+    }
+  }, [id]);
 
   return (
     <div>
@@ -88,7 +90,7 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
           </NoCoachingSection>
         )}
       </InformImageSection>
-      <ProgramTitle>⭐️ {selectedChildInfo.name}에게 딱 맞는 추천 코칭</ProgramTitle>
+      {!!data[0].length && <ProgramTitle>⭐️ {name}에게 딱 맞는 추천 코칭</ProgramTitle>}
       {data[0].map((coaching: coachingType, index: number) => {
         return (
           <div key={index}>
