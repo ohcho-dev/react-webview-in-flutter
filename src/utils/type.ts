@@ -170,12 +170,12 @@ export interface MonthContent {
 export interface NotificationType {
   id: number;
   parent_id: number;
-  record_id: number;
   type: string;
   title: string;
   body: string;
   created_at: string;
   updated_at: string;
+  detail: { [key: string]: any };
 }
 
 export interface SelectBtnArrayType {
