@@ -3,6 +3,11 @@ import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useRecoilValue } from "recoil";
+import DatePicker from "react-datepicker";
+
+import { ko } from "date-fns/esm/locale";
+
 import { getSelectedChild, updateChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
@@ -10,12 +15,9 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childType } from "../../utils/type";
 import { BottomBtnWrap } from "../ProgramPage/components/styled";
 import PageTitle from "./components/PageTitle";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
-import { ko } from "date-fns/esm/locale";
 import { queryKeys } from "../../constant/queryKeys";
-import { useRecoilValue } from "recoil";
 import { childrenListState } from "../../recoil/atom";
 import CustomModal from "../../components/common/CustomModal";
 
@@ -98,7 +100,14 @@ const UpdateChild = () => {
   const [updateStatus, setUpdateStatus] = useState(false);
   const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
-  const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
+  const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid), {
+    onSuccess: data => {
+      setChildData(data[0]);
+      // 생일 날짜 date 형식으로 변환
+      setBirthDate(new Date(data[0].birth_date));
+      data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
+    },
+  });
 
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
@@ -109,20 +118,10 @@ const UpdateChild = () => {
     },
   });
 
-  useEffect(() => {
-    setChildData(data[0]);
-    // 생일 날짜 date 형식으로 변환
-    setBirthDate(new Date(data[0].birth_date));
-    data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
-  }, [data]);
-
   // 생일 날짜 string으로 변환
   useEffect(() => {
-    if (childData.name) {
+    if (childData.name)
       setChildData({ ...childData, birth_date: dayjs(birthDate).format("YYYY-MM-DD") });
-      new Date(String(dueDate)) < new Date(String(birthDate)) &&
-        setDueDate(new Date(String(birthDate)));
-    }
   }, [birthDate]);
 
   // 이른둥이 출산일 날짜 string으로 변환
@@ -133,14 +132,22 @@ const UpdateChild = () => {
   }, [dueDate]);
 
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value;
-    setChildData({ ...childData, gender: value });
+    setChildData({ ...childData, gender: evt.target.value });
     setUpdateStatus(true);
   };
 
   const handlePrematureValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value;
-    setChildData({ ...childData, premature_flag: Number(value) });
+    let flag: number = Number(evt.target.value);
+    if (flag === 1) {
+      let date: Date | null = null;
+
+      date =
+        dayjs(birthDate).format("YYYY-MM-DD") === dayjs(data[0].birth_date).format("YYYY-MM-DD")
+          ? new Date(data[0].due_date || birthDate)
+          : birthDate;
+      setDueDate(date);
+    }
+    setChildData({ ...childData, premature_flag: flag });
     setUpdateStatus(true);
   };
 
@@ -166,11 +173,14 @@ const UpdateChild = () => {
     if (childData.premature_flag === 0) {
       setChildData(current => {
         const { due_date, ...rest } = current;
-
         return rest;
       });
     } else {
-      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
+      setChildData({
+        ...childData,
+        due_date: dayjs(dueDate).format("YYYY-MM-DD"),
+        birth_date: dayjs(birthDate).format("YYYY-MM-DD"),
+      });
     }
   }, [childData.due_date]);
 
@@ -189,7 +199,7 @@ const UpdateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    let validCheck = childList.find((aaa: any) => aaa.name === childData.name);
+    let validCheck = childList.find((child: any) => child.name === childData.name);
     if (!childData.name) {
       setOpenValidModal(true);
       return;
@@ -241,14 +251,13 @@ const UpdateChild = () => {
             scrollableYearDropdown
             dateFormatCalendar="MMMM"
             locale={ko}
-            minDate={new Date("2016-01-01")}
-            maxDate={new Date()}
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
             selected={birthDate}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => {
               setBirthDate(date);
+              setDueDate(date);
               setUpdateStatus(true);
             }}
           />
@@ -273,8 +282,8 @@ const UpdateChild = () => {
                 dateFormat="yyyy.MM.dd"
                 showPopperArrow={false}
                 selected={dueDate}
-                minDate={new Date(String(birthDate))}
-                maxDate={new Date()}
+                minDate={birthDate}
+                maxDate={dayjs(birthDate).add(90, "day").toDate()}
                 customInput={<CustomInput inputRef={inputRef} />}
                 onChange={(date: Date | null) => {
                   setDueDate(date);
@@ -288,7 +297,6 @@ const UpdateChild = () => {
       <BottomBtnWrap>
         <Button theme={"black"} content={"아이 정보 수정하기"} onClick={handleSubmit} />
       </BottomBtnWrap>
-
       <CustomModal
         title="아이 이름을 입력해주세요."
         isOpen={openValidModal}
@@ -296,9 +304,6 @@ const UpdateChild = () => {
           setOpenValidModal(false);
         }}
         okBtnName="확인"
-        okBtnClick={() => {
-          setOpenValidModal(false);
-        }}
       />
       <CustomModal
         title="같은 이름의 아이를 등록할 수 없습니다."
@@ -307,9 +312,6 @@ const UpdateChild = () => {
           setOpenSameNameModal(false);
         }}
         okBtnName="확인"
-        okBtnClick={() => {
-          setOpenSameNameModal(false);
-        }}
       />
       <CustomModal
         title="저장이 완료됐어요."
