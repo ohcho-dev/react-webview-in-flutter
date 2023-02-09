@@ -13,7 +13,6 @@ export const request = async (config: AxiosRequestConfig) => {
   const childId = window.localStorage.getItem(CHILD_ID_FIELD);
 
   try {
-    console.log(childId);
     const response = await axios({
       ...config,
       headers: {
