@@ -37,6 +37,27 @@ const ProductMainInfo = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 `;
 
+const ProductDetailInfoSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 2rem;
+
+  img {
+    width: 33.5rem;
+    height: 17.5rem;
+  }
+`;
+
+const GreySquare = styled.div`
+  width: 100%;
+  height: 1rem;
+
+  margin: 4rem 0;
+  background-color: #f6f6f6;
+`;
+
 const ProductName = styled.h1`
   margin: 0 0.5rem 1rem;
 
@@ -131,7 +152,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const navigate = useNavigate();
   const { id } = props;
   const { state } = useLocation();
-  const [favorites, setFavorites] = useState<boolean>(false);
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const [openSameCoachingModal, setOpenSameCoachingModal] = useState(false);
@@ -195,7 +215,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     setOpenUsageDuration(false);
     setOpenBottomModal(false);
   };
-  console.log();
 
   const handleBackBtn = () => {
     if (state === "/coaching") {
@@ -241,6 +260,10 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
               />
             </Favorites> */}
           </ProductMainInfo>
+          <ProductDetailInfoSection>
+            <img alt="detail info" src="/images/coaching-detail-info.png" />
+          </ProductDetailInfoSection>
+          <GreySquare />
           <ImageWrap>
             <img src={selectedCoachingInfo[0].content_image} width="100%" />
           </ImageWrap>

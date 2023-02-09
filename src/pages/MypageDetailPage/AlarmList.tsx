@@ -88,7 +88,6 @@ const AlarmList = () => {
   const setNotificationTime = useMutation(updateNotificationCheckTime);
 
   useEffect(() => {
-    console.log("call");
     setNewNotificationFlag(false);
     // last_checked_at api 호출
     setNotificationTime.mutate();
