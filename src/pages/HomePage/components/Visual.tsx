@@ -13,7 +13,7 @@ const Wrap = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    box-shadow: inset 0 -4rem 2rem rgba(183, 171, 205, 0.2);
+    box-shadow: inset 0 -4rem 2rem rgba(213, 213, 213, 0.2);
   }
 `;
 
@@ -108,53 +108,6 @@ const UploadImage = styled.img`
   border-radius: 10rem;
   border: solid 1rem #fff;
   box-shadow: 0px 0.4rem 0.8rem rgba(0, 0, 0, 0.12);
-`;
-
-const NoticeWrap = styled.div`
-  margin-top: 0.6rem;
-`;
-
-const NoticeTitle = styled.div`
-  font-weight: 700;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.04rem;
-  color: #5ac4b1;
-  margin-left: 0.8rem;
-`;
-
-const NoticeDesc = styled.div`
-  background: #f6f6f6;
-  border-radius: 0.8rem;
-  padding: 2rem 2.1rem 2rem 3.5rem;
-  margin-top: 0.8rem;
-
-  span {
-    display: inline-block;
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 2rem;
-    letter-spacing: -0.04rem;
-    color: rgba(10, 10, 10, 0.5);
-    list-style-type: disc;
-    position: relative;
-    margin-bottom: 0.8rem;
-    word-break: keep-all;
-
-    &:last-child {
-      margin-bottom: 0;
-    }
-
-    &:before {
-      content: ".";
-      font-size: 2rem;
-      line-height: 0;
-      display: black;
-      position: absolute;
-      left: -1rem;
-      top: 0.2rem;
-    }
-  }
 `;
 
 const Visual = () => {

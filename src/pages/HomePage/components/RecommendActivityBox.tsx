@@ -79,7 +79,7 @@ const NoticeDesc = styled.div`
     align-items: flex-start;
 
     &:last-child {
-      margin-bottom: 0;
+      margin-bottom: 0.5rem;
     }
   }
 `;
@@ -98,11 +98,11 @@ const ActivityWrap = styled.div`
   padding: 3.5rem 0 0;
 `;
 const ActivityTitle = styled.div`
-  padding: 0 2rem 2.5rem;
+  padding: 0 2rem 1.8rem;
 
   font-weight: 700;
-  font-size: 2rem;
-  line-height: 2rem;
+  font-size: 1.8rem;
+  line-height: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -110,8 +110,8 @@ const ActivityTitle = styled.div`
   span {
     margin-left: 0.4rem;
     font-weight: 700;
-    font-size: 2rem;
-    line-height: 2rem;
+    font-size: 1.8rem;
+    line-height: 2.2rem;
     color: #000000;
   }
 `;
