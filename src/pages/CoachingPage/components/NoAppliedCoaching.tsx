@@ -29,7 +29,7 @@ const ProgramTitle = styled.span`
   font-size: 2rem;
 `;
 
-const NoAppliedCoachingSection = styled.div`
+const NoCoachingSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -75,16 +75,20 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
     <div>
       <InformImageSection>
         {selectedMenu === "end" ? (
-          <NoEndCoachingImg alt="inform-image" src="/images/no-end-coaching.png" />
+          <NoCoachingSection>
+            <img alt="inform-image" src="/images/no-coaching-img.png" />
+            <span>아직 종료한 코칭이 없어요.</span>
+            <span>코칭 종료까지 응원할게요!</span>
+          </NoCoachingSection>
         ) : (
-          <NoAppliedCoachingSection>
-            <img alt="inform-image" src="/images/no-applied-coaching.svg" />
+          <NoCoachingSection>
+            <img alt="inform-image" src="/images/no-coaching-img.png" />
             <span>아직 신청한 코칭이 없어요.</span>
             <span>우리 아이 맞춤 코칭을 바로 신청해 보세요.</span>
-          </NoAppliedCoachingSection>
+          </NoCoachingSection>
         )}
       </InformImageSection>
-      <ProgramTitle>⭐️ {selectedChildInfo.name}을 위한 추천 코칭</ProgramTitle>
+      <ProgramTitle>⭐️ {selectedChildInfo.name}에게 딱 맞는 추천 코칭</ProgramTitle>
       {data[0].map((coaching: coachingType, index: number) => {
         return (
           <div key={index}>
