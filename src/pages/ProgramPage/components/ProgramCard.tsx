@@ -52,7 +52,7 @@ const ProgramTitle = styled.div`
   font-size: 1.8rem;
   line-height: 2.2rem;
 
-  margin-top: ${(props: { topMargin: boolean }) => (props.topMargin ? "0" : "1rem")};
+  margin-top: ${(props: { topMargin: boolean }) => (props.topMargin ? "0" : "1.5rem")};
 
   // 2줄까지만 노출하면 넘어가면 말줄임 표기
   overflow: hidden;

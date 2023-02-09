@@ -38,6 +38,8 @@ const ProgramTitle = styled.span`
   line-height: 2rem;
   display: flex;
   align-items: center;
+
+  margin-top: 1rem;
 `;
 
 const Title = styled.span`
