@@ -59,6 +59,7 @@ const ClassSubSection = styled.div`
 const Divider = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
   padding: 0 2.5rem;
+  margin: 0 2rem;
 `;
 
 const DetailClass: React.FC<DetailClassProps> = props => {
@@ -71,7 +72,6 @@ const DetailClass: React.FC<DetailClassProps> = props => {
 
   return (
     <LayoutDetailPage
-      handleBackBtnClick={() => navigate("/program")}
       titleBarBorder={true}
       bottomBtn
       bottomBtnElement={
