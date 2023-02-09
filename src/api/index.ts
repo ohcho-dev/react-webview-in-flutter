@@ -13,6 +13,7 @@ export const request = async (config: AxiosRequestConfig) => {
   const childId = window.localStorage.getItem(CHILD_ID_FIELD);
 
   try {
+    console.log(childId);
     const response = await axios({
       ...config,
       headers: {
@@ -25,13 +26,26 @@ export const request = async (config: AxiosRequestConfig) => {
   } catch (error) {
     const { response } = error as unknown as AxiosError;
 
-    Sentry.withScope(scope => {
-      scope.setTag("type", "api");
-      scope.setLevel("error");
-      scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
+    // sentry api 에러 추적 (429 too many attempts 는 경고처리)
+    if (response?.status === 429) {
+      Sentry.withScope(scope => {
+        scope.setTag("type", "api");
+        scope.setLevel("warning");
+        scope.setUser({ "child-id": childId });
+        scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
 
-      Sentry.captureException(error);
-    });
+        Sentry.captureException(error);
+      });
+    } else {
+      Sentry.withScope(scope => {
+        scope.setTag("type", "api");
+        scope.setLevel("error");
+        scope.setUser({ "child-id": childId });
+        scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
+
+        Sentry.captureException(error);
+      });
+    }
 
     if (response?.status === 400) {
       return response.data;
