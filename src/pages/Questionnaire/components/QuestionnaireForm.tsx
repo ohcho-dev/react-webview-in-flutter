@@ -15,11 +15,12 @@ import {
 } from "../../../recoil/atom";
 import { SurveyAnswerType, SurveyInfoType } from "../../../utils/type";
 import Question from "./Question";
-import { QuestionGap, SurveyCategoryTitle, SurveyQuestionWrapper } from "./style";
+import { QuestionGap, SurveyCategoryTitle, SurveyQuestionWrapper, ListScroll } from "./style";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();
   const { order } = useParams();
+  const [scroll, setScroll] = useState(0);
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [surveyInfo, setSurveyInfo] = useState<SurveyInfoType>({
     id: 0,
@@ -152,25 +153,32 @@ const QuestionnaireForm = (): JSX.Element => {
         }
       >
         <SurveyQuestionWrapper>
-          <SurveyCategoryTitle>
-            {surveyInfo?.name}
+          <SurveyCategoryTitle scroll={scroll}>
+            <span>{surveyInfo?.name}</span>
             <img alt="form character" src="/images/form-character.svg" />
           </SurveyCategoryTitle>
-          {surveyInfo.question.length &&
-            surveyInfo.question.map((question, index: number) => {
-              return (
-                <div key={`${question.content + question.id}`}>
-                  <Question
-                    questionNumber={index + 1}
-                    question={question}
-                    totalQuestionNum={surveyInfo.question.length}
-                  />
-                  {index !== surveyInfo.question.length - 1 && (
-                    <QuestionGap key={`${question.content + question.id}`} />
-                  )}
-                </div>
-              );
-            })}
+          <ListScroll
+            id="question-list"
+            onScroll={(e: React.UIEvent<HTMLElement>) => {
+              setScroll(e.currentTarget.scrollTop);
+            }}
+          >
+            {surveyInfo.question.length &&
+              surveyInfo.question.map((question, index: number) => {
+                return (
+                  <div key={`${question.content + question.id}`}>
+                    <Question
+                      questionNumber={index + 1}
+                      question={question}
+                      totalQuestionNum={surveyInfo.question.length}
+                    />
+                    {index !== surveyInfo.question.length - 1 && (
+                      <QuestionGap key={`${question.content + question.id}`} />
+                    )}
+                  </div>
+                );
+              })}
+          </ListScroll>
         </SurveyQuestionWrapper>
       </LayoutDetailPage>
       <CustomModal

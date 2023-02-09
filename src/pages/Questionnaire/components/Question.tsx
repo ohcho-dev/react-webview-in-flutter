@@ -33,7 +33,10 @@ const Question = (props: QuestionPropsType): JSX.Element => {
     <QuestionWrapper>
       <QuestionNumber>
         <span>{questionNumber < 10 ? `0${questionNumber}` : questionNumber}</span>
-        <span>/{totalQuestionNum}</span>
+        <span>
+          /{totalQuestionNum < 10 && "0"}
+          {totalQuestionNum}
+        </span>
       </QuestionNumber>
       <QuestionTitle>{question.content}</QuestionTitle>
       <AnswerSection>
