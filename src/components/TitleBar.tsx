@@ -119,6 +119,7 @@ const LoginInfo = styled.div`
     color: rgba(10, 10, 10, 0.8);
   }
 `;
+
 interface MainTitleBarProps {
   style?: object;
 }
@@ -127,7 +128,6 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
   const selectedChildInfo = useRecoilValue(selectedChildInfoState);
   const setOpenModal = useSetRecoilState(openBottomModalState);
   const childrenKey = useRecoilValue(childrenKeyState);
-  const { pathname } = useLocation();
   const handleChildNameClick = () => {
     setOpenModal(true);
   };
