@@ -57,7 +57,7 @@ export const RouterConfig = [
     element: <HomePage />,
     sceneConfig: {
       enter: "from-fade",
-      exit: "to-fade",
+      exit: "to-right",
     },
   },
   // {
@@ -65,7 +65,7 @@ export const RouterConfig = [
   //   element: <NotePage />,
   //   sceneConfig: {
   //     enter: "from-fade",
-  //     exit: "to-fade",
+  //     exit: "to-right",
   //   },
   // },
   {
@@ -73,7 +73,7 @@ export const RouterConfig = [
     element: <CoachingPage />,
     sceneConfig: {
       enter: "from-fade",
-      exit: "to-fade",
+      exit: "to-right",
     },
   },
   {
@@ -81,7 +81,7 @@ export const RouterConfig = [
     element: <ProgramPage />,
     sceneConfig: {
       enter: "from-fade",
-      exit: "to-fade",
+      exit: "to-right",
     },
   },
   {
@@ -89,7 +89,7 @@ export const RouterConfig = [
     element: <MyPage />,
     sceneConfig: {
       enter: "from-fade",
-      exit: "to-fade",
+      exit: "to-right",
     },
   },
   {
