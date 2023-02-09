@@ -170,6 +170,7 @@ export interface MonthContent {
 export interface NotificationType {
   id: number;
   parent_id: number;
+  record_id: number;
   type: string;
   title: string;
   body: string;

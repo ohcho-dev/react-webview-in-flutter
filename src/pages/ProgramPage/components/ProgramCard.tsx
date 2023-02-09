@@ -70,7 +70,7 @@ const ProgramLocation = styled.div`
 `;
 
 const ProgramPriceSection = styled.div`
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 `;
 
 const ProgramStatus = styled.div`
