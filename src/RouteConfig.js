@@ -56,40 +56,40 @@ export const RouterConfig = [
     path: "/home",
     element: <HomePage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: "from-fade",
+      exit: "to-fade",
     },
   },
   // {
   //   path: "/note",
   //   element: <NotePage />,
   //   sceneConfig: {
-  //     enter: "from-right",
-  //     exit: "to-right",
+  //     enter: "from-fade",
+  //     exit: "to-fade",
   //   },
   // },
   {
     path: "/coaching",
     element: <CoachingPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: "from-fade",
+      exit: "to-fade",
     },
   },
   {
     path: "/program",
     element: <ProgramPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: "from-fade",
+      exit: "to-fade",
     },
   },
   {
     path: "/my",
     element: <MyPage />,
     sceneConfig: {
-      enter: "from-right",
-      exit: "to-right",
+      enter: "from-fade",
+      exit: "to-fade",
     },
   },
   {

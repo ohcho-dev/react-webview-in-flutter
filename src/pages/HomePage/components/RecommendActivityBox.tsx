@@ -199,17 +199,19 @@ const RecommendActivityBox = () => {
           </FlexBox>
         </FlexBox>
       </GreyBox>
-      <GreyBox marginBottom="0">
-        <NoticeTitle>이 시기 발달정보</NoticeTitle>
-        <NoticeDesc>
-          {homeData.month_level_info.map((item, key) => (
-            <div key={key}>
-              <ListStyle i={key}></ListStyle>
-              <span>{item}</span>
-            </div>
-          ))}
-        </NoticeDesc>
-      </GreyBox>
+      {homeData.month_level_info[0] && (
+        <GreyBox marginBottom="0">
+          <NoticeTitle>이 시기 발달정보</NoticeTitle>
+          <NoticeDesc>
+            {homeData.month_level_info.map((item, key) => (
+              <div key={key}>
+                <ListStyle i={key}></ListStyle>
+                <span>{item}</span>
+              </div>
+            ))}
+          </NoticeDesc>
+        </GreyBox>
+      )}
       <ActivityWrap>
         {homeData.month_level_content.length > 0 && (
           <>
