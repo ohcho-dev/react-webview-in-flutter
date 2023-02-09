@@ -7,7 +7,6 @@ import { getAppliedCoachingList } from "../../api/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { commonCodeState, selectedChildInfoState } from "../../recoil/atom";
-import Dday from "../../utils/Dday";
 import { appliedCoachingType } from "../../utils/type";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
@@ -75,6 +74,11 @@ const CoachingPage = () => {
   const { data: appliedCoachingList, refetch } = useQuery(
     queryKeys.appliedCoachingList,
     getAppliedCoachingList,
+    {
+      onSuccess: () => {
+        setSelectedMenu("all");
+      },
+    },
   );
 
   const handleCardClick = (id: number) => {
@@ -93,7 +97,9 @@ const CoachingPage = () => {
   };
 
   useEffect(() => {
-    if (id) refetch();
+    if (id) {
+      refetch();
+    }
   }, [id]);
 
   useEffect(() => {
