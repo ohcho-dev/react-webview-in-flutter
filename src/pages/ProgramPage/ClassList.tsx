@@ -30,12 +30,7 @@ const ClassList = () => {
   const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
 
-  const {
-    status,
-    isFetching,
-    refetch,
-    data: classList = [],
-  } = useQuery(queryKeys.classList, () => getClassList(), {
+  const { refetch, data: classList = [] } = useQuery(queryKeys.classList, () => getClassList(), {
     enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
   });
 
@@ -49,7 +44,6 @@ const ClassList = () => {
 
   return (
     <>
-      {(status === "idle" || isFetching) && <LoadingSpinner height="30vw" />}
       {classList[0] && (
         <ProgramTitle>
           🧑🏻‍⚕️ <Title>전문가와 함께하는 클래스</Title>

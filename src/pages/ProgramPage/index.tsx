@@ -76,14 +76,10 @@ const ProgramPage = () => {
           </Slider>
         </CarouselSection> */}
         <CouchingSection>
-          <Suspense fallback={<LoadingSpinner height="30vw" />}>
-            <CoachingList />
-          </Suspense>
+          <CoachingList />
         </CouchingSection>
         <ClassSection>
-          <Suspense fallback={<LoadingSpinner height="30vw" />}>
-            <ClassList />
-          </Suspense>
+          <ClassList />
         </ClassSection>
       </ProgramPageWrapper>
     </LayoutMainPage>
