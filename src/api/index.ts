@@ -29,7 +29,7 @@ export const request = async (config: AxiosRequestConfig) => {
     if (response?.status === 429) {
       Sentry.withScope(scope => {
         scope.setTag("type", "api");
-        scope.setLevel("warning");
+        scope.setLevel("info");
         scope.setUser({ "child-id": childId });
         scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
 
