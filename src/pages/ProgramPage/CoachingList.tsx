@@ -37,14 +37,13 @@ const CoachingList = () => {
   const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
 
-  const {
-    status,
-    isFetching,
-    refetch,
-    data: coachingList = [[]],
-  } = useQuery(queryKeys.coachingList, () => getCoachingList(), {
-    enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
-  });
+  const { refetch, data: coachingList = [[]] } = useQuery(
+    queryKeys.coachingList,
+    () => getCoachingList(),
+    {
+      enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
+    },
+  );
 
   useEffect(() => {
     if (id) refetch();
@@ -56,7 +55,6 @@ const CoachingList = () => {
 
   return (
     <>
-      {(status === "idle" || isFetching) && <LoadingSpinner height="30vw" />}
       {coachingList && coachingList[0][0] && (
         <>
           <ProgramTitle>
