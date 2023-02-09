@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 const Wrap = styled.div`
-  padding: 13.5rem 2rem 25.6rem;
-  background: url("/images/home-bg.png") no-repeat 50% 0;
+  padding: 9rem 2rem 25.6rem;
+  background: url("/images/home-bg-20230209.png") no-repeat 50% 0;
   background-size: 100%;
   position: relative;
 
@@ -13,8 +13,6 @@ const Wrap = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    background: url("/images/home-bg-phone.png") no-repeat 50% 50%;
-    background-size: 100%;
     box-shadow: inset 0 -4rem 2rem rgba(183, 171, 205, 0.2);
   }
 `;
