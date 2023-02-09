@@ -7,6 +7,7 @@ import CustomModal from "../../components/common/CustomModal";
 import { useLayoutEffect, useState } from "react";
 import { flutterInAppWebViewPlatformReady } from "../..";
 import { MypageTitleBar } from "../../components/TitleBar";
+import * as Sentry from "@sentry/react";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -161,6 +162,19 @@ const MyPage = () => {
         });
       }
     } else {
+      if (
+        navigator.userAgent.match(
+          /Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/,
+        )
+      ) {
+        Sentry.withScope(scope => {
+          scope.setTag("type", "flutter.callHandler");
+          scope.setLevel("error");
+          scope.setFingerprint(["routeNativeScreen", value]);
+
+          Sentry.captureException("flutter callHandler Error");
+        });
+      }
       console.error("flutterInAppWebViewPlatformReady not Ready!!");
     }
   };
