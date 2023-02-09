@@ -129,12 +129,71 @@
   }
 }
 
+.forward-from-fade-enter {
+  main {
+    opacity: 0;
+    z-index: 110;
+  }
+}
+
+.forward-from-fade-enter-active {
+  main {
+    opacity: 1;
+    transition: all 300ms;
+    z-index: 110;
+  }
+}
+
+.forward-from-fade-exit {
+  main {
+    opacity: 0.3;
+    z-index: 100;
+  }
+}
+.forward-from-fade-exit-active {
+  main {
+    opacity: 0.2;
+    transition: all 300ms;
+    z-index: 100;
+  }
+}
+
+.back-to-fade-enter {
+  main {
+    opacity: 0.3;
+    z-index: 100;
+  }
+}
+.back-to-fade-enter-active {
+  main {
+    opacity: 1;
+    transition: all 300ms;
+    z-index: 100;
+  }
+}
+
+.back-to-fade-exit {
+  main {
+    opacity: 1;
+    z-index: 110;
+  }
+}
+
+.back-to-fade-exit-active {
+  main {
+    opacity: 0;
+    transition: all 300ms;
+    z-index: 110;
+  }
+}
+
 .fadein-moveTop {
   opacity: 1;
   position: relative;
   bottom: 0;
   animation: fadein-moveTop 0.3s linear alternate;
 }
+
 @keyframes fadein-moveTop {
   0% {
     opacity: 0;

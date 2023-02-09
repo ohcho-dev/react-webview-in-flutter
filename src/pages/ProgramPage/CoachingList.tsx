@@ -12,6 +12,25 @@ import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
 import { coachingType } from "../../utils/type";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
+import styled from "styled-components";
+
+const ListWrap = styled.div`
+  margin-bottom: 3rem;
+`;
+
+const ProgramTitle = styled.span`
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
+  display: flex;
+  align-items: center;
+
+  margin-top: 1rem;
+`;
+
+const Title = styled.span`
+  margin-left: 0.4rem;
+`;
 
 const CoachingList = () => {
   const navigate = useNavigate();
@@ -38,24 +57,32 @@ const CoachingList = () => {
   return (
     <>
       {(status === "idle" || isFetching) && <LoadingSpinner height="30vw" />}
-      {coachingList &&
-        coachingList[0].map((coaching: coachingType, index: number) => {
-          return (
-            <div key={index}>
-              <ProgramCard
-                id={coaching.id}
-                handleCardClick={() => handleCardClick(coaching.id)}
-                programImage={coaching.main_image}
-                title={coaching.name}
-                originalPrice={coaching.base_price}
-                price={coaching.price}
-                discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
-                utilVisible={false}
-              />
-              {index !== coachingList[0].length - 1 && <Divider />}
-            </div>
-          );
-        })}
+      {coachingList && coachingList[0][0] && (
+        <>
+          <ProgramTitle>
+            🙌🏻 <Title>전문 검사와 함께하는 코칭</Title>
+          </ProgramTitle>
+          <ListWrap>
+            {coachingList[0].map((coaching: coachingType, index: number) => {
+              return (
+                <div key={index}>
+                  <ProgramCard
+                    id={coaching.id}
+                    handleCardClick={() => handleCardClick(coaching.id)}
+                    programImage={coaching.main_image}
+                    title={coaching.name}
+                    originalPrice={coaching.base_price}
+                    price={coaching.price}
+                    discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
+                    utilVisible={false}
+                  />
+                  {index !== coachingList[0].length - 1 && <Divider />}
+                </div>
+              );
+            })}
+          </ListWrap>
+        </>
+      )}
     </>
   );
 };

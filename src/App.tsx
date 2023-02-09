@@ -192,11 +192,6 @@ const App: React.FC = () => {
     exit: "to-right",
   };
 
-  const SURVEY_SCENE_CONFIG = {
-    enter: "from-right",
-    exit: "from-right",
-  };
-
   const getSceneConfig = (location: {
     pathname: string;
     search: string;
@@ -208,7 +203,7 @@ const App: React.FC = () => {
       location &&
       RouterConfig.find(config => new RegExp(`^${config.path}$`).test(location.pathname));
 
-    return matchedRoute ? DEFAULT_SCENE_CONFIG : DEFAULT_SCENE_CONFIG;
+    return matchedRoute ? matchedRoute.sceneConfig : DEFAULT_SCENE_CONFIG;
   };
 
   let classNames = "";
