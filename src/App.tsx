@@ -188,8 +188,8 @@ const App: React.FC = () => {
   }, [childrenList, window.localStorage.getItem(CHILD_ID_FIELD)]);
 
   const DEFAULT_SCENE_CONFIG = {
-    enter: "from-bottom",
-    exit: "to-bottom",
+    enter: "from-right",
+    exit: "to-right",
   };
 
   const SURVEY_SCENE_CONFIG = {
@@ -208,11 +208,7 @@ const App: React.FC = () => {
       location &&
       RouterConfig.find(config => new RegExp(`^${config.path}$`).test(location.pathname));
 
-    return matchedRoute
-      ? matchedRoute.sceneConfig
-      : secondPath === "questionnarie"
-      ? SURVEY_SCENE_CONFIG
-      : DEFAULT_SCENE_CONFIG;
+    return matchedRoute ? DEFAULT_SCENE_CONFIG : DEFAULT_SCENE_CONFIG;
   };
 
   let classNames = "";

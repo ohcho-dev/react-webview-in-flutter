@@ -209,7 +209,7 @@ const UpdateChild = () => {
     if (updateStatus) {
       setOpenBackModal(!openBackModal);
     } else {
-      navigate("/my/management-child", { replace: true });
+      navigate(-1);
     }
   };
 
@@ -318,7 +318,7 @@ const UpdateChild = () => {
         toggleModal={() => setOpenModal(!openModal)}
         okBtnName="확인"
         okBtnClick={() => {
-          navigate("/my/management-child", { replace: true });
+          navigate(-1);
         }}
       />
 
@@ -335,7 +335,7 @@ const UpdateChild = () => {
         cancelBtnName="그냥 나가기"
         cancelBtnClick={() => {
           setOpenBackModal(!openBackModal);
-          navigate("/my/management-child", { replace: true });
+          navigate(-1);
         }}
       />
     </LayoutDetailPage>
