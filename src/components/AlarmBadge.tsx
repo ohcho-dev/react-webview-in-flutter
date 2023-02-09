@@ -33,7 +33,6 @@ interface AlarmBadgeProps {}
 
 export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
   const navigate = useNavigate();
-  //const notificationList = useRecoilValue(notificationListstate);
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
   const [newFlag, setNewFlag] = useState(newNotificationFlag);
   const { status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
@@ -46,7 +45,10 @@ export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
           }
         });
       } else {
-        setNewFlag(true);
+        let flag = false;
+
+        flag = data.list.length ? true : false;
+        setNewFlag(flag);
       }
     },
     enabled: !!Cookies.get("token"),
