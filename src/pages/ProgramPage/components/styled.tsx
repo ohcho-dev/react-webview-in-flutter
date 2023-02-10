@@ -35,8 +35,13 @@ export const BottomBtnWrap = styled.div`
   bottom: 0;
   background: #fff;
 
+  transition: box-shadow 0.5s ease;
   display: flex;
   align-items: center;
+
+  box-shadow: ${(prop: { $scrolling?: boolean }) =>
+    prop.$scrolling ? "0px -5px 15px rgba(0, 0, 0, 0.05)" : "none"};
+  z-index: 110;
 `;
 
 export const Divider = styled.div`
