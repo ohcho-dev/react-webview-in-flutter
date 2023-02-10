@@ -195,6 +195,7 @@ const CreateChild = () => {
             locale={ko}
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
+            maxDate={new Date()}
             selected={birthDate}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => setBirthDate(date)}
