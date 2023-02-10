@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { BottomBtnWrap } from "../../ProgramPage/components/styled";
 
 const ContentWrapper = styled.div`
   width: 100%;

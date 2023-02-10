@@ -1,4 +1,5 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
+
 import styled from "styled-components";
 import { DetailTitleBar } from "../components/TitleBar";
 import { BottomBtnWrap } from "../pages/ProgramPage/components/styled";
@@ -36,6 +37,7 @@ interface LayoutDetailPageProps {
   bottomBtnElement?: ReactElement;
   style?: object;
   leftBtn?: React.ReactNode;
+  programDetailPage?: boolean;
   handleBackBtnClick?: () => void | undefined;
 }
 
@@ -44,11 +46,24 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   hideTitleBar = false,
   titleBarBorder = false,
   bottomBtn = false,
+  programDetailPage = false,
   bottomBtnElement,
   style,
   leftBtn,
   handleBackBtnClick,
 }) => {
+  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const [scrollY, setScrollY] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (scrollY === scrollRef?.current?.scrollTop) {
+        setScrolling(false);
+      }
+    }, 500);
+  }, [scrollY]);
+
   return (
     <LayoutBasePage>
       {!hideTitleBar && (
@@ -58,10 +73,25 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
           handleBackBtnClick={handleBackBtnClick}
         />
       )}
-      <DetailPage id="main" bottomBtn={bottomBtn ? true : false} style={{ ...style }}>
+      <DetailPage
+        id="main"
+        bottomBtn={bottomBtn ? true : false}
+        style={{ ...style }}
+        ref={scrollRef}
+        onScroll={() => {
+          setScrollY(scrollRef?.current?.scrollTop);
+          if (!scrolling) {
+            setScrolling(true);
+          }
+        }}
+      >
         {children}
       </DetailPage>
-      {bottomBtn && <BottomBtnWrap>{bottomBtnElement}</BottomBtnWrap>}
+      {bottomBtn && (
+        <BottomBtnWrap $scrolling={programDetailPage && scrolling}>
+          {bottomBtnElement}
+        </BottomBtnWrap>
+      )}
     </LayoutBasePage>
   );
 };
