@@ -23,16 +23,16 @@ const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
       hitType: "pageview",
       page: `${location.pathname + location.search + location.hash}`,
     });
-  };
 
-  ReactGA.event({
-    category: "router",
-    action: `${location.pathname + location.search + location.hash}`,
-    // label: "your label", // optional
-    // value: 99, // optional, must be a number
-    // nonInteraction: true, // optional, true/false
-    // transport: "xhr", // optional, beacon/xhr/image
-  });
+    ReactGA.event({
+      category: "router",
+      action: `${location.pathname + location.search + location.hash}`,
+      // label: "your label", // optional
+      // value: 99, // optional, must be a number
+      // nonInteraction: true, // optional, true/false
+      // transport: "xhr", // optional, beacon/xhr/image
+    });
+  };
 
   return <BasePage id="body">{children}</BasePage>;
 };
