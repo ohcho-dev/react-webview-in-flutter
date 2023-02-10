@@ -100,14 +100,7 @@ const UpdateChild = () => {
   const [updateStatus, setUpdateStatus] = useState(false);
   const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
-  const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid), {
-    onSuccess: data => {
-      setChildData(data[0]);
-      // 생일 날짜 date 형식으로 변환
-      setBirthDate(new Date(data[0].birth_date));
-      data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
-    },
-  });
+  const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
 
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
@@ -118,18 +111,17 @@ const UpdateChild = () => {
     },
   });
 
-  // 생일 날짜 string으로 변환
   useEffect(() => {
-    if (childData.name)
-      setChildData({ ...childData, birth_date: dayjs(birthDate).format("YYYY-MM-DD") });
-  }, [birthDate]);
-
-  // 이른둥이 출산일 날짜 string으로 변환
-  useEffect(() => {
-    if (childData.name) {
-      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
+    if (data.length) {
+      setChildData(data[0]);
+      setBirthDate(new Date(data[0].birth_date));
+      data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
+      setDefaultGender(Genders.filter(gender => gender.value === data[0].gender)[0]);
+      setDefaultPremature(
+        Prematures.filter(premature => premature.value === data[0].premature_flag)[0],
+      );
     }
-  }, [dueDate]);
+  }, [data]);
 
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setChildData({ ...childData, gender: evt.target.value });
@@ -139,13 +131,7 @@ const UpdateChild = () => {
   const handlePrematureValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
     let flag: number = Number(evt.target.value);
     if (flag === 1) {
-      let date: Date | null = null;
-
-      date =
-        dayjs(birthDate).format("YYYY-MM-DD") === dayjs(data[0].birth_date).format("YYYY-MM-DD")
-          ? new Date(data[0].due_date || birthDate)
-          : birthDate;
-      setDueDate(date);
+      setDueDate(birthDate);
     }
     setChildData({ ...childData, premature_flag: flag });
     setUpdateStatus(true);
@@ -162,42 +148,6 @@ const UpdateChild = () => {
     setUpdateStatus(true);
   };
 
-  useEffect(() => {
-    setDefaultGender(Genders.filter(gender => gender.value === data[0].gender)[0]);
-    setDefaultPremature(
-      Prematures.filter(premature => premature.value === data[0].premature_flag)[0],
-    );
-  }, [childData]);
-
-  useEffect(() => {
-    if (childData.premature_flag === 0) {
-      setChildData(current => {
-        const { due_date, ...rest } = current;
-        return rest;
-      });
-    } else {
-      setChildData({
-        ...childData,
-        due_date: dayjs(dueDate).format("YYYY-MM-DD"),
-        birth_date: dayjs(birthDate).format("YYYY-MM-DD"),
-      });
-    }
-  }, [childData.due_date]);
-
-  useEffect(() => {
-    if (childData.premature_flag === 0) {
-      setChildData(current => {
-        const { due_date, ...rest } = current;
-
-        return rest;
-      });
-    } else if (childData.premature_flag === 1 && data[0].due_date && !childData.due_date) {
-      setChildData({ ...childData, due_date: dayjs(data[0].due_date).format("YYYY-MM-DD") });
-    } else if (childData.premature_flag === 1 && data[0].due_date !== childData.due_date) {
-      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
-    }
-  }, [childData.premature_flag]);
-
   const handleSubmit = () => {
     let validCheck = childList.find((child: any) => child.name === childData.name);
     if (!childData.name) {
@@ -208,7 +158,12 @@ const UpdateChild = () => {
       setOpenSameNameModal(true);
       return;
     }
-    callUpdateChildInfo.mutate({ ...childData, id: String(childid) });
+    callUpdateChildInfo.mutate({
+      ...childData,
+      id: String(childid),
+      birth_date: dayjs(birthDate).format("YYYY-MM-DD"),
+      due_date: dayjs(dueDate).format("YYYY-MM-DD"),
+    });
   };
 
   const CustomInput = forwardRef((props: any, ref) => {
@@ -253,12 +208,15 @@ const UpdateChild = () => {
             locale={ko}
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
+            maxDate={new Date()}
             selected={birthDate}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => {
               setBirthDate(date);
-              setDueDate(date);
               setUpdateStatus(true);
+              if (childData.premature_flag) {
+                setDueDate(date);
+              }
             }}
           />
 
