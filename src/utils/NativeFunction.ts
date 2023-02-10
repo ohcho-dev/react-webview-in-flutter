@@ -15,6 +15,7 @@ export const NativeFunction = (funcName: String, value: any) => {
     }
   } else {
     if (
+      process.env.NODE_ENV === "production" &&
       navigator.userAgent.match(
         /Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/,
       )
