@@ -103,11 +103,7 @@ const AlarmList = () => {
           {data.list.map((noti: NotificationType) => (
             <AlarmWrap
               new={new Date(noti.created_at) > new Date(data.last_checked_at)}
-              onClick={() =>
-                navigate(`/coaching/videoAssignment/${noti.detail?.task_id}`, {
-                  state: { task_id: noti.detail.coaching_id },
-                })
-              }
+              onClick={() => navigate(`/coaching/videoAssignment/${noti.detail?.task_id}`)}
               key={noti.id}
             >
               <img src={`/images/icon-alarm-${noti.type}.svg`} />
