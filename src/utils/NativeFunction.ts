@@ -1,4 +1,5 @@
 import { flutterInAppWebViewPlatformReady } from "../index";
+import * as Sentry from "@sentry/react";
 
 export const NativeFunction = (funcName: String, value: any) => {
   if (flutterInAppWebViewPlatformReady) {
@@ -13,6 +14,20 @@ export const NativeFunction = (funcName: String, value: any) => {
       window.flutter_inappwebview._callHandler(funcName, value);
     }
   } else {
+    if (
+      process.env.NODE_ENV === "production" &&
+      navigator.userAgent.match(
+        /Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/,
+      )
+    ) {
+      Sentry.withScope(scope => {
+        scope.setTag("type", "flutter.callHandler");
+        scope.setLevel("error");
+        scope.setFingerprint([funcName, value]);
+
+        Sentry.captureException("flutter callHandler Error");
+      });
+    }
     console.error("flutterInAppWebViewPlatformReady not Ready!!");
   }
 };

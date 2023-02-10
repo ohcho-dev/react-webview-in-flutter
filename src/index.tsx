@@ -8,6 +8,7 @@ import Modal from "react-modal";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 
+// connect react-sentry
 Sentry.init({
   dsn: process.env.NODE_ENV === "production" ? process.env.REACT_APP_SENTRY_DSN : "",
   release: "0.1.0",

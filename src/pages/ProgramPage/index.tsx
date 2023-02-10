@@ -29,23 +29,7 @@ const CouchingSection = styled.div`
 
 const ClassSection = styled.div`
   width: 100%;
-  margin-top: 2rem;
 `;
-
-const ProgramTitle = styled.span`
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 2rem;
-  display: flex;
-  align-items: center;
-
-  margin-top: 1rem;
-`;
-
-const Title = styled.span`
-  margin-left: 0.4rem;
-`;
-
 const SliderContainer = styled.div`
   width: 31.5rem;
   height: 14rem;
@@ -92,20 +76,10 @@ const ProgramPage = () => {
           </Slider>
         </CarouselSection> */}
         <CouchingSection>
-          <ProgramTitle>
-            🙌🏻 <Title>전문 검사와 함께하는 코칭</Title>
-          </ProgramTitle>
-          <Suspense fallback={<LoadingSpinner height="30vw" />}>
-            <CoachingList />
-          </Suspense>
+          <CoachingList />
         </CouchingSection>
         <ClassSection>
-          <ProgramTitle>
-            🧑🏻‍⚕️ <Title>전문가와 함께하는 클래스</Title>
-          </ProgramTitle>
-          <Suspense fallback={<LoadingSpinner height="30vw" />}>
-            <ClassList />
-          </Suspense>
+          <ClassList />
         </ClassSection>
       </ProgramPageWrapper>
     </LayoutMainPage>
