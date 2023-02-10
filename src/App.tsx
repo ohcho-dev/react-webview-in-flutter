@@ -29,12 +29,12 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import { getLoginDev } from "./api/loginDevApi";
 import { getUserInfo } from "./api/mypage";
 import { getHomeData } from "./api/homeApi";
-import RouteChangeTracker from "./utils/RouteChangeTracker";
+// import RouteChangeTracker from "./utils/RouteChangeTracker";
 
 let oldLocation: any = null;
 
 const App: React.FC = () => {
-  RouteChangeTracker();
+  // RouteChangeTracker();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const params = new URLSearchParams(window.location.search);
