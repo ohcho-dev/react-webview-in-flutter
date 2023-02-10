@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -12,7 +11,7 @@ import { getDateTime } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { getMonthLevelString } from "../../../utils/getMonthLevelString";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
-import { AgeRange, BottomBtnWrap, OnlineOffline } from "../../ProgramPage/components/styled";
+import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
 interface DetailClassProps {
   id: string;
@@ -71,6 +70,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
 
   return (
     <LayoutDetailPage
+      programDetailPage={true}
       handleBackBtnClick={() => navigate("/program")}
       titleBarBorder={true}
       bottomBtn
