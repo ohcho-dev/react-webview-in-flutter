@@ -6,6 +6,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { SurveyResultQuestionType } from "../../utils/type";
 import {
+  ListScroll,
   QuestionGap,
   SurveyCategoryTitle,
   SurveyQuestionWrapper,
@@ -43,20 +44,22 @@ const QuestionnaireDetailPage = (): JSX.Element => {
           {surveyAnswerInfo?.name}
           <img alt="form character" src="/images/form-character.svg" />
         </SurveyCategoryTitle>
-        {answerList.map((question: SurveyResultQuestionType, index: number) => {
-          return (
-            <div key={`${question.content + question.answer_id + index}`}>
-              <ResultQuestion
-                questionNumber={index + 1}
-                question={question}
-                totalNum={answerList.length}
-              />
-              {index !== answerList.length - 1 && (
-                <QuestionGap key={`${question.content + question.answer_id}`} />
-              )}
-            </div>
-          );
-        })}
+        <ListScroll height="calc(100vh - 11.4rem)">
+          {answerList.map((question: SurveyResultQuestionType, index: number) => {
+            return (
+              <div key={`${question.content + question.answer_id + index}`}>
+                <ResultQuestion
+                  questionNumber={index + 1}
+                  question={question}
+                  totalNum={answerList.length}
+                />
+                {index !== answerList.length - 1 && (
+                  <QuestionGap key={`${question.content + question.answer_id}`} />
+                )}
+              </div>
+            );
+          })}
+        </ListScroll>
       </SurveyQuestionWrapper>
     </LayoutDetailPage>
   );

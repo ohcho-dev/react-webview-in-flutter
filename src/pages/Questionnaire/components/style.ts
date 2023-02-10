@@ -99,6 +99,6 @@ export const Answer = styled.div`
 `;
 
 export const ListScroll = styled.div`
-  height: calc(100vh - 13rem);
+  height: ${(prop: { height?: string }) => prop.height || "calc(100vh - 13rem)"};
   overflow: scroll;
 `;
