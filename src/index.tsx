@@ -7,11 +7,6 @@ import { RecoilRoot } from "recoil";
 import Modal from "react-modal";
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
-import ReactGA from "react-ga";
-
-// connect react-ga
-const TRACKING_ID = process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID || "";
-ReactGA.initialize(TRACKING_ID);
 
 // connect react-sentry
 Sentry.init({
