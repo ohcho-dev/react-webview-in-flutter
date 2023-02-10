@@ -199,7 +199,6 @@ const Reason = styled.div`
 `;
 
 const VideoAssignmentPage = (): JSX.Element => {
-  const { state } = useLocation();
   const { id } = useParams();
   const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
@@ -232,10 +231,7 @@ const VideoAssignmentPage = (): JSX.Element => {
           content="다시 촬영하기"
           style={{ height: "5rem" }}
           onClick={() => {
-            NativeFunction(
-              "routeNativeScreen",
-              `coachingVideoDetail@${state.task_id}@${childInfo.id}`,
-            );
+            NativeFunction("routeNativeScreen", `coachingVideoDetail@${id}@${childInfo.id}`);
           }}
           // onClick={async () =>
           //   await callNativeFunction().then(function () {

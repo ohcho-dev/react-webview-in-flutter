@@ -2,18 +2,20 @@ import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
+
+import "react-datepicker/dist/react-datepicker.css";
+import { ko } from "date-fns/esm/locale";
+
 import { createChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { createChildType } from "../../utils/type";
 import PageTitle from "./components/PageTitle";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "./components/DatePickerInput";
-import { ko } from "date-fns/esm/locale";
-import { useRecoilValue } from "recoil";
 import { childrenListState } from "../../recoil/atom";
 import CustomModal from "../../components/common/CustomModal";
 
@@ -46,6 +48,7 @@ const PageLayout = styled.div`
 const FormWrap = styled.form`
   padding: 0 2.5rem;
 `;
+
 const InputTitle = styled.div`
   margin-bottom: 1rem;
   font-weight: 400;
@@ -79,15 +82,14 @@ const InputBox = styled.input`
   }
 `;
 
+const DEFAULT_GENDER = { name: "여아", value: "F" };
+const DEFAULT_PREMATURE = { name: "예정일 출산", value: 0 };
+
 const CreateChild = () => {
   const navigate = useNavigate();
   const [childData, setChildData] = useState<createChildType>(DEFAULT_CHILD_TYPE);
-
-  const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
-  const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
-  const [openModal, setOpenModal] = useState(false);
   const [openLengthModal, setOpenLengthModal] = useState(false);
   const [openNameCheckModal, setOpenNameCheckModal] = useState(false);
   const [openSameNameCheckModal, setOpenSameNameCheckModal] = useState(false);
@@ -107,24 +109,13 @@ const CreateChild = () => {
   //   생일 날짜 string으로 변환
   useEffect(() => {
     setChildData({ ...childData, birth_date: dayjs(birthDate).format("YYYY-MM-DD") });
-    new Date(String(dueDate)) < new Date(String(birthDate)) &&
-      setDueDate(new Date(String(birthDate)));
+    setDueDate(birthDate);
   }, [birthDate]);
 
   // 이른둥이 출산일 날짜 string으로 변환
   useEffect(() => {
     setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
   }, [dueDate]);
-
-  const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value;
-    setChildData({ ...childData, gender: value });
-  };
-
-  const handlePrematureValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    const value = evt.target.value;
-    setChildData({ ...childData, premature_flag: Number(value) });
-  };
 
   const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const id = evt.target.id;
@@ -140,18 +131,6 @@ const CreateChild = () => {
     if (childData.premature_flag === 0) {
       setChildData(current => {
         const { due_date, ...rest } = current;
-
-        return rest;
-      });
-    } else {
-      setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
-    }
-  }, [childData.due_date]);
-
-  useEffect(() => {
-    if (childData.premature_flag === 0) {
-      setChildData(current => {
-        const { due_date, ...rest } = current;
         return rest;
       });
     } else if (childData.premature_flag === 1 && !childData.due_date) {
@@ -160,7 +139,7 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    let validCheck = childrenList.find((aaa: any) => aaa.name === childData.name);
+    let validCheck = childrenList.find((child: any) => child.name === childData.name);
 
     if (childrenList.length >= 5) {
       setOpenLengthModal(true);
@@ -183,7 +162,6 @@ const CreateChild = () => {
 
   return (
     <LayoutDetailPage
-      handleBackBtnClick={() => navigate("/my/management-child", { replace: true })}
       bottomBtn
       bottomBtnElement={<Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />}
     >
@@ -202,8 +180,10 @@ const CreateChild = () => {
           <CustomRadioButton
             id="childGender"
             type={Genders}
-            defaultValue={defaultGender}
-            onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
+            defaultValue={DEFAULT_GENDER}
+            onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setChildData({ ...childData, gender: e.target.value });
+            }}
           />
 
           <InputTitle>생년월일</InputTitle>
@@ -215,9 +195,8 @@ const CreateChild = () => {
             locale={ko}
             dateFormat="yyyy.MM.dd"
             showPopperArrow={false}
-            selected={birthDate}
-            minDate={new Date("2016-01-01")}
             maxDate={new Date()}
+            selected={birthDate}
             customInput={<CustomInput inputRef={inputRef} />}
             onChange={(date: Date | null) => setBirthDate(date)}
           />
@@ -226,8 +205,10 @@ const CreateChild = () => {
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
-            defaultValue={defaultPremature}
-            onChangeFunction={handlePrematureValue}
+            defaultValue={DEFAULT_PREMATURE}
+            onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) =>
+              setChildData({ ...childData, premature_flag: Number(e.target.value) })
+            }
           />
 
           {childData.premature_flag === 1 && (
@@ -242,8 +223,8 @@ const CreateChild = () => {
                 dateFormat="yyyy.MM.dd"
                 showPopperArrow={false}
                 selected={dueDate}
-                minDate={new Date(String(birthDate))}
-                maxDate={new Date()}
+                minDate={birthDate}
+                maxDate={dayjs(birthDate).add(90, "day").toDate()}
                 customInput={<CustomInput inputRef={inputRef} />}
                 onChange={(date: Date | null) => setDueDate(date)}
               />
@@ -257,14 +238,12 @@ const CreateChild = () => {
         isOpen={openLengthModal}
         toggleModal={() => setOpenLengthModal(!openLengthModal)}
         okBtnName="확인"
-        okBtnClick={() => setOpenLengthModal(!openLengthModal)}
       />
       <CustomModal
         title="아이 이름을 입력해주세요."
         isOpen={openNameCheckModal}
         toggleModal={() => setOpenNameCheckModal(!openNameCheckModal)}
         okBtnName="확인"
-        okBtnClick={() => setOpenNameCheckModal(!openNameCheckModal)}
       />
 
       <CustomModal
@@ -272,15 +251,17 @@ const CreateChild = () => {
         isOpen={openSameNameCheckModal}
         toggleModal={() => setOpenSameNameCheckModal(!openSameNameCheckModal)}
         okBtnName="확인"
-        okBtnClick={() => setOpenSameNameCheckModal(!openSameNameCheckModal)}
       />
 
       <CustomModal
         title="아이등록이 완료됐어요."
         isOpen={openSaveModal}
-        toggleModal={() => navigate("/my/management-child", { replace: true })}
+        toggleModal={() => setOpenSaveModal(false)}
         okBtnName="확인"
-        okBtnClick={() => navigate("/my/management-child", { replace: true })}
+        okBtnClick={() => {
+          setOpenSaveModal(false);
+          navigate("/my/management-child", { replace: true });
+        }}
       />
     </LayoutDetailPage>
   );

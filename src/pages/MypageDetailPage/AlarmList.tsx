@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useMutation, useQuery } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getNotificationList, updateNotificationCheckTime } from "../../api/notificationApi";
@@ -83,12 +84,12 @@ const DateTime = styled.div`
 `;
 
 const AlarmList = () => {
+  const navigate = useNavigate();
   const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
   const { data } = useQuery(queryKeys.notificationList, getNotificationList);
   const setNotificationTime = useMutation(updateNotificationCheckTime);
 
   useEffect(() => {
-    console.log("call");
     setNewNotificationFlag(false);
     // last_checked_at api 호출
     setNotificationTime.mutate();
@@ -99,8 +100,12 @@ const AlarmList = () => {
       <PageTitle title={"알림"} />
       {data.list.length ? (
         <AlarmListWrap>
-          {data.list.map((noti: any) => (
-            <AlarmWrap new={new Date(noti.created_at) > new Date(data.last_checked_at)}>
+          {data.list.map((noti: NotificationType) => (
+            <AlarmWrap
+              new={new Date(noti.created_at) > new Date(data.last_checked_at)}
+              onClick={() => navigate(`/coaching/videoAssignment/${noti.detail?.task_id}`)}
+              key={noti.id}
+            >
               <img src={`/images/icon-alarm-${noti.type}.svg`} />
               <div>
                 <Title>{noti.title}</Title>

@@ -56,7 +56,7 @@ export const RouterConfig = [
     path: "/home",
     element: <HomePage />,
     sceneConfig: {
-      enter: "from-right",
+      enter: "from-fade",
       exit: "to-right",
     },
   },
@@ -64,7 +64,7 @@ export const RouterConfig = [
   //   path: "/note",
   //   element: <NotePage />,
   //   sceneConfig: {
-  //     enter: "from-right",
+  //     enter: "from-fade",
   //     exit: "to-right",
   //   },
   // },
@@ -72,7 +72,7 @@ export const RouterConfig = [
     path: "/coaching",
     element: <CoachingPage />,
     sceneConfig: {
-      enter: "from-right",
+      enter: "from-fade",
       exit: "to-right",
     },
   },
@@ -80,7 +80,7 @@ export const RouterConfig = [
     path: "/program",
     element: <ProgramPage />,
     sceneConfig: {
-      enter: "from-right",
+      enter: "from-fade",
       exit: "to-right",
     },
   },
@@ -88,7 +88,7 @@ export const RouterConfig = [
     path: "/my",
     element: <MyPage />,
     sceneConfig: {
-      enter: "from-right",
+      enter: "from-fade",
       exit: "to-right",
     },
   },
@@ -96,48 +96,48 @@ export const RouterConfig = [
     path: "/program/coaching/:coachingid",
     element: <ProgramDetailPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/program/class/:classid",
     element: <ProgramDetailPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/program/class/apply-class/:classid",
     element: <ApplyClassPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/program/class/apply-class/success",
     element: <ApplySuccessPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/program/class/apply-coaching/success",
     element: <ApplyCoachingSuccess />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/coaching/coaching-detail/:id",
     element: <CoachingDetailPage />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
@@ -176,64 +176,64 @@ export const RouterConfig = [
     path: "/my/notice",
     element: <Notice />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/notice/:noticeid",
     element: <NoticeDetail />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/management-alarm",
     element: <ManagementAlarm />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/management-child",
     element: <ManagementChild />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/management-child/:childid",
     element: <UpdateChild />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/management-child/register",
     element: <CreateChild />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/applied-program-list",
     element: <AppliedProgramList />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/coaching/result/:paperid",
     element: <ResultPaper />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
 
@@ -241,32 +241,32 @@ export const RouterConfig = [
     path: "/my/terms",
     element: <Terms />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/privacy",
     element: <Privacy />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/sensitive",
     element: <Sensitive />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
   {
     path: "/my/alarm-list",
     element: <AlarmList />,
     sceneConfig: {
-      enter: "from-bottom",
-      exit: "to-bottom",
+      enter: "from-right",
+      exit: "to-right",
     },
   },
 ];

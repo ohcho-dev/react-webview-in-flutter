@@ -29,10 +29,12 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import { getLoginDev } from "./api/loginDevApi";
 import { getUserInfo } from "./api/mypage";
 import { getHomeData } from "./api/homeApi";
+import RouteChangeTracker from "./utils/RouteChangeTracker";
 
 let oldLocation: any = null;
 
 const App: React.FC = () => {
+  RouteChangeTracker();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const params = new URLSearchParams(window.location.search);
@@ -188,13 +190,8 @@ const App: React.FC = () => {
   }, [childrenList, window.localStorage.getItem(CHILD_ID_FIELD)]);
 
   const DEFAULT_SCENE_CONFIG = {
-    enter: "from-bottom",
-    exit: "to-bottom",
-  };
-
-  const SURVEY_SCENE_CONFIG = {
     enter: "from-right",
-    exit: "from-right",
+    exit: "to-right",
   };
 
   const getSceneConfig = (location: {
@@ -208,11 +205,7 @@ const App: React.FC = () => {
       location &&
       RouterConfig.find(config => new RegExp(`^${config.path}$`).test(location.pathname));
 
-    return matchedRoute
-      ? matchedRoute.sceneConfig
-      : secondPath === "questionnarie"
-      ? SURVEY_SCENE_CONFIG
-      : DEFAULT_SCENE_CONFIG;
+    return matchedRoute ? matchedRoute.sceneConfig : DEFAULT_SCENE_CONFIG;
   };
 
   let classNames = "";

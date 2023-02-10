@@ -11,18 +11,26 @@ import { selectedChildInfoState } from "../../recoil/atom";
 import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
+import styled from "styled-components";
+
+const ProgramTitle = styled.span`
+  font-weight: 700;
+  font-size: 2rem;
+  line-height: 2rem;
+  display: flex;
+  align-items: center;
+`;
+
+const Title = styled.span`
+  margin-left: 0.4rem;
+`;
 
 const ClassList = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
 
-  const {
-    status,
-    isFetching,
-    refetch,
-    data: classList = [],
-  } = useQuery(queryKeys.classList, () => getClassList(), {
+  const { refetch, data: classList = [] } = useQuery(queryKeys.classList, () => getClassList(), {
     enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
   });
 
@@ -36,7 +44,11 @@ const ClassList = () => {
 
   return (
     <>
-      {(status === "idle" || isFetching) && <LoadingSpinner height="30vw" />}
+      {classList[0] && (
+        <ProgramTitle>
+          🧑🏻‍⚕️ <Title>전문가와 함께하는 클래스</Title>
+        </ProgramTitle>
+      )}
       {classList.map((singleClass: { [key: string]: any }, index: number) => {
         return (
           <div key={index}>

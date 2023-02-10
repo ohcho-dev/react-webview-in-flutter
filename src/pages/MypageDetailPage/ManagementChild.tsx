@@ -61,7 +61,7 @@ export const ManagementChild = () => {
       setOpenBreakModal(!openBreakModal);
       return;
     }
-    navigate("/my/management-child/register", { replace: true });
+    navigate("/my/management-child/register");
   };
 
   return (
@@ -70,14 +70,13 @@ export const ManagementChild = () => {
       bottomBtnElement={
         <Button theme={"black"} content={"아이 추가하기"} onClick={handleCreateCHildBtn} />
       }
-      handleBackBtnClick={() => navigate("/my")}
     >
       <PageTitle title="아이 관리" />
       <PageLayout>
         {childrenList.map((child: childType, index: number) => (
           <ChildrenListWrap
             key={index}
-            onClick={() => navigate(`/my/management-child/${child.id}`, { replace: true })}
+            onClick={() => navigate(`/my/management-child/${child.id}`)}
           >
             <ChildInfoSection>
               <img alt="profile icon" src={`/images/profile-${index}.png`} />

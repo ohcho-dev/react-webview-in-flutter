@@ -175,6 +175,7 @@ export interface NotificationType {
   body: string;
   created_at: string;
   updated_at: string;
+  detail: { [key: string]: any };
 }
 
 export interface SelectBtnArrayType {

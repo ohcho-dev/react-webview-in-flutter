@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -29,7 +30,7 @@ const ProgramTitle = styled.span`
   font-size: 2rem;
 `;
 
-const NoAppliedCoachingSection = styled.div`
+const NoCoachingSection = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,36 +56,41 @@ const NoAppliedCoachingSection = styled.div`
   }
 `;
 
-const NoEndCoachingImg = styled.img`
-  width: 26rem;
-  height: 17rem;
-`;
-
 const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const { selectedMenu } = props;
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { data } = useQuery(queryKeys.coachingList, () => getCoachingList());
-  const selectedChildInfo = useRecoilValue(selectedChildInfoState);
+  const { data, refetch } = useQuery(queryKeys.coachingList, getCoachingList);
+  const { id, name } = useRecoilValue(selectedChildInfoState);
 
   const handleCardClick = (id: number) => {
     navigate(`/program/coaching/${id}`, { state: pathname });
   };
 
+  useEffect(() => {
+    if (id) {
+      refetch();
+    }
+  }, [id]);
+
   return (
     <div>
       <InformImageSection>
         {selectedMenu === "end" ? (
-          <NoEndCoachingImg alt="inform-image" src="/images/no-end-coaching.png" />
+          <NoCoachingSection>
+            <img alt="inform-image" src="/images/no-coaching-img.png" />
+            <span>아직 종료한 코칭이 없어요.</span>
+            <span>코칭 종료까지 응원할게요!</span>
+          </NoCoachingSection>
         ) : (
-          <NoAppliedCoachingSection>
-            <img alt="inform-image" src="/images/no-applied-coaching.svg" />
+          <NoCoachingSection>
+            <img alt="inform-image" src="/images/no-coaching-img.png" />
             <span>아직 신청한 코칭이 없어요.</span>
             <span>우리 아이 맞춤 코칭을 바로 신청해 보세요.</span>
-          </NoAppliedCoachingSection>
+          </NoCoachingSection>
         )}
       </InformImageSection>
-      <ProgramTitle>⭐️ {selectedChildInfo.name}을 위한 추천 코칭</ProgramTitle>
+      {!!data[0].length && <ProgramTitle>⭐️ {name}에게 딱 맞는 추천 코칭</ProgramTitle>}
       {data[0].map((coaching: coachingType, index: number) => {
         return (
           <div key={index}>
