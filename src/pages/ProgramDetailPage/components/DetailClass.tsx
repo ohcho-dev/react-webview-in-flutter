@@ -71,7 +71,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
 
   return (
     <LayoutDetailPage
-      programDetailPage={true}
+      bottomScrollAnimationEffect={true}
       handleBackBtnClick={() => navigate("/program")}
       titleBarBorder={true}
       bottomBtn

@@ -11,6 +11,13 @@ export const SurveyQuestionWrapper = styled.div`
 `;
 
 export const SurveyCategoryTitle = styled.div`
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: white;
+
+  z-index: 110;
+
   padding: 1.5rem 1rem;
   font-weight: 500;
   font-size: 1.8rem;

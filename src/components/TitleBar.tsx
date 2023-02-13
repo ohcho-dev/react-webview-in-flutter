@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import AlarmBadge from "./AlarmBadge";
 import {
   childrenKeyState,

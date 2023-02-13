@@ -92,3 +92,13 @@ export const currentTaskIdState = atom({
   key: "currentTaskId",
   default: "",
 });
+
+export const loginInfoState = atom({
+  key: "loginInfo",
+  default: {
+    id: 0,
+    name: "",
+    sns_kind: "",
+    sns_id: "",
+  },
+});
