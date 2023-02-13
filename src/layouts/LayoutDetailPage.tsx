@@ -37,7 +37,7 @@ interface LayoutDetailPageProps {
   bottomBtnElement?: ReactElement;
   style?: object;
   leftBtn?: React.ReactNode;
-  programDetailPage?: boolean;
+  bottomScrollAnimationEffect?: boolean;
   handleBackBtnClick?: () => void | undefined;
 }
 
@@ -46,7 +46,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   hideTitleBar = false,
   titleBarBorder = false,
   bottomBtn = false,
-  programDetailPage = false,
+  bottomScrollAnimationEffect = false,
   bottomBtnElement,
   style,
   leftBtn,
@@ -88,7 +88,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
         {children}
       </DetailPage>
       {bottomBtn && (
-        <BottomBtnWrap $scrolling={programDetailPage && scrolling}>
+        <BottomBtnWrap $scrolling={bottomScrollAnimationEffect && scrolling}>
           {bottomBtnElement}
         </BottomBtnWrap>
       )}

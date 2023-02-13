@@ -227,7 +227,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   return (
     <>
       <LayoutDetailPage
-        programDetailPage={true}
+        bottomScrollAnimationEffect={true}
         handleBackBtnClick={handleBackBtn}
         titleBarBorder={true}
         bottomBtn

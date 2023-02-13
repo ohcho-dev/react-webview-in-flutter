@@ -88,8 +88,12 @@ const DetailTitle = styled.span`
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: coachingInfo } = useQuery(queryKeys.appliedCoachingInfo, () =>
-    getAppliedCoachingInfo(id),
+  const { data: coachingInfo } = useQuery(
+    queryKeys.appliedCoachingInfo,
+    () => getAppliedCoachingInfo(id),
+    {
+      refetchOnWindowFocus: true,
+    },
   );
   const childInfo = useRecoilValue(selectedChildInfoState);
   const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
