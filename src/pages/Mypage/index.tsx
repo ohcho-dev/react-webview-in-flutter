@@ -8,6 +8,8 @@ import { useLayoutEffect, useState } from "react";
 import { flutterInAppWebViewPlatformReady } from "../..";
 import { MypageTitleBar } from "../../components/TitleBar";
 import * as Sentry from "@sentry/react";
+import { useRecoilValue } from "recoil";
+import { selectedChildInfoState } from "../../recoil/atom";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -140,6 +142,7 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [version, setVersion] = useState("");
+  const selectedChild = useRecoilValue(selectedChildInfoState);
 
   useLayoutEffect(() => {
     getNativeValue("appVersion");
@@ -168,13 +171,15 @@ const MyPage = () => {
           /Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/,
         )
       ) {
-        Sentry.withScope(scope => {
-          scope.setTag("type", "flutter.callHandler");
-          scope.setLevel("error");
-          scope.setFingerprint(["routeNativeScreen", value]);
-
-          Sentry.captureException("flutter callHandler Error");
-        });
+        if (window.navigator.userAgent.indexOf("InApp") > -1) {
+          Sentry.withScope(scope => {
+            scope.setTag("type", "flutter.callHandler");
+            scope.setLevel("error");
+            scope.setFingerprint(["routeNativeScreen", value]);
+            scope.setUser({ "child-id": selectedChild.id });
+            Sentry.captureException("flutter callHandler Error");
+          });
+        }
       }
       console.error("flutterInAppWebViewPlatformReady not Ready!!");
     }
