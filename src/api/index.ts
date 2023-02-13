@@ -27,23 +27,27 @@ export const request = async (config: AxiosRequestConfig) => {
 
     // sentry api 에러 추적 (429 too many attempts 는 경고처리)
     if (response?.status === 429) {
-      Sentry.withScope(scope => {
-        scope.setTag("type", "api");
-        scope.setLevel("info");
-        scope.setUser({ "child-id": childId });
-        scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
+      if (window.navigator.userAgent.indexOf("InApp") > -1) {
+        Sentry.withScope(scope => {
+          scope.setTag("type", "api");
+          scope.setLevel("info");
+          scope.setUser({ "child-id": childId });
+          scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
 
-        Sentry.captureException(error);
-      });
+          Sentry.captureException(error);
+        });
+      }
     } else {
-      Sentry.withScope(scope => {
-        scope.setTag("type", "api");
-        scope.setLevel("error");
-        scope.setUser({ "child-id": childId });
-        scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
+      if (window.navigator.userAgent.indexOf("InApp") > -1) {
+        Sentry.withScope(scope => {
+          scope.setTag("type", "api");
+          scope.setLevel("error");
+          scope.setUser({ "child-id": childId });
+          scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
 
-        Sentry.captureException(error);
-      });
+          Sentry.captureException(error);
+        });
+      }
     }
 
     if (response?.status === 400) {
