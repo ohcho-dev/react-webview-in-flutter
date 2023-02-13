@@ -153,13 +153,46 @@ const QuestionnaireForm = (): JSX.Element => {
           />
         }
       >
-        <SurveyQuestionWrapper>
-          <SurveyCategoryTitle scroll={scroll}>
+        <SurveyCategoryTitle scroll={scroll}>
+          <span>{surveyInfo?.name}</span>
+          <img alt="form character" src="/images/form-character.svg" />
+        </SurveyCategoryTitle>
+        {surveyInfo.question.length &&
+          surveyInfo.question.map((question, index: number) => {
+            return (
+              <div key={`${question.content + question.id}`}>
+                <Question
+                  questionNumber={index + 1}
+                  question={question}
+                  totalQuestionNum={surveyInfo.question.length}
+                />
+                {index !== surveyInfo.question.length - 1 && (
+                  <QuestionGap key={`${question.content + question.id}`} />
+                )}
+              </div>
+            );
+          })}
+
+        {/* <SurveyCategoryTitle scroll={scroll}>
             <span>{surveyInfo?.name}</span>
             <img alt="form character" src="/images/form-character.svg" />
           </SurveyCategoryTitle>
-          <ListScroll
-            height="100%"
+          {surveyInfo.question.length &&
+            surveyInfo.question.map((question, index: number) => {
+              return (
+                <div key={`${question.content + question.id}`}>
+                  <Question
+                    questionNumber={index + 1}
+                    question={question}
+                    totalQuestionNum={surveyInfo.question.length}
+                  />
+                  {index !== surveyInfo.question.length - 1 && (
+                    <QuestionGap key={`${question.content + question.id}`} />
+                  )}
+                </div>
+              );
+            })} */}
+        {/* <ListScroll
             id="question-list"
             onScroll={(e: React.UIEvent<HTMLElement>) => {
               setScroll(e.currentTarget.scrollTop);
@@ -180,8 +213,7 @@ const QuestionnaireForm = (): JSX.Element => {
                   </div>
                 );
               })}
-          </ListScroll>
-        </SurveyQuestionWrapper>
+          </ListScroll> */}
       </LayoutDetailPage>
       <CustomModal
         content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
