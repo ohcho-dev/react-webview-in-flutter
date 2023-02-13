@@ -159,6 +159,7 @@ const QuestionnaireForm = (): JSX.Element => {
             <img alt="form character" src="/images/form-character.svg" />
           </SurveyCategoryTitle>
           <ListScroll
+            height="100%"
             id="question-list"
             onScroll={(e: React.UIEvent<HTMLElement>) => {
               setScroll(e.currentTarget.scrollTop);
