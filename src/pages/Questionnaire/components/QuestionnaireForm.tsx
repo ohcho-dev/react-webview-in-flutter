@@ -139,6 +139,7 @@ const QuestionnaireForm = (): JSX.Element => {
   return (
     <>
       <LayoutDetailPage
+        bottomScrollAnimationEffect={true}
         hideTitleBar
         style={{ borderBottom: "none", top: 0, height: "calc(100vh - 7.4rem)" }}
         bottomBtn
