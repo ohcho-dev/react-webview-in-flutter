@@ -5,7 +5,7 @@ import { NativeFunction } from "../utils/NativeFunction";
 
 const BottomNavWrap = styled.ul`
   width: 100%;
-  height: 6rem;
+  height: 6.5rem;
   display: flex;
   justify-content: space-between;
   background: #fff;
@@ -18,12 +18,12 @@ const BottomNavWrap = styled.ul`
 const Lists = styled.li`
   width: 100%;
   text-align: center;
-  padding-bottom: 0.6rem;
+  padding-bottom: 1.3rem;
 `;
 
 const ImageWrap = styled.div`
-  width: 7.5rem;
-  height: 5.4rem;
+  width: 3.6rem;
+  height: 3.6rem;
   margin: 0 auto;
 `;
 
@@ -32,43 +32,43 @@ const Text = styled.div`
   font-size: 1.1rem;
   line-height: 2.2rem;
   letter-spacing: 0.04rem;
-  color: #747474;
+  color: ${(prop: { selected: boolean }) => (prop.selected ? "#000000" : "#747474")};
 `;
 
 const bottomNavData = [
   {
     id: 0,
     name: "홈",
-    imgUrl: "/images/home_off.png",
-    selectedImgUrl: "/images/home_on.png",
+    imgUrl: "/images/home_off.svg",
+    selectedImgUrl: "/images/home_on.svg",
     link: "/home",
   },
   // {
   //   id: 1,
   //   name: '기록',
-  //   imgUrl: '/images/note_off.png',
-  //   selectedImgUrl: '/images/note_on.png',
+  //   imgUrl: '/images/note_off.svg',
+  //   selectedImgUrl: '/images/note_on.svg',
   //   link: '/note',
   // },
   {
     id: 2,
     name: "코칭",
-    imgUrl: "/images/coaching_off.png",
-    selectedImgUrl: "/images/coaching_on.png",
+    imgUrl: "/images/coaching_off.svg",
+    selectedImgUrl: "/images/coaching_on.svg",
     link: "/coaching",
   },
   {
     id: 3,
     name: "프로그램",
-    imgUrl: "/images/program_off.png",
-    selectedImgUrl: "/images/program_on.png",
+    imgUrl: "/images/program_off.svg",
+    selectedImgUrl: "/images/program_on.svg",
     link: "/program",
   },
   {
     id: 4,
     name: "MY",
-    imgUrl: "/images/my_off.png",
-    selectedImgUrl: "/images/my_on.png",
+    imgUrl: "/images/my_off.svg",
+    selectedImgUrl: "/images/my_on.svg",
     link: "/my",
   },
 ];
@@ -76,13 +76,6 @@ const bottomNavData = [
 const BottomNav = () => {
   const { pathname } = useLocation();
   let firstPath = pathname.split("/")[1];
-
-  useLayoutEffect(() => {
-    window.history.pushState(null, "", window.location.href);
-    window.onpopstate = () => {
-      NativeFunction("routeNativeScreen", "off");
-    };
-  }, []);
 
   return (
     <BottomNavWrap>
@@ -98,6 +91,7 @@ const BottomNav = () => {
                   alt={item.name}
                 />
               </ImageWrap>
+              <Text selected={`/${firstPath}` === item.link}>{item.name}</Text>
             </NavLink>
           </Lists>
         );
