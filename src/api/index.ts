@@ -25,16 +25,13 @@ export const request = async (config: AxiosRequestConfig) => {
     return response.data;
   } catch (error) {
     const { response } = error as unknown as AxiosError;
-
     // sentry api 에러 추적 (429 too many attempts 는 경고처리)
     if (response?.status === 429) {
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
         Sentry.withScope(scope => {
           scope.setTag("type", "api");
           scope.setLevel("info");
-          scope.setUser({ email: userInfo, "child-id": childId });
           scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
-
           Sentry.captureException(error);
         });
       }
@@ -43,9 +40,7 @@ export const request = async (config: AxiosRequestConfig) => {
         Sentry.withScope(scope => {
           scope.setTag("type", "api");
           scope.setLevel("error");
-          scope.setUser({ "child-id": childId });
           scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
-
           Sentry.captureException(error);
         });
       }

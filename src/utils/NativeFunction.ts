@@ -29,7 +29,6 @@ export const NativeFunction = (funcName: String, value: any) => {
           scope.setTag("type", "flutter.callHandler");
           scope.setLevel("error");
           scope.setFingerprint([funcName, value]);
-          scope.setUser({ email: userInfo, "child-id": childId });
           Sentry.captureException("flutter callHandler Error");
         });
       }

@@ -176,7 +176,6 @@ const MyPage = () => {
             scope.setTag("type", "flutter.callHandler");
             scope.setLevel("error");
             scope.setFingerprint(["routeNativeScreen", value]);
-            scope.setUser({ "child-id": selectedChild.id });
             Sentry.captureException("flutter callHandler Error");
           });
         }
