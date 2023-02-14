@@ -22,20 +22,17 @@ import {
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
-import { CHILD_ID_FIELD, USER_INFO, USER_KEY } from "./constant/localStorage";
+import { CHILD_ID_FIELD, USER_KEY } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { getLoginDev } from "./api/loginDevApi";
 import { getUserInfo } from "./api/mypage";
 import { getHomeData } from "./api/homeApi";
-import RouteChangeTracker from "./utils/RouteChangeTracker";
 import * as Sentry from "@sentry/react";
 
 let oldLocation: any = null;
 
 const App: React.FC = () => {
-  RouteChangeTracker();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const params = new URLSearchParams(window.location.search);
