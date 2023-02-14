@@ -190,7 +190,7 @@ const RecommendActivityBox = () => {
       <GreyBox padding="2rem 2rem 2rem 1.3rem">
         <FlexBox>
           <FlexBox>
-            <img src="/images/icon-home-child.svg" />
+            <img src="/images/icon-home-child.svg" alt="우리 아이 태어난지" />
             <Label>우리 아이 태어난지</Label>
           </FlexBox>
           <FlexBox>

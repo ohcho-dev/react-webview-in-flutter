@@ -95,7 +95,6 @@ const GoToChildManagementBtn = styled.div`
 const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
   const { openModal, toggleModal, childrenList, selectedChildInfo, handleChildClick } = props;
   const navigate = useNavigate();
-
   return (
     <CustomBottomModal toggle={openModal} handleToggle={toggleModal}>
       <ChildrenListModalWrapper>

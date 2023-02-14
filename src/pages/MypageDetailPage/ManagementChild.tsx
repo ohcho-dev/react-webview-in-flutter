@@ -79,7 +79,7 @@ export const ManagementChild = () => {
             onClick={() => navigate(`/my/management-child/${child.id}`)}
           >
             <ChildInfoSection>
-              <img alt="profile icon" src={`/images/profile-${index}.png`} />
+              <img alt="profile icon" src={child.image || `/images/profile-${index}.png`} />
               <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
               <span style={{ marginLeft: "-1rem" }}>
                 ({getDate(child.birth_date)}) {getGender(child.gender)}아
