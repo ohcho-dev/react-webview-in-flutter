@@ -176,7 +176,7 @@ const App: React.FC = () => {
     if (window.navigator.userAgent.indexOf("InApp") > -1) {
       if (window.localStorage.getItem(USER_INFO) && selectedChild.id) {
         Sentry.setUser({
-          email: window.localStorage.getItem(USER_INFO) || "",
+          email: String(window.localStorage.getItem(USER_INFO)) || "",
           child_id: selectedChild.id,
         });
       }
