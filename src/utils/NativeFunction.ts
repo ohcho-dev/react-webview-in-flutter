@@ -1,10 +1,10 @@
 import { flutterInAppWebViewPlatformReady } from "../index";
 import * as Sentry from "@sentry/react";
-import { useRecoilValue } from "recoil";
-import { selectedChildInfoState } from "../recoil/atom";
+import { CHILD_ID_FIELD, USER_INFO } from "../constant/localStorage";
 
 export const NativeFunction = (funcName: String, value: any) => {
-  const selectedChild = useRecoilValue(selectedChildInfoState);
+  const childId = window.localStorage.getItem(CHILD_ID_FIELD);
+  const userInfo = window.localStorage.getItem(USER_INFO) || "";
 
   if (flutterInAppWebViewPlatformReady) {
     // @ts-ignore
@@ -29,7 +29,7 @@ export const NativeFunction = (funcName: String, value: any) => {
           scope.setTag("type", "flutter.callHandler");
           scope.setLevel("error");
           scope.setFingerprint([funcName, value]);
-          scope.setUser({ "child-id": selectedChild.id });
+          scope.setUser({ email: userInfo, "child-id": childId });
           Sentry.captureException("flutter callHandler Error");
         });
       }

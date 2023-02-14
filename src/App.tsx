@@ -16,14 +16,13 @@ import {
   childrenListState,
   commonCodeState,
   currentTaskIdState,
-  loginInfoState,
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./recoil/atom";
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
-import { CHILD_ID_FIELD } from "./constant/localStorage";
+import { CHILD_ID_FIELD, USER_INFO } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
@@ -52,7 +51,6 @@ const App: React.FC = () => {
   const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
   const [selectedHomeData, setSelectedHomeData] = useRecoilState(selectedHomeDataState);
   const [childrenList, setChildrenList] = useRecoilState(childrenListState);
-  const [userInfo, setUserInfo] = useRecoilState(loginInfoState);
   const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const currentTaskId = useRecoilValue(currentTaskIdState);
@@ -89,7 +87,7 @@ const App: React.FC = () => {
       queryFn: () => getUserInfo(),
       onSuccess: (data: any) => {
         window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
-        setUserInfo(data);
+        window.localStorage.setItem(USER_INFO, data.sns_id);
       },
       enabled: !!Cookies.get("token"),
     },
@@ -176,11 +174,14 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (window.navigator.userAgent.indexOf("InApp") > -1) {
-      if (userInfo.sns_id && selectedChild.id) {
-        Sentry.setUser({ email: userInfo.sns_id, child_id: selectedChild.id });
+      if (window.localStorage.getItem(USER_INFO) && selectedChild.id) {
+        Sentry.setUser({
+          email: window.localStorage.getItem(USER_INFO) || "",
+          child_id: selectedChild.id,
+        });
       }
     }
-  }, [userInfo, selectedChild]);
+  }, [window.localStorage.getItem(USER_INFO), selectedChild]);
 
   useEffect(() => {
     if (resultId) {
