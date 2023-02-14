@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
-import { CHILD_ID_FIELD, USER_INFO } from "../constant/localStorage";
+import { CHILD_ID_FIELD } from "../constant/localStorage";
 import * as Sentry from "@sentry/react";
 
 // axios 기본 설정
@@ -11,7 +11,6 @@ axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 export const request = async (config: AxiosRequestConfig) => {
   const token = Cookies.get("token");
   const childId = window.localStorage.getItem(CHILD_ID_FIELD);
-  const userInfo = window.localStorage.getItem(USER_INFO) || "";
 
   try {
     const response = await axios({

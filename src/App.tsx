@@ -22,7 +22,7 @@ import {
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
-import { CHILD_ID_FIELD, USER_INFO } from "./constant/localStorage";
+import { CHILD_ID_FIELD, USER_INFO, USER_KEY } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
@@ -88,6 +88,7 @@ const App: React.FC = () => {
       onSuccess: (data: any) => {
         window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
         window.localStorage.setItem(USER_INFO, data.sns_id);
+        window.localStorage.setItem(USER_KEY, data.id);
       },
       enabled: !!Cookies.get("token"),
     },
@@ -174,14 +175,19 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (window.navigator.userAgent.indexOf("InApp") > -1) {
-      if (window.localStorage.getItem(USER_INFO) && selectedChild.id) {
+      if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
         Sentry.setUser({
-          email: String(window.localStorage.getItem(USER_INFO)) || "",
+          id: window.localStorage.getItem(USER_KEY) || "",
+          sns_id: window.localStorage.getItem(USER_INFO) || "",
           child_id: selectedChild.id,
         });
       }
     }
-  }, [window.localStorage.getItem(USER_INFO), selectedChild]);
+  }, [
+    window.localStorage.getItem(USER_KEY),
+    window.localStorage.getItem(USER_INFO),
+    selectedChild,
+  ]);
 
   useEffect(() => {
     if (resultId) {
