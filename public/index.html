@@ -12,18 +12,20 @@
       rel="preconnect"
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.6/dist/web/variable/pretendardvariable.css"
     />
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=%REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID%"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", `${process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID}`);
+    </script>
   </head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JQXEVSZ6NK"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-
-    gtag("config", "G-JQXEVSZ6NK");
-  </script>
   <body>
     <div id="root"></div>
   </body>
