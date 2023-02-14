@@ -25,13 +25,6 @@ export const request = async (config: AxiosRequestConfig) => {
     return response.data;
   } catch (error) {
     const { response } = error as unknown as AxiosError;
-
-    Sentry.configureScope(function (scope) {
-      scope.setUser({
-        email: userInfo,
-        "child-id": childId,
-      });
-    });
     // sentry api 에러 추적 (429 too many attempts 는 경고처리)
     if (response?.status === 429) {
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
