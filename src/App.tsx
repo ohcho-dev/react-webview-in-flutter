@@ -16,27 +16,23 @@ import {
   childrenListState,
   commonCodeState,
   currentTaskIdState,
-  loginInfoState,
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./recoil/atom";
 import { childType } from "./utils/type";
 import { queryKeys } from "./constant/queryKeys";
 import { getChildrenList } from "./api/childApi";
-import { CHILD_ID_FIELD } from "./constant/localStorage";
+import { CHILD_ID_FIELD, USER_KEY } from "./constant/localStorage";
 import { getCommonCodeList } from "./api/commonApi";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { getLoginDev } from "./api/loginDevApi";
 import { getUserInfo } from "./api/mypage";
 import { getHomeData } from "./api/homeApi";
-import RouteChangeTracker from "./utils/RouteChangeTracker";
 import * as Sentry from "@sentry/react";
 
 let oldLocation: any = null;
 
 const App: React.FC = () => {
-  RouteChangeTracker();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const params = new URLSearchParams(window.location.search);
@@ -52,7 +48,6 @@ const App: React.FC = () => {
   const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
   const [selectedHomeData, setSelectedHomeData] = useRecoilState(selectedHomeDataState);
   const [childrenList, setChildrenList] = useRecoilState(childrenListState);
-  const [userInfo, setUserInfo] = useRecoilState(loginInfoState);
   const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);
   const currentTaskId = useRecoilValue(currentTaskIdState);
@@ -89,7 +84,7 @@ const App: React.FC = () => {
       queryFn: () => getUserInfo(),
       onSuccess: (data: any) => {
         window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
-        setUserInfo(data);
+        window.localStorage.setItem(USER_KEY, data.id);
       },
       enabled: !!Cookies.get("token"),
     },
@@ -176,11 +171,14 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (window.navigator.userAgent.indexOf("InApp") > -1) {
-      if (userInfo.sns_id && selectedChild.id) {
-        Sentry.setUser({ email: userInfo.sns_id, child_id: selectedChild.id });
+      if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
+        Sentry.setUser({
+          id: window.localStorage.getItem(USER_KEY) || "",
+          child_id: selectedChild.id,
+        });
       }
     }
-  }, [userInfo, selectedChild]);
+  }, [window.localStorage.getItem(USER_KEY), selectedChild]);
 
   useEffect(() => {
     if (resultId) {
