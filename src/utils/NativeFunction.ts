@@ -24,12 +24,17 @@ export const NativeFunction = (funcName: String, value: any) => {
         /Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/,
       )
     ) {
+      Sentry.configureScope(function (scope) {
+        scope.setUser({
+          email: userInfo,
+          "child-id": childId,
+        });
+      });
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
         Sentry.withScope(scope => {
           scope.setTag("type", "flutter.callHandler");
           scope.setLevel("error");
           scope.setFingerprint([funcName, value]);
-          scope.setUser({ email: userInfo, "child-id": childId });
           Sentry.captureException("flutter callHandler Error");
         });
       }
