@@ -87,7 +87,6 @@ const App: React.FC = () => {
       queryFn: () => getUserInfo(),
       onSuccess: (data: any) => {
         window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
-        window.localStorage.setItem(USER_INFO, data.sns_id);
         window.localStorage.setItem(USER_KEY, data.id);
       },
       enabled: !!Cookies.get("token"),
@@ -178,16 +177,11 @@ const App: React.FC = () => {
       if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
         Sentry.setUser({
           id: window.localStorage.getItem(USER_KEY) || "",
-          sns_id: window.localStorage.getItem(USER_INFO) || "",
           child_id: selectedChild.id,
         });
       }
     }
-  }, [
-    window.localStorage.getItem(USER_KEY),
-    window.localStorage.getItem(USER_INFO),
-    selectedChild,
-  ]);
+  }, [window.localStorage.getItem(USER_KEY), selectedChild]);
 
   useEffect(() => {
     if (resultId) {
