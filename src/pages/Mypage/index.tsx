@@ -165,12 +165,7 @@ const MyPage = () => {
         });
       }
     } else {
-      if (
-        process.env.NODE_ENV === "production" &&
-        navigator.userAgent.match(
-          /Mobile|iP(hone|od)|BlackBerry|IEMobile|Kindle|NetFront|Silk-Accelerated|(hpw|web)OS|Fennec|Minimo|Opera M(obi|ini)|Blazer|Dolfin|Dolphin|Skyfire|Zune/,
-        )
-      ) {
+      if (process.env.NODE_ENV === "production") {
         if (window.navigator.userAgent.indexOf("InApp") > -1) {
           Sentry.withScope(scope => {
             scope.setTag("type", "flutter.callHandler");
