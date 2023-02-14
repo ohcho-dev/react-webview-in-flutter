@@ -200,7 +200,7 @@ const MyPage = () => {
         >
           <div>
             <IconTextGroup>
-              <img src={item.imgUrl} alt="" />
+              <img src={item.imgUrl} alt={item.name} />
               <span>{item.name}</span>
             </IconTextGroup>
             <img src="/images/icon-mypage-arrow.svg" />
