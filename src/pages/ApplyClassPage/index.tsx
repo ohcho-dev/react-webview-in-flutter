@@ -12,7 +12,6 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";
 import { applyClassBodyType, childType } from "../../utils/type";
-import { BOTTOM_BTN_WRAP_HEIGHT } from "../ProgramPage/components/styled";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";

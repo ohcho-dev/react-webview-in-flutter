@@ -9,7 +9,6 @@ import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/a
 import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
 import { NativeFunction } from "../../../utils/NativeFunction";
-import { HomeData } from "../../../utils/type";
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;

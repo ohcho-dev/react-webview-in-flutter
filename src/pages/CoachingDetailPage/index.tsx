@@ -12,7 +12,6 @@ import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
-import ContentTitle from "./components/ContentTitle";
 
 const PageTitleWrap = styled.div`
   position: fixed;

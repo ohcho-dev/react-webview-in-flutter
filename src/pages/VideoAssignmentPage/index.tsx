@@ -6,7 +6,7 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
 import { getVideoAssignmentResult } from "../../api/coachingApi";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { VideoAssignmentResultType } from "../../utils/type";
 import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";

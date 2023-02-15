@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { getCoachingList } from "../../api/programApi";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { CHILD_ID_FIELD } from "../../constant/localStorage";
 import { queryKeys } from "../../constant/queryKeys";
 import { selectedChildInfoState } from "../../recoil/atom";

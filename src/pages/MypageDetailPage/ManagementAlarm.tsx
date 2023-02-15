@@ -1,5 +1,5 @@
-import { ChangeEvent, useEffect, useState } from "react";
-import { useMutation, useQueries, useQuery } from "react-query";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "react-query";
 import styled from "styled-components";
 import { getAlarmConfig, updateAlarmConfig } from "../../api/mypage";
 import CustomToggleSwitch from "../../components/common/CustomToggleSwitch";

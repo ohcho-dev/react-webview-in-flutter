@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
-import { getLeftDaysFromCurrentTime } from "../../../utils/getLeftDaysFromCurrentTime";
 import { appliedCoachingType } from "../../../utils/type";
 
 const CoachingCardWrapper = styled.div`
