@@ -61,8 +61,12 @@ const ChildrenName = styled.div`
 `;
 
 const ArrowWrap = styled.div`
-  width: 0.8rem;
   margin-left: 0.7rem;
+
+  img {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
 `;
 
 const HistoryBackIconWrap = styled.div`
@@ -109,6 +113,11 @@ const LoginInfo = styled.div`
   display: flex;
   align-items: center;
 
+  img {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
+
   span {
     font-weight: 400;
     font-size: 1.4rem;
@@ -144,7 +153,7 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
         </ProfileImageWrap>
         <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>
         <ArrowWrap>
-          <img src="/images/icon-arrow-down.svg" width="100%" alt="arrow down icon" />
+          <img src="/images/icon-arrow-down.svg" alt="arrow down icon" />
         </ArrowWrap>
       </ProfileWrap>
       <AlarmBadge />
@@ -222,7 +231,7 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
         <span>보호자님, 안녕하세요.</span>
       </Title>
       <LoginInfo>
-        <img src={icon} />
+        <img src={icon} alt="socal login logo" />
         <span>{sns} 로그인</span>
       </LoginInfo>
     </MypageTitleWrap>
