@@ -216,19 +216,10 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     setOpenBottomModal(false);
   };
 
-  const handleBackBtn = () => {
-    if (state === "/coaching") {
-      navigate("/coaching");
-    } else if (state === "/program") {
-      navigate("/program");
-    }
-  };
-
   return (
     <>
       <LayoutDetailPage
         bottomScrollAnimationEffect={true}
-        handleBackBtnClick={handleBackBtn}
         titleBarBorder={true}
         bottomBtn
         bottomBtnElement={
