@@ -109,6 +109,11 @@ const UpdateChild = () => {
 
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
+      TrackGoogleAnalyticsEvent(
+        updateChildCategory,
+        updateChildSuccessedAction,
+        window.location.pathname,
+      );
       setOpenModal(true);
     },
     onError: error => {
@@ -163,12 +168,6 @@ const UpdateChild = () => {
       setOpenSameNameModal(true);
       return;
     }
-
-    TrackGoogleAnalyticsEvent(
-      updateChildCategory,
-      updateChildSuccessedAction,
-      window.location.pathname,
-    );
 
     callUpdateChildInfo.mutate({
       ...childData,
