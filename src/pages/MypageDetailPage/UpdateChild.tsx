@@ -20,6 +20,11 @@ import { ForwardedInput } from "./components/DatePickerInput";
 import { queryKeys } from "../../constant/queryKeys";
 import { childrenListState } from "../../recoil/atom";
 import CustomModal from "../../components/common/CustomModal";
+import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
+import {
+  updateChildCategory,
+  updateChildSuccessedAction,
+} from "../../utils/google-analytics/events/ManagementChildEvent";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -158,6 +163,13 @@ const UpdateChild = () => {
       setOpenSameNameModal(true);
       return;
     }
+
+    TrackGoogleAnalyticsEvent(
+      updateChildCategory,
+      updateChildSuccessedAction,
+      window.location.pathname,
+    );
+
     callUpdateChildInfo.mutate({
       ...childData,
       id: String(childid),
