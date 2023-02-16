@@ -10,7 +10,8 @@ const ErrorSection = styled.div`
   justify-content: center;
   align-items: center;
   img {
-    width: 30%;
+    width: 11rem;
+    height: 8.5rem;
   }
 `;
 

@@ -11,6 +11,9 @@ export const SurveyQuestionWrapper = styled.div`
 `;
 
 export const SurveyCategoryTitle = styled.div`
+  display: flex;
+  align-items: center;
+
   position: sticky;
   top: 0;
   width: 100%;
@@ -29,6 +32,8 @@ export const SurveyCategoryTitle = styled.div`
 
   img {
     margin-left: 0.5rem;
+    width: 3rem;
+    height: 2.4rem;
   }
 
   span {

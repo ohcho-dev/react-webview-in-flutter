@@ -259,7 +259,12 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
           </ProductDetailInfoSection>
           <GreySquare />
           <ImageWrap>
-            <img src={selectedCoachingInfo[0].content_image} width="100%" />
+            <img
+              src={selectedCoachingInfo[0].content_image}
+              width="100%"
+              alt="coaching content image"
+              loading="lazy"
+            />
           </ImageWrap>
         </DetailCoachingContainer>
       </LayoutDetailPage>

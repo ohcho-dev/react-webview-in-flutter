@@ -19,6 +19,10 @@ const ItemWrap = styled.div`
 
 const ImageWrap = styled.div`
   margin-right: 1.4rem;
+  img {
+    width: 9.8rem;
+    height: 8.6rem;
+  }
 `;
 
 const ItemDesc = styled.div`
@@ -71,7 +75,7 @@ const ContentItem: React.FC<ContentItemProps> = ({
   return (
     <ItemWrap onClick={handleClick} style={style}>
       <ImageWrap>
-        <img src={`/images/icon-coaching-${coachingMethod}.svg`} />
+        <img src={`/images/icon-coaching-${coachingMethod}.svg`} alt="task image" />
       </ImageWrap>
       <ItemDesc>
         <ChipLayout>

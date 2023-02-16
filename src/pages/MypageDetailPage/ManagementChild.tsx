@@ -42,6 +42,7 @@ const ChildInfoSection = styled.div`
 
   img {
     width: 3rem;
+    height: 3rem;
   }
 `;
 
@@ -85,7 +86,11 @@ export const ManagementChild = () => {
                 ({getDate(child.birth_date)}) {getGender(child.gender)}아
               </span>
             </ChildInfoSection>
-            <img src="/images/icon-mypage-arrow.svg" />
+            <img
+              src="/images/icon-mypage-arrow.svg"
+              alt="right arrow icon"
+              style={{ width: "2.8rem", height: "2.8rem" }}
+            />
           </ChildrenListWrap>
         ))}
       </PageLayout>

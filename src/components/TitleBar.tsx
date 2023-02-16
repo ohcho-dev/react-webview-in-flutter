@@ -69,8 +69,9 @@ const ArrowWrap = styled.div`
   }
 `;
 
-const HistoryBackIconWrap = styled.div`
+const HistoryBackIconImage = styled.img`
   width: 2.8rem;
+  height: 2.8rem;
 `;
 
 const ButtonWrap = styled.div`
@@ -178,13 +179,13 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
 
   return (
     <TitleBarWrap border={border} style={{ ...style }}>
-      <HistoryBackIconWrap
+      <div
         onClick={() => {
           handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
         }}
       >
-        <img src="/images/icon-back.svg" width="100%" />
-      </HistoryBackIconWrap>
+        <HistoryBackIconImage src="/images/icon-back.svg" alt="left arrow icon" />
+      </div>
       {leftBtn && <ButtonWrap>{leftBtn}</ButtonWrap>}
     </TitleBarWrap>
   );

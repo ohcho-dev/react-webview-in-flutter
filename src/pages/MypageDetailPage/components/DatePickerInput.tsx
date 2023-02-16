@@ -34,6 +34,7 @@ const ForwardInputRefFunction: React.ForwardRefRenderFunction<HTMLInputElement, 
       onChange={e => onChange(e.target.value)}
       onClick={onClick}
       readOnly
+      aria-label="input"
     />
   );
 };

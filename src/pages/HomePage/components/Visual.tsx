@@ -4,7 +4,8 @@ const Wrap = styled.div`
   padding: 9rem 2rem 25.6rem;
   position: relative;
 
-  img {
+  img,
+  picture {
     position: absolute;
     top: 0;
     left: 0;
@@ -45,7 +46,11 @@ const Content = styled.div`
 const Visual = () => {
   return (
     <Wrap>
-      <img src="/images/home-bg-20230209.png" alt="홈 배경" />
+      {/* <img src="/images/home-bg-20230209.png" alt="홈 배경" /> */}
+      <picture>
+        <source srcSet="/images/home-bg-20230209.webp" type="image/webp" />
+        <img src="/images/home-bg-20230209.png" alt="홈 배경" />
+      </picture>
       <Title>우리 아이 잘 자라고 있는 걸까?</Title>
       <Content>발달에 맞는 전문 코칭을 받아보세요.</Content>
     </Wrap>
