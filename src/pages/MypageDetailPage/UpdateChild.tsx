@@ -179,7 +179,13 @@ const UpdateChild = () => {
   };
 
   return (
-    <LayoutDetailPage handleBackBtnClick={handleBackBtn}>
+    <LayoutDetailPage
+      handleBackBtnClick={handleBackBtn}
+      bottomBtn
+      bottomBtnElement={
+        <Button theme={"black"} content={"아이 정보 수정하기"} onClick={handleSubmit} />
+      }
+    >
       <PageTitle title={"아이 정보 수정"} />
       <PageLayout>
         <FormWrap>
@@ -201,6 +207,7 @@ const UpdateChild = () => {
 
           <InputTitle>생년월일</InputTitle>
           <DatePicker
+            withPortal
             showYearDropdown
             yearDropdownItemNumber={6}
             scrollableYearDropdown
@@ -232,6 +239,7 @@ const UpdateChild = () => {
             <>
               <InputTitle>기존 출산 예정일</InputTitle>
               <DatePicker
+                withPortal
                 showYearDropdown
                 yearDropdownItemNumber={6}
                 scrollableYearDropdown
@@ -252,9 +260,6 @@ const UpdateChild = () => {
           )}
         </FormWrap>
       </PageLayout>
-      <BottomBtnWrap>
-        <Button theme={"black"} content={"아이 정보 수정하기"} onClick={handleSubmit} />
-      </BottomBtnWrap>
       <CustomModal
         title="아이 이름을 입력해주세요."
         isOpen={openValidModal}

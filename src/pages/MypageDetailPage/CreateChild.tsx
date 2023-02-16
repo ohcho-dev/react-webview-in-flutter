@@ -188,6 +188,7 @@ const CreateChild = () => {
 
           <InputTitle>생년월일</InputTitle>
           <DatePicker
+            withPortal
             showYearDropdown
             yearDropdownItemNumber={6}
             scrollableYearDropdown
@@ -215,6 +216,7 @@ const CreateChild = () => {
             <>
               <InputTitle>기존 출산 예정일</InputTitle>
               <DatePicker
+                withPortal
                 showYearDropdown
                 yearDropdownItemNumber={6}
                 scrollableYearDropdown
