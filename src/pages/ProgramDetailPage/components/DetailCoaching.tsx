@@ -183,6 +183,11 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   );
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {
+      TrackGoogleAnalyticsEvent(
+        applyCoachingBtnClickCategory,
+        applyCoachingSuccessedAction,
+        window.location.pathname,
+      );
       setOpenBottomModal(!openBottomModal);
       navigate("/program/class/apply-coaching/success", {
         state: { id: res.purchase_id },
@@ -203,12 +208,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const handleApplyBtnClick = () => {
     if (res?.message === "OK") {
       callApplyCoaching.mutate({ id: coachingInfo.id.toString() });
-
-      TrackGoogleAnalyticsEvent(
-        applyCoachingBtnClickCategory,
-        applyCoachingSuccessedAction,
-        window.location.pathname,
-      );
     } else {
       if (res?.code === "ONGOING_COACHING") {
         // 1.구매불가(해당 월령 구매한 동일상품)

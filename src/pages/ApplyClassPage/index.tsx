@@ -151,6 +151,11 @@ const ApplyClassPage = () => {
   const callApplyClasses = useMutation(applyClass, {
     onSuccess: res => {
       if (res.purchase_id) {
+        TrackGoogleAnalyticsEvent(
+          applyClassBtnClickCategory,
+          applyClassSuccessedAction,
+          window.location.pathname,
+        );
         navigate("/program/class/apply-class/success");
       } else {
         setErrorCode(res.code);
@@ -222,11 +227,6 @@ const ApplyClassPage = () => {
   const handleApplyBtnClick = () => {
     const { child_id, parent_name, parent_phone } = requiredInfo;
     if (child_id && parent_name && parent_phone && classid) {
-      TrackGoogleAnalyticsEvent(
-        applyClassBtnClickCategory,
-        applyClassSuccessedAction,
-        window.location.pathname,
-      );
       callApplyClasses.mutate({ ...requiredInfo, class_id: classid.toString() });
     } else {
       setOpenValidationModal(true);

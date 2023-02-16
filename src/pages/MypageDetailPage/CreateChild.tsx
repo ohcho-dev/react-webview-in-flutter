@@ -103,6 +103,11 @@ const CreateChild = () => {
 
   const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
+      TrackGoogleAnalyticsEvent(
+        registChildCategory,
+        registChildSuccessedAction,
+        window.location.pathname,
+      );
       setOpenSaveModal(true);
     },
     onError: error => {
@@ -157,11 +162,6 @@ const CreateChild = () => {
       setOpenSameNameCheckModal(true);
       return;
     }
-    TrackGoogleAnalyticsEvent(
-      registChildCategory,
-      registChildSuccessedAction,
-      window.location.pathname,
-    );
     callCreateChildInfo.mutate(childData);
   };
 
