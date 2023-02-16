@@ -11,6 +11,11 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";
+import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
+import {
+  applyClassBtnClickCategory,
+  applyClassSuccessedAction,
+} from "../../utils/google-analytics/events/ClickApplyBtn";
 import { applyClassBodyType, childType } from "../../utils/type";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
@@ -217,6 +222,11 @@ const ApplyClassPage = () => {
   const handleApplyBtnClick = () => {
     const { child_id, parent_name, parent_phone } = requiredInfo;
     if (child_id && parent_name && parent_phone && classid) {
+      TrackGoogleAnalyticsEvent(
+        applyClassBtnClickCategory,
+        applyClassSuccessedAction,
+        window.location.pathname,
+      );
       callApplyClasses.mutate({ ...requiredInfo, class_id: classid.toString() });
     } else {
       setOpenValidationModal(true);

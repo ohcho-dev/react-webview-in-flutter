@@ -250,4 +250,4 @@ const App: React.FC = () => {
   );
 };
 
-export default App;
+export default Sentry.withProfiler(App);

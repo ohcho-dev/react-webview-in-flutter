@@ -23,8 +23,9 @@ const ClassWrapper = styled.div`
 
   margin-bottom: 2rem;
 
-  img {
+  img:nth-child(1) {
     width: 37.5rem;
+    height: 25rem;
   }
 `;
 
@@ -112,7 +113,11 @@ const DetailClass: React.FC<DetailClassProps> = props => {
         </ClassInfoWrapper>
         <Divider />
         {selectedClassInfo.content_image && (
-          <img alt="content image" src={selectedClassInfo.content_image} />
+          <img
+            alt="content image"
+            src={selectedClassInfo.content_image}
+            style={{ width: "37.5rem", height: "auto" }}
+          />
         )}
       </ClassWrapper>
     </LayoutDetailPage>

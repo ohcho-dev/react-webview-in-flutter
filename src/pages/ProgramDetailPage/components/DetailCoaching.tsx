@@ -16,6 +16,10 @@ import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
 import { getDate } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
+import { TrackGoogleAnalyticsEvent } from "../../../utils/google-analytics";
+import applyCoachingBtnClickCategory, {
+  applyCoachingSuccessedAction,
+} from "../../../utils/google-analytics/events/ClickApplyBtn";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 
@@ -199,6 +203,12 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const handleApplyBtnClick = () => {
     if (res?.message === "OK") {
       callApplyCoaching.mutate({ id: coachingInfo.id.toString() });
+
+      TrackGoogleAnalyticsEvent(
+        applyCoachingBtnClickCategory,
+        applyCoachingSuccessedAction,
+        window.location.pathname,
+      );
     } else {
       if (res?.code === "ONGOING_COACHING") {
         // 1.구매불가(해당 월령 구매한 동일상품)
@@ -259,7 +269,12 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
           </ProductDetailInfoSection>
           <GreySquare />
           <ImageWrap>
-            <img src={selectedCoachingInfo[0].content_image} width="100%" />
+            <img
+              src={selectedCoachingInfo[0].content_image}
+              width="100%"
+              alt="coaching content image"
+              loading="lazy"
+            />
           </ImageWrap>
         </DetailCoachingContainer>
       </LayoutDetailPage>

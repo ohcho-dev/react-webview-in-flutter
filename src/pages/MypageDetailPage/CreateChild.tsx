@@ -18,6 +18,10 @@ import PageTitle from "./components/PageTitle";
 import { ForwardedInput } from "./components/DatePickerInput";
 import { childrenListState } from "../../recoil/atom";
 import CustomModal from "../../components/common/CustomModal";
+import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
+import registChildCategory, {
+  registChildSuccessedAction,
+} from "../../utils/google-analytics/events/ManagementChildEvent";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
@@ -153,6 +157,11 @@ const CreateChild = () => {
       setOpenSameNameCheckModal(true);
       return;
     }
+    TrackGoogleAnalyticsEvent(
+      registChildCategory,
+      registChildSuccessedAction,
+      window.location.pathname,
+    );
     callCreateChildInfo.mutate(childData);
   };
 
