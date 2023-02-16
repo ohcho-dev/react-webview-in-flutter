@@ -216,19 +216,10 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     setOpenBottomModal(false);
   };
 
-  const handleBackBtn = () => {
-    if (state === "/coaching") {
-      navigate("/coaching");
-    } else if (state === "/program") {
-      navigate("/program");
-    }
-  };
-
   return (
     <>
       <LayoutDetailPage
         bottomScrollAnimationEffect={true}
-        handleBackBtnClick={handleBackBtn}
         titleBarBorder={true}
         bottomBtn
         bottomBtnElement={
@@ -236,11 +227,13 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         }
       >
         <DetailCoachingContainer>
-          <Thumbnail
-            alt="thumnail"
-            src={coachingInfo?.main_image ? coachingInfo?.main_image : "/images/icon-sparkle.png"}
-            image={coachingInfo?.main_image}
-          />
+          {coachingInfo.main_image && (
+            <Thumbnail
+              alt="thumnail"
+              src={coachingInfo.main_image}
+              image={coachingInfo.main_image}
+            />
+          )}
           <ProductMainInfo>
             <ProductName>{coachingInfo?.name}</ProductName>
             <PriceWrap>

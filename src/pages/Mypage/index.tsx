@@ -203,7 +203,11 @@ const MyPage = () => {
               <img src={item.imgUrl} alt={item.name} />
               <span>{item.name}</span>
             </IconTextGroup>
-            <img src="/images/icon-mypage-arrow.svg" />
+            <img
+              src="/images/icon-mypage-arrow.svg"
+              style={{ width: "0.6rem", height: "1rem" }}
+              alt="right arrow"
+            />
           </div>
         </LinkItemWrap>
       ))}

@@ -28,6 +28,11 @@ const FlexBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  img {
+    width: 2.8rem;
+    height: 2.8rem;
+  }
 `;
 
 const Label = styled.span`
@@ -97,6 +102,7 @@ const ListStyle = styled.span`
 const ActivityWrap = styled.div`
   padding: 3.5rem 0 0;
 `;
+
 const ActivityTitle = styled.div`
   padding: 0 2rem 1.8rem;
 
@@ -115,6 +121,7 @@ const ActivityTitle = styled.div`
     color: #000000;
   }
 `;
+
 const ActivityContent = styled.div`
   padding: 0 2rem;
   overflow-x: scroll;
@@ -159,6 +166,7 @@ const ImageWrap = styled.div`
   background: url(${(prop: { image: string }) => prop.image}) no-repeat 50% 50%;
   background-size: cover;
 `;
+
 const ItemTitle = styled.div`
   margin-top: 1.3rem;
   font-weight: 600;

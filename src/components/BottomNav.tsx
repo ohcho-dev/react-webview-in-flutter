@@ -1,7 +1,5 @@
-import { useEffect, useLayoutEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { NativeFunction } from "../utils/NativeFunction";
 
 const BottomNavWrap = styled.ul`
   width: 100%;

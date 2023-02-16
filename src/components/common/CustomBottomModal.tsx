@@ -1,5 +1,4 @@
 import React, { ReactNode, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 
 const handleFade = keyframes`

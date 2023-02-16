@@ -1,9 +1,7 @@
-import { Suspense } from "react";
 import styled from "styled-components";
-import Slider from "react-slick";
+
 import "slick-carousel/slick/slick.css";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
 import CoachingList from "./CoachingList";
 import ClassList from "./ClassList";
 
