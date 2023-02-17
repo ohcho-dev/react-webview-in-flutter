@@ -29,6 +29,7 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import { getUserInfo } from "./api/mypage";
 import { getHomeData } from "./api/homeApi";
 import * as Sentry from "@sentry/react";
+import InitializeGoogleAnalytics from "./utils/google-analytics";
 
 let oldLocation: any = null;
 
@@ -178,6 +179,7 @@ const App: React.FC = () => {
         });
       }
     }
+    InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
   }, [window.localStorage.getItem(USER_KEY), selectedChild]);
 
   useEffect(() => {
