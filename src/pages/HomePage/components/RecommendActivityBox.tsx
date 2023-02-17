@@ -162,6 +162,7 @@ const ImageWrap = styled.img`
   height: 14rem;
   border-radius: 0.8rem;
   border: solid 1px #efefef;
+  object-fit: cover;
 `;
 
 const ItemTitle = styled.div`
