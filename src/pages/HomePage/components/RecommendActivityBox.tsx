@@ -234,7 +234,11 @@ const RecommendActivityBox = () => {
                     }
                   >
                     {item.image ? (
-                      <ImageWrap src={item.image} loading="lazy" />
+                      <ImageWrap
+                        src={item.image}
+                        loading="lazy"
+                        alt="recommended activity thumbnail"
+                      />
                     ) : (
                       "이미지가 없어요.."
                     )}

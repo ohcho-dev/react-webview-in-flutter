@@ -23,33 +23,34 @@ export const request = async (config: AxiosRequestConfig) => {
     });
     return response.data;
   } catch (error) {
-    const { response } = error as unknown as AxiosError;
-    // sentry api 에러 추적 (429 too many attempts 는 경고처리)
-    if (response?.status === 429) {
-      if (window.navigator.userAgent.indexOf("InApp") > -1) {
-        Sentry.withScope(scope => {
-          scope.setTag("type", "api");
-          scope.setLevel("info");
-          scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
-          Sentry.captureException(error);
-        });
-      }
-    } else {
-      if (window.navigator.userAgent.indexOf("InApp") > -1) {
-        Sentry.withScope(scope => {
-          scope.setTag("type", "api");
-          scope.setLevel("error");
-          scope.setFingerprint([`${config.method}`, `${config.url}`, `${response?.status}`]);
-          Sentry.captureException(error);
-        });
-      }
-    }
+    if (axios.isAxiosError(error) && error.config && error.response) {
+      const { config, response } = error;
+      const { method, url, params, data: requestData, headers } = config;
+      const { status } = response;
 
-    if (response?.status === 400) {
-      return response.data;
-    } else if (response?.status === 404) {
-      return response.data;
+      Sentry.setContext("API Request Detail", {
+        method,
+        url,
+        params,
+        requestData,
+        headers,
+      });
+      // sentry api 에러 추적 (429 too many attempts 는 경고처리)
+      if (window.navigator.userAgent.indexOf("InApp") > -1) {
+        Sentry.withScope(scope => {
+          scope.setTag("type", "api");
+          scope.setLevel(status === 429 ? "info" : "error");
+          scope.setFingerprint([`${method}`, `${url}`, `${status}`]);
+          Sentry.captureException(error);
+        });
+      }
+
+      if (response?.status === 400) {
+        return response.data;
+      } else if (response?.status === 404) {
+        return response.data;
+      }
+      throw error;
     }
-    throw error;
   }
 };
