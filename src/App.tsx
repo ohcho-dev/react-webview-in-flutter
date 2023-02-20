@@ -172,11 +172,13 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    const { name, id } = selectedChild;
     if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
         Sentry.setUser({
           id: window.localStorage.getItem(USER_KEY) || "",
-          child_id: selectedChild.id,
+          child_id: id,
+          child_name: name,
         });
       }
       InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
