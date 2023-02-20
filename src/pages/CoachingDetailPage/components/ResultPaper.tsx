@@ -3,10 +3,10 @@ import styled from "styled-components";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 
 const IframeWrap = styled.div`
-  padding-bottom: 56.25%;
   position: relative;
   display: block;
   width: 100%;
+  height: 100%;
 `;
 const Iframe = styled.iframe`
   width: 100%;
