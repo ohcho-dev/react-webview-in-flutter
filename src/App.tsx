@@ -30,6 +30,7 @@ import { getUserInfo } from "./api/mypage";
 import { getHomeData } from "./api/homeApi";
 import * as Sentry from "@sentry/react";
 import InitializeGoogleAnalytics from "./utils/google-analytics";
+import ReactGA4 from "react-ga4";
 
 let oldLocation: any = null;
 
@@ -171,15 +172,17 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (window.navigator.userAgent.indexOf("InApp") > -1) {
-      if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
+    const { name, id } = selectedChild;
+    if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
+      if (window.navigator.userAgent.indexOf("InApp") > -1) {
         Sentry.setUser({
           id: window.localStorage.getItem(USER_KEY) || "",
-          child_id: selectedChild.id,
+          child_id: id,
+          child_name: name,
         });
       }
+      InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
     }
-    InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
   }, [window.localStorage.getItem(USER_KEY), selectedChild]);
 
   useEffect(() => {
@@ -199,6 +202,16 @@ const App: React.FC = () => {
       setChildrenKey(String(profileKey));
     }
   }, [childrenList, window.localStorage.getItem(CHILD_ID_FIELD)]);
+
+  // GA pageview react용으로 재등록(gtag 기본 페이지뷰 조회 기능 비활성화함)
+  useEffect(() => {
+    ReactGA4.send({
+      hitType: "pageview",
+      path: window.location.pathname,
+      location: window.location.pathname,
+      title: window.location.pathname,
+    });
+  }, [location]);
 
   const DEFAULT_SCENE_CONFIG = {
     enter: "from-right",
