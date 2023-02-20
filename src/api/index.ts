@@ -25,7 +25,7 @@ export const request = async (config: AxiosRequestConfig) => {
   } catch (error) {
     if (axios.isAxiosError(error) && error.config && error.response) {
       const { config, response } = error;
-      const { method, url, params, data: requestData, headers } = config;
+      const { method, url, params, data, data: requestData, headers } = config;
       const { status } = response;
 
       Sentry.setContext("API Request Detail", {
@@ -35,6 +35,12 @@ export const request = async (config: AxiosRequestConfig) => {
         requestData,
         headers,
       });
+
+      Sentry.setContext("API Response Detail", {
+        status,
+        data,
+      });
+
       // sentry api 에러 추적 (429 too many attempts 는 경고처리)
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
         Sentry.withScope(scope => {
