@@ -171,15 +171,15 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (window.navigator.userAgent.indexOf("InApp") > -1) {
-      if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
+    if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
+      if (window.navigator.userAgent.indexOf("InApp") > -1) {
         Sentry.setUser({
           id: window.localStorage.getItem(USER_KEY) || "",
           child_id: selectedChild.id,
         });
       }
+      InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
     }
-    InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
   }, [window.localStorage.getItem(USER_KEY), selectedChild]);
 
   useEffect(() => {
