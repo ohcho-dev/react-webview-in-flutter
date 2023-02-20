@@ -10,6 +10,12 @@ import { MypageTitleBar } from "../../components/TitleBar";
 import * as Sentry from "@sentry/react";
 import { useRecoilValue } from "recoil";
 import { selectedChildInfoState } from "../../recoil/atom";
+import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
+import logoutCategory, {
+  logoutSuccessedAction,
+  withdrawalCategory,
+  withdrawalSuccessedAction,
+} from "../../utils/google-analytics/events/ManagementUser";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -180,11 +186,21 @@ const MyPage = () => {
   };
   const clickLogout = async () => {
     await logoutApi();
+    await TrackGoogleAnalyticsEvent(
+      logoutCategory,
+      logoutSuccessedAction,
+      window.location.pathname,
+    );
     await NativeFunction("routeNativeScreen", "logout");
   };
 
   const clickWithDrawal = async () => {
     await Withdrawal();
+    await TrackGoogleAnalyticsEvent(
+      withdrawalCategory,
+      withdrawalSuccessedAction,
+      window.location.pathname,
+    );
     await NativeFunction("routeNativeScreen", "reset");
   };
 
