@@ -1,6 +1,8 @@
 # Repo 소개
 
-엘턴 앱(쑥토어) 웹뷰를 위한 repository입니다.
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e645e2d89e6d4a418f199e543c336332)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=dev-lumanlab/eltern-mobile-web&utm_campaign=Badge_Grade)
+
+### 엘턴 앱 웹뷰를 위한 repository입니다. ✨
 
 ## 목차
 
@@ -55,14 +57,13 @@ npm run build
 
 깃 커밋 메시지 앞에 어떤 유형의 커밋인지 정의를 권장
 
-- Feat: 기능 개발
-- Fix: 버그 픽스
-- Refact: 리팩토링
-- Typo: 문구 수정
-- Test: 테스링 관련
-- Docs: 문서 작업
-- Chore: 기타 todo
-- Rese: 조사 할 것 들
+- feat: 기능 개발
+- fix: 버그 픽스
+- refact: 리팩토링
+- typo: 문구 수정
+- test: 테스링 관련
+- docs: 문서 작업
+- chore: 기타 todo
 
 ## CSS 규칙<a name="css"></a>
 
@@ -81,7 +82,7 @@ npm run build
 - html { font-size: 2.66666667vw } 적용 (핸드폰 가로일 경우는 font-size: 62.5%)
 - rem 단위 사용 (1rem = 10px)
 
-## 쑥토어 피그마
+## 엘턴 피그마
 
 - 설계: https://www.figma.com/file/J9CtDX2VB2OoFyCoF8cVYK/%EA%B8%B0%ED%9A%8D
 - 디자인: https://www.figma.com/file/A6oZ2ekhqiuwF4UZMSKjoS/%EB%94%94%EC%9E%90%EC%9D%B8?node-id=103%3A18&t=PadbO6Py0kOBOyvz-0
