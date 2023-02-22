@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-prettier",
+    "stylelint-config-recommended",
+    "stylelint-config-styled-components"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.{ts,tsx}"],
+      "customSyntax": "@stylelint/postcss-css-in-js",
+      "rules": {
+        "function-no-unknown": [true, { "ignoreFunctions": ["/\\${/"] }],
+        "value-keyword-case": null,
+        "color-hex-length": "short",
+        "selector-class-pattern": null,
+        "rule-empty-line-before": "never",
+        "property-no-vendor-prefix": null,
+        "declaration-empty-line-before": [
+          "always",
+          {
+            "except": ["first-nested"],
+            "ignore": ["after-comment", "after-declaration"]
+          }
+        ]
+      }
+    }
+  ],
+  "rules": {
+    "function-no-unknown": [true, { "ignoreFunctions": ["/\\${/"] }],
+    "value-keyword-case": null,
+    "color-hex-length": "short",
+    "selector-class-pattern": null,
+    "property-no-vendor-prefix": null,
+    "rule-empty-line-before": [
+      "always-multi-line",
+      {
+        "except": ["first-nested"]
+      }
+    ],
+    "declaration-empty-line-before": [
+      "always",
+      {
+        "except": ["first-nested"],
+        "ignore": ["after-comment", "after-declaration"]
+      }
+    ]
+  }
+}
