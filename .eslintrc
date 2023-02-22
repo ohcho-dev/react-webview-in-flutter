@@ -1,6 +1,11 @@
 {
-  "plugins": ["prettier", "@typescript-eslint"],
-  "extends": ["react-app", "prettier"],
+  "plugins": ["react", "prettier", "@typescript-eslint"],
+  "extends": [
+    "react-app",
+    "prettier",
+    "eslint:recommended", // eslint
+    "plugin:@typescript-eslint/recommended"
+  ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "project": "./tsconfig.json"
@@ -11,6 +16,8 @@
     "array-callback-return": "off",
     "react-hooks/exhaustive-deps": "off",
     "jsx-a11y/alt-text": "off",
-    "jsx-a11y/img-redundant-alt": "off"
+    "jsx-a11y/img-redundant-alt": "off",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "no-multiple-empty-lines": ["error", { "max": 1 }]
   }
 }
