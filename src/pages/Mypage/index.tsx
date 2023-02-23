@@ -219,7 +219,7 @@ const MyPage = () => {
             </IconTextGroup>
             <img
               src="/images/icon-mypage-arrow.svg"
-              style={{ width: "0.6rem", height: "1rem" }}
+              style={{ width: "2.8rem", height: "2.8rem" }}
               alt="right arrow"
             />
           </div>
