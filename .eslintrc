@@ -18,7 +18,7 @@
   },
   "rules": {
     "import/order": [
-      "error",
+      "warn",
       {
         "groups": ["builtin", "external", "internal"],
         "alphabetize": {
@@ -28,6 +28,7 @@
     ],
     "react/react-in-jsx-scope": "off", // JSX 표현식을 사용하는 모든 파일 최상단에 import React from 'react'; 명시
     "react-hooks/exhaustive-deps": "warn", // 비효율적인 useEffect dependency에서 에러를 띄움
-    "react/prop-types": "off" // prop type 지정
+    "react/prop-types": "off", // prop type 지정
+    "@typescript-eslint/no-inferrable-types": "warn"
   }
 }
