@@ -64,7 +64,6 @@ const Divider = styled.div`
 
 const DetailClass: React.FC<DetailClassProps> = props => {
   const navigate = useNavigate();
-  // eslint-disable-next-line react/prop-types
   const { id } = props;
   const { data: selectedClassInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(id),
@@ -90,7 +89,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
       }
     >
       <ClassWrapper>
-        <img alt="class image" src={selectedClassInfo.main_image} />
+        <img alt="class img" src={selectedClassInfo.main_image} />
         <ClassInfoWrapper>
           <ClassInfo>
             <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
@@ -115,7 +114,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
         <Divider />
         {selectedClassInfo.content_image && (
           <img
-            alt="content image"
+            alt="content img2"
             src={selectedClassInfo.content_image}
             style={{ width: "37.5rem", height: "auto" }}
           />

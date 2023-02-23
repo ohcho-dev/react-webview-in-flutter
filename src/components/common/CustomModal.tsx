@@ -1,6 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
 import Modal from "react-modal";
-import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Button from "./Button";
 
@@ -116,7 +115,6 @@ const CustomModal = (props: ModalProps) => {
     contentMarkup,
   } = props;
 
-  const navigate = useNavigate();
   // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
   const [visible, setVisible] = useState<boolean>(false);
 

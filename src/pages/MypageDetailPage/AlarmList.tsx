@@ -106,7 +106,7 @@ const AlarmList = () => {
               onClick={() => navigate(`/coaching/videoAssignment/${noti.detail?.task_id}`)}
               key={noti.id}
             >
-              <img src={`/images/icon-alarm-${noti.type}.svg`} />
+              <img src={`/images/icon-alarm-${noti.type}.svg`} alt="alarm icon" />
               <div>
                 <Title>{noti.title}</Title>
                 <Desc>{noti.body}</Desc>

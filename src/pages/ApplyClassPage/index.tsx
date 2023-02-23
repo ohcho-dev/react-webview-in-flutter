@@ -21,12 +21,6 @@ import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
 
-interface requeiredInfo {
-  id: string;
-  parent_name: string;
-  parent_phone: string;
-}
-
 export const Title = styled.div`
   font-weight: 700;
   font-size: 1.8rem;
@@ -143,7 +137,6 @@ const ApplyClassPage = () => {
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
-  const [test, setTest] = useState(false);
   const activeInputref = useRef<HTMLInputElement | null>(null);
   const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
@@ -171,10 +164,6 @@ const ApplyClassPage = () => {
 
     if (window.visualViewport) {
       const handleResize = (event: any) => {
-        const os = navigator.userAgent.toLowerCase();
-        const { height: visualViewportHeight } = event.target;
-        const { current } = sectionRef;
-
         // if (os.indexOf("android") > -1) {
         //   eventName = fullHeight.current > window.innerHeight ? "keyboardopen" : "keyboardclose";
         //   keyboardHeight = fullHeight.current - window.innerHeight;
@@ -310,7 +299,6 @@ const ApplyClassPage = () => {
             pattern="[0-9]*"
             onChange={handleTypeInformation}
           />
-          {test && <div style={{ width: "100%", height: "20rem", backgroundColor: "pink" }}></div>}
         </UserSection>
       </LayoutDetailPage>
       <ChildSelectBottomModal

@@ -38,8 +38,9 @@ export const AlarmBadge: React.FC = props => {
       if (data.last_checked_at) {
         data.list.map((noti: NotificationType) => {
           if (new Date(noti.created_at) > new Date(data.last_checked_at)) {
-            setNewFlag(true);
+            return setNewFlag(true);
           }
+          return null;
         });
       } else {
         let flag = false;

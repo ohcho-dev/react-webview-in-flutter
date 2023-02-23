@@ -13,13 +13,13 @@ const ProgramPageWrapper = styled.div`
   padding: 2rem;
 `;
 
-const CarouselSection = styled.div`
-  width: 100%;
-  margin: 0 0 3rem 0;
-  .slick-slide div {
-    outline: none;
-  }
-`;
+// const CarouselSection = styled.div`
+//   width: 100%;
+//   margin: 0 0 3rem 0;
+//   .slick-slide div {
+//     outline: none;
+//   }
+// `;
 
 const CouchingSection = styled.div`
   width: 100%;
@@ -28,29 +28,29 @@ const CouchingSection = styled.div`
 const ClassSection = styled.div`
   width: 100%;
 `;
-const SliderContainer = styled.div`
-  width: 31.5rem;
-  height: 14rem;
+// const SliderContainer = styled.div`
+//   width: 31.5rem;
+//   height: 14rem;
 
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`;
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
 const ProgramPage = () => {
-  const settings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 1300,
-    autoplaySpeed: 3000,
-    mobileFirst: false,
-    cssEase: "ease-out",
-  };
+  // const settings = {
+  //   dots: false,
+  //   arrows: false,
+  //   infinite: true,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   speed: 1300,
+  //   autoplaySpeed: 3000,
+  //   mobileFirst: false,
+  //   cssEase: "ease-out",
+  // };
 
   return (
     <LayoutMainPage>

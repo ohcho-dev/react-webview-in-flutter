@@ -75,7 +75,7 @@ const ContentItem: React.FC<ContentItemProps> = ({
   return (
     <ItemWrap onClick={handleClick} style={style}>
       <ImageWrap>
-        <img src={`/images/icon-coaching-${coachingMethod}.svg`} alt="task image" />
+        <img src={`/images/icon-coaching-${coachingMethod}.svg`} alt="task img" />
       </ImageWrap>
       <ItemDesc>
         <ChipLayout>

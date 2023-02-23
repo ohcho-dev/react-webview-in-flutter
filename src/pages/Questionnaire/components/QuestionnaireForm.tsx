@@ -20,7 +20,7 @@ import { QuestionGap, SurveyCategoryTitle } from "./style";
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();
   const { order } = useParams();
-  const [scroll, setScroll] = useState(0);
+  const scroll = 0;
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [surveyInfo, setSurveyInfo] = useState<SurveyInfoType>({
     id: 0,
@@ -82,7 +82,7 @@ const QuestionnaireForm = (): JSX.Element => {
     let answerForSubmit: { id: number; item_id: number }[] = [];
     surveyTempAnswer.map(answer => {
       totalScore += answer.score;
-      answerForSubmit = [...answerForSubmit, { id: answer.id, item_id: answer.item_id }];
+      return (answerForSubmit = [...answerForSubmit, { id: answer.id, item_id: answer.item_id }]);
     });
 
     // 지역변수 설문데이터 저장 (다음 설문지가 없을때를 대비)

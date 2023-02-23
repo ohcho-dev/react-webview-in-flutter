@@ -29,8 +29,8 @@ const QuestionnaireDetailPage = (): JSX.Element => {
     if (surveyAnswerInfo?.survey.length) {
       let tempAnswerList: SurveyResultQuestionType[] = [];
       surveyAnswerInfo?.survey.map(survey => {
-        survey.question.map(question => {
-          tempAnswerList = [...tempAnswerList, question];
+        return survey.question.map(question => {
+          return (tempAnswerList = [...tempAnswerList, question]);
         });
       });
       setAnswerList(tempAnswerList);

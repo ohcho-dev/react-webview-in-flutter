@@ -13,8 +13,13 @@
         "value-keyword-case": null,
         "color-hex-length": "short",
         "selector-class-pattern": null,
-        "rule-empty-line-before": "never",
         "property-no-vendor-prefix": null,
+        "rule-empty-line-before": [
+          "always-multi-line",
+          {
+            "except": ["first-nested"]
+          }
+        ],
         "declaration-empty-line-before": [
           "always",
           {

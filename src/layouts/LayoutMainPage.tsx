@@ -14,7 +14,6 @@ import {
   mainPageScrollValueState,
   openBottomModalState,
   selectedChildInfoState,
-  selectedHomeDataState,
 } from "../recoil/atom";
 import { childType } from "../utils/type";
 import LayoutBasePage from "./LayoutBasePage";

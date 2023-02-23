@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import RecommendActivityBox from "./components/RecommendActivityBox";
 import Visual from "./components/Visual";

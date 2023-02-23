@@ -78,13 +78,13 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
       <InformImageSection>
         {selectedMenu === "end" ? (
           <NoCoachingSection>
-            <img alt="inform-image" src="/images/no-coaching-img.png" />
+            <img alt="inform-img" src="/images/no-coaching-img.png" />
             <span>아직 종료한 코칭이 없어요.</span>
             <span>코칭 종료까지 응원할게요!</span>
           </NoCoachingSection>
         ) : (
           <NoCoachingSection>
-            <img alt="inform-image" src="/images/no-coaching-img.png" />
+            <img alt="inform-img" src="/images/no-coaching-img.png" />
             <span>아직 신청한 코칭이 없어요.</span>
             <span>우리 아이 맞춤 코칭을 바로 신청해 보세요.</span>
           </NoCoachingSection>

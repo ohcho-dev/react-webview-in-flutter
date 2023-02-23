@@ -35,8 +35,8 @@ const ApplySuccessPage = () => {
       }
     >
       <ContentWrapper>
-        <img alt="apply success image" src="/images/apply-success-img.png" />
-        <img alt="success next step image" src="/images/success-next-step-img.svg" />
+        <img alt="apply success img" src="/images/apply-success-img.png" />
+        <img alt="success next step img" src="/images/success-next-step-img.svg" />
       </ContentWrapper>
     </LayoutDetailPage>
   );

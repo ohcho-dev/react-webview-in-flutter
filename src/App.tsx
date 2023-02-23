@@ -48,7 +48,7 @@ const App: React.FC = () => {
 
   const [token, setToken] = useState("");
   const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
-  const [selectedHomeData, setSelectedHomeData] = useRecoilState(selectedHomeDataState);
+  const setSelectedHomeData = useSetRecoilState(selectedHomeDataState);
   const [childrenList, setChildrenList] = useRecoilState(childrenListState);
   const setChildrenKey = useSetRecoilState(childrenKeyState);
   const setCommonCodeList = useSetRecoilState(commonCodeState);

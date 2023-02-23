@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import {
@@ -75,29 +75,29 @@ const PriceWrap = styled.div`
   margin: 0 0.5rem;
 `;
 
-const Favorites = styled.div`
-  position: absolute;
-  top: 5rem;
-  right: 0;
-  width: 2.8rem;
-`;
+// const Favorites = styled.div`
+//   position: absolute;
+//   top: 5rem;
+//   right: 0;
+//   width: 2.8rem;
+// `;
 
 const ImageWrap = styled.div`
   width: 100%;
   margin: 0 auto;
 `;
 
-const GiftBtn = styled.div`
-  min-width: 5rem;
-  height: 5rem;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 0.4rem;
-  margin-right: 1.2rem;
+// const GiftBtn = styled.div`
+//   min-width: 5rem;
+//   height: 5rem;
+//   border: 1px solid rgba(0, 0, 0, 0.15);
+//   border-radius: 0.4rem;
+//   margin-right: 1.2rem;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
 const TitleText = styled.h2`
   font-weight: 700;
@@ -155,7 +155,6 @@ const ButtonWrap = styled.div`
 const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const navigate = useNavigate();
   const { id } = props;
-  const { state } = useLocation();
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const [openSameCoachingModal, setOpenSameCoachingModal] = useState(false);
@@ -271,7 +270,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
             <img
               src={selectedCoachingInfo[0].content_image}
               width="100%"
-              alt="coaching content image"
+              alt="coaching content"
               loading="lazy"
             />
           </ImageWrap>

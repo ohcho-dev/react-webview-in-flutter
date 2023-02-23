@@ -10,18 +10,18 @@ interface ProgramPriceProps {
   perNum?: string;
 }
 
-const ProgramPriceSection = styled.div`
-  display: flex;
-  column-gap: 0.5rem;
-  align-items: center;
-  width: 100%;
-`;
+// const ProgramPriceSection = styled.div`
+//   display: flex;
+//   column-gap: 0.5rem;
+//   align-items: center;
+//   width: 100%;
+// `;
 
-const DiscountPercentage = styled.span`
-  font-weight: 700;
-  font-size: 1.8rem;
-  color: #fd7473;
-`;
+// const DiscountPercentage = styled.span`
+//   font-weight: 700;
+//   font-size: 1.8rem;
+//   color: #fd7473;
+// `;
 
 const Price = styled.span`
   font-weight: 700;
@@ -29,12 +29,12 @@ const Price = styled.span`
   color: #0a0a0a;
 `;
 
-const OriginalPrice = styled.span`
-  font-weight: 400;
-  font-size: 1.6rem;
-  color: #9d9d9d;
-  text-decoration: line-through;
-`;
+// const OriginalPrice = styled.span`
+//   font-weight: 400;
+//   font-size: 1.6rem;
+//   color: #9d9d9d;
+//   text-decoration: line-through;
+// `;
 
 const PerActivity = styled.span`
   font-weight: 400;
@@ -44,15 +44,15 @@ const PerActivity = styled.span`
 
 const ProgramPrice: React.FC<ProgramPriceProps> = props => {
   const {
-    discountPercentage,
+    // discountPercentage,
+    // originalPrice,
+    // percentageStyle,
+    // originalPriceStyle,
+    // priceStyle,
     price,
-    originalPrice,
-    percentageStyle,
-    originalPriceStyle,
-    priceStyle,
     perNum,
   } = props;
-  const numberFormatter = new Intl.NumberFormat("ko");
+  //const numberFormatter = new Intl.NumberFormat("ko");
 
   return (
     <>

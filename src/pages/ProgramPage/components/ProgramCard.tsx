@@ -132,7 +132,6 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
   const {
     id,
     programImage,
-    isDeadlineComingUp = false,
     ageRange,
     isOnline,
     title,
