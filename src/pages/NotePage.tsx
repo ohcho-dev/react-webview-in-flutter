@@ -8,9 +8,6 @@ const NotePage = () => {
   function openModal() {
     setIsOpen(!modalIsOpen);
   }
-  const handleOkBtnClick = () => {
-    //console.log("click");
-  };
 
   return (
     <LayoutMainPage>

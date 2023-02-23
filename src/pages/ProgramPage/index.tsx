@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 import "slick-carousel/slick/slick.css";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import CoachingList from "./CoachingList";
 import ClassList from "./ClassList";
+import CoachingList from "./CoachingList";
 
 const ProgramPageWrapper = styled.div`
   display: flex;

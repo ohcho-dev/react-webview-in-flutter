@@ -15,7 +15,7 @@ import {
 } from "../../../recoil/atom";
 import { SurveyAnswerType, SurveyInfoType } from "../../../utils/type";
 import Question from "./Question";
-import { QuestionGap, SurveyCategoryTitle, SurveyQuestionWrapper, ListScroll } from "./style";
+import { QuestionGap, SurveyCategoryTitle } from "./style";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();
