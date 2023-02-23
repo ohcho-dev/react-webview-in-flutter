@@ -205,11 +205,17 @@ const App: React.FC = () => {
 
   // GA pageview react용으로 재등록(gtag 기본 페이지뷰 조회 기능 비활성화함)
   useEffect(() => {
+    console.log("11111");
     ReactGA4.send({
       hitType: "pageview",
-      path: window.location.pathname,
-      location: window.location.pathname,
-      title: window.location.pathname,
+      path: location.pathname,
+      location: location.pathname,
+      title: location.pathname,
+    });
+    ReactGA4.event({
+      category: location.pathname,
+      action: location.pathname,
+      label: location.pathname,
     });
   }, [location]);
 

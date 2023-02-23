@@ -1,7 +1,7 @@
 import ReactGA4 from "react-ga4";
 
 const InitializeGoogleAnalytics = (userId?: string, childId?: number) => {
-  ReactGA4.initialize("G-RZ0C7WRZ1Y", {
+  ReactGA4.initialize(`${process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID}`, {
     gaOptions: {
       user_id: userId,
     },
