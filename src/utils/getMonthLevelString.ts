@@ -3,7 +3,7 @@ import { MonthRangeType } from "./type";
 type getMonthLevelFuncType = (month_level_arr: MonthRangeType[] | MonthRangeType) => string;
 
 export const getMonthLevelString: getMonthLevelFuncType = obj => {
-  let str: string = "";
+  let str = "";
 
   if (!Array.isArray(obj)) {
     return `${obj.month_start}~${obj.month_end}개월`;

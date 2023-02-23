@@ -1,7 +1,8 @@
-import { flutterInAppWebViewPlatformReady } from "../index";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as Sentry from "@sentry/react";
+import { flutterInAppWebViewPlatformReady } from "../index";
 
-export const NativeFunction = (funcName: String, value: any) => {
+export const NativeFunction = (funcName: string, value: any) => {
   if (flutterInAppWebViewPlatformReady) {
     // @ts-ignore
     if (window.flutter_inappwebview.callHandler) {

@@ -71,7 +71,6 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
   const { pathname } = useLocation();
   const [openModal, setOpenModal] = useRecoilState(openBottomModalState);
   const [selectedChildInfo, setSelectedChildInfo] = useRecoilState(selectedChildInfoState);
-  const [selectedHomeData, setSelectedHomeData] = useRecoilState(selectedHomeDataState);
   const childrenList = useRecoilValue(childrenListState);
   const [scroll, setScroll] = useRecoilState(mainPageScrollValueState);
 

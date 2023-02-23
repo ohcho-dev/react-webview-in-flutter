@@ -1,5 +1,5 @@
 import * as Sentry from "@sentry/react";
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
 

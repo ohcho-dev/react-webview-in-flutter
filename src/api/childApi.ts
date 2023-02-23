@@ -1,6 +1,4 @@
-import { JsonObjectExpression } from "typescript";
 import { request } from ".";
-import { childType } from "../utils/type";
 
 export const getChildrenList = (param?: object) => {
   return request({

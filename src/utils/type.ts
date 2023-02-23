@@ -5,9 +5,9 @@ export interface ApiErrorResponseType {
 }
 
 export interface childType {
-  id: Number;
+  id: number;
   image?: string;
-  parent_id?: Number;
+  parent_id?: number;
   name: string;
   gender: string;
   birth_date: string;
