@@ -1,27 +1,27 @@
+import { ko } from "date-fns/esm/locale";
 import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
+import DatePicker from "react-datepicker";
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import DatePicker from "react-datepicker";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import "react-datepicker/dist/react-datepicker.css";
-import { ko } from "date-fns/esm/locale";
 
 import { createChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
+import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { createChildType } from "../../utils/type";
-import PageTitle from "./components/PageTitle";
-import { ForwardedInput } from "./components/DatePickerInput";
 import { childrenListState } from "../../recoil/atom";
-import CustomModal from "../../components/common/CustomModal";
 import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
 import registChildCategory, {
   registChildSuccessedAction,
 } from "../../utils/google-analytics/events/ManagementChildEvent";
+import { createChildType } from "../../utils/type";
+import { ForwardedInput } from "./components/DatePickerInput";
+import PageTitle from "./components/PageTitle";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
@@ -148,7 +148,7 @@ const CreateChild = () => {
   }, [childData.premature_flag]);
 
   const handleSubmit = () => {
-    let validCheck = childrenList.find((child: any) => child.name === childData.name);
+    const validCheck = childrenList.find((child: any) => child.name === childData.name);
 
     if (childrenList.length >= 5) {
       setOpenLengthModal(true);
@@ -165,6 +165,7 @@ const CreateChild = () => {
     callCreateChildInfo.mutate(childData);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });

@@ -1,8 +1,8 @@
 import { ReactElement, useEffect, useState } from "react";
-import styled, { keyframes } from "styled-components";
 import Modal from "react-modal";
-import Button from "./Button";
 import { useNavigate } from "react-router-dom";
+import styled, { keyframes } from "styled-components";
+import Button from "./Button";
 
 interface ModalProps {
   isOpen: boolean;
@@ -125,7 +125,6 @@ const CustomModal = (props: ModalProps) => {
       setVisible(isOpen);
     }
   }, [isOpen]);
-
 
   return (
     <Modal

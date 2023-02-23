@@ -1,17 +1,17 @@
-import styled from "styled-components";
+import { useEffect, useState } from "react";
+import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
-import AlarmBadge from "./AlarmBadge";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import styled from "styled-components";
+import { getUserInfo } from "../api/mypage";
+import { queryKeys } from "../constant/queryKeys";
 import {
   childrenKeyState,
   childrenListState,
   openBottomModalState,
   selectedChildInfoState,
 } from "../recoil/atom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import { queryKeys } from "../constant/queryKeys";
-import { getUserInfo } from "../api/mypage";
+import AlarmBadge from "./AlarmBadge";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -191,9 +191,7 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   );
 };
 
-interface MypageTitleBarProps {}
-
-export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
+export const MypageTitleBar: React.FC = () => {
   const [firstRegistChildInfo, setFirstRegistChildInfo] = useState({ name: "" });
   const [sns, setSns] = useState("");
   const [icon, setIcon] = useState("");
@@ -203,7 +201,7 @@ export const MypageTitleBar: React.FC<MypageTitleBarProps> = () => {
 
   useEffect(() => {
     if (userInfo.sns_kind) {
-      let sns = userInfo.sns_kind;
+      const sns = userInfo.sns_kind;
       if (sns === "SNS_KAKAO") {
         setSns("카카오");
         setIcon("/images/icon-mypage-kakao.svg");

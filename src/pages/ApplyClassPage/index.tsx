@@ -248,8 +248,6 @@ const ApplyClassPage = () => {
     activeInputref.current = ref.current;
   };
 
-  const handleBlurInput = (ref: RefObject<HTMLInputElement>) => {};
-
   const handleKeyDown = (evt: React.KeyboardEvent<HTMLDivElement>) => {
     if (evt.key === "Enter") {
       const { current: section } = sectionRef;
@@ -297,7 +295,6 @@ const ApplyClassPage = () => {
           <InputTitle ref={nameInputRef}>이름</InputTitle>
           <InputBox
             onKeyDown={handleKeyDown}
-            onBlur={() => handleBlurInput(nameInputRef)}
             onFocus={() => handleFocusInput(nameInputRef)}
             placeholder="이름을 입력해주세요."
             id="parentName"
@@ -306,7 +303,6 @@ const ApplyClassPage = () => {
           <InputTitle ref={phoneNumberInputRef}>휴대전화 번호</InputTitle>
           <InputBox
             onKeyDown={handleKeyDown}
-            onBlur={() => handleBlurInput(phoneNumberInputRef)}
             onFocus={() => handleFocusInput(phoneNumberInputRef)}
             placeholder="번호를 입력해주세요."
             type={"number"}

@@ -28,10 +28,7 @@ const CustomAlarmBadge = styled.div`
     height: 100%;
   }
 `;
-
-interface AlarmBadgeProps {}
-
-export const AlarmBadge: React.FC<AlarmBadgeProps> = props => {
+export const AlarmBadge: React.FC = props => {
   const navigate = useNavigate();
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
   const [newFlag, setNewFlag] = useState(newNotificationFlag);

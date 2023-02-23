@@ -73,7 +73,7 @@ const bottomNavData = [
 
 const BottomNav = () => {
   const { pathname } = useLocation();
-  let firstPath = pathname.split("/")[1];
+  const firstPath = pathname.split("/")[1];
 
   return (
     <BottomNavWrap>

@@ -1,15 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import LayoutMainPage from "../../layouts/LayoutMainPage";
-import styled from "styled-components";
-import { logoutApi, Withdrawal } from "../../api/mypage";
-import { NativeFunction } from "../../utils/NativeFunction";
-import CustomModal from "../../components/common/CustomModal";
-import { useLayoutEffect, useState } from "react";
-import { flutterInAppWebViewPlatformReady } from "../..";
-import { MypageTitleBar } from "../../components/TitleBar";
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as Sentry from "@sentry/react";
+import { useLayoutEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
+import { flutterInAppWebViewPlatformReady } from "../..";
+import { logoutApi, Withdrawal } from "../../api/mypage";
+import { MypageTitleBar } from "../../components/TitleBar";
+import CustomModal from "../../components/common/CustomModal";
+import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { selectedChildInfoState } from "../../recoil/atom";
+import { NativeFunction } from "../../utils/NativeFunction";
 import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
 import logoutCategory, {
   logoutSuccessedAction,

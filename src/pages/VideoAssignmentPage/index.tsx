@@ -1,17 +1,17 @@
 import { useState } from "react";
+import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import styled, { css, keyframes } from "styled-components";
+import { getVideoAssignmentResult } from "../../api/coachingApi";
 import Button from "../../components/common/Button";
 import { BODY_1, STB_20 } from "../../constant/font";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { useQuery } from "react-query";
 import { queryKeys } from "../../constant/queryKeys";
-import { getVideoAssignmentResult } from "../../api/coachingApi";
-import { useParams } from "react-router-dom";
-import { VideoAssignmentResultType } from "../../utils/type";
-import { getDate } from "../../utils/getDateTime";
-import { NativeFunction } from "../../utils/NativeFunction";
-import { useRecoilValue } from "recoil";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { selectedChildInfoState } from "../../recoil/atom";
+import { NativeFunction } from "../../utils/NativeFunction";
+import { getDate } from "../../utils/getDateTime";
+import { VideoAssignmentResultType } from "../../utils/type";
 
 type collapseType = "" | "open" | "close";
 

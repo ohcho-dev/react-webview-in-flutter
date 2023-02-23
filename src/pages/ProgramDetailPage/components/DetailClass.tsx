@@ -64,6 +64,7 @@ const Divider = styled.div`
 
 const DetailClass: React.FC<DetailClassProps> = props => {
   const navigate = useNavigate();
+  // eslint-disable-next-line react/prop-types
   const { id } = props;
   const { data: selectedClassInfo } = useQuery(queryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(id),

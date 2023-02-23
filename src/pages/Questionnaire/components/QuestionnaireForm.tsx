@@ -78,7 +78,7 @@ const QuestionnaireForm = (): JSX.Element => {
   };
 
   const handleSubmitSurveyBtnClick = () => {
-    let totalScore: number = 0;
+    let totalScore = 0;
     let answerForSubmit: { id: number; item_id: number }[] = [];
     surveyTempAnswer.map(answer => {
       totalScore += answer.score;

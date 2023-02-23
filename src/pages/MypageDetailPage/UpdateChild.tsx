@@ -1,30 +1,28 @@
+import { ko } from "date-fns/esm/locale";
 import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
+import DatePicker from "react-datepicker";
 import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import styled from "styled-components";
 import { useRecoilValue } from "recoil";
-import DatePicker from "react-datepicker";
-
-import { ko } from "date-fns/esm/locale";
-
+import styled from "styled-components";
 import { getSelectedChild, updateChild } from "../../api/childApi";
 import Button from "../../components/common/Button";
-import { CustomRadioButton } from "../../components/common/CustomRadioButton";
-import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childType } from "../../utils/type";
-import { BottomBtnWrap } from "../ProgramPage/components/styled";
-import PageTitle from "./components/PageTitle";
-import "react-datepicker/dist/react-datepicker.css";
-import { ForwardedInput } from "./components/DatePickerInput";
-import { queryKeys } from "../../constant/queryKeys";
-import { childrenListState } from "../../recoil/atom";
+
 import CustomModal from "../../components/common/CustomModal";
+import { CustomRadioButton } from "../../components/common/CustomRadioButton";
+import { queryKeys } from "../../constant/queryKeys";
+import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import { childrenListState } from "../../recoil/atom";
+import "react-datepicker/dist/react-datepicker.css";
 import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
 import {
   updateChildCategory,
   updateChildSuccessedAction,
 } from "../../utils/google-analytics/events/ManagementChildEvent";
+import { childType } from "../../utils/type";
+import { ForwardedInput } from "./components/DatePickerInput";
+import PageTitle from "./components/PageTitle";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -139,7 +137,7 @@ const UpdateChild = () => {
   };
 
   const handlePrematureValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
-    let flag: number = Number(evt.target.value);
+    const flag = Number(evt.target.value);
     if (flag === 1) {
       setDueDate(birthDate);
     }
@@ -159,7 +157,7 @@ const UpdateChild = () => {
   };
 
   const handleSubmit = () => {
-    let validCheck = childList.find((child: any) => child.name === childData.name);
+    const validCheck = childList.find((child: any) => child.name === childData.name);
     if (!childData.name) {
       setOpenValidModal(true);
       return;
@@ -177,6 +175,7 @@ const UpdateChild = () => {
     });
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name
   const CustomInput = forwardRef((props: any, ref) => {
     return <ForwardedInput {...props} ref={ref} />;
   });

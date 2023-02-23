@@ -8,8 +8,8 @@ import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../recoil/atom";
-import { getDate } from "../../utils/getDateTime";
 import { NativeFunction } from "../../utils/NativeFunction";
+import { getDate } from "../../utils/getDateTime";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
 
@@ -102,7 +102,7 @@ const CoachingDetailPage = () => {
 
   useEffect(() => {
     // 과제 상테값 체크
-    let taskStatus = coachingInfo.task.find((item: any) => item.status !== "TSST_COMPLETE");
+    const taskStatus = coachingInfo.task.find((item: any) => item.status !== "TSST_COMPLETE");
 
     // 과제 미완성 + 기한 만료일때 modal
     if (taskStatus && coachingInfo.status === "COSTAT_END") {

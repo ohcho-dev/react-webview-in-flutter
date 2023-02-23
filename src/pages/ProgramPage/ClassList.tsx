@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
+import styled from "styled-components";
 import { getClassList } from "../../api/programApi";
 import { CHILD_ID_FIELD } from "../../constant/localStorage";
 import { queryKeys } from "../../constant/queryKeys";
@@ -10,7 +11,6 @@ import { selectedChildInfoState } from "../../recoil/atom";
 import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
-import styled from "styled-components";
 
 const ProgramTitle = styled.span`
   font-weight: 700;

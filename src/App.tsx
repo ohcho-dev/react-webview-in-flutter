@@ -1,16 +1,26 @@
+import * as Sentry from "@sentry/react";
+import Cookies from "js-cookie";
 import React, { Suspense, useEffect, useState } from "react";
+import ReactGA4 from "react-ga4";
+import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-query";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
-import Cookies from "js-cookie";
 
 import "./scss/_reset.scss";
 import "./scss/_global.scss";
 import "./scss/_slideTransition.scss";
 import "./scss/_customReactDatepicker.scss";
 
-import { RouterConfig } from "./RouteConfig";
-import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-query";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { RouterConfig } from "./RouteConfig";
+import { getChildrenList } from "./api/childApi";
+import { getCommonCodeList } from "./api/commonApi";
+import { getHomeData } from "./api/homeApi";
+import { getUserInfo } from "./api/mypage";
+import LoadingSpinner from "./components/common/LoadingSpinner";
+import { CHILD_ID_FIELD, USER_KEY } from "./constant/localStorage";
+import { queryKeys } from "./constant/queryKeys";
+import { ErrorBoundary } from "./pages/ErrorPage";
 import {
   childrenKeyState,
   childrenListState,
@@ -19,18 +29,8 @@ import {
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./recoil/atom";
-import { childType } from "./utils/type";
-import { queryKeys } from "./constant/queryKeys";
-import { getChildrenList } from "./api/childApi";
-import { CHILD_ID_FIELD, USER_KEY } from "./constant/localStorage";
-import { getCommonCodeList } from "./api/commonApi";
-import { ErrorBoundary } from "./pages/ErrorPage";
-import LoadingSpinner from "./components/common/LoadingSpinner";
-import { getUserInfo } from "./api/mypage";
-import { getHomeData } from "./api/homeApi";
-import * as Sentry from "@sentry/react";
 import InitializeGoogleAnalytics from "./utils/google-analytics";
-import ReactGA4 from "react-ga4";
+import { childType } from "./utils/type";
 
 let oldLocation: any = null;
 
@@ -64,7 +64,7 @@ const App: React.FC = () => {
   }
 
   useEffect(() => {
-    let paramsToken = params.get("token");
+    const paramsToken = params.get("token");
     if (paramsToken) {
       Cookies.set("token", String(paramsToken));
       setToken(String(paramsToken));
@@ -74,7 +74,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (token) {
       if (params.get("token") === token) {
-        let path = window.location.pathname;
+        const path = window.location.pathname;
         path === "/" ? navigate("/home", { replace: true }) : navigate(path, { replace: true });
       }
     }
@@ -95,7 +95,7 @@ const App: React.FC = () => {
       queryFn: () => getChildrenList(),
       onSuccess: (data: any[]) => {
         if (data.length) {
-          let id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
+          const id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
           setSelectedChild(data.filter((child: childType) => child.id.toString() === id)[0]);
 
           setChildrenList(data);
@@ -117,7 +117,7 @@ const App: React.FC = () => {
       queryKey: queryKeys.commonCodeList,
       queryFn: () => getCommonCodeList(),
       onSuccess: (commonCodeList: any[]) => {
-        let codeObj: { [key: string]: string | number | object } = {};
+        const codeObj: { [key: string]: string | number | object } = {};
 
         if (commonCodeList[0].length) {
           commonCodeList[0].map(
@@ -131,7 +131,7 @@ const App: React.FC = () => {
   ]);
 
   useEffect(() => {
-    let secondPath = pathname.split("/")[2];
+    const secondPath = pathname.split("/")[2];
     secondPath && setSecontPath(secondPath);
   }, [pathname]);
 
@@ -196,7 +196,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (childrenList.length) {
-      let profileKey = Object.keys(childrenList).find(
+      const profileKey = Object.keys(childrenList).find(
         key => childrenList[key].id === selectedChild.id,
       );
       setChildrenKey(String(profileKey));

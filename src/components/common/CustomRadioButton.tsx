@@ -52,7 +52,7 @@ const RadioButton = styled.input`
 
 interface CustonRadioButtonProps {
   defaultValue: TypeProps;
-  onChangeFunction: Function;
+  onChangeFunction: (e: any) => void;
   type: TypeProps[];
   id: string;
 }

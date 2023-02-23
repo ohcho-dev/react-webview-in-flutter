@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import ProgramPrice from "./ProgramPrice";
 import { useEffect, useState } from "react";
-import { AgeRange, OnlineOffline } from "./styled";
+import styled from "styled-components";
 import Dday from "../../../utils/Dday";
+import ProgramPrice from "./ProgramPrice";
+import { AgeRange, OnlineOffline } from "./styled";
 
 const ProgramCardWrapper = styled.div`
   display: flex;
@@ -151,7 +151,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
   const [DDay, setDDay] = useState(0);
 
   useEffect(() => {
-    let dday = Dday(expiryDate);
+    const dday = Dday(expiryDate);
     setDDay(dday);
   }, [expiryDate]);
 

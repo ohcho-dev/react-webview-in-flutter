@@ -9,7 +9,7 @@ interface buttonProps {
 }
 
 const Button = (props: buttonProps) => {
-  const { theme, onClick, style, content, disabled, ...rest } = props;
+  const { theme, onClick, style, content, ...rest } = props;
   const [themeColor, setThemeColor] = useState({});
 
   useEffect(() => {

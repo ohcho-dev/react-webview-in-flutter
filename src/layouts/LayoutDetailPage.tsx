@@ -33,7 +33,7 @@ interface LayoutDetailPageProps {
   hideTitleBar?: boolean;
   titleBarBorder?: boolean;
   children?: React.ReactNode;
-  bottomBtn?: Boolean;
+  bottomBtn?: boolean;
   bottomBtnElement?: ReactElement;
   style?: object;
   leftBtn?: React.ReactNode;

@@ -1,9 +1,14 @@
 import React, { useEffect } from "react";
+import { useMutation } from "react-query";
+import { useLocation } from "react-router-dom";
+import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
+import { updateSelectedChildIdApi } from "../api/childApi";
 import BottomNav from "../components/BottomNav";
-import LayoutBasePage from "./LayoutBasePage";
-import { useRecoilState, useRecoilValue } from "recoil";
+import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
+import MainTitleBar from "../components/TitleBar";
+import { CHILD_ID_FIELD } from "../constant/localStorage";
 import {
   childrenListState,
   mainPageScrollValueState,
@@ -12,12 +17,7 @@ import {
   selectedHomeDataState,
 } from "../recoil/atom";
 import { childType } from "../utils/type";
-import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
-import { CHILD_ID_FIELD } from "../constant/localStorage";
-import MainTitleBar from "../components/TitleBar";
-import { useLocation } from "react-router-dom";
-import { useMutation } from "react-query";
-import { updateSelectedChildIdApi } from "../api/childApi";
+import LayoutBasePage from "./LayoutBasePage";
 
 const MainPage = styled.main`
   width: 100%;
@@ -41,6 +41,7 @@ const MainPage = styled.main`
     display: none; /* Chrome, Safari, Opera*/
   }
 `;
+
 const Content = styled.div`
   margin-bottom: 6rem;
 `;

@@ -34,7 +34,7 @@ const ManagementAlarm = () => {
   const [coaching, setCoaching] = useState<alarmType>();
   const [event, setEvent] = useState<alarmType>();
 
-  let { data } = useQuery(queryKeys.alarmConfig, () => getAlarmConfig());
+  const { data } = useQuery(queryKeys.alarmConfig, () => getAlarmConfig());
 
   useEffect(() => {
     setCoaching(data[0][0]);
