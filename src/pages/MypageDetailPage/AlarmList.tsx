@@ -106,7 +106,8 @@ const AlarmList = () => {
               onClick={() => navigate(`/coaching/videoAssignment/${noti.detail?.task_id}`)}
               key={noti.id}
             >
-              <img src={`/images/icon-alarm-${noti.type}.svg`} />
+              {/* 아이콘 하나로 통일했습니다. 추후 알림 종류가 여러개로 나눠질 경우 그에 맞게 수정 필요합니다. */}
+              <img src={`/images/icon-alarm-NTCH_VIDEO_REJECT.svg`} />
               <div>
                 <Title>{noti.title}</Title>
                 <Desc>{noti.body}</Desc>
