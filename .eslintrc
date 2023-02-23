@@ -19,10 +19,10 @@
   "rules": {
     "react/react-in-jsx-scope": "off", // JSX 표현식을 사용하는 모든 파일 최상단에 import React from 'react'; 명시
     "react-hooks/exhaustive-deps": "off", // 비효율적인 useEffect dependency에서 에러를 띄움
-    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/rules-of-hooks": "error", // hooks 규칙 따르기 (예: 컴포넌트 시작은 대문자)
     "react/prop-types": "off", // prop type 지정
-    "@typescript-eslint/no-inferrable-types": "off",
-    "@typescript-eslint/no-unused-vars": "off",
-    "@typescript-eslint/no-explicit-any": "off"
+    "@typescript-eslint/no-inferrable-types": "off", // 타입이 명확할때는 타입을 적어주지 않아도됨 (ex. const time=200;)
+    "@typescript-eslint/no-unused-vars": "off", // 사용하지 않는 변수 잡는 규칙
+    "@typescript-eslint/no-explicit-any": "off" // any 사용금지 규칙
   }
 }
