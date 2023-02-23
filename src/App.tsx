@@ -180,8 +180,8 @@ const App: React.FC = () => {
           child_id: id,
           child_name: name,
         });
+        InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
       }
-      InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
     }
   }, [window.localStorage.getItem(USER_KEY), selectedChild]);
 
@@ -205,7 +205,6 @@ const App: React.FC = () => {
 
   // GA pageview react용으로 재등록(gtag 기본 페이지뷰 조회 기능 비활성화함)
   useEffect(() => {
-    console.log("11111");
     ReactGA4.send({
       hitType: "pageview",
       path: location.pathname,
