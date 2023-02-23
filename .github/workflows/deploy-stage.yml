@@ -1,8 +1,10 @@
 name: Deploy - b/Stage a/Deploy
 
 on:
+  push:
+    branches: [stage]
   pull_request:
-    branches: stage
+    branches: [stage]
 
 jobs:
   build:
