@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { useShareState } from "../../../recoil/atom";
 
@@ -23,7 +23,7 @@ interface PageTitlePropsType {
   title: string;
 }
 const PageTitle = ({ title = "" }: PageTitlePropsType) => {
-  const [share, setShare] = useRecoilState(useShareState);
+  const setShare = useSetRecoilState(useShareState);
 
   useEffect(() => {
     setShare(false);

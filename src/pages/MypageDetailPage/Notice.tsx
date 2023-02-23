@@ -66,7 +66,7 @@ export const NoticeList = () => {
             <NoticeItem key={notice.id} onClick={() => navigate(`/my/notice/${notice.id}`)}>
               <Subject>{notice.subject}</Subject>
               <CreateDate>{getDate(notice.created_at.substr(0, 10))}</CreateDate>
-              <img src="/images/icon-mypage-arrow.svg" />
+              <img src="/images/icon-mypage-arrow.svg" alt="mypage arrow" />
             </NoticeItem>
           ))}
         </ListScroll>
