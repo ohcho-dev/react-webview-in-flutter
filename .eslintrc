@@ -21,6 +21,8 @@
     "react-hooks/exhaustive-deps": "off", // 비효율적인 useEffect dependency에서 에러를 띄움
     "react-hooks/rules-of-hooks": "error",
     "react/prop-types": "off", // prop type 지정
-    "@typescript-eslint/no-inferrable-types": "off"
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "@typescript-eslint/no-explicit-any": "off"
   }
 }
