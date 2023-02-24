@@ -51,12 +51,11 @@ export const request = async (config: AxiosRequestConfig) => {
         });
       }
 
-      if (response?.status === 400) {
+      if (response?.status === 435) {
         return response.data;
-      } else if (response?.status === 404) {
-        return response.data;
+      } else {
+        throw error;
       }
-      throw error;
     }
   }
 };
