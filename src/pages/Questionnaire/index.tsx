@@ -10,6 +10,7 @@ import Chip from "../../components/common/Chip";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import {
+  currentSurveyInfoState,
   questionnarieState,
   startQuestionOrderNumState,
   surveyAnswerState,
@@ -60,6 +61,11 @@ const Questionnaire = (): JSX.Element => {
   const { data: selectedTaskInfo } = useQuery(queryKeys.selectedTaskInfo, () =>
     getSelectedTaskInfo(id),
   );
+  const [currentSurveyInfo, setCurrentSurveyInfo] = useRecoilState(currentSurveyInfoState);
+
+  useEffect(() => {
+    if (id && state) setCurrentSurveyInfo({ taskId: id, coachingId: state.coachingId });
+  }, [id, state]);
 
   useEffect(() => {
     if (surveyQuestionList.survey.length) {
@@ -76,6 +82,9 @@ const Questionnaire = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
+      handleBackBtnClick={() =>
+        navigate(`/coaching/coaching-detail/${currentSurveyInfo.coachingId}`)
+      }
       bottomBtn
       bottomBtnElement={
         <Button

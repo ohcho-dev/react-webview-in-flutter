@@ -7,6 +7,7 @@ import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import {
+  currentSurveyInfoState,
   questionnarieState,
   startQuestionOrderNumState,
   surveyAnswerState,
@@ -30,6 +31,7 @@ const QuestionnaireForm = (): JSX.Element => {
   });
   const questionnaireInfo = useRecoilValue(questionnarieState);
   const surveyCoachingId = useRecoilValue(surveyCoachingIdState);
+  const currentSurveyInfo = useRecoilValue(currentSurveyInfoState);
   const [surveyTempAnswer, setSurveyTempAnswer] = useRecoilState(surveyTempAnswerState);
   const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyAnswerState);
   const startQuestionOrderNum = useRecoilValue(startQuestionOrderNumState);
@@ -154,7 +156,17 @@ const QuestionnaireForm = (): JSX.Element => {
         }
       >
         <SurveyCategoryTitle scroll={scroll}>
-          <span>{surveyInfo?.name}</span>
+          <img
+            src="/images/icon-back.svg"
+            alt="left arrow icon"
+            onClick={() => {
+              navigate(`/coaching/questionnarie/${currentSurveyInfo.taskId}`, {
+                state: { coachingId: currentSurveyInfo.coachingId },
+              });
+              setSurveyAnswer({ task_id: 0, survey: [] });
+            }}
+          />
+          <span style={{ marginLeft: "1rem" }}>{surveyInfo?.name}</span>
           <img alt="form character" src="/images/form-character.svg" />
         </SurveyCategoryTitle>
         {surveyInfo.question.length &&

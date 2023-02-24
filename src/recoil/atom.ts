@@ -92,3 +92,9 @@ export const currentTaskIdState = atom({
   key: "currentTaskId",
   default: "",
 });
+
+// current survey id
+export const currentSurveyInfoState = atom({
+  key: "currentSurveyId",
+  default: { taskId: "", coachingId: "" },
+});
