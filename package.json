@@ -40,9 +40,6 @@
     "sass": "^1.56.1",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.6",
-    "stylelint-config-concentric-order": "^5.1.0",
-    "stylelint-config-recess-order": "^4.0.0",
-    "stylelint-config-styled-components": "^0.1.1",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
   },
@@ -82,6 +79,8 @@
     "postcss-syntax": "^0.36.2",
     "stylelint": "^15.2.0",
     "stylelint-config-standard": "^30.0.1",
-    "stylelint-config-standard-scss": "^7.0.1"
+    "stylelint-config-standard-scss": "^7.0.1",
+    "stylelint-config-styled-components": "^0.1.1",
+    "stylelint-processor-styled-components": "^1.10.0"
   }
 }
