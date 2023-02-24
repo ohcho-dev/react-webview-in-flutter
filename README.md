@@ -4,6 +4,8 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e645e2d89e6d4a418f199e543c336332)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=dev-lumanlab/eltern-mobile-web&utm_campaign=Badge_Grade)
 
+[![Deploy - b/Product a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml) [![Deploy - b/Stage a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-stage.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-stage.yml) [![Monitor - b/Dev a/Build](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/monitor-develop.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/monitor-develop.yml)
+
 ### 엘턴 앱 웹뷰를 위한 repository입니다. ✨
 
 ## 목차
@@ -73,15 +75,17 @@ npm run build
 
 애니메이션 효과를 위해 모든 부분에 position: fixed; 를 적용
 
-- 10 - TitleBar
-- 20 - BottomBar
-- 100 - 상세페이지 진입
-- 150 - 바텀 모달
-- 200 - 공통 모달
+- titlebar = 30
+- bottom-nav = 110
+- mainpage = 20
+- detailpage = 100 or 110
+- detailpage bottom-btn-wrap = 110
+- custom-bottom-modal = 150
+- slide-transition = in: 110 out: 100 (페이지 전환 애니메이션)
 
 ### 반응형 기준
 
-- html { font-size: 2.66666667vw } 적용 (핸드폰 가로일 경우는 font-size: 62.5%)
+- html { font-size: 2.6666vw } 적용 (핸드폰 가로일 경우는 font-size: 62.5%)
 - rem 단위 사용 (1rem = 10px)
 
 ## 엘턴 피그마
