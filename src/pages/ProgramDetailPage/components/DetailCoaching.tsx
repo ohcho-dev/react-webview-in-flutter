@@ -27,8 +27,6 @@ interface DetailCoachingProps {
   id: string;
 }
 
-const DetailCoachingContainer = styled.div``;
-
 const Thumbnail = styled.img`
   width: ${(prop: { image: string }) => (prop.image ? "37.5rem" : "25.9rem")};
   height: ${(prop: { image: string }) => (prop.image ? "25rem" : "9rem")};
@@ -234,7 +232,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
           <Button theme={"black"} content={"신청하기"} onClick={() => setOpenBottomModal(true)} />
         }
       >
-        <DetailCoachingContainer>
+        <div>
           {coachingInfo.main_image && (
             <Thumbnail
               alt="thumnail"
@@ -274,7 +272,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
               loading="lazy"
             />
           </ImageWrap>
-        </DetailCoachingContainer>
+        </div>
       </LayoutDetailPage>
       <CustomBottomModal
         toggle={openBottomModal}
