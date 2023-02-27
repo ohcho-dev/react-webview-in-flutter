@@ -246,12 +246,14 @@ const CreateChild = () => {
       </PageLayout>
 
       <CustomModal
+        cancelbtn={false}
         title="아이는 최대 5명 이상 등록할 수 없습니다."
         isOpen={openLengthModal}
         toggleModal={() => setOpenLengthModal(!openLengthModal)}
         okBtnName="확인"
       />
       <CustomModal
+        cancelbtn={false}
         title="아이 이름을 입력해주세요."
         isOpen={openNameCheckModal}
         toggleModal={() => setOpenNameCheckModal(!openNameCheckModal)}
@@ -259,13 +261,14 @@ const CreateChild = () => {
       />
 
       <CustomModal
+        cancelbtn={false}
         title="같은 이름의 아이를 등록할 수 없습니다."
         isOpen={openSameNameCheckModal}
         toggleModal={() => setOpenSameNameCheckModal(!openSameNameCheckModal)}
         okBtnName="확인"
       />
-
       <CustomModal
+        cancelbtn={false}
         title="아이등록이 완료됐어요."
         isOpen={openSaveModal}
         toggleModal={() => setOpenSaveModal(false)}

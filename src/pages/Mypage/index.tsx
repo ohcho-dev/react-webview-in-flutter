@@ -235,6 +235,7 @@ const MyPage = () => {
       </BottomArea>
 
       <CustomModal
+        cancelbtn
         isOpen={openModal}
         toggleModal={() => setOpenModal(!openModal)}
         topImage={<img src="/images/icon-sad-circle.svg" alt="sad icon" />}
