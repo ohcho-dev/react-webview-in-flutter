@@ -4,7 +4,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { applyClass, getSelectedClassInfo } from "../../api/programApi";
-import { sendSlackMessage } from "../../api/sendSlackMessage";
 import ChildSelectBottomModal from "../../components/ChildSelectBottomModal";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
@@ -146,9 +145,6 @@ const ApplyClassPage = () => {
   const callApplyClasses = useMutation(applyClass, {
     onSuccess: res => {
       if (res.purchase_id) {
-        sendSlackMessage({
-          text: `클래스 신청 \\n 부모ID: ${selectedChildInfo.parent_id} \\n 아이ID: ${selectedChildInfo.id} \\n 아이이름: ${selectedChildInfo.name}`,
-        });
         TrackGoogleAnalyticsEvent(
           applyClassBtnClickCategory,
           applyClassSuccessedAction,

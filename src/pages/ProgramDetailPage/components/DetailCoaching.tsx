@@ -8,7 +8,6 @@ import {
   checkValidCoachingToApply,
   getSelectedCoachingInfo,
 } from "../../../api/programApi";
-import { sendSlackMessage } from "../../../api/sendSlackMessage";
 import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
@@ -181,9 +180,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   );
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {
-      sendSlackMessage({
-        text: `코칭 신청 \\n 부모ID: ${selectedChildInfo.parent_id} \\n 아이ID: ${selectedChildInfo.id} \\n 아이이름: ${selectedChildInfo.name}`,
-      });
       TrackGoogleAnalyticsEvent(
         applyCoachingBtnClickCategory,
         applyCoachingSuccessedAction,
