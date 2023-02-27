@@ -23,7 +23,7 @@ const QuestionnaireForm = (): JSX.Element => {
   const { order } = useParams();
   const scroll = 0;
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
-  const [openModal, setOpenModal] = useState(false);
+  const [openWarningModal, setOpenWarningModal] = useState(false);
   const [surveyInfo, setSurveyInfo] = useState<SurveyInfoType>({
     id: 0,
     name: "",
@@ -59,11 +59,11 @@ const QuestionnaireForm = (): JSX.Element => {
       });
 
       hammer.on("swipeleft", () => {
-        setOpenModal(true);
+        //setOpenModal(true);
       });
 
       hammer.on("swiperight", () => {
-        setOpenModal(true);
+        //setOpenModal(true);
       });
     });
   }, []);
@@ -84,6 +84,13 @@ const QuestionnaireForm = (): JSX.Element => {
       survey: [...surveyAnswer.survey, updatedSurveyAnswer],
     });
     setSurveyTempAnswer([]);
+  };
+
+  const handleExitQuestionnaireBtnClick = () => {
+    navigate(`/coaching/questionnarie/${currentSurveyInfo.taskId}`, {
+      state: { coachingId: currentSurveyInfo.coachingId },
+    });
+    setSurveyAnswer({ task_id: 0, survey: [] });
   };
 
   const setDataForNextSurvey = (updatedSurveyAnswer: SurveyAnswerType, nextOrder: boolean) => {
@@ -189,12 +196,7 @@ const QuestionnaireForm = (): JSX.Element => {
           <img
             src="/images/icon-back.svg"
             alt="left arrow icon"
-            onClick={() => {
-              navigate(`/coaching/questionnarie/${currentSurveyInfo.taskId}`, {
-                state: { coachingId: currentSurveyInfo.coachingId },
-              });
-              setSurveyAnswer({ task_id: 0, survey: [] });
-            }}
+            onClick={() => setOpenWarningModal(true)}
           />
           <span style={{ marginLeft: "1rem" }}>{surveyInfo?.name}</span>
           <img alt="form character" src="/images/form-character.svg" />
@@ -258,10 +260,13 @@ const QuestionnaireForm = (): JSX.Element => {
           </ListScroll> */}
       </LayoutDetailPage>
       <CustomModal
-        content="스와이프 테스트"
-        isOpen={openModal}
-        title="테스트"
-        toggleModal={() => setOpenModal(!openModal)}
+        content="지금까지 작성하신 모든 설문이 사라집니다."
+        isOpen={openWarningModal}
+        okBtnClick={handleExitQuestionnaireBtnClick}
+        toggleModal={() => setOpenWarningModal(!openWarningModal)}
+        cancelBtnClick={() => setOpenWarningModal(!openWarningModal)}
+        cancelbtn
+        title="정말로 나가시겠습니까?"
       />
       <CustomModal
         content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
@@ -271,6 +276,7 @@ const QuestionnaireForm = (): JSX.Element => {
         }
         toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
         title="설문 답변을 완료했어요."
+        cancelbtn={false}
       />
     </div>
   );
