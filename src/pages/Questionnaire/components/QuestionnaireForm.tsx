@@ -45,30 +45,6 @@ const QuestionnaireForm = (): JSX.Element => {
   });
 
   useEffect(() => {
-    let hammer: HammerManager;
-
-    // DOM 렌더링이 끝난 후 동적 import
-    import("hammerjs").then(() => {
-      const listSection = document.querySelector<HTMLElement>(".list-section");
-      if (!listSection) return;
-
-      hammer = new Hammer(listSection);
-
-      hammer.get("swipe").set({
-        direction: Hammer.DIRECTION_ALL,
-      });
-
-      hammer.on("swipeleft", () => {
-        //setOpenModal(true);
-      });
-
-      hammer.on("swiperight", () => {
-        //setOpenModal(true);
-      });
-    });
-  }, []);
-
-  useEffect(() => {
     setSurveyTempAnswer([]);
   }, [questionnaireInfo]);
 
