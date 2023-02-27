@@ -31,17 +31,9 @@ code {
  * **************************************************/
 
 * {
-  -webkit-tap-highlight-color: "#fff";
+  -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-touch-callout: none;
-
-  /* Keyword values */
-  -webkit-touch-callout: default;
-
-  /* Global values */
-  -webkit-touch-callout: initial;
-  -webkit-touch-callout: inherit;
-  -webkit-touch-callout: unset;
 }
 
 input {
