@@ -14,6 +14,7 @@ interface ModalProps {
   cancelBtnName?: string;
   okBtnClick?: () => void;
   cancelBtnClick?: () => void;
+  cancelbtn: boolean;
 }
 
 const fadeIn = keyframes`
@@ -51,15 +52,15 @@ const customStyles = {
 };
 
 const ModalStyle = styled.div`
-  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.2s ease-in;
+  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.1s ease-in;
   visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")};
-  transition: visibility 0.2s ease-out;
+  transition: visibility 0.1s ease-out;
 `;
 
 const OverlayStyle = styled.div`
-  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.2s ease-in;
+  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.1s ease-in;
   visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")};
-  transition: visibility 0.2s ease-out;
+  transition: visibility 0.1s ease-out;
 `;
 
 const ModalWrapper = styled.div`
@@ -111,6 +112,7 @@ const CustomModal = (props: ModalProps) => {
     cancelBtnName,
     okBtnClick,
     cancelBtnClick,
+    cancelbtn,
     topImage,
     contentMarkup,
   } = props;
@@ -123,6 +125,20 @@ const CustomModal = (props: ModalProps) => {
       setVisible(isOpen);
     }
   }, [isOpen]);
+
+  const handleCloseBtnClick = (btnName: "cancel" | "ok") => {
+    // visible의 상태를 false로 바꿔줌과 동시에 애니메이션 동작
+    setVisible(false);
+    // 애니메이션이 끝나면 toggleModal함수 실행으로 모달창 닫기
+    setTimeout(() => {
+      if (btnName === "ok" && okBtnClick) {
+        okBtnClick();
+      } else if (btnName === "cancel" && cancelBtnClick) {
+        cancelBtnClick();
+      }
+      toggleModal();
+    }, 200);
+  };
 
   return (
     <Modal
@@ -146,16 +162,16 @@ const CustomModal = (props: ModalProps) => {
           <ModalContent>{content ? content : contentMarkup}</ModalContent>
         </ModalContentWrapper>
         <ModalBtnsWrapper>
-          {cancelBtnName && (
+          {cancelbtn && (
             <Button
               theme={cancelBtnName === "탈퇴" ? "red" : "white"}
-              onClick={cancelBtnClick}
-              content={cancelBtnName}
+              onClick={() => handleCloseBtnClick("cancel")}
+              content={cancelBtnName ? cancelBtnName : "취소"}
             />
           )}
           <Button
             theme={"black"}
-            onClick={okBtnClick || toggleModal}
+            onClick={() => handleCloseBtnClick("ok")}
             content={okBtnName ? okBtnName : "확인"}
           />
         </ModalBtnsWrapper>
