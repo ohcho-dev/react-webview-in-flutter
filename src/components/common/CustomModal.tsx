@@ -52,15 +52,15 @@ const customStyles = {
 };
 
 const ModalStyle = styled.div`
-  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.1s ease-in;
+  /* animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.1s ease-in;
   visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")};
-  transition: visibility 0.1s ease-out;
+  transition: visibility 0.1s ease-out; */
 `;
 
 const OverlayStyle = styled.div`
-  animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.1s ease-in;
+  /* animation: ${(prop: { isOpen: boolean }) => (prop.isOpen ? fadeIn : fadeOut)} 0.1s ease-in;
   visibility: ${(prop: { isOpen: boolean }) => (prop.isOpen ? "visible" : "hidden")};
-  transition: visibility 0.1s ease-out;
+  transition: visibility 0.1s ease-out; */
 `;
 
 const ModalWrapper = styled.div`
@@ -137,7 +137,7 @@ const CustomModal = (props: ModalProps) => {
         cancelBtnClick();
       }
       toggleModal();
-    }, 200);
+    }, 100);
   };
 
   return (
