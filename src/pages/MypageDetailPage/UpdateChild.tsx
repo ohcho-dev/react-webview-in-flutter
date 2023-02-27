@@ -271,6 +271,7 @@ const UpdateChild = () => {
         </FormWrap>
       </PageLayout>
       <CustomModal
+        cancelbtn={false}
         title="아이 이름을 입력해주세요."
         isOpen={openValidModal}
         toggleModal={() => {
@@ -279,6 +280,7 @@ const UpdateChild = () => {
         okBtnName="확인"
       />
       <CustomModal
+        cancelbtn={false}
         title="같은 이름의 아이를 등록할 수 없습니다."
         isOpen={openSameNameModal}
         toggleModal={() => {
@@ -287,6 +289,7 @@ const UpdateChild = () => {
         okBtnName="확인"
       />
       <CustomModal
+        cancelbtn={false}
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
@@ -298,6 +301,7 @@ const UpdateChild = () => {
       />
 
       <CustomModal
+        cancelbtn={false}
         title="수정사항 저장이 필요해요."
         content="수정 사항을 저장하지않았습니다. 저장없이 나가시겠어요?"
         isOpen={openBackModal}

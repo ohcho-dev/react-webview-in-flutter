@@ -97,6 +97,7 @@ export const ManagementChild = () => {
       </PageLayout>
 
       <CustomModal
+        cancelbtn={false}
         topImage={
           <img src={"/images/icon-sad-circle.svg"} alt="character" style={{ width: "9.5rem" }} />
         }

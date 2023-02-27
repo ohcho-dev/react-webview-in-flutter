@@ -54,6 +54,7 @@ const ClassRejectModal = (props: rejectModalProps): JSX.Element => {
   }, [theme]);
   return (
     <CustomModal
+      cancelbtn={false}
       topImage={
         theme !== "CLASS_ALREADY_APPLIED" ? (
           <img

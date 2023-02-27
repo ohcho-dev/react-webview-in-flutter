@@ -309,6 +309,7 @@ const ApplyClassPage = () => {
         handleChildClick={handleChildClick}
       />
       <CustomModal
+        cancelbtn={false}
         title="필수 정보를 모두 입력해주세요."
         content="필수 정보를 모두 입력해야 신청이 가능해요."
         isOpen={openValidationMoadl}

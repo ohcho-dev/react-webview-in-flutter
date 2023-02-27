@@ -13,6 +13,7 @@ const NotePage = () => {
     <LayoutMainPage>
       <button onClick={openModal}>Open Modal</button>
       <CustomModal
+        cancelbtn={false}
         topImage={
           <img src={"/images/reject-eltern.svg"} alt="character" style={{ width: "9.5rem" }} />
         }
