@@ -147,30 +147,7 @@ const ApplyClassPage = () => {
     onSuccess: res => {
       if (res.purchase_id) {
         sendSlackMessage({
-          data: {
-            text: "클래스 신청",
-            attachments: [
-              {
-                text: "클래스 신청 이벤트가 발생하였습니다.",
-                color: "#3AA3E3",
-                attachment_type: "default",
-                actions: [
-                  {
-                    name: "class",
-                    text: `부모ID: ${selectedChildInfo.parent_id}`,
-                    type: "button",
-                    value: `부모ID: ${selectedChildInfo.parent_id}`,
-                  },
-                  {
-                    name: "class",
-                    text: `아이ID: ${selectedChildInfo.id} // 아이이름: ${selectedChildInfo.name}`,
-                    type: "button",
-                    value: `아이ID: ${selectedChildInfo.id} // 아이이름: ${selectedChildInfo.name}`,
-                  },
-                ],
-              },
-            ],
-          },
+          text: `클래스 신청 \\n 부모ID: ${selectedChildInfo.parent_id} \\n 아이ID: ${selectedChildInfo.id} \\n 아이이름: ${selectedChildInfo.name}`,
         });
         TrackGoogleAnalyticsEvent(
           applyClassBtnClickCategory,
