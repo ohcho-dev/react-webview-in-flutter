@@ -23,6 +23,7 @@ const QuestionnaireForm = (): JSX.Element => {
   const { order } = useParams();
   const scroll = 0;
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [surveyInfo, setSurveyInfo] = useState<SurveyInfoType>({
     id: 0,
     name: "",
@@ -42,6 +43,30 @@ const QuestionnaireForm = (): JSX.Element => {
       }
     },
   });
+
+  useEffect(() => {
+    let hammer: HammerManager;
+
+    // DOM 렌더링이 끝난 후 동적 import
+    import("hammerjs").then(() => {
+      const listSection = document.querySelector<HTMLElement>(".list-section");
+      if (!listSection) return;
+
+      hammer = new Hammer(listSection);
+
+      hammer.get("swipe").set({
+        direction: Hammer.DIRECTION_ALL,
+      });
+
+      hammer.on("swipeleft", () => {
+        setOpenModal(true);
+      });
+
+      hammer.on("swiperight", () => {
+        setOpenModal(true);
+      });
+    });
+  }, []);
 
   useEffect(() => {
     setSurveyTempAnswer([]);
@@ -139,11 +164,16 @@ const QuestionnaireForm = (): JSX.Element => {
   };
 
   return (
-    <>
+    <div className="list-section" style={{ touchAction: "pan-y" }}>
       <LayoutDetailPage
         bottomScrollAnimationEffect={true}
         hideTitleBar
-        style={{ borderBottom: "none", top: 0, height: "calc(100vh - 7.4rem)" }}
+        style={{
+          borderBottom: "none",
+          top: 0,
+          height: "calc(100vh - 7.4rem)",
+          touchAction: "pan-y",
+        }}
         bottomBtn
         bottomBtnElement={
           <Button
@@ -228,6 +258,12 @@ const QuestionnaireForm = (): JSX.Element => {
           </ListScroll> */}
       </LayoutDetailPage>
       <CustomModal
+        content="스와이프 테스트"
+        isOpen={openModal}
+        title="테스트"
+        toggleModal={() => setOpenModal(!openModal)}
+      />
+      <CustomModal
         content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
         isOpen={openSuccessModal}
         okBtnClick={() =>
@@ -236,7 +272,7 @@ const QuestionnaireForm = (): JSX.Element => {
         toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
         title="설문 답변을 완료했어요."
       />
-    </>
+    </div>
   );
 };
 
