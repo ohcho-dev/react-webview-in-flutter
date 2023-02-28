@@ -28,10 +28,8 @@ const ChildrenListWrap = styled.div`
 `;
 
 const ChildInfoSection = styled.div`
-  display: grid;
+  display: flex;
   align-items: center;
-  grid-template-columns: 3rem 5.7rem 13rem;
-  column-gap: 1rem;
 
   width: 100%;
 
@@ -52,6 +50,8 @@ const ChildName = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  max-width: 9rem;
+  margin: 0 1.5rem 0 0.9rem;
 `;
 
 export const ManagementChild = () => {
