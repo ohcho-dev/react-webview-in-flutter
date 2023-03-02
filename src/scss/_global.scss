@@ -17,7 +17,6 @@ body {
     "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -28,18 +27,19 @@ code {
  *
  * webview settings
  * 
+ * -webkit-touch-callout: none;  사용자가 타겟을 터치하거나 꾹 누르는 경우(롱터치) 보여지는 기본 UI를 제어하는 속성 
+ * -webkit-tap-highlight-color: transparent; 꾹 눌렀을때 또는 터치했을때의 영역 색상 
+ * -webkit-user-select: none; 브라우저에서 드래그나 더블클릭을 사용한 텍스트 선택등을 막기 
  * **************************************************/
 
 * {
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
+  -webkit-user-select: none;
   -webkit-touch-callout: none;
 }
 
 input {
-  -moz-user-select: auto;
   -webkit-user-select: auto;
-  -ms-user-select: auto;
   user-select: auto;
 }
 
