@@ -184,6 +184,7 @@ const MyPage = () => {
   };
   const clickLogout = async () => {
     await logoutApi();
+    await NativeFunction("ga4logNativeEventLog", `${logoutSuccessedAction}`);
     await TrackGoogleAnalyticsEvent(
       logoutCategory,
       logoutSuccessedAction,
@@ -194,6 +195,7 @@ const MyPage = () => {
 
   const clickWithDrawal = async () => {
     await Withdrawal();
+    await NativeFunction("ga4logNativeEventLog", `${withdrawalSuccessedAction}`);
     await TrackGoogleAnalyticsEvent(
       withdrawalCategory,
       withdrawalSuccessedAction,

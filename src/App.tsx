@@ -31,6 +31,7 @@ import {
 } from "./recoil/atom";
 import InitializeGoogleAnalytics from "./utils/google-analytics";
 import { childType } from "./utils/type";
+import { NativeFunction } from "./utils/NativeFunction";
 
 let oldLocation: any = null;
 
@@ -216,6 +217,8 @@ const App: React.FC = () => {
       action: location.pathname,
       label: location.pathname,
     });
+    //
+    NativeFunction("ga4logNativeLog", `${location.pathname}`);
   }, [location]);
 
   const DEFAULT_SCENE_CONFIG = {

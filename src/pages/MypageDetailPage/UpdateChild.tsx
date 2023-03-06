@@ -23,6 +23,7 @@ import {
 import { childType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
+import { NativeFunction } from "../../utils/NativeFunction";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -107,6 +108,7 @@ const UpdateChild = () => {
 
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
+      NativeFunction("ga4logNativeEventLog", `${updateChildSuccessedAction}`);
       TrackGoogleAnalyticsEvent(
         updateChildCategory,
         updateChildSuccessedAction,

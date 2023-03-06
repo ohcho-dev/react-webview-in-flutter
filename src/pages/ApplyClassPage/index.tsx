@@ -16,6 +16,7 @@ import {
   applyClassBtnClickCategory,
   applyClassSuccessedAction,
 } from "../../utils/google-analytics/events/ClickApplyBtn";
+import { NativeFunction } from "../../utils/NativeFunction";
 import { applyClassBodyType, childType } from "../../utils/type";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
@@ -145,6 +146,7 @@ const ApplyClassPage = () => {
   const callApplyClasses = useMutation(applyClass, {
     onSuccess: res => {
       if (res.purchase_id) {
+        NativeFunction("ga4logNativeEventLog", `${applyClassSuccessedAction}`);
         TrackGoogleAnalyticsEvent(
           applyClassBtnClickCategory,
           applyClassSuccessedAction,

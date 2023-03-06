@@ -22,6 +22,7 @@ import registChildCategory, {
 import { createChildType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
+import { NativeFunction } from "../../utils/NativeFunction";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
@@ -103,6 +104,7 @@ const CreateChild = () => {
 
   const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
+      NativeFunction("ga4logNativeEventLog", `${registChildSuccessedAction}`);
       TrackGoogleAnalyticsEvent(
         registChildCategory,
         registChildSuccessedAction,

@@ -20,6 +20,7 @@ import { TrackGoogleAnalyticsEvent } from "../../../utils/google-analytics";
 import applyCoachingBtnClickCategory, {
   applyCoachingSuccessedAction,
 } from "../../../utils/google-analytics/events/ClickApplyBtn";
+import { NativeFunction } from "../../../utils/NativeFunction";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 
@@ -180,6 +181,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   );
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {
+      NativeFunction("ga4logNativeEventLog", `${applyCoachingSuccessedAction}`);
       TrackGoogleAnalyticsEvent(
         applyCoachingBtnClickCategory,
         applyCoachingSuccessedAction,
