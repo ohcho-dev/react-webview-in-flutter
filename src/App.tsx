@@ -217,8 +217,15 @@ const App: React.FC = () => {
       action: location.pathname,
       label: location.pathname,
     });
-    //
-    NativeFunction("ga4logNativeLog", `${location.pathname}`);
+
+    const pathname = location.pathname;
+    const regexDeleteNumber = /[0-9]/g;
+    const regexIsNumber = /[^0-9]/g;
+    const isNumber = pathname.replace(regexIsNumber, "");
+    const deleteNumber = pathname.replace(regexDeleteNumber, "");
+    const newPathname = isNumber ? deleteNumber + "[id]" : deleteNumber;
+
+    NativeFunction("ga4logNativeLog", `${newPathname}`);
   }, [location]);
 
   const DEFAULT_SCENE_CONFIG = {
