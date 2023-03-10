@@ -141,6 +141,18 @@ const UpdateChild = () => {
   const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const id = evt.target.id;
     const value = evt.target.value;
+    const maxLength = evt.target.maxLength;
+
+    // 한글, 영문, 숫자만 입력가능
+    const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/;
+    if (!regex.test(value)) {
+      value.replace(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g, "");
+      return;
+    }
+
+    // 최대 글자 수 제한
+    if (maxLength && maxLength < value.length) return;
+
     if (id === "childName") {
       setChildData({ ...childData, name: value });
     } else if (id === "childBirth") {
@@ -197,6 +209,7 @@ const UpdateChild = () => {
             placeholder="이름을 입력해주세요."
             id="childName"
             value={childData.name}
+            maxLength={30}
             onChange={handleTypeInformation}
           />
 
@@ -294,7 +307,7 @@ const UpdateChild = () => {
       />
 
       <CustomModal
-        cancelbtn={false}
+        cancelbtn={true}
         title="수정사항 저장이 필요해요."
         content="수정 사항을 저장하지않았습니다. 저장없이 나가시겠어요?"
         isOpen={openBackModal}

@@ -219,7 +219,18 @@ const ApplyClassPage = () => {
   const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const id = evt.target.id;
     const value = evt.target.value;
+    const maxLength = evt.target.maxLength;
+
+    // 최대 글자 수 제한
+    if (maxLength && maxLength < value.length) return;
+
     if (id === "parentName") {
+      // 한글, 영문, 숫자만 입력가능
+      const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/;
+      if (!regex.test(value)) {
+        value.replace(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g, "");
+        return;
+      }
       setRequiredInfo({ ...requiredInfo, parent_name: value });
     } else if (id === "parentPhoneNumber") {
       setRequiredInfo({ ...requiredInfo, parent_phone: value });
@@ -281,6 +292,8 @@ const ApplyClassPage = () => {
             onFocus={() => handleFocusInput(nameInputRef)}
             placeholder="이름을 입력해주세요."
             id="parentName"
+            maxLength={30}
+            value={requiredInfo.parent_name || ""}
             onChange={handleTypeInformation}
           />
           <InputTitle ref={phoneNumberInputRef}>휴대전화 번호</InputTitle>
@@ -291,6 +304,8 @@ const ApplyClassPage = () => {
             type={"number"}
             id="parentPhoneNumber"
             pattern="[0-9]*"
+            maxLength={11}
+            value={requiredInfo.parent_phone || ""}
             onChange={handleTypeInformation}
           />
         </UserSection>

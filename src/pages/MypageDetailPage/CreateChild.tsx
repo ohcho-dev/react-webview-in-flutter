@@ -123,6 +123,18 @@ const CreateChild = () => {
   const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
     const id = evt.target.id;
     const value = evt.target.value;
+    const maxLength = evt.target.maxLength;
+
+    // 한글, 영문, 숫자만 입력가능
+    const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/;
+    if (!regex.test(value)) {
+      value.replace(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g, "");
+      return;
+    }
+
+    // 최대 글자 수 제한
+    if (maxLength && maxLength < value.length) return;
+
     if (id === "childName") {
       setChildData({ ...childData, name: value });
     } else if (id === "childBirth") {
@@ -177,6 +189,7 @@ const CreateChild = () => {
             placeholder="이름을 입력해주세요."
             id="childName"
             value={childData.name}
+            maxLength={30}
             onChange={handleTypeInformation}
           />
 
