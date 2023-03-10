@@ -11,11 +11,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";
-import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
-import {
-  applyClassBtnClickCategory,
-  applyClassSuccessedAction,
-} from "../../utils/google-analytics/events/ClickApplyBtn";
+import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { applyClassBodyType, childType } from "../../utils/type";
 import ClassRejectModal from "./components/ClassRejectModal";
@@ -147,11 +143,6 @@ const ApplyClassPage = () => {
     onSuccess: res => {
       if (res.purchase_id) {
         NativeFunction("ga4logNativeEventLog", `${applyClassSuccessedAction}`);
-        TrackGoogleAnalyticsEvent(
-          applyClassBtnClickCategory,
-          applyClassSuccessedAction,
-          window.location.pathname,
-        );
         navigate("/program/class/apply-class/success");
       } else {
         setErrorCode(res.code);

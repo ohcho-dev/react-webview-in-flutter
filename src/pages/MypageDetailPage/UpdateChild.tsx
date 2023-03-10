@@ -15,11 +15,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState } from "../../recoil/atom";
 import "react-datepicker/dist/react-datepicker.css";
-import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
-import {
-  updateChildCategory,
-  updateChildSuccessedAction,
-} from "../../utils/google-analytics/events/ManagementChildEvent";
+import { updateChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
 import { childType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
@@ -109,11 +105,6 @@ const UpdateChild = () => {
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
       NativeFunction("ga4logNativeEventLog", `${updateChildSuccessedAction}`);
-      TrackGoogleAnalyticsEvent(
-        updateChildCategory,
-        updateChildSuccessedAction,
-        window.location.pathname,
-      );
       setOpenModal(true);
     },
     onError: error => {

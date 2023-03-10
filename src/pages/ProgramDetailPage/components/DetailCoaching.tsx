@@ -16,10 +16,7 @@ import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
 import { getDate } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
-import { TrackGoogleAnalyticsEvent } from "../../../utils/google-analytics";
-import applyCoachingBtnClickCategory, {
-  applyCoachingSuccessedAction,
-} from "../../../utils/google-analytics/events/ClickApplyBtn";
+import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../../utils/NativeFunction";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
@@ -182,11 +179,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {
       NativeFunction("ga4logNativeEventLog", `${applyCoachingSuccessedAction}`);
-      TrackGoogleAnalyticsEvent(
-        applyCoachingBtnClickCategory,
-        applyCoachingSuccessedAction,
-        window.location.pathname,
-      );
       setOpenBottomModal(!openBottomModal);
       navigate("/program/class/apply-coaching/success", {
         state: { id: res.purchase_id },

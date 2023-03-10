@@ -15,10 +15,7 @@ import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState } from "../../recoil/atom";
-import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
-import registChildCategory, {
-  registChildSuccessedAction,
-} from "../../utils/google-analytics/events/ManagementChildEvent";
+import { registChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
 import { createChildType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
@@ -105,11 +102,6 @@ const CreateChild = () => {
   const callCreateChildInfo = useMutation(createChild, {
     onSuccess: () => {
       NativeFunction("ga4logNativeEventLog", `${registChildSuccessedAction}`);
-      TrackGoogleAnalyticsEvent(
-        registChildCategory,
-        registChildSuccessedAction,
-        window.location.pathname,
-      );
       setOpenSaveModal(true);
     },
     onError: error => {

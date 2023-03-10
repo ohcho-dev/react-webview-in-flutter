@@ -1,7 +1,6 @@
 import * as Sentry from "@sentry/react";
 import Cookies from "js-cookie";
 import React, { Suspense, useEffect, useState } from "react";
-import ReactGA4 from "react-ga4";
 import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-query";
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -29,7 +28,6 @@ import {
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./recoil/atom";
-import InitializeGoogleAnalytics from "./utils/google-analytics";
 import { childType } from "./utils/type";
 import { NativeFunction } from "./utils/NativeFunction";
 
@@ -181,7 +179,6 @@ const App: React.FC = () => {
           child_id: id,
           child_name: name,
         });
-        InitializeGoogleAnalytics(String(window.localStorage.getItem(USER_KEY)), selectedChild.id);
       }
     }
   }, [window.localStorage.getItem(USER_KEY), selectedChild]);
@@ -204,20 +201,8 @@ const App: React.FC = () => {
     }
   }, [childrenList, window.localStorage.getItem(CHILD_ID_FIELD)]);
 
-  // GA pageview react용으로 재등록(gtag 기본 페이지뷰 조회 기능 비활성화함)
+  // GA_pageview 정보 전송
   useEffect(() => {
-    ReactGA4.send({
-      hitType: "pageview",
-      path: location.pathname,
-      location: location.pathname,
-      title: location.pathname,
-    });
-    ReactGA4.event({
-      category: location.pathname,
-      action: location.pathname,
-      label: location.pathname,
-    });
-
     const pathname = location.pathname;
     const regexDeleteNumber = /[0-9]/g;
     const regexIsNumber = /[^0-9]/g;

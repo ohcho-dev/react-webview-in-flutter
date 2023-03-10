@@ -9,10 +9,8 @@ import { MypageTitleBar } from "../../components/TitleBar";
 import CustomModal from "../../components/common/CustomModal";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { TrackGoogleAnalyticsEvent } from "../../utils/google-analytics";
-import logoutCategory, {
+import {
   logoutSuccessedAction,
-  withdrawalCategory,
   withdrawalSuccessedAction,
 } from "../../utils/google-analytics/events/ManagementUser";
 
@@ -185,22 +183,12 @@ const MyPage = () => {
   const clickLogout = async () => {
     await logoutApi();
     await NativeFunction("ga4logNativeEventLog", `${logoutSuccessedAction}`);
-    await TrackGoogleAnalyticsEvent(
-      logoutCategory,
-      logoutSuccessedAction,
-      window.location.pathname,
-    );
     await NativeFunction("routeNativeScreen", "logout");
   };
 
   const clickWithDrawal = async () => {
     await Withdrawal();
     await NativeFunction("ga4logNativeEventLog", `${withdrawalSuccessedAction}`);
-    await TrackGoogleAnalyticsEvent(
-      withdrawalCategory,
-      withdrawalSuccessedAction,
-      window.location.pathname,
-    );
     await NativeFunction("routeNativeScreen", "reset");
   };
 
