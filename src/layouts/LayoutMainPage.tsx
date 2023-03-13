@@ -108,6 +108,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
       )}
 
       <MainPage
+        id="main"
         marginTop={marginTop}
         bgColor={bgColor}
         style={style}
