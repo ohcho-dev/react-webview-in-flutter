@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
-import { NativeFunction } from "../../../utils/NativeFunction";
 
 const Wrap = styled.div`
   padding: 2.5rem 0;
@@ -183,6 +183,7 @@ const ItemTitle = styled.div`
 const listStyle = ["#00C7B1", "#9380FF", "#78B9FF", "#FF9999", "#5AC4B1"];
 
 const RecommendActivityBox = () => {
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const selectedChild = useRecoilValue(selectedChildInfoState);
   const homeData = useRecoilValue(selectedHomeDataState);
@@ -229,9 +230,7 @@ const RecommendActivityBox = () => {
                 {homeData.month_level_content.map((item: any) => (
                   <ItemWrap
                     key={item.id}
-                    onClick={() =>
-                      NativeFunction("routeNativeScreen", `childRecommend@${item.url}`)
-                    }
+                    onClick={() => navigate("/home/activity", { state: item.url })}
                   >
                     {item.image ? (
                       <ImageWrap

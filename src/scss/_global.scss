@@ -49,3 +49,12 @@ input {
   width: 100%;
   overflow: hidden !important;
 }
+
+.notion-page-header {
+  display: none !important;
+}
+
+.notion-page-offset {
+  margin-top: 0 !important;
+  padding: 0 2rem 10rem !important;
+}

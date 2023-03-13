@@ -10,6 +10,11 @@ const ProgramPage = React.lazy(() => import("./pages/ProgramPage"));
 const MyPage = React.lazy(() => import("./pages/Mypage"));
 
 /**
+ * 홈메뉴
+ */
+const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"));
+
+/**
  * 코칭메뉴
  */
 
@@ -57,6 +62,14 @@ export const RouterConfig = [
     element: <HomePage />,
     sceneConfig: {
       enter: "from-fade",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/home/activity",
+    element: <ActivityDetail />,
+    sceneConfig: {
+      enter: "from-right",
       exit: "to-right",
     },
   },
