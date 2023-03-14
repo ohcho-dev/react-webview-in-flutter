@@ -1,9 +1,11 @@
 import React, { Component, ReactNode } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LayoutDetailPage from "../layouts/LayoutDetailPage";
 
 const ErrorSection = styled.div`
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 12rem);
 
   display: flex;
   flex-direction: column;
@@ -27,6 +29,12 @@ const RetryButton = styled.button`
   color: white;
   background-color: black;
   font-size: 1.6rem;
+`;
+const LinkHomeButton = styled.span`
+  color: #333;
+  font-size: 1.4rem;
+  text-decoration: underline;
+  margin-top: 2rem;
 `;
 
 interface Props {
@@ -66,11 +74,16 @@ export class ErrorBoundary extends Component<Props, State> {
   public render() {
     if (this.state.hasError) {
       return (
-        <ErrorSection>
-          <img src="/images/icon-sad.svg" alt="sad icon" />
-          <FailSentence>요청사항을 처리하는데 실패하였습니다.</FailSentence>
-          <RetryButton onClick={this.onResetErrorBoundary}>다시 시도하기</RetryButton>
-        </ErrorSection>
+        <LayoutDetailPage>
+          <ErrorSection>
+            <img src="/images/icon-sad.svg" alt="sad icon" />
+            <FailSentence>요청사항을 처리하는데 실패하였습니다.</FailSentence>
+            <RetryButton onClick={this.onResetErrorBoundary}>다시 시도하기</RetryButton>
+            <LinkHomeButton>
+              <Link to="/home">홈으로</Link>
+            </LinkHomeButton>
+          </ErrorSection>
+        </LayoutDetailPage>
       );
     }
 
