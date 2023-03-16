@@ -54,7 +54,7 @@ const ClassList = () => {
             <ProgramCard
               id={singleClass.id}
               handleCardClick={() => handleCardClick(singleClass.id)}
-              programImage={"/images/class/class_04.png" || singleClass.main_image}
+              programImage="/images/class/class_04.png"
               title={singleClass.name}
               originalPrice={singleClass.base_price}
               price={singleClass.price}
