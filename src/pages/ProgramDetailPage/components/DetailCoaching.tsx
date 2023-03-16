@@ -20,14 +20,17 @@ import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/ev
 import { NativeFunction } from "../../../utils/NativeFunction";
 import { ApiErrorResponseType, coachingType } from "../../../utils/type";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
+import UseImgix from "../../../utils/UseImgix";
 
 interface DetailCoachingProps {
   id: string;
 }
 
-const Thumbnail = styled.img`
-  width: ${(prop: { image: string }) => (prop.image ? "37.5rem" : "25.9rem")};
-  height: ${(prop: { image: string }) => (prop.image ? "25rem" : "9rem")};
+const Thumbnail = styled.div`
+  img:nth-child(1) {
+    width: 37.5rem;
+    height: 25rem;
+  }
 `;
 
 const ProductMainInfo = styled.div`
@@ -79,8 +82,10 @@ const PriceWrap = styled.div`
 // `;
 
 const ImageWrap = styled.div`
-  width: 100%;
-  margin: 0 auto;
+  img {
+    width: 100%;
+    margin: 0 auto;
+  }
 `;
 
 // const GiftBtn = styled.div`
@@ -215,7 +220,6 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     setOpenUsageDuration(false);
     setOpenBottomModal(false);
   };
-
   return (
     <>
       <LayoutDetailPage
@@ -228,11 +232,9 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
       >
         <div>
           {coachingInfo.main_image && (
-            <Thumbnail
-              alt="thumnail"
-              src={coachingInfo.main_image}
-              image={coachingInfo.main_image}
-            />
+            <Thumbnail>
+              <UseImgix srcUrl="/images/coaching/coaching_new_main_0207.png" />
+            </Thumbnail>
           )}
           <ProductMainInfo>
             <ProductName>{coachingInfo?.name}</ProductName>
@@ -255,17 +257,18 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
             </Favorites> */}
           </ProductMainInfo>
           <ProductDetailInfoSection>
-            <img alt="detail info" src="/images/coaching-detail-info.png" />
+            <UseImgix srcUrl="/images/coaching/coaching-detail-info.png" />
           </ProductDetailInfoSection>
           <GreySquare />
-          <ImageWrap>
-            <img
-              src={selectedCoachingInfo[0].content_image}
-              width="100%"
-              alt="coaching content"
-              loading="lazy"
-            />
-          </ImageWrap>
+          {coachingInfo.id === 5 && (
+            <ImageWrap>
+              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_01.png" />
+              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_02.png" />
+              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_03.png" />
+              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_04.png" />
+              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_05.png" />
+            </ImageWrap>
+          )}
         </div>
       </LayoutDetailPage>
       <CustomBottomModal

@@ -10,6 +10,7 @@ import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { getMonthLevelString } from "../../../utils/getMonthLevelString";
+import UseImgix from "../../../utils/UseImgix";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
@@ -70,6 +71,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   );
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
+  console.log(selectedClassInfo.main_image);
   return (
     <LayoutDetailPage
       bottomScrollAnimationEffect={true}
@@ -89,7 +91,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
       }
     >
       <ClassWrapper>
-        <img alt="class img" src={selectedClassInfo.main_image} />
+        <UseImgix srcUrl="/images/class/class_04.png" />
         <ClassInfoWrapper>
           <ClassInfo>
             <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
@@ -113,11 +115,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
         </ClassInfoWrapper>
         <Divider />
         {selectedClassInfo.content_image && (
-          <img
-            alt="content img2"
-            src={selectedClassInfo.content_image}
-            style={{ width: "37.5rem", height: "auto" }}
-          />
+          <UseImgix srcUrl="/images/class/class_04_detail_01.png" />
         )}
       </ClassWrapper>
     </LayoutDetailPage>
