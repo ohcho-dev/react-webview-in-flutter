@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Dday from "../../../utils/Dday";
 import ProgramPrice from "./ProgramPrice";
 import { AgeRange, OnlineOffline } from "./styled";
+import UseImgix from "../../../utils/UseImgix";
 
 const ProgramCardWrapper = styled.div`
   display: flex;
@@ -11,6 +12,15 @@ const ProgramCardWrapper = styled.div`
   width: 33.55rem;
 
   margin: 2.5rem 0 1rem 0;
+
+  img:nth-child(1) {
+    position: relative;
+    border-radius: 0.8rem;
+    width: 33.5rem;
+    height: 17rem;
+    object-fit: cover;
+    object-position: top;
+  }
 `;
 
 const ProgramImageSection = styled.img`
@@ -156,7 +166,8 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
 
   return (
     <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id.toString()}>
-      <ProgramImageSection alt="program image" src={programImage} />
+      <UseImgix srcUrl={programImage} />
+      {/* <ProgramImageSection alt="program image" src={programImage} /> */}
       {/* {isDeadlineComingUp && <div>마감임박</div>} */}
       {utilVisible && (
         <ClassInfoSection>

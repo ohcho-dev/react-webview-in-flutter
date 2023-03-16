@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Dday from "../../../utils/Dday";
 import { getDate } from "../../../utils/getDateTime";
 import { appliedCoachingType } from "../../../utils/type";
+import UseImgix from "../../../utils/UseImgix";
 
 const CoachingCardWrapper = styled.div`
   display: flex;
@@ -62,7 +63,8 @@ const CoachingCard = (props: { coaching: appliedCoachingType }): JSX.Element => 
 
   return (
     <CoachingCardWrapper progressing={status === "COSTAT_ONGOING"}>
-      <img alt="coaching-thumnail" src={main_image} />
+      <UseImgix srcUrl="/images/coaching/coaching_new_main_0207.png" />
+      {/* <img alt="coaching-thumnail" src={main_image} /> */}
       <CoachingTitle>{coaching_name}</CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
         <ProgressChip progressing={status === "COSTAT_ONGOING"}>
