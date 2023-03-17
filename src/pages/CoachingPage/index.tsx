@@ -8,6 +8,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { commonCodeState, selectedChildInfoState } from "../../recoil/atom";
 import { appliedCoachingType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
 import NoAppliedCoaching from "./components/NoAppliedCoaching";
@@ -181,7 +182,7 @@ const CoachingPage = () => {
                       handleCardClick(coaching.id);
                     }}
                   >
-                    <CoachingCard coaching={coaching} />
+                    <CoachingCard coaching={coaching} alt="Coaching Thumbnail" />
                     {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
                   </div>
                 ))}
@@ -192,7 +193,7 @@ const CoachingPage = () => {
       </CoachingTabWrapper>
       {lastIndex < coachingList.length - 1 && (
         <MoreBtn onClick={handleMoreBtnClick}>
-          더 보기 <img alt="arrow-down" src="/images/icon-arrow-down.svg" />
+          더 보기 <UseImgix alt="arrow-down" srcUrl="/images/icon-arrow-down.svg" />
         </MoreBtn>
       )}
     </LayoutMainPage>

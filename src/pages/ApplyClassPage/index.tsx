@@ -9,11 +9,17 @@ import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState, selectedChildInfoState, useShareState } from "../../recoil/atom";
+import {
+  childrenKeyState,
+  childrenListState,
+  selectedChildInfoState,
+  useShareState,
+} from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";
 import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { applyClassBodyType, childType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
@@ -111,6 +117,7 @@ const ApplyClassPage = () => {
   const nameInputRef = useRef<HTMLInputElement>(null);
   const phoneNumberInputRef = useRef<HTMLInputElement>(null);
   const fullHeight = useRef<number>(window.innerHeight);
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const defaultChild = useRecoilValue(selectedChildInfoState);
   const setShareBtnVisibility = useSetRecoilState(useShareState);
   const childrenList = useRecoilValue(childrenListState);
@@ -192,6 +199,7 @@ const ApplyClassPage = () => {
   useEffect(() => {
     if (selectedChildInfo.id) {
       setRequiredInfo({ ...requiredInfo, child_id: selectedChildInfo.id.toString() });
+      setSelectedIndex(childrenList.findIndex((item: any) => item.id === selectedChildInfo.id));
     }
   }, [selectedChildInfo]);
 
@@ -271,7 +279,7 @@ const ApplyClassPage = () => {
           <SelectChildBtn onClick={() => toggleModal()}>
             {selectedChildInfo.id ? (
               <SelectedChildInfo>
-                <img alt="icon-profile" src="/images/profile-0.svg" />
+                <UseImgix alt="icon-profile" srcUrl={`/images/profile-${selectedIndex}.png`} />
                 <span>{selectedChildInfo.name}</span>
                 <span>{`(${getDate(selectedChildInfo.birth_date)}) ${
                   selectedChildInfo.gender === "F" ? "여아" : "남아"
@@ -281,7 +289,7 @@ const ApplyClassPage = () => {
               <span>아이를 선택해 주세요.</span>
             )}
 
-            <img alt="icon-arrow-down" src="/images/icon-arrow-down-bg.svg" />
+            <UseImgix alt="icon-arrow-down" srcUrl="/images/icon-arrow-down-bg.svg" />
           </SelectChildBtn>
           <Title style={{ display: "flex" }}>
             보호자 정보<div style={{ color: "#FD7473" }}>*</div>

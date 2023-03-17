@@ -71,7 +71,6 @@ const DetailClass: React.FC<DetailClassProps> = props => {
   );
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
-  console.log(selectedClassInfo.main_image);
   return (
     <LayoutDetailPage
       bottomScrollAnimationEffect={true}
@@ -80,7 +79,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
       bottomBtnElement={
         <>
           {/* <GiftBtn>
-          <img src="/images/icon-gift.svg" alt="선물하기" />
+          <UseImgix srcUrl="/images/icon-gift.svg" alt="선물하기" />
         </GiftBtn> */}
           <Button
             theme={"black"}
@@ -91,7 +90,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
       }
     >
       <ClassWrapper>
-        <UseImgix srcUrl="/images/class/class_04.png" />
+        <UseImgix srcUrl="/images/class/class_04.png" alt="Class Thumbnail" />
         <ClassInfoWrapper>
           <ClassInfo>
             <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>
@@ -115,7 +114,7 @@ const DetailClass: React.FC<DetailClassProps> = props => {
         </ClassInfoWrapper>
         <Divider />
         {selectedClassInfo.content_image && (
-          <UseImgix srcUrl="/images/class/class_04_detail_01.png" />
+          <UseImgix srcUrl="/images/class/class_04_detail_01.png" alt="Class Detail Page" />
         )}
       </ClassWrapper>
     </LayoutDetailPage>

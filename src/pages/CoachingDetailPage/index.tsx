@@ -12,6 +12,7 @@ import { NativeFunction } from "../../utils/NativeFunction";
 import { getDate } from "../../utils/getDateTime";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
+import UseImgix from "../../utils/UseImgix";
 
 const PageTitleWrap = styled.div`
   position: fixed;
@@ -200,7 +201,11 @@ const CoachingDetailPage = () => {
         <CustomModal
           cancelbtn={false}
           topImage={
-            <img src={"/images/icon-sad-circle.svg"} alt="character" style={{ width: "9.5rem" }} />
+            <UseImgix
+              srcUrl={"/images/icon-sad-circle.svg"}
+              alt="character"
+              style={{ width: "9.5rem" }}
+            />
           }
           title={modalTitle}
           content={modalContent}

@@ -58,13 +58,13 @@ const LeftDays = styled.div`
   font-size: 1.6rem;
 `;
 
-const CoachingCard = (props: { coaching: appliedCoachingType }): JSX.Element => {
+const CoachingCard = (props: { coaching: appliedCoachingType; alt: string }): JSX.Element => {
   const { status, coaching_name, start_date, end_date, main_image } = props.coaching;
+  const { alt } = props;
 
   return (
     <CoachingCardWrapper progressing={status === "COSTAT_ONGOING"}>
-      <UseImgix srcUrl="/images/coaching/coaching_new_main_0207.png" />
-      {/* <img alt="coaching-thumnail" src={main_image} /> */}
+      {main_image && <UseImgix srcUrl="/images/coaching/coaching_new_main_0207.png" alt={alt} />}
       <CoachingTitle>{coaching_name}</CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
         <ProgressChip progressing={status === "COSTAT_ONGOING"}>

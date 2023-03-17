@@ -8,6 +8,7 @@ import { getNotificationList } from "../api/notificationApi";
 import { queryKeys } from "../constant/queryKeys";
 import { newNotificationFlagstate } from "../recoil/atom";
 import { NotificationType } from "../utils/type";
+import UseImgix from "../utils/UseImgix";
 
 const CustomAlarmBadge = styled.div`
   width: 2.8rem;
@@ -60,8 +61,8 @@ export const AlarmBadge: React.FC = props => {
     <>
       {(status === "idle" || isFetching) && null}
       <CustomAlarmBadge newNotification={newFlag} onClick={() => navigate("/my/alarm-list")}>
-        <img alt="badge" src="/images/badge.svg" />
-        <img alt="icon-bell" src="/images/icon-bell.svg" />
+        <UseImgix srcUrl="/images/badge.svg" alt="alarm" />
+        <UseImgix srcUrl="/images/icon-bell.svg" alt="alarm" />
       </CustomAlarmBadge>
     </>
   );

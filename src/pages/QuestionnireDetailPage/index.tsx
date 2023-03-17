@@ -5,6 +5,7 @@ import { getSurveyAnswers } from "../../api/questionnaireApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { SurveyResultQuestionType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 import {
   ListScroll,
   QuestionGap,
@@ -42,7 +43,7 @@ const QuestionnaireDetailPage = (): JSX.Element => {
       <SurveyQuestionWrapper>
         <SurveyCategoryTitle>
           {surveyAnswerInfo?.name}
-          <img alt="form character" src="/images/form-character.svg" />
+          <UseImgix alt="form character" srcUrl="/images/form-character.svg" />
         </SurveyCategoryTitle>
         <ListScroll height="calc(100vh - 11.4rem)">
           {answerList.map((question: SurveyResultQuestionType, index: number) => {

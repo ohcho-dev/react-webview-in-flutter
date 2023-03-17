@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CustomModal from "../../../components/common/CustomModal";
+import UseImgix from "../../../utils/UseImgix";
 
 const ApplicationCloseModalContent = styled.div`
   display: flex;
@@ -57,11 +58,9 @@ const ClassRejectModal = (props: rejectModalProps): JSX.Element => {
       cancelbtn={false}
       topImage={
         theme !== "CLASS_ALREADY_APPLIED" ? (
-          <img
-            alt="sad icon"
-            src="/images/icon-sad-circle.svg"
-            style={{ width: "9.5rem", marginBottom: "1.5rem" }}
-          />
+          <div style={{ width: "9.5rem", marginBottom: "1.5rem" }}>
+            <UseImgix alt="sad icon" srcUrl="/images/icon-sad-circle.svg" />
+          </div>
         ) : undefined
       }
       title={content.title}

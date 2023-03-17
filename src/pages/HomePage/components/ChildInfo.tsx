@@ -9,10 +9,11 @@ import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/a
 import Dday from "../../../utils/Dday";
 import { NativeFunction } from "../../../utils/NativeFunction";
 import { getDate } from "../../../utils/getDateTime";
+import UseImgix from "../../../utils/UseImgix";
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;
-  background: url("/images/bg-home.svg") no-repeat 50% 0;
+  background: url(${(props: { background: string }) => props.background}) no-repeat 50% 0;
   background-size: 100%;
 `;
 
@@ -83,7 +84,7 @@ const ProfileImageWrap = styled.div`
     bottom: 2.5rem;
   }
 `;
-const UploadImage = styled.img`
+const UploadImage = styled.span`
   width: 18.5rem;
   height: 18.5rem;
   object-fit: cover;
@@ -155,7 +156,7 @@ const ChildInfo = () => {
   }, [selectedChild.id]);
 
   return (
-    <ChildInfoWrap>
+    <ChildInfoWrap background={process.env.REACT_APP_IMGIX_URL + "/images/bg-home.svg"}>
       <FlexBox>
         <div>
           <BirthDateChip>
@@ -171,13 +172,15 @@ const ChildInfo = () => {
           <ProfileImageWrap
             onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
           >
-            <img src="/images/profile-default.svg" alt="프로필 사진" />
-            <img src="/images/icon-addbtn.svg" alt="사진 추가하기" />
+            <UseImgix srcUrl="/images/profile-default.svg" alt="프로필 사진" />
+            <UseImgix srcUrl="/images/icon-addbtn.svg" alt="사진 추가하기" />
           </ProfileImageWrap>
         )}
         {selectedChild.image && (
           <ProfileImageWrap onClick={() => setOpenSelectModal(true)}>
-            <UploadImage src={selectedChild.image} alt="프로필 사진" />
+            <UploadImage>
+              <UseImgix srcUrl={selectedChild.image} alt="프로필 사진" />
+            </UploadImage>
           </ProfileImageWrap>
         )}
       </FlexBox>

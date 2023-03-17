@@ -2,6 +2,7 @@ import React, { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LayoutDetailPage from "../layouts/LayoutDetailPage";
+import UseImgix from "../utils/UseImgix";
 
 const ErrorSection = styled.div`
   width: 100%;
@@ -76,7 +77,7 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <LayoutDetailPage>
           <ErrorSection>
-            <img src="/images/icon-sad.svg" alt="sad icon" />
+            <UseImgix srcUrl="/images/icon-sad.svg" alt="sad icon" />
             <FailSentence>요청사항을 처리하는데 실패하였습니다.</FailSentence>
             <RetryButton onClick={this.onResetErrorBoundary}>다시 시도하기</RetryButton>
             <LinkHomeButton>

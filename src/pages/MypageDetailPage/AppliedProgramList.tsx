@@ -8,6 +8,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";
+import UseImgix from "../../utils/UseImgix";
 import PageTitle from "./components/PageTitle";
 
 const TabValue = ["코칭", "클래스"];
@@ -150,16 +151,6 @@ const ThumbnailWrapper = styled.div`
   justify-content: flex-end;
 `;
 
-const Thumbnail = styled.div`
-  width: 8.5rem;
-  height: 7rem;
-  background-image: url(${(prop: { imgUrl?: string }) => prop.imgUrl});
-  background-size: cover;
-  background-position: 50% 50%;
-
-  border-radius: 0.5rem;
-`;
-
 const NotFoundData = styled.div`
   width: 100%;
   text-align: center;
@@ -271,7 +262,16 @@ const AppliedProgramList = () => {
                             </ChildInfo>
                           </div>
                           <ThumbnailWrapper>
-                            <Thumbnail imgUrl={detailData.main_image} />
+                            <UseImgix
+                              srcUrl="/images/coaching/coaching_new_main_0207.png"
+                              alt="Coaching Thumbnail"
+                              style={{
+                                width: "8.5rem",
+                                height: "7rem",
+                                objectFit: "cover",
+                                borderRadius: "0.5rem",
+                              }}
+                            />
                           </ThumbnailWrapper>
                         </ListContent>
                       </ListWrap>
@@ -280,7 +280,7 @@ const AppliedProgramList = () => {
                 )
               ) : (
                 <NotFoundData>
-                  <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                  <UseImgix srcUrl="/images/icon-sparkle.png" alt="thumbnail" />
                   <NotFoundTitle>아직 신청한 {selectedTab + "이"} 없어요.</NotFoundTitle>
                   <NotFoundDesc>우리 아이 맞춤 {selectedTab + "을"} 신청해 보세요.</NotFoundDesc>
                   <LinkBtn onClick={() => navigate("/program", { replace: true })}>
@@ -316,7 +316,16 @@ const AppliedProgramList = () => {
                             </ChildInfo>
                           </div>
                           <ThumbnailWrapper>
-                            <Thumbnail imgUrl={detailData.main_image} />
+                            <UseImgix
+                              srcUrl="/images/coaching/coaching_new_main_0207.png"
+                              alt="Coaching Thumbnail"
+                              style={{
+                                width: "8.5rem",
+                                height: "7rem",
+                                objectFit: "cover",
+                                borderRadius: "0.5rem",
+                              }}
+                            />
                           </ThumbnailWrapper>
                         </ListContent>
                       </ListWrap>
@@ -325,7 +334,7 @@ const AppliedProgramList = () => {
                 )
               ) : (
                 <NotFoundData>
-                  <img src="/images/icon-sparkle.png" alt="thumbnail" />
+                  <UseImgix srcUrl="/images/icon-sparkle.png" alt="thumbnail" />
                   <NotFoundTitle>아직 신청한 {selectedTab + "가"} 없어요.</NotFoundTitle>
                   <NotFoundDesc>우리 아이 맞춤 {selectedTab + "를"} 신청해 보세요.</NotFoundDesc>
                   <LinkBtn onClick={() => navigate("/program", { replace: true })}>

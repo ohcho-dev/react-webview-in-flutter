@@ -233,7 +233,10 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         <div>
           {coachingInfo.main_image && (
             <Thumbnail>
-              <UseImgix srcUrl="/images/coaching/coaching_new_main_0207.png" />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0207.png"
+                alt="Coaching Thumbanil"
+              />
             </Thumbnail>
           )}
           <ProductMainInfo>
@@ -250,23 +253,41 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
             </PriceWrap>
             {/* TODO: 즐겨찾기기능 구현하기 */}
             {/* <Favorites onClick={() => setFavorites(!favorites)}>
-              <img
-                src={favorites ? "/images/icon-favorites-on.svg" : "/images/icon-favorites-off.svg"}
+              <UseImgix
+                srcUrl={favorites ? "/images/icon-favorites-on.svg" : "/images/icon-favorites-off.svg"}
                 alt="즐겨찾기"
               />
             </Favorites> */}
           </ProductMainInfo>
           <ProductDetailInfoSection>
-            <UseImgix srcUrl="/images/coaching/coaching-detail-info.png" />
+            <UseImgix
+              srcUrl="/images/coaching/coaching-detail-info.png"
+              alt="Coaching Detail Info"
+            />
           </ProductDetailInfoSection>
           <GreySquare />
           {coachingInfo.id === 5 && (
             <ImageWrap>
-              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_01.png" />
-              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_02.png" />
-              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_03.png" />
-              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_04.png" />
-              <UseImgix srcUrl="/images/coaching/coaching_new_main_0220_05.png" />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_01.png"
+                alt="Coaching Detail Page 1"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_02.png"
+                alt="Coaching Detail Page 2"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_03.png"
+                alt="Coaching Detail Page 3"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_04.png"
+                alt="Coaching Detail Page 4"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_05.png"
+                alt="Coaching Detail Page 5"
+              />
             </ImageWrap>
           )}
         </div>
@@ -279,7 +300,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         <SubText>아래 정보로 신청하시겠어요?</SubText>
         <ChildInfoWrap>
           <ProfileImageWrap>
-            <img src="/images/icon-profile-default.svg" width="100%" alt="profile icon" />
+            <UseImgix srcUrl="/images/icon-profile-default.svg" alt="profile icon" />
           </ProfileImageWrap>
           <div>
             {selectedChildInfo.name}
@@ -303,7 +324,7 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
       />
       <CustomModal
         cancelbtn={false}
-        topImage={<img alt="warning icon" src="/images/icon-alert.svg" />}
+        topImage={<UseImgix alt="warning icon" srcUrl="/images/icon-alert.svg" />}
         title="이용기간을 확인해주세요!"
         contentMarkup={
           <div style={{ lineHeight: "2.2rem" }}>

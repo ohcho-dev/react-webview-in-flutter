@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { SelectBtnArrayType } from "../../utils/type";
-import Button from "./Button";
+import UseImgix from "../../utils/UseImgix";
 
 interface ModalProps {
   isOpen: boolean;
@@ -101,7 +101,7 @@ const BtnItem = styled.div`
   }
 `;
 
-const CloseBtn = styled.img`
+const CloseBtn = styled.span`
   position: absolute;
   top: 0;
   right: 2rem;
@@ -139,7 +139,9 @@ const CustomSelectModal = (props: ModalProps) => {
         <ModalContentWrapper>
           <ModalTitle>{title}</ModalTitle>
 
-          <CloseBtn alt="close icon" src="/images/icon-close.svg" onClick={toggleModal} />
+          <CloseBtn onClick={toggleModal}>
+            <UseImgix alt="close icon" srcUrl="/images/icon-close.svg" />
+          </CloseBtn>
 
           <ModalContent>
             {selectBtnArray?.map(btn => (

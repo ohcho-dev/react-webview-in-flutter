@@ -11,6 +11,7 @@ import {
   openBottomModalState,
   selectedChildInfoState,
 } from "../recoil/atom";
+import UseImgix from "../utils/UseImgix";
 import AlarmBadge from "./AlarmBadge";
 
 const TitleBarWrap = styled.section`
@@ -69,7 +70,7 @@ const ArrowWrap = styled.div`
   }
 `;
 
-const HistoryBackIconImage = styled.img`
+const HistoryBackIconImage = styled.span`
   width: 2.8rem;
   height: 2.8rem;
 `;
@@ -146,15 +147,13 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
     <TitleBarWrap border={true} style={{ ...style }}>
       <ProfileWrap>
         <ProfileImageWrap>
-          <img
-            src={selectedChildInfo.image || `/images/profile-${childrenKey}.png`}
-            width="100%"
-            alt="child icon"
-          />
+          {childrenKey && (
+            <UseImgix srcUrl={`/images/profile-${childrenKey}.png`} alt="child icon" />
+          )}
         </ProfileImageWrap>
         <ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</ChildrenName>
         <ArrowWrap>
-          <img src="/images/icon-arrow-down.svg" alt="arrow down icon" />
+          <UseImgix srcUrl="/images/icon-arrow-down.svg" alt="arrow down icon" />
         </ArrowWrap>
       </ProfileWrap>
       <AlarmBadge />
@@ -184,7 +183,11 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
           handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
         }}
       >
-        <HistoryBackIconImage src="/images/icon-back.svg" alt="left arrow icon" />
+        <UseImgix
+          srcUrl="/images/icon-back.svg"
+          alt="left arrow icon"
+          style={{ width: "2.8rem" }}
+        />
       </div>
       {leftBtn && <ButtonWrap>{leftBtn}</ButtonWrap>}
     </TitleBarWrap>
@@ -230,7 +233,7 @@ export const MypageTitleBar: React.FC = () => {
         <span>보호자님, 안녕하세요.</span>
       </Title>
       <LoginInfo>
-        <img src={icon} alt="socal login logo" />
+        <UseImgix srcUrl={icon} alt="socal login logo" />
         <span>{sns} 로그인</span>
       </LoginInfo>
     </MypageTitleWrap>
