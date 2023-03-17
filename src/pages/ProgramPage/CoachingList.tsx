@@ -12,6 +12,7 @@ import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
 import { coachingType } from "../../utils/type";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
+import UseImgix from "../../utils/UseImgix";
 
 const ListWrap = styled.div`
   margin-bottom: 3rem;
@@ -29,6 +30,30 @@ const ProgramTitle = styled.span`
 
 const Title = styled.span`
   margin-left: 0.4rem;
+`;
+
+const NoCoachingSection = styled.div`
+  display: flex;
+  margin: 4rem 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 26rem;
+    height: 9rem;
+    margin-bottom: 3rem;
+  }
+
+  span:nth-child(2) {
+    display: block;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: #0a0a0a;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 `;
 
 const CoachingList = () => {
@@ -80,6 +105,18 @@ const CoachingList = () => {
             })}
           </ListWrap>
         </>
+      )}
+
+      {/* production 서버에 클래스를 숨긴 상태라서 빈페이지로 노출되기 때문에 임시로 넣어둠 */}
+      {!coachingList[0].length && (
+        <NoCoachingSection>
+          <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
+          <span>
+            태어난지 12개월 이후부터
+            <br />
+            프로그램 신청이 가능합니다.
+          </span>
+        </NoCoachingSection>
       )}
     </>
   );
