@@ -6,6 +6,8 @@ import styled from "styled-components";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
+import UseImgix from "../../../utils/UseImgix";
+import { NativeFunction } from "../../../utils/NativeFunction";
 
 const Wrap = styled.div`
   padding: 2.5rem 0;
@@ -197,7 +199,7 @@ const RecommendActivityBox = () => {
       <GreyBox padding="2rem 2rem 2rem 1.3rem">
         <FlexBox>
           <FlexBox>
-            <img src="/images/icon-home-child.svg" alt="우리 아이 태어난지" />
+            <UseImgix srcUrl="/images/icon-home-child.svg" alt="우리 아이 태어난지" />
             <Label>우리 아이 태어난지</Label>
           </FlexBox>
           <FlexBox>
@@ -230,7 +232,11 @@ const RecommendActivityBox = () => {
                 {homeData.month_level_content.map((item: any) => (
                   <ItemWrap
                     key={item.id}
-                    onClick={() => navigate("/home/activity", { state: item.url })}
+                    onClick={() =>
+                      item.url.indexOf("notion") === -1
+                        ? NativeFunction("routeNativeScreen", `childRecommend@${item.url}`)
+                        : navigate("/home/activity", { state: item.url })
+                    }
                   >
                     {item.image ? (
                       <ImageWrap
