@@ -112,7 +112,7 @@ const CoachingList = () => {
         <NoCoachingSection>
           <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
           <span>
-            태어난지 12개월 이후부터
+            태어난 지 12개월 이후부터
             <br />
             프로그램 신청이 가능합니다.
           </span>
