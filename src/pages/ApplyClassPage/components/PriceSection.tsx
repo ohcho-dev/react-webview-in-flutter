@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Title } from "..";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
+import UseImgix from "../../../utils/UseImgix";
 
 const PriceSectionWrapper = styled.div`
   display: flex;
@@ -56,7 +57,7 @@ const TotalPriceSection = styled.div`
   font-weight: 700;
 `;
 
-const InformImg = styled.img`
+const InformImg = styled.span`
   width: 100%;
   margin-top: 2rem;
 `;
@@ -97,7 +98,9 @@ const PriceSection = (props: { [key: string]: any }): JSX.Element => {
         </div>
       </TotalPriceSection>
       {classInfo.payment_type === "CLPYT_ONSITE" && (
-        <InformImg alt="inform payment" src="/images/inform-pay-onsite-img.svg" />
+        <InformImg>
+          <UseImgix alt="inform payment" srcUrl="/images/inform-pay-onsite-img.svg" />
+        </InformImg>
       )}
     </PriceSectionWrapper>
   );

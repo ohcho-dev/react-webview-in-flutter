@@ -12,6 +12,7 @@ import { selectedChildInfoState } from "../../recoil/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
 import { getDate } from "../../utils/getDateTime";
 import { VideoAssignmentResultType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 
 type collapseType = "" | "open" | "close";
 
@@ -244,15 +245,16 @@ const VideoAssignmentPage = (): JSX.Element => {
       <PageWrapper>
         <PageTitleWrapper>
           <STB_20>촬영 영상</STB_20>
-          <img
-            alt="arrow"
-            src={
-              collapse === "open" || collapse === ""
-                ? `/images/icon-videoAssignment-arrow-up.svg`
-                : `/images/icon-videoAssignment-arrow-down.svg`
-            }
-            onClick={handleArrowClick}
-          />
+          <div onClick={handleArrowClick}>
+            <UseImgix
+              alt="arrow"
+              srcUrl={
+                collapse === "open" || collapse === ""
+                  ? `/images/icon-videoAssignment-arrow-up.svg`
+                  : `/images/icon-videoAssignment-arrow-down.svg`
+              }
+            />
+          </div>
         </PageTitleWrapper>
         <VideoSection collapse={collapse}>
           <VideoWrapper collapse={collapse}>
@@ -272,7 +274,10 @@ const VideoAssignmentPage = (): JSX.Element => {
           </VideoInfoSection>
         </VideoSection>
         <FileInformSection>
-          <img alt="inform img" src={`/images/video-${videoAssignmentResult?.status}-img.svg`} />
+          <UseImgix
+            alt="inform img"
+            srcUrl={`/images/video-${videoAssignmentResult?.status}-img.svg`}
+          />
           {videoAssignmentResult?.status === "TSST_REJECT" && (
             <RejectReasonSection>
               {videoAssignmentResult.admin_comment.map((comment: string, index: number) => (

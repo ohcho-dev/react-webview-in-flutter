@@ -17,6 +17,7 @@ import {
   surveyCoachingIdState,
 } from "../../recoil/atom";
 import { SurveyInfoType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 
 const QuestionnarieWrapper = styled.div`
   display: flex;
@@ -101,7 +102,7 @@ const Questionnaire = (): JSX.Element => {
         <Chip status="TSTY_SURVEY" />
         <QuestionnarieDescription>{selectedTaskInfo.description}</QuestionnarieDescription>
         <HowToSection>
-          <img alt="how to img" src="/images/how-to-img.png" />
+          <UseImgix alt="how to img" srcUrl="/images/how-to-img.png" />
         </HowToSection>
       </QuestionnarieWrapper>
     </LayoutDetailPage>

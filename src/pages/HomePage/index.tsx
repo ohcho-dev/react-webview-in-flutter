@@ -17,9 +17,9 @@ const HomePage = () => {
   return (
     <>
       <LayoutMainPage marginTop="-6rem">
-        {/* <ChildInfo />
-        <Devider />
-        <RecommendActivity /> */}
+        {/* <ChildInfo /> */}
+        {/* <Devider /> */}
+        {/* <RecommendActivity /> */}
         <Visual />
         <RecommendActivityBox />
       </LayoutMainPage>

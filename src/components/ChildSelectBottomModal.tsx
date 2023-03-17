@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getDate } from "../utils/getDateTime";
 import { childType } from "../utils/type";
+import UseImgix from "../utils/UseImgix";
 import CustomBottomModal from "./common/CustomBottomModal";
 
 interface ChildSelectBottomModalProps {
@@ -100,13 +101,9 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
       <ChildrenListModalWrapper>
         <ChildrenListModalTitleSection>
           <span>아이 선택</span>
-          <img
-            alt="close icon"
-            src="/images/icon-close.svg"
-            onClick={() => {
-              toggleModal();
-            }}
-          />
+          <span onClick={() => toggleModal()}>
+            <UseImgix srcUrl="/images/icon-close.svg" alt="close icon" />
+          </span>
         </ChildrenListModalTitleSection>
         {childrenList.slice(0, 5).map((child: childType, index: number) => {
           return (
@@ -116,7 +113,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
               key={child.id.toString()}
             >
               <div>
-                <img alt="profile icon" src={child.image || `/images/profile-${index}.png`} />
+                <UseImgix srcUrl={`/images/profile-${index}.png`} alt="profile icon" />
                 <ChildName>{child.name}</ChildName>
                 <ChildInfo>
                   <span>({getDate(child.birth_date)}) </span>
@@ -125,7 +122,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
               </div>
 
               {selectedChildInfo.id === child.id && (
-                <img alt="selected-icon" src="/images/icon-selected.svg" />
+                <UseImgix alt="selected-icon" srcUrl="/images/icon-selected.svg" />
               )}
             </ChildInfoWrapper>
           );
@@ -137,7 +134,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
           }}
         >
           아이 관리로 이동하기
-          <img alt="arrow-right" src={"/images/icon-arrow-right-small.svg"} />
+          <UseImgix alt="arrow-right" srcUrl={"/images/icon-arrow-right-small.svg"} />
         </GoToChildManagementBtn>
       </ChildrenListModalWrapper>
     </CustomBottomModal>

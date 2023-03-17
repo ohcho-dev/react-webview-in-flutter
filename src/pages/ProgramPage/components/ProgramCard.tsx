@@ -122,6 +122,7 @@ const ProceedStatus = styled.span`
 interface ProgramCardProps {
   id: number;
   programImage: string;
+  programImageAlt?: string;
   title: string;
   isDeadlineComingUp?: boolean;
   ageRange?: string;
@@ -142,6 +143,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
   const {
     id,
     programImage,
+    programImageAlt,
     ageRange,
     isOnline,
     title,
@@ -166,7 +168,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
 
   return (
     <ProgramCardWrapper onClick={() => handleCardClick(id)} id={id.toString()}>
-      <UseImgix srcUrl={programImage} />
+      <UseImgix srcUrl={programImage} alt={programImageAlt || ""} />
       {/* {isDeadlineComingUp && <div>마감임박</div>} */}
       {utilVisible && (
         <ClassInfoSection>

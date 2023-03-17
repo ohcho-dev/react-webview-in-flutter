@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import Button from "../../../components/common/Button";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
+import UseImgix from "../../../utils/UseImgix";
 
 const floatingMove = keyframes`
 	 0%{transform:translate(0,0);}
@@ -16,12 +17,12 @@ const ContentWrapper = styled.div`
   height: 100%;
 `;
 
-const SuccessImg = styled.img`
+const SuccessImg = styled.span`
   width: 29.7rem;
   height: 16.9rem;
 `;
 
-const FloatingImg = styled.img`
+const FloatingImg = styled.span`
   position: absolute;
   bottom: -1rem;
   width: 33.5rem;
@@ -47,8 +48,15 @@ const ApplyCoachingSuccess = (): JSX.Element => {
       }
     >
       <ContentWrapper>
-        <SuccessImg src="/images/apply-coaching-success-img.png" alt="apply coaching success img" />
-        <FloatingImg src="/images/apply-coaching-success-floating-img.png" alt="floating img" />
+        <SuccessImg>
+          <UseImgix
+            srcUrl="/images/apply-coaching-success-img.png"
+            alt="apply coaching success img"
+          />
+        </SuccessImg>
+        <FloatingImg>
+          <UseImgix srcUrl="/images/apply-coaching-success-floating-img.png" alt="floating img" />
+        </FloatingImg>
       </ContentWrapper>
     </LayoutDetailPage>
   );

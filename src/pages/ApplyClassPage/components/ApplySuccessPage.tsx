@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
+import UseImgix from "../../../utils/UseImgix";
 
 const ContentWrapper = styled.div`
   width: 100%;
@@ -35,8 +36,8 @@ const ApplySuccessPage = () => {
       }
     >
       <ContentWrapper>
-        <img alt="apply success img" src="/images/apply-success-img.png" />
-        <img alt="success next step img" src="/images/success-next-step-img.svg" />
+        <UseImgix alt="apply success img" srcUrl="/images/apply-success-img.png" />
+        <UseImgix alt="success next step img" srcUrl="/images/success-next-step-img.svg" />
       </ContentWrapper>
     </LayoutDetailPage>
   );

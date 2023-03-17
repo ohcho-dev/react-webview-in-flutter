@@ -9,6 +9,7 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { newNotificationFlagstate } from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";
 import { NotificationType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 import PageTitle from "./components/PageTitle";
 
 const ImgWrap = styled.div`
@@ -18,7 +19,7 @@ const ImgWrap = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const NoneImg = styled.img`
+const NoneImg = styled.span`
   width: 25.9rem;
   height: 9rem;
 `;
@@ -107,7 +108,7 @@ const AlarmList = () => {
               key={noti.id}
             >
               {/* 아이콘 하나로 통일했습니다. 추후 알림 종류가 여러개로 나눠질 경우 그에 맞게 수정 필요합니다. */}
-              <img src={`/images/icon-alarm-NTCH_VIDEO_REJECT.svg`} alt="alarm icon"/>
+              <UseImgix srcUrl={`/images/icon-alarm-NTCH_VIDEO_REJECT.svg`} alt="alarm icon" />
               <div>
                 <Title>{noti.title}</Title>
                 <Desc>{noti.body}</Desc>
@@ -118,7 +119,13 @@ const AlarmList = () => {
         </AlarmListWrap>
       ) : (
         <ImgWrap>
-          <NoneImg src="/images/icon-sparkle.png" alt="도착한 알림이 없어요." />
+          <NoneImg>
+            <UseImgix
+              srcUrl="/images/icon-sparkle.png"
+              alt="도착한 알림이 없어요."
+              style={{ width: "100%" }}
+            />
+          </NoneImg>
           <NoneTitle>도착한 알림이 없어요.</NoneTitle>
           <NoneDesc>중요한 정보가 생기면 바로 알려드릴게요.</NoneDesc>
         </ImgWrap>

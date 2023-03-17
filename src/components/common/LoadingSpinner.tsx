@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import UseImgix from "../../utils/UseImgix";
 
 const CustomSpinner = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ interface LoadingSpinnerProps {
 const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({ height }) => {
   return (
     <CustomSpinner height={height}>
-      <img alt="loading spinner" src="/images/spinner2.svg" />
+      <UseImgix alt="loading spinner" srcUrl="/images/spinner2.svg" />
     </CustomSpinner>
   );
 };

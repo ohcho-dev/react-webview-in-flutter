@@ -15,6 +15,7 @@ import {
   surveyTempAnswerState,
 } from "../../../recoil/atom";
 import { SurveyAnswerType, SurveyInfoType } from "../../../utils/type";
+import UseImgix from "../../../utils/UseImgix";
 import Question from "./Question";
 import { QuestionGap, SurveyCategoryTitle } from "./style";
 
@@ -169,13 +170,11 @@ const QuestionnaireForm = (): JSX.Element => {
         }
       >
         <SurveyCategoryTitle scroll={scroll}>
-          <img
-            src="/images/icon-back.svg"
-            alt="left arrow icon"
-            onClick={() => setOpenWarningModal(true)}
-          />
+          <div onClick={() => setOpenWarningModal(true)}>
+            <UseImgix srcUrl="/images/icon-back.svg" alt="left arrow icon" />
+          </div>
           <span style={{ marginLeft: "1rem" }}>{surveyInfo?.name}</span>
-          <img alt="form character" src="/images/form-character.svg" />
+          <UseImgix alt="form character" srcUrl="/images/form-character.svg" />
         </SurveyCategoryTitle>
         {surveyInfo.question.length &&
           surveyInfo.question.map((question, index: number) => {

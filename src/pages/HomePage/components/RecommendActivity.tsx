@@ -3,6 +3,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { selectedHomeDataState } from "../../../recoil/atom";
 import { NativeFunction } from "../../../utils/NativeFunction";
+import UseImgix from "../../../utils/UseImgix";
 
 const ActivityWrap = styled.div`
   padding: 3.5rem 0;
@@ -148,7 +149,7 @@ const RecommendActivity = () => {
       <LinkBanner onClick={() => navigate("/program")}>
         <BannerTitle>우리 아이 잘 자라고 있는걸까?</BannerTitle>
         <BannerDesc>발달에 맞는 전문 코칭을 받아보세요.</BannerDesc>
-        <img src="/images/banner-home.png" alt="프로그램 바로가기" />
+        <UseImgix srcUrl="/images/banner-home.png" alt="프로그램 바로가기" />
       </LinkBanner>
     </ActivityWrap>
   );

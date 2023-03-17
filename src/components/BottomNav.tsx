@@ -1,5 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import UseImgix from "../utils/UseImgix";
 
 const BottomNavWrap = styled.ul`
   width: 100%;
@@ -82,11 +83,10 @@ const BottomNav = () => {
           <Lists key={item.id}>
             <NavLink to={item.link} replace={true}>
               <ImageWrap>
-                <img
-                  src={`/${firstPath}` === item.link ? item.selectedImgUrl : item.imgUrl}
-                  width="100%"
-                  height="100%"
+                <UseImgix
+                  srcUrl={`/${firstPath}` === item.link ? item.selectedImgUrl : item.imgUrl}
                   alt={item.name}
+                  style={{ width: "3.6rem" }}
                 />
               </ImageWrap>
               <Text selected={`/${firstPath}` === item.link}>{item.name}</Text>

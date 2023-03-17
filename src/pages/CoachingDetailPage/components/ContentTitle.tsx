@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import UseEmoji from "../../../utils/UseEmoji";
+import UseImgix from "../../../utils/UseImgix";
 
 interface ContentTitleProps {
   emoji?: string;
@@ -26,7 +27,7 @@ const ContentTitle: React.FC<ContentTitleProps> = ({ emoji, imgUrl, name }) => {
   return (
     <TitleWrap>
       {emoji && <UseEmoji emojiName={emoji} />}
-      {imgUrl && <img src={imgUrl} alt="" />}
+      {imgUrl && <UseImgix srcUrl={imgUrl} alt="" />}
       <TitleName>{name}</TitleName>
     </TitleWrap>
   );

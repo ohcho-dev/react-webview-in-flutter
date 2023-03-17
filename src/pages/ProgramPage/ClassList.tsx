@@ -55,6 +55,7 @@ const ClassList = () => {
               id={singleClass.id}
               handleCardClick={() => handleCardClick(singleClass.id)}
               programImage="/images/class/class_04.png"
+              programImageAlt="Class Thumbnail"
               title={singleClass.name}
               originalPrice={singleClass.base_price}
               price={singleClass.price}

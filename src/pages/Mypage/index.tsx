@@ -13,6 +13,7 @@ import {
   logoutSuccessedAction,
   withdrawalSuccessedAction,
 } from "../../utils/google-analytics/events/ManagementUser";
+import UseImgix from "../../utils/UseImgix";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;
@@ -204,13 +205,13 @@ const MyPage = () => {
         >
           <div>
             <IconTextGroup>
-              <img src={item.imgUrl} alt={item.name} />
+              <UseImgix srcUrl={item.imgUrl} alt={item.name} />
               <span>{item.name}</span>
             </IconTextGroup>
-            <img
-              src="/images/icon-mypage-arrow.svg"
-              style={{ width: "2.8rem", height: "2.8rem" }}
+            <UseImgix
+              srcUrl="/images/icon-mypage-arrow.svg"
               alt="right arrow"
+              style={{ width: "2.8rem" }}
             />
           </div>
         </LinkItemWrap>
@@ -228,7 +229,7 @@ const MyPage = () => {
         cancelbtn
         isOpen={openModal}
         toggleModal={() => setOpenModal(!openModal)}
-        topImage={<img src="/images/icon-sad-circle.svg" alt="sad icon" />}
+        topImage={<UseImgix srcUrl="/images/icon-sad-circle.svg" alt="sad icon" />}
         title="정말로 탈퇴하시겠어요?"
         contentMarkup={
           <>

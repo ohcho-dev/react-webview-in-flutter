@@ -9,6 +9,7 @@ import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState } from "../../../recoil/atom";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { coachingType } from "../../../utils/type";
+import UseImgix from "../../../utils/UseImgix";
 import ProgramCard from "../../ProgramPage/components/ProgramCard";
 import { Divider } from "../../ProgramPage/components/styled";
 
@@ -78,13 +79,13 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
       <InformImageSection>
         {selectedMenu === "end" ? (
           <NoCoachingSection>
-            <img alt="inform-img" src="/images/no-coaching-img.png" />
+            <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
             <span>아직 종료한 코칭이 없어요.</span>
             <span>코칭 종료까지 응원할게요!</span>
           </NoCoachingSection>
         ) : (
           <NoCoachingSection>
-            <img alt="inform-img" src="/images/no-coaching-img.png" />
+            <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
             <span>아직 신청한 코칭이 없어요.</span>
             <span>우리 아이 맞춤 코칭을 바로 신청해 보세요.</span>
           </NoCoachingSection>
@@ -98,6 +99,7 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
               id={coaching.id}
               handleCardClick={() => handleCardClick(coaching.id)}
               programImage="/images/coaching/coaching_new_main_0207.png"
+              programImageAlt="Coaching Thumbnail"
               isDeadlineComingUp
               title={coaching.name}
               originalPrice={coaching.base_price}

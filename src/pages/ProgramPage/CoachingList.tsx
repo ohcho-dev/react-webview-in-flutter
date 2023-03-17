@@ -67,6 +67,7 @@ const CoachingList = () => {
                     id={coaching.id}
                     handleCardClick={() => handleCardClick(coaching.id)}
                     programImage="/images/coaching/coaching_new_main_0207.png"
+                    programImageAlt="Coaching Thumbnail"
                     title={coaching.name}
                     originalPrice={coaching.base_price}
                     price={coaching.price}

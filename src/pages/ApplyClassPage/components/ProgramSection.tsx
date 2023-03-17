@@ -4,6 +4,7 @@ import { Title } from "..";
 import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";
 import { getMonthLevelString } from "../../../utils/getMonthLevelString";
+import UseImgix from "../../../utils/UseImgix";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
 const ProgramSectionWrapper = styled.div`
@@ -80,7 +81,7 @@ const ProgramSection = (props: { [key: string]: any }): JSX.Element => {
             )}
           </ClassInfoSection>
         </div>
-        <img alt="program img" src={classInfo.main_image} />
+        <UseImgix alt="program img" srcUrl={"/images/class/class_04.png"} />
       </ProgramInfoSection>
     </ProgramSectionWrapper>
   );

@@ -10,6 +10,7 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";
 import { childType } from "../../utils/type";
+import UseImgix from "../../utils/UseImgix";
 import PageTitle from "./components/PageTitle";
 
 const PageLayout = styled.div`
@@ -81,14 +82,14 @@ export const ManagementChild = () => {
             onClick={() => navigate(`/my/management-child/${child.id}`)}
           >
             <ChildInfoSection>
-              <img alt="profile icon" src={child.image || `/images/profile-${index}.png`} />
+              <UseImgix alt="profile icon" srcUrl={child.image || `/images/profile-${index}.png`} />
               <ChildName style={{ fontWeight: "600" }}>{child.name}</ChildName>
               <span style={{ marginLeft: "-1rem" }}>
                 ({getDate(child.birth_date)}) {getGender(child.gender)}아
               </span>
             </ChildInfoSection>
-            <img
-              src="/images/icon-mypage-arrow.svg"
+            <UseImgix
+              srcUrl="/images/icon-mypage-arrow.svg"
               alt="right arrow icon"
               style={{ width: "2.8rem", height: "2.8rem" }}
             />
@@ -99,7 +100,11 @@ export const ManagementChild = () => {
       <CustomModal
         cancelbtn={false}
         topImage={
-          <img src={"/images/icon-sad-circle.svg"} alt="character" style={{ width: "9.5rem" }} />
+          <UseImgix
+            srcUrl={"/images/icon-sad-circle.svg"}
+            alt="character"
+            style={{ width: "9.5rem" }}
+          />
         }
         title="아이를 더 이상 추가할 수 없어요."
         content="아이는 최대 5명까지 등록할 수 있어요."

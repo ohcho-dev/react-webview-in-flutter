@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Chip from "../../../components/common/Chip";
+import UseImgix from "../../../utils/UseImgix";
 
 const ItemWrap = styled.div`
   width: calc(100% - 4rem);
@@ -48,7 +49,7 @@ const ItemTitle = styled.div`
   color: #282828;
 `;
 
-const ArrowBtn = styled.img`
+const ArrowBtn = styled.span`
   position: absolute;
   top: 50%;
   right: 1.8rem;
@@ -75,7 +76,7 @@ const ContentItem: React.FC<ContentItemProps> = ({
   return (
     <ItemWrap onClick={handleClick} style={style}>
       <ImageWrap>
-        <img src={`/images/icon-coaching-${coachingMethod}.svg`} alt="task img" />
+        <UseImgix srcUrl={`/images/icon-coaching-${coachingMethod}.svg`} alt="task img" />
       </ImageWrap>
       <ItemDesc>
         <ChipLayout>
@@ -85,7 +86,11 @@ const ContentItem: React.FC<ContentItemProps> = ({
         </ChipLayout>
         <ItemTitle>{name}</ItemTitle>
       </ItemDesc>
-      {useArrowBtn && <ArrowBtn src="/images/icon-arrow-right.svg" alt="상세보기" />}
+      {useArrowBtn && (
+        <ArrowBtn>
+          <UseImgix srcUrl="/images/icon-arrow-right.svg" alt="상세보기" />
+        </ArrowBtn>
+      )}
     </ItemWrap>
   );
 };
