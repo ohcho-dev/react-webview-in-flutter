@@ -52,10 +52,15 @@ const ApplyCoachingSuccess = (): JSX.Element => {
           <UseImgix
             srcUrl="/images/apply-coaching-success-img.png"
             alt="apply coaching success img"
+            style={{ width: "100%" }}
           />
         </SuccessImg>
         <FloatingImg>
-          <UseImgix srcUrl="/images/apply-coaching-success-floating-img.png" alt="floating img" />
+          <UseImgix
+            srcUrl="/images/apply-coaching-success-floating-img.png"
+            alt="floating img"
+            style={{ width: "100%" }}
+          />
         </FloatingImg>
       </ContentWrapper>
     </LayoutDetailPage>
