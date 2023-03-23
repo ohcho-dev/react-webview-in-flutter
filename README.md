@@ -6,7 +6,7 @@
 
 [![Deploy - b/Product a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml) [![Deploy - b/Stage a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-stage.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-stage.yml) [![Monitor - b/Dev a/Build](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/monitor-develop.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/monitor-develop.yml)
 
-### 엘턴 앱 웹뷰를 위한 repository입니다. ✨
+### 엘턴 B2C(Biz)앱 웹뷰를 위한 repository입니다. ✨
 
 ## 목차
 
