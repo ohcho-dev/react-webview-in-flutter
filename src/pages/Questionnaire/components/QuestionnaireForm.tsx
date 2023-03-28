@@ -64,9 +64,7 @@ const QuestionnaireForm = (): JSX.Element => {
   };
 
   const handleExitQuestionnaireBtnClick = () => {
-    navigate(`/coaching/questionnarie/${currentSurveyInfo.taskId}`, {
-      state: { coachingId: currentSurveyInfo.coachingId },
-    });
+    navigate(-1);
     setSurveyAnswer({ task_id: 0, survey: [] });
   };
 
@@ -246,9 +244,7 @@ const QuestionnaireForm = (): JSX.Element => {
       <CustomModal
         content="선택한 답변은 설문 상태 확인 페이지에서 다시 확인하실 수 있어요."
         isOpen={openSuccessModal}
-        okBtnClick={() =>
-          navigate(`/coaching/coaching-detail/${surveyCoachingId}`, { replace: true })
-        }
+        okBtnClick={() => navigate(-2)}
         toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
         title="설문 답변을 완료했어요."
         cancelbtn={false}
