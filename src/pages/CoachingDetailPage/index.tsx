@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -27,17 +27,19 @@ const PageTitleWrap = styled.div`
 
 const ShadowBox = styled.div`
   position: fixed;
-  top: 10rem;
+  top: 10.2rem;
   left: 0;
   width: 100%;
   height: 1px;
-  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: ${(props: { scrolling: boolean }) =>
+    props.scrolling ? "rgba(0, 0, 0, 0.1) 0px 1px 15px" : ""};
+  transition: box-shadow 0.5s ease;
 `;
 const ListScroll = styled.div`
   width: 100%;
   height: calc(100vh - 16rem);
   margin-top: 10rem;
-  overflow-x: scroll;
+  overflow-y: scroll;
 `;
 const Title = styled.div`
   font-weight: 600;
@@ -101,6 +103,17 @@ const CoachingDetailPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
+  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const [scrollY, setScrollY] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (scrollY === scrollRef?.current?.scrollTop) {
+        setScrolling(false);
+      }
+    }, 500);
+  }, [scrollY]);
 
   useEffect(() => {
     id && setCurrentTaskId(id);
@@ -142,8 +155,16 @@ const CoachingDetailPage = () => {
             </span>
           </ProgramStatus>
         </PageTitleWrap>
-        <ShadowBox />
-        <ListScroll>
+        <ShadowBox scrolling={scrolling} />
+        <ListScroll
+          ref={scrollRef}
+          onScroll={() => {
+            setScrollY(scrollRef?.current?.scrollTop);
+            if (!scrolling) {
+              setScrolling(true);
+            }
+          }}
+        >
           <DetailTitle>⛳️ 결과지</DetailTitle>
           {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
             <ContentItem
