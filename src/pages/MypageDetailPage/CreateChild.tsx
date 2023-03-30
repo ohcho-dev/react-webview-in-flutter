@@ -215,7 +215,7 @@ const CreateChild = () => {
             showPopperArrow={false}
             maxDate={new Date()}
             selected={birthDate}
-            customInput={<CustomInput inputRef={inputRef} />}
+            customInput={<CustomInput inputRef={inputRef} modifiable={true} />}
             onChange={(date: Date | null) => setBirthDate(date)}
           />
 
@@ -244,7 +244,7 @@ const CreateChild = () => {
                 selected={dueDate}
                 minDate={birthDate}
                 maxDate={dayjs(birthDate).add(90, "day").toDate()}
-                customInput={<CustomInput inputRef={inputRef} />}
+                customInput={<CustomInput inputRef={inputRef} modifiable={true} />}
                 onChange={(date: Date | null) => setDueDate(date)}
               />
             </>

@@ -21,18 +21,24 @@ interface InputProps {
   value: string;
   onChange: (value: string) => void;
   onClick: () => void;
+  modifiable: boolean;
+  setOpenRejectModal: () => void;
 }
 const ForwardInputRefFunction: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
-  { className, value, onClick, onChange },
+  { className, value, onClick, onChange, modifiable, setOpenRejectModal },
   ref,
 ) => {
+  const handleReject = () => {
+    setOpenRejectModal();
+  };
+
   return (
     <CustomInput
       className={className}
       value={value}
       ref={ref}
       onChange={e => onChange(e.target.value)}
-      onClick={onClick}
+      onClick={modifiable ? onClick : handleReject}
       readOnly
       aria-label="input"
     />
