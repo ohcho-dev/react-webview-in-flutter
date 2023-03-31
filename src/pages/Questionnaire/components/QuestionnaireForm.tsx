@@ -67,7 +67,6 @@ const QuestionnaireForm = (): JSX.Element => {
     setSurveyAnswer({ task_id: 0, survey: [] });
   };
 
-  console.log(surveyAnswer, surveyTempAnswer);
   const setDataForNextSurvey = (updatedSurveyAnswer: SurveyAnswerType, nextOrder: boolean) => {
     // 전역변수 설문데이터 저장
     setSurveyAnswer({

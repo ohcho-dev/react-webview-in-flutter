@@ -33,7 +33,6 @@ const QuestionnaireDetailPage = (): JSX.Element => {
     }
   }, [surveyAnswerInfo]);
 
-  console.log(answerList);
   return (
     <LayoutDetailPage>
       <SurveyQuestionWrapper>
@@ -58,7 +57,6 @@ const QuestionnaireDetailPage = (): JSX.Element => {
                   </div>
                 );
               case "SVQT_TEXT_LONG":
-                console.log(question.question);
                 return (
                   <div key={`${question.content + question.id + index}`}>
                     <ResultQuestionTextLong
