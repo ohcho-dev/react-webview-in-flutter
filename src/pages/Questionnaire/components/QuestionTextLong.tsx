@@ -34,6 +34,13 @@ const QuestionTextLong = (props: QuestionPropsType): JSX.Element => {
     const foundSurveyAnswerKey = Object.keys(surveyAnswer).find(
       (key: any) => surveyAnswer[key].id === value.id,
     );
+    // 값이 비었을 때 삭제
+    if (foundSurveyAnswerKey && !e.target.value) {
+      updateSurveyAnswer = updateSurveyAnswer.filter(answer => answer.id !== value.id);
+      setSurveyAnswer(updateSurveyAnswer);
+      return;
+    }
+    // 입력값이 있을때 수정 or 추가
     if (foundSurveyAnswerKey) {
       updateSurveyAnswer = surveyAnswer.map(answer =>
         answer.id === value.id
