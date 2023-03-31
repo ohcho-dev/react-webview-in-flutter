@@ -1,4 +1,4 @@
-import { QuestionItemType, SurveyResultQuestionType } from "../../../utils/type";
+import { GetSurveyAnswerType, QuestionItemType } from "../../../utils/type";
 import {
   Answer,
   AnswerSection,
@@ -9,11 +9,11 @@ import {
 
 interface ResultQuestionPropsType {
   questionNumber: number;
-  question: SurveyResultQuestionType;
+  question: GetSurveyAnswerType;
   totalNum: number;
 }
 
-const ResultQuestion = (props: ResultQuestionPropsType): JSX.Element => {
+const ResultQuestionChoice = (props: ResultQuestionPropsType): JSX.Element => {
   const { question, questionNumber, totalNum } = props;
   return (
     <QuestionWrapper>
@@ -21,9 +21,9 @@ const ResultQuestion = (props: ResultQuestionPropsType): JSX.Element => {
         <span>{questionNumber < 10 ? `0${questionNumber}` : questionNumber}</span>
         <span>/{totalNum}</span>
       </QuestionNumber>
-      <QuestionTitle>{question.content}</QuestionTitle>
+      <QuestionTitle>{question.question.content}</QuestionTitle>
       <AnswerSection>
-        {question.question_item.map((item: QuestionItemType) => (
+        {question.question.item.map((item: QuestionItemType) => (
           <Answer
             id={item.id.toString()}
             selected={question.answered_item_id.toString() === item.id.toString()}
@@ -37,4 +37,4 @@ const ResultQuestion = (props: ResultQuestionPropsType): JSX.Element => {
   );
 };
 
-export default ResultQuestion;
+export default ResultQuestionChoice;

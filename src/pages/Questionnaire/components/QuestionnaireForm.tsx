@@ -7,16 +7,17 @@ import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import {
-  currentSurveyInfoState,
   questionnarieState,
   startQuestionOrderNumState,
   surveyAnswerState,
-  surveyCoachingIdState,
   surveyTempAnswerState,
 } from "../../../recoil/atom";
-import { SurveyAnswerType, SurveyInfoType } from "../../../utils/type";
+import { SurveyAnswerType, ViewSurveyListType } from "../../../utils/type";
 import UseImgix from "../../../utils/UseImgix";
-import Question from "./Question";
+import QuestionChoice from "./QuestionChoice";
+import QuestionNumberUnit from "./QuestionNumberUnit";
+import QuestionTextLong from "./QuestionTextLong";
+import QuestionTextSHort from "./QuestionTextShort";
 import { QuestionGap, SurveyCategoryTitle } from "./style";
 
 const QuestionnaireForm = (): JSX.Element => {
@@ -25,15 +26,13 @@ const QuestionnaireForm = (): JSX.Element => {
   const scroll = 0;
   const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [openWarningModal, setOpenWarningModal] = useState(false);
-  const [surveyInfo, setSurveyInfo] = useState<SurveyInfoType>({
+  const [surveyInfo, setSurveyInfo] = useState<ViewSurveyListType>({
     id: 0,
     name: "",
     order: 0,
     question: [],
   });
   const questionnaireInfo = useRecoilValue(questionnarieState);
-  const surveyCoachingId = useRecoilValue(surveyCoachingIdState);
-  const currentSurveyInfo = useRecoilValue(currentSurveyInfoState);
   const [surveyTempAnswer, setSurveyTempAnswer] = useRecoilState(surveyTempAnswerState);
   const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyAnswerState);
   const startQuestionOrderNum = useRecoilValue(startQuestionOrderNumState);
@@ -68,6 +67,7 @@ const QuestionnaireForm = (): JSX.Element => {
     setSurveyAnswer({ task_id: 0, survey: [] });
   };
 
+  console.log(surveyAnswer, surveyTempAnswer);
   const setDataForNextSurvey = (updatedSurveyAnswer: SurveyAnswerType, nextOrder: boolean) => {
     // 전역변수 설문데이터 저장
     setSurveyAnswer({
@@ -88,10 +88,13 @@ const QuestionnaireForm = (): JSX.Element => {
 
   const handleSubmitSurveyBtnClick = () => {
     let totalScore = 0;
-    let answerForSubmit: { id: number; item_id: number }[] = [];
+    let answerForSubmit: { id: number; item_id: number | null; content: string | null }[] = [];
     surveyTempAnswer.map(answer => {
-      totalScore += answer.score;
-      return (answerForSubmit = [...answerForSubmit, { id: answer.id, item_id: answer.item_id }]);
+      totalScore += answer.score || 0;
+      return (answerForSubmit = [
+        ...answerForSubmit,
+        { id: answer.id, item_id: answer.item_id, content: answer.content },
+      ]);
     });
 
     // 지역변수 설문데이터 저장 (다음 설문지가 없을때를 대비)
@@ -144,7 +147,6 @@ const QuestionnaireForm = (): JSX.Element => {
       }
     }
   };
-
   return (
     <div className="list-section" style={{ touchAction: "pan-y" }}>
       <LayoutDetailPage
@@ -176,50 +178,11 @@ const QuestionnaireForm = (): JSX.Element => {
         </SurveyCategoryTitle>
         {surveyInfo.question.length &&
           surveyInfo.question.map((question, index: number) => {
-            return (
-              <div key={`${question.content + question.id}`}>
-                <Question
-                  questionNumber={index + 1}
-                  question={question}
-                  totalQuestionNum={surveyInfo.question.length}
-                />
-                {index !== surveyInfo.question.length - 1 && (
-                  <QuestionGap key={`${question.content + question.id}`} />
-                )}
-              </div>
-            );
-          })}
-
-        {/* <SurveyCategoryTitle scroll={scroll}>
-            <span>{surveyInfo?.name}</span>
-            <img alt="form character" src="/images/form-character.svg" />
-          </SurveyCategoryTitle>
-          {surveyInfo.question.length &&
-            surveyInfo.question.map((question, index: number) => {
-              return (
-                <div key={`${question.content + question.id}`}>
-                  <Question
-                    questionNumber={index + 1}
-                    question={question}
-                    totalQuestionNum={surveyInfo.question.length}
-                  />
-                  {index !== surveyInfo.question.length - 1 && (
-                    <QuestionGap key={`${question.content + question.id}`} />
-                  )}
-                </div>
-              );
-            })} */}
-        {/* <ListScroll
-            id="question-list"
-            onScroll={(e: React.UIEvent<HTMLElement>) => {
-              setScroll(e.currentTarget.scrollTop);
-            }}
-          >
-            {surveyInfo.question.length &&
-              surveyInfo.question.map((question, index: number) => {
+            switch (question.type) {
+              case "SVQT_CHOICE":
                 return (
                   <div key={`${question.content + question.id}`}>
-                    <Question
+                    <QuestionChoice
                       questionNumber={index + 1}
                       question={question}
                       totalQuestionNum={surveyInfo.question.length}
@@ -229,8 +192,49 @@ const QuestionnaireForm = (): JSX.Element => {
                     )}
                   </div>
                 );
-              })}
-          </ListScroll> */}
+              case "SVQT_TEXT_LONG":
+                return (
+                  <div key={`${question.content + question.id}`}>
+                    <QuestionTextLong
+                      questionNumber={index + 1}
+                      question={question}
+                      totalQuestionNum={surveyInfo.question.length}
+                    />
+                    {index !== surveyInfo.question.length - 1 && (
+                      <QuestionGap key={`${question.content + question.id}`} />
+                    )}
+                  </div>
+                );
+              case "SVQT_TEXT_SHORT":
+                return (
+                  <div key={`${question.content + question.id}`}>
+                    <QuestionTextSHort
+                      questionNumber={index + 1}
+                      question={question}
+                      totalQuestionNum={surveyInfo.question.length}
+                    />
+                    {index !== surveyInfo.question.length - 1 && (
+                      <QuestionGap key={`${question.content + question.id}`} />
+                    )}
+                  </div>
+                );
+              case "SVQT_NUMBER":
+                return (
+                  <div key={`${question.content + question.id}`}>
+                    <QuestionNumberUnit
+                      questionNumber={index + 1}
+                      question={question}
+                      totalQuestionNum={surveyInfo.question.length}
+                    />
+                    {index !== surveyInfo.question.length - 1 && (
+                      <QuestionGap key={`${question.content + question.id}`} />
+                    )}
+                  </div>
+                );
+              default:
+                return false;
+            }
+          })}
       </LayoutDetailPage>
       <CustomModal
         content="지금까지 작성하신 모든 설문이 사라집니다."
