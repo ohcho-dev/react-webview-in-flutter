@@ -1,30 +1,41 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { surveyTempAnswerState } from "../../../recoil/atom";
-import { QuestionItemType, QuestionType } from "../../../utils/type";
+import { QuestionItemType, ViewSurveyQuestionListType } from "../../../utils/type";
 import { Answer, AnswerSection, QuestionNumber, QuestionTitle, QuestionWrapper } from "./style";
 
 interface QuestionPropsType {
   questionNumber: number;
-  question: QuestionType;
+  question: ViewSurveyQuestionListType;
   totalQuestionNum: number;
 }
 
-const Question = (props: QuestionPropsType): JSX.Element => {
+const QuestionChoice = (props: QuestionPropsType): JSX.Element => {
   const { questionNumber, question, totalQuestionNum } = props;
   const [selectedAnswer, setSelectedAnswer] = useState("0");
   const [surveyAnswer, setSurveyAnswer] = useRecoilState(surveyTempAnswerState);
 
   const handleAnswerClick = (item: QuestionItemType) => {
-    let updatedArr: { id: number; score: number; item_id: number }[] = [];
+    let updatedArr: {
+      id: number;
+      score?: number;
+      item_id: number | null;
+      content: string | null;
+    }[] = [];
     setSelectedAnswer(item.id.toString());
+
     const foundAnswer = surveyAnswer.find(answer => answer.id === question.id);
     if (foundAnswer) {
       updatedArr = surveyAnswer.map(answer =>
-        answer.id === question.id ? { ...answer, item_id: item.id, score: item.score } : answer,
+        answer.id === question.id
+          ? { ...answer, score: item.score, item_id: item.id, content: null }
+          : answer,
       );
     } else {
-      updatedArr = [...surveyAnswer, { id: question.id, item_id: item.id, score: item.score }];
+      updatedArr = [
+        ...surveyAnswer,
+        { id: question.id, score: item.score, item_id: item.id, content: null },
+      ];
     }
     setSurveyAnswer([...updatedArr]);
   };
@@ -55,4 +66,4 @@ const Question = (props: QuestionPropsType): JSX.Element => {
   );
 };
 
-export default Question;
+export default QuestionChoice;

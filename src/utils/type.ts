@@ -13,6 +13,7 @@ export interface childType {
   birth_date: string;
   premature_flag: number;
   due_date?: string;
+  birth_modifiable?: boolean;
 }
 
 export interface createChildType {
@@ -84,7 +85,7 @@ export interface AnswerType {
 export interface SurveyAnswerType {
   id: number;
   score: number;
-  question: { id: number; item_id: number }[];
+  question: { id: number; item_id: number | null; content: string | null }[];
 }
 
 export interface SurveyInfoType {
@@ -182,4 +183,79 @@ export interface SelectBtnArrayType {
   id: number;
   name: string;
   function?: () => void;
+}
+
+// *************************
+// 설문지 보기 => ViewSurvey
+// *************************
+export interface ViewSurveyType {
+  id: number;
+  name: string;
+  target_score: number;
+  start_survey_id: number;
+  survey: ViewSurveyListType[];
+}
+export interface ViewSurveyListType {
+  id: number;
+  name: string;
+  order: number;
+  question: ViewSurveyQuestionListType[];
+}
+export interface ViewSurveyQuestionListType {
+  id: number;
+  content: string;
+  order: string;
+  type: string;
+  unit: string | null;
+  item: ViewSurveyQuestionItemListType[];
+}
+export interface ViewSurveyQuestionItemListType {
+  id: number;
+  order: number;
+  content: string;
+  score: number;
+  image: string | null;
+}
+
+// *************************
+// 설문답변 보기 => GETSurvey
+// *************************
+export interface GetSurveyType {
+  id: string;
+  name: string;
+  survey: GetSurveyListType[];
+}
+export interface GetSurveyListType {
+  result_id: number;
+  answer: [];
+}
+export interface GetSurveyAnswerType {
+  id: number;
+  answered_item_id: number;
+  content: string;
+  question: GetSurveyAnswerQuestionType;
+}
+export interface GetSurveyAnswerQuestionType {
+  content: string;
+  type: string;
+  unit: string | null;
+  item: GetSurveyAnswerQuestionItemListType[];
+}
+export interface GetSurveyAnswerQuestionItemListType {
+  id: number;
+  order: number;
+  content: string;
+  score: number;
+  image: string | null;
+}
+
+// *************************
+// 설문답변 저장 => PostSurvey
+// *************************
+
+export interface PostSurveyQuestionListType {
+  id: number;
+  score?: number;
+  item_id: number | null;
+  content: string | null;
 }

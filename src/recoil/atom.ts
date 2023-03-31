@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { AnswerType, HomeData, QuestionnaireType } from "../utils/type";
+import { AnswerType, HomeData, PostSurveyQuestionListType, ViewSurveyType } from "../utils/type";
 
 export const commonCodeState = atom({
   key: "commonCodeList",
@@ -22,6 +22,7 @@ export const selectedChildInfoState = atom({
     gender: "",
     due_date: "",
     birth_date: "",
+    birth_modifiable: true,
   },
 });
 export const selectedHomeDataState = atom<HomeData>({
@@ -51,9 +52,9 @@ export const useShareState = atom({
   default: false,
 });
 
-export const questionnarieState = atom<QuestionnaireType>({
+export const questionnarieState = atom<ViewSurveyType>({
   key: "questionnaire",
-  default: { id: 0, name: "", target_score: 0, first_survey_id: 0, survey: [] },
+  default: { id: 0, name: "", target_score: 0, start_survey_id: 0, survey: [] },
 });
 
 export const surveyAnswerState = atom<AnswerType>({
@@ -61,7 +62,7 @@ export const surveyAnswerState = atom<AnswerType>({
   default: { task_id: 0, survey: [] },
 });
 
-export const surveyTempAnswerState = atom<{ id: number; score: number; item_id: number }[]>({
+export const surveyTempAnswerState = atom<PostSurveyQuestionListType[]>({
   key: "surveyTempAnswer",
   default: [],
 });

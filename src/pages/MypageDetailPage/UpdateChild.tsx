@@ -92,16 +92,17 @@ const UpdateChild = () => {
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
   const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
+  const [birthModifiable, setBirthModifiable] = useState(false);
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
   const [openModal, setOpenModal] = useState(false);
   const [openBackModal, setOpenBackModal] = useState(false);
   const [openValidModal, setOpenValidModal] = useState(false);
   const [openSameNameModal, setOpenSameNameModal] = useState(false);
+  const [openRejectModal, setOpenRejectModal] = useState(false);
   const [updateStatus, setUpdateStatus] = useState(false);
   const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
   const { data } = useQuery(queryKeys.updatedChildInfo, () => getSelectedChild(childid));
-
   const callUpdateChildInfo = useMutation(updateChild, {
     onSuccess: () => {
       NativeFunction("ga4logNativeEventLog", `${updateChildSuccessedAction}`);
@@ -121,6 +122,7 @@ const UpdateChild = () => {
       setDefaultPremature(
         Prematures.filter(premature => premature.value === data[0].premature_flag)[0],
       );
+      setBirthModifiable(data[0].birth_modifiable);
     }
   }, [data]);
 
@@ -233,7 +235,13 @@ const UpdateChild = () => {
             showPopperArrow={false}
             maxDate={new Date()}
             selected={birthDate}
-            customInput={<CustomInput inputRef={inputRef} />}
+            customInput={
+              <CustomInput
+                inputRef={inputRef}
+                modifiable={birthModifiable}
+                setOpenRejectModal={() => setOpenRejectModal(!openRejectModal)}
+              />
+            }
             onChange={(date: Date | null) => {
               setBirthDate(date);
               setUpdateStatus(true);
@@ -266,7 +274,13 @@ const UpdateChild = () => {
                 selected={dueDate}
                 minDate={birthDate}
                 maxDate={dayjs(birthDate).add(90, "day").toDate()}
-                customInput={<CustomInput inputRef={inputRef} />}
+                customInput={
+                  <CustomInput
+                    inputRef={inputRef}
+                    modifiable={birthModifiable}
+                    setOpenRejectModal={() => setOpenRejectModal(!openRejectModal)}
+                  />
+                }
                 onChange={(date: Date | null) => {
                   setDueDate(date);
                   setUpdateStatus(true);
@@ -304,6 +318,15 @@ const UpdateChild = () => {
         okBtnClick={() => {
           navigate(-1);
         }}
+      />
+      <CustomModal
+        cancelbtn={false}
+        title="변경할 수 없어요."
+        content="진행중인 검사가 있을 경우 생일을 변경할 수 없습니다."
+        isOpen={openRejectModal}
+        toggleModal={() => setOpenRejectModal(!openRejectModal)}
+        okBtnName="확인"
+        okBtnClick={() => setOpenRejectModal(!openRejectModal)}
       />
 
       <CustomModal
