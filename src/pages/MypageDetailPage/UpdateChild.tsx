@@ -132,6 +132,10 @@ const UpdateChild = () => {
   };
 
   const handlePrematureValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
+    if (!birthModifiable) {
+      setOpenRejectModal(!openRejectModal);
+      return;
+    }
     const flag = Number(evt.target.value);
     if (flag === 1) {
       setDueDate(birthDate);
@@ -256,6 +260,7 @@ const UpdateChild = () => {
             id="childPremeture"
             type={Prematures}
             defaultValue={defaultPremature}
+            modifiable={birthModifiable}
             onChangeFunction={handlePrematureValue}
           />
 
