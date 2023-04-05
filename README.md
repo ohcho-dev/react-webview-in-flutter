@@ -4,7 +4,7 @@
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/e645e2d89e6d4a418f199e543c336332)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=dev-lumanlab/eltern-mobile-web&utm_campaign=Badge_Grade)
 
-[![Deploy - b/Product a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml) [![Deploy - b/Stage a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-stage.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-stage.yml) [![Monitor - b/Dev a/Build](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/monitor-develop.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/monitor-develop.yml)
+[![Deploy - b/Product a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml) [![Deploy - b/Dev a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/deploy-dev.yml) [![Monitor - b/feature(fix) a/Build](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/monitor-feat-fix.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/monitor-feat-fix.yml)
 
 ### 엘턴 B2C(Biz)앱 웹뷰를 위한 repository입니다. ✨
 
