@@ -83,17 +83,13 @@ const Questionnaire = (): JSX.Element => {
 
   return (
     <LayoutDetailPage
-      handleBackBtnClick={() =>
-        navigate(`/coaching/coaching-detail/${currentSurveyInfo.coachingId}`)
-      }
+      handleBackBtnClick={() => navigate(-1)}
       bottomBtn
       bottomBtnElement={
         <Button
           content="설문하기"
           theme="black"
-          onClick={() =>
-            navigate(`/coaching/questionnarie/form/${startOrderNum}`, { replace: true })
-          }
+          onClick={() => navigate(`/coaching/questionnarie/form/${startOrderNum}`)}
         />
       }
     >

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -16,7 +16,7 @@ import UseImgix from "../../utils/UseImgix";
 
 const PageTitleWrap = styled.div`
   position: fixed;
-  top: 5.9rem;
+  top: 0;
   left: 0;
   width: 100%;
   background: #fff;
@@ -27,13 +27,20 @@ const PageTitleWrap = styled.div`
 
 const ShadowBox = styled.div`
   position: fixed;
-  top: 16.2rem;
+  top: 10.2rem;
   left: 0;
   width: 100%;
   height: 1px;
-  box-shadow: 0px 1px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: ${(props: { scrolling: boolean }) =>
+    props.scrolling ? "rgba(0, 0, 0, 0.1) 0px 1px 15px" : ""};
+  transition: box-shadow 0.5s ease;
 `;
-
+const ListScroll = styled.div`
+  width: 100%;
+  height: calc(100vh - 16rem);
+  margin-top: 10rem;
+  overflow-y: scroll;
+`;
 const Title = styled.div`
   font-weight: 600;
   font-size: 2.2rem;
@@ -96,6 +103,17 @@ const CoachingDetailPage = () => {
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
+  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const [scrollY, setScrollY] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (scrollY === scrollRef?.current?.scrollTop) {
+        setScrolling(false);
+      }
+    }, 500);
+  }, [scrollY]);
 
   useEffect(() => {
     id && setCurrentTaskId(id);
@@ -123,81 +141,88 @@ const CoachingDetailPage = () => {
   }, [coachingInfo]);
   return (
     <>
-      <PageTitleWrap>
-        <Title>{coachingInfo.name}</Title>
-        <ProgramStatus>
-          <ProceedStatus color={coachingInfo.date_remain >= 0 ? "#00c7b1" : "#8D8D8D"}>
-            {coachingInfo.date_remain >= 0 ? "진행중" : "종료"}
-          </ProceedStatus>
-          <span>~{getDate(coachingInfo.end_date)}</span>
-          <span>
-            {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
-            {coachingInfo.date_remain === 0 && "오늘까지!"}
-          </span>
-        </ProgramStatus>
-      </PageTitleWrap>
-      <ShadowBox />
-      <LayoutDetailPage
-        style={{ marginTop: "10rem", height: "calc(100vh - 6rem - 10rem)" }}
-        handleBackBtnClick={() => navigate("/coaching")}
-      >
-        <DetailTitle>⛳️ 결과지</DetailTitle>
-        {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
-          <ContentItem
-            style={{ marginBottom: "0" }}
-            key={index + paper.name}
-            coachingMethod="result"
-            chipStatus={[paper.status]}
-            name={paper.name}
-            useArrowBtn={true}
-            handleClick={() => {
-              // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
-              if (paper.status === "TTPST_COMPLETE") {
-                navigate(`/coaching/result/${paper.paper_url}`);
-              } else {
-                setOpenModal(true);
-              }
-            }}
-          />
-        ))}
-        <DetailTitle>✅ 과제</DetailTitle>
-        {coachingInfo.task.map((task: TaskStatusType, index: number) => (
-          <ContentItem
-            key={index + task.name}
-            coachingMethod={task.task_type}
-            chipStatus={
-              coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
-                ? [task.task_type, "EXPIRED"]
-                : [task.task_type, task.status]
+      <LayoutDetailPage handleBackBtnClick={() => navigate(-1)}>
+        <PageTitleWrap>
+          <Title>{coachingInfo.name}</Title>
+          <ProgramStatus>
+            <ProceedStatus color={coachingInfo.date_remain >= 0 ? "#00c7b1" : "#8D8D8D"}>
+              {coachingInfo.date_remain >= 0 ? "진행중" : "종료"}
+            </ProceedStatus>
+            <span>~{getDate(coachingInfo.end_date)}</span>
+            <span>
+              {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
+              {coachingInfo.date_remain === 0 && "오늘까지!"}
+            </span>
+          </ProgramStatus>
+        </PageTitleWrap>
+        <ShadowBox scrolling={scrolling} />
+        <ListScroll
+          ref={scrollRef}
+          onScroll={() => {
+            setScrollY(scrollRef?.current?.scrollTop);
+            if (!scrolling) {
+              setScrolling(true);
             }
-            name={task.name}
-            useArrowBtn={
-              coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
-            }
-            handleClick={() => {
-              if (task.task_type === "TSTY_SURVEY") {
-                if (task.status === "TSST_ONGOING") {
-                  coachingInfo.date_remain >= 0 &&
-                    navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
-                } else if (task.status === "TSST_COMPLETE") {
-                  navigate(`/coaching/questionnarie/detail/${task.id}`);
-                }
-              } else if (task.task_type === "TSTY_VIDEO") {
-                if (task.status === "TSST_ONGOING") {
-                  coachingInfo.date_remain >= 0 &&
-                    NativeFunction(
-                      "routeNativeScreen",
-                      `coachingVideoDetail@${task.id}@${childInfo.id}`,
-                    );
+          }}
+        >
+          <DetailTitle>⛳️ 결과지</DetailTitle>
+          {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
+            <ContentItem
+              style={{ marginBottom: "0" }}
+              key={index + paper.name}
+              coachingMethod="result"
+              chipStatus={[paper.status]}
+              name={paper.name}
+              useArrowBtn={true}
+              handleClick={() => {
+                // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
+                if (paper.status === "TTPST_COMPLETE") {
+                  navigate(`/coaching/result/${paper.paper_url}`);
                 } else {
-                  navigate(`/coaching/videoAssignment/${task.id}`, {
-                    state: { task_id: task.id, coaching_id: id },
-                  });
+                  setOpenModal(true);
                 }
+              }}
+            />
+          ))}
+          <DetailTitle>✅ 과제</DetailTitle>
+          {coachingInfo.task.map((task: TaskStatusType, index: number) => (
+            <ContentItem
+              key={index + task.name}
+              coachingMethod={task.task_type}
+              chipStatus={
+                coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
+                  ? [task.task_type, "EXPIRED"]
+                  : [task.task_type, task.status]
               }
-            }}
-          />
-        ))}
+              name={task.name}
+              useArrowBtn={
+                coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
+              }
+              handleClick={() => {
+                if (task.task_type === "TSTY_SURVEY") {
+                  if (task.status === "TSST_ONGOING") {
+                    coachingInfo.date_remain >= 0 &&
+                      navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
+                  } else if (task.status === "TSST_COMPLETE") {
+                    navigate(`/coaching/questionnarie/detail/${task.id}`);
+                  }
+                } else if (task.task_type === "TSTY_VIDEO") {
+                  if (task.status === "TSST_ONGOING") {
+                    coachingInfo.date_remain >= 0 &&
+                      NativeFunction(
+                        "routeNativeScreen",
+                        `coachingVideoDetail@${task.id}@${childInfo.id}`,
+                      );
+                  } else {
+                    navigate(`/coaching/videoAssignment/${task.id}`, {
+                      state: { task_id: task.id, coaching_id: id },
+                    });
+                  }
+                }
+              }}
+            />
+          ))}
+        </ListScroll>
         <CustomModal
           cancelbtn={false}
           topImage={
