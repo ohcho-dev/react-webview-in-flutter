@@ -55,6 +55,7 @@ interface CustonRadioButtonProps {
   onChangeFunction: (e: any) => void;
   type: TypeProps[];
   id: string;
+  modifiable?: boolean;
 }
 
 export function CustomRadioButton({
@@ -62,6 +63,7 @@ export function CustomRadioButton({
   type,
   defaultValue,
   onChangeFunction,
+  modifiable,
 }: CustonRadioButtonProps) {
   const [selectedColor, setSelectedColor] = useState<TypeProps>(defaultValue);
 
@@ -75,6 +77,10 @@ export function CustomRadioButton({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     const selected = type.filter(item => String(item.value) === value);
+
+    if (id === "childPremeture" && !modifiable) {
+      return;
+    }
 
     if (selected) {
       setSelectedColor(selected[0]);
