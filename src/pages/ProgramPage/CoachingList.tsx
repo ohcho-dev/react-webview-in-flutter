@@ -126,7 +126,7 @@ const CoachingList = () => {
                       )}
                       utilVisible={false}
                     />
-                    {/* {index !== coachingList[0].length - 1 && <Divider />} */}
+                    {index !== coachingList[0].length - 1 && <Divider />}
                   </div>
                 );
               })}
