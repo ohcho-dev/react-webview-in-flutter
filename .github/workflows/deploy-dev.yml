@@ -1,7 +1,7 @@
 name: Deploy - b/Dev a/Deploy
 
 on:
-  pull_request:
+  push:
     branches: [dev]
 
 jobs:
