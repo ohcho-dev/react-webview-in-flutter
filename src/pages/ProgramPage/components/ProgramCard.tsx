@@ -181,6 +181,7 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
       {dateTime && <ProgramLocation>{dateTime}</ProgramLocation>}
       <ProgramPriceSection>
         <ProgramPrice
+          id={id}
           discountPercentage={discountPercentage}
           price={price}
           originalPrice={originalPrice}

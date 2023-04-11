@@ -8,20 +8,21 @@ interface ProgramPriceProps {
   originalPriceStyle?: object;
   priceStyle?: object;
   perNum?: string;
+  id?: number;
 }
 
-// const ProgramPriceSection = styled.div`
-//   display: flex;
-//   column-gap: 0.5rem;
-//   align-items: center;
-//   width: 100%;
-// `;
+const ProgramPriceSection = styled.div`
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+  width: 100%;
+`;
 
-// const DiscountPercentage = styled.span`
-//   font-weight: 700;
-//   font-size: 1.8rem;
-//   color: #fd7473;
-// `;
+const DiscountPercentage = styled.span`
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #fd7473;
+`;
 
 const Price = styled.span`
   font-weight: 700;
@@ -29,12 +30,12 @@ const Price = styled.span`
   color: #0a0a0a;
 `;
 
-// const OriginalPrice = styled.span`
-//   font-weight: 400;
-//   font-size: 1.6rem;
-//   color: #9d9d9d;
-//   text-decoration: line-through;
-// `;
+const OriginalPrice = styled.span`
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: #9d9d9d;
+  text-decoration: line-through;
+`;
 
 const PerActivity = styled.span`
   font-weight: 400;
@@ -44,37 +45,37 @@ const PerActivity = styled.span`
 
 const ProgramPrice: React.FC<ProgramPriceProps> = props => {
   const {
-    // discountPercentage,
-    // originalPrice,
-    // percentageStyle,
-    // originalPriceStyle,
-    // priceStyle,
+    discountPercentage,
+    originalPrice,
+    percentageStyle,
+    originalPriceStyle,
+    priceStyle,
     price,
     perNum,
+    id,
   } = props;
-  //const numberFormatter = new Intl.NumberFormat("ko");
+  const numberFormatter = new Intl.NumberFormat("ko");
 
   return (
     <>
-      {price === 0 ? (
+      {price === 0 || id === 5 ? (
         <Price>무료{perNum && <PerActivity>({perNum}회)</PerActivity>}</Price>
       ) : (
-        <Price>무료{perNum && <PerActivity>({perNum}회)</PerActivity>}</Price>
-        // <ProgramPriceSection>
-        //   {discountPercentage > 0 && (
-        //     <DiscountPercentage style={{ ...percentageStyle }}>
-        //       {discountPercentage}%
-        //     </DiscountPercentage>
-        //   )}
-        //   <Price style={{ ...priceStyle }}>
-        //     {numberFormatter.format(price)}원{perNum && <PerActivity>({perNum}회)</PerActivity>}
-        //   </Price>
-        //   {originalPrice > 0 && (
-        //     <OriginalPrice style={{ ...originalPriceStyle }}>
-        //       {numberFormatter.format(originalPrice)}원
-        //     </OriginalPrice>
-        //   )}
-        // </ProgramPriceSection>
+        <ProgramPriceSection>
+          {discountPercentage > 0 && (
+            <DiscountPercentage style={{ ...percentageStyle }}>
+              {discountPercentage}%
+            </DiscountPercentage>
+          )}
+          <Price style={{ ...priceStyle }}>
+            {numberFormatter.format(price)}원{perNum && <PerActivity>({perNum}회)</PerActivity>}
+          </Price>
+          {originalPrice > 0 && (
+            <OriginalPrice style={{ ...originalPriceStyle }}>
+              {numberFormatter.format(originalPrice)}원
+            </OriginalPrice>
+          )}
+        </ProgramPriceSection>
       )}
     </>
   );
