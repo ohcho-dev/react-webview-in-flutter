@@ -19,6 +19,9 @@ const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"
  */
 
 const CoachingDetailPage = React.lazy(() => import("./pages/CoachingDetailPage"));
+const ApplyCoachingPayment = React.lazy(() =>
+  import("./pages/ProgramDetailPage/components/ApplyCoachingPayment"),
+);
 const ResultPaper = React.lazy(() => import("./pages/CoachingDetailPage/components/ResultPaper"));
 
 const Questionnaire = React.lazy(() => import("./pages/Questionnaire"));
@@ -108,6 +111,14 @@ export const RouterConfig = [
   {
     path: "/program/coaching/:coachingid",
     element: <ProgramDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/program/coaching/:coachingid/payment",
+    element: <ApplyCoachingPayment />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

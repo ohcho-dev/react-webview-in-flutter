@@ -206,8 +206,19 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
     //TODO: 코드 수정 필요
     //id=5 -> price>0 이지만 무료 , id=7 -> 유료
     if (id === 7) {
-      NativeFunction("routeNativeScreen", "payment@39900");
-      setOpenBottomModal(false);
+      if (res?.message === "OK") {
+        setOpenBottomModal(false);
+        navigate(`/program/coaching/${id}/payment`);
+      } else {
+        if (res?.code === "ONGOING_COACHING") {
+          // 1.구매불가(해당 월령 구매한 동일상품)
+          setOpenSameCoachingModal(true);
+        } else if (res?.code === "ALMOST_MONTH_LIMIT") {
+          // 2.경고(월령 변경까지 얼마 남지 않음)
+          setOpenUsageDuration(true);
+          setLeftDays(res?.detail?.left_days || 0);
+        }
+      }
     } else {
       if (res?.message === "OK") {
         callApplyCoaching.mutate({ id: coachingInfo.id.toString() });

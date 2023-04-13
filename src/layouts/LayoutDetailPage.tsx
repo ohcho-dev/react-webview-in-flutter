@@ -36,6 +36,7 @@ interface LayoutDetailPageProps {
   bottomBtn?: boolean;
   bottomBtnElement?: ReactElement;
   style?: object;
+  title?: string;
   leftBtn?: React.ReactNode;
   bottomScrollAnimationEffect?: boolean;
   handleBackBtnClick?: () => void | undefined;
@@ -49,6 +50,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   bottomScrollAnimationEffect = false,
   bottomBtnElement,
   style,
+  title,
   leftBtn,
   handleBackBtnClick,
 }) => {
@@ -70,6 +72,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
         <DetailTitleBar
           style={titleBarBorder ? { borderBottom: "solid 0.5px rgba(0, 0, 0, 0.15)" } : {}}
           leftBtn={leftBtn}
+          title={title}
           handleBackBtnClick={handleBackBtnClick}
         />
       )}
