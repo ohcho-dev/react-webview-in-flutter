@@ -131,6 +131,14 @@ const LoginInfo = styled.div`
   }
 `;
 
+const PageTitle = styled.div`
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 3.2rem;
+  letter-spacing: -0.04rem;
+  color: #0a0a0a;
+`;
+
 interface MainTitleBarProps {
   style?: object;
 }
@@ -164,8 +172,10 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
 interface DetailTitleBarProps {
   border?: boolean;
   style?: object;
+
   leftBtn?: React.ReactNode;
   handleBackBtnClick?: () => void | undefined;
+  title?: string;
 }
 
 export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
@@ -173,12 +183,14 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   style,
   leftBtn,
   handleBackBtnClick,
+  title,
 }) => {
   const navigate = useNavigate();
 
   return (
     <TitleBarWrap border={border} style={{ ...style }}>
       <div
+        style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
         onClick={() => {
           handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
         }}
@@ -189,7 +201,8 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
           style={{ width: "2.8rem" }}
         />
       </div>
-      {leftBtn && <ButtonWrap>{leftBtn}</ButtonWrap>}
+      {title && <PageTitle>{title}</PageTitle>}
+      {title && <div style={{ width: "2.8rem" }}></div>}
     </TitleBarWrap>
   );
 };
