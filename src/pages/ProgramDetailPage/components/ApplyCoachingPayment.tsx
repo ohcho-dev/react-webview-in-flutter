@@ -200,22 +200,17 @@ const ApplyCoachingPayment = () => {
     const id = evt.target.id;
     const value = evt.target.value;
     const maxLength = evt.target.maxLength;
-
+    console.log(value);
     // 최대 글자 수 제한
     if (maxLength && maxLength < value.length) return;
 
     if (id === "parentName") {
-      // 한글, 영문, 숫자만 입력가능
-      const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/;
-      if (!regex.test(value)) {
-        value.replace(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g, "");
-        return;
-      }
       setRequiredInfo({ ...requiredInfo, parent_name: value });
     } else if (id === "parentPhoneNumber") {
       setRequiredInfo({ ...requiredInfo, parent_phone: value });
     }
   };
+  console.log(requiredInfo.parent_name);
 
   const handleApplyBtnClick = () => {
     const { parent_name, parent_phone, payment_method } = requiredInfo;
