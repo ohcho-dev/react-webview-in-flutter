@@ -12,20 +12,20 @@ import { selectedChildInfoState } from "../../../recoil/atom";
 import getGender from "../../../utils/getGender";
 import { RefObject, useRef, useState } from "react";
 import { applyCoachingBodyType } from "../../../utils/type";
-import { CustomRadioButton } from "../../../components/common/CustomRadioButton";
+// import { CustomRadioButton } from "../../../components/common/CustomRadioButton";
 import CustomModal from "../../../components/common/CustomModal";
 import { NativeFunction } from "../../../utils/NativeFunction";
 
-interface TypeProps {
-  name: string;
-  value: any;
-}
-const PaymentMethods: TypeProps[] = [
-  { name: "신용카드", value: "credit" },
-  { name: "네이버페이", value: "naver" },
-  { name: "카카오페이", value: "kakao" },
-];
-const DEFAULT_PaymentMethods = { name: "신용카드", value: "credit" };
+// interface TypeProps {
+//   name: string;
+//   value: any;
+// }
+// const PaymentMethods: TypeProps[] = [
+//   { name: "신용카드", value: "credit" },
+//   { name: "네이버페이", value: "naver" },
+//   { name: "카카오페이", value: "kakao" },
+// ];
+// const DEFAULT_PaymentMethods = { name: "신용카드", value: "credit" };
 
 const Base = styled.div`
   background: white;
@@ -222,7 +222,7 @@ const ApplyCoachingPayment = () => {
     if (parent_name && parent_phone && payment_method && coachingid && selectedChild.id) {
       NativeFunction(
         "routeNativeScreen",
-        `payment@${selectedCoachingInfo[0].price.toString()}@${parent_name}@${parent_phone}@${payment_method}`,
+        `payment@${selectedCoachingInfo[0].price.toString()}@${parent_name}@${parent_phone}`,
       );
     } else {
       setOpenValidationModal(true);
@@ -306,7 +306,7 @@ const ApplyCoachingPayment = () => {
           onChange={handleTypeInformation}
         />
       </Accordion>
-      <Accordion title="결제수단">
+      {/* <Accordion title="결제수단">
         <CustomRadioButton
           id="paymentMethod"
           type={PaymentMethods}
@@ -315,7 +315,7 @@ const ApplyCoachingPayment = () => {
             setRequiredInfo({ ...requiredInfo, payment_method: e.target.value });
           }}
         />
-      </Accordion>
+      </Accordion> */}
       <Accordion title="결제 정보">
         <ProductInfoWrap>
           <FlexBox>
