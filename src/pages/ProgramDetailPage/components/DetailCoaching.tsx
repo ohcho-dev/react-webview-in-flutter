@@ -250,14 +250,14 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         }
       >
         <div>
-          {coachingInfo.main_image && (
-            <Thumbnail>
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0207.png"
-                alt="Coaching Thumbanil"
-              />
-            </Thumbnail>
-          )}
+          {/* {coachingInfo.main_image && ( */}
+          <Thumbnail>
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0207.png"
+              alt="Coaching Thumbanil"
+            />
+          </Thumbnail>
+          {/* )} */}
           <ProductMainInfo>
             <ProductName>{coachingInfo?.name}</ProductName>
             <PriceWrap>
@@ -305,6 +305,31 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
               />
               <UseImgix
                 srcUrl="/images/coaching/coaching_new_main_0220_05.png"
+                alt="Coaching Detail Page 5"
+              />
+            </ImageWrap>
+          )}
+          {/* 결제 test용 */}
+          {coachingInfo.id === 7 && (
+            <ImageWrap>
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_01.png"
+                alt="Coaching Detail Page 1"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_02.png"
+                alt="Coaching Detail Page 2"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_03.png"
+                alt="Coaching Detail Page 3"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_04.png"
+                alt="Coaching Detail Page 4"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_05_test2.png"
                 alt="Coaching Detail Page 5"
               />
             </ImageWrap>
