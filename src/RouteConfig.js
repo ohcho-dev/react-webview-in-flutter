@@ -5,19 +5,22 @@ import React from "react";
  */
 
 const HomePage = React.lazy(() => import("./pages/HomePage"));
+const RecordPage = React.lazy(() => import("./pages/RecordPage"));
 const CoachingPage = React.lazy(() => import("./pages/CoachingPage"));
 const ProgramPage = React.lazy(() => import("./pages/ProgramPage"));
 const MyPage = React.lazy(() => import("./pages/Mypage"));
-
 /**
  * 홈메뉴
  */
 const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"));
 
 /**
- * 코칭메뉴
+ * 기록메뉴
  */
 
+/**
+ * 코칭메뉴
+ */
 const CoachingDetailPage = React.lazy(() => import("./pages/CoachingDetailPage"));
 const ApplyCoachingPayment = React.lazy(() =>
   import("./pages/ProgramDetailPage/components/ApplyCoachingPayment"),
@@ -76,14 +79,14 @@ export const RouterConfig = [
       exit: "to-right",
     },
   },
-  // {
-  //   path: "/note",
-  //   element: <NotePage />,
-  //   sceneConfig: {
-  //     enter: "from-fade",
-  //     exit: "to-right",
-  //   },
-  // },
+  {
+    path: "/record",
+    element: <RecordPage />,
+    sceneConfig: {
+      enter: "from-fade",
+      exit: "to-right",
+    },
+  },
   {
     path: "/coaching",
     element: <CoachingPage />,
