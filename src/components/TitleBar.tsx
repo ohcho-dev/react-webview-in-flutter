@@ -176,6 +176,7 @@ interface DetailTitleBarProps {
   leftBtn?: React.ReactNode;
   handleBackBtnClick?: () => void | undefined;
   title?: string;
+  titleType?: "back" | "close";
 }
 
 export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
@@ -184,25 +185,42 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   leftBtn,
   handleBackBtnClick,
   title,
+  titleType,
 }) => {
   const navigate = useNavigate();
 
   return (
-    <TitleBarWrap border={border} style={{ ...style }}>
-      <div
-        style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
-        onClick={() => {
-          handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
-        }}
-      >
-        <UseImgix
-          srcUrl="/images/icon-back.svg"
-          alt="left arrow icon"
-          style={{ width: "2.8rem" }}
-        />
-      </div>
+    <TitleBarWrap
+      border={border}
+      style={{ ...style, justifyContent: titleType === "close" ? "flex-end" : "space-between" }}
+    >
+      {(!titleType || titleType === "back") && (
+        <div
+          style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+          onClick={() => {
+            handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
+          }}
+        >
+          <UseImgix
+            srcUrl="/images/icon-back.svg"
+            alt="left arrow icon"
+            style={{ width: "2.8rem" }}
+          />
+        </div>
+      )}
       {title && <PageTitle>{title}</PageTitle>}
       {title && <div style={{ width: "2.8rem" }}></div>}
+
+      {titleType === "close" && (
+        <div
+          style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}
+          onClick={() => {
+            handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
+          }}
+        >
+          <UseImgix srcUrl="/images/icon-close.svg" alt="close icon" style={{ width: "2.8rem" }} />
+        </div>
+      )}
     </TitleBarWrap>
   );
 };

@@ -17,6 +17,7 @@ const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"
 /**
  * 기록메뉴
  */
+const ExplanationRecord = React.lazy(() => import("./pages/RecordDetailPage/ExplanationRecord"));
 
 /**
  * 코칭메뉴
@@ -84,6 +85,14 @@ export const RouterConfig = [
     element: <RecordPage />,
     sceneConfig: {
       enter: "from-fade",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/record/explanation",
+    element: <ExplanationRecord />,
+    sceneConfig: {
+      enter: "from-right",
       exit: "to-right",
     },
   },
