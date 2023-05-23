@@ -13,7 +13,7 @@ const MyPage = React.lazy(() => import("./pages/Mypage"));
  * 홈메뉴
  */
 const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"));
-
+const StampReward = React.lazy(() => import("./pages/RecordDetailPage/StampReward"));
 /**
  * 기록메뉴
  */
@@ -91,6 +91,14 @@ export const RouterConfig = [
   {
     path: "/record/explanation",
     element: <ExplanationRecord />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/record/stampReward",
+    element: <StampReward />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

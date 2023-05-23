@@ -94,7 +94,7 @@ const RecordGrade = () => {
           <Imgix src={`${process.env.REACT_APP_IMGIX_URL}/images/record/record_sprout.svg`} />
           <GradeText>새싹</GradeText>
         </GradeWrap>
-        <UtilWrap>
+        <UtilWrap onClick={() => navigate("/record/stampreward")}>
           <CountChip>10개 기록</CountChip>
           <Imgix src={`${process.env.REACT_APP_IMGIX_URL}/images/common/chevron-right.svg`} />
         </UtilWrap>
