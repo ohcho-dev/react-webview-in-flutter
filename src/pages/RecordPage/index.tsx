@@ -4,6 +4,7 @@ import FloatingButton from "../../components/common/FloatingButton";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import RecordGrade from "./components/RecordGrade";
 import RecordList from "./components/RecordList";
+import { useNavigate } from "react-router-dom";
 
 const Devider = styled.div`
   height: 1rem;
@@ -11,6 +12,8 @@ const Devider = styled.div`
 `;
 
 const RecordPage = () => {
+  const navigate = useNavigate();
+
   return (
     <LayoutMainPage>
       <RecordGrade />
@@ -19,7 +22,7 @@ const RecordPage = () => {
       <FloatingButton
         page="main"
         iconUrl={`${process.env.REACT_APP_IMGIX_URL}/images/record/record_icon_pencil.svg`}
-        onClick={() => console.log(1)}
+        onClick={() => navigate("/record/record-task-list")}
       />
     </LayoutMainPage>
   );

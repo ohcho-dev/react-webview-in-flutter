@@ -1,8 +1,9 @@
-import EmptyBox from "../../../components/globals/EmptyBox";
-import { ColorLightEltern4 } from "../../../constant/ldsConstants/global";
-import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
+import * as S from "./StampReward.styled";
 import UseImgix from "../../../utils/UseImgix";
-import * as SC from "./styled";
+import EmptyBox from "../../../components/globals/EmptyBox";
+import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
+
+import { ColorLightEltern4 } from "../../../constant/ldsConstants/global";
 
 const StampReward = () => {
   const StampList = [
@@ -55,8 +56,8 @@ const StampReward = () => {
 
   return (
     <LayoutDetailPage titleType="close">
-      <SC.Title>기록 목록</SC.Title>
-      <SC.StampContainer>
+      <S.Title>기록 목록</S.Title>
+      <S.StampContainer>
         {StampList.map((stampItem, index) => {
           let backgroundColor = "";
           if (index === 2) console.log((index + 1) % 3);
@@ -72,17 +73,17 @@ const StampReward = () => {
               break;
           }
           return (
-            <SC.StampListWrap key={index}>
-              <SC.StampImage style={{ backgroundColor }}>
+            <S.StampListWrap key={index}>
+              <S.StampImage style={{ backgroundColor }}>
                 <UseImgix srcUrl={stampItem.imgUrl} alt={stampItem.title} />
-              </SC.StampImage>
-              <SC.StampTitle style={{ width: "10rem" }}>{stampItem.title}</SC.StampTitle>
-            </SC.StampListWrap>
+              </S.StampImage>
+              <S.StampTitle style={{ width: "10rem" }}>{stampItem.title}</S.StampTitle>
+            </S.StampListWrap>
           );
         })}
-      </SC.StampContainer>
+      </S.StampContainer>
       <EmptyBox height="2.4rem" />
-      <SC.Title>기록 여정</SC.Title>
+      <S.Title>기록 여정</S.Title>
     </LayoutDetailPage>
   );
 };

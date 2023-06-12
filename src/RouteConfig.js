@@ -13,11 +13,13 @@ const MyPage = React.lazy(() => import("./pages/Mypage"));
  * 홈메뉴
  */
 const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"));
-const StampReward = React.lazy(() => import("./pages/RecordDetailPage/StampReward"));
+
 /**
  * 기록메뉴
  */
 const ExplanationRecord = React.lazy(() => import("./pages/RecordDetailPage/ExplanationRecord"));
+const StampReward = React.lazy(() => import("./pages/RecordDetailPage/StampReward"));
+const RecordTaskList = React.lazy(() => import("./pages/RecordDetailPage/RecordTaskList"));
 
 /**
  * 코칭메뉴
@@ -97,8 +99,16 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/record/stampReward",
+    path: "/record/stamp-reward",
     element: <StampReward />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/record/record-task-list",
+    element: <RecordTaskList />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
