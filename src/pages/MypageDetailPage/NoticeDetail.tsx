@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { getNoticeDetail } from "../../apis/mypage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 
 const PageLayout = styled.div`
   margin-top: 7rem;

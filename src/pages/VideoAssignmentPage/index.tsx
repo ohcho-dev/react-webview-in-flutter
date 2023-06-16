@@ -10,7 +10,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 import { VideoAssignmentResultType } from "../../utils/type";
 import UseImgix from "../../utils/UseImgix";
 

@@ -6,10 +6,10 @@ import { deleteProfilImageApi } from "../../../apis/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
-import Dday from "../../../utils/Dday";
 import { NativeFunction } from "../../../utils/NativeFunction";
-import { getDate } from "../../../utils/getDateTime";
+import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../utils/UseImgix";
+import getDday from "../../../utils/date/getDday";
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;
@@ -164,7 +164,9 @@ const ChildInfo = () => {
           </BirthDateChip>
           <DdayLabel>우리아이 태어난지</DdayLabel>
           <DdayValue>
-            <span>{selectedChild.birth_date && Math.abs(Dday(selectedChild.birth_date)) + 1}</span>
+            <span>
+              {selectedChild.birth_date && Math.abs(getDday(selectedChild.birth_date)) + 1}
+            </span>
             <span>일</span>
           </DdayValue>
         </div>

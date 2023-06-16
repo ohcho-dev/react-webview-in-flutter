@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
-import Dday from "../../../utils/Dday";
+import getDday from "../../../utils/date/getDday";
 import UseImgix from "../../../utils/UseImgix";
 import { NativeFunction } from "../../../utils/NativeFunction";
 
@@ -203,7 +203,9 @@ const RecommendActivityBox = () => {
             <Label>우리 아이 태어난지</Label>
           </FlexBox>
           <FlexBox>
-            <DDay>{selectedChild.birth_date && Math.abs(Dday(selectedChild.birth_date)) + 1}</DDay>
+            <DDay>
+              {selectedChild.birth_date && Math.abs(getDday(selectedChild.birth_date)) + 1}
+            </DDay>
             <DDayLabel>일째</DDayLabel>
           </FlexBox>
         </FlexBox>

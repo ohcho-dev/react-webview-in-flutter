@@ -7,7 +7,7 @@ import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 import getGender from "../../utils/getGender";
 import { childType } from "../../utils/type";
 import UseImgix from "../../utils/UseImgix";

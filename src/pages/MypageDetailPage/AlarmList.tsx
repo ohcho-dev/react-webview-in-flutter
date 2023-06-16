@@ -7,7 +7,7 @@ import { getNotificationList, updateNotificationCheckTime } from "../../apis/not
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { newNotificationFlagstate } from "../../store/atom";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 import { NotificationType } from "../../utils/type";
 import UseImgix from "../../utils/UseImgix";
 import PageTitle from "./components/PageTitle";

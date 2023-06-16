@@ -1,6 +1,6 @@
+import getDday from "../../../utils/date/getDday";
 import styled from "styled-components";
-import Dday from "../../../utils/Dday";
-import { getDate } from "../../../utils/getDateTime";
+import { getDate } from "../../../utils/date/getDateTime";
 import { appliedCoachingType } from "../../../utils/type";
 import UseImgix from "../../../utils/UseImgix";
 
@@ -71,8 +71,8 @@ const CoachingCard = (props: { coaching: appliedCoachingType; alt: string }): JS
           {status === "COSTAT_ONGOING" ? "진행중" : "종료"}
         </ProgressChip>
         <Duration>{`${getDate(start_date)}~${getDate(end_date)}`}</Duration>
-        {Dday(end_date) > 0 && <LeftDays>{Dday(end_date)}일 남음</LeftDays>}
-        {Dday(end_date) === 0 && <LeftDays>오늘까지!</LeftDays>}
+        {getDday(end_date) > 0 && <LeftDays>{getDday(end_date)}일 남음</LeftDays>}
+        {getDday(end_date) === 0 && <LeftDays>오늘까지!</LeftDays>}
       </div>
     </CoachingCardWrapper>
   );

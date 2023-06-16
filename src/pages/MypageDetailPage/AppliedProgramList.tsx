@@ -6,7 +6,7 @@ import { getPurchaseClasses, getPurchaseCoaching } from "../../apis/mypage";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 import getGender from "../../utils/getGender";
 import UseImgix from "../../utils/UseImgix";
 import PageTitle from "./components/PageTitle";

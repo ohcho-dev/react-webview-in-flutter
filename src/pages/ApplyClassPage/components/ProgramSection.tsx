@@ -1,9 +1,9 @@
+import { getMonthLevelString } from "../../../utils/date/getMonthLevelString";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Title } from "..";
 import { commonCodeState } from "../../../store/atom";
-import { getDateTime } from "../../../utils/getDateTime";
-import { getMonthLevelString } from "../../../utils/getMonthLevelString";
+import { getDateTime } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../utils/UseImgix";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 

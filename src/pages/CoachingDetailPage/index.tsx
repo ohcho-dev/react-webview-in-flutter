@@ -9,7 +9,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
 import UseImgix from "../../utils/UseImgix";

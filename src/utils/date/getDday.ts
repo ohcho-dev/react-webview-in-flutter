@@ -1,4 +1,4 @@
-const Dday = (expiryDate: any) => {
+const getDday = (expiryDate: any) => {
   // D-Day 날짜 지정
   const setExpiryDate = new Date(expiryDate);
 
@@ -16,4 +16,4 @@ const Dday = (expiryDate: any) => {
   return dday + 1;
 };
 
-export default Dday;
+export default getDday;

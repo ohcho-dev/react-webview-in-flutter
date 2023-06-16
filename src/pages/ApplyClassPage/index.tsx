@@ -15,10 +15,10 @@ import {
   selectedChildInfoState,
   useShareState,
 } from "../../store/atom";
-import { getDate } from "../../utils/getDateTime";
+import { getDate } from "../../utils/date/getDateTime";
 import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { applyClassBodyType, childType } from "@utils/type";
+import { applyClassBodyType, childType } from "../../utils/type";
 import UseImgix from "../../utils/UseImgix";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";

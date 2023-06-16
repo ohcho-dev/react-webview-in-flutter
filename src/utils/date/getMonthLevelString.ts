@@ -1,4 +1,4 @@
-import { MonthRangeType } from "./type";
+import { MonthRangeType } from "../type";
 
 type getMonthLevelFuncType = (month_level_arr: MonthRangeType[] | MonthRangeType) => string;
 

@@ -14,7 +14,7 @@ import CustomModal from "../../../components/common/CustomModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../store/atom";
-import { getDate } from "../../../utils/getDateTime";
+import { getDate } from "../../../utils/date/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../../utils/NativeFunction";
