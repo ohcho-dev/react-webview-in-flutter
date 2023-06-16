@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getUserInfo } from "../apis/mypage";
-import { queryKeys } from "../constants/queryKeys";
+import { queryKeys } from "../constant/queryKeys";
 import {
   childrenKeyState,
   childrenListState,

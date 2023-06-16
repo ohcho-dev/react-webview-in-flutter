@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ColorLightBlack9Base, ColorLightEltern8 } from "../../../../constants/ldsConstants/global";
+import { ColorLightBlack9Base, ColorLightEltern8 } from "../../../../constant/ldsConstants/global";
 
 export const Container = styled.div`
   width: 100%;

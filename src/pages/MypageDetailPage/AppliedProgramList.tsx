@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getPurchaseClasses, getPurchaseCoaching } from "../../apis/mypage";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
-import { queryKeys } from "../../constants/queryKeys";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as DT from "../../../../../constants/ldsConstants/global";
+import * as DT from "../../../../../constant/ldsConstants/global";
 import { convertStrToRem } from "../../../../../utils/design-system/convertStrToRem";
 
 export const ListItemWrapper = styled.div`

@@ -17,8 +17,8 @@ import { getCommonCodeList } from "./apis/commonApi";
 import { getHomeData } from "./apis/homeApi";
 import { getUserInfo } from "./apis/mypage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
-import { queryKeys } from "./constants/queryKeys";
+import { CHILD_ID_FIELD, USER_KEY } from "./constant/localStorage";
+import { queryKeys } from "./constant/queryKeys";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import {
   childrenKeyState,

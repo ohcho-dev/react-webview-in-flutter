@@ -7,7 +7,7 @@ import { applyClass, getSelectedClassInfo } from "../../apis/programApi";
 import ChildSelectBottomModal from "../../components/ChildSelectBottomModal";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
-import { queryKeys } from "../../constants/queryKeys";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import {
   childrenKeyState,

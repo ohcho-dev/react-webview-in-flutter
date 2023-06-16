@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import * as DT from "../../constants/ldsConstants/global";
+import * as DT from "../../constant/ldsConstants/global";
 
 interface chipProps {
   status: string;

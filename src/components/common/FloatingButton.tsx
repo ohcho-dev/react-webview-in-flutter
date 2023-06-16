@@ -1,6 +1,6 @@
 import Imgix from "react-imgix";
 import styled from "styled-components";
-import { ColorLightBlack9Base } from "../../constants/ldsConstants/global";
+import { ColorLightBlack9Base } from "../../constant/ldsConstants/global";
 
 interface FloatingButtonProps {
   page: "main" | "detail";

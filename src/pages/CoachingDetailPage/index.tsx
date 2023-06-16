@@ -5,7 +5,7 @@ import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getAppliedCoachingInfo } from "../../apis/coachingApi";
 import CustomModal from "../../components/common/CustomModal";
-import { queryKeys } from "../../constants/queryKeys";
+import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/NativeFunction";
