@@ -3,14 +3,14 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { getUserInfo } from "../api/mypage";
-import { queryKeys } from "../constant/queryKeys";
+import { getUserInfo } from "../apis/mypage";
+import { queryKeys } from "../constants/queryKeys";
 import {
   childrenKeyState,
   childrenListState,
   openBottomModalState,
   selectedChildInfoState,
-} from "../recoil/atom";
+} from "../store/atom";
 import UseImgix from "../utils/UseImgix";
 import AlarmBadge from "./AlarmBadge";
 

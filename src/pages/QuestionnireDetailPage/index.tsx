@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import { getSurveyAnswers } from "../../api/questionnaireApi";
-import { queryKeys } from "../../constant/queryKeys";
+import { getSurveyAnswers } from "../../apis/questionnaireApi";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { GetSurveyAnswerType, GetSurveyType } from "../../utils/type";
 import UseImgix from "../../utils/UseImgix";

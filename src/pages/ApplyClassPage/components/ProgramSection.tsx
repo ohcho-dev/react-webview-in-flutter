@@ -1,7 +1,7 @@
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Title } from "..";
-import { commonCodeState } from "../../../recoil/atom";
+import { commonCodeState } from "../../../store/atom";
 import { getDateTime } from "../../../utils/getDateTime";
 import { getMonthLevelString } from "../../../utils/getMonthLevelString";
 import UseImgix from "../../../utils/UseImgix";

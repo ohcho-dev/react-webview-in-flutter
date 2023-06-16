@@ -4,9 +4,9 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { getNotificationList } from "../api/notificationApi";
-import { queryKeys } from "../constant/queryKeys";
-import { newNotificationFlagstate } from "../recoil/atom";
+import { getNotificationList } from "../apis/notificationApi";
+import { queryKeys } from "../constants/queryKeys";
+import { newNotificationFlagstate } from "../store/atom";
 import { NotificationType } from "../utils/type";
 import UseImgix from "../utils/UseImgix";
 

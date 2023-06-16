@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { COLOR_PALETTE } from "../../constant/color";
+import { COLOR_PALETTE } from "../../constants/color";
 
 const StyledLabel = styled.label<{ checked: boolean }>`
   cursor: pointer;

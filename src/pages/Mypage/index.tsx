@@ -4,7 +4,7 @@ import { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { flutterInAppWebViewPlatformReady } from "../..";
-import { logoutApi, Withdrawal } from "../../api/mypage";
+import { logoutApi, Withdrawal } from "../../apis/mypage";
 import { MypageTitleBar } from "../../components/TitleBar";
 import CustomModal from "../../components/common/CustomModal";
 import LayoutMainPage from "../../layouts/LayoutMainPage";

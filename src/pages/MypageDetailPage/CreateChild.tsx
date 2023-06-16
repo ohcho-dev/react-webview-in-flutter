@@ -9,12 +9,12 @@ import styled from "styled-components";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { createChild } from "../../api/childApi";
+import { createChild } from "../../apis/childApi";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState } from "../../recoil/atom";
+import { childrenListState } from "../../store/atom";
 import { registChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
 import { createChildType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";

@@ -3,11 +3,11 @@ import { useQuery } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { getSelectedTaskInfo } from "../../api/coachingApi";
-import { getSurveyQuestionList } from "../../api/questionnaireApi";
+import { getSelectedTaskInfo } from "../../apis/coachingApi";
+import { getSurveyQuestionList } from "../../apis/questionnaireApi";
 import Button from "../../components/common/Button";
 import Chip from "../../components/common/Chip";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import {
   currentSurveyInfoState,
@@ -15,7 +15,7 @@ import {
   startQuestionOrderNumState,
   surveyAnswerState,
   surveyCoachingIdState,
-} from "../../recoil/atom";
+} from "../../store/atom";
 import { SurveyInfoType } from "../../utils/type";
 import UseImgix from "../../utils/UseImgix";
 

@@ -4,17 +4,17 @@ import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
-import { updateSelectedChildIdApi } from "../api/childApi";
+import { updateSelectedChildIdApi } from "../apis/childApi";
 import BottomNav from "../components/BottomNav";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import MainTitleBar from "../components/TitleBar";
-import { CHILD_ID_FIELD } from "../constant/localStorage";
+import { CHILD_ID_FIELD } from "../constants/localStorage";
 import {
   childrenListState,
   mainPageScrollValueState,
   openBottomModalState,
   selectedChildInfoState,
-} from "../recoil/atom";
+} from "../store/atom";
 import { childType } from "../utils/type";
 import LayoutBasePage from "./LayoutBasePage";
 

@@ -6,14 +6,14 @@ import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { getSelectedChild, updateChild } from "../../api/childApi";
+import { getSelectedChild, updateChild } from "../../apis/childApi";
 import Button from "../../components/common/Button";
 
 import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState } from "../../recoil/atom";
+import { childrenListState } from "../../store/atom";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
 import { childType } from "../../utils/type";

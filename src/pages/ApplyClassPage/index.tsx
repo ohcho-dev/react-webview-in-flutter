@@ -3,22 +3,22 @@ import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { applyClass, getSelectedClassInfo } from "../../api/programApi";
+import { applyClass, getSelectedClassInfo } from "../../apis/programApi";
 import ChildSelectBottomModal from "../../components/ChildSelectBottomModal";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import {
   childrenKeyState,
   childrenListState,
   selectedChildInfoState,
   useShareState,
-} from "../../recoil/atom";
+} from "../../store/atom";
 import { getDate } from "../../utils/getDateTime";
 import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../utils/NativeFunction";
-import { applyClassBodyType, childType } from "../../utils/type";
+import { applyClassBodyType, childType } from "@utils/type";
 import UseImgix from "../../utils/UseImgix";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";

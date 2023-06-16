@@ -5,20 +5,20 @@ import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-qu
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import "./scss/_reset.scss";
-import "./scss/_global.scss";
-import "./scss/_slideTransition.scss";
-import "./scss/_customReactDatepicker.scss";
+import "./styles/_reset.scss";
+import "./styles/_global.scss";
+import "./styles/_slideTransition.scss";
+import "./styles/_customReactDatepicker.scss";
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { RouterConfig } from "./RouteConfig";
-import { getChildrenList } from "./api/childApi";
-import { getCommonCodeList } from "./api/commonApi";
-import { getHomeData } from "./api/homeApi";
-import { getUserInfo } from "./api/mypage";
+import { getChildrenList } from "./apis/childApi";
+import { getCommonCodeList } from "./apis/commonApi";
+import { getHomeData } from "./apis/homeApi";
+import { getUserInfo } from "./apis/mypage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
-import { CHILD_ID_FIELD, USER_KEY } from "./constant/localStorage";
-import { queryKeys } from "./constant/queryKeys";
+import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
+import { queryKeys } from "./constants/queryKeys";
 import { ErrorBoundary } from "./pages/ErrorPage";
 import {
   childrenKeyState,
@@ -27,7 +27,7 @@ import {
   currentTaskIdState,
   selectedChildInfoState,
   selectedHomeDataState,
-} from "./recoil/atom";
+} from "./store/atom";
 import { childType } from "./utils/type";
 import { NativeFunction } from "./utils/NativeFunction";
 

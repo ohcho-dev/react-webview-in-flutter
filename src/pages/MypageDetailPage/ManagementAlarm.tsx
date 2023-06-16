@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "react-query";
 import styled from "styled-components";
-import { getAlarmConfig, updateAlarmConfig } from "../../api/mypage";
+import { getAlarmConfig, updateAlarmConfig } from "../../apis/mypage";
 import CustomToggleSwitch from "../../components/common/CustomToggleSwitch";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { alarmType } from "../../utils/type";
 import PageTitle from "./components/PageTitle";

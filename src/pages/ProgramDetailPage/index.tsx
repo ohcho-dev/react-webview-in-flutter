@@ -2,7 +2,7 @@ import { Suspense, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
-import { useShareState } from "../../recoil/atom";
+import { useShareState } from "../../store/atom";
 import DetailClass from "./components/DetailClass";
 import DetailCoaching from "./components/DetailCoaching";
 

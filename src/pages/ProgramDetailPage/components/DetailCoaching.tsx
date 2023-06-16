@@ -7,13 +7,13 @@ import {
   applyCoaching,
   checkValidCoachingToApply,
   getSelectedCoachingInfo,
-} from "../../../api/programApi";
+} from "../../../apis/programApi";
 import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
+import { openBottomModalState, selectedChildInfoState } from "../../../store/atom";
 import { getDate } from "../../../utils/getDateTime";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";

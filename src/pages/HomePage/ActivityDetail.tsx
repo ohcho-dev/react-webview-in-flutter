@@ -9,7 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 
-import { mainPageScrollValueState } from "../../recoil/atom";
+import { mainPageScrollValueState } from "../../store/atom";
 import { useRecoilValue } from "recoil";
 
 function ActivityDetail() {

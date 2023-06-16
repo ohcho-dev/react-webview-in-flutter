@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { createSurveyAnswerData } from "../../../api/questionnaireApi";
+import { createSurveyAnswerData } from "../../../apis/questionnaireApi";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
@@ -11,7 +11,7 @@ import {
   startQuestionOrderNumState,
   surveyAnswerState,
   surveyTempAnswerState,
-} from "../../../recoil/atom";
+} from "../../../store/atom";
 import { SurveyAnswerType, ViewSurveyListType } from "../../../utils/type";
 import UseImgix from "../../../utils/UseImgix";
 import QuestionChoice from "./QuestionChoice";

@@ -1,5 +1,5 @@
 import { useRecoilState } from "recoil";
-import { surveyTempAnswerState } from "../../../recoil/atom";
+import { surveyTempAnswerState } from "../../../store/atom";
 import { PostSurveyQuestionListType, ViewSurveyQuestionListType } from "../../../utils/type";
 import {
   AnswerSection,
