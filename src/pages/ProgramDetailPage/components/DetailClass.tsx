@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getSelectedClassInfo } from "../../../api/programApi";
 import Button from "../../../components/common/Button";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { commonCodeState } from "../../../recoil/atom";
 import { getDateTime } from "../../../utils/getDateTime";

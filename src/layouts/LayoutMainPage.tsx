@@ -8,7 +8,7 @@ import { updateSelectedChildIdApi } from "../api/childApi";
 import BottomNav from "../components/BottomNav";
 import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
 import MainTitleBar from "../components/TitleBar";
-import { CHILD_ID_FIELD } from "../constant/localStorage";
+import { CHILD_ID_FIELD } from "../constants/localStorage";
 import {
   childrenListState,
   mainPageScrollValueState,

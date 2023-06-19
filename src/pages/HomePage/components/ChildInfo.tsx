@@ -4,7 +4,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { deleteProfilImageApi } from "../../../api/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../recoil/atom";
 import Dday from "../../../utils/Dday";
 import { NativeFunction } from "../../../utils/NativeFunction";

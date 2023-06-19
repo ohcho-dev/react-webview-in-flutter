@@ -5,7 +5,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { MenuType } from "..";
 import { getCoachingList } from "../../../api/programApi";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import { selectedChildInfoState } from "../../../recoil/atom";
 import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
 import { coachingType } from "../../../utils/type";

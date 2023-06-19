@@ -11,7 +11,7 @@ import {
 import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
 import { getDate } from "../../../utils/getDateTime";

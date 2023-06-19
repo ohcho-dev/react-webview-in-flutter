@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/react";
 import axios, { AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
-import { CHILD_ID_FIELD } from "../constant/localStorage";
+import { CHILD_ID_FIELD } from "../constants/localStorage";
 
 // axios 기본 설정
 axios.defaults.baseURL = process.env.REACT_APP_API_URL;

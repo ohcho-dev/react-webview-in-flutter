@@ -7,7 +7,7 @@ import { getSelectedTaskInfo } from "../../api/coachingApi";
 import { getSurveyQuestionList } from "../../api/questionnaireApi";
 import Button from "../../components/common/Button";
 import Chip from "../../components/common/Chip";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import {
   currentSurveyInfoState,
