@@ -1,5 +1,5 @@
 import * as S from "./RecordListItem";
-import UseImgix from "../../../../utils/UseImgix";
+import UseImgix from "../../../../components/common/Imgix";
 
 interface RecordListItemProps {
   data?: object[];

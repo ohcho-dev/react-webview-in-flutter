@@ -1,6 +1,6 @@
 import * as S from "./NoListRecord.styled";
-import UseImgix from "../../../../utils/UseImgix";
-import EmptyBox from "../../../../components/globals/EmptyBox";
+import UseImgix from "../../../../components/common/Imgix";
+import EmptyBox from "../../../../components/common/EmptyBox";
 
 const INFO_MESSAGE = [
   "아이의 발달을 위한 연습을 영상으로 기록해 보세요.",

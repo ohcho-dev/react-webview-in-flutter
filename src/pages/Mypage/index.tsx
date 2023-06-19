@@ -5,15 +5,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { flutterInAppWebViewPlatformReady } from "../..";
 import { logoutApi, Withdrawal } from "../../apis/mypage";
-import { MypageTitleBar } from "../../components/TitleBar";
+import { MypageTitleBar } from "../../components/domain/my/TitleBar";
 import CustomModal from "../../components/common/CustomModal";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import { NativeFunction } from "../../utils/NativeFunction";
+import { NativeFunction } from "../../utils/app/NativeFunction";
 import {
   logoutSuccessedAction,
   withdrawalSuccessedAction,
 } from "../../utils/google-analytics/events/ManagementUser";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 
 const LinkItemWrap = styled.div`
   padding: 0 2.5rem;

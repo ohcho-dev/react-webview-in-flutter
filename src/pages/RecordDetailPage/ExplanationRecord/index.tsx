@@ -1,5 +1,5 @@
 import * as S from "./ExplanationRecord.styled";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 
 const INFO_MESSAGE = [

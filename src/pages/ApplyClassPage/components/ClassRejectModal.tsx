@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import CustomModal from "../../../components/common/CustomModal";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 
 const ApplicationCloseModalContent = styled.div`
   display: flex;

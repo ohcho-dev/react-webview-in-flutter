@@ -8,11 +8,11 @@ import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../store/atom";
-import { NativeFunction } from "../../utils/NativeFunction";
+import { NativeFunction } from "../../utils/app/NativeFunction";
 import { getDate } from "../../utils/date/getDateTime";
 import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 
 const PageTitleWrap = styled.div`
   position: fixed;

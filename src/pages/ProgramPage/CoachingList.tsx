@@ -8,11 +8,11 @@ import { getCoachingList } from "../../apis/programApi";
 import { CHILD_ID_FIELD } from "../../constant/localStorage";
 import { queryKeys } from "../../constant/queryKeys";
 import { selectedChildInfoState } from "../../store/atom";
-import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
-import { coachingType } from "../../utils/type";
+import { getDiscountPercentage } from "../../utils/program/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
+import { coachingType } from "../../types/domain/coaching";
 
 const ListWrap = styled.div`
   margin-bottom: 3rem;

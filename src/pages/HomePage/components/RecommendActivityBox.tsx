@@ -6,8 +6,8 @@ import styled from "styled-components";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
 import getDday from "../../../utils/date/getDday";
-import UseImgix from "../../../utils/UseImgix";
-import { NativeFunction } from "../../../utils/NativeFunction";
+import UseImgix from "../../../components/common/Imgix";
+import { NativeFunction } from "../../../utils/app/NativeFunction";
 
 const Wrap = styled.div`
   padding: 2.5rem 0;

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { applyClass, getSelectedClassInfo } from "../../apis/programApi";
-import ChildSelectBottomModal from "../../components/ChildSelectBottomModal";
+import ChildSelectBottomModal from "../../components/domain/home/ChildSelectBottomModal";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
@@ -15,11 +15,12 @@ import {
   selectedChildInfoState,
   useShareState,
 } from "../../store/atom";
+import { childType } from "../../types/common";
 import { getDate } from "../../utils/date/getDateTime";
 import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
-import { NativeFunction } from "../../utils/NativeFunction";
-import { applyClassBodyType, childType } from "../../utils/type";
-import UseImgix from "../../utils/UseImgix";
+import { NativeFunction } from "../../utils/app/NativeFunction";
+import { applyClassBodyType } from "../../utils/type";
+import UseImgix from "../../components/common/Imgix";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";

@@ -16,10 +16,10 @@ import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState } from "../../store/atom";
 import { registChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
-import { createChildType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
-import { NativeFunction } from "../../utils/NativeFunction";
+import { NativeFunction } from "../../utils/app/NativeFunction";
+import { createChildType } from "../../types/domain/my";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",

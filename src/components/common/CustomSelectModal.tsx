@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
 import { SelectBtnArrayType } from "../../utils/type";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "./Imgix";
 
 interface ModalProps {
   isOpen: boolean;

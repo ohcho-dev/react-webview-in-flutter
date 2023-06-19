@@ -8,7 +8,7 @@ import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { commonCodeState, selectedChildInfoState } from "../../store/atom";
 import { appliedCoachingType } from "../../utils/type";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
 import NoAppliedCoaching from "./components/NoAppliedCoaching";

@@ -5,7 +5,7 @@ import { getNoticeList } from "../../apis/mypage";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/date/getDateTime";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 import PageTitle from "./components/PageTitle";
 
 const PageLayout = styled.div`

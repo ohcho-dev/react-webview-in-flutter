@@ -1,5 +1,5 @@
 import RecordChip from "../../../../../components/common/RecordChip";
-import UseImgix from "../../../../../utils/UseImgix";
+import UseImgix from "../../../../../components/common/Imgix";
 import * as S from "./TaskListItem.styled";
 
 interface TaskListItemProps {

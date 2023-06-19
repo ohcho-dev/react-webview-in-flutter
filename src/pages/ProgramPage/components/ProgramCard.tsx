@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import ProgramPrice from "./ProgramPrice";
 import { AgeRange, OnlineOffline } from "./styled";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 import getDday from "../../../utils/date/getDday";
 
 const ProgramCardWrapper = styled.div`

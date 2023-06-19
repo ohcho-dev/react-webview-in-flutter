@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Title } from "..";
-import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
-import UseImgix from "../../../utils/UseImgix";
+import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
+import UseImgix from "../../../components/common/Imgix";
 
 const PriceSectionWrapper = styled.div`
   display: flex;

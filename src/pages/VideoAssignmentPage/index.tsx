@@ -9,10 +9,10 @@ import { BODY_1, STB_20 } from "../../constant/font";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { selectedChildInfoState } from "../../store/atom";
-import { NativeFunction } from "../../utils/NativeFunction";
+import { NativeFunction } from "../../utils/app/NativeFunction";
 import { getDate } from "../../utils/date/getDateTime";
 import { VideoAssignmentResultType } from "../../utils/type";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 
 type collapseType = "" | "open" | "close";
 

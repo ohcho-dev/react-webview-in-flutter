@@ -13,7 +13,7 @@ import {
   surveyTempAnswerState,
 } from "../../../store/atom";
 import { SurveyAnswerType, ViewSurveyListType } from "../../../utils/type";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 import QuestionChoice from "./QuestionChoice";
 import QuestionNumberUnit from "./QuestionNumberUnit";
 import QuestionTextLong from "./QuestionTextLong";

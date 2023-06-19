@@ -8,7 +8,7 @@ import { getClassList } from "../../apis/programApi";
 import { CHILD_ID_FIELD } from "../../constant/localStorage";
 import { queryKeys } from "../../constant/queryKeys";
 import { selectedChildInfoState } from "../../store/atom";
-import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
+import { getDiscountPercentage } from "../../utils/program/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
 

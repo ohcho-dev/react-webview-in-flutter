@@ -12,7 +12,7 @@ const EmojiSizeWrap = styled.div`
   width: ${(prop: { customWidth: string | undefined }) => prop.customWidth || "2rem"};
 `;
 
-const UseEmoji: React.FC<useEmojiProps> = ({ emojiName = "", width = "" }) => {
+const CustomEmoji: React.FC<useEmojiProps> = ({ emojiName = "", width = "" }) => {
   return (
     <EmojiSizeWrap customWidth={width}>
       <EmojiProvider data={emojiData}>
@@ -22,4 +22,4 @@ const UseEmoji: React.FC<useEmojiProps> = ({ emojiName = "", width = "" }) => {
   );
 };
 
-export default UseEmoji;
+export default CustomEmoji;

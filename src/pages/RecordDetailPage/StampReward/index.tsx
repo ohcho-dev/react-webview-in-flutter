@@ -1,6 +1,6 @@
 import * as S from "./StampReward.styled";
-import UseImgix from "../../../utils/UseImgix";
-import EmptyBox from "../../../components/globals/EmptyBox";
+import UseImgix from "../../../components/common/Imgix";
+import EmptyBox from "../../../components/common/EmptyBox";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 
 import { ColorLightEltern4 } from "../../../constant/ldsConstants/global";

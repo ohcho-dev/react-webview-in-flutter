@@ -7,9 +7,9 @@ import { MenuType } from "..";
 import { getCoachingList } from "../../../apis/programApi";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState } from "../../../store/atom";
-import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
-import { coachingType } from "../../../utils/type";
-import UseImgix from "../../../utils/UseImgix";
+import { coachingType } from "../../../types/domain/coaching";
+import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
+import UseImgix from "../../../components/common/Imgix";
 import ProgramCard from "../../ProgramPage/components/ProgramCard";
 import { Divider } from "../../ProgramPage/components/styled";
 

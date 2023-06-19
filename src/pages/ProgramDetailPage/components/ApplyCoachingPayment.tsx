@@ -2,19 +2,19 @@ import { useNavigate, useParams } from "react-router-dom";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import Button from "../../../components/common/Button";
 import styled from "styled-components";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 import Accordion from "../../../components/common/Accordion";
 import { useQuery } from "react-query";
 import { queryKeys } from "../../../constant/queryKeys";
 import { getSelectedCoachingInfo } from "../../../apis/programApi";
 import { useRecoilValue } from "recoil";
 import { selectedChildInfoState } from "../../../store/atom";
-import getGender from "../../../utils/getGender";
+import getGender from "../../../utils/user/getGender";
 import { RefObject, useRef, useState } from "react";
 import { applyCoachingBodyType } from "../../../utils/type";
 // import { CustomRadioButton } from "../../../components/common/CustomRadioButton";
 import CustomModal from "../../../components/common/CustomModal";
-import { NativeFunction } from "../../../utils/NativeFunction";
+import { NativeFunction } from "../../../utils/app/NativeFunction";
 
 // interface TypeProps {
 //   name: string;

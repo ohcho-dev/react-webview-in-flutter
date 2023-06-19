@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 
 const Wrap = styled.div`
   padding: 9rem 2rem 25.6rem;

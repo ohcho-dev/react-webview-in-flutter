@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
 import * as S from "./RecordGrade.styled";
-import UseImgix from "../../../../utils/UseImgix";
+import UseImgix from "../../../../components/common/Imgix";
 
 const RecordGrade = () => {
   const navigate = useNavigate();

@@ -28,8 +28,8 @@ import {
   selectedChildInfoState,
   selectedHomeDataState,
 } from "./store/atom";
-import { childType } from "./utils/type";
-import { NativeFunction } from "./utils/NativeFunction";
+import { NativeFunction } from "./utils/app/NativeFunction";
+import { childType } from "./types/common";
 
 let oldLocation: any = null;
 

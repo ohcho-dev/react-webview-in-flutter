@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 import * as S from "./RecordList.styled";
 import RecordListItem from "../RecordListItem";
 import NoListRecord from "../NoListRecord";
-import EmptyBox from "../../../../components/globals/EmptyBox";
+import EmptyBox from "../../../../components/common/EmptyBox";
 
 export type MenuType = "all" | "practice" | "daily" | "play";
 

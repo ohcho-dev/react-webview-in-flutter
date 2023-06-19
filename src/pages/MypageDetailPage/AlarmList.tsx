@@ -9,7 +9,7 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { newNotificationFlagstate } from "../../store/atom";
 import { getDate } from "../../utils/date/getDateTime";
 import { NotificationType } from "../../utils/type";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 import PageTitle from "./components/PageTitle";
 
 const ImgWrap = styled.div`

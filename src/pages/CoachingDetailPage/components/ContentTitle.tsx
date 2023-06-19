@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import UseEmoji from "../../../utils/UseEmoji";
-import UseImgix from "../../../utils/UseImgix";
+import CustomEmoji from "../../../components/common/Emoji";
+import UseImgix from "../../../components/common/Imgix";
 
 interface ContentTitleProps {
   emoji?: string;
@@ -26,7 +26,7 @@ const TitleName = styled.div`
 const ContentTitle: React.FC<ContentTitleProps> = ({ emoji, imgUrl, name }) => {
   return (
     <TitleWrap>
-      {emoji && <UseEmoji emojiName={emoji} />}
+      {emoji && <CustomEmoji emojiName={emoji} />}
       {imgUrl && <UseImgix srcUrl={imgUrl} alt="" />}
       <TitleName>{name}</TitleName>
     </TitleWrap>

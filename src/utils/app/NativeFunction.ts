@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as Sentry from "@sentry/react";
-import { flutterInAppWebViewPlatformReady } from "../index";
+import { flutterInAppWebViewPlatformReady } from "../../index";
 
 export const NativeFunction = (funcName: string, value: any) => {
   if (flutterInAppWebViewPlatformReady) {

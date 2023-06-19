@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../../../components/common/Button";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 
 const ContentWrapper = styled.div`
   width: 100%;

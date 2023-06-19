@@ -1,6 +1,6 @@
 import * as S from "./RecordTaskList.styled";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import EmptyBox from "../../../components/globals/EmptyBox";
+import EmptyBox from "../../../components/common/EmptyBox";
 import TaskListItem from "./components/TaskListItem";
 
 const data = {

@@ -15,12 +15,13 @@ import { queryKeys } from "../../../constant/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../store/atom";
 import { getDate } from "../../../utils/date/getDateTime";
-import { getDiscountPercentage } from "../../../utils/getDiscountPercentage";
+import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
-import { NativeFunction } from "../../../utils/NativeFunction";
-import { ApiErrorResponseType, coachingType } from "../../../utils/type";
+import { NativeFunction } from "../../../utils/app/NativeFunction";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
+import { ApiErrorResponseType } from "../../../types/apis/base";
+import { coachingType } from "../../../types/domain/coaching";
 
 interface DetailCoachingProps {
   id: string;

@@ -7,8 +7,8 @@ import LoadingSpinner from "../../components/common/LoadingSpinner";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/date/getDateTime";
-import getGender from "../../utils/getGender";
-import UseImgix from "../../utils/UseImgix";
+import getGender from "../../utils/user/getGender";
+import UseImgix from "../../components/common/Imgix";
 import PageTitle from "./components/PageTitle";
 
 const TabValue = ["코칭", "클래스"];

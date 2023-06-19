@@ -16,10 +16,10 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState } from "../../store/atom";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
-import { childType } from "../../utils/type";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
-import { NativeFunction } from "../../utils/NativeFunction";
+import { NativeFunction } from "../../utils/app/NativeFunction";
+import { childType } from "../../types/common";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,

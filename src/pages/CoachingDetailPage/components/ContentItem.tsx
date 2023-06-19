@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Chip from "../../../components/common/Chip";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 
 const ItemWrap = styled.div`
   width: calc(100% - 4rem);

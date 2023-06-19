@@ -5,7 +5,7 @@ import { getSurveyAnswers } from "../../apis/questionnaireApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { GetSurveyAnswerType, GetSurveyType } from "../../utils/type";
-import UseImgix from "../../utils/UseImgix";
+import UseImgix from "../../components/common/Imgix";
 import {
   ListScroll,
   QuestionGap,

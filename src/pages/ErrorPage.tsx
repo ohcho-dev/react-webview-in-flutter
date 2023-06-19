@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import LayoutDetailPage from "../layouts/LayoutDetailPage";
-import UseImgix from "../utils/UseImgix";
+import UseImgix from "../components/common/Imgix";
 
 const ErrorSection = styled.div`
   width: 100%;

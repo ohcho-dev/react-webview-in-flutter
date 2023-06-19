@@ -17,8 +17,7 @@
     "jsx": "react-jsx",
     "sourceMap": true,
     "inlineSources": true,
-    "sourceRoot": "/",
-    "baseUrl": "."
+    "sourceRoot": "/"
     // "paths": {
     //   "@apis/*": ["apis/*"],
     //   "@components/*": ["components/*"],

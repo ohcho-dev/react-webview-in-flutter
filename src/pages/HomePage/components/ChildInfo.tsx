@@ -6,9 +6,9 @@ import { deleteProfilImageApi } from "../../../apis/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { queryKeys } from "../../../constant/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
-import { NativeFunction } from "../../../utils/NativeFunction";
+import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 import getDday from "../../../utils/date/getDday";
 
 const ChildInfoWrap = styled.div`

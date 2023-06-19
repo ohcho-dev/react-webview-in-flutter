@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { Title } from "..";
 import { commonCodeState } from "../../../store/atom";
 import { getDateTime } from "../../../utils/date/getDateTime";
-import UseImgix from "../../../utils/UseImgix";
+import UseImgix from "../../../components/common/Imgix";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
 
 const ProgramSectionWrapper = styled.div`

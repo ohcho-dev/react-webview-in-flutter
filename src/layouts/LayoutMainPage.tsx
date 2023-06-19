@@ -5,9 +5,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import { updateSelectedChildIdApi } from "../apis/childApi";
-import BottomNav from "../components/BottomNav";
-import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
-import MainTitleBar from "../components/TitleBar";
+import BottomNav from "../components/domain/home/BottomNav";
+import ChildSelectBottomModal from "../components/domain/home/ChildSelectBottomModal";
+import MainTitleBar from "../components/domain/my/TitleBar";
 import { CHILD_ID_FIELD } from "../constant/localStorage";
 import {
   childrenListState,
@@ -15,7 +15,7 @@ import {
   openBottomModalState,
   selectedChildInfoState,
 } from "../store/atom";
-import { childType } from "../utils/type";
+import { childType } from "../types/common";
 import LayoutBasePage from "./LayoutBasePage";
 
 const MainPage = styled.main`
