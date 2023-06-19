@@ -1,3 +1,3 @@
-[submodule "src/constant/ldsConstants"]
-	path = src/constant/ldsConstants
+[submodule "src/constants/ldsConstants"]
+	path = src/constants/ldsConstants
 	url = git@github.com:dev-lumanlab/Lumanlab-Figma-Constants.git
