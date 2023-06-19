@@ -11,7 +11,7 @@ import {
 import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { openBottomModalState, selectedChildInfoState } from "../../../recoil/atom";
 import { getDate } from "../../../utils/getDateTime";
@@ -202,16 +202,35 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
   }, [selectedCoachingInfo]);
 
   const handleApplyBtnClick = () => {
-    if (res?.message === "OK") {
-      callApplyCoaching.mutate({ id: coachingInfo.id.toString() });
+    const { id } = coachingInfo;
+    //TODO: 코드 수정 필요
+    //id=5 -> price>0 이지만 무료 , id=7 -> 유료
+    if (id === 7) {
+      if (res?.message === "OK") {
+        setOpenBottomModal(false);
+        navigate(`/program/coaching/${id}/payment`);
+      } else {
+        if (res?.code === "ONGOING_COACHING") {
+          // 1.구매불가(해당 월령 구매한 동일상품)
+          setOpenSameCoachingModal(true);
+        } else if (res?.code === "ALMOST_MONTH_LIMIT") {
+          // 2.경고(월령 변경까지 얼마 남지 않음)
+          setOpenUsageDuration(true);
+          setLeftDays(res?.detail?.left_days || 0);
+        }
+      }
     } else {
-      if (res?.code === "ONGOING_COACHING") {
-        // 1.구매불가(해당 월령 구매한 동일상품)
-        setOpenSameCoachingModal(true);
-      } else if (res?.code === "ALMOST_MONTH_LIMIT") {
-        // 2.경고(월령 변경까지 얼마 남지 않음)
-        setOpenUsageDuration(true);
-        setLeftDays(res?.detail?.left_days || 0);
+      if (res?.message === "OK") {
+        callApplyCoaching.mutate({ id: coachingInfo.id.toString() });
+      } else {
+        if (res?.code === "ONGOING_COACHING") {
+          // 1.구매불가(해당 월령 구매한 동일상품)
+          setOpenSameCoachingModal(true);
+        } else if (res?.code === "ALMOST_MONTH_LIMIT") {
+          // 2.경고(월령 변경까지 얼마 남지 않음)
+          setOpenUsageDuration(true);
+          setLeftDays(res?.detail?.left_days || 0);
+        }
       }
     }
   };
@@ -231,14 +250,14 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
         }
       >
         <div>
-          {coachingInfo.main_image && (
-            <Thumbnail>
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0207.png"
-                alt="Coaching Thumbanil"
-              />
-            </Thumbnail>
-          )}
+          {/* {coachingInfo.main_image && ( */}
+          <Thumbnail>
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0207.png"
+              alt="Coaching Thumbanil"
+            />
+          </Thumbnail>
+          {/* )} */}
           <ProductMainInfo>
             <ProductName>{coachingInfo?.name}</ProductName>
             <PriceWrap>
@@ -286,6 +305,31 @@ const DetailCoaching = (props: DetailCoachingProps): JSX.Element => {
               />
               <UseImgix
                 srcUrl="/images/coaching/coaching_new_main_0220_05.png"
+                alt="Coaching Detail Page 5"
+              />
+            </ImageWrap>
+          )}
+          {/* 결제 test용 */}
+          {coachingInfo.id === 7 && (
+            <ImageWrap>
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_01.png"
+                alt="Coaching Detail Page 1"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_02.png"
+                alt="Coaching Detail Page 2"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_03.png"
+                alt="Coaching Detail Page 3"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_04.png"
+                alt="Coaching Detail Page 4"
+              />
+              <UseImgix
+                srcUrl="/images/coaching/coaching_new_main_0220_05_test2.png"
                 alt="Coaching Detail Page 5"
               />
             </ImageWrap>

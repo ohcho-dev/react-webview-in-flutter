@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getNotificationList, updateNotificationCheckTime } from "../../api/notificationApi";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { newNotificationFlagstate } from "../../recoil/atom";
 import { getDate } from "../../utils/getDateTime";

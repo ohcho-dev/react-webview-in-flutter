@@ -8,8 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          submodules: recursive
 
       - uses: actions/setup-node@v1
         with:
@@ -38,11 +41,11 @@ jobs:
           aws-region: ap-northeast-2
 
       - name: Copy the files from build folder to the S3 bucket
-        run: aws s3 sync . ${{ secrets.AWS_S3_BUCKET_PRODUCT_URL }} --cache-control max-age=31536000
+        run: aws s3 sync . ${{ secrets.AWS_S3_BUCKET_PRODUCT_V2_URL }} --cache-control max-age=31536000
         working-directory: ./build/
 
       - name: Invalidate CloudFront
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID_PRODUCT }} --paths "/*"
+        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID_PRODUCT_V2 }} --paths "/*"
 
       - name: Send slack message
         uses: 8398a7/action-slack@v3

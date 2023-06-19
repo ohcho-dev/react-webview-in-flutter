@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getUserInfo } from "../api/mypage";
-import { queryKeys } from "../constant/queryKeys";
+import { queryKeys } from "../constants/queryKeys";
 import {
   childrenKeyState,
   childrenListState,
@@ -131,6 +131,14 @@ const LoginInfo = styled.div`
   }
 `;
 
+const PageTitle = styled.div`
+  font-weight: 700;
+  font-size: 2.2rem;
+  line-height: 3.2rem;
+  letter-spacing: -0.04rem;
+  color: #0a0a0a;
+`;
+
 interface MainTitleBarProps {
   style?: object;
 }
@@ -164,8 +172,11 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
 interface DetailTitleBarProps {
   border?: boolean;
   style?: object;
+
   leftBtn?: React.ReactNode;
   handleBackBtnClick?: () => void | undefined;
+  title?: string;
+  titleType?: "back" | "close";
 }
 
 export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
@@ -173,23 +184,43 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
   style,
   leftBtn,
   handleBackBtnClick,
+  title,
+  titleType,
 }) => {
   const navigate = useNavigate();
 
   return (
-    <TitleBarWrap border={border} style={{ ...style }}>
-      <div
-        onClick={() => {
-          handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
-        }}
-      >
-        <UseImgix
-          srcUrl="/images/icon-back.svg"
-          alt="left arrow icon"
-          style={{ width: "2.8rem" }}
-        />
-      </div>
-      {leftBtn && <ButtonWrap>{leftBtn}</ButtonWrap>}
+    <TitleBarWrap
+      border={border}
+      style={{ ...style, justifyContent: titleType === "close" ? "flex-end" : "space-between" }}
+    >
+      {(!titleType || titleType === "back") && (
+        <div
+          style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}
+          onClick={() => {
+            handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
+          }}
+        >
+          <UseImgix
+            srcUrl="/images/icon-back.svg"
+            alt="left arrow icon"
+            style={{ width: "2.8rem" }}
+          />
+        </div>
+      )}
+      {title && <PageTitle>{title}</PageTitle>}
+      {title && <div style={{ width: "2.8rem" }}></div>}
+
+      {titleType === "close" && (
+        <div
+          style={{ display: "flex", alignItems: "center", justifyContent: "flex-end" }}
+          onClick={() => {
+            handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
+          }}
+        >
+          <UseImgix srcUrl="/images/icon-close.svg" alt="close icon" style={{ width: "2.8rem" }} />
+        </div>
+      )}
     </TitleBarWrap>
   );
 };

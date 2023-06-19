@@ -5,8 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getCoachingList } from "../../api/programApi";
-import { CHILD_ID_FIELD } from "../../constant/localStorage";
-import { queryKeys } from "../../constant/queryKeys";
+import { CHILD_ID_FIELD } from "../../constants/localStorage";
+import { queryKeys } from "../../constants/queryKeys";
 import { selectedChildInfoState } from "../../recoil/atom";
 import { getDiscountPercentage } from "../../utils/getDiscountPercentage";
 import { coachingType } from "../../utils/type";
@@ -85,24 +85,51 @@ const CoachingList = () => {
             🙌🏻 <Title>전문 검사와 함께하는 코칭</Title>
           </ProgramTitle>
           <ListWrap>
-            {coachingList[0].map((coaching: coachingType, index: number) => {
-              return (
-                <div key={index}>
-                  <ProgramCard
-                    id={coaching.id}
-                    handleCardClick={() => handleCardClick(coaching.id)}
-                    programImage="/images/coaching/coaching_new_main_0207.png"
-                    programImageAlt="Coaching Thumbnail"
-                    title={coaching.name}
-                    originalPrice={coaching.base_price}
-                    price={coaching.price}
-                    discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
-                    utilVisible={false}
-                  />
-                  {index !== coachingList[0].length - 1 && <Divider />}
-                </div>
-              );
-            })}
+            {process.env.REACT_APP_HOST_URL === "https://biz-stg-webview.eltern.kr" &&
+              coachingList[0].map((coaching: coachingType, index: number) => {
+                if (coaching.id === 7) return false;
+                return (
+                  <div key={index}>
+                    <ProgramCard
+                      id={coaching.id}
+                      handleCardClick={() => handleCardClick(coaching.id)}
+                      programImage="/images/coaching/coaching_new_main_0207.png"
+                      programImageAlt="Coaching Thumbnail"
+                      title={coaching.name}
+                      originalPrice={coaching.base_price}
+                      price={coaching.price}
+                      discountPercentage={getDiscountPercentage(
+                        coaching.base_price,
+                        coaching.price,
+                      )}
+                      utilVisible={false}
+                    />
+                    {/* {index !== coachingList[0].length - 1 && <Divider />} */}
+                  </div>
+                );
+              })}
+            {process.env.REACT_APP_HOST_URL !== "https://biz-stg-webview.eltern.kr" &&
+              coachingList[0].map((coaching: coachingType, index: number) => {
+                return (
+                  <div key={index}>
+                    <ProgramCard
+                      id={coaching.id}
+                      handleCardClick={() => handleCardClick(coaching.id)}
+                      programImage="/images/coaching/coaching_new_main_0207.png"
+                      programImageAlt="Coaching Thumbnail"
+                      title={coaching.name}
+                      originalPrice={coaching.base_price}
+                      price={coaching.price}
+                      discountPercentage={getDiscountPercentage(
+                        coaching.base_price,
+                        coaching.price,
+                      )}
+                      utilVisible={false}
+                    />
+                    {index !== coachingList[0].length - 1 && <Divider />}
+                  </div>
+                );
+              })}
           </ListWrap>
         </>
       )}

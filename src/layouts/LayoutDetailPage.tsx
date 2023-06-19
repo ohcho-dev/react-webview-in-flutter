@@ -36,9 +36,11 @@ interface LayoutDetailPageProps {
   bottomBtn?: boolean;
   bottomBtnElement?: ReactElement;
   style?: object;
+  title?: string;
   leftBtn?: React.ReactNode;
   bottomScrollAnimationEffect?: boolean;
   handleBackBtnClick?: () => void | undefined;
+  titleType?: "back" | "close";
 }
 
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
@@ -49,8 +51,10 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   bottomScrollAnimationEffect = false,
   bottomBtnElement,
   style,
+  title,
   leftBtn,
   handleBackBtnClick,
+  titleType,
 }) => {
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
@@ -70,7 +74,9 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
         <DetailTitleBar
           style={titleBarBorder ? { borderBottom: "solid 0.5px rgba(0, 0, 0, 0.15)" } : {}}
           leftBtn={leftBtn}
+          title={title}
           handleBackBtnClick={handleBackBtnClick}
+          titleType={titleType}
         />
       )}
       <DetailPage

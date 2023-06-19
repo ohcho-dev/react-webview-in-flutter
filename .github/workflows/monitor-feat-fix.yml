@@ -2,14 +2,17 @@ name: Monitor - b/feature(fix) a/Build
 
 on:
   push:
-    branches: [feature/**, fix/**]
+    branches: [feature/**, fix/**, feat/**]
 
 jobs:
   build:
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout source code
-        uses: actions/checkout@v3
+      - name: Checkout repository and submodules
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          submodules: recursive
 
       - uses: actions/setup-node@v1
         with:

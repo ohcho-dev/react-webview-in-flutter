@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { getChildrenList } from "../../api/childApi";
 import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/getDateTime";
 import getGender from "../../utils/getGender";

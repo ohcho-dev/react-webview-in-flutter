@@ -44,10 +44,10 @@ const bottomNavData = [
   },
   // {
   //   id: 1,
-  //   name: '기록',
-  //   imgUrl: '/images/note_off.svg',
-  //   selectedImgUrl: '/images/note_on.svg',
-  //   link: '/note',
+  //   name: "기록",
+  //   imgUrl: "/images/note_off.svg",
+  //   selectedImgUrl: "/images/note_on.svg",
+  //   link: "/record",
   // },
   {
     id: 2,
