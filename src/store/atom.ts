@@ -1,5 +1,7 @@
 import { atom } from "recoil";
-import { AnswerType, HomeData, PostSurveyQuestionListType, ViewSurveyType } from "../utils/type";
+import { AnswerType } from "../types/apis/program";
+import { PostSurveyQuestionListType, ViewSurveyType } from "../types/domain/coaching";
+import { HomeData } from "../types/domain/home";
 
 export const commonCodeState = atom({
   key: "commonCodeList",

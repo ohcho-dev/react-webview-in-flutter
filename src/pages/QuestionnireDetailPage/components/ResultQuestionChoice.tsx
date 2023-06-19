@@ -1,4 +1,5 @@
-import { GetSurveyAnswerType, QuestionItemType } from "../../../utils/type";
+import { GetSurveyAnswerType } from "../../../types/apis/coaching";
+import { QuestionItemType } from "../../../types/apis/program";
 import {
   Answer,
   AnswerSection,

@@ -10,9 +10,9 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { currentTaskIdState, selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/app/NativeFunction";
 import { getDate } from "../../utils/date/getDateTime";
-import { CoachingStatusType, TaskStatusType } from "../../utils/type";
 import ContentItem from "./components/ContentItem";
 import UseImgix from "../../components/common/Imgix";
+import { CoachingStatusType, TaskStatusType } from "../../types/domain/coaching";
 
 const PageTitleWrap = styled.div`
   position: fixed;

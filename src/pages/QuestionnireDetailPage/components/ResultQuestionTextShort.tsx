@@ -1,4 +1,4 @@
-import { GetSurveyAnswerType } from "../../../utils/type";
+import { GetSurveyAnswerType } from "../../../types/apis/coaching";
 import {
   AnswerSection,
   InputBox,

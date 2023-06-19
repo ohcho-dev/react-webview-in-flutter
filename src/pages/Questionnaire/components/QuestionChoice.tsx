@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { surveyTempAnswerState } from "../../../store/atom";
-import { QuestionItemType, ViewSurveyQuestionListType } from "../../../utils/type";
+import { QuestionItemType } from "../../../types/apis/program";
+import { ViewSurveyQuestionListType } from "../../../types/domain/coaching";
 import { Answer, AnswerSection, QuestionNumber, QuestionTitle, QuestionWrapper } from "./style";
 
 interface QuestionPropsType {

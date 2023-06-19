@@ -4,12 +4,11 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { getNotificationList } from "../api/notificationApi";
-import { queryKeys } from "../constants/queryKeys";
-import { newNotificationFlagstate } from "../recoil/atom";
-import { NotificationType } from "../utils/type";
+import { getNotificationList } from "../../apis/notificationApi";
+import { queryKeys } from "../../constants/queryKeys";
+import { newNotificationFlagstate } from "../../store/atom";
+import { NotificationType } from "../../types/common";
 import UseImgix from "./Imgix";
-
 
 const CustomAlarmBadge = styled.div`
   width: 2.8rem;

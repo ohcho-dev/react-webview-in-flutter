@@ -1,6 +1,6 @@
 import { Method } from "axios";
 import { request } from ".";
-import { AnswerType } from "../utils/type";
+import { AnswerType } from "../types/apis/program";
 
 // 설문지 보기(GET)
 export const getSurveyQuestionList = (task_id: string | undefined) => {

@@ -11,8 +11,8 @@ import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/app/NativeFunction";
 import { getDate } from "../../utils/date/getDateTime";
-import { VideoAssignmentResultType } from "../../utils/type";
 import UseImgix from "../../components/common/Imgix";
+import { VideoAssignmentResultType } from "../../types/domain/coaching";
 
 type collapseType = "" | "open" | "close";
 

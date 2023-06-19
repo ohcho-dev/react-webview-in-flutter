@@ -1,7 +1,10 @@
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import { surveyTempAnswerState } from "../../../store/atom";
-import { PostSurveyQuestionListType, ViewSurveyQuestionListType } from "../../../utils/type";
+import {
+  PostSurveyQuestionListType,
+  ViewSurveyQuestionListType,
+} from "../../../types/domain/coaching";
 import {
   AnswerSection,
   InputBox,

@@ -12,13 +12,14 @@ import {
   surveyAnswerState,
   surveyTempAnswerState,
 } from "../../../store/atom";
-import { SurveyAnswerType, ViewSurveyListType } from "../../../utils/type";
 import UseImgix from "../../../components/common/Imgix";
 import QuestionChoice from "./QuestionChoice";
 import QuestionNumberUnit from "./QuestionNumberUnit";
 import QuestionTextLong from "./QuestionTextLong";
 import QuestionTextSHort from "./QuestionTextShort";
 import { QuestionGap, SurveyCategoryTitle } from "./style";
+import { SurveyAnswerType } from "../../../types/apis/program";
+import { ViewSurveyListType } from "../../../types/domain/coaching";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();

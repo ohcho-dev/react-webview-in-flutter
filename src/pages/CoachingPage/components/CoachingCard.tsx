@@ -1,8 +1,8 @@
 import getDday from "../../../utils/date/getDday";
 import styled from "styled-components";
 import { getDate } from "../../../utils/date/getDateTime";
-import { appliedCoachingType } from "../../../utils/type";
 import UseImgix from "../../../components/common/Imgix";
+import { AppliedCoachingType } from "../../../types/apis/program";
 
 const CoachingCardWrapper = styled.div`
   display: flex;
@@ -58,7 +58,7 @@ const LeftDays = styled.div`
   font-size: 1.6rem;
 `;
 
-const CoachingCard = (props: { coaching: appliedCoachingType; alt: string }): JSX.Element => {
+const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JSX.Element => {
   const { status, coaching_name, start_date, end_date, main_image } = props.coaching;
   const { alt } = props;
 

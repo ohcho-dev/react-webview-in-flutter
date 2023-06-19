@@ -5,7 +5,7 @@ import { getAlarmConfig, updateAlarmConfig } from "../../apis/mypage";
 import CustomToggleSwitch from "../../components/common/CustomToggleSwitch";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { alarmType } from "../../utils/type";
+import { AlarmType } from "../../types/common";
 import PageTitle from "./components/PageTitle";
 
 const PageLayout = styled.div`
@@ -31,8 +31,8 @@ const TypeLabel = styled.div`
 `;
 
 const ManagementAlarm = () => {
-  const [coaching, setCoaching] = useState<alarmType>();
-  const [event, setEvent] = useState<alarmType>();
+  const [coaching, setCoaching] = useState<AlarmType>();
+  const [event, setEvent] = useState<AlarmType>();
 
   const { data } = useQuery(queryKeys.alarmConfig, () => getAlarmConfig());
 

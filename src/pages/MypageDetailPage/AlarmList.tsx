@@ -8,9 +8,9 @@ import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { newNotificationFlagstate } from "../../store/atom";
 import { getDate } from "../../utils/date/getDateTime";
-import { NotificationType } from "../../utils/type";
 import UseImgix from "../../components/common/Imgix";
 import PageTitle from "./components/PageTitle";
+import { NotificationType } from "../../types/common";
 
 const ImgWrap = styled.div`
   height: 100%;

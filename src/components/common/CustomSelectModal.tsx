@@ -1,9 +1,14 @@
-import { ReactElement, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import styled, { keyframes } from "styled-components";
-import { SelectBtnArrayType } from "../../utils/type";
 import UseImgix from "./Imgix";
+
+interface SelectBtnArrayType {
+  id: number;
+  name: string;
+  function?: () => void;
+}
 
 interface ModalProps {
   isOpen: boolean;

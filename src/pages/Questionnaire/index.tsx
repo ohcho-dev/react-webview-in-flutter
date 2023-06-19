@@ -16,8 +16,8 @@ import {
   surveyAnswerState,
   surveyCoachingIdState,
 } from "../../store/atom";
-import { SurveyInfoType } from "../../utils/type";
 import UseImgix from "../../components/common/Imgix";
+import { SurveyInfoType } from "../../types/apis/program";
 
 const QuestionnarieWrapper = styled.div`
   display: flex;

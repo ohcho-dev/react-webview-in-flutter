@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getUserInfo } from "../../../apis/mypage";
-import { queryKeys } from "../constants/queryKeys";
 
 import {
   childrenKeyState,
@@ -14,6 +13,7 @@ import {
 } from "../../../store/atom";
 import UseImgix from "../../common/Imgix";
 import AlarmBadge from "../../common/AlarmBadge";
+import { queryKeys } from "../../../constants/queryKeys";
 
 const TitleBarWrap = styled.section`
   width: 100%;

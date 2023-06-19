@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import { getSurveyAnswers } from "../../apis/questionnaireApi";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { GetSurveyAnswerType, GetSurveyType } from "../../utils/type";
 import UseImgix from "../../components/common/Imgix";
 import {
   ListScroll,
@@ -15,6 +14,7 @@ import {
 import ResultQuestionChoice from "./components/ResultQuestionChoice";
 import ResultQuestionNumberUnit from "./components/ResultQuestionNumberUnit";
 import ResultQuestionTextLong from "./components/ResultQuestionTextLong";
+import { GetSurveyAnswerType, GetSurveyType } from "../../types/apis/coaching";
 
 const QuestionnaireDetailPage = (): JSX.Element => {
   const { id } = useParams();
