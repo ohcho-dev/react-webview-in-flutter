@@ -5,13 +5,14 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { MenuType } from "..";
 import { getCoachingList } from "../../../../queries/domain/program/programApi";
-import { queryKeys } from "../../../../constants/queryKeys";
 import { coachingType } from "../../../../types/domain/coaching";
 import { getDiscountPercentage } from "../../../../utils/program/getDiscountPercentage";
 import UseImgix from "../../../../components/common/Imgix";
 import ProgramCard from "../../../program/ProgramListPage/components/ProgramCard";
 import { Divider } from "../../../program/ProgramListPage/components/styled";
 import { selectedChildInfoState } from "../../../../store/common";
+import { coachingQueryKeys } from "../../../../queries/domain/coaching/coachingQueryKeys";
+import { programQueryKeys } from "../../../../queries/domain/program/programQueryKeys";
 
 interface NoAppliedCoachingPropsType {
   selectedMenu?: MenuType;
@@ -61,7 +62,7 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const { selectedMenu } = props;
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { data, refetch } = useQuery(queryKeys.coachingList, getCoachingList);
+  const { data, refetch } = useQuery(programQueryKeys.coachingList, getCoachingList);
   const { id, name } = useRecoilValue(selectedChildInfoState);
 
   const handleCardClick = (id: number) => {

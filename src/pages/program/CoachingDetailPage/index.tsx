@@ -6,13 +6,13 @@ import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
 import UseImgix from "../../../components/common/Imgix";
-import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import {
   applyCoaching,
   checkValidCoachingToApply,
   getSelectedCoachingInfo,
 } from "../../../queries/domain/program/programApi";
+import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 import { openBottomModalState, selectedChildInfoState } from "../../../store/common";
 import { ApiErrorResponseType } from "../../../types/apis/base";
 import { coachingType } from "../../../types/domain/coaching";
@@ -49,11 +49,12 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
     updated_at: "",
     valid_day: 0,
   });
-  const { data: selectedCoachingInfo } = useQuery(queryKeys.selectedCoacingInfo, () =>
+  const { data: selectedCoachingInfo } = useQuery(programQueryKeys.selectedCoacingInfo, () =>
     getSelectedCoachingInfo(id),
   );
-  const { data: res } = useQuery<ApiErrorResponseType>(queryKeys.checkValidCoachingToApply, () =>
-    checkValidCoachingToApply(id),
+  const { data: res } = useQuery<ApiErrorResponseType>(
+    programQueryKeys.checkValidCoachingToApply,
+    () => checkValidCoachingToApply(id),
   );
   const callApplyCoaching = useMutation(applyCoaching, {
     onSuccess: res => {

@@ -6,13 +6,13 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getCoachingList } from "../../../queries/domain/program/programApi";
 import { CHILD_ID_FIELD } from "../../../constants/localStorage";
-import { queryKeys } from "../../../constants/queryKeys";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
 import UseImgix from "../../../components/common/Imgix";
 import { coachingType } from "../../../types/domain/coaching";
 import { selectedChildInfoState } from "../../../store/common";
+import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 
 const ListWrap = styled.div`
   margin-bottom: 3rem;
@@ -62,7 +62,7 @@ const CoachingList = () => {
   const { id } = useRecoilValue(selectedChildInfoState);
 
   const { refetch, data: coachingList = [[]] } = useQuery(
-    queryKeys.coachingList,
+    programQueryKeys.coachingList,
     () => getCoachingList(),
     {
       enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),

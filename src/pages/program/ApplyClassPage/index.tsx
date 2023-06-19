@@ -6,7 +6,6 @@ import { applyClass, getSelectedClassInfo } from "../../../queries/domain/progra
 import ChildSelectBottomModal from "../../../components/domain/home/ChildSelectBottomModal";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
-import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 
 import { ChildType } from "../../../types/common";
@@ -24,6 +23,7 @@ import * as S from "./applyClassPage.styled";
 import ProgramSection from "./components/ProgramSection";
 import PriceSection from "./components/PriceSection";
 import ClassRejectModal from "./components/ClassRejectModal";
+import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 export const USER_SECTION_HEIGHT = 37;
 
 const ApplyClassPage = () => {
@@ -58,7 +58,7 @@ const ApplyClassPage = () => {
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
   const activeInputref = useRef<HTMLInputElement | null>(null);
-  const { data: classInfo } = useQuery(queryKeys.selectedClassInfo, () =>
+  const { data: classInfo } = useQuery(programQueryKeys.selectedClassInfo, () =>
     getSelectedClassInfo(classid),
   );
 

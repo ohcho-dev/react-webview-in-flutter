@@ -4,12 +4,13 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { deleteProfilImageApi } from "../../../queries/domain/home/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
-import { queryKeys } from "../../../constants/queryKeys";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../components/common/Imgix";
 import getDday from "../../../utils/date/getDday";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/common";
+import { homeQueryKeys } from "../../../queries/domain/home/homeQueryKeys";
+import { myQueryKeys } from "../../../queries/domain/my/myQueryKeys";
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;
@@ -147,12 +148,12 @@ const ChildInfo = () => {
 
   const deleteProfilImage = useMutation(deleteProfilImageApi, {
     onSuccess: res => {
-      queryClient.invalidateQueries(queryKeys.childrenList);
+      queryClient.invalidateQueries(myQueryKeys.childrenList);
     },
   });
 
   useEffect(() => {
-    queryClient.invalidateQueries(queryKeys.homeData);
+    queryClient.invalidateQueries(homeQueryKeys.homeData);
   }, [selectedChild.id]);
 
   return (

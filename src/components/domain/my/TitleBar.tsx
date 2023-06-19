@@ -6,13 +6,13 @@ import styled from "styled-components";
 import { getUserInfo } from "../../../queries/domain/my/mypage";
 import UseImgix from "../../common/Imgix";
 import AlarmBadge from "../../common/AlarmBadge";
-import { queryKeys } from "../../../constants/queryKeys";
 import {
   childrenKeyState,
   childrenListState,
   openBottomModalState,
   selectedChildInfoState,
 } from "../../../store/common";
+import { myQueryKeys } from "../../../queries/domain/my/myQueryKeys";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -231,7 +231,7 @@ export const MypageTitleBar: React.FC = () => {
   const [icon, setIcon] = useState("");
   const childrenList = useRecoilValue(childrenListState);
 
-  const { data: userInfo } = useQuery(queryKeys.userInfo, () => getUserInfo());
+  const { data: userInfo } = useQuery(myQueryKeys.userInfo, () => getUserInfo());
 
   useEffect(() => {
     if (userInfo.sns_kind) {

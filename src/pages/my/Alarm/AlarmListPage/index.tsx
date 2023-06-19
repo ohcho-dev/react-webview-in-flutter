@@ -5,8 +5,8 @@ import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { queryKeys } from "../../../../constants/queryKeys";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
+import { commonQueryKeys } from "../../../../queries/common/commonQueryKeys";
 import {
   getNotificationList,
   updateNotificationCheckTime,
@@ -90,7 +90,7 @@ const DateTime = styled.div`
 const AlarmListPage = () => {
   const navigate = useNavigate();
   const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
-  const { data } = useQuery(queryKeys.notificationList, getNotificationList);
+  const { data } = useQuery(commonQueryKeys.notificationList, getNotificationList);
   const setNotificationTime = useMutation(updateNotificationCheckTime);
 
   useEffect(() => {

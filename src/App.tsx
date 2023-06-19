@@ -18,7 +18,6 @@ import { getHomeData } from "./queries/domain/home/homeApi";
 import { getUserInfo } from "./queries/domain/my/mypage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
-import { queryKeys } from "./constants/queryKeys";
 import { ErrorBoundary } from "./pages/common/ErrorPage/ErrorPage";
 import { NativeFunction } from "./utils/app/NativeFunction";
 import { ChildType } from "./types/common";
@@ -30,6 +29,10 @@ import {
   selectedHomeDataState,
 } from "./store/common";
 import { currentTaskIdState } from "./store/domain/coaching";
+import { commonQueryKeys } from "./queries/common/commonQueryKeys";
+import { homeQueryKeys } from "./queries/domain/home/homeQueryKeys";
+import { coachingQueryKeys } from "./queries/domain/coaching/coachingQueryKeys";
+import { myQueryKeys } from "./queries/domain/my/myQueryKeys";
 
 let oldLocation: any = null;
 
@@ -57,7 +60,7 @@ const App: React.FC = () => {
 
   function refetchData() {
     return new Promise(function (resolve, reject) {
-      queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
+      queryClient.invalidateQueries(coachingQueryKeys.appliedCoachingInfo);
       resolve("success");
     });
   }
@@ -81,7 +84,7 @@ const App: React.FC = () => {
 
   const getBaseData = useQueries([
     {
-      queryKey: queryKeys.userInfo,
+      queryKey: myQueryKeys.userInfo,
       queryFn: () => getUserInfo(),
       onSuccess: (data: any) => {
         window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
@@ -90,7 +93,7 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
     {
-      queryKey: queryKeys.childrenList,
+      queryKey: myQueryKeys.childrenList,
       queryFn: () => getChildrenList(),
       onSuccess: (data: any[]) => {
         if (data.length) {
@@ -103,7 +106,7 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
     {
-      queryKey: queryKeys.homeData,
+      queryKey: homeQueryKeys.homeData,
       queryFn: () => getHomeData(),
       onSuccess: (data: any) => {
         if (data) {
@@ -113,7 +116,7 @@ const App: React.FC = () => {
       enabled: !!selectedChild && !!window.localStorage.getItem(CHILD_ID_FIELD),
     },
     {
-      queryKey: queryKeys.commonCodeList,
+      queryKey: commonQueryKeys.commonCodeList,
       queryFn: () => getCommonCodeList(),
       onSuccess: (commonCodeList: any[]) => {
         const codeObj: { [key: string]: string | number | object } = {};
@@ -146,11 +149,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("refetchChildData", () => {
-      queryClient.invalidateQueries(queryKeys.childrenList);
+      queryClient.invalidateQueries(myQueryKeys.childrenList);
     });
 
     window.addEventListener("refetchPushList", () => {
-      queryClient.invalidateQueries(queryKeys.notificationList);
+      queryClient.invalidateQueries(commonQueryKeys.notificationList);
     });
 
     window.addEventListener("coachingResult", (res: any) => {

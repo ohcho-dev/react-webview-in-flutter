@@ -3,11 +3,11 @@ import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { queryKeys } from "../../../constants/queryKeys";
 import getDday from "../../../utils/date/getDday";
 import UseImgix from "../../../components/common/Imgix";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/common";
+import { homeQueryKeys } from "../../../queries/domain/home/homeQueryKeys";
 
 const Wrap = styled.div`
   padding: 2.5rem 0;
@@ -191,7 +191,7 @@ const RecommendActivityBox = () => {
   const homeData = useRecoilValue(selectedHomeDataState);
 
   useEffect(() => {
-    queryClient.invalidateQueries(queryKeys.homeData);
+    queryClient.invalidateQueries(homeQueryKeys.homeData);
   }, [selectedChild.id]);
 
   return (

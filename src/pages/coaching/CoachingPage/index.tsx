@@ -3,7 +3,6 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { getAppliedCoachingList } from "../../../queries/domain/coaching/coachingApi";
-import { queryKeys } from "../../../constants/queryKeys";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
 import UseImgix from "../../../components/common/Imgix";
 import { Divider } from "../../program/ProgramListPage/components/styled";
@@ -12,6 +11,7 @@ import NoAppliedCoaching from "./components/NoAppliedCoaching";
 import { AppliedCoachingType } from "../../../types/apis/program";
 import { commonCodeState, selectedChildInfoState } from "../../../store/common";
 import * as S from "./coaching.styled";
+import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
 
 export type MenuType = "ongoing" | "all" | "end";
 
@@ -28,7 +28,7 @@ const CoachingPage = () => {
   const [endList, setEndList] = useState<AppliedCoachingType[]>([]);
   const { id } = useRecoilValue(selectedChildInfoState);
   const { data: appliedCoachingList, refetch } = useQuery(
-    queryKeys.appliedCoachingList,
+    coachingQueryKeys.appliedCoachingList,
     getAppliedCoachingList,
     {
       onSuccess: () => {

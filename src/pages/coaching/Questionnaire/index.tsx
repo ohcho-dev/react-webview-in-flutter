@@ -6,7 +6,6 @@ import { getSelectedTaskInfo } from "../../../queries/domain/coaching/coachingAp
 import { getSurveyQuestionList } from "../../../queries/domain/coaching/questionnaireApi";
 import Button from "../../../components/common/Button";
 import Chip from "../../../components/common/Chip";
-import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import UseImgix from "../../../components/common/Imgix";
 import { SurveyInfoType } from "../../../types/apis/program";
@@ -18,6 +17,7 @@ import {
   surveyCoachingIdState,
 } from "../../../store/domain/coaching";
 import * as S from "./questionnaire.styled";
+import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
 
 const Questionnaire = (): JSX.Element => {
   const navigate = useNavigate();
@@ -27,10 +27,10 @@ const Questionnaire = (): JSX.Element => {
   const setSurveyAnswer = useSetRecoilState(surveyAnswerState);
   const setSurveyCoachingId = useSetRecoilState(surveyCoachingIdState);
   const [startOrderNum, setStartQuestionOrderNum] = useRecoilState(startQuestionOrderNumState);
-  const { data: surveyQuestionList } = useQuery(queryKeys.surveyQuestionList, () =>
+  const { data: surveyQuestionList } = useQuery(coachingQueryKeys.surveyQuestionList, () =>
     getSurveyQuestionList(id),
   );
-  const { data: selectedTaskInfo } = useQuery(queryKeys.selectedTaskInfo, () =>
+  const { data: selectedTaskInfo } = useQuery(coachingQueryKeys.selectedTaskInfo, () =>
     getSelectedTaskInfo(id),
   );
   const [currentSurveyInfo, setCurrentSurveyInfo] = useRecoilState(currentSurveyInfoState);

@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { getNotificationList } from "../../queries/common/notificationApi";
-import { queryKeys } from "../../constants/queryKeys";
 import { newNotificationFlagstate } from "../../store/common";
 import { NotificationType } from "../../types/common";
 import UseImgix from "./Imgix";
+import { commonQueryKeys } from "../../queries/common/commonQueryKeys";
 
 const CustomAlarmBadge = styled.div`
   width: 2.8rem;
@@ -33,7 +33,7 @@ export const AlarmBadge: React.FC = props => {
   const navigate = useNavigate();
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
   const [newFlag, setNewFlag] = useState(newNotificationFlag);
-  const { status, isFetching } = useQuery(queryKeys.notificationList, getNotificationList, {
+  const { status, isFetching } = useQuery(commonQueryKeys.notificationList, getNotificationList, {
     refetchOnWindowFocus: true,
     onSuccess: data => {
       if (data.last_checked_at) {

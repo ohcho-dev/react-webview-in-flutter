@@ -6,11 +6,11 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getClassList } from "../../../queries/domain/program/programApi";
 import { CHILD_ID_FIELD } from "../../../constants/localStorage";
-import { queryKeys } from "../../../constants/queryKeys";
 import { selectedChildInfoState } from "../../../store/common";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
+import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 
 const ProgramTitle = styled.span`
   font-weight: 700;
@@ -29,9 +29,13 @@ const ClassList = () => {
   const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
 
-  const { refetch, data: classList = [] } = useQuery(queryKeys.classList, () => getClassList(), {
-    enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
-  });
+  const { refetch, data: classList = [] } = useQuery(
+    programQueryKeys.classList,
+    () => getClassList(),
+    {
+      enabled: !!Cookies.get("token") && !!window.localStorage.getItem(CHILD_ID_FIELD),
+    },
+  );
 
   useEffect(() => {
     if (id) refetch();

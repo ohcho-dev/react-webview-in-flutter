@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { getSurveyAnswers } from "../../../queries/domain/coaching/questionnaireApi";
-import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import UseImgix from "../../../components/common/Imgix";
 import {
@@ -15,11 +14,13 @@ import ResultQuestionChoice from "./components/ResultQuestionChoice";
 import ResultQuestionNumberUnit from "./components/ResultQuestionNumberUnit";
 import ResultQuestionTextLong from "./components/ResultQuestionTextLong";
 import { GetSurveyAnswerType, GetSurveyType } from "../../../types/apis/coaching";
+import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
 
 const QuestionnaireDetailPage = (): JSX.Element => {
   const { id } = useParams();
-  const { data: surveyAnswerInfo } = useQuery<GetSurveyType>(queryKeys.surveyAnswerList, () =>
-    getSurveyAnswers(id),
+  const { data: surveyAnswerInfo } = useQuery<GetSurveyType>(
+    coachingQueryKeys.surveyAnswerList,
+    () => getSurveyAnswers(id),
   );
   const [answerList, setAnswerList] = useState<GetSurveyAnswerType[]>([]);
 

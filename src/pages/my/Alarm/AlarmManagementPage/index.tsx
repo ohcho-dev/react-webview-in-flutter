@@ -3,9 +3,9 @@ import { useMutation, useQuery } from "react-query";
 import styled from "styled-components";
 import CustomToggleSwitch from "../../../../components/common/CustomToggleSwitch";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { queryKeys } from "../../../../constants/queryKeys";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import { getAlarmConfig, updateAlarmConfig } from "../../../../queries/domain/my/mypage";
+import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
 import { AlarmType } from "../../../../types/common";
 
 const PageLayout = styled.div`
@@ -34,7 +34,7 @@ const AlarmManagementPage = () => {
   const [coaching, setCoaching] = useState<AlarmType>();
   const [event, setEvent] = useState<AlarmType>();
 
-  const { data } = useQuery(queryKeys.alarmConfig, () => getAlarmConfig());
+  const { data } = useQuery(myQueryKeys.alarmConfig, () => getAlarmConfig());
 
   useEffect(() => {
     setCoaching(data[0][0]);

@@ -5,9 +5,9 @@ import styled from "styled-components";
 import UseImgix from "../../../components/common/Imgix";
 import LoadingSpinner from "../../../components/common/LoadingSpinner";
 import PageTitle from "../../../components/domain/my/PageTitle";
-import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { getPurchaseClasses, getPurchaseCoaching } from "../../../queries/domain/my/mypage";
+import { myQueryKeys } from "../../../queries/domain/my/myQueryKeys";
 import { getDate } from "../../../utils/date/getDateTime";
 import getGender from "../../../utils/user/getGender";
 
@@ -200,13 +200,13 @@ const AppliedProgramListPage = () => {
   const [selectedTab, setSelectedTab] = useState(TabValue[0]);
 
   const { data: purchasedCoachingList } = useQuery(
-    queryKeys.purchaseCoaching,
+    myQueryKeys.purchaseCoaching,
     getPurchaseCoaching,
     {
       enabled: selectedTab === "코칭",
     },
   );
-  const { data: purchasedClassList } = useQuery(queryKeys.purchaseClasses, getPurchaseClasses, {
+  const { data: purchasedClassList } = useQuery(myQueryKeys.purchaseClasses, getPurchaseClasses, {
     enabled: selectedTab === "클래스",
   });
 
