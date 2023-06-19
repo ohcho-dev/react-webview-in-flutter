@@ -15,15 +15,15 @@ import {
   selectedChildInfoState,
   useShareState,
 } from "../../store/atom";
-import { childType } from "../../types/common";
+import { ChildType } from "../../types/common";
 import { getDate } from "../../utils/date/getDateTime";
 import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
 import { NativeFunction } from "../../utils/app/NativeFunction";
-import { applyClassBodyType } from "../../utils/type";
 import UseImgix from "../../components/common/Imgix";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
+import { applyClassBodyType } from "../../types/apis/program";
 
 export const Title = styled.div`
   font-weight: 700;
@@ -130,7 +130,7 @@ const ApplyClassPage = () => {
     parent_name: "",
     parent_phone: "",
   });
-  const [selectedChildInfo, setSelectedChildInfo] = useState<childType>({
+  const [selectedChildInfo, setSelectedChildInfo] = useState<ChildType>({
     id: 0,
     name: "",
     parent_id: 0,
@@ -211,7 +211,7 @@ const ApplyClassPage = () => {
   const handleChildClick = (evt: React.MouseEvent<HTMLElement>) => {
     const childId = (evt.currentTarget as HTMLButtonElement).id;
     setSelectedChildInfo(
-      childrenList.filter((child: childType) => child.id.toString() === childId)[0],
+      childrenList.filter((child: ChildType) => child.id.toString() === childId)[0],
     );
     setOpenChildrenModal(false);
   };

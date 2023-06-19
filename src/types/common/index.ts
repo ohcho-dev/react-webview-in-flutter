@@ -1,4 +1,4 @@
-export interface childType {
+export interface ChildType {
   id: number;
   image?: string;
   parent_id?: number;

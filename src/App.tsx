@@ -29,7 +29,7 @@ import {
   selectedHomeDataState,
 } from "./store/atom";
 import { NativeFunction } from "./utils/app/NativeFunction";
-import { childType } from "./types/common";
+import { ChildType } from "./types/common";
 
 let oldLocation: any = null;
 
@@ -95,7 +95,7 @@ const App: React.FC = () => {
       onSuccess: (data: any[]) => {
         if (data.length) {
           const id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
-          setSelectedChild(data.filter((child: childType) => child.id.toString() === id)[0]);
+          setSelectedChild(data.filter((child: ChildType) => child.id.toString() === id)[0]);
 
           setChildrenList(data);
         }

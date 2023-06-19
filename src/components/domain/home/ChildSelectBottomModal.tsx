@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { childType } from "../../../types/common";
+import { ChildType } from "../../../types/common";
 import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../common/Imgix";
 import CustomBottomModal from "../../common/CustomBottomModal";
 
 interface ChildSelectBottomModalProps {
-  selectedChildInfo: childType;
-  childrenList: childType[];
+  selectedChildInfo: ChildType;
+  childrenList: ChildType[];
   openModal: boolean;
   toggleModal: () => void;
   handleChildClick: (evt: React.MouseEvent<HTMLElement>) => void;
@@ -105,7 +105,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
             <UseImgix srcUrl="/images/icon-close.svg" alt="close icon" />
           </span>
         </ChildrenListModalTitleSection>
-        {childrenList.slice(0, 5).map((child: childType, index: number) => {
+        {childrenList.slice(0, 5).map((child: ChildType, index: number) => {
           return (
             <ChildInfoWrapper
               onClick={handleChildClick}

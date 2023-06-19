@@ -7,7 +7,7 @@ import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childType } from "../../types/common";
+import { ChildType } from "../../types/common";
 import { getDate } from "../../utils/date/getDateTime";
 import getGender from "../../utils/user/getGender";
 import UseImgix from "../../components/common/Imgix";
@@ -76,7 +76,7 @@ export const ManagementChild = () => {
     >
       <PageTitle title="아이 관리" />
       <PageLayout>
-        {childrenList.map((child: childType, index: number) => (
+        {childrenList.map((child: ChildType, index: number) => (
           <ChildrenListWrap
             key={index}
             onClick={() => navigate(`/my/management-child/${child.id}`)}

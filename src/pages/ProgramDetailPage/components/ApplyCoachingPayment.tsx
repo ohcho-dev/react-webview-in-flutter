@@ -11,10 +11,9 @@ import { useRecoilValue } from "recoil";
 import { selectedChildInfoState } from "../../../store/atom";
 import getGender from "../../../utils/user/getGender";
 import { RefObject, useRef, useState } from "react";
-import { applyCoachingBodyType } from "../../../utils/type";
-// import { CustomRadioButton } from "../../../components/common/CustomRadioButton";
 import CustomModal from "../../../components/common/CustomModal";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
+import { applyCoachingBodyType } from "../../../types/apis/program";
 
 // interface TypeProps {
 //   name: string;

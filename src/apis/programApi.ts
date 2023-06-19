@@ -1,6 +1,6 @@
 import { Method } from "axios";
 import { request } from ".";
-import { applyClassBodyType } from "../utils/type";
+import { applyClassBodyType } from "../types/apis/program";
 
 // 코칭 상품 목록 (GET)
 export const getCoachingList = () => {

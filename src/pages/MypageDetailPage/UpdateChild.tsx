@@ -19,7 +19,7 @@ import { updateChildSuccessedAction } from "../../utils/google-analytics/events/
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
 import { NativeFunction } from "../../utils/app/NativeFunction";
-import { childType } from "../../types/common";
+import { ChildType } from "../../types/common";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -87,7 +87,7 @@ const InputBox = styled.input`
 const UpdateChild = () => {
   const { childid } = useParams();
   const navigate = useNavigate();
-  const [childData, setChildData] = useState<childType>(DEFAULT_CHILD_TYPE);
+  const [childData, setChildData] = useState<ChildType>(DEFAULT_CHILD_TYPE);
 
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
   const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });

@@ -15,7 +15,7 @@ import {
   openBottomModalState,
   selectedChildInfoState,
 } from "../store/atom";
-import { childType } from "../types/common";
+import { ChildType } from "../types/common";
 import LayoutBasePage from "./LayoutBasePage";
 
 const MainPage = styled.main`
@@ -82,7 +82,7 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
   const handleChildClick = (evt: React.MouseEvent<HTMLElement>) => {
     const childId = (evt.currentTarget as HTMLButtonElement).id;
     setSelectedChildInfo(
-      childrenList.filter((child: childType) => child.id.toString() === childId)[0],
+      childrenList.filter((child: ChildType) => child.id.toString() === childId)[0],
     );
 
     window.localStorage.setItem(CHILD_ID_FIELD, childId);
