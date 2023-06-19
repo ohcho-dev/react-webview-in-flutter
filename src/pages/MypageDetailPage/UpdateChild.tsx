@@ -13,13 +13,13 @@ import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState } from "../../store/atom";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
 import { NativeFunction } from "../../utils/app/NativeFunction";
 import { ChildType } from "../../types/common";
+import { childrenListState } from "../../store/common";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,

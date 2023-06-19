@@ -6,12 +6,12 @@ import styled from "styled-components";
 import { MenuType } from "..";
 import { getCoachingList } from "../../../apis/programApi";
 import { queryKeys } from "../../../constants/queryKeys";
-import { selectedChildInfoState } from "../../../store/atom";
 import { coachingType } from "../../../types/domain/coaching";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import UseImgix from "../../../components/common/Imgix";
 import ProgramCard from "../../ProgramPage/components/ProgramCard";
 import { Divider } from "../../ProgramPage/components/styled";
+import { selectedChildInfoState } from "../../../store/common";
 
 interface NoAppliedCoachingPropsType {
   selectedMenu?: MenuType;

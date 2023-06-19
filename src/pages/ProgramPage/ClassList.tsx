@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { getClassList } from "../../apis/programApi";
 import { CHILD_ID_FIELD } from "../../constants/localStorage";
 import { queryKeys } from "../../constants/queryKeys";
-import { selectedChildInfoState } from "../../store/atom";
+import { selectedChildInfoState } from "../../store/common";
 import { getDiscountPercentage } from "../../utils/program/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";

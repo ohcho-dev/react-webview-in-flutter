@@ -6,13 +6,13 @@ import { getSelectedClassInfo } from "../../../apis/programApi";
 import Button from "../../../components/common/Button";
 import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { commonCodeState } from "../../../store/atom";
 import { getDateTime } from "../../../utils/date/getDateTime";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import { getMonthLevelString } from "../../../utils/date/getMonthLevelString";
 import UseImgix from "../../../components/common/Imgix";
 import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
+import { commonCodeState } from "../../../store/common";
 
 interface DetailClassProps {
   id: string;

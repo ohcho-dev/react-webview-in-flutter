@@ -7,12 +7,12 @@ import styled from "styled-components";
 import { getCoachingList } from "../../apis/programApi";
 import { CHILD_ID_FIELD } from "../../constants/localStorage";
 import { queryKeys } from "../../constants/queryKeys";
-import { selectedChildInfoState } from "../../store/atom";
 import { getDiscountPercentage } from "../../utils/program/getDiscountPercentage";
 import ProgramCard from "./components/ProgramCard";
 import { Divider } from "./components/styled";
 import UseImgix from "../../components/common/Imgix";
 import { coachingType } from "../../types/domain/coaching";
+import { selectedChildInfoState } from "../../store/common";
 
 const ListWrap = styled.div`
   margin-bottom: 3rem;

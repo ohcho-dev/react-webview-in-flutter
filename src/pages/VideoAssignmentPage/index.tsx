@@ -8,11 +8,11 @@ import Button from "../../components/common/Button";
 import { BODY_1, STB_20 } from "../../constants/font";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/app/NativeFunction";
 import { getDate } from "../../utils/date/getDateTime";
 import UseImgix from "../../components/common/Imgix";
 import { VideoAssignmentResultType } from "../../types/domain/coaching";
+import { selectedChildInfoState } from "../../store/common";
 
 type collapseType = "" | "open" | "close";
 

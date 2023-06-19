@@ -9,12 +9,7 @@ import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import {
-  childrenKeyState,
-  childrenListState,
-  selectedChildInfoState,
-  useShareState,
-} from "../../store/atom";
+
 import { ChildType } from "../../types/common";
 import { getDate } from "../../utils/date/getDateTime";
 import { applyClassSuccessedAction } from "../../utils/google-analytics/events/ClickApplyBtn";
@@ -24,6 +19,7 @@ import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
 import { ApplyClassBodyType } from "../../types/apis/program";
+import { childrenListState, selectedChildInfoState, visibleShareState } from "../../store/common";
 
 export const Title = styled.div`
   font-weight: 700;
@@ -120,7 +116,7 @@ const ApplyClassPage = () => {
   const fullHeight = useRef<number>(window.innerHeight);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const defaultChild = useRecoilValue(selectedChildInfoState);
-  const setShareBtnVisibility = useSetRecoilState(useShareState);
+  const setShareBtnVisibility = useSetRecoilState(visibleShareState);
   const childrenList = useRecoilValue(childrenListState);
   const [openChildrenModal, setOpenChildrenModal] = useState<boolean>(false);
   const [openValidationMoadl, setOpenValidationModal] = useState<boolean>(false);

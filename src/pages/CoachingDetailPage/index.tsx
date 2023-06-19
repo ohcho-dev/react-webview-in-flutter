@@ -7,12 +7,13 @@ import { getAppliedCoachingInfo } from "../../apis/coachingApi";
 import CustomModal from "../../components/common/CustomModal";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { currentTaskIdState, selectedChildInfoState } from "../../store/atom";
 import { NativeFunction } from "../../utils/app/NativeFunction";
 import { getDate } from "../../utils/date/getDateTime";
 import ContentItem from "./components/ContentItem";
 import UseImgix from "../../components/common/Imgix";
 import { CoachingStatusType, TaskStatusType } from "../../types/domain/coaching";
+import { selectedChildInfoState } from "../../store/common";
+import { currentTaskIdState } from "../../store/domain/coaching";
 
 const PageTitleWrap = styled.div`
   position: fixed;

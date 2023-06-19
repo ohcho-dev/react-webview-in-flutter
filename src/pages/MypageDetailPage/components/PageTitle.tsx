@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { useShareState } from "../../../store/atom";
+import { visibleShareState } from "../../../store/common";
 
 const TitleWrap = styled.div`
   width: 100%;
@@ -23,7 +23,7 @@ interface PageTitlePropsType {
   title: string;
 }
 const PageTitle = ({ title = "" }: PageTitlePropsType) => {
-  const setShare = useSetRecoilState(useShareState);
+  const setShare = useSetRecoilState(visibleShareState);
 
   useEffect(() => {
     setShare(false);

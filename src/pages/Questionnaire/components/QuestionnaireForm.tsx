@@ -6,12 +6,6 @@ import { createSurveyAnswerData } from "../../../apis/questionnaireApi";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import {
-  questionnarieState,
-  startQuestionOrderNumState,
-  surveyAnswerState,
-  surveyTempAnswerState,
-} from "../../../store/atom";
 import UseImgix from "../../../components/common/Imgix";
 import QuestionChoice from "./QuestionChoice";
 import QuestionNumberUnit from "./QuestionNumberUnit";
@@ -20,6 +14,12 @@ import QuestionTextSHort from "./QuestionTextShort";
 import { QuestionGap, SurveyCategoryTitle } from "./style";
 import { SurveyAnswerType } from "../../../types/apis/program";
 import { ViewSurveyListType } from "../../../types/domain/coaching";
+import {
+  questionnarieState,
+  startQuestionOrderNumState,
+  surveyAnswerState,
+  surveyTempAnswerState,
+} from "../../../store/domain/coaching";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();

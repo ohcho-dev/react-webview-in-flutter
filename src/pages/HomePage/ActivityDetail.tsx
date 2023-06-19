@@ -8,9 +8,8 @@ import "react-notion/src/styles.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import LoadingSpinner from "../../components/common/LoadingSpinner";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-
-import { mainPageScrollValueState } from "../../store/atom";
 import { useRecoilValue } from "recoil";
+import { mainPageScrollValueState } from "../../store/common";
 
 function ActivityDetail() {
   const navigate = useNavigate();

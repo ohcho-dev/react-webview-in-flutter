@@ -6,12 +6,12 @@ import styled from "styled-components";
 import { getAppliedCoachingList } from "../../apis/coachingApi";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
-import { commonCodeState, selectedChildInfoState } from "../../store/atom";
 import UseImgix from "../../components/common/Imgix";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
 import NoAppliedCoaching from "./components/NoAppliedCoaching";
 import { AppliedCoachingType } from "../../types/apis/program";
+import { commonCodeState, selectedChildInfoState } from "../../store/common";
 
 export type MenuType = "ongoing" | "all" | "end";
 

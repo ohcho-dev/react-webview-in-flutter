@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { queryKeys } from "../../../constants/queryKeys";
-import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
 import getDday from "../../../utils/date/getDday";
 import UseImgix from "../../../components/common/Imgix";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
+import { selectedChildInfoState, selectedHomeDataState } from "../../../store/common";
 
 const Wrap = styled.div`
   padding: 2.5rem 0;

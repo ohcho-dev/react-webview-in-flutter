@@ -5,11 +5,11 @@ import styled from "styled-components";
 import { deleteProfilImageApi } from "../../../apis/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { queryKeys } from "../../../constants/queryKeys";
-import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../components/common/Imgix";
 import getDday from "../../../utils/date/getDday";
+import { selectedChildInfoState, selectedHomeDataState } from "../../../store/common";
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;

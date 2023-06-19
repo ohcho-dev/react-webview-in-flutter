@@ -20,16 +20,16 @@ import LoadingSpinner from "./components/common/LoadingSpinner";
 import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
 import { queryKeys } from "./constants/queryKeys";
 import { ErrorBoundary } from "./pages/ErrorPage";
+import { NativeFunction } from "./utils/app/NativeFunction";
+import { ChildType } from "./types/common";
 import {
   childrenKeyState,
   childrenListState,
   commonCodeState,
-  currentTaskIdState,
   selectedChildInfoState,
   selectedHomeDataState,
-} from "./store/atom";
-import { NativeFunction } from "./utils/app/NativeFunction";
-import { ChildType } from "./types/common";
+} from "./store/common";
+import { currentTaskIdState } from "./store/domain/coaching";
 
 let oldLocation: any = null;
 

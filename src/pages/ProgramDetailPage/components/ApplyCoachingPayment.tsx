@@ -8,12 +8,12 @@ import { useQuery } from "react-query";
 import { queryKeys } from "../../../constants/queryKeys";
 import { getSelectedCoachingInfo } from "../../../apis/programApi";
 import { useRecoilValue } from "recoil";
-import { selectedChildInfoState } from "../../../store/atom";
 import getGender from "../../../utils/user/getGender";
 import { RefObject, useRef, useState } from "react";
 import CustomModal from "../../../components/common/CustomModal";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { ApplyCoachingBodyType } from "../../../types/apis/program";
+import { selectedChildInfoState } from "../../../store/common";
 
 // interface TypeProps {
 //   name: string;

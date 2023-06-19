@@ -14,12 +14,12 @@ import Button from "../../components/common/Button";
 import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
-import { childrenListState } from "../../store/atom";
 import { registChildSuccessedAction } from "../../utils/google-analytics/events/ManagementChildEvent";
 import { ForwardedInput } from "./components/DatePickerInput";
 import PageTitle from "./components/PageTitle";
 import { NativeFunction } from "../../utils/app/NativeFunction";
 import { createChildType } from "../../types/domain/my";
+import { childrenListState } from "../../store/common";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",

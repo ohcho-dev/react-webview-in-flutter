@@ -13,7 +13,6 @@ import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
 import { queryKeys } from "../../../constants/queryKeys";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { openBottomModalState, selectedChildInfoState } from "../../../store/atom";
 import { getDate } from "../../../utils/date/getDateTime";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
@@ -22,6 +21,7 @@ import ProgramPrice from "../../ProgramPage/components/ProgramPrice";
 import UseImgix from "../../../components/common/Imgix";
 import { ApiErrorResponseType } from "../../../types/apis/base";
 import { coachingType } from "../../../types/domain/coaching";
+import { openBottomModalState, selectedChildInfoState } from "../../../store/common";
 
 interface DetailCoachingProps {
   id: string;
@@ -75,31 +75,12 @@ const PriceWrap = styled.div`
   margin: 0 0.5rem;
 `;
 
-// const Favorites = styled.div`
-//   position: absolute;
-//   top: 5rem;
-//   right: 0;
-//   width: 2.8rem;
-// `;
-
 const ImageWrap = styled.div`
   img {
     width: 100%;
     margin: 0 auto;
   }
 `;
-
-// const GiftBtn = styled.div`
-//   min-width: 5rem;
-//   height: 5rem;
-//   border: 1px solid rgba(0, 0, 0, 0.15);
-//   border-radius: 0.4rem;
-//   margin-right: 1.2rem;
-
-//   display: flex;
-//   align-items: center;
-//   justify-content: center;
-// `;
 
 const TitleText = styled.h2`
   font-weight: 700;

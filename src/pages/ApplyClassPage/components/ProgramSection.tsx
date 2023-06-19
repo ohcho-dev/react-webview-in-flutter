@@ -2,10 +2,10 @@ import { getMonthLevelString } from "../../../utils/date/getMonthLevelString";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { Title } from "..";
-import { commonCodeState } from "../../../store/atom";
 import { getDateTime } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../components/common/Imgix";
 import { AgeRange, OnlineOffline } from "../../ProgramPage/components/styled";
+import { commonCodeState } from "../../../store/common";
 
 const ProgramSectionWrapper = styled.div`
   background: white;

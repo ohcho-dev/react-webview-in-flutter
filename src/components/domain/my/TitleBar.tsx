@@ -4,16 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { getUserInfo } from "../../../apis/mypage";
-
+import UseImgix from "../../common/Imgix";
+import AlarmBadge from "../../common/AlarmBadge";
+import { queryKeys } from "../../../constants/queryKeys";
 import {
   childrenKeyState,
   childrenListState,
   openBottomModalState,
   selectedChildInfoState,
-} from "../../../store/atom";
-import UseImgix from "../../common/Imgix";
-import AlarmBadge from "../../common/AlarmBadge";
-import { queryKeys } from "../../../constants/queryKeys";
+} from "../../../store/common";
 
 const TitleBarWrap = styled.section`
   width: 100%;

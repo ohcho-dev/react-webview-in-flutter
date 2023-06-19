@@ -9,15 +9,15 @@ import Button from "../../components/common/Button";
 import Chip from "../../components/common/Chip";
 import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
+import UseImgix from "../../components/common/Imgix";
+import { SurveyInfoType } from "../../types/apis/program";
 import {
   currentSurveyInfoState,
   questionnarieState,
   startQuestionOrderNumState,
   surveyAnswerState,
   surveyCoachingIdState,
-} from "../../store/atom";
-import UseImgix from "../../components/common/Imgix";
-import { SurveyInfoType } from "../../types/apis/program";
+} from "../../store/domain/coaching";
 
 const QuestionnarieWrapper = styled.div`
   display: flex;

@@ -6,7 +6,7 @@ import { useRecoilState } from "recoil";
 import styled from "styled-components";
 import { getNotificationList } from "../../apis/notificationApi";
 import { queryKeys } from "../../constants/queryKeys";
-import { newNotificationFlagstate } from "../../store/atom";
+import { newNotificationFlagstate } from "../../store/common";
 import { NotificationType } from "../../types/common";
 import UseImgix from "./Imgix";
 

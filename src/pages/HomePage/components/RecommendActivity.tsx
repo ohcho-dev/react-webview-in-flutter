@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { selectedHomeDataState } from "../../../store/atom";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import UseImgix from "../../../components/common/Imgix";
+import { selectedHomeDataState } from "../../../store/common";
 
 const ActivityWrap = styled.div`
   padding: 3.5rem 0;
