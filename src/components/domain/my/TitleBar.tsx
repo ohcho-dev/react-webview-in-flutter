@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { getUserInfo } from "../../../apis/mypage";
+import { getUserInfo } from "../../../queries/domain/my/mypage";
 import UseImgix from "../../common/Imgix";
 import AlarmBadge from "../../common/AlarmBadge";
 import { queryKeys } from "../../../constants/queryKeys";

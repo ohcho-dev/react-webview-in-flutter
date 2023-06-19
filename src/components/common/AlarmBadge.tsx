@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import styled from "styled-components";
-import { getNotificationList } from "../../apis/notificationApi";
+import { getNotificationList } from "../../queries/common/notificationApi";
 import { queryKeys } from "../../constants/queryKeys";
 import { newNotificationFlagstate } from "../../store/common";
 import { NotificationType } from "../../types/common";

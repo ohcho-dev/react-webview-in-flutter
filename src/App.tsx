@@ -12,14 +12,14 @@ import "./styles/_customReactDatepicker.scss";
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { RouterConfig } from "./RouteConfig";
-import { getChildrenList } from "./apis/childApi";
-import { getCommonCodeList } from "./apis/commonApi";
-import { getHomeData } from "./apis/homeApi";
-import { getUserInfo } from "./apis/mypage";
+import { getChildrenList } from "./queries/domain/my/childApi";
+import { getCommonCodeList } from "./queries/common/commonApi";
+import { getHomeData } from "./queries/domain/home/homeApi";
+import { getUserInfo } from "./queries/domain/my/mypage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
 import { queryKeys } from "./constants/queryKeys";
-import { ErrorBoundary } from "./pages/ErrorPage";
+import { ErrorBoundary } from "./pages/common/ErrorPage/ErrorPage";
 import { NativeFunction } from "./utils/app/NativeFunction";
 import { ChildType } from "./types/common";
 import {

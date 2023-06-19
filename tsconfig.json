@@ -18,19 +18,6 @@
     "sourceMap": true,
     "inlineSources": true,
     "sourceRoot": "/"
-    // "paths": {
-    //   "@apis/*": ["apis/*"],
-    //   "@components/*": ["components/*"],
-    //   "@constants/*": ["constants/*"],
-    //   "@hooks/*": ["hooks/*"],
-    //   "@layouts/*": ["layouts/*"],
-    //   "@pages/*": ["pages/*"],
-    //   "@queries/*": ["queries/*"],
-    //   "@store/*": ["store/*"],
-    //   "@styles/*": ["styles/*"],
-    //   "@types/*": ["types/*"],
-    //   "@utils/*": ["utils/*"]
-    // }
   },
   "include": ["src"]
 }
