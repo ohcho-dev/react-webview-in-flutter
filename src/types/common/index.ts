@@ -9,3 +9,8 @@ export interface ChildType {
   due_date?: string;
   birth_modifiable?: boolean;
 }
+
+export interface MonthRangeType {
+  month_start: number;
+  month_end: number;
+}

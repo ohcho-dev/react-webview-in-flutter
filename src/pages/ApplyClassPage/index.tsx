@@ -23,7 +23,7 @@ import UseImgix from "../../components/common/Imgix";
 import ClassRejectModal from "./components/ClassRejectModal";
 import PriceSection from "./components/PriceSection";
 import ProgramSection from "./components/ProgramSection";
-import { applyClassBodyType } from "../../types/apis/program";
+import { ApplyClassBodyType } from "../../types/apis/program";
 
 export const Title = styled.div`
   font-weight: 700;
@@ -124,7 +124,7 @@ const ApplyClassPage = () => {
   const childrenList = useRecoilValue(childrenListState);
   const [openChildrenModal, setOpenChildrenModal] = useState<boolean>(false);
   const [openValidationMoadl, setOpenValidationModal] = useState<boolean>(false);
-  const [requiredInfo, setRequiredInfo] = useState<applyClassBodyType>({
+  const [requiredInfo, setRequiredInfo] = useState<ApplyClassBodyType>({
     child_id: "",
     class_id: "",
     parent_name: "",

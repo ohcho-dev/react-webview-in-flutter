@@ -1,19 +1,3 @@
-export interface MonthRangeType {
-  month_start: number;
-  month_end: number;
-}
-
-export interface appliedCoachingType {
-  coaching_name: string;
-  end_date: string;
-  id: number;
-  main_image: string;
-  month_level: MonthRangeType[] | MonthRangeType;
-  start_date: string;
-  status: string;
-  status_label: string;
-}
-
 export interface alarmType {
   type: string;
   type_label: string;

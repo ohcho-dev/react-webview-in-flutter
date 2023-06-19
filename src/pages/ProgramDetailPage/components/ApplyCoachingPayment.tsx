@@ -13,7 +13,7 @@ import getGender from "../../../utils/user/getGender";
 import { RefObject, useRef, useState } from "react";
 import CustomModal from "../../../components/common/CustomModal";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
-import { applyCoachingBodyType } from "../../../types/apis/program";
+import { ApplyCoachingBodyType } from "../../../types/apis/program";
 
 // interface TypeProps {
 //   name: string;
@@ -183,7 +183,7 @@ const ApplyCoachingPayment = () => {
     getSelectedCoachingInfo(coachingid),
   );
 
-  const [requiredInfo, setRequiredInfo] = useState<applyCoachingBodyType>({
+  const [requiredInfo, setRequiredInfo] = useState<ApplyCoachingBodyType>({
     coaching_id: "",
     child_id: "",
     parent_name: "",

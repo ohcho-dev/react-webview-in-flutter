@@ -7,11 +7,11 @@ import { getAppliedCoachingList } from "../../apis/coachingApi";
 import { queryKeys } from "../../constant/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { commonCodeState, selectedChildInfoState } from "../../store/atom";
-import { appliedCoachingType } from "../../utils/type";
 import UseImgix from "../../components/common/Imgix";
 import { Divider } from "../ProgramPage/components/styled";
 import CoachingCard from "./components/CoachingCard";
 import NoAppliedCoaching from "./components/NoAppliedCoaching";
+import { AppliedCoachingType } from "../../types/apis/program";
 
 export type MenuType = "ongoing" | "all" | "end";
 
@@ -68,9 +68,9 @@ const CoachingPage = () => {
   const commonCode = useRecoilValue<{ [key: string]: any }>(commonCodeState);
   const [selectedMenu, setSelectedMenu] = useState<MenuType>("all");
   const [lastIndex, setLastIndex] = useState<number>(0);
-  const [coachingList, setCoachingList] = useState<appliedCoachingType[]>([]);
-  const [ongoingList, setOngoingList] = useState<appliedCoachingType[]>([]);
-  const [endList, setEndList] = useState<appliedCoachingType[]>([]);
+  const [coachingList, setCoachingList] = useState<AppliedCoachingType[]>([]);
+  const [ongoingList, setOngoingList] = useState<AppliedCoachingType[]>([]);
+  const [endList, setEndList] = useState<AppliedCoachingType[]>([]);
   const { id } = useRecoilValue(selectedChildInfoState);
   const { data: appliedCoachingList, refetch } = useQuery(
     queryKeys.appliedCoachingList,
@@ -104,7 +104,7 @@ const CoachingPage = () => {
   }, [id]);
 
   useEffect(() => {
-    let newList: appliedCoachingType[] = [];
+    let newList: AppliedCoachingType[] = [];
 
     if (selectedMenu === "end") {
       newList = endList;
@@ -124,15 +124,15 @@ const CoachingPage = () => {
     // 2. 진행중: 종료일이 많이 남은 순
     // 3. 종료: 종료일이 최신순
     if (appliedCoachingList.data.length) {
-      const ongoingArr: appliedCoachingType[] = appliedCoachingList.data
-        .filter((coaching: appliedCoachingType) => coaching.status === "COSTAT_ONGOING")
-        .sort((a: appliedCoachingType, b: appliedCoachingType): number => {
+      const ongoingArr: AppliedCoachingType[] = appliedCoachingList.data
+        .filter((coaching: AppliedCoachingType) => coaching.status === "COSTAT_ONGOING")
+        .sort((a: AppliedCoachingType, b: AppliedCoachingType): number => {
           return new Date(b.end_date).getTime() - new Date(a.end_date).getTime();
         });
 
-      const endArr: appliedCoachingType[] = appliedCoachingList.data
-        .filter((coaching: appliedCoachingType) => coaching.status === "COSTAT_END")
-        .sort((a: appliedCoachingType, b: appliedCoachingType): number => {
+      const endArr: AppliedCoachingType[] = appliedCoachingList.data
+        .filter((coaching: AppliedCoachingType) => coaching.status === "COSTAT_END")
+        .sort((a: AppliedCoachingType, b: AppliedCoachingType): number => {
           return new Date(b.end_date).getTime() - new Date(a.end_date).getTime();
         });
 
@@ -175,7 +175,7 @@ const CoachingPage = () => {
             {coachingList.length > 0 &&
               coachingList
                 .slice(0, lastIndex)
-                .map((coaching: appliedCoachingType, index: number) => (
+                .map((coaching: AppliedCoachingType, index: number) => (
                   <div
                     key={index}
                     onClick={() => {

@@ -1,6 +1,6 @@
 import { Method } from "axios";
 import { request } from ".";
-import { applyClassBodyType } from "../types/apis/program";
+import { ApplyClassBodyType } from "../types/apis/program";
 
 // 코칭 상품 목록 (GET)
 export const getCoachingList = () => {
@@ -33,7 +33,7 @@ export const applyCoaching = (body: { id: string }) => {
 };
 
 // 클래스 상품 신청(POST)
-export const applyClass = (body: applyClassBodyType) => {
+export const applyClass = (body: ApplyClassBodyType) => {
   return request({
     method: "POST" as Method,
     url: `/v1/program/classes/${body.class_id}`,
