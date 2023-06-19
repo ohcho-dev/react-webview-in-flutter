@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getNoticeList } from "../../apis/mypage";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { getDate } from "../../utils/date/getDateTime";
 import UseImgix from "../../components/common/Imgix";

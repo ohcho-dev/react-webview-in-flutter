@@ -11,7 +11,7 @@ import Button from "../../components/common/Button";
 
 import CustomModal from "../../components/common/CustomModal";
 import { CustomRadioButton } from "../../components/common/CustomRadioButton";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutDetailPage from "../../layouts/LayoutDetailPage";
 import { childrenListState } from "../../store/atom";
 import "react-datepicker/dist/react-datepicker.css";

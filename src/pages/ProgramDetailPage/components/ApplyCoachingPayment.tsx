@@ -5,7 +5,7 @@ import styled from "styled-components";
 import UseImgix from "../../../components/common/Imgix";
 import Accordion from "../../../components/common/Accordion";
 import { useQuery } from "react-query";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import { getSelectedCoachingInfo } from "../../../apis/programApi";
 import { useRecoilValue } from "recoil";
 import { selectedChildInfoState } from "../../../store/atom";

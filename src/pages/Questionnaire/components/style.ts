@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { COLOR_PALETTE } from "../../../constant/color";
+import { COLOR_PALETTE } from "../../../constants/color";
 
 export const SurveyQuestionWrapper = styled.div`
   width: 100%;

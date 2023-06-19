@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useMutation } from "react-query";
 import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import styled from "styled-components";
-
+import styled from "styled-components"
 import { updateSelectedChildIdApi } from "../apis/childApi";
 import BottomNav from "../components/domain/home/BottomNav";
 import ChildSelectBottomModal from "../components/domain/home/ChildSelectBottomModal";
 import MainTitleBar from "../components/domain/my/TitleBar";
-import { CHILD_ID_FIELD } from "../constant/localStorage";
+import { CHILD_ID_FIELD } from "../constants/localStorage";
+
 import {
   childrenListState,
   mainPageScrollValueState,

@@ -3,7 +3,7 @@ import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { queryKeys } from "../../../constant/queryKeys";
+import { queryKeys } from "../../../constants/queryKeys";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/atom";
 import getDday from "../../../utils/date/getDday";
 import UseImgix from "../../../components/common/Imgix";

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getAppliedCoachingList } from "../../apis/coachingApi";
-import { queryKeys } from "../../constant/queryKeys";
+import { queryKeys } from "../../constants/queryKeys";
 import LayoutMainPage from "../../layouts/LayoutMainPage";
 import { commonCodeState, selectedChildInfoState } from "../../store/atom";
 import UseImgix from "../../components/common/Imgix";
