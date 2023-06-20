@@ -15,7 +15,7 @@ import CustomModal from "../../../../components/common/CustomModal";
 import { CustomRadioButton } from "../../../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import { registChildSuccessedAction } from "../../../../utils/google-analytics/events/ManagementChildEvent";
-import { ForwardedInput } from "../../../../components/domain/my/DatePickerInput";
+import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import { NativeFunction } from "../../../../utils/app/NativeFunction";
 import { createChildType } from "../../../../types/domain/my";

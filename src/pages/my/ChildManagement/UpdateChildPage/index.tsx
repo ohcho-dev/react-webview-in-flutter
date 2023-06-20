@@ -14,7 +14,7 @@ import { CustomRadioButton } from "../../../../components/common/CustomRadioButt
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import "react-datepicker/dist/react-datepicker.css";
 import { updateChildSuccessedAction } from "../../../../utils/google-analytics/events/ManagementChildEvent";
-import { ForwardedInput } from "../../../../components/domain/my/DatePickerInput";
+import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import { NativeFunction } from "../../../../utils/app/NativeFunction";
 import { ChildType } from "../../../../types/common";
