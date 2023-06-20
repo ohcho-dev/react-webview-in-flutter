@@ -4,7 +4,10 @@ import { useRecoilValue } from "recoil";
 import Button from "../../../components/common/Button";
 import UseImgix from "../../../components/common/Imgix";
 import ProgramPrice from "../../../components/domain/program/programListPage/ProgramPrice";
-import { AgeRange, OnlineOffline } from "../../../components/domain/program/programListPage/styled";
+import {
+  AgeRange,
+  OnlineOffline,
+} from "../../../components/domain/program/programListPage/programListPage.styled";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { commonCodeState } from "../../../store/common";
 import { getDateTime } from "../../../utils/date/getDateTime";

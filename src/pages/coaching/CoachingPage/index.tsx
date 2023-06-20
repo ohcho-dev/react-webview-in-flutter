@@ -9,9 +9,9 @@ import NoAppliedCoaching from "../../../components/domain/coaching/coachingPage/
 import { AppliedCoachingType } from "../../../types/apis/program";
 import { commonCodeState, selectedChildInfoState } from "../../../store/common";
 import * as S from "./coaching.styled";
-import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
-import { Divider } from "../../../components/domain/program/programListPage/styled";
+
 import useAppliedCoachingList from "../../../queries/domain/coaching/useAppliedCoachingList";
+import { Divider } from "components/domain/program/programListPage/programListPage.styled";
 
 export type MenuType = "ongoing" | "all" | "end";
 

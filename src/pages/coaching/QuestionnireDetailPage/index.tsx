@@ -7,7 +7,7 @@ import {
   QuestionGap,
   SurveyCategoryTitle,
   SurveyQuestionWrapper,
-} from "../../../components/domain/coaching/questionnairePage/style";
+} from "../../../components/domain/coaching/questionnairePage/questionnaire.styled";
 import ResultQuestionChoice from "../../../components/domain/coaching/questionnaireDetailPage/ResultQuestionChoice";
 import ResultQuestionNumberUnit from "../../../components/domain/coaching/questionnaireDetailPage/ResultQuestionNumberUnit";
 import ResultQuestionTextLong from "../../../components/domain/coaching/questionnaireDetailPage/ResultQuestionTextLong";
