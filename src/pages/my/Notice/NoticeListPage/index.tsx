@@ -1,12 +1,10 @@
-import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getNoticeList } from "../../../../queries/domain/my/mypage";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import { getDate } from "../../../../utils/date/getDateTime";
 import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
+import useNoticeList from "../../../../queries/domain/my/useNoticeList";
 
 const PageLayout = styled.div`
   margin-top: 7rem;
@@ -56,7 +54,7 @@ const CreateDate = styled.div`
 
 export const ChildrenListPage = () => {
   const navigate = useNavigate();
-  const { data: noticeList } = useQuery(myQueryKeys.noticeList, () => getNoticeList());
+  const { data: noticeList } = useNoticeList();
 
   return (
     <LayoutDetailPage>

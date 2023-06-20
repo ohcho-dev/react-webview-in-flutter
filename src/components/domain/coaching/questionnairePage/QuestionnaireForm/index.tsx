@@ -1,25 +1,25 @@
+import Button from "components/common/Button";
+import CustomModal from "components/common/CustomModal";
+import UseImgix from "components/common/Imgix";
+import LayoutDetailPage from "layouts/LayoutDetailPage";
+import { createSurveyAnswerData } from "queries/domain/coaching/useCreateSurveyAnswerData";
 import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { createSurveyAnswerData } from "../../../../../queries/domain/coaching/questionnaireApi";
-import Button from "../../../../common/Button";
-import CustomModal from "../../../../common/CustomModal";
-import LayoutDetailPage from "../../../../../layouts/LayoutDetailPage";
-import UseImgix from "../../../../common/Imgix";
-import QuestionChoice from "../QuestionChoice";
-import QuestionNumberUnit from "../QuestionNumberUnit";
-import QuestionTextLong from "../QuestionTextLong";
-import QuestionTextSHort from "../QuestionTextShort";
-import { QuestionGap, SurveyCategoryTitle } from "../questionnaire.styled";
-import { SurveyAnswerType } from "../../../../../types/apis/program";
-import { ViewSurveyListType } from "../../../../../types/domain/coaching";
 import {
   questionnarieState,
   startQuestionOrderNumState,
   surveyAnswerState,
   surveyTempAnswerState,
-} from "../../../../../store/domain/coaching";
+} from "store/domain/coaching";
+import { SurveyAnswerType } from "types/apis/program";
+import { ViewSurveyListType } from "types/domain/coaching";
+import QuestionChoice from "../QuestionChoice";
+import { QuestionGap, SurveyCategoryTitle } from "../questionnaire.styled";
+import QuestionNumberUnit from "../QuestionNumberUnit";
+import QuestionTextLong from "../QuestionTextLong";
+import QuestionTextSHort from "../QuestionTextShort";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();

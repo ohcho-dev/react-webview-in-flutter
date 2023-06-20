@@ -1,13 +1,12 @@
 import { Suspense, useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import UseImgix from "../../../components/common/Imgix";
 import LoadingSpinner from "../../../components/common/LoadingSpinner";
 import PageTitle from "../../../components/domain/my/PageTitle";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { getPurchaseClasses, getPurchaseCoaching } from "../../../queries/domain/my/mypage";
-import { myQueryKeys } from "../../../queries/domain/my/myQueryKeys";
+import usePurchasedClasses from "../../../queries/domain/my/usePurchasedClasses";
+import usePurchasedCoaching from "../../../queries/domain/my/usePurchasedCoaching";
 import { getDate } from "../../../utils/date/getDateTime";
 import getGender from "../../../utils/user/getGender";
 
@@ -199,16 +198,8 @@ const AppliedProgramListPage = () => {
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState(TabValue[0]);
 
-  const { data: purchasedCoachingList } = useQuery(
-    myQueryKeys.purchaseCoaching,
-    getPurchaseCoaching,
-    {
-      enabled: selectedTab === "코칭",
-    },
-  );
-  const { data: purchasedClassList } = useQuery(myQueryKeys.purchaseClasses, getPurchaseClasses, {
-    enabled: selectedTab === "클래스",
-  });
+  const { data: purchasedCoachingList } = usePurchasedCoaching(selectedTab);
+  const { data: purchasedClassList } = usePurchasedClasses(selectedTab);
 
   useEffect(() => {
     document.getElementById("list-scroll")?.scrollTo({ top: 0 });

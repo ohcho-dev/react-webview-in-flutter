@@ -14,7 +14,7 @@ export const surveyAnswerState = atom<AnswerType>({
 });
 
 export const surveyTempAnswerState = atom<PostSurveyQuestionListType[]>({
-  key: coachingAtomKeys.surveyAnswer,
+  key: coachingAtomKeys.surveyTempAnswer,
   default: [],
 });
 

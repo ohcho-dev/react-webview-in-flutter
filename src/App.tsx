@@ -12,10 +12,6 @@ import "./styles/_customReactDatepicker.scss";
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { RouterConfig } from "./RouteConfig";
-import { getChildrenList } from "./queries/domain/my/childApi";
-import { getCommonCodeList } from "./queries/common/commonApi";
-import { getHomeData } from "./queries/domain/home/homeApi";
-import { getUserInfo } from "./queries/domain/my/mypage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
 import { ErrorBoundary } from "./pages/common/ErrorPage/ErrorPage";
@@ -33,6 +29,10 @@ import { commonQueryKeys } from "./queries/common/commonQueryKeys";
 import { homeQueryKeys } from "./queries/domain/home/homeQueryKeys";
 import { coachingQueryKeys } from "./queries/domain/coaching/coachingQueryKeys";
 import { myQueryKeys } from "./queries/domain/my/myQueryKeys";
+import { getHomeData } from "./queries/domain/home/useHomeData";
+import { getChildrenList } from "./queries/domain/my/child/useChildrenList";
+import { getUserInfo } from "./queries/common/auth/useAuthMe";
+import { getCommonCodeList } from "./queries/common/useCommonCodeList";
 
 let oldLocation: any = null;
 

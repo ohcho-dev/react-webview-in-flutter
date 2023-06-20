@@ -1,8 +1,6 @@
 import React, { RefObject, useEffect, useRef, useState } from "react";
-import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { applyClass, getSelectedClassInfo } from "../../../queries/domain/program/programApi";
 import ChildSelectBottomModal from "../../../components/common/ChildSelectBottomModal";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
@@ -10,8 +8,6 @@ import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 
 import { ChildType } from "../../../types/common";
 import { getDate } from "../../../utils/date/getDateTime";
-import { applyClassSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
-import { NativeFunction } from "../../../utils/app/NativeFunction";
 import UseImgix from "../../../components/common/Imgix";
 import { ApplyClassBodyType } from "../../../types/apis/program";
 import {
@@ -23,8 +19,9 @@ import * as S from "./applyClassPage.styled";
 import ProgramSection from "../../../components/domain/program/applyClassPage/ProgramSection";
 import PriceSection from "../../../components/domain/program/applyClassPage/PriceSection";
 import ClassRejectModal from "../../../components/domain/program/applyClassPage/ClassRejectModal";
-import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
-export const USER_SECTION_HEIGHT = 37;
+import useSelectedClassInfo from "queries/domain/program/useSelectedClassInfo";
+import useApplyClass from "queries/domain/program/useApplyClass";
+const USER_SECTION_HEIGHT = 37;
 
 const ApplyClassPage = () => {
   const { classid } = useParams();
@@ -58,21 +55,9 @@ const ApplyClassPage = () => {
   >("MONTH_NOT_ACCEPTABLE");
   const [openRejectModal, setOpenRejectModal] = useState(false);
   const activeInputref = useRef<HTMLInputElement | null>(null);
-  const { data: classInfo } = useQuery(programQueryKeys.selectedClassInfo, () =>
-    getSelectedClassInfo(classid),
-  );
+  const { data: classInfo } = useSelectedClassInfo(classid);
 
-  const callApplyClasses = useMutation(applyClass, {
-    onSuccess: res => {
-      if (res.purchase_id) {
-        NativeFunction("ga4logNativeEventLog", `${applyClassSuccessedAction}`);
-        navigate("/program/class/apply-class/success");
-      } else {
-        setErrorCode(res.code);
-        setOpenRejectModal(true);
-      }
-    },
-  });
+  const { mutate: applyClass } = useApplyClass(setErrorCode, setOpenRejectModal);
 
   useEffect(() => {
     setShareBtnVisibility(false);
@@ -134,7 +119,7 @@ const ApplyClassPage = () => {
   const handleApplyBtnClick = () => {
     const { child_id, parent_name, parent_phone } = requiredInfo;
     if (child_id && parent_name && parent_phone && classid) {
-      callApplyClasses.mutate({ ...requiredInfo, class_id: classid.toString() });
+      applyClass({ ...requiredInfo, class_id: classid.toString() });
     } else {
       setOpenValidationModal(true);
     }

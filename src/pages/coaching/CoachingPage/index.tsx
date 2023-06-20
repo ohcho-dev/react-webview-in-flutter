@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { getAppliedCoachingList } from "../../../queries/domain/coaching/coachingApi";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
 import UseImgix from "../../../components/common/Imgix";
 import CoachingCard from "../../../components/domain/coaching/coachingPage/CoachingCard";
@@ -10,8 +9,9 @@ import NoAppliedCoaching from "../../../components/domain/coaching/coachingPage/
 import { AppliedCoachingType } from "../../../types/apis/program";
 import { commonCodeState, selectedChildInfoState } from "../../../store/common";
 import * as S from "./coaching.styled";
-import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
-import { Divider } from "../../../components/domain/program/programListPage/programListPage.styled";
+
+import useAppliedCoachingList from "../../../queries/domain/coaching/useAppliedCoachingList";
+import { Divider } from "components/domain/program/programListPage/programListPage.styled";
 
 export type MenuType = "ongoing" | "all" | "end";
 
@@ -27,15 +27,7 @@ const CoachingPage = () => {
   const [ongoingList, setOngoingList] = useState<AppliedCoachingType[]>([]);
   const [endList, setEndList] = useState<AppliedCoachingType[]>([]);
   const { id } = useRecoilValue(selectedChildInfoState);
-  const { data: appliedCoachingList, refetch } = useQuery(
-    coachingQueryKeys.appliedCoachingList,
-    getAppliedCoachingList,
-    {
-      onSuccess: () => {
-        setSelectedMenu("all");
-      },
-    },
-  );
+  const { data: appliedCoachingList } = useAppliedCoachingList(id, setSelectedMenu);
 
   const handleCardClick = (id: number) => {
     navigate(`/coaching/coaching-detail/${id}`);
@@ -52,11 +44,11 @@ const CoachingPage = () => {
     setLastIndex(index);
   };
 
-  useEffect(() => {
-    if (id) {
-      refetch();
-    }
-  }, [id]);
+  // useEffect(() => {
+  //   if (id) {
+  //     refetch();
+  //   }
+  // }, [id]);
 
   useEffect(() => {
     let newList: AppliedCoachingType[] = [];

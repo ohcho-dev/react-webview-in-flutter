@@ -1,16 +1,12 @@
+import UseImgix from "components/common/Imgix";
 import { useEffect } from "react";
-import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
-import { commonQueryKeys } from "../../../../queries/common/commonQueryKeys";
-import {
-  getNotificationList,
-  updateNotificationCheckTime,
-} from "../../../../queries/common/notificationApi";
+import useNotificationList from "../../../../queries/common/notification/useNotificationList";
+import useUpdateNotificationCheckTime from "../../../../queries/common/notification/useUpdateNotificationCheckTime";
 import { newNotificationFlagstate } from "../../../../store/common";
 import { NotificationType } from "../../../../types/common";
 import { getDate } from "../../../../utils/date/getDateTime";
@@ -90,13 +86,13 @@ const DateTime = styled.div`
 const AlarmListPage = () => {
   const navigate = useNavigate();
   const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
-  const { data } = useQuery(commonQueryKeys.notificationList, getNotificationList);
-  const setNotificationTime = useMutation(updateNotificationCheckTime);
+  const { data } = useNotificationList();
+  const { mutate: updateNotificationTime } = useUpdateNotificationCheckTime();
 
   useEffect(() => {
     setNewNotificationFlag(false);
     // last_checked_at api 호출
-    setNotificationTime.mutate();
+    updateNotificationTime();
   }, []);
 
   return (

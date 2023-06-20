@@ -1,9 +1,6 @@
 import { useEffect } from "react";
-import { useQuery } from "react-query";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { getSelectedTaskInfo } from "../../../queries/domain/coaching/coachingApi";
-import { getSurveyQuestionList } from "../../../queries/domain/coaching/questionnaireApi";
 import Button from "../../../components/common/Button";
 import Chip from "../../../components/common/Chip";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
@@ -17,7 +14,8 @@ import {
   surveyCoachingIdState,
 } from "../../../store/domain/coaching";
 import * as S from "./questionnaire.styled";
-import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
+import useSelectedTaskInfo from "../../../queries/domain/coaching/useSelectedTaskInfo";
+import useSurveyQuestionList from "../../../queries/domain/coaching/useSurveyQuestionList";
 
 const Questionnaire = (): JSX.Element => {
   const navigate = useNavigate();
@@ -27,14 +25,9 @@ const Questionnaire = (): JSX.Element => {
   const setSurveyAnswer = useSetRecoilState(surveyAnswerState);
   const setSurveyCoachingId = useSetRecoilState(surveyCoachingIdState);
   const [startOrderNum, setStartQuestionOrderNum] = useRecoilState(startQuestionOrderNumState);
-  const { data: surveyQuestionList } = useQuery(coachingQueryKeys.surveyQuestionList, () =>
-    getSurveyQuestionList(id),
-  );
-  const { data: selectedTaskInfo } = useQuery(coachingQueryKeys.selectedTaskInfo, () =>
-    getSelectedTaskInfo(id),
-  );
+  const { data: surveyQuestionList } = useSurveyQuestionList(id);
+  const { data: selectedTaskInfo } = useSelectedTaskInfo(id);
   const [currentSurveyInfo, setCurrentSurveyInfo] = useRecoilState(currentSurveyInfoState);
-
   useEffect(() => {
     if (id && state) setCurrentSurveyInfo({ taskId: id, coachingId: state.coachingId });
   }, [id, state]);

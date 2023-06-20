@@ -1,10 +1,8 @@
-import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
-import { getNoticeDetail } from "../../../../queries/domain/my/mypage";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import { getDate } from "../../../../utils/date/getDateTime";
-import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
+import useNoticeDetail from "../../../../queries/domain/my/useNoticeDetail";
 
 const PageLayout = styled.div`
   margin-top: 7rem;
@@ -41,7 +39,7 @@ const ContentWrap = styled.div`
 
 const NoticeDetailPage = () => {
   const { noticeid } = useParams();
-  const { data: noticeData } = useQuery(myQueryKeys.noticeDetail, () => getNoticeDetail(noticeid));
+  const { data: noticeData } = useNoticeDetail(noticeid);
 
   return (
     <LayoutDetailPage>
