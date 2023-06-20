@@ -3,16 +3,15 @@ import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { MenuType } from "..";
+import { MenuType } from "../../../../pages/coaching/CoachingPage";
 import { getCoachingList } from "../../../../queries/domain/program/programApi";
 import { coachingType } from "../../../../types/domain/coaching";
 import { getDiscountPercentage } from "../../../../utils/program/getDiscountPercentage";
-import UseImgix from "../../../../components/common/Imgix";
-import ProgramCard from "../../../program/ProgramListPage/components/ProgramCard";
-import { Divider } from "../../../program/ProgramListPage/components/styled";
+import UseImgix from "../../../common/Imgix";
 import { selectedChildInfoState } from "../../../../store/common";
-import { coachingQueryKeys } from "../../../../queries/domain/coaching/coachingQueryKeys";
 import { programQueryKeys } from "../../../../queries/domain/program/programQueryKeys";
+import ProgramCard from "../../program/programListPage/ProgramCard";
+import { Divider } from "../../program/programListPage/styled";
 
 interface NoAppliedCoachingPropsType {
   selectedMenu?: MenuType;

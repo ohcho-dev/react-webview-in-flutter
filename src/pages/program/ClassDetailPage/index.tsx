@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import Button from "../../../components/common/Button";
 import UseImgix from "../../../components/common/Imgix";
+import ProgramPrice from "../../../components/domain/program/programListPage/ProgramPrice";
+import { AgeRange, OnlineOffline } from "../../../components/domain/program/programListPage/styled";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { getSelectedClassInfo } from "../../../queries/domain/program/programApi";
 import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
@@ -10,8 +12,6 @@ import { commonCodeState } from "../../../store/common";
 import { getDateTime } from "../../../utils/date/getDateTime";
 import { getMonthLevelString } from "../../../utils/date/getMonthLevelString";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
-import ProgramPrice from "../ProgramListPage/components/ProgramPrice";
-import { AgeRange, OnlineOffline } from "../ProgramListPage/components/styled";
 import * as S from "./classDetailPage.styled";
 
 interface ClassDetailPageProps {

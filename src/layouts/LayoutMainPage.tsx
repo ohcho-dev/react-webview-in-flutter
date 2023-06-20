@@ -4,8 +4,8 @@ import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { updateSelectedChildIdApi } from "../queries/domain/my/childApi";
-import BottomNav from "../components/domain/home/BottomNav";
-import ChildSelectBottomModal from "../components/domain/home/ChildSelectBottomModal";
+import BottomNav from "../components/layout/BottomNav";
+import ChildSelectBottomModal from "../components/common/ChildSelectBottomModal";
 import MainTitleBar from "../components/domain/my/TitleBar";
 import { CHILD_ID_FIELD } from "../constants/localStorage";
 import {

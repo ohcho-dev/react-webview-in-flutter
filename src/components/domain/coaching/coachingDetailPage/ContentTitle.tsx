@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import CustomEmoji from "../../../../components/common/Emoji";
-import UseImgix from "../../../../components/common/Imgix";
+import CustomEmoji from "../../../common/Emoji";
+import UseImgix from "../../../common/Imgix";
 
 interface ContentTitleProps {
   emoji?: string;

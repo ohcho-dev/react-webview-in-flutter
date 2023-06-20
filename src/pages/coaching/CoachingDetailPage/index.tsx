@@ -7,7 +7,7 @@ import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
-import ContentItem from "./components/ContentItem";
+import ContentItem from "../../../components/domain/coaching/coachingDetailPage/ContentItem";
 import UseImgix from "../../../components/common/Imgix";
 import { CoachingStatusType, TaskStatusType } from "../../../types/domain/coaching";
 import { selectedChildInfoState } from "../../../store/common";

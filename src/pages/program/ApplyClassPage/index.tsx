@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { applyClass, getSelectedClassInfo } from "../../../queries/domain/program/programApi";
-import ChildSelectBottomModal from "../../../components/domain/home/ChildSelectBottomModal";
+import ChildSelectBottomModal from "../../../components/common/ChildSelectBottomModal";
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
@@ -20,9 +20,9 @@ import {
   visibleShareState,
 } from "../../../store/common";
 import * as S from "./applyClassPage.styled";
-import ProgramSection from "./components/ProgramSection";
-import PriceSection from "./components/PriceSection";
-import ClassRejectModal from "./components/ClassRejectModal";
+import ProgramSection from "../../../components/domain/program/applyClassPage/ProgramSection";
+import PriceSection from "../../../components/domain/program/applyClassPage/PriceSection";
+import ClassRejectModal from "../../../components/domain/program/applyClassPage/ClassRejectModal";
 import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 export const USER_SECTION_HEIGHT = 37;
 

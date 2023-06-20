@@ -26,15 +26,15 @@ const RecordTaskList = React.lazy(() => import("./pages/record/RecordTaskListPag
  */
 const CoachingDetailPage = React.lazy(() => import("./pages/coaching/CoachingDetailPage"));
 const ApplyCoachingPayment = React.lazy(() =>
-  import("./pages/program/ProgramDetailPage/components/ApplyCoachingPayment"),
+  import("./components/domain/program/programDetailPage/ApplyCoachingPayment"),
 );
 const ResultPaper = React.lazy(() =>
-  import("./pages/coaching/CoachingDetailPage/components/ResultPaper"),
+  import("./components/domain/coaching/coachingDetailPage/ResultPaper"),
 );
 
 const Questionnaire = React.lazy(() => import("./pages/coaching/Questionnaire"));
 const QuestionnaireForm = React.lazy(() =>
-  import("./pages/coaching/Questionnaire/components/QuestionnaireForm"),
+  import("./components/domain/coaching/questionnairePage/QuestionnaireForm"),
 );
 const QuestionnaireDetailPage = React.lazy(() => import("./pages/coaching/QuestionnireDetailPage"));
 const VideoAssignmentPage = React.lazy(() => import("./pages/coaching/VideoAssignmentPage"));

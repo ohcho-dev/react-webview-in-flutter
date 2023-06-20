@@ -1,8 +1,8 @@
 import "slick-carousel/slick/slick.css";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
-import ClassList from "./ClassList";
-import CoachingList from "./CoachingList";
+import CoachingList from "../../../components/domain/program/programListPage/CoachingList";
 import * as S from "./programList.styled";
+import ClassList from "../../../components/domain/program/programListPage/ClassList";
 
 const ProgramListPage = () => {
   // const settings = {

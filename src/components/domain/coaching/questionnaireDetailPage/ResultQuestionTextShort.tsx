@@ -7,7 +7,7 @@ import {
   QuestionTitle,
   QuestionWrapper,
   Unit,
-} from "../../Questionnaire/components/style";
+} from "../questionnairePage/style";
 
 interface ResultQuestionPropsType {
   questionNumber: number;
@@ -15,7 +15,7 @@ interface ResultQuestionPropsType {
   totalNum: number;
 }
 
-const ResultQuestionNumberUnit = (props: ResultQuestionPropsType): JSX.Element => {
+const ResultQuestionTextLong = (props: ResultQuestionPropsType): JSX.Element => {
   const { question, questionNumber, totalNum } = props;
   return (
     <QuestionWrapper>
@@ -36,4 +36,4 @@ const ResultQuestionNumberUnit = (props: ResultQuestionPropsType): JSX.Element =
   );
 };
 
-export default ResultQuestionNumberUnit;
+export default ResultQuestionTextLong;

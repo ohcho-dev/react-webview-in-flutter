@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { ChildType } from "../../../types/common";
-import { getDate } from "../../../utils/date/getDateTime";
-import UseImgix from "../../common/Imgix";
-import CustomBottomModal from "../../common/CustomBottomModal";
+import { ChildType } from "../../types/common";
+import { getDate } from "../../utils/date/getDateTime";
+import UseImgix from "./Imgix";
+import CustomBottomModal from "./CustomBottomModal";
 
 interface ChildSelectBottomModalProps {
   selectedChildInfo: ChildType;

@@ -5,13 +5,13 @@ import { useRecoilValue } from "recoil";
 import { getAppliedCoachingList } from "../../../queries/domain/coaching/coachingApi";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
 import UseImgix from "../../../components/common/Imgix";
-import { Divider } from "../../program/ProgramListPage/components/styled";
-import CoachingCard from "./components/CoachingCard";
-import NoAppliedCoaching from "./components/NoAppliedCoaching";
+import CoachingCard from "../../../components/domain/coaching/coachingPage/CoachingCard";
+import NoAppliedCoaching from "../../../components/domain/coaching/coachingPage/NoAppliedCoaching";
 import { AppliedCoachingType } from "../../../types/apis/program";
 import { commonCodeState, selectedChildInfoState } from "../../../store/common";
 import * as S from "./coaching.styled";
 import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
+import { Divider } from "../../../components/domain/program/programListPage/styled";
 
 export type MenuType = "ongoing" | "all" | "end";
 

@@ -6,6 +6,7 @@ import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
 import CustomModal from "../../../components/common/CustomModal";
 import UseImgix from "../../../components/common/Imgix";
+import ProgramPrice from "../../../components/domain/program/programListPage/ProgramPrice";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import {
   applyCoaching,
@@ -20,7 +21,6 @@ import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
 import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
-import ProgramPrice from "../ProgramListPage/components/ProgramPrice";
 import * as S from "./coachingDetailPage.styled";
 
 interface DetailCoachingProps {

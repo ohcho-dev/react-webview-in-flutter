@@ -1,7 +1,8 @@
 import * as S from "./RecordTaskList.styled";
-import TaskListItem from "./components/TaskListItem";
+
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import EmptyBox from "../../../components/common/EmptyBox";
+import TaskListItem from "../../../components/domain/record/recordTaskListPage/TaskListItem";
 
 const data = {
   practice: [

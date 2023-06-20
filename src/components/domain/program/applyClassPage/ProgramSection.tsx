@@ -2,10 +2,10 @@ import { getMonthLevelString } from "../../../../utils/date/getMonthLevelString"
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { getDateTime } from "../../../../utils/date/getDateTime";
-import UseImgix from "../../../../components/common/Imgix";
-import { AgeRange, OnlineOffline } from "../../ProgramListPage/components/styled";
+import UseImgix from "../../../common/Imgix";
 import { commonCodeState } from "../../../../store/common";
-import { Title } from "../applyClassPage.styled";
+import { Title } from "../../../../pages/program/ApplyClassPage/applyClassPage.styled";
+import { AgeRange, OnlineOffline } from "../programListPage/styled";
 
 const ProgramSectionWrapper = styled.div`
   background: white;

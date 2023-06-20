@@ -4,15 +4,15 @@ import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { getCoachingList } from "../../../queries/domain/program/programApi";
-import { CHILD_ID_FIELD } from "../../../constants/localStorage";
-import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
-import ProgramCard from "./components/ProgramCard";
-import { Divider } from "./components/styled";
-import UseImgix from "../../../components/common/Imgix";
-import { coachingType } from "../../../types/domain/coaching";
-import { selectedChildInfoState } from "../../../store/common";
-import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
+import { getCoachingList } from "../../../../queries/domain/program/programApi";
+import { CHILD_ID_FIELD } from "../../../../constants/localStorage";
+import { getDiscountPercentage } from "../../../../utils/program/getDiscountPercentage";
+import UseImgix from "../../../common/Imgix";
+import { coachingType } from "../../../../types/domain/coaching";
+import { selectedChildInfoState } from "../../../../store/common";
+import { programQueryKeys } from "../../../../queries/domain/program/programQueryKeys";
+import ProgramCard from "./ProgramCard";
+import { Divider } from "../../../../pages/program/ClassDetailPage/classDetailPage.styled";
 
 const ListWrap = styled.div`
   margin-bottom: 3rem;

@@ -1,6 +1,6 @@
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import UseImgix from "../../common/Imgix";
+import UseImgix from "../common/Imgix";
 
 const BottomNavWrap = styled.ul`
   width: 100%;

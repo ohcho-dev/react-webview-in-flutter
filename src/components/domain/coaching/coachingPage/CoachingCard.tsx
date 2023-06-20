@@ -1,7 +1,7 @@
 import getDday from "../../../../utils/date/getDday";
 import styled from "styled-components";
 import { getDate } from "../../../../utils/date/getDateTime";
-import UseImgix from "../../../../components/common/Imgix";
+import UseImgix from "../../../common/Imgix";
 import { AppliedCoachingType } from "../../../../types/apis/program";
 
 const CoachingCardWrapper = styled.div`

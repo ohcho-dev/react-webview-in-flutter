@@ -1,13 +1,12 @@
 import { GetSurveyAnswerType } from "../../../../types/apis/coaching";
+import { QuestionItemType } from "../../../../types/apis/program";
 import {
+  Answer,
   AnswerSection,
-  InputWrap,
   QuestionNumber,
   QuestionTitle,
   QuestionWrapper,
-  TextWrap,
-  Unit,
-} from "../../Questionnaire/components/style";
+} from "../questionnairePage/style";
 
 interface ResultQuestionPropsType {
   questionNumber: number;
@@ -15,7 +14,7 @@ interface ResultQuestionPropsType {
   totalNum: number;
 }
 
-const ResultQuestionTextLong = (props: ResultQuestionPropsType): JSX.Element => {
+const ResultQuestionChoice = (props: ResultQuestionPropsType): JSX.Element => {
   const { question, questionNumber, totalNum } = props;
   return (
     <QuestionWrapper>
@@ -23,17 +22,20 @@ const ResultQuestionTextLong = (props: ResultQuestionPropsType): JSX.Element => 
         <span>{questionNumber < 10 ? `0${questionNumber}` : questionNumber}</span>
         <span>/{totalNum}</span>
       </QuestionNumber>
-      <QuestionTitle>
-        {question.question.content}
-        {question.question.unit && <Unit>{question.question.unit}</Unit>}
-      </QuestionTitle>
+      <QuestionTitle>{question.question.content}</QuestionTitle>
       <AnswerSection>
-        <InputWrap>
-          <TextWrap>{question.content}</TextWrap>
-        </InputWrap>
+        {question.question.item.map((item: QuestionItemType) => (
+          <Answer
+            id={item.id.toString()}
+            selected={question.answered_item_id.toString() === item.id.toString()}
+            key={item.id}
+          >
+            {item.content}
+          </Answer>
+        ))}
       </AnswerSection>
     </QuestionWrapper>
   );
 };
 
-export default ResultQuestionTextLong;
+export default ResultQuestionChoice;

@@ -9,10 +9,10 @@ import {
   QuestionGap,
   SurveyCategoryTitle,
   SurveyQuestionWrapper,
-} from "../Questionnaire/components/style";
-import ResultQuestionChoice from "./components/ResultQuestionChoice";
-import ResultQuestionNumberUnit from "./components/ResultQuestionNumberUnit";
-import ResultQuestionTextLong from "./components/ResultQuestionTextLong";
+} from "../../../components/domain/coaching/questionnairePage/style";
+import ResultQuestionChoice from "../../../components/domain/coaching/questionnaireDetailPage/ResultQuestionChoice";
+import ResultQuestionNumberUnit from "../../../components/domain/coaching/questionnaireDetailPage/ResultQuestionNumberUnit";
+import ResultQuestionTextLong from "../../../components/domain/coaching/questionnaireDetailPage/ResultQuestionTextLong";
 import { GetSurveyAnswerType, GetSurveyType } from "../../../types/apis/coaching";
 import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
 

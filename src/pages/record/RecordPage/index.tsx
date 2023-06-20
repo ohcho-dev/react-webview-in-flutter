@@ -2,9 +2,9 @@ import styled from "styled-components";
 
 import FloatingButton from "../../../components/common/FloatingButton";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
-import RecordGrade from "./components/RecordGrade";
-import RecordList from "./components/RecordList";
 import { useNavigate } from "react-router-dom";
+import RecordGrade from "../../../components/domain/record/explanationRecordPage/RecordGrade";
+import RecordList from "../../../components/domain/record/explanationRecordPage/RecordList";
 
 const Devider = styled.div`
   height: 1rem;
