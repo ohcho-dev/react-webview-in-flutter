@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
-
-import { deleteProfilImageApi } from "../../../../queries/domain/home/homeApi";
 import CustomSelectModal from "../../../common/CustomSelectModal";
 import { NativeFunction } from "../../../../utils/app/NativeFunction";
 import { getDate } from "../../../../utils/date/getDateTime";
@@ -10,8 +8,8 @@ import UseImgix from "../../../../components/common/Imgix";
 import getDday from "../../../../utils/date/getDday";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../../store/common";
 import { homeQueryKeys } from "../../../../queries/domain/home/homeQueryKeys";
-import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
 import * as S from "./ChildInfo.styled";
+import useDeleteProfileImage from "queries/domain/home/useDeleteProfileImage";
 
 const ChildInfo = () => {
   const queryClient = useQueryClient();
@@ -19,11 +17,7 @@ const ChildInfo = () => {
   const selectedChild = useRecoilValue(selectedChildInfoState);
   const [openSelectModal, setOpenSelectModal] = useState(false);
 
-  const deleteProfilImage = useMutation(deleteProfilImageApi, {
-    onSuccess: res => {
-      queryClient.invalidateQueries(myQueryKeys.childrenList);
-    },
-  });
+  const deleteProfilImage = useDeleteProfileImage();
 
   useEffect(() => {
     queryClient.invalidateQueries(homeQueryKeys.homeData);

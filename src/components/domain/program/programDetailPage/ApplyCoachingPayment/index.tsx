@@ -4,8 +4,6 @@ import Button from "../../../../common/Button";
 
 import UseImgix from "../../../../common/Imgix";
 import Accordion from "../../../../common/Accordion";
-import { useQuery } from "react-query";
-import { getSelectedCoachingInfo } from "../../../../../queries/domain/program/programApi";
 import { useRecoilValue } from "recoil";
 import getGender from "../../../../../utils/user/getGender";
 import { RefObject, useRef, useState } from "react";
@@ -13,8 +11,8 @@ import CustomModal from "../../../../common/CustomModal";
 import { NativeFunction } from "../../../../../utils/app/NativeFunction";
 import { ApplyCoachingBodyType } from "../../../../../types/apis/program";
 import { selectedChildInfoState } from "../../../../../store/common";
-import { programQueryKeys } from "../../../../../queries/domain/program/programQueryKeys";
 import * as S from "./ApplyCoachingPayment.styled";
+import useSelectedCoachingInfo from "queries/domain/program/useSelectedCoachingInfo";
 
 // interface TypeProps {
 //   name: string;
@@ -34,9 +32,7 @@ const ApplyCoachingPayment = () => {
   const phoneNumberInputRef = useRef<HTMLInputElement>(null);
   const selectedChild = useRecoilValue(selectedChildInfoState);
   const [openValidationModal, setOpenValidationModal] = useState<boolean>(false);
-  const { data: selectedCoachingInfo } = useQuery(programQueryKeys.selectedCoacingInfo, () =>
-    getSelectedCoachingInfo(coachingid),
-  );
+  const { data: selectedCoachingInfo } = useSelectedCoachingInfo(coachingid);
 
   const [requiredInfo, setRequiredInfo] = useState<ApplyCoachingBodyType>({
     coaching_id: "",
