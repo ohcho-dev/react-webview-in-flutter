@@ -2,7 +2,7 @@ import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
 import { DetailTitleBar } from "../components/domain/my/TitleBar";
-import { BottomBtnWrap } from "../components/domain/program/programListPage/styled";
+import { BottomBtnWrap } from "../components/domain/program/programListPage/programListPage.styled";
 
 import LayoutBasePage from "./LayoutBasePage";
 
