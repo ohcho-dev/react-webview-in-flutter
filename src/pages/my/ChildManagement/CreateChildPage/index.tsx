@@ -2,24 +2,21 @@ import { ko } from "date-fns/esm/locale";
 import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
-import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 
 import "react-datepicker/dist/react-datepicker.css";
 
-import { createChild } from "../../../../queries/domain/my/childApi";
 import Button from "../../../../components/common/Button";
 import CustomModal from "../../../../components/common/CustomModal";
 import { CustomRadioButton } from "../../../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
-import { registChildSuccessedAction } from "../../../../utils/google-analytics/events/ManagementChildEvent";
 import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { NativeFunction } from "../../../../utils/app/NativeFunction";
 import { createChildType } from "../../../../types/domain/my";
-import { childrenListState } from "../../../../store/common";
+import useCreateChild from "../../../../queries/domain/my/child/useCreateChild";
+import { childrenListState } from "store/common";
 
 const DEFAULT_CHILD_TYPE = {
   name: "",
@@ -98,16 +95,7 @@ const CreateChildPage = () => {
   const [openSaveModal, setOpenSaveModal] = useState(false);
   const inputRef = useRef(null);
   const childrenList = useRecoilValue(childrenListState);
-
-  const callCreateChildInfo = useMutation(createChild, {
-    onSuccess: () => {
-      NativeFunction("ga4logNativeEventLog", `${registChildSuccessedAction}`);
-      setOpenSaveModal(true);
-    },
-    onError: error => {
-      throw error;
-    },
-  });
+  const { mutate: createChild } = useCreateChild(setOpenSaveModal);
 
   //   생일 날짜 string으로 변환
   useEffect(() => {
@@ -168,7 +156,7 @@ const CreateChildPage = () => {
       setOpenSameNameCheckModal(true);
       return;
     }
-    callCreateChildInfo.mutate(childData);
+    createChild(childData);
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, react/display-name

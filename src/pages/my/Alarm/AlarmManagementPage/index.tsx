@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useMutation } from "react-query";
 import styled from "styled-components";
 import CustomToggleSwitch from "../../../../components/common/CustomToggleSwitch";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
-import { getAlarmConfig, updateAlarmConfig } from "../../../../queries/domain/my/mypage";
-import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
+import useAlarmConfig from "../../../../queries/domain/my/useAlarmConfig";
+import useUpdateAlarmConfig from "../../../../queries/domain/my/useUpdateAlarmConfig";
 import { AlarmType } from "../../../../types/common";
 
 const PageLayout = styled.div`
@@ -34,31 +34,24 @@ const AlarmManagementPage = () => {
   const [coaching, setCoaching] = useState<AlarmType>();
   const [event, setEvent] = useState<AlarmType>();
 
-  const { data } = useQuery(myQueryKeys.alarmConfig, () => getAlarmConfig());
+  const { data } = useAlarmConfig();
 
   useEffect(() => {
     setCoaching(data[0][0]);
     setEvent(data[0][1]);
   }, [data]);
 
-  const callUpdateAlarmConfig = useMutation(updateAlarmConfig, {
-    onSuccess: () => {
-      console.log("update success");
-    },
-    onError: error => {
-      throw error;
-    },
-  });
+  const { mutate: callUpdateAlarmConfig } = useUpdateAlarmConfig();
 
   useEffect(() => {
     if (coaching?.newData) {
-      callUpdateAlarmConfig.mutate({ type: coaching.type, value: coaching.value });
+      callUpdateAlarmConfig({ type: coaching.type, value: coaching.value });
     }
   }, [coaching]);
 
   useEffect(() => {
     if (event?.newData) {
-      callUpdateAlarmConfig.mutate({ type: event.type, value: event.value });
+      callUpdateAlarmConfig({ type: event.type, value: event.value });
     }
   }, [event]);
 

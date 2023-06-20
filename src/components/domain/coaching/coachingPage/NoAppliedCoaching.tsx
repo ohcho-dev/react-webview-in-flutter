@@ -1,17 +1,14 @@
-import { useEffect } from "react";
-import { useQuery } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { MenuType } from "../../../../pages/coaching/CoachingPage";
-import { getCoachingList } from "../../../../queries/domain/program/programApi";
 import { coachingType } from "../../../../types/domain/coaching";
 import { getDiscountPercentage } from "../../../../utils/program/getDiscountPercentage";
 import UseImgix from "../../../common/Imgix";
 import { selectedChildInfoState } from "../../../../store/common";
-import { programQueryKeys } from "../../../../queries/domain/program/programQueryKeys";
 import ProgramCard from "../../program/programListPage/ProgramCard";
 import { Divider } from "../../program/programListPage/styled";
+import useCoachingList from "../../../../queries/domain/program/useCoachingList";
 
 interface NoAppliedCoachingPropsType {
   selectedMenu?: MenuType;
@@ -61,18 +58,11 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   const { selectedMenu } = props;
   const navigate = useNavigate();
   const { pathname } = useLocation();
-  const { data, refetch } = useQuery(programQueryKeys.coachingList, getCoachingList);
   const { id, name } = useRecoilValue(selectedChildInfoState);
-
+  const { data } = useCoachingList(id);
   const handleCardClick = (id: number) => {
     navigate(`/program/coaching/${id}`, { state: pathname });
   };
-
-  useEffect(() => {
-    if (id) {
-      refetch();
-    }
-  }, [id]);
 
   return (
     <div>

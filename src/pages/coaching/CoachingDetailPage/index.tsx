@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { getAppliedCoachingInfo } from "../../../queries/domain/coaching/coachingApi";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
@@ -13,14 +12,12 @@ import { CoachingStatusType, TaskStatusType } from "../../../types/domain/coachi
 import { selectedChildInfoState } from "../../../store/common";
 import { currentTaskIdState } from "../../../store/domain/coaching";
 import * as S from "./coachingDetail.styled";
-import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
+import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedCoachingInfo";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { data: coachingInfo } = useQuery(coachingQueryKeys.appliedCoachingInfo, () =>
-    getAppliedCoachingInfo(id),
-  );
+  const { data: coachingInfo } = useAppliedCoachingInfo(id);
   const childInfo = useRecoilValue(selectedChildInfoState);
   const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
   const [openModal, setOpenModal] = useState(false);

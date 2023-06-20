@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { USER_SECTION_HEIGHT } from ".";
+const USER_SECTION_HEIGHT = 37;
 
 export const Title = styled.div`
   font-weight: 700;

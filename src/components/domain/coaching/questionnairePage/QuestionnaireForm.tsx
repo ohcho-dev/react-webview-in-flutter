@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { createSurveyAnswerData } from "../../../../queries/domain/coaching/questionnaireApi";
 import Button from "../../../common/Button";
 import CustomModal from "../../../common/CustomModal";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
@@ -20,6 +19,7 @@ import {
   surveyAnswerState,
   surveyTempAnswerState,
 } from "../../../../store/domain/coaching";
+import { createSurveyAnswerData } from "../../../../queries/domain/coaching/useCreateSurveyAnswerData";
 
 const QuestionnaireForm = (): JSX.Element => {
   const navigate = useNavigate();

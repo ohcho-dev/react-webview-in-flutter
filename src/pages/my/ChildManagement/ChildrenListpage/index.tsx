@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { getChildrenList } from "../../../../queries/domain/my/childApi";
 import Button from "../../../../components/common/Button";
 import CustomModal from "../../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
@@ -11,7 +9,7 @@ import { getDate } from "../../../../utils/date/getDateTime";
 import getGender from "../../../../utils/user/getGender";
 import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
+import useChildrenList from "../../../../queries/domain/my/child/useChildrenList";
 
 const PageLayout = styled.div`
   margin-top: 7rem;
@@ -57,7 +55,7 @@ const ChildName = styled.span`
 
 export const ChildrenListPage = () => {
   const navigate = useNavigate();
-  const { data: childrenList } = useQuery(myQueryKeys.childrenList, () => getChildrenList());
+  const { data: childrenList } = useChildrenList();
   const [openBreakModal, setOpenBreakModal] = useState(false);
   const handleCreateCHildBtn = () => {
     if (childrenList.length >= 5) {

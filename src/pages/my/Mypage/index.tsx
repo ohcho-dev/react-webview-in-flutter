@@ -3,7 +3,6 @@ import * as Sentry from "@sentry/react";
 import { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { flutterInAppWebViewPlatformReady } from "../../..";
-import { logoutApi, Withdrawal } from "../../../queries/domain/my/mypage";
 import { MypageTitleBar } from "../../../components/domain/my/TitleBar";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
@@ -14,6 +13,8 @@ import {
 } from "../../../utils/google-analytics/events/ManagementUser";
 import UseImgix from "../../../components/common/Imgix";
 import * as S from "./myPage.styled";
+import useWithdrawAccount from "../../../queries/common/auth/useWithdrawAccount";
+import useLogout from "../../../queries/common/auth/useLogout";
 
 const linkItem = [
   {
@@ -71,7 +72,8 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [openModal, setOpenModal] = useState(false);
   const [version, setVersion] = useState("");
-
+  const { mutate: withdrawAccount } = useWithdrawAccount();
+  const { mutate: logout } = useLogout();
   useLayoutEffect(() => {
     getNativeValue("appVersion");
   }, []);
@@ -107,13 +109,13 @@ const MyPage = () => {
     }
   };
   const clickLogout = async () => {
-    await logoutApi();
+    await logout();
     await NativeFunction("ga4logNativeEventLog", `${logoutSuccessedAction}`);
     await NativeFunction("routeNativeScreen", "logout");
   };
 
   const clickWithDrawal = async () => {
-    await Withdrawal();
+    await withdrawAccount();
     await NativeFunction("ga4logNativeEventLog", `${withdrawalSuccessedAction}`);
     await NativeFunction("routeNativeScreen", "reset");
   };

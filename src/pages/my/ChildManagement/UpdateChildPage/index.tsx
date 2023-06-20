@@ -2,24 +2,21 @@ import { ko } from "date-fns/esm/locale";
 import dayjs from "dayjs";
 import React, { useEffect, useRef, useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
-import { useMutation, useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { getSelectedChild, updateChild } from "../../../../queries/domain/my/childApi";
 import Button from "../../../../components/common/Button";
 
 import CustomModal from "../../../../components/common/CustomModal";
 import { CustomRadioButton } from "../../../../components/common/CustomRadioButton";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import "react-datepicker/dist/react-datepicker.css";
-import { updateChildSuccessedAction } from "../../../../utils/google-analytics/events/ManagementChildEvent";
 import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { NativeFunction } from "../../../../utils/app/NativeFunction";
 import { ChildType } from "../../../../types/common";
 import { childrenListState } from "../../../../store/common";
-import { myQueryKeys } from "../../../../queries/domain/my/myQueryKeys";
+import useSelectedChild from "../../../../queries/domain/my/child/useSelectedChild";
+import useUpdateChild from "../../../../queries/domain/my/child/useUpdateChild";
 
 const DEFAULT_CHILD_TYPE = {
   id: 0,
@@ -102,16 +99,8 @@ const UpdateChildPage = () => {
   const [updateStatus, setUpdateStatus] = useState(false);
   const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
-  const { data } = useQuery(myQueryKeys.updatedChildInfo, () => getSelectedChild(childid));
-  const callUpdateChildInfo = useMutation(updateChild, {
-    onSuccess: () => {
-      NativeFunction("ga4logNativeEventLog", `${updateChildSuccessedAction}`);
-      setOpenModal(true);
-    },
-    onError: error => {
-      throw error;
-    },
-  });
+  const { data } = useSelectedChild(childid);
+  const { mutate: updateChild } = useUpdateChild(setOpenModal);
 
   useEffect(() => {
     if (data.length) {
@@ -178,7 +167,7 @@ const UpdateChildPage = () => {
       return;
     }
 
-    callUpdateChildInfo.mutate({
+    updateChild({
       ...childData,
       id: String(childid),
       birth_date: dayjs(birthDate).format("YYYY-MM-DD"),

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
-import { getUserInfo } from "../../../queries/domain/my/mypage";
 import UseImgix from "../../common/Imgix";
 import AlarmBadge from "../../common/AlarmBadge";
 import {
@@ -12,7 +10,7 @@ import {
   openBottomModalState,
   selectedChildInfoState,
 } from "../../../store/common";
-import { myQueryKeys } from "../../../queries/domain/my/myQueryKeys";
+import useAuthMe from "../../../queries/common/auth/useAuthMe";
 
 const TitleBarWrap = styled.section`
   width: 100%;
@@ -231,7 +229,7 @@ export const MypageTitleBar: React.FC = () => {
   const [icon, setIcon] = useState("");
   const childrenList = useRecoilValue(childrenListState);
 
-  const { data: userInfo } = useQuery(myQueryKeys.userInfo, () => getUserInfo());
+  const { data: userInfo } = useAuthMe();
 
   useEffect(() => {
     if (userInfo.sns_kind) {

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useQueryClient } from "react-query";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
-import { deleteProfilImageApi } from "../../../queries/domain/home/homeApi";
 import CustomSelectModal from "../../../components/common/CustomSelectModal";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
@@ -10,7 +9,7 @@ import UseImgix from "../../../components/common/Imgix";
 import getDday from "../../../utils/date/getDday";
 import { selectedChildInfoState, selectedHomeDataState } from "../../../store/common";
 import { homeQueryKeys } from "../../../queries/domain/home/homeQueryKeys";
-import { myQueryKeys } from "../../../queries/domain/my/myQueryKeys";
+import useDeleteProfileImage from "../../../queries/domain/home/useDeleteProfileImage";
 
 const ChildInfoWrap = styled.div`
   padding: 11.6rem 2rem 3rem;
@@ -143,46 +142,39 @@ const NoticeDesc = styled.div`
 const ChildInfo = () => {
   const queryClient = useQueryClient();
   const homeData = useRecoilValue(selectedHomeDataState);
-  const selectedChild = useRecoilValue(selectedChildInfoState);
+  const { id, birth_date, image } = useRecoilValue(selectedChildInfoState);
   const [openSelectModal, setOpenSelectModal] = useState(false);
-
-  const deleteProfilImage = useMutation(deleteProfilImageApi, {
-    onSuccess: res => {
-      queryClient.invalidateQueries(myQueryKeys.childrenList);
-    },
-  });
+  const { mutate: deleteProfileImage } = useDeleteProfileImage();
 
   useEffect(() => {
     queryClient.invalidateQueries(homeQueryKeys.homeData);
-  }, [selectedChild.id]);
+  }, [id]);
 
   return (
     <ChildInfoWrap background={process.env.REACT_APP_IMGIX_URL + "/images/bg-home.svg"}>
       <FlexBox>
         <div>
           <BirthDateChip>
-            탄생일<span>{selectedChild.birth_date && getDate(selectedChild.birth_date)}</span>
+            탄생일<span>{birth_date && getDate(birth_date)}</span>
           </BirthDateChip>
           <DdayLabel>우리아이 태어난지</DdayLabel>
           <DdayValue>
-            <span>
-              {selectedChild.birth_date && Math.abs(getDday(selectedChild.birth_date)) + 1}
-            </span>
+            <span>{birth_date && Math.abs(getDday(birth_date)) + 1}</span>
             <span>일</span>
           </DdayValue>
         </div>
-        {!selectedChild.image && (
+        {!image && (
           <ProfileImageWrap
-            onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`)}
+            onClick={() => NativeFunction("routeNativeScreen", `imageUpload@${id}`)}
           >
             <UseImgix srcUrl="/images/profile-default.svg" alt="프로필 사진" />
             <UseImgix srcUrl="/images/icon-addbtn.svg" alt="사진 추가하기" />
           </ProfileImageWrap>
         )}
-        {selectedChild.image && (
+        {image && (
           <ProfileImageWrap onClick={() => setOpenSelectModal(true)}>
             <UploadImage>
-              <UseImgix srcUrl={selectedChild.image} alt="프로필 사진" />
+              <UseImgix srcUrl={image} alt="프로필 사진" />
             </UploadImage>
           </ProfileImageWrap>
         )}
@@ -205,7 +197,7 @@ const ChildInfo = () => {
             id: 0,
             name: "앨범에서 이미지 선택",
             function: () => {
-              NativeFunction("routeNativeScreen", `imageUpload@${selectedChild.id}`);
+              NativeFunction("routeNativeScreen", `imageUpload@${id}`);
               setOpenSelectModal(false);
             },
           },
@@ -214,7 +206,7 @@ const ChildInfo = () => {
             name: "기본 이미지로 변경",
             function: () => {
               setOpenSelectModal(false);
-              deleteProfilImage.mutate(selectedChild.id.toString());
+              deleteProfileImage(id.toString());
             },
           },
         ]}

@@ -1,5 +1,7 @@
+import useApplyCoaching from "queries/domain/program/useApplyCoaching";
+import useCheckValidCoachingToApply from "queries/domain/program/useCheckValidCoachingToApply";
+import useSelectedCoachingInfo from "queries/domain/program/useSelectedCoachingInfo";
 import { useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "../../../components/common/Button";
@@ -8,18 +10,9 @@ import CustomModal from "../../../components/common/CustomModal";
 import UseImgix from "../../../components/common/Imgix";
 import ProgramPrice from "../../../components/domain/program/programListPage/ProgramPrice";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import {
-  applyCoaching,
-  checkValidCoachingToApply,
-  getSelectedCoachingInfo,
-} from "../../../queries/domain/program/programApi";
-import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 import { openBottomModalState, selectedChildInfoState } from "../../../store/common";
-import { ApiErrorResponseType } from "../../../types/apis/base";
 import { coachingType } from "../../../types/domain/coaching";
-import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
-import { applyCoachingSuccessedAction } from "../../../utils/google-analytics/events/ClickApplyBtn";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import * as S from "./coachingDetailPage.styled";
 
@@ -49,26 +42,9 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
     updated_at: "",
     valid_day: 0,
   });
-  const { data: selectedCoachingInfo } = useQuery(programQueryKeys.selectedCoacingInfo, () =>
-    getSelectedCoachingInfo(id),
-  );
-  const { data: res } = useQuery<ApiErrorResponseType>(
-    programQueryKeys.checkValidCoachingToApply,
-    () => checkValidCoachingToApply(id),
-  );
-  const callApplyCoaching = useMutation(applyCoaching, {
-    onSuccess: res => {
-      NativeFunction("ga4logNativeEventLog", `${applyCoachingSuccessedAction}`);
-      setOpenBottomModal(!openBottomModal);
-      navigate("/program/class/apply-coaching/success", {
-        state: { id: res.purchase_id },
-        replace: true,
-      });
-    },
-    onError: error => {
-      throw error;
-    },
-  });
+  const { data: selectedCoachingInfo } = useSelectedCoachingInfo(id);
+  const { data: res } = useCheckValidCoachingToApply(id);
+  const { mutate: applyCoaching } = useApplyCoaching(setOpenBottomModal);
 
   useEffect(() => {
     if (selectedCoachingInfo.length) {
@@ -96,7 +72,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
       }
     } else {
       if (res?.message === "OK") {
-        callApplyCoaching.mutate({ id: coachingInfo.id.toString() });
+        applyCoaching(coachingInfo.id.toString());
       } else {
         if (res?.code === "ONGOING_COACHING") {
           // 1.구매불가(해당 월령 구매한 동일상품)
@@ -254,7 +230,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
         }
         isOpen={openCheckUsageDuration}
         toggleModal={() => setOpenUsageDuration(!openCheckUsageDuration)}
-        okBtnClick={() => callApplyCoaching.mutate({ id: coachingInfo.id.toString() })}
+        okBtnClick={() => applyCoaching(coachingInfo.id.toString())}
         cancelBtnClick={handleUsageDurationModalBtnClick}
         cancelBtnName="취소"
         okBtnName="신청하기"

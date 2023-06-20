@@ -2,27 +2,22 @@ import { useState } from "react";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { getVideoAssignmentResult } from "../../../queries/domain/coaching/coachingApi";
 import Button from "../../../components/common/Button";
 import { BODY_1, STB_20 } from "../../../constants/font";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
 import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../components/common/Imgix";
-import { VideoAssignmentResultType } from "../../../types/domain/coaching";
 import { selectedChildInfoState } from "../../../store/common";
 import * as S from "./videoAssignmentPage.styled";
-import { coachingQueryKeys } from "../../../queries/domain/coaching/coachingQueryKeys";
+import useVideoAssignmentResult from "../../../queries/domain/coaching/useVideoAssignmentResult";
 export type collapseType = "" | "open" | "close";
 
 const VideoAssignmentPage = (): JSX.Element => {
   const { id } = useParams();
   const childInfo = useRecoilValue(selectedChildInfoState);
   const [collapse, setCollapse] = useState<collapseType>("");
-  const { data: videoAssignmentResult } = useQuery<VideoAssignmentResultType>(
-    coachingQueryKeys.videoAssignmentResult,
-    () => getVideoAssignmentResult(id),
-  );
+  const { data: videoAssignmentResult } = useVideoAssignmentResult(id);
 
   const handleArrowClick = () => {
     if (!collapse || collapse === "open") {

@@ -1,4 +1,4 @@
-import { useQuery } from "react-query";
+import useSelectedClassInfo from "queries/domain/program/useSelectedClassInfo";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import Button from "../../../components/common/Button";
@@ -6,8 +6,6 @@ import UseImgix from "../../../components/common/Imgix";
 import ProgramPrice from "../../../components/domain/program/programListPage/ProgramPrice";
 import { AgeRange, OnlineOffline } from "../../../components/domain/program/programListPage/styled";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { getSelectedClassInfo } from "../../../queries/domain/program/programApi";
-import { programQueryKeys } from "../../../queries/domain/program/programQueryKeys";
 import { commonCodeState } from "../../../store/common";
 import { getDateTime } from "../../../utils/date/getDateTime";
 import { getMonthLevelString } from "../../../utils/date/getMonthLevelString";
@@ -21,9 +19,7 @@ interface ClassDetailPageProps {
 const ClassDetailPage: React.FC<ClassDetailPageProps> = props => {
   const navigate = useNavigate();
   const { id } = props;
-  const { data: selectedClassInfo } = useQuery(programQueryKeys.selectedClassInfo, () =>
-    getSelectedClassInfo(id),
-  );
+  const { data: selectedClassInfo } = useSelectedClassInfo(id);
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
   return (
