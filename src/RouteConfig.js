@@ -4,66 +4,64 @@ import React from "react";
  * 메인메뉴
  */
 
-const HomePage = React.lazy(() => import("./pages/HomePage"));
-const RecordPage = React.lazy(() => import("./pages/RecordPage"));
-const CoachingPage = React.lazy(() => import("./pages/CoachingPage"));
-const ProgramPage = React.lazy(() => import("./pages/ProgramPage"));
-const MyPage = React.lazy(() => import("./pages/Mypage"));
+const HomePage = React.lazy(() => import("./pages/home/HomePage"));
+const RecordPage = React.lazy(() => import("./pages/record/RecordPage"));
+const CoachingPage = React.lazy(() => import("./pages/coaching/CoachingPage"));
+const ProgramPage = React.lazy(() => import("./pages/program/ProgramListPage"));
+const MyPage = React.lazy(() => import("./pages/my/Mypage"));
 /**
  * 홈메뉴
  */
-const ActivityDetail = React.lazy(() => import("./pages/HomePage/ActivityDetail"));
+const ActivityDetail = React.lazy(() => import("./components/domain/home/ActivityDetail"));
 
 /**
  * 기록메뉴
  */
-const ExplanationRecord = React.lazy(() => import("./pages/RecordDetailPage/ExplanationRecord"));
-const StampReward = React.lazy(() => import("./pages/RecordDetailPage/StampReward"));
-const RecordTaskList = React.lazy(() => import("./pages/RecordDetailPage/RecordTaskList"));
+const ExplanationRecord = React.lazy(() => import("./pages/record/ExplanationRecordPage"));
+const StampReward = React.lazy(() => import("./pages/record/StampRewardPage"));
+const RecordTaskList = React.lazy(() => import("./pages/record/RecordTaskListPage"));
 
 /**
  * 코칭메뉴
  */
-const CoachingDetailPage = React.lazy(() => import("./pages/CoachingDetailPage"));
+const CoachingDetailPage = React.lazy(() => import("./pages/coaching/CoachingDetailPage"));
 const ApplyCoachingPayment = React.lazy(() =>
-  import("./pages/ProgramDetailPage/components/ApplyCoachingPayment"),
+  import("./components/domain/program/programDetailPage/ApplyCoachingPayment"),
 );
-const ResultPaper = React.lazy(() => import("./pages/CoachingDetailPage/components/ResultPaper"));
+const ResultPaper = React.lazy(() =>
+  import("./components/domain/coaching/coachingDetailPage/ResultPaper"),
+);
 
-const Questionnaire = React.lazy(() => import("./pages/Questionnaire"));
+const Questionnaire = React.lazy(() => import("./pages/coaching/Questionnaire"));
 const QuestionnaireForm = React.lazy(() =>
-  import("./pages/Questionnaire/components/QuestionnaireForm"),
+  import("./components/domain/coaching/questionnairePage/QuestionnaireForm"),
 );
-const QuestionnaireDetailPage = React.lazy(() => import("./pages/QuestionnireDetailPage"));
-const VideoAssignmentPage = React.lazy(() => import("./pages/VideoAssignmentPage"));
+const QuestionnaireDetailPage = React.lazy(() => import("./pages/coaching/QuestionnireDetailPage"));
+const VideoAssignmentPage = React.lazy(() => import("./pages/coaching/VideoAssignmentPage"));
 
 /**
  * 프로그램 메뉴
  */
 
-const ApplyClassPage = React.lazy(() => import("./pages/ApplyClassPage"));
-const ApplySuccessPage = React.lazy(() =>
-  import("./pages/ApplyClassPage/components/ApplySuccessPage"),
-);
-const ApplyCoachingSuccess = React.lazy(() =>
-  import("./pages/ProgramDetailPage/components/ApplyCoachingSuccess"),
-);
-const ProgramDetailPage = React.lazy(() => import("./pages/ProgramDetailPage"));
+const ApplyClassPage = React.lazy(() => import("./pages/program/ApplyClassPage"));
+const ApplySuccessPage = React.lazy(() => import("./pages/program/ApplySuccessPage"));
+const ApplyCoachingSuccess = React.lazy(() => import("./pages/program/ApplyCoachingSuccessPage"));
+const ProgramDetailPage = React.lazy(() => import("./pages/program/ProgramDetailPage"));
 
 /**
  * My 메뉴
  */
-const AppliedProgramList = React.lazy(() => import("./pages/MypageDetailPage/AppliedProgramList"));
-const ManagementAlarm = React.lazy(() => import("./pages/MypageDetailPage/ManagementAlarm"));
-const ManagementChild = React.lazy(() => import("./pages/MypageDetailPage/ManagementChild"));
-const CreateChild = React.lazy(() => import("./pages/MypageDetailPage/CreateChild"));
-const UpdateChild = React.lazy(() => import("./pages/MypageDetailPage/UpdateChild"));
-const Notice = React.lazy(() => import("./pages/MypageDetailPage/Notice"));
-const NoticeDetail = React.lazy(() => import("./pages/MypageDetailPage/NoticeDetail"));
-const Terms = React.lazy(() => import("./pages/MypageDetailPage/Terms"));
-const Privacy = React.lazy(() => import("./pages/MypageDetailPage/Privacy"));
-const Sensitive = React.lazy(() => import("./pages/MypageDetailPage/Sensitive"));
-const AlarmList = React.lazy(() => import("./pages/MypageDetailPage/AlarmList"));
+const AppliedProgramList = React.lazy(() => import("./pages/my/AppliedProgramListPage"));
+const AlarmList = React.lazy(() => import("./pages/my/Alarm/AlarmListPage"));
+const ManagementAlarm = React.lazy(() => import("./pages/my/Alarm/AlarmManagementPage"));
+const ManagementChild = React.lazy(() => import("./pages/my/ChildManagement/ChildrenListpage"));
+const CreateChild = React.lazy(() => import("./pages/my/ChildManagement/CreateChildPage"));
+const UpdateChild = React.lazy(() => import("./pages/my/ChildManagement/UpdateChildPage"));
+const Notice = React.lazy(() => import("./pages/my/Notice/NoticeListPage"));
+const NoticeDetail = React.lazy(() => import("./pages/my/Notice/NoticeDetailPage"));
+const Terms = React.lazy(() => import("./pages/my/TermsPage"));
+const Privacy = React.lazy(() => import("./pages/my/PrivacyPage"));
+const Sensitive = React.lazy(() => import("./pages/my/SensitivePage"));
 
 export const RouterConfig = [
   {

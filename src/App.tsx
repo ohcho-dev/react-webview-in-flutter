@@ -5,31 +5,34 @@ import { useQueries, useQueryClient, useQueryErrorResetBoundary } from "react-qu
 import { Route, Routes, useNavigate, useNavigationType, useLocation } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
-import "./scss/_reset.scss";
-import "./scss/_global.scss";
-import "./scss/_slideTransition.scss";
-import "./scss/_customReactDatepicker.scss";
+import "./styles/_reset.scss";
+import "./styles/_global.scss";
+import "./styles/_slideTransition.scss";
+import "./styles/_customReactDatepicker.scss";
 
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { RouterConfig } from "./RouteConfig";
-import { getChildrenList } from "./api/childApi";
-import { getCommonCodeList } from "./api/commonApi";
-import { getHomeData } from "./api/homeApi";
-import { getUserInfo } from "./api/mypage";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";
-import { queryKeys } from "./constants/queryKeys";
-import { ErrorBoundary } from "./pages/ErrorPage";
+import { ErrorBoundary } from "./pages/common/ErrorPage/ErrorPage";
+import { NativeFunction } from "./utils/app/NativeFunction";
+import { ChildType } from "./types/common";
 import {
   childrenKeyState,
   childrenListState,
   commonCodeState,
-  currentTaskIdState,
   selectedChildInfoState,
   selectedHomeDataState,
-} from "./recoil/atom";
-import { childType } from "./utils/type";
-import { NativeFunction } from "./utils/NativeFunction";
+} from "./store/common";
+import { currentTaskIdState } from "./store/domain/coaching";
+import { commonQueryKeys } from "./queries/common/commonQueryKeys";
+import { homeQueryKeys } from "./queries/domain/home/homeQueryKeys";
+import { coachingQueryKeys } from "./queries/domain/coaching/coachingQueryKeys";
+import { myQueryKeys } from "./queries/domain/my/myQueryKeys";
+import { getHomeData } from "./queries/domain/home/useHomeData";
+import { getChildrenList } from "./queries/domain/my/child/useChildrenList";
+import { getUserInfo } from "./queries/common/auth/useAuthMe";
+import { getCommonCodeList } from "./queries/common/useCommonCodeList";
 
 let oldLocation: any = null;
 
@@ -57,7 +60,7 @@ const App: React.FC = () => {
 
   function refetchData() {
     return new Promise(function (resolve, reject) {
-      queryClient.invalidateQueries(queryKeys.appliedCoachingInfo);
+      queryClient.invalidateQueries(coachingQueryKeys.appliedCoachingInfo);
       resolve("success");
     });
   }
@@ -81,7 +84,7 @@ const App: React.FC = () => {
 
   const getBaseData = useQueries([
     {
-      queryKey: queryKeys.userInfo,
+      queryKey: myQueryKeys.userInfo,
       queryFn: () => getUserInfo(),
       onSuccess: (data: any) => {
         window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
@@ -90,12 +93,12 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
     {
-      queryKey: queryKeys.childrenList,
+      queryKey: myQueryKeys.childrenList,
       queryFn: () => getChildrenList(),
       onSuccess: (data: any[]) => {
         if (data.length) {
           const id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
-          setSelectedChild(data.filter((child: childType) => child.id.toString() === id)[0]);
+          setSelectedChild(data.filter((child: ChildType) => child.id.toString() === id)[0]);
 
           setChildrenList(data);
         }
@@ -103,7 +106,7 @@ const App: React.FC = () => {
       enabled: !!Cookies.get("token"),
     },
     {
-      queryKey: queryKeys.homeData,
+      queryKey: homeQueryKeys.homeData,
       queryFn: () => getHomeData(),
       onSuccess: (data: any) => {
         if (data) {
@@ -113,7 +116,7 @@ const App: React.FC = () => {
       enabled: !!selectedChild && !!window.localStorage.getItem(CHILD_ID_FIELD),
     },
     {
-      queryKey: queryKeys.commonCodeList,
+      queryKey: commonQueryKeys.commonCodeList,
       queryFn: () => getCommonCodeList(),
       onSuccess: (commonCodeList: any[]) => {
         const codeObj: { [key: string]: string | number | object } = {};
@@ -146,11 +149,11 @@ const App: React.FC = () => {
 
   useEffect(() => {
     window.addEventListener("refetchChildData", () => {
-      queryClient.invalidateQueries(queryKeys.childrenList);
+      queryClient.invalidateQueries(myQueryKeys.childrenList);
     });
 
     window.addEventListener("refetchPushList", () => {
-      queryClient.invalidateQueries(queryKeys.notificationList);
+      queryClient.invalidateQueries(commonQueryKeys.notificationList);
     });
 
     window.addEventListener("coachingResult", (res: any) => {
