@@ -18,10 +18,12 @@
 
 ## 프로젝트 빌드 <a name="how-to-use"></a>
 
+### 이 프로젝트는 submodule을 사용하였습니다.
+
 **프로젝트 clone**
 
 ```
-$ git clone git@github.com:luman-lab/ssuktore-frontend-webview.git
+$ git clone git@github.com:dev-lumanlab/eltern-mobile-web-biz.git --recurse-submodules
 $ git checkout dev
 ```
 
@@ -92,3 +94,7 @@ npm run build
 
 - 설계: https://www.figma.com/file/J9CtDX2VB2OoFyCoF8cVYK/%EA%B8%B0%ED%9A%8D
 - 디자인: https://www.figma.com/file/A6oZ2ekhqiuwF4UZMSKjoS/%EB%94%94%EC%9E%90%EC%9D%B8?node-id=103%3A18&t=PadbO6Py0kOBOyvz-0
+
+## .gitmodules 파일은 있지만 경로에 폴더나 파일이 없을때 명령어
+
+- git submodule update --init --recursive
