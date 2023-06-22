@@ -33,6 +33,7 @@ import { getHomeData } from "./queries/domain/home/useHomeData";
 import { getChildrenList } from "./queries/domain/my/child/useChildrenList";
 import { getUserInfo } from "./queries/common/auth/useAuthMe";
 import { getCommonCodeList } from "./queries/common/useCommonCodeList";
+import useGetBaseDate from "hooks/useGetBaseData";
 
 let oldLocation: any = null;
 
@@ -57,6 +58,7 @@ const App: React.FC = () => {
   const currentTaskId = useRecoilValue(currentTaskIdState);
   const [resultId, setResultId] = useState("");
   const [videoId, setVideoId] = useState("");
+  const data = useGetBaseDate();
 
   function refetchData() {
     return new Promise(function (resolve, reject) {
@@ -82,55 +84,55 @@ const App: React.FC = () => {
     }
   }, [token]);
 
-  const getBaseData = useQueries([
-    {
-      queryKey: myQueryKeys.userInfo,
-      queryFn: () => getUserInfo(),
-      onSuccess: (data: any) => {
-        window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
-        window.localStorage.setItem(USER_KEY, data.id);
-      },
-      enabled: !!Cookies.get("token"),
-    },
-    {
-      queryKey: myQueryKeys.childrenList,
-      queryFn: () => getChildrenList(),
-      onSuccess: (data: any[]) => {
-        if (data.length) {
-          const id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
-          setSelectedChild(data.filter((child: ChildType) => child.id.toString() === id)[0]);
+  // const getBaseData = useQueries([
+  //   {
+  //     queryKey: myQueryKeys.userInfo,
+  //     queryFn: () => getUserInfo(),
+  //     onSuccess: (data: any) => {
+  //       window.localStorage.setItem(CHILD_ID_FIELD, data.last_selected_child);
+  //       window.localStorage.setItem(USER_KEY, data.id);
+  //     },
+  //     enabled: !!Cookies.get("token"),
+  //   },
+  //   {
+  //     queryKey: myQueryKeys.childrenList,
+  //     queryFn: () => getChildrenList(),
+  //     onSuccess: (data: any[]) => {
+  //       if (data.length) {
+  //         const id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
+  //         setSelectedChild(data.filter((child: ChildType) => child.id.toString() === id)[0]);
 
-          setChildrenList(data);
-        }
-      },
-      enabled: !!Cookies.get("token"),
-    },
-    {
-      queryKey: homeQueryKeys.homeData,
-      queryFn: () => getHomeData(),
-      onSuccess: (data: any) => {
-        if (data) {
-          setSelectedHomeData(data);
-        }
-      },
-      enabled: !!selectedChild && !!window.localStorage.getItem(CHILD_ID_FIELD),
-    },
-    {
-      queryKey: commonQueryKeys.commonCodeList,
-      queryFn: () => getCommonCodeList(),
-      onSuccess: (commonCodeList: any[]) => {
-        const codeObj: { [key: string]: string | number | object } = {};
+  //         setChildrenList(data);
+  //       }
+  //     },
+  //     enabled: !!Cookies.get("token"),
+  //   },
+  //   {
+  //     queryKey: homeQueryKeys.homeData,
+  //     queryFn: () => getHomeData(),
+  //     onSuccess: (data: any) => {
+  //       if (data) {
+  //         setSelectedHomeData(data);
+  //       }
+  //     },
+  //     enabled: !!selectedChild && !!window.localStorage.getItem(CHILD_ID_FIELD),
+  //   },
+  //   {
+  //     queryKey: commonQueryKeys.commonCodeList,
+  //     queryFn: () => getCommonCodeList(),
+  //     onSuccess: (commonCodeList: any[]) => {
+  //       const codeObj: { [key: string]: string | number | object } = {};
 
-        if (commonCodeList[0].length) {
-          commonCodeList[0].map(
-            (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
-          );
-          setCommonCodeList(codeObj);
-        }
-      },
-      enabled: !!Cookies.get("token"),
-    },
-  ]);
+  //       if (commonCodeList[0].length) {
+  //         commonCodeList[0].map(
+  //           (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
+  //         );
+  //         setCommonCodeList(codeObj);
+  //       }
+  //     },
+  //     enabled: !!Cookies.get("token"),
+  //   },
+  // ]);
 
   useEffect(() => {
     const secondPath = pathname.split("/")[2];
@@ -148,6 +150,7 @@ const App: React.FC = () => {
   }, [currentTaskId]);
 
   useEffect(() => {
+    window.localStorage.removeItem(CHILD_ID_FIELD);
     window.addEventListener("refetchChildData", () => {
       queryClient.invalidateQueries(myQueryKeys.childrenList);
     });
@@ -157,17 +160,10 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("coachingResult", (res: any) => {
-      console.log("coachingResult:: ", "푸시 알림 클릭 시 결과지 페이지로 웹뷰 이동시키는 함수");
-      console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
       setResultId(res.detail.id);
     });
 
     window.addEventListener("coachingVideoAssignment", (res: any) => {
-      console.log(
-        "coachingResult:: ",
-        "푸시 알림 클릭 시 비디오 다시 촬영하기 페이지로 웹뷰 이동시키는 함수",
-      );
-      console.log("coachingResult 값:: ", res, res.detail, res.detail.id);
       alert(res.detail.id);
       setVideoId(res.detail.id);
     });

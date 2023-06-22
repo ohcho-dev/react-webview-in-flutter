@@ -21,6 +21,7 @@ import PriceSection from "../../../components/domain/program/applyClassPage/Pric
 import ClassRejectModal from "../../../components/domain/program/applyClassPage/ClassRejectModal";
 import useSelectedClassInfo from "queries/domain/program/useSelectedClassInfo";
 import useApplyClass from "queries/domain/program/useApplyClass";
+import { DEFAULT_CHILD_TYPE } from "pages/my/ChildManagement/UpdateChildPage";
 const USER_SECTION_HEIGHT = 37;
 
 const ApplyClassPage = () => {
@@ -42,14 +43,7 @@ const ApplyClassPage = () => {
     parent_name: "",
     parent_phone: "",
   });
-  const [selectedChildInfo, setSelectedChildInfo] = useState<ChildType>({
-    id: 0,
-    name: "",
-    parent_id: 0,
-    gender: "",
-    birth_date: "",
-    premature_flag: 0,
-  });
+  const [selectedChildInfo, setSelectedChildInfo] = useState<ChildType>(DEFAULT_CHILD_TYPE);
   const [errorCode, setErrorCode] = useState<
     "MONTH_NOT_ACCEPTABLE" | "CLASS_STUDENT_FULL" | "CLASS_ALREADY_APPLIED"
   >("MONTH_NOT_ACCEPTABLE");

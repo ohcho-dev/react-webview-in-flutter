@@ -107,7 +107,7 @@ export const MypageTitleBar: React.FC = () => {
   const { data: userInfo } = useAuthMe();
 
   useEffect(() => {
-    if (userInfo.sns_kind) {
+    if (userInfo && userInfo.sns_kind) {
       const sns = userInfo.sns_kind;
       if (sns === "SNS_KAKAO") {
         setSns("카카오");

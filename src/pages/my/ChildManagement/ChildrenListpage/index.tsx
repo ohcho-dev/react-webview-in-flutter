@@ -58,7 +58,7 @@ export const ChildrenListPage = () => {
   const { data: childrenList } = useChildrenList();
   const [openBreakModal, setOpenBreakModal] = useState(false);
   const handleCreateCHildBtn = () => {
-    if (childrenList.length >= 5) {
+    if (childrenList && childrenList.length >= 5) {
       setOpenBreakModal(!openBreakModal);
       return;
     }
@@ -74,7 +74,7 @@ export const ChildrenListPage = () => {
     >
       <PageTitle title="아이 관리" />
       <PageLayout>
-        {childrenList.map((child: ChildType, index: number) => (
+        {childrenList?.map((child: ChildType, index: number) => (
           <ChildrenListWrap
             key={index}
             onClick={() => navigate(`/my/management-child/${child.id}`)}

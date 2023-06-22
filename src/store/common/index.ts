@@ -1,5 +1,5 @@
 import { atom } from "recoil";
-import { HomeData } from "../../types/domain/home";
+import { HomeDataResponseType } from "types/apis/home";
 import { commonAtomKeys } from "./commonAtomKeys";
 
 export const commonCodeState = atom({
@@ -27,7 +27,7 @@ export const selectedChildInfoState = atom({
   },
 });
 
-export const selectedHomeDataState = atom<HomeData>({
+export const selectedHomeDataState = atom<HomeDataResponseType>({
   key: commonAtomKeys.selectedHomeData,
   default: {
     birth_date: "",

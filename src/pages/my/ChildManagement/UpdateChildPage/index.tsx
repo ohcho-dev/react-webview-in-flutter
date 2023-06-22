@@ -18,13 +18,16 @@ import { childrenListState } from "../../../../store/common";
 import useSelectedChild from "../../../../queries/domain/my/child/useSelectedChild";
 import useUpdateChild from "../../../../queries/domain/my/child/useUpdateChild";
 
-const DEFAULT_CHILD_TYPE = {
+export const DEFAULT_CHILD_TYPE = {
   id: 0,
   name: "",
   gender: "",
   birth_date: "",
   premature_flag: 0,
   due_date: "",
+  image: "",
+  parent_id: 0,
+  birth_modifiable: false,
 };
 
 interface TypeProps {

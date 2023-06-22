@@ -1,4 +1,4 @@
-export interface HomeData {
+export interface HomeDataResponseType {
   birth_date: string;
   days_from_birth: number;
   image: string;

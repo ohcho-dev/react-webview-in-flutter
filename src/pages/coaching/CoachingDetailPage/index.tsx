@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import CustomModal from "../../../components/common/CustomModal";
