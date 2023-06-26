@@ -242,7 +242,7 @@ const QuestionnaireForm = (): JSX.Element => {
         okBtnClick={handleExitQuestionnaireBtnClick}
         toggleModal={() => setOpenWarningModal(!openWarningModal)}
         cancelBtnClick={() => setOpenWarningModal(!openWarningModal)}
-        cancelbtn
+        cancelBtn
         title="정말로 나가시겠습니까?"
       />
       <CustomModal
@@ -251,7 +251,7 @@ const QuestionnaireForm = (): JSX.Element => {
         okBtnClick={() => navigate(-2)}
         toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
         title="설문 답변을 완료했어요."
-        cancelbtn={false}
+        cancelBtn={false}
       />
     </div>
   );

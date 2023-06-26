@@ -208,7 +208,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
         </S.ButtonWrap>
       </CustomBottomModal>
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="진행 중인 코칭이 있어요!"
         content="동일한 코칭은 동시에 진행할 수 없어요. 진행 중인 코칭 완료 후 다음 월령에 다시 신청해주세요."
         isOpen={openSameCoachingModal}
@@ -218,7 +218,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
         }}
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         topImage={<UseImgix alt="warning icon" srcUrl="/images/icon-alert.svg" />}
         title="이용기간을 확인해주세요!"
         contentMarkup={

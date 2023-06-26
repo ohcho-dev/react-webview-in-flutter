@@ -153,7 +153,7 @@ const MyPage = () => {
       </S.BottomArea>
 
       <CustomModal
-        cancelbtn
+        cancelBtn
         isOpen={openModal}
         toggleModal={() => setOpenModal(!openModal)}
         topImage={<UseImgix srcUrl="/images/icon-sad-circle.svg" alt="sad icon" />}

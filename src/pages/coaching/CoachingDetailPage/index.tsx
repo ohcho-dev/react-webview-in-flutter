@@ -143,7 +143,7 @@ const CoachingDetailPage = () => {
           ))}
         </S.ListScroll>
         <CustomModal
-          cancelbtn={false}
+          cancelBtn={false}
           topImage={
             <UseImgix
               srcUrl={"/images/icon-sad-circle.svg"}

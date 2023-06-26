@@ -185,7 +185,7 @@ const ApplyCoachingPayment = () => {
       </Accordion>
       <S.PayAgreement>주문 내용을 확인하였으며, 약관 및 개인정보제공에 동의합니다.</S.PayAgreement>
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="필수 정보를 모두 입력해주세요."
         content="필수 정보를 모두 입력해야 신청이 가능해요."
         isOpen={openValidationModal}

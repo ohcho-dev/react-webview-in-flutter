@@ -21,7 +21,7 @@ import PriceSection from "../../../components/domain/program/applyClassPage/Pric
 import ClassRejectModal from "../../../components/domain/program/applyClassPage/ClassRejectModal";
 import useSelectedClassInfo from "queries/domain/program/useSelectedClassInfo";
 import useApplyClass from "queries/domain/program/useApplyClass";
-import { DEFAULT_CHILD_TYPE } from "pages/my/ChildManagement/UpdateChildPage";
+import { DEFAULT_CHILD_TYPE } from "pages/my/ChildManagement/CreateChildPage";
 const USER_SECTION_HEIGHT = 37;
 
 const ApplyClassPage = () => {
@@ -221,7 +221,7 @@ const ApplyClassPage = () => {
         handleChildClick={handleChildClick}
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="필수 정보를 모두 입력해주세요."
         content="필수 정보를 모두 입력해야 신청이 가능해요."
         isOpen={openValidationMoadl}
