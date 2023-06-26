@@ -10,20 +10,22 @@ import getGender from "../../../../utils/user/getGender";
 import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import useChildrenList from "../../../../queries/domain/my/child/useChildrenList";
+import { ColorLightSlate1 } from "constants/ldsConstants/global";
 
 const PageLayout = styled.div`
   margin-top: 7rem;
 `;
-const ChildrenListWrap = styled.div`
+const SingleChildWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: calc(100% - 5rem);
-  padding: 2.4rem 1.4rem 2.4rem 2rem;
+  padding: 2rem 1.4rem 2rem 2rem;
   margin: 0 auto 1rem;
 
   border: 1px solid rgba(0, 0, 0, 0.12);
   border-radius: 0.8rem;
+  background: ${ColorLightSlate1};
 `;
 
 const ChildInfoSection = styled.div`
@@ -56,6 +58,7 @@ const ChildName = styled.span`
 export const ChildrenListPage = () => {
   const navigate = useNavigate();
   const { data: childrenList } = useChildrenList();
+
   const [openBreakModal, setOpenBreakModal] = useState(false);
   const handleCreateCHildBtn = () => {
     if (childrenList && childrenList.length >= 5) {
@@ -75,7 +78,7 @@ export const ChildrenListPage = () => {
       <PageTitle title="아이 관리" />
       <PageLayout>
         {childrenList?.map((child: ChildType, index: number) => (
-          <ChildrenListWrap
+          <SingleChildWrapper
             key={index}
             onClick={() => navigate(`/my/management-child/${child.id}`)}
           >
@@ -91,12 +94,12 @@ export const ChildrenListPage = () => {
               alt="right arrow icon"
               style={{ width: "2.8rem", height: "2.8rem" }}
             />
-          </ChildrenListWrap>
+          </SingleChildWrapper>
         ))}
       </PageLayout>
 
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         topImage={
           <UseImgix
             srcUrl={"/images/icon-sad-circle.svg"}

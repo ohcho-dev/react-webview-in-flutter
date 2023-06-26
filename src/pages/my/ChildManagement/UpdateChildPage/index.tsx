@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import { useNavigate, useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 import Button from "../../../../components/common/Button";
 
 import CustomModal from "../../../../components/common/CustomModal";
@@ -17,78 +16,29 @@ import { ChildType } from "../../../../types/common";
 import { childrenListState } from "../../../../store/common";
 import useSelectedChild from "../../../../queries/domain/my/child/useSelectedChild";
 import useUpdateChild from "../../../../queries/domain/my/child/useUpdateChild";
+import { DEFAULT_CHILD_TYPE } from "../CreateChildPage";
+import * as S from "../childManagement.styled";
+import AffiliatedOrganizationBox from "components/domain/my/AffiliatedOrganizationBox";
+import { OptionType } from "types/domain/my";
+import ConfirmAffiliateOrganizationStatusModal from "components/domain/my/ConfirmAffiliateOrganizationStatusModal.tsx";
+import ConfirmDeleteOrganizationModal from "components/domain/my/ConfirmDeleteOrganizationModal";
+import RejectDeleteOrganizationModal from "components/domain/my/RejectDeleteOrganizationModal";
+import RejectChangeOrganizationModal from "components/domain/my/RejectChangeOrganizationModal";
 
-export const DEFAULT_CHILD_TYPE = {
-  id: 0,
-  name: "",
-  gender: "",
-  birth_date: "",
-  premature_flag: 0,
-  due_date: "",
-  image: "",
-  parent_id: 0,
-  birth_modifiable: false,
-};
-
-interface TypeProps {
-  name: string;
-  value: any;
-}
-
-const Genders: TypeProps[] = [
+const Genders: OptionType[] = [
   { name: "여아", value: "F" },
   { name: "남아", value: "M" },
 ];
-const Prematures: TypeProps[] = [
+const Prematures: OptionType[] = [
   { name: "예정일 출산", value: 0 },
   { name: "이른둥이 출산", value: 1 },
 ];
-
-const PageLayout = styled.div`
-  margin-top: 7rem;
-`;
-
-const FormWrap = styled.form`
-  padding: 0 2.5rem;
-`;
-const InputTitle = styled.div`
-  margin-bottom: 1rem;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2.5rem;
-  letter-spacing: -0.04rem;
-  color: rgba(10, 10, 10, 0.8);
-`;
-
-const InputBox = styled.input`
-  width: 100%;
-  border: none;
-
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 25px;
-
-  color: rgba(0, 0, 0, 0.8);
-
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
-  :focus {
-    outline: none;
-    border-bottom: 1px solid #5ac4b1;
-  }
-
-  ::placeholder {
-    color: rgba(0, 0, 0, 0.2);
-  }
-`;
 
 const UpdateChildPage = () => {
   const { childid } = useParams();
   const navigate = useNavigate();
   const [childData, setChildData] = useState<ChildType>(DEFAULT_CHILD_TYPE);
-
+  const [openAffiliatedConfirmModal, setOpenAffiliatedConfirmModal] = useState(false);
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
   const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
@@ -99,6 +49,10 @@ const UpdateChildPage = () => {
   const [openValidModal, setOpenValidModal] = useState(false);
   const [openSameNameModal, setOpenSameNameModal] = useState(false);
   const [openRejectModal, setOpenRejectModal] = useState(false);
+  const [openRejectDeleteOrganizationModal, setOpenRejectDeleteOrganizationModal] = useState(false);
+  const [openRejectChangeOrganizationModal, setOpenRejectChangeOrganizationModal] = useState(false);
+  const [openConfirmDeleteOrganizationModal, setOpenConfirmDeleteOrganizationModal] =
+    useState(false);
   const [updateStatus, setUpdateStatus] = useState(false);
   const childList = useRecoilValue(childrenListState);
   const inputRef = useRef(null);
@@ -110,10 +64,13 @@ const UpdateChildPage = () => {
       setChildData(data[0]);
       setBirthDate(new Date(data[0].birth_date));
       data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
-      setDefaultGender(Genders.filter(gender => gender.value === data[0].gender)[0]);
-      setDefaultPremature(
-        Prematures.filter(premature => premature.value === data[0].premature_flag)[0],
-      );
+
+      const defaultGender = Genders.filter(gender => gender.value === data[0].gender)[0];
+      const defaultPremature = Prematures.filter(
+        premature => premature.value === data[0].premature_flag,
+      )[0];
+      setDefaultGender({ name: defaultGender.name, value: defaultGender.value as string });
+      setDefaultPremature({ name: defaultPremature.name, value: defaultPremature.value as number });
       setBirthModifiable(data[0].birth_modifiable);
     }
   }, [data]);
@@ -200,10 +157,10 @@ const UpdateChildPage = () => {
       }
     >
       <PageTitle title={"아이 정보 수정"} />
-      <PageLayout>
-        <FormWrap>
-          <InputTitle>이름</InputTitle>
-          <InputBox
+      <S.PageLayout>
+        <S.FormWrap>
+          <S.InputTitle>아이 이름</S.InputTitle>
+          <S.InputBox
             placeholder="이름을 입력해주세요."
             id="childName"
             value={childData.name}
@@ -211,7 +168,7 @@ const UpdateChildPage = () => {
             onChange={handleTypeInformation}
           />
 
-          <InputTitle>성별</InputTitle>
+          <S.InputTitle>아이 성별</S.InputTitle>
           <CustomRadioButton
             id="childGender"
             type={Genders}
@@ -219,7 +176,7 @@ const UpdateChildPage = () => {
             onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
           />
 
-          <InputTitle>생년월일</InputTitle>
+          <S.InputTitle>아이 생년월일</S.InputTitle>
           <DatePicker
             withPortal
             showYearDropdown
@@ -247,7 +204,7 @@ const UpdateChildPage = () => {
             }}
           />
 
-          <InputTitle>이른둥이 여부</InputTitle>
+          <S.InputTitle>이른둥이 여부</S.InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
@@ -258,7 +215,7 @@ const UpdateChildPage = () => {
 
           {childData.premature_flag === 1 && (
             <>
-              <InputTitle>기존 출산 예정일</InputTitle>
+              <S.InputTitle>기존 출산 예정일</S.InputTitle>
               <DatePicker
                 withPortal
                 showYearDropdown
@@ -285,10 +242,33 @@ const UpdateChildPage = () => {
               />
             </>
           )}
-        </FormWrap>
-      </PageLayout>
+          <S.InputTitle>제휴 기관</S.InputTitle>
+          <AffiliatedOrganizationBox handleClick={() => setOpenAffiliatedConfirmModal(true)} />
+          {/* <NoAffiliatedOrganizationBox /> */}
+        </S.FormWrap>
+      </S.PageLayout>
+      <ConfirmAffiliateOrganizationStatusModal
+        toggle={openAffiliatedConfirmModal}
+        handleToggle={() => setOpenAffiliatedConfirmModal(!openAffiliatedConfirmModal)}
+        handleDeleteBtnClick={() => {
+          // await setOpenAffiliatedConfirmModal(false);
+          setOpenConfirmDeleteOrganizationModal(true);
+        }}
+      />
+      <ConfirmDeleteOrganizationModal
+        toggle={openConfirmDeleteOrganizationModal}
+        handleToggle={() => setOpenConfirmDeleteOrganizationModal(prev => !prev)}
+      />
+      <RejectDeleteOrganizationModal
+        toggle={openRejectDeleteOrganizationModal}
+        handleToggle={() => setOpenRejectDeleteOrganizationModal(prev => !prev)}
+      />
+      <RejectChangeOrganizationModal
+        toggle={openRejectChangeOrganizationModal}
+        handleToggle={() => setOpenRejectChangeOrganizationModal(prev => !prev)}
+      />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="아이 이름을 입력해주세요."
         isOpen={openValidModal}
         toggleModal={() => {
@@ -297,7 +277,7 @@ const UpdateChildPage = () => {
         okBtnName="확인"
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="같은 이름의 아이를 등록할 수 없습니다."
         isOpen={openSameNameModal}
         toggleModal={() => {
@@ -306,7 +286,7 @@ const UpdateChildPage = () => {
         okBtnName="확인"
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="저장이 완료됐어요."
         content="수정사항을 저장했어요."
         isOpen={openModal}
@@ -317,7 +297,7 @@ const UpdateChildPage = () => {
         }}
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="변경할 수 없어요."
         content="진행중인 검사가 있을 경우 생일을 변경할 수 없습니다."
         isOpen={openRejectModal}
@@ -327,7 +307,7 @@ const UpdateChildPage = () => {
       />
 
       <CustomModal
-        cancelbtn={true}
+        cancelBtn={true}
         title="수정사항 저장이 필요해요."
         content="수정 사항을 저장하지않았습니다. 저장없이 나가시겠어요?"
         isOpen={openBackModal}

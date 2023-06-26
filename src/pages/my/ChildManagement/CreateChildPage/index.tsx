@@ -4,7 +4,6 @@ import React, { useEffect, useRef, useState, forwardRef } from "react";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import styled from "styled-components";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -14,72 +13,32 @@ import { CustomRadioButton } from "../../../../components/common/CustomRadioButt
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { createChildType } from "../../../../types/domain/my";
+import { createChildType, OptionType } from "../../../../types/domain/my";
 import useCreateChild from "../../../../queries/domain/my/child/useCreateChild";
 import { childrenListState } from "store/common";
+import * as S from "../childManagement.styled";
+import AffiliatedOrganizationBox from "components/domain/my/AffiliatedOrganizationBox";
 
-const DEFAULT_CHILD_TYPE = {
+export const DEFAULT_CHILD_TYPE = {
+  id: 0,
   name: "",
-  gender: "F",
+  gender: "",
   birth_date: dayjs(new Date()).format("YYYY-MM-DD"),
   premature_flag: 0,
   due_date: "",
+  image: "",
+  parent_id: 0,
+  birth_modifiable: false,
 };
 
-interface TypeProps {
-  name: string;
-  value: any;
-}
-
-const Genders: TypeProps[] = [
+const Genders: OptionType[] = [
   { name: "여아", value: "F" },
   { name: "남아", value: "M" },
 ];
-const Prematures: TypeProps[] = [
+const Prematures: OptionType[] = [
   { name: "예정일 출산", value: 0 },
   { name: "이른둥이 출산", value: 1 },
 ];
-
-const PageLayout = styled.div`
-  margin-top: 7rem;
-`;
-
-const FormWrap = styled.form`
-  padding: 0 2.5rem;
-`;
-
-const InputTitle = styled.div`
-  margin-bottom: 1rem;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2.5rem;
-  letter-spacing: -0.04rem;
-  color: rgba(10, 10, 10, 0.8);
-`;
-
-const InputBox = styled.input`
-  width: 100%;
-  border: none;
-
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 25px;
-
-  color: rgba(0, 0, 0, 0.8);
-
-  padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
-  :focus {
-    outline: none;
-    border-bottom: 1px solid #5ac4b1;
-  }
-
-  ::placeholder {
-    color: rgba(0, 0, 0, 0.2);
-  }
-`;
 
 const DEFAULT_GENDER = { name: "여아", value: "F" };
 const DEFAULT_PREMATURE = { name: "예정일 출산", value: 0 };
@@ -170,10 +129,10 @@ const CreateChildPage = () => {
       bottomBtnElement={<Button theme={"black"} content={"아이 추가하기"} onClick={handleSubmit} />}
     >
       <PageTitle title={"아이 등록"} />
-      <PageLayout>
-        <FormWrap>
-          <InputTitle>이름</InputTitle>
-          <InputBox
+      <S.PageLayout>
+        <S.FormWrap>
+          <S.InputTitle>아이 이름</S.InputTitle>
+          <S.InputBox
             placeholder="이름을 입력해주세요."
             id="childName"
             value={childData.name}
@@ -181,7 +140,7 @@ const CreateChildPage = () => {
             onChange={handleTypeInformation}
           />
 
-          <InputTitle>성별</InputTitle>
+          <S.InputTitle>아이 성별</S.InputTitle>
           <CustomRadioButton
             id="childGender"
             type={Genders}
@@ -191,7 +150,7 @@ const CreateChildPage = () => {
             }}
           />
 
-          <InputTitle>생년월일</InputTitle>
+          <S.InputTitle>아이 생년월일</S.InputTitle>
           <DatePicker
             withPortal
             showYearDropdown
@@ -207,7 +166,7 @@ const CreateChildPage = () => {
             onChange={(date: Date | null) => setBirthDate(date)}
           />
 
-          <InputTitle>이른둥이 여부</InputTitle>
+          <S.InputTitle>이른둥이 여부</S.InputTitle>
           <CustomRadioButton
             id="childPremeture"
             type={Prematures}
@@ -219,7 +178,7 @@ const CreateChildPage = () => {
 
           {childData.premature_flag === 1 && (
             <>
-              <InputTitle>기존 출산 예정일</InputTitle>
+              <S.InputTitle>기존 출산 예정일</S.InputTitle>
               <DatePicker
                 withPortal
                 showYearDropdown
@@ -237,18 +196,20 @@ const CreateChildPage = () => {
               />
             </>
           )}
-        </FormWrap>
-      </PageLayout>
+        </S.FormWrap>
+        <S.InputTitle>제휴 기관</S.InputTitle>
+        <AffiliatedOrganizationBox handleClick={() => console.log("d")} />
+      </S.PageLayout>
 
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="아이는 최대 5명 이상 등록할 수 없습니다."
         isOpen={openLengthModal}
         toggleModal={() => setOpenLengthModal(!openLengthModal)}
         okBtnName="확인"
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="아이 이름을 입력해주세요."
         isOpen={openNameCheckModal}
         toggleModal={() => setOpenNameCheckModal(!openNameCheckModal)}
@@ -256,14 +217,14 @@ const CreateChildPage = () => {
       />
 
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="같은 이름의 아이를 등록할 수 없습니다."
         isOpen={openSameNameCheckModal}
         toggleModal={() => setOpenSameNameCheckModal(!openSameNameCheckModal)}
         okBtnName="확인"
       />
       <CustomModal
-        cancelbtn={false}
+        cancelBtn={false}
         title="아이등록이 완료됐어요."
         isOpen={openSaveModal}
         toggleModal={() => setOpenSaveModal(false)}
