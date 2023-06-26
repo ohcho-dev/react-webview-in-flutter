@@ -5,17 +5,16 @@ import { ChildType } from "types/common";
 import { request } from "../../../axiosInstance";
 import { myQueryKeys } from "../myQueryKeys";
 
-export const getChildrenList = async () => {
-  const { data }: AxiosResponse<ChildType[]> = await request({
+export const getChildrenList = () => {
+  return request({
     method: "GET",
     url: "/v1/children",
   });
-
-  return data;
 };
 
 const useChildrenList = () => {
-  return useQuery(myQueryKeys.childrenList, () => getChildrenList());
+  const { data } = useQuery([myQueryKeys.childrenList], () => getChildrenList());
+  return { data };
 };
 
 export default useChildrenList;

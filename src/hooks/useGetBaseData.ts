@@ -19,7 +19,6 @@ import { ChildType } from "types/common";
 import { AuthMeResponseType } from "types/apis/common/auth";
 import { HomeDataResponseType } from "types/apis/home";
 import { CommonCodeItemType } from "types/apis/common";
-import { request } from "queries/axiosInstance";
 
 const useGetBaseDate = () => {
   const [selectedChild, setSelectedChild] = useRecoilState(selectedChildInfoState);
@@ -30,11 +29,7 @@ const useGetBaseDate = () => {
   const getBaseData = useQueries([
     {
       queryKey: myQueryKeys.userInfo,
-      queryFn: () =>
-        request({
-          method: "POST",
-          url: "v1/auth/me",
-        }),
+      queryFn: () => getUserInfo(),
       onSuccess: ({ last_selected_child, id }: AuthMeResponseType) => {
         window.localStorage.setItem(CHILD_ID_FIELD, last_selected_child.toString());
         window.localStorage.setItem(USER_KEY, id.toString());
@@ -43,11 +38,7 @@ const useGetBaseDate = () => {
     },
     {
       queryKey: myQueryKeys.childrenList,
-      queryFn: () =>
-        request({
-          method: "GET",
-          url: "/v1/children",
-        }),
+      queryFn: () => getChildrenList(),
       onSuccess: (data: ChildType[]) => {
         if (data.length) {
           const id = window.localStorage.getItem(CHILD_ID_FIELD) || data[0].id.toString();
@@ -59,11 +50,7 @@ const useGetBaseDate = () => {
     },
     {
       queryKey: homeQueryKeys.homeData,
-      queryFn: () =>
-        request({
-          method: "GET",
-          url: "/v1/home",
-        }),
+      queryFn: () => getHomeData(),
       onSuccess: (data: HomeDataResponseType) => {
         if (data) {
           setSelectedHomeData(data);
@@ -73,11 +60,7 @@ const useGetBaseDate = () => {
     },
     {
       queryKey: commonQueryKeys.commonCodeList,
-      queryFn: () =>
-        request({
-          method: "GET",
-          url: `/v1/system/common-code/codes`,
-        }),
+      queryFn: () => getCommonCodeList(),
       onSuccess: (commonCodeList: CommonCodeItemType[]) => {
         const codeObj: { [key: string]: string } = {};
 
