@@ -5,3 +5,8 @@ export interface createChildType {
   premature_flag: number;
   due_date?: string;
 }
+
+export interface OptionType {
+  name: string;
+  value: string | number;
+}
