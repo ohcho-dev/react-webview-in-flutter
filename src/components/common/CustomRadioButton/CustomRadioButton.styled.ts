@@ -1,3 +1,4 @@
+import { ColorLightEltern3, ColorLightEltern9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const ColorSelectorContainer = styled.div`
@@ -38,8 +39,8 @@ export const RadioButton = styled.input`
   display: none;
 
   &:checked + ${Label} {
-    background: rgba(90, 196, 177, 0.12);
-    border: 1px solid #5ac4b1;
-    color: #00c7b1;
+    background: ${ColorLightEltern3};
+    border: 1px solid ${ColorLightEltern9Base};
+    color: ${ColorLightEltern9Base};
   }
 `;
