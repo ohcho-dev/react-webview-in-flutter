@@ -15,7 +15,9 @@ interface ModalProps {
   cancelBtnName?: string;
   okBtnClick?: () => void;
   cancelBtnClick?: () => void;
-  cancelbtn: boolean;
+  deleteBtnClick?: () => void;
+  cancelBtn?: boolean;
+  deleteBtn?: boolean;
 }
 
 const customStyles = {
@@ -27,6 +29,7 @@ const customStyles = {
     bottom: "auto",
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
+    borderRadius: "1.6rem",
   },
   overlay: {
     background: "rgba(0,0,0,0.7)",
@@ -44,7 +47,9 @@ const CustomModal = (props: ModalProps) => {
     cancelBtnName,
     okBtnClick,
     cancelBtnClick,
-    cancelbtn,
+    deleteBtnClick,
+    cancelBtn = false,
+    deleteBtn = false,
     topImage,
     contentMarkup,
   } = props;
@@ -58,7 +63,7 @@ const CustomModal = (props: ModalProps) => {
     }
   }, [isOpen]);
 
-  const handleCloseBtnClick = (btnName: "cancel" | "ok") => {
+  const handleCloseBtnClick = (btnName: "cancel" | "ok" | "delete") => {
     // visible의 상태를 false로 바꿔줌과 동시에 애니메이션 동작
     setVisible(false);
     // 애니메이션이 끝나면 toggleModal함수 실행으로 모달창 닫기
@@ -67,6 +72,8 @@ const CustomModal = (props: ModalProps) => {
         okBtnClick();
       } else if (btnName === "cancel" && cancelBtnClick) {
         cancelBtnClick();
+      } else if (btnName === "delete" && deleteBtnClick) {
+        deleteBtnClick();
       }
       toggleModal();
     }, 100);
@@ -94,11 +101,18 @@ const CustomModal = (props: ModalProps) => {
           <S.ModalContent>{content ? content : contentMarkup}</S.ModalContent>
         </S.ModalContentWrapper>
         <S.ModalBtnsWrapper>
-          {cancelbtn && (
+          {cancelBtn && (
             <Button
               theme={cancelBtnName === "탈퇴" ? "red" : "white"}
               onClick={() => handleCloseBtnClick("cancel")}
               content={cancelBtnName ? cancelBtnName : "취소"}
+            />
+          )}
+          {deleteBtn && (
+            <Button
+              theme={"warning"}
+              onClick={() => handleCloseBtnClick("delete")}
+              content={"삭제"}
             />
           )}
           <Button

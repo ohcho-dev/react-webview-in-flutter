@@ -1,3 +1,4 @@
+import { ColorLightBlack7, ColorLightBlack8 } from "constants/ldsConstants/global";
 import styled, { keyframes } from "styled-components";
 
 export const fadeIn = keyframes`
@@ -60,11 +61,13 @@ export const ModalTitle = styled.span`
   font-size: 2rem;
   line-height: 3rem;
   margin-bottom: 1.2rem;
+  color: ${ColorLightBlack8};
 `;
 
 export const ModalContent = styled.span`
   font-weight: 400;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
   margin-bottom: 3rem;
+  color: ${ColorLightBlack7};
 `;
