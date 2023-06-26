@@ -1,7 +1,13 @@
+import {
+  ColorLight1,
+  ColorLightBlack9Base,
+  ColorLightRed7,
+  ColorLightRed9Base,
+} from "constants/ldsConstants/global";
 import { useEffect, useState } from "react";
 
 interface buttonProps {
-  theme: "black" | "white" | "disabled" | "red";
+  theme: "black" | "white" | "disabled" | "red" | "warning";
   onClick?: () => void;
   style?: object;
   content: string;
@@ -19,7 +25,7 @@ const Button = (props: buttonProps) => {
       case "black":
         colorPalette = {
           color: "white",
-          backgroundColor: "black",
+          backgroundColor: ColorLightBlack9Base,
           border: "none",
         };
         break;
@@ -40,6 +46,14 @@ const Button = (props: buttonProps) => {
         };
         break;
 
+      case "warning":
+        colorPalette = {
+          color: ColorLightRed9Base,
+          backgroundColor: ColorLight1,
+          border: `1px solid ${ColorLightRed7}`,
+        };
+        break;
+
       case "red":
         colorPalette = {
           color: "#FD7473",
@@ -54,7 +68,7 @@ const Button = (props: buttonProps) => {
       width: "100%",
       height: "4.5rem",
       fontSize: "1.6rem",
-      borderRadius: "0.4rem",
+      borderRadius: "0.6rem",
     });
   }, [theme]);
 
