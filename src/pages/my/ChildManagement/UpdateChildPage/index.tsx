@@ -243,6 +243,7 @@ const UpdateChildPage = () => {
             </>
           )}
           <S.InputTitle>제휴 기관</S.InputTitle>
+          {/* TODO: 제휴기관 등록 여부에 따라 다르게 보여주기 */}
           <AffiliatedOrganizationBox handleClick={() => setOpenAffiliatedConfirmModal(true)} />
           {/* <NoAffiliatedOrganizationBox /> */}
         </S.FormWrap>
@@ -250,14 +251,24 @@ const UpdateChildPage = () => {
       <ConfirmAffiliateOrganizationStatusModal
         toggle={openAffiliatedConfirmModal}
         handleToggle={() => setOpenAffiliatedConfirmModal(!openAffiliatedConfirmModal)}
-        handleDeleteBtnClick={() => {
-          // await setOpenAffiliatedConfirmModal(false);
-          setOpenConfirmDeleteOrganizationModal(true);
+        handleDeleteBtnClick={async () => {
+          await setOpenAffiliatedConfirmModal(false);
+          await setOpenConfirmDeleteOrganizationModal(true);
+        }}
+        // TODO: 기관 변경하기 -> 진행중인 코칭 없을때 : 카메라 화면으로 이동
+        handleChangeBtnClick={async () => {
+          await setOpenAffiliatedConfirmModal(false);
+          await setOpenRejectChangeOrganizationModal(true);
         }}
       />
       <ConfirmDeleteOrganizationModal
         toggle={openConfirmDeleteOrganizationModal}
         handleToggle={() => setOpenConfirmDeleteOrganizationModal(prev => !prev)}
+        handleDeleteBtnClick={async () => {
+          await setOpenConfirmDeleteOrganizationModal(false);
+          // TODO: 진행 중 코칭이 있을 시 다르게 로직 실행
+          await setOpenRejectDeleteOrganizationModal(true);
+        }}
       />
       <RejectDeleteOrganizationModal
         toggle={openRejectDeleteOrganizationModal}
