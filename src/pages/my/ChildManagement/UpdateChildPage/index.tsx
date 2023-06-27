@@ -12,24 +12,23 @@ import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import "react-datepicker/dist/react-datepicker.css";
 import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
-import { ChildType } from "../../../../types/common";
+import { ChildType, OptionType } from "../../../../types/common";
 import { childrenListState } from "../../../../store/common";
 import useSelectedChild from "../../../../queries/domain/my/child/useSelectedChild";
 import useUpdateChild from "../../../../queries/domain/my/child/useUpdateChild";
-import { DEFAULT_CHILD_TYPE } from "../CreateChildPage";
 import * as S from "../childManagement.styled";
 import AffiliatedOrganizationBox from "components/domain/my/AffiliatedOrganizationBox";
-import { OptionType } from "types/domain/my";
 import ConfirmAffiliateOrganizationStatusModal from "components/domain/my/ConfirmAffiliateOrganizationStatusModal.tsx";
 import ConfirmDeleteOrganizationModal from "components/domain/my/ConfirmDeleteOrganizationModal";
 import RejectDeleteOrganizationModal from "components/domain/my/RejectDeleteOrganizationModal";
 import RejectChangeOrganizationModal from "components/domain/my/RejectChangeOrganizationModal";
+import { DEFAULT_CHILD_VALUE } from "utils/default";
 
-const Genders: OptionType[] = [
+const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },
   { name: "남아", value: "M" },
 ];
-const Prematures: OptionType[] = [
+const PrematureOption: OptionType[] = [
   { name: "예정일 출산", value: 0 },
   { name: "이른둥이 출산", value: 1 },
 ];
@@ -37,7 +36,7 @@ const Prematures: OptionType[] = [
 const UpdateChildPage = () => {
   const { childid } = useParams();
   const navigate = useNavigate();
-  const [childData, setChildData] = useState<ChildType>(DEFAULT_CHILD_TYPE);
+  const [childData, setChildData] = useState<ChildType>(DEFAULT_CHILD_VALUE);
   const [openAffiliatedConfirmModal, setOpenAffiliatedConfirmModal] = useState(false);
   const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
   const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });
@@ -65,8 +64,8 @@ const UpdateChildPage = () => {
       setBirthDate(new Date(data[0].birth_date));
       data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
 
-      const defaultGender = Genders.filter(gender => gender.value === data[0].gender)[0];
-      const defaultPremature = Prematures.filter(
+      const defaultGender = GenderOption.filter(gender => gender.value === data[0].gender)[0];
+      const defaultPremature = PrematureOption.filter(
         premature => premature.value === data[0].premature_flag,
       )[0];
       setDefaultGender({ name: defaultGender.name, value: defaultGender.value as string });
@@ -171,8 +170,8 @@ const UpdateChildPage = () => {
           <S.InputTitle>아이 성별</S.InputTitle>
           <CustomRadioButton
             id="childGender"
-            type={Genders}
-            defaultValue={defaultGender}
+            options={GenderOption}
+            selectedValue={childData.gender}
             onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
           />
 
@@ -207,8 +206,8 @@ const UpdateChildPage = () => {
           <S.InputTitle>이른둥이 여부</S.InputTitle>
           <CustomRadioButton
             id="childPremeture"
-            type={Prematures}
-            defaultValue={defaultPremature}
+            options={PrematureOption}
+            selectedValue={childData.premature_flag}
             modifiable={birthModifiable}
             onChangeFunction={handlePrematureValue}
           />
