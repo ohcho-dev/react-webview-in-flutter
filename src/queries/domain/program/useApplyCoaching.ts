@@ -13,14 +13,24 @@ export const applyCoaching = (id: string) => {
 
 const useApplyCoaching = (setOpenBottomModal: Dispatch<SetStateAction<boolean>>) => {
   const navigate = useNavigate();
+  const callToggleModal = () => {
+    return new Promise<void>(resolve => {
+      // 모달 토글 코드
+      setOpenBottomModal(prev => !prev);
+      setTimeout(() => {
+        resolve(); // 일정 시간 후에 두 번째 페이지로 이동
+      }, 100);
+    });
+  };
   return useMutation((id: string) => applyCoaching(id), {
     onSuccess: res => {
       NativeFunction("ga4logNativeEventLog", `${applyCoachingSuccessedAction}`);
-      setOpenBottomModal(prev => !prev);
-      navigate("/program/class/apply-coaching/success", {
-        state: { id: res.purchase_id },
-        replace: true,
-      });
+      callToggleModal().then(() =>
+        navigate("/program/class/apply-coaching/success", {
+          state: { id: res.purchase_id },
+          replace: true,
+        }),
+      );
     },
     onError: error => {
       throw error;
