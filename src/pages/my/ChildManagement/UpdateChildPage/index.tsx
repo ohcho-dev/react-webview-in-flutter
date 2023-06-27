@@ -38,8 +38,6 @@ const UpdateChildPage = () => {
   const navigate = useNavigate();
   const [childData, setChildData] = useState<ChildType>(DEFAULT_CHILD_VALUE);
   const [openAffiliatedConfirmModal, setOpenAffiliatedConfirmModal] = useState(false);
-  const [defaultGender, setDefaultGender] = useState({ name: "여아", value: "F" });
-  const [defaultPremature, setDefaultPremature] = useState({ name: "예정일 출산", value: 0 });
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
   const [birthModifiable, setBirthModifiable] = useState(false);
   const [dueDate, setDueDate] = useState<Date | null>(new Date());
@@ -63,16 +61,13 @@ const UpdateChildPage = () => {
       setChildData(data[0]);
       setBirthDate(new Date(data[0].birth_date));
       data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
-
-      const defaultGender = GenderOption.filter(gender => gender.value === data[0].gender)[0];
-      const defaultPremature = PrematureOption.filter(
-        premature => premature.value === data[0].premature_flag,
-      )[0];
-      setDefaultGender({ name: defaultGender.name, value: defaultGender.value as string });
-      setDefaultPremature({ name: defaultPremature.name, value: defaultPremature.value as number });
       setBirthModifiable(data[0].birth_modifiable);
     }
   }, [data]);
+
+  useEffect(() => {
+    setDueDate(dayjs(birthDate).add(1, "day").toDate());
+  }, [birthDate]);
 
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setChildData({ ...childData, gender: evt.target.value });
@@ -86,7 +81,7 @@ const UpdateChildPage = () => {
     }
     const flag = Number(evt.target.value);
     if (flag === 1) {
-      setDueDate(birthDate);
+      setDueDate(dayjs(birthDate).add(1, "day").toDate());
     }
     setChildData({ ...childData, premature_flag: flag });
     setUpdateStatus(true);
@@ -139,17 +134,9 @@ const UpdateChildPage = () => {
     return <ForwardedInput {...props} ref={ref} />;
   });
 
-  const handleBackBtn = () => {
-    if (updateStatus) {
-      setOpenBackModal(!openBackModal);
-    } else {
-      navigate(-1);
-    }
-  };
-
   return (
     <LayoutDetailPage
-      handleBackBtnClick={handleBackBtn}
+      handleBackBtnClick={() => (updateStatus ? setOpenBackModal(!openBackModal) : navigate(-1))}
       bottomBtn
       bottomBtnElement={
         <Button theme={"black"} content={"아이 정보 수정하기"} onClick={handleSubmit} />
@@ -197,9 +184,6 @@ const UpdateChildPage = () => {
             onChange={(date: Date | null) => {
               setBirthDate(date);
               setUpdateStatus(true);
-              if (childData.premature_flag) {
-                setDueDate(date);
-              }
             }}
           />
 
@@ -225,7 +209,7 @@ const UpdateChildPage = () => {
                 dateFormat="yyyy.MM.dd"
                 showPopperArrow={false}
                 selected={dueDate}
-                minDate={birthDate}
+                minDate={dayjs(birthDate).add(1, "day").toDate()}
                 maxDate={dayjs(birthDate).add(90, "day").toDate()}
                 customInput={
                   <CustomInput
