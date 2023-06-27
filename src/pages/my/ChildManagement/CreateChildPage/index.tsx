@@ -58,14 +58,8 @@ const CreateChildPage = () => {
 
   //   생일 날짜 string으로 변환
   useEffect(() => {
-    setChildData({ ...childData, birth_date: dayjs(birthDate).format("YYYY-MM-DD") });
     setDueDate(dayjs(birthDate).add(1, "day").toDate());
   }, [birthDate]);
-
-  // 이른둥이 출산일 날짜 string으로 변환
-  useEffect(() => {
-    setChildData({ ...childData, due_date: dayjs(dueDate).format("YYYY-MM-DD") });
-  }, [dueDate]);
 
   useEffect(() => {
     if (childData.premature_flag === 0) {
@@ -100,7 +94,11 @@ const CreateChildPage = () => {
 
   const handleSubmit = () => {
     if (isValid) {
-      createChild(childData);
+      createChild({
+        ...childData,
+        birth_date: dayjs(birthDate).format("YYYY-MM-DD"),
+        due_date: dayjs(dueDate).format("YYYY-MM-DD"),
+      });
     } else {
       setValidationModalTitle(validationModalTitleArr[titleNum]);
       setOpenValidationModal(true);
