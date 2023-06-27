@@ -32,3 +32,8 @@ export interface NotificationType {
   updated_at: string;
   detail: { [key: string]: any };
 }
+
+export interface OptionType {
+  name: string;
+  value: string | number;
+}
