@@ -10,7 +10,7 @@ import "./styles/_global.scss";
 import "./styles/_slideTransition.scss";
 import "./styles/_customReactDatepicker.scss";
 
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { RouterConfig } from "./RouteConfig";
 import LoadingSpinner from "./components/common/LoadingSpinner";
 import { CHILD_ID_FIELD, USER_KEY } from "./constants/localStorage";

@@ -61,11 +61,11 @@ const useGetBaseDate = () => {
     {
       queryKey: commonQueryKeys.commonCodeList,
       queryFn: () => getCommonCodeList(),
-      onSuccess: (commonCodeList: CommonCodeItemType[]) => {
+      onSuccess: (commonCodeList: CommonCodeItemType[][]) => {
         const codeObj: { [key: string]: string } = {};
 
         if (commonCodeList.length) {
-          commonCodeList.map(
+          commonCodeList[0].map(
             (code: { name: string; label: string }) => (codeObj[code.name] = code.label),
           );
           setCommonCodeList(codeObj);
