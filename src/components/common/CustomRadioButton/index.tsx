@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as S from "./CustomRadioButton.styled";
 
 type TypeProps = {
@@ -7,53 +7,37 @@ type TypeProps = {
 };
 
 interface CustonRadioButtonProps {
-  defaultValue: TypeProps;
+  selectedValue: string | number;
   onChangeFunction: (e: any) => void;
-  type: TypeProps[];
+  options: TypeProps[];
   id: string;
   modifiable?: boolean;
 }
 
 export function CustomRadioButton({
   id,
-  type,
-  defaultValue,
+  options,
+  selectedValue,
   onChangeFunction,
   modifiable,
 }: CustonRadioButtonProps) {
-  const [selectedColor, setSelectedColor] = useState<TypeProps>(defaultValue);
-
-  useEffect(() => {
-    if (defaultValue) {
-      const selected = type.filter(item => item.value === defaultValue.value);
-      setSelectedColor(selected[0]);
-    }
-  }, [defaultValue]);
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
-    const selected = type.filter(item => String(item.value) === value);
-
     if (id === "childPremeture" && !modifiable) {
       return;
-    }
-
-    if (selected) {
-      setSelectedColor(selected[0]);
     }
   };
 
   return (
     <>
       <S.ColorSelectorContainer>
-        {type.map(item => (
+        {options.map(item => (
           <S.RadioWrap key={item.name}>
             <S.RadioButton
               id={item.name}
               type="radio"
               name={id}
               value={item.value}
-              checked={item.value === selectedColor.value}
+              checked={item.value === selectedValue}
               onChange={e => {
                 handleChange(e);
                 onChangeFunction(e);
