@@ -12,6 +12,8 @@ import { selectedChildInfoState } from "../../../store/common";
 import { currentTaskIdState } from "../../../store/domain/coaching";
 import * as S from "./coachingDetail.styled";
 import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedCoachingInfo";
+import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
+import CustomToggleSwitch from "components/common/CustomToggleSwitch";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -64,14 +66,12 @@ const CoachingDetailPage = () => {
         <S.PageTitleWrap>
           <S.Title>{coachingInfo.name}</S.Title>
           <S.ProgramStatus>
-            <S.ProceedStatus color={coachingInfo.date_remain >= 0 ? "#00c7b1" : "#8D8D8D"}>
-              {coachingInfo.date_remain >= 0 ? "진행중" : "종료"}
-            </S.ProceedStatus>
-            <span>~{getDate(coachingInfo.end_date)}</span>
-            <span>
+            <ProgressStatusBadge isFinished={coachingInfo.date_remain === 0} />
+            <S.CoachingProgramDuration>~{getDate(coachingInfo.end_date)}</S.CoachingProgramDuration>
+            <S.CoachingProgramDuration>
               {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
               {coachingInfo.date_remain === 0 && "오늘까지!"}
-            </span>
+            </S.CoachingProgramDuration>
           </S.ProgramStatus>
         </S.PageTitleWrap>
         <S.ShadowBox scrolling={scrolling} />
@@ -84,7 +84,10 @@ const CoachingDetailPage = () => {
             }
           }}
         >
-          <S.DetailTitle>⛳️ 결과지</S.DetailTitle>
+          <S.CoachingDetailTitleBox>
+            <UseImgix srcUrl={"/images/result_paper_new.svg"} />
+            <S.DetailTitle>결과지</S.DetailTitle>
+          </S.CoachingDetailTitleBox>
           {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
             <ContentItem
               style={{ marginBottom: "0" }}
@@ -103,7 +106,28 @@ const CoachingDetailPage = () => {
               }}
             />
           ))}
-          <S.DetailTitle>✅ 과제</S.DetailTitle>
+          <S.SharedResultPaperBox isShared={false}>
+            <S.SharedResultPaperBoxTextSection>
+              <S.SharedResultPaperBoxTitle isShared={false}>
+                결과지 공유
+              </S.SharedResultPaperBoxTitle>
+              <S.SharedResultPaperBoxText isShared={false}>
+                담임 선생님이 보육활동 참고를 위해 결과지를 확인하는것에 동의해요.
+              </S.SharedResultPaperBoxText>
+            </S.SharedResultPaperBoxTextSection>
+            <div>
+              <CustomToggleSwitch
+                data={{ type: "", value: 0 }}
+                handleValue={function (): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            </div>
+          </S.SharedResultPaperBox>
+          <S.CoachingDetailTitleBox>
+            <UseImgix srcUrl={"/images/books.svg"} />
+            <S.DetailTitle>과제</S.DetailTitle>
+          </S.CoachingDetailTitleBox>
           {coachingInfo.task.map((task: TaskStatusType, index: number) => (
             <ContentItem
               key={index + task.name}

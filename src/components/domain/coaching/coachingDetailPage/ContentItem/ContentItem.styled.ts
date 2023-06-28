@@ -1,11 +1,12 @@
+import { ColorLightSlate1, ColorLightSlate7 } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const ItemWrap = styled.div`
   width: calc(100% - 4rem);
   padding: 1.2rem;
   margin: 0 auto;
-  background: #f8f8f8;
-  border: 1px solid rgba(0, 0, 0, 0.15);
+  background: ${ColorLightSlate1};
+  border: 1px solid ${ColorLightSlate7};
   border-radius: 0.8rem;
   display: flex;
   position: relative;
