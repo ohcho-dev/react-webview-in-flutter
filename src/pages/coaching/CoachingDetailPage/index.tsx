@@ -13,7 +13,7 @@ import { currentTaskIdState } from "../../../store/domain/coaching";
 import * as S from "./coachingDetail.styled";
 import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedCoachingInfo";
 import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
-import CustomToggleSwitch from "components/common/CustomToggleSwitch";
+import CustomToggle from "components/common/CustomToggle";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -27,6 +27,7 @@ const CoachingDetailPage = () => {
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -116,12 +117,7 @@ const CoachingDetailPage = () => {
               </S.SharedResultPaperBoxText>
             </S.SharedResultPaperBoxTextSection>
             <div>
-              <CustomToggleSwitch
-                data={{ type: "", value: 0 }}
-                handleValue={function (): void {
-                  throw new Error("Function not implemented.");
-                }}
-              />
+              <CustomToggle value={toggle} handleValue={() => setToggle(prev => !prev)} size="sm" />
             </div>
           </S.SharedResultPaperBox>
           <S.CoachingDetailTitleBox>
