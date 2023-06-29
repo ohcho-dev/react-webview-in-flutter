@@ -14,11 +14,13 @@ import * as S from "./coachingDetail.styled";
 import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedCoachingInfo";
 import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
 import CustomToggle from "components/common/CustomToggle";
+import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { data: coachingInfo } = useAppliedCoachingInfo(id);
+  const { mutate: setOpenResultPaper } = useOpenResultPaper();
   const childInfo = useRecoilValue(selectedChildInfoState);
   const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
   const [openModal, setOpenModal] = useState(false);
@@ -27,7 +29,6 @@ const CoachingDetailPage = () => {
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
-  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
@@ -89,37 +90,45 @@ const CoachingDetailPage = () => {
             <UseImgix srcUrl={"/images/result_paper_new.svg"} />
             <S.DetailTitle>결과지</S.DetailTitle>
           </S.CoachingDetailTitleBox>
-          {coachingInfo.result_paper.map((paper: CoachingStatusType, index: number) => (
-            <ContentItem
-              style={{ marginBottom: "0" }}
-              key={index + paper.name}
-              coachingMethod="result"
-              chipStatus={[paper.status]}
-              name={paper.name}
-              useArrowBtn={true}
-              handleClick={() => {
-                // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
-                if (paper.status === "TTPST_COMPLETE") {
-                  navigate(`/coaching/result/${paper.paper_url}`);
-                } else {
-                  setOpenModal(true);
-                }
-              }}
-            />
-          ))}
-          <S.SharedResultPaperBox isShared={false}>
-            <S.SharedResultPaperBoxTextSection>
-              <S.SharedResultPaperBoxTitle isShared={false}>
-                결과지 공유
-              </S.SharedResultPaperBoxTitle>
-              <S.SharedResultPaperBoxText isShared={false}>
-                담임 선생님이 보육활동 참고를 위해 결과지를 확인하는것에 동의해요.
-              </S.SharedResultPaperBoxText>
-            </S.SharedResultPaperBoxTextSection>
-            <div>
-              <CustomToggle value={toggle} handleValue={() => setToggle(prev => !prev)} size="sm" />
-            </div>
-          </S.SharedResultPaperBox>
+          {coachingInfo.result_paper.map(
+            ({ name, status, paper_url, is_open, id }: CoachingStatusType, index: number) => (
+              <>
+                <ContentItem
+                  style={{ marginBottom: "0" }}
+                  key={index + name}
+                  coachingMethod="result"
+                  chipStatus={[status]}
+                  name={name}
+                  useArrowBtn={true}
+                  handleClick={() => {
+                    // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
+                    if (status === "TTPST_COMPLETE") {
+                      navigate(`/coaching/result/${paper_url}`);
+                    } else {
+                      setOpenModal(true);
+                    }
+                  }}
+                />
+                <S.SharedResultPaperBox isShared={is_open === 1}>
+                  <S.SharedResultPaperBoxTextSection>
+                    <S.SharedResultPaperBoxTitle isShared={is_open === 1}>
+                      결과지 공유
+                    </S.SharedResultPaperBoxTitle>
+                    <S.SharedResultPaperBoxText isShared={is_open === 1}>
+                      담임 선생님이 보육활동 참고를 위해 결과지를 확인하는것에 동의해요.
+                    </S.SharedResultPaperBoxText>
+                  </S.SharedResultPaperBoxTextSection>
+                  <div>
+                    <CustomToggle
+                      value={is_open === 1}
+                      handleValue={() => setOpenResultPaper(id)}
+                      size="sm"
+                    />
+                  </div>
+                </S.SharedResultPaperBox>
+              </>
+            ),
+          )}
           <S.CoachingDetailTitleBox>
             <UseImgix srcUrl={"/images/books.svg"} />
             <S.DetailTitle>과제</S.DetailTitle>

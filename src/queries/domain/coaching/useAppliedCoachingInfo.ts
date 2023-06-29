@@ -1,5 +1,4 @@
 import { Method } from "axios";
-import { Dispatch, SetStateAction } from "react";
 import { useQuery } from "react-query";
 import { request } from "../../axiosInstance";
 import { coachingQueryKeys } from "./coachingQueryKeys";
@@ -13,7 +12,7 @@ const getAppliedCoachingInfo = (id: string | undefined) => {
 };
 
 const useAppliedCoachingInfo = (id: string | undefined) => {
-  return useQuery(coachingQueryKeys.appliedCoachingInfo, () => getAppliedCoachingInfo(id));
+  return useQuery([coachingQueryKeys.appliedCoachingInfo, id], () => getAppliedCoachingInfo(id));
 };
 
 export default useAppliedCoachingInfo;
