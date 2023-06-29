@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
-import { useMutation } from "react-query";
 import styled from "styled-components";
-import CustomToggleSwitch from "../../../../components/common/CustomToggleSwitch";
+import { AlarmConfigItemType } from "types/apis/my";
+import CustomToggle from "../../../../components/common/CustomToggle";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
 import useAlarmConfig from "../../../../queries/domain/my/useAlarmConfig";
 import useUpdateAlarmConfig from "../../../../queries/domain/my/useUpdateAlarmConfig";
-import { AlarmType } from "../../../../types/common";
 
 const PageLayout = styled.div`
   margin-top: 7rem;
@@ -31,40 +30,29 @@ const TypeLabel = styled.div`
 `;
 
 const AlarmManagementPage = () => {
-  const [coaching, setCoaching] = useState<AlarmType>();
-  const [event, setEvent] = useState<AlarmType>();
+  const [coaching, setCoaching] = useState<AlarmConfigItemType>();
+  const [event, setEvent] = useState<AlarmConfigItemType>();
 
-  const { data } = useAlarmConfig();
-
-  useEffect(() => {
-    setCoaching(data[0][0]);
-    setEvent(data[0][1]);
-  }, [data]);
-
+  const { data: alarmConfigList } = useAlarmConfig();
   const { mutate: callUpdateAlarmConfig } = useUpdateAlarmConfig();
 
   useEffect(() => {
-    if (coaching?.newData) {
-      callUpdateAlarmConfig({ type: coaching.type, value: coaching.value });
+    if (alarmConfigList[0].length) {
+      setCoaching(
+        alarmConfigList[0].find((alarm: AlarmConfigItemType) => alarm.type === "NTTY_COACHING"),
+      );
+      setEvent(
+        alarmConfigList[0].find((alarm: AlarmConfigItemType) => alarm.type === "NTTY_MARKETING"),
+      );
     }
-  }, [coaching]);
+  }, [alarmConfigList]);
 
-  useEffect(() => {
-    if (event?.newData) {
-      callUpdateAlarmConfig({ type: event.type, value: event.value });
-    }
-  }, [event]);
-
-  const toggleCoaching = () => {
-    if (coaching) {
-      coaching.value === 0 && setCoaching({ ...coaching, value: 1, newData: true });
-      coaching.value === 1 && setCoaching({ ...coaching, value: 0, newData: true });
-    }
-  };
-
-  const toggleEvent = () => {
-    event?.value === 0 && setEvent({ ...event, value: 1, newData: true });
-    event?.value === 1 && setEvent({ ...event, value: 0, newData: true });
+  const handleToggleChange = (type: "NTTY_COACHING" | "NTTY_MARKETING") => {
+    callUpdateAlarmConfig({
+      type: type,
+      value:
+        type === "NTTY_COACHING" ? (coaching?.value === 1 ? 0 : 1) : event?.value === 1 ? 0 : 1,
+    });
   };
 
   return (
@@ -74,14 +62,22 @@ const AlarmManagementPage = () => {
         {coaching && (
           <AlarmContentWrap>
             <TypeLabel>{coaching.type_label}</TypeLabel>
-            <CustomToggleSwitch data={coaching} handleValue={toggleCoaching}></CustomToggleSwitch>
+            <CustomToggle
+              value={coaching.value === 1}
+              handleValue={() => handleToggleChange("NTTY_COACHING")}
+              size="md"
+            />
           </AlarmContentWrap>
         )}
 
         {event && (
           <AlarmContentWrap>
             <TypeLabel>{event.type_label}</TypeLabel>
-            <CustomToggleSwitch data={event} handleValue={toggleEvent}></CustomToggleSwitch>
+            <CustomToggle
+              value={event.value === 1}
+              handleValue={() => handleToggleChange("NTTY_MARKETING")}
+              size="md"
+            />
           </AlarmContentWrap>
         )}
       </PageLayout>

@@ -1,5 +1,6 @@
-import { useMutation } from "react-query";
+import { useMutation, useQueryClient } from "react-query";
 import { request } from "../../axiosInstance";
+import { myQueryKeys } from "./myQueryKeys";
 
 interface PayloadType {
   type: string | undefined;
@@ -11,7 +12,11 @@ const updateAlarmConfig = (body: PayloadType) => {
 };
 
 const useUpdateAlarmConfig = () => {
+  const queryClient = useQueryClient();
   return useMutation((payload: PayloadType) => updateAlarmConfig(payload), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(myQueryKeys.alarmConfig);
+    },
     onError: error => {
       throw error;
     },
