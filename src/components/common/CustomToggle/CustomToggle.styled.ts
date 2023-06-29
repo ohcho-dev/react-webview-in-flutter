@@ -1,4 +1,4 @@
-import { ColorLightEltern9Base } from "constants/ldsConstants/global";
+import { ColorLightEltern9Base, ColorLightSlate7 } from "constants/ldsConstants/global";
 import styled, { css } from "styled-components";
 
 export const StyledLabel = styled.label<{
@@ -18,7 +18,7 @@ export const StyledLabel = styled.label<{
         : ColorLightEltern9Base
       : disabledColor
       ? disabledColor
-      : "#DCDCDC"};
+      : ColorLightSlate7};
   display: block;
   border-radius: 100px;
   position: relative;
