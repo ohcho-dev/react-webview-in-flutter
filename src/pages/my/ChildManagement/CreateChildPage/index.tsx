@@ -14,11 +14,6 @@ import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import useCreateChild from "../../../../queries/domain/my/child/useCreateChild";
 import * as S from "../childManagement.styled";
-import AffiliatedOrganizationBox from "components/domain/my/AffiliatedOrganizationBox";
-import ConfirmAffiliateOrganizationStatusModal from "components/domain/my/ConfirmAffiliateOrganizationStatusModal.tsx";
-import ConfirmDeleteOrganizationModal from "components/domain/my/ConfirmDeleteOrganizationModal";
-import RejectDeleteOrganizationModal from "components/domain/my/RejectDeleteOrganizationModal";
-import RejectChangeOrganizationModal from "components/domain/my/RejectChangeOrganizationModal";
 import useValidChildInfo from "hooks/my/useValidChildInfo";
 import { OptionType } from "types/common";
 import { CreateChildObjType } from "types/domain/my";
@@ -48,11 +43,6 @@ const CreateChildPage = () => {
   const [openValidationModal, setOpenValidationModal] = useState<boolean>(false);
   const [openSaveModal, setOpenSaveModal] = useState(false);
   const inputRef = useRef(null);
-  const [openRejectDeleteOrganizationModal, setOpenRejectDeleteOrganizationModal] = useState(false);
-  const [openRejectChangeOrganizationModal, setOpenRejectChangeOrganizationModal] = useState(false);
-  const [openConfirmDeleteOrganizationModal, setOpenConfirmDeleteOrganizationModal] =
-    useState(false);
-  const [openAffiliatedConfirmModal, setOpenAffiliatedConfirmModal] = useState(false);
   const { mutate: createChild } = useCreateChild(setOpenSaveModal);
   const [isValid, titleNum] = useValidChildInfo(childData);
 
@@ -182,42 +172,8 @@ const CreateChildPage = () => {
               />
             </>
           )}
-          <S.InputTitle>제휴 기관</S.InputTitle>
-          {/* TODO: 제휴기관 등록 여부에 따라 다르게 보여주기 */}
-          <AffiliatedOrganizationBox handleClick={() => setOpenAffiliatedConfirmModal(true)} />
-          {/* <NoAffiliatedOrganizationBox /> */}
         </S.FormWrap>
       </S.PageLayout>
-      <ConfirmAffiliateOrganizationStatusModal
-        toggle={openAffiliatedConfirmModal}
-        handleToggle={() => setOpenAffiliatedConfirmModal(!openAffiliatedConfirmModal)}
-        handleDeleteBtnClick={async () => {
-          await setOpenAffiliatedConfirmModal(false);
-          await setOpenConfirmDeleteOrganizationModal(true);
-        }}
-        // TODO: 기관 변경하기 -> 진행중인 코칭 없을때 : 카메라 화면으로 이동
-        handleChangeBtnClick={async () => {
-          await setOpenAffiliatedConfirmModal(false);
-          await setOpenRejectChangeOrganizationModal(true);
-        }}
-      />
-      <ConfirmDeleteOrganizationModal
-        toggle={openConfirmDeleteOrganizationModal}
-        handleToggle={() => setOpenConfirmDeleteOrganizationModal(prev => !prev)}
-        handleDeleteBtnClick={async () => {
-          await setOpenConfirmDeleteOrganizationModal(false);
-          // TODO: 진행 중 코칭이 있을 시 다르게 로직 실행
-          await setOpenRejectDeleteOrganizationModal(true);
-        }}
-      />
-      <RejectDeleteOrganizationModal
-        toggle={openRejectDeleteOrganizationModal}
-        handleToggle={() => setOpenRejectDeleteOrganizationModal(prev => !prev)}
-      />
-      <RejectChangeOrganizationModal
-        toggle={openRejectChangeOrganizationModal}
-        handleToggle={() => setOpenRejectChangeOrganizationModal(prev => !prev)}
-      />
       <CustomModal
         cancelBtn={false}
         title={validationModalTitle}
