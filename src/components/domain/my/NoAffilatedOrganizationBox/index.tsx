@@ -1,3 +1,5 @@
+import Icon from "components/common/Icon";
+import { ColorLightBlack8 } from "constants/ldsConstants/global";
 import * as S from "./NoAffiliatedOrganizationBox.styled";
 
 const NoAffiliatedOrganizationBox = () => {
@@ -7,6 +9,7 @@ const NoAffiliatedOrganizationBox = () => {
   return (
     <S.BoxWrapper onClick={handleSectionClick}>
       <S.InformText>아직 등록한 기관이 없습니다.</S.InformText>
+      <Icon icon={"home-plus"} size={24} fill={ColorLightBlack8} />
     </S.BoxWrapper>
   );
 };
