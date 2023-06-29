@@ -1,5 +1,5 @@
+import { ColorLightEltern9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
-import { COLOR_PALETTE } from "../../../../constants/color";
 
 export const SurveyQuestionWrapper = styled.div`
   width: 100%;
@@ -55,7 +55,7 @@ export const QuestionNumber = styled.div`
   padding-left: 1rem;
   margin-bottom: 0.5rem;
 
-  color: ${COLOR_PALETTE.point};
+  color: ${ColorLightEltern9Base};
 
   span:nth-child(1) {
     font-weight: 600;
@@ -114,7 +114,7 @@ export const Answer = styled.div`
   font-size: 1.6rem;
 
   color: ${(props: { selected: boolean }) =>
-    props.selected ? COLOR_PALETTE.point : "rgba(10, 10, 10, 0.8)"};
+    props.selected ? ColorLightEltern9Base : "rgba(10, 10, 10, 0.8)"};
   background-color: ${(props: { selected: boolean }) => (props.selected ? "#EEF9F7" : "white")};
 `;
 
