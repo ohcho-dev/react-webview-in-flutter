@@ -16,7 +16,7 @@ export const PageTitleWrap = styled.div`
   width: 100%;
   background: #fff;
   border-bottom: solid 0.2rem #f5f5f5;
-  padding: 2rem 2.5rem;
+  padding: 1.5rem 2.5rem;
   z-index: 100;
 `;
 
@@ -45,25 +45,9 @@ export const Title = styled.div`
 
 export const ProgramStatus = styled.div`
   display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
   margin-top: 0.8rem;
-
-  span:nth-child(2) {
-    margin-left: 0.5rem;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.04rem;
-    color: rgba(0, 0, 0, 0.3);
-  }
-
-  span:nth-child(3) {
-    margin-left: 0.5rem;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
-    letter-spacing: -0.04rem;
-    color: rgba(0, 0, 0, 0.3);
-  }
 `;
 
 export const ProceedStatus = styled.span<{ color: string }>`
