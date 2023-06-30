@@ -6,7 +6,6 @@ export const ColorSelectorContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin-bottom: 1.5rem;
 `;
 
 export const RadioWrap = styled.div`
@@ -28,7 +27,7 @@ export const Label = styled.label`
   background: #ffffff;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0.4rem;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 1.6rem;
   line-height: 2.5rem;
   letter-spacing: -0.4px;

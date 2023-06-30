@@ -148,59 +148,64 @@ const UpdateChildPage = () => {
       <PageTitle title={"아이 정보 수정"} />
       <S.PageLayout>
         <S.FormWrap>
-          <S.InputTitle>아이 이름</S.InputTitle>
-          <S.InputBox
-            placeholder="이름을 입력해주세요."
-            id="childName"
-            value={childData.name}
-            maxLength={30}
-            onChange={handleTypeInformation}
-          />
-
-          <S.InputTitle>아이 성별</S.InputTitle>
-          <CustomRadioButton
-            id="childGender"
-            options={GenderOption}
-            selectedValue={childData.gender}
-            onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
-          />
-
-          <S.InputTitle>아이 생년월일</S.InputTitle>
-          <DatePicker
-            withPortal
-            showYearDropdown
-            yearDropdownItemNumber={6}
-            scrollableYearDropdown
-            dateFormatCalendar="MMMM"
-            locale={ko}
-            dateFormat="yyyy.MM.dd"
-            showPopperArrow={false}
-            maxDate={new Date()}
-            selected={birthDate}
-            customInput={
-              <CustomInput
-                inputRef={inputRef}
-                modifiable={birthModifiable}
-                setOpenRejectModal={() => setOpenRejectModal(!openRejectModal)}
-              />
-            }
-            onChange={(date: Date | null) => {
-              setBirthDate(date);
-              setUpdateStatus(true);
-            }}
-          />
-
-          <S.InputTitle>이른둥이 여부</S.InputTitle>
-          <CustomRadioButton
-            id="childPremeture"
-            options={PrematureOption}
-            selectedValue={childData.premature_flag}
-            modifiable={birthModifiable}
-            onChangeFunction={handlePrematureValue}
-          />
+          <div>
+            <S.InputTitle>아이 이름</S.InputTitle>
+            <S.InputBox
+              placeholder="이름을 입력해주세요."
+              id="childName"
+              value={childData.name}
+              maxLength={30}
+              onChange={handleTypeInformation}
+            />
+          </div>
+          <div>
+            <S.InputTitle>아이 성별</S.InputTitle>
+            <CustomRadioButton
+              id="childGender"
+              options={GenderOption}
+              selectedValue={childData.gender}
+              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => handleGenderValue(e)}
+            />
+          </div>
+          <div>
+            <S.InputTitle>아이 생년월일</S.InputTitle>
+            <DatePicker
+              withPortal
+              showYearDropdown
+              yearDropdownItemNumber={6}
+              scrollableYearDropdown
+              dateFormatCalendar="MMMM"
+              locale={ko}
+              dateFormat="yyyy.MM.dd"
+              showPopperArrow={false}
+              maxDate={new Date()}
+              selected={birthDate}
+              customInput={
+                <CustomInput
+                  inputRef={inputRef}
+                  modifiable={birthModifiable}
+                  setOpenRejectModal={() => setOpenRejectModal(!openRejectModal)}
+                />
+              }
+              onChange={(date: Date | null) => {
+                setBirthDate(date);
+                setUpdateStatus(true);
+              }}
+            />
+          </div>
+          <div>
+            <S.InputTitle>이른둥이 여부</S.InputTitle>
+            <CustomRadioButton
+              id="childPremeture"
+              options={PrematureOption}
+              selectedValue={childData.premature_flag}
+              modifiable={birthModifiable}
+              onChangeFunction={handlePrematureValue}
+            />
+          </div>
 
           {childData.premature_flag === 1 && (
-            <>
+            <div>
               <S.InputTitle>기존 출산 예정일</S.InputTitle>
               <DatePicker
                 withPortal
@@ -226,18 +231,20 @@ const UpdateChildPage = () => {
                   setUpdateStatus(true);
                 }}
               />
-            </>
+            </div>
           )}
-          <S.InputTitle>제휴 기관</S.InputTitle>
-          {data.has_organization ? (
-            <AffiliatedOrganizationBox
-              group_name={data.group_name}
-              organization_name={data.organization_name}
-              handleClick={() => setOpenAffiliatedConfirmModal(true)}
-            />
-          ) : (
-            <NoAffiliatedOrganizationBox />
-          )}
+          <div>
+            <S.InputTitle>제휴 기관</S.InputTitle>
+            {data.has_organization ? (
+              <AffiliatedOrganizationBox
+                group_name={data.group_name}
+                organization_name={data.organization_name}
+                handleClick={() => setOpenAffiliatedConfirmModal(true)}
+              />
+            ) : (
+              <NoAffiliatedOrganizationBox />
+            )}
+          </div>
         </S.FormWrap>
       </S.PageLayout>
       <ConfirmAffiliateOrganizationStatusModal

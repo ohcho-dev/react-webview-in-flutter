@@ -1,4 +1,4 @@
-import { ColorLightEltern9Base } from "constants/ldsConstants/global";
+import { ColorLightEltern9Base, ColorLightSlate11 } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const InputBox = styled.input`
@@ -12,7 +12,6 @@ export const InputBox = styled.input`
   color: rgba(0, 0, 0, 0.8);
 
   padding-bottom: 1rem;
-  margin-bottom: 1.5rem;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
   :focus {
@@ -27,11 +26,11 @@ export const InputBox = styled.input`
 
 export const InputTitle = styled.div`
   margin-bottom: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 1.4rem;
-  line-height: 2.5rem;
+  line-height: 2rem;
   letter-spacing: -0.04rem;
-  color: rgba(10, 10, 10, 0.8);
+  color: ${ColorLightSlate11};
 `;
 
 export const PageLayout = styled.div`
@@ -40,4 +39,7 @@ export const PageLayout = styled.div`
 
 export const FormWrap = styled.form`
   padding: 0 2.5rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1.5rem;
 `;

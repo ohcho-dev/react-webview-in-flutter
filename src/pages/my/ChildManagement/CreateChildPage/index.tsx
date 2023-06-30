@@ -108,52 +108,58 @@ const CreateChildPage = () => {
       <PageTitle title={"아이 등록"} />
       <S.PageLayout>
         <S.FormWrap>
-          <S.InputTitle>아이 이름</S.InputTitle>
-          <S.InputBox
-            placeholder="이름을 입력해주세요."
-            id="childName"
-            value={childData.name}
-            maxLength={30}
-            onChange={handleTypeInformation}
-          />
+          <div>
+            <S.InputTitle>아이 이름</S.InputTitle>
+            <S.InputBox
+              placeholder="이름을 입력해주세요."
+              id="childName"
+              value={childData.name}
+              maxLength={30}
+              onChange={handleTypeInformation}
+            />
+          </div>
+          <div>
+            <S.InputTitle>아이 성별</S.InputTitle>
+            <CustomRadioButton
+              id="childGender"
+              options={GenderOption}
+              selectedValue={childData.gender}
+              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setChildData({ ...childData, gender: e.target.value as "F" | "M" });
+              }}
+            />
+          </div>
+          <div>
+            <S.InputTitle>아이 생년월일</S.InputTitle>
+            <DatePicker
+              withPortal
+              showYearDropdown
+              yearDropdownItemNumber={6}
+              scrollableYearDropdown
+              dateFormatCalendar="MMMM"
+              locale={ko}
+              dateFormat="yyyy.MM.dd"
+              showPopperArrow={false}
+              maxDate={new Date()}
+              selected={birthDate}
+              customInput={<CustomInput inputRef={inputRef} modifiable={true} />}
+              onChange={(date: Date | null) => setBirthDate(date)}
+            />
+          </div>
+          <div>
+            <S.InputTitle>이른둥이 여부</S.InputTitle>
+            <CustomRadioButton
+              id="childPremeture"
+              options={PrematureOption}
+              selectedValue={childData.premature_flag}
+              onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setChildData({ ...childData, premature_flag: Number(e.target.value) })
+              }
+            />
+          </div>
 
-          <S.InputTitle>아이 성별</S.InputTitle>
-          <CustomRadioButton
-            id="childGender"
-            options={GenderOption}
-            selectedValue={childData.gender}
-            onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setChildData({ ...childData, gender: e.target.value as "F" | "M" });
-            }}
-          />
-
-          <S.InputTitle>아이 생년월일</S.InputTitle>
-          <DatePicker
-            withPortal
-            showYearDropdown
-            yearDropdownItemNumber={6}
-            scrollableYearDropdown
-            dateFormatCalendar="MMMM"
-            locale={ko}
-            dateFormat="yyyy.MM.dd"
-            showPopperArrow={false}
-            maxDate={new Date()}
-            selected={birthDate}
-            customInput={<CustomInput inputRef={inputRef} modifiable={true} />}
-            onChange={(date: Date | null) => setBirthDate(date)}
-          />
-
-          <S.InputTitle>이른둥이 여부</S.InputTitle>
-          <CustomRadioButton
-            id="childPremeture"
-            options={PrematureOption}
-            selectedValue={childData.premature_flag}
-            onChangeFunction={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setChildData({ ...childData, premature_flag: Number(e.target.value) })
-            }
-          />
           {childData.premature_flag === 1 && (
-            <>
+            <div>
               <S.InputTitle>기존 출산 예정일</S.InputTitle>
               <DatePicker
                 withPortal
@@ -170,7 +176,7 @@ const CreateChildPage = () => {
                 customInput={<CustomInput inputRef={inputRef} modifiable={true} />}
                 onChange={(date: Date | null) => setDueDate(date)}
               />
-            </>
+            </div>
           )}
         </S.FormWrap>
       </S.PageLayout>
