@@ -10,4 +10,9 @@ export interface IconProps {
   fill?: string;
 }
 
-export type iconName = "home-plus" | "calendar_ver2";
+export type iconName =
+  | "home-plus"
+  | "calendar_ver2"
+  | "chevron-right"
+  | "chevron-left"
+  | "big-chevron";

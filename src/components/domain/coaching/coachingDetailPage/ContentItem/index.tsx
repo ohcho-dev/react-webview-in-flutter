@@ -1,3 +1,5 @@
+import Icon from "components/common/Icon";
+import { ColorLightSlate10 } from "constants/ldsConstants/global";
 import Chip from "../../../../common/Chip";
 import UseImgix from "../../../../common/Imgix";
 import * as S from "./ContentItem.styled";
@@ -34,7 +36,7 @@ const ContentItem: React.FC<ContentItemProps> = ({
       </S.ItemDesc>
       {useArrowBtn && (
         <S.ArrowBtn>
-          <UseImgix srcUrl="/images/icon-arrow-right.svg" alt="상세보기" />
+          <Icon icon={"chevron-right"} size={24} fill={ColorLightSlate10} />
         </S.ArrowBtn>
       )}
     </S.ItemWrap>

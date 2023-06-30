@@ -1,4 +1,6 @@
+import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
+import { ColorLightSlate8 } from "constants/ldsConstants/global";
 import * as S from "./affiliatedOrganizationBox.styled";
 
 interface AffiliatedOrganizationBoxPropType {
@@ -20,7 +22,7 @@ const AffiliatedOrganizationBox = ({
       </S.DayCareInfoSection>
       <S.GroupInfoSection>
         <S.DayCareGroupName>{group_name}</S.DayCareGroupName>
-        <UseImgix srcUrl="/images/icon-arrow-right.svg" alt="상세보기" />
+        <Icon icon={"chevron-right"} size={24} fill={ColorLightSlate8} />
       </S.GroupInfoSection>
     </S.BoxWrapper>
   );

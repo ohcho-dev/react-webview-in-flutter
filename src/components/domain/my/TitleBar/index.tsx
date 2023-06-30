@@ -11,6 +11,8 @@ import {
 } from "../../../../store/common";
 import * as S from "./TitleBar.styled";
 import useAuthMe from "queries/common/auth/useAuthMe";
+import Icon from "components/common/Icon";
+import { ColorLight2 } from "constants/ldsConstants/global";
 
 interface MainTitleBarProps {
   style?: object;
@@ -74,11 +76,7 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
             handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
           }}
         >
-          <UseImgix
-            srcUrl="/images/icon-back.svg"
-            alt="left arrow icon"
-            style={{ width: "2.8rem" }}
-          />
+          <Icon icon={"big-chevron"} size={28} fill={ColorLight2} />
         </div>
       )}
       {title && <S.PageTitle>{title}</S.PageTitle>}

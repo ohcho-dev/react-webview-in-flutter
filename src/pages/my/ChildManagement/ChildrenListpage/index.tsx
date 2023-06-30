@@ -10,7 +10,8 @@ import getGender from "../../../../utils/user/getGender";
 import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import useChildrenList from "../../../../queries/domain/my/child/useChildrenList";
-import { ColorLightSlate1 } from "constants/ldsConstants/global";
+import { ColorLightSlate1, ColorLightSlate8 } from "constants/ldsConstants/global";
+import Icon from "components/common/Icon";
 
 const PageLayout = styled.div`
   margin-top: 7rem;
@@ -89,11 +90,7 @@ export const ChildrenListPage = () => {
                 ({getDate(child.birth_date)}) {getGender(child.gender)}아
               </span>
             </ChildInfoSection>
-            <UseImgix
-              srcUrl="/images/icon-mypage-arrow.svg"
-              alt="right arrow icon"
-              style={{ width: "2.8rem", height: "2.8rem" }}
-            />
+            <Icon icon={"chevron-right"} size={24} fill={ColorLightSlate8} />
           </SingleChildWrapper>
         ))}
       </PageLayout>
