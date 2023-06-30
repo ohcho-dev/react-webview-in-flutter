@@ -8,6 +8,10 @@ export interface ChildType {
   premature_flag: number;
   due_date: string;
   birth_modifiable: boolean;
+  group_modifiable: boolean;
+  group_name: string;
+  has_organization: boolean;
+  organization_name: string;
 }
 
 export interface MonthRangeType {

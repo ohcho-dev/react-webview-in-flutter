@@ -1,5 +1,6 @@
 import { atom } from "recoil";
 import { HomeDataResponseType } from "types/apis/home";
+import { DEFAULT_CHILD_VALUE } from "utils/default";
 import { commonAtomKeys } from "./commonAtomKeys";
 
 export const commonCodeState = atom({
@@ -14,17 +15,7 @@ export const openBottomModalState = atom({
 
 export const selectedChildInfoState = atom({
   key: commonAtomKeys.selectedChild,
-  default: {
-    id: 0,
-    image: "",
-    name: "",
-    parent_id: 0,
-    premature_flag: 0,
-    gender: "",
-    due_date: "",
-    birth_date: "",
-    birth_modifiable: true,
-  },
+  default: DEFAULT_CHILD_VALUE,
 });
 
 export const selectedHomeDataState = atom<HomeDataResponseType>({
