@@ -1,4 +1,6 @@
+import { ColorLightBlack8 } from "constants/ldsConstants/global";
 import React from "react";
+import Icon from "../Icon";
 import * as S from "./DatePickerInput.styled";
 
 interface InputProps {
@@ -18,15 +20,18 @@ const ForwardInputRefFunction: React.ForwardRefRenderFunction<HTMLInputElement, 
   };
 
   return (
-    <S.CustomInput
-      className={className}
-      value={value}
-      ref={ref}
-      onChange={e => onChange(e.target.value)}
-      onClick={modifiable ? onClick : handleReject}
-      readOnly
-      aria-label="input"
-    />
+    <S.DatepickerWrapper>
+      <S.CustomInput
+        className={className}
+        value={value}
+        ref={ref}
+        onChange={e => onChange(e.target.value)}
+        onClick={modifiable ? onClick : handleReject}
+        readOnly
+        aria-label="input"
+      />
+      <Icon icon={"calendar_ver2"} size={24} fill={ColorLightBlack8} />
+    </S.DatepickerWrapper>
   );
 };
 
