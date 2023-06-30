@@ -23,6 +23,8 @@ import ConfirmDeleteOrganizationModal from "components/domain/my/ConfirmDeleteOr
 import RejectDeleteOrganizationModal from "components/domain/my/RejectDeleteOrganizationModal";
 import RejectChangeOrganizationModal from "components/domain/my/RejectChangeOrganizationModal";
 import { DEFAULT_CHILD_VALUE } from "utils/default";
+import NoAffiliatedOrganizationBox from "components/domain/my/NoAffilatedOrganizationBox";
+import useDeleteGroup from "queries/domain/my/child/useDeleteGroup";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },
@@ -55,6 +57,7 @@ const UpdateChildPage = () => {
   const inputRef = useRef(null);
   const { data } = useSelectedChild(childid);
   const { mutate: updateChild } = useUpdateChild(setOpenModal);
+  const { mutate: deleteGroup } = useDeleteGroup(setOpenConfirmDeleteOrganizationModal);
 
   useEffect(() => {
     if (data.length) {
@@ -226,9 +229,15 @@ const UpdateChildPage = () => {
             </>
           )}
           <S.InputTitle>제휴 기관</S.InputTitle>
-          {/* TODO: 제휴기관 등록 여부에 따라 다르게 보여주기 */}
-          <AffiliatedOrganizationBox handleClick={() => setOpenAffiliatedConfirmModal(true)} />
-          {/* <NoAffiliatedOrganizationBox /> */}
+          {data.has_organization ? (
+            <AffiliatedOrganizationBox
+              group_name={data.group_name}
+              organization_name={data.organization_name}
+              handleClick={() => setOpenAffiliatedConfirmModal(true)}
+            />
+          ) : (
+            <NoAffiliatedOrganizationBox />
+          )}
         </S.FormWrap>
       </S.PageLayout>
       <ConfirmAffiliateOrganizationStatusModal
@@ -238,19 +247,25 @@ const UpdateChildPage = () => {
           await setOpenAffiliatedConfirmModal(false);
           await setOpenConfirmDeleteOrganizationModal(true);
         }}
-        // TODO: 기관 변경하기 -> 진행중인 코칭 없을때 : 카메라 화면으로 이동
         handleChangeBtnClick={async () => {
-          await setOpenAffiliatedConfirmModal(false);
-          await setOpenRejectChangeOrganizationModal(true);
+          if (data.group_modifiable) {
+            //TODO: 카메라 페이지로 이동시키기
+            console.log("move to camera page");
+          } else {
+            await setOpenAffiliatedConfirmModal(false);
+            await setOpenRejectChangeOrganizationModal(true);
+          }
         }}
       />
       <ConfirmDeleteOrganizationModal
         toggle={openConfirmDeleteOrganizationModal}
         handleToggle={() => setOpenConfirmDeleteOrganizationModal(prev => !prev)}
-        handleDeleteBtnClick={async () => {
-          await setOpenConfirmDeleteOrganizationModal(false);
-          // TODO: 진행 중 코칭이 있을 시 다르게 로직 실행
-          await setOpenRejectDeleteOrganizationModal(true);
+        handleDeleteBtnClick={() => {
+          if (data.group_modifiable) {
+            if (childid) deleteGroup(parseInt(childid, 10));
+          } else {
+            setOpenRejectDeleteOrganizationModal(true);
+          }
         }}
       />
       <RejectDeleteOrganizationModal
