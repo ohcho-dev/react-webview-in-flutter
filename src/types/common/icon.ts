@@ -15,4 +15,5 @@ export type iconName =
   | "calendar_ver2"
   | "chevron-right"
   | "chevron-left"
-  | "big-chevron";
+  | "big-chevron"
+  | "chevron-down";

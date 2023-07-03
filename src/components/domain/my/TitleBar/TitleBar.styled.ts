@@ -37,7 +37,7 @@ export const ProfileImageWrap = styled.div`
 export const ChildrenName = styled.div`
   max-width: 19rem;
   height: 1.9rem;
-  margin-left: 0.8rem;
+  margin: 0rem 0.3rem 0 0.8rem;
   font-weight: 600;
   font-size: 1.6rem;
   line-height: 1.9rem;

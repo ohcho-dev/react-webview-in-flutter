@@ -12,7 +12,7 @@ import {
 import * as S from "./TitleBar.styled";
 import useAuthMe from "queries/common/auth/useAuthMe";
 import Icon from "components/common/Icon";
-import { ColorLight2 } from "constants/ldsConstants/global";
+import { ColorLight2, ColorLightSlate9Base } from "constants/ldsConstants/global";
 
 interface MainTitleBarProps {
   style?: object;
@@ -35,9 +35,7 @@ export const MainTitleBar: React.FC<MainTitleBarProps> = ({ style }) => {
           )}
         </S.ProfileImageWrap>
         <S.ChildrenName onClick={handleChildNameClick}>{selectedChildInfo.name}</S.ChildrenName>
-        <S.ArrowWrap>
-          <UseImgix srcUrl="/images/icon-arrow-down.svg" alt="arrow down icon" />
-        </S.ArrowWrap>
+        <Icon icon={"chevron-down"} size={20} fill={ColorLightSlate9Base} />
       </S.ProfileWrap>
       <AlarmBadge />
     </S.TitleBarWrap>
