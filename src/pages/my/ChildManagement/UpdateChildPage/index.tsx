@@ -25,6 +25,7 @@ import RejectChangeOrganizationModal from "components/domain/my/RejectChangeOrga
 import { DEFAULT_CHILD_VALUE } from "utils/default";
 import NoAffiliatedOrganizationBox from "components/domain/my/NoAffilatedOrganizationBox";
 import useDeleteGroup from "queries/domain/my/child/useDeleteGroup";
+import { NativeFunction } from "utils/app/NativeFunction";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },
@@ -242,7 +243,7 @@ const UpdateChildPage = () => {
                 handleClick={() => setOpenAffiliatedConfirmModal(true)}
               />
             ) : (
-              <NoAffiliatedOrganizationBox />
+              <NoAffiliatedOrganizationBox childId={childid} />
             )}
           </div>
         </S.FormWrap>
@@ -255,9 +256,8 @@ const UpdateChildPage = () => {
           await setOpenConfirmDeleteOrganizationModal(true);
         }}
         handleChangeBtnClick={async () => {
-          if (data.group_modifiable) {
-            //TODO: 카메라 페이지로 이동시키기
-            console.log("move to camera page");
+          if (data.group_modifiable && childid) {
+            NativeFunction("routeNativeScreen", `registerOrganization@${childid}`);
           } else {
             await setOpenAffiliatedConfirmModal(false);
             await setOpenRejectChangeOrganizationModal(true);

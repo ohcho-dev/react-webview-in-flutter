@@ -1,10 +1,14 @@
 import Icon from "components/common/Icon";
 import { ColorLightBlack8 } from "constants/ldsConstants/global";
+import { NativeFunction } from "utils/app/NativeFunction";
 import * as S from "./NoAffiliatedOrganizationBox.styled";
 
-const NoAffiliatedOrganizationBox = () => {
+interface NoAffiliatedOrganizationBoxPropsType {
+  childId: string | undefined;
+}
+const NoAffiliatedOrganizationBox = ({ childId }: NoAffiliatedOrganizationBoxPropsType) => {
   const handleSectionClick = () => {
-    console.log("click");
+    if (childId) NativeFunction("routeNativeScreen", `registerOrganization@${childId}`);
   };
   return (
     <S.BoxWrapper onClick={handleSectionClick}>

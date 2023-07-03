@@ -80,6 +80,10 @@ const App: React.FC = () => {
       queryClient.invalidateQueries(myQueryKeys.childrenList);
     });
 
+    window.addEventListener("refetchSelectedChildDate", () => {
+      queryClient.invalidateQueries(myQueryKeys.selectedChildInfo);
+    });
+
     window.addEventListener("refetchPushList", () => {
       queryClient.invalidateQueries(commonQueryKeys.notificationList);
     });
