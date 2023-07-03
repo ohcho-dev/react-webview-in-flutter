@@ -21,7 +21,7 @@ const AffiliatedOrganizationBox = ({
         <S.DayCareName>{organization_name}</S.DayCareName>
       </S.DayCareInfoSection>
       <S.GroupInfoSection>
-        <S.DayCareGroupName>{group_name}</S.DayCareGroupName>
+        <S.DayCareGroupName>{`${group_name}반`}</S.DayCareGroupName>
         <Icon icon={"chevron-right"} size={24} fill={ColorLightSlate8} />
       </S.GroupInfoSection>
     </S.BoxWrapper>

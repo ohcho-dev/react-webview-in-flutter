@@ -35,6 +35,7 @@ export const GroupInfoSection = styled.div`
   display: flex;
   column-gap: 1.6rem;
   justify-content: end;
+  align-items: center;
 `;
 
 export const DayCareGroupName = styled.span`

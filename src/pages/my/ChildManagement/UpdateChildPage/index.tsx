@@ -236,10 +236,10 @@ const UpdateChildPage = () => {
           )}
           <div>
             <S.InputTitle>제휴 기관</S.InputTitle>
-            {data.has_organization ? (
+            {childData.has_organization ? (
               <AffiliatedOrganizationBox
-                group_name={data.group_name}
-                organization_name={data.organization_name}
+                group_name={childData.group_name}
+                organization_name={childData.organization_name}
                 handleClick={() => setOpenAffiliatedConfirmModal(true)}
               />
             ) : (
