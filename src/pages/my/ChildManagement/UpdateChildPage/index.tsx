@@ -26,6 +26,7 @@ import { DEFAULT_CHILD_VALUE } from "utils/default";
 import NoAffiliatedOrganizationBox from "components/domain/my/NoAffilatedOrganizationBox";
 import useDeleteGroup from "queries/domain/my/child/useDeleteGroup";
 import { NativeFunction } from "utils/app/NativeFunction";
+import NameInput from "components/domain/my/NameInput";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },
@@ -59,6 +60,7 @@ const UpdateChildPage = () => {
   const { data } = useSelectedChild(childid);
   const { mutate: updateChild } = useUpdateChild(setOpenModal);
   const { mutate: deleteGroup } = useDeleteGroup(setOpenConfirmDeleteOrganizationModal);
+  const [nameValidationCheck, setNameValidationCheck] = useState(false);
 
   useEffect(() => {
     if (data.length) {
@@ -92,36 +94,26 @@ const UpdateChildPage = () => {
     setUpdateStatus(true);
   };
 
-  const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>, isValid: boolean) => {
     const id = evt.target.id;
     const value = evt.target.value;
-    const maxLength = evt.target.maxLength;
 
-    // 한글, 영문, 숫자만 입력가능
-    const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/;
-    if (!regex.test(value)) {
-      value.replace(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g, "");
-      return;
-    }
-
-    // 최대 글자 수 제한
-    if (maxLength && maxLength < value.length) return;
-
-    if (id === "childName") {
-      setChildData({ ...childData, name: value });
-    } else if (id === "childBirth") {
-      setChildData({ ...childData, birth_date: value });
-    }
+    setNameValidationCheck(isValid);
+    setChildData({ ...childData, [id === "childName" ? "name" : "birth_date"]: value });
     setUpdateStatus(true);
   };
 
   const handleSubmit = () => {
-    const validCheck = childList.find((child: any) => child.name === childData.name);
+    const foundSameNameObj = childList.find((child: any) => child.name === childData.name);
+
+    if (!nameValidationCheck) return;
+
     if (!childData.name) {
       setOpenValidModal(true);
       return;
     }
-    if (validCheck && data[0].name !== validCheck.name) {
+
+    if (foundSameNameObj && data[0].name !== foundSameNameObj.name) {
       setOpenSameNameModal(true);
       return;
     }
@@ -152,12 +144,12 @@ const UpdateChildPage = () => {
         <S.FormWrap>
           <div>
             <S.InputTitle>아이 이름</S.InputTitle>
-            <S.InputBox
+            <NameInput
               placeholder="이름을 입력해주세요."
               id="childName"
               value={childData.name}
-              maxLength={30}
-              onChange={handleTypeInformation}
+              handleChange={handleTypeInformation}
+              type="modify"
             />
           </div>
           <div>

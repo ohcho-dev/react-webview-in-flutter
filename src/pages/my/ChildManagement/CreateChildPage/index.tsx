@@ -18,6 +18,7 @@ import useValidChildInfo from "hooks/my/useValidChildInfo";
 import { OptionType } from "types/common";
 import { CreateChildObjType } from "types/domain/my";
 import { DEFAULT_CREATE_CHILD_VALUE } from "utils/default";
+import NameInput from "components/domain/my/NameInput";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },
@@ -35,6 +36,7 @@ const validationModalTitleArr = [
 ];
 
 const CreateChildPage = () => {
+  const inputRef = useRef(null);
   const navigate = useNavigate();
   const [childData, setChildData] = useState<CreateChildObjType>(DEFAULT_CREATE_CHILD_VALUE);
   const [birthDate, setBirthDate] = useState<Date | null>(new Date());
@@ -42,9 +44,9 @@ const CreateChildPage = () => {
   const [validationModalTitle, setValidationModalTitle] = useState<string>("");
   const [openValidationModal, setOpenValidationModal] = useState<boolean>(false);
   const [openSaveModal, setOpenSaveModal] = useState(false);
-  const inputRef = useRef(null);
   const { mutate: createChild } = useCreateChild(setOpenSaveModal);
   const [isValid, titleNum] = useValidChildInfo(childData);
+  const [nameValidationCheck, setNameValidationCheck] = useState(false);
 
   //   생일 날짜 string으로 변환
   useEffect(() => {
@@ -60,29 +62,16 @@ const CreateChildPage = () => {
     }
   }, [childData.premature_flag]);
 
-  const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleTypeInformation = (evt: React.ChangeEvent<HTMLInputElement>, isValid: boolean) => {
     const id = evt.target.id;
     const value = evt.target.value;
-    const maxLength = evt.target.maxLength;
 
-    // 한글, 영문, 숫자만 입력가능
-    const regex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]*$/;
-    if (!regex.test(value)) {
-      value.replace(/[^a-z|A-Z|0-9|ㄱ-ㅎ|가-힣]/g, "");
-      return;
-    }
-
-    // 최대 글자 수 제한
-    if (maxLength && maxLength < value.length) return;
-
-    if (id === "childName") {
-      setChildData({ ...childData, name: value });
-    } else if (id === "childBirth") {
-      setChildData({ ...childData, birth_date: value });
-    }
+    setNameValidationCheck(isValid);
+    setChildData({ ...childData, [id === "childName" ? "name" : "birth_date"]: value });
   };
 
   const handleSubmit = () => {
+    if (!nameValidationCheck) return;
     if (isValid) {
       createChild({
         ...childData,
@@ -110,12 +99,12 @@ const CreateChildPage = () => {
         <S.FormWrap>
           <div>
             <S.InputTitle>아이 이름</S.InputTitle>
-            <S.InputBox
+            <NameInput
               placeholder="이름을 입력해주세요."
               id="childName"
               value={childData.name}
-              maxLength={30}
-              onChange={handleTypeInformation}
+              handleChange={handleTypeInformation}
+              type="create"
             />
           </div>
           <div>
