@@ -1,21 +1,21 @@
+import { ColorLightBlack9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const ListWrap = styled.div`
   margin-bottom: 3rem;
 `;
 
-export const ProgramTitle = styled.span`
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 2rem;
+export const ProgramTitle = styled.div`
   display: flex;
   align-items: center;
-
-  margin-top: 1rem;
+  column-gap: 0.5rem;
 `;
 
 export const Title = styled.span`
-  margin-left: 0.4rem;
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  color: ${ColorLightBlack9Base};
 `;
 
 export const NoCoachingSection = styled.div`

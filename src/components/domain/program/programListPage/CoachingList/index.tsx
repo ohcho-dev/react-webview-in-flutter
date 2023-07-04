@@ -25,7 +25,8 @@ const CoachingList = () => {
       {coachingList && coachingList[0][0] && (
         <>
           <S.ProgramTitle>
-            🙌🏻 <S.Title>전문 검사와 함께하는 코칭</S.Title>
+            <UseImgix srcUrl={"/images/test_coaching.svg"} />
+            <S.Title>전문 검사와 함께하는 코칭</S.Title>
           </S.ProgramTitle>
           <S.ListWrap>
             {process.env.REACT_APP_HOST_URL === "https://biz-stg-webview.eltern.kr" &&

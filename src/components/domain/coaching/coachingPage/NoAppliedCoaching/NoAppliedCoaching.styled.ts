@@ -39,3 +39,9 @@ export const NoCoachingSection = styled.div`
     color: rgba(10, 10, 10, 0.45);
   }
 `;
+
+export const TitleBox = styled.div`
+  display: flex;
+  column-gap: 0.5rem;
+  align-items: center;
+`;

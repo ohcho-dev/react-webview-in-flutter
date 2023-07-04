@@ -41,7 +41,12 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
           </S.NoCoachingSection>
         )}
       </S.InformImageSection>
-      {!!data[0].length && <S.ProgramTitle>⭐️ {name}에게 딱 맞는 추천 코칭</S.ProgramTitle>}
+      {!!data[0].length && (
+        <S.TitleBox>
+          <UseImgix srcUrl={"/images/coaching_star.svg"} />
+          <S.ProgramTitle>{name}에게 딱 맞는 추천 코칭</S.ProgramTitle>
+        </S.TitleBox>
+      )}
       {data[0].map((coaching: coachingType, index: number) => {
         return (
           <div key={index}>

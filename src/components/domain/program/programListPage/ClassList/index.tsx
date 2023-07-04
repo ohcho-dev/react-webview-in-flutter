@@ -1,3 +1,4 @@
+import UseImgix from "components/common/Imgix";
 import useClassList from "queries/domain/program/useClassList";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
@@ -22,7 +23,8 @@ const ClassList = () => {
     <>
       {classList[0] && (
         <S.ProgramTitle>
-          🧑🏻‍⚕️ <S.Title>전문가와 함께하는 클래스</S.Title>
+          <UseImgix srcUrl={"/images/expert.svg"} />
+          <S.Title>전문가와 함께하는 클래스</S.Title>
         </S.ProgramTitle>
       )}
       {classList.map((singleClass: { [key: string]: any }, index: number) => {

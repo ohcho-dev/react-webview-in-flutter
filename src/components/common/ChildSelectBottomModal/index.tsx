@@ -5,6 +5,8 @@ import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../Imgix";
 import CustomBottomModal from "../CustomBottomModal";
 import * as S from "./ChildSelectBottomModal.styled";
+import Icon from "../Icon";
+import { ColorLightBlack4, ColorLightBlack9Base } from "constants/ldsConstants/global";
 
 interface ChildSelectBottomModalProps {
   selectedChildInfo: ChildType;
@@ -23,7 +25,7 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
         <S.ChildrenListModalTitleSection>
           <span>아이 선택</span>
           <span onClick={() => toggleModal()}>
-            <UseImgix srcUrl="/images/icon-close.svg" alt="close icon" />
+            <Icon icon={"x"} size={28} fill={ColorLightBlack9Base} />
           </span>
         </S.ChildrenListModalTitleSection>
         {childrenList.slice(0, 5).map((child: ChildType, index: number) => {
@@ -54,8 +56,8 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
             navigate("/my/management-child");
           }}
         >
-          아이 관리로 이동하기
-          <UseImgix alt="arrow-right" srcUrl={"/images/icon-arrow-right-small.svg"} />
+          <span>아이 관리로 이동하기</span>
+          <Icon icon={"chevron-right"} size={20} fill={ColorLightBlack4} />
         </S.GoToChildManagementBtn>
       </S.ChildrenListModalWrapper>
     </CustomBottomModal>

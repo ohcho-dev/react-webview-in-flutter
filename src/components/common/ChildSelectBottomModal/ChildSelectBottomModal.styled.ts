@@ -1,8 +1,10 @@
+import { ColorLightBlack6 } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const ChildrenListModalTitleSection = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 
   margin-bottom: 2rem;
 
@@ -68,12 +70,16 @@ export const GoToChildManagementBtn = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-
+  align-items: center;
   margin-top: 1rem;
+  column-gap: 0.4rem;
 
-  font-weight: 400;
-  font-size: 1.4rem;
-  color: rgba(10, 10, 10, 0.5);
+  span {
+    font-weight: 400;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    color: ${ColorLightBlack6};
+  }
 
   img {
     margin-left: 1rem;
