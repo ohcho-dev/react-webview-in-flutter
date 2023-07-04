@@ -68,7 +68,6 @@ const UpdateChildPage = () => {
       setBirthDate(new Date(data[0].birth_date));
       data[0].due_date !== null && setDueDate(new Date(data[0].due_date));
       setBirthModifiable(data[0].birth_modifiable);
-      console.log("데이터 갱신", data[0]);
     }
   }, [data]);
 
