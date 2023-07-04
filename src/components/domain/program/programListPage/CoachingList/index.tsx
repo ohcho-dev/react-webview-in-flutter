@@ -6,8 +6,7 @@ import { selectedChildInfoState } from "store/common";
 import { coachingType } from "types/domain/coaching";
 import { getDiscountPercentage } from "utils/program/getDiscountPercentage";
 import ProgramCard from "../ProgramCard";
-import { Divider } from "../programListPage.styled";
-import * as S from "./CoachingList.styled";
+import * as S from "../programListPage.styled";
 
 const CoachingList = () => {
   const navigate = useNavigate();
@@ -29,51 +28,23 @@ const CoachingList = () => {
             <S.Title>전문 검사와 함께하는 코칭</S.Title>
           </S.ProgramTitle>
           <S.ListWrap>
-            {process.env.REACT_APP_HOST_URL === "https://biz-stg-webview.eltern.kr" &&
-              coachingList[0].map((coaching: coachingType, index: number) => {
-                if (coaching.id === 7) return false;
-                return (
-                  <div key={index}>
-                    <ProgramCard
-                      id={coaching.id}
-                      handleCardClick={() => handleCardClick(coaching.id)}
-                      programImage="/images/coaching/coaching_new_main_0207.png"
-                      programImageAlt="Coaching Thumbnail"
-                      title={coaching.name}
-                      originalPrice={coaching.base_price}
-                      price={coaching.price}
-                      discountPercentage={getDiscountPercentage(
-                        coaching.base_price,
-                        coaching.price,
-                      )}
-                      utilVisible={false}
-                    />
-                    {/* {index !== coachingList[0].length - 1 && <Divider />} */}
-                  </div>
-                );
-              })}
-            {process.env.REACT_APP_HOST_URL !== "https://biz-stg-webview.eltern.kr" &&
-              coachingList[0].map((coaching: coachingType, index: number) => {
-                return (
-                  <div key={index}>
-                    <ProgramCard
-                      id={coaching.id}
-                      handleCardClick={() => handleCardClick(coaching.id)}
-                      programImage="/images/coaching/coaching_new_main_0207.png"
-                      programImageAlt="Coaching Thumbnail"
-                      title={coaching.name}
-                      originalPrice={coaching.base_price}
-                      price={coaching.price}
-                      discountPercentage={getDiscountPercentage(
-                        coaching.base_price,
-                        coaching.price,
-                      )}
-                      utilVisible={false}
-                    />
-                    {index !== coachingList[0].length - 1 && <Divider />}
-                  </div>
-                );
-              })}
+            {coachingList[0].map((coaching: coachingType, index: number) => {
+              return (
+                <div key={index}>
+                  <ProgramCard
+                    id={coaching.id}
+                    handleCardClick={() => handleCardClick(coaching.id)}
+                    programImage="/images/coaching/coaching_new_main_0207.png"
+                    programImageAlt="Coaching Thumbnail"
+                    title={coaching.name}
+                    originalPrice={coaching.base_price}
+                    price={coaching.price}
+                    discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
+                    utilVisible={false}
+                  />
+                </div>
+              );
+            })}
           </S.ListWrap>
         </>
       )}

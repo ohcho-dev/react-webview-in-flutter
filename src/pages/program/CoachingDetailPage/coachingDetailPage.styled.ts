@@ -1,3 +1,4 @@
+import { ColorLightBlack6, ColorLightSlate2 } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const Thumbnail = styled.div`
@@ -73,9 +74,9 @@ export const SubText = styled.h4`
 `;
 
 export const ChildInfoWrap = styled.div`
-  background: #f6f6f6;
+  background: ${ColorLightSlate2};
   border-radius: 0.8rem;
-  padding: 1.5rem 1.6rem;
+  padding: 1.6rem;
   margin-bottom: 6.4rem;
   display: flex;
   align-items: center;
@@ -85,21 +86,18 @@ export const ChildInfoWrap = styled.div`
   font-size: 1.6rem;
   line-height: 1.9rem;
   color: #000000;
-
-  div {
-    margin-left: 0.8rem;
-  }
 `;
 
 export const ProfileImageWrap = styled.div`
-  width: 3.2rem;
+  margin-right: 0.8rem;
 `;
 
-export const BirthDate = styled.span`
+export const ChildInfo = styled.span`
   font-weight: 400;
   font-size: 1.6rem;
-  line-height: 1.9rem;
+  line-height: 2.4rem;
   margin-left: 0.2rem;
+  color: ${ColorLightBlack6};
 `;
 
 export const ButtonWrap = styled.div`

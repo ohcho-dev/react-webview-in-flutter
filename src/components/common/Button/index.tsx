@@ -1,5 +1,7 @@
 import {
   ColorLight1,
+  ColorLightBlack4,
+  ColorLightBlack7,
   ColorLightBlack9Base,
   ColorLightRed7,
   ColorLightRed9Base,
@@ -32,9 +34,9 @@ const Button = (props: buttonProps) => {
 
       case "white":
         colorPalette = {
-          color: "black",
+          color: ColorLightBlack7,
           backgroundColor: "white",
-          border: "1px solid #A8A8A8",
+          border: `1px solid ${ColorLightBlack4}`,
         };
         break;
 

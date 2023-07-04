@@ -1,3 +1,4 @@
+import { ColorLightBlack9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const OnlineOffline = styled.span`
@@ -42,6 +43,51 @@ export const BottomBtnWrap = styled.div`
   box-shadow: ${(prop: { $scrolling?: boolean }) =>
     prop.$scrolling ? "0px -5px 15px rgba(0, 0, 0, 0.05)" : "none"};
   z-index: 110;
+`;
+
+export const ListWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  row-gap: 1.2rem;
+`;
+
+export const ProgramTitle = styled.div`
+  display: flex;
+  align-items: center;
+  column-gap: 0.5rem;
+  margin-bottom: 1.2rem;
+`;
+
+export const Title = styled.span`
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  color: ${ColorLightBlack9Base};
+`;
+
+export const NoCoachingSection = styled.div`
+  display: flex;
+  margin: 4rem 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 26rem;
+    height: 9rem;
+    margin-bottom: 3rem;
+  }
+
+  span:nth-child(2) {
+    display: block;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    color: #0a0a0a;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
 `;
 
 export const Divider = styled.div`

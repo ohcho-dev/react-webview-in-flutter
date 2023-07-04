@@ -6,8 +6,6 @@ export const ProgramCardWrapper = styled.div`
 
   width: 33.55rem;
 
-  margin: 2.5rem 0 1rem 0;
-
   img:nth-child(1) {
     position: relative;
     border-radius: 0.8rem;

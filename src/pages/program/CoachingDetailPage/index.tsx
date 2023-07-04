@@ -199,7 +199,8 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
           </S.ProfileImageWrap>
           <div>
             {selectedChildInfo.name}
-            <S.BirthDate>({getDate(selectedChildInfo.birth_date)})</S.BirthDate>
+            <S.ChildInfo>({getDate(selectedChildInfo.birth_date)})</S.ChildInfo>
+            <S.ChildInfo>{selectedChildInfo.gender === "M" ? "남아" : "여아"}</S.ChildInfo>
           </div>
         </S.ChildInfoWrap>
         <S.ButtonWrap>
