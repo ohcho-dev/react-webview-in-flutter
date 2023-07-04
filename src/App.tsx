@@ -81,6 +81,7 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("refetchSelectedChildDate", () => {
+      console.log("refetchSelectedChildDate 함수 실행");
       queryClient.invalidateQueries(myQueryKeys.selectedChildInfo);
     });
 
