@@ -256,8 +256,8 @@ const UpdateChildPage = () => {
           await setOpenConfirmDeleteOrganizationModal(true);
         }}
         handleChangeBtnClick={async () => {
-          if (data.group_modifiable && childid) {
-            NativeFunction("routeNativeScreen", `registerOrganization@${childid}`);
+          if (childData.group_modifiable) {
+            if (childid) NativeFunction("routeNativeScreen", `registerOrganization@${childid}`);
           } else {
             await setOpenAffiliatedConfirmModal(false);
             await setOpenRejectChangeOrganizationModal(true);
@@ -268,7 +268,7 @@ const UpdateChildPage = () => {
         toggle={openConfirmDeleteOrganizationModal}
         handleToggle={() => setOpenConfirmDeleteOrganizationModal(prev => !prev)}
         handleDeleteBtnClick={() => {
-          if (data.group_modifiable) {
+          if (childData.group_modifiable) {
             if (childid) deleteGroup(parseInt(childid, 10));
           } else {
             setOpenRejectDeleteOrganizationModal(true);
