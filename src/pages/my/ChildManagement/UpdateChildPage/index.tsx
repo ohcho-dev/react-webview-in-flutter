@@ -256,10 +256,12 @@ const UpdateChildPage = () => {
           await setOpenConfirmDeleteOrganizationModal(true);
         }}
         handleChangeBtnClick={async () => {
+          await setOpenAffiliatedConfirmModal(false);
           if (childData.group_modifiable) {
-            if (childid) NativeFunction("routeNativeScreen", `registerOrganization@${childid}`);
+            if (childid) {
+              await NativeFunction("routeNativeScreen", `registerOrganization@${childid}`);
+            }
           } else {
-            await setOpenAffiliatedConfirmModal(false);
             await setOpenRejectChangeOrganizationModal(true);
           }
         }}
