@@ -85,18 +85,17 @@ const DaycareResultPage = () => {
                 <UseImgix srcUrl={"/images/graph.svg"} />
                 영역별 발달 결과
               </S.TitleSection>
-              {filteredEmptyArr.map(([levelTitle, levelArr], index) => {
-                if (levelArr.length > 0) {
-                  return (
+              {filteredEmptyArr.map(
+                ([levelTitle, levelArr], index) =>
+                  levelArr.length > 0 && (
                     <LevelSection
                       level_title={levelTitle as "TTRL_LEVEL1" | "TTRL_LEVEL2" | "TTRL_LEVEL3"}
                       level_arr={levelArr}
                       last_section={index === filteredEmptyArr.length - 1}
                       key={levelTitle}
                     />
-                  );
-                }
-              })}
+                  ),
+              )}
             </S.Section>
             <S.DividerSection />
             <S.Section>
