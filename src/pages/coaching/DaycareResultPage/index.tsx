@@ -4,7 +4,11 @@ import CategoryResultSection from "components/domain/coaching/DaycareResultPage/
 import LanguageResultSection from "components/domain/coaching/DaycareResultPage/LanguageResultSection";
 import LevelSection from "components/domain/coaching/DaycareResultPage/LevleSection";
 import TabComponent from "components/domain/coaching/DaycareResultPage/TabComponent";
-import { ColorLightEltern9Base, ColorLightRed8 } from "constants/ldsConstants/global";
+import {
+  ColorLightEltern2,
+  ColorLightEltern9Base,
+  ColorLightRed8,
+} from "constants/ldsConstants/global";
 import LayoutDetailPage from "layouts/LayoutDetailPage";
 import useSelectedDaycareResultInfo from "queries/domain/coaching/useDaycareResultPaper";
 import { useEffect, useRef } from "react";
@@ -14,6 +18,18 @@ import { useRecoilState } from "recoil";
 import { selectedCategoryIdState } from "store/domain/coaching";
 import { DaycareResultResponseType } from "types/apis/coaching";
 import * as S from "./DaycareResultPage.styled";
+import { Radar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 export const GROWTH_CATEGORY_INFO = [
   "gross_motor_skills",
@@ -40,6 +56,12 @@ const DaycareResultPage = () => {
     }
   }, [selectedCategoryId]);
 
+  const returnLevel = (level: string) => {
+    if (level === "TTRL_LEVEL1") return 1;
+    if (level === "TTRL_LEVEL2") return 2;
+    if (level === "TTRL_LEVEL3") return 3;
+  };
+
   return (
     <LayoutDetailPage>
       <div ref={divRef} style={{ height: "100%", overflowY: "auto" }}>
@@ -61,8 +83,54 @@ const DaycareResultPage = () => {
                 <S.OverallSectionHighlight>발달 균형</S.OverallSectionHighlight>
                 <S.OverallSectionText>이 필요해요!</S.OverallSectionText>
               </S.OverallTitleSection>
-              <S.GraphSection></S.GraphSection>
-              <UseImgix srcUrl={"/images/must_check.svg"} />
+              <S.GraphSection>
+                <Radar
+                  data={{
+                    labels: resultPaperInfo?.list.map(item => item.growth_category_name),
+                    datasets: [
+                      {
+                        data: resultPaperInfo?.list.map(item => returnLevel(item.level)),
+                        borderColor: ColorLightEltern9Base,
+                        borderWidth: 1,
+                        backgroundColor: "rgba(90, 196, 177, 0.05)",
+                        pointBackgroundColor: ColorLightEltern9Base,
+                      },
+                    ],
+                  }}
+                  options={{
+                    plugins: {
+                      legend: {
+                        display: false,
+                      },
+                    },
+
+                    scales: {
+                      r: {
+                        // angleLines: {
+                        //   color: "black",
+                        // },
+                        // grid: {
+                        //   color: "black",
+                        // },
+                        pointLabels: {
+                          color: "rgba(68, 181, 161, 1)",
+                          font: {
+                            size: 12,
+                            weight: "600",
+                          },
+                        },
+                        max: 3,
+                        min: 1,
+                        ticks: { display: false, stepSize: 1 },
+                      },
+                    },
+                  }}
+                />
+              </S.GraphSection>
+              <UseImgix
+                srcUrl={"/images/must_check.svg"}
+                style={{ width: "100%", height: "22.1rem" }}
+              />
             </S.OverallSection>
             <S.DividerSection />
             <S.ChecklistSection>
@@ -108,7 +176,10 @@ const DaycareResultPage = () => {
                 개월의 발달
               </S.TitleSection>
               <S.MonthImageSection>
-                <UseImgix srcUrl={"/images/month_image.svg"} />
+                <UseImgix
+                  srcUrl={"/images/month_image.svg"}
+                  style={{ width: "100%", height: "22.8rem" }}
+                />
               </S.MonthImageSection>
               <S.MonthContentSection>
                 {resultPaperInfo?.month_level.content.split("/n").map((content: string) => (
