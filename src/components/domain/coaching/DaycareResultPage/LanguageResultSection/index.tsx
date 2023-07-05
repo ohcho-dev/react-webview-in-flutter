@@ -37,7 +37,7 @@ const LanguageResultSection = ({
   return (
     <S.Layout>
       <S.PaddingWrapper>
-        <UseImgix srcUrl={`/images/language_main.svg`} />
+        <UseImgix srcUrl={`/images/language_main.svg`} style={{ width: "100%", height: "13rem" }} />
         <LanguageExplanationBtn
           onClick={() => navigate("/coaching/daycare/resultPaper/languageDesc")}
         >
@@ -60,7 +60,10 @@ const LanguageResultSection = ({
                 />
               </S.DecoImageSection>
             </S.LevelSection>
-            <UseImgix srcUrl={`/images/${category.level}.svg`} />
+            <UseImgix
+              srcUrl={`/images/${category.level}.svg`}
+              style={{ width: "100%", height: "15.7rem" }}
+            />
           </>
         ))}
         <S.CommentSection>{language_info.comment}</S.CommentSection>
@@ -73,7 +76,10 @@ const LanguageResultSection = ({
             추천 활동
           </TitleSection>
           <S.RecommendActivityImgSection>
-            <UseImgix srcUrl={"/images/recommend_activity.svg"} />
+            <UseImgix
+              srcUrl={"/images/recommend_activity.svg"}
+              style={{ width: "100%", height: "22.8rem" }}
+            />
           </S.RecommendActivityImgSection>
           <S.RecommendCommentSection>
             {language_info.activity_content.split("\n").map((content: string) => (

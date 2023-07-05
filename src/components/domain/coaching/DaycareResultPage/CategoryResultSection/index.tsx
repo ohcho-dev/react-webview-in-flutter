@@ -41,7 +41,10 @@ const CategoryResultSection = ({
   return (
     <S.Layout>
       <S.PaddingWrapper>
-        <UseImgix srcUrl={`/images/${category}_main.svg`} />
+        <UseImgix
+          srcUrl={`/images/${category}_main.svg`}
+          style={{ width: "100%", height: "13rem" }}
+        />
         <S.LevelSection>
           <S.LevelInfoSection>
             <S.LevelTitle>{`${child_name}의 ${CATEGORY_NAME[category]}발달은`}</S.LevelTitle>
@@ -56,7 +59,10 @@ const CategoryResultSection = ({
             />
           </S.DecoImageSection>
         </S.LevelSection>
-        <UseImgix srcUrl={`/images/${category_info.level}.svg`} />
+        <UseImgix
+          srcUrl={`/images/${category_info.level}.svg`}
+          style={{ width: "100%", height: "15.7rem" }}
+        />
         <S.CommentSection>{category_info.comment}</S.CommentSection>
       </S.PaddingWrapper>
       <DividerSection />
@@ -67,7 +73,10 @@ const CategoryResultSection = ({
             추천 활동
           </TitleSection>
           <S.RecommendActivityImgSection>
-            <UseImgix srcUrl={"/images/recommend_activity.svg"} />
+            <UseImgix
+              srcUrl={"/images/recommend_activity.svg"}
+              style={{ width: "100%", height: "22.8rem" }}
+            />
           </S.RecommendActivityImgSection>
           <S.RecommendCommentSection>
             {category_info.activity_content.split("\n").map((content: string) => (
