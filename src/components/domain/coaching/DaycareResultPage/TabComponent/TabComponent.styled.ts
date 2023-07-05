@@ -1,4 +1,5 @@
 import {
+  ColorLight1,
   ColorLightBlack9Base,
   ColorLightSlate3,
   ColorLightSlate9Base,
@@ -14,6 +15,10 @@ export const TabWrapper = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
   scroll-behavior: smooth;
+
+  position: sticky;
+  top: 0;
+  background-color: ${ColorLight1};
 
   border-bottom: 1px solid ${ColorLightSlate3};
 
