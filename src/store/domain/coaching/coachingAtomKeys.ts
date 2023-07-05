@@ -6,4 +6,5 @@ export const coachingAtomKeys = {
   startQuestionOrderNum: "startQuestionOrderNum",
   currentTaskId: "currentTaskId",
   currentSurveyId: "currentSurveyId",
+  selectedCategoryId: "selectedCategoryId",
 };

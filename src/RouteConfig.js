@@ -1,3 +1,5 @@
+import DaycareResultPage from "pages/coaching/DaycareResultPage";
+import LanguageExplanationPage from "pages/coaching/LanguageExplanationPage";
 import React from "react";
 
 /**
@@ -316,6 +318,22 @@ export const RouterConfig = [
   {
     path: "/my/alarm-list",
     element: <AlarmList />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/daycare/resultPaper/:id",
+    element: <DaycareResultPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/daycare/resultPaper/languageDesc",
+    element: <LanguageExplanationPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

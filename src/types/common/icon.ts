@@ -17,4 +17,5 @@ export type iconName =
   | "chevron-left"
   | "big-chevron"
   | "chevron-down"
-  | "x";
+  | "x"
+  | "point-filled";

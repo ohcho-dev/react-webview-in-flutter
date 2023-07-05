@@ -38,3 +38,8 @@ export const currentSurveyInfoState = atom({
   key: coachingAtomKeys.currentSurveyId,
   default: { taskId: "", coachingId: "" },
 });
+
+export const selectedCategoryIdState = atom({
+  key: coachingAtomKeys.selectedCategoryId,
+  default: 0,
+});

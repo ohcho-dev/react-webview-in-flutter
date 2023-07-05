@@ -7,4 +7,5 @@ export const coachingQueryKeys = {
   selectedTaskInfo: "selected-task-info",
   surveyAnswerList: "survey-answer-list",
   videoAssignmentResult: "video-assignment-result",
+  daycareResultPaper: "daycare-result-paper",
 };

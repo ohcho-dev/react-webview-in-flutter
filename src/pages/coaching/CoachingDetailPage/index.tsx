@@ -9,7 +9,7 @@ import ContentItem from "../../../components/domain/coaching/coachingDetailPage/
 import UseImgix from "../../../components/common/Imgix";
 import { CoachingStatusType, TaskStatusType } from "../../../types/domain/coaching";
 import { selectedChildInfoState } from "../../../store/common";
-import { currentTaskIdState } from "../../../store/domain/coaching";
+import { currentTaskIdState, selectedCategoryIdState } from "../../../store/domain/coaching";
 import * as S from "./coachingDetail.styled";
 import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedCoachingInfo";
 import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
@@ -29,6 +29,7 @@ const CoachingDetailPage = () => {
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
+  const setSelectedCategoryId = useSetRecoilState(selectedCategoryIdState);
 
   useEffect(() => {
     setTimeout(() => {
@@ -101,12 +102,14 @@ const CoachingDetailPage = () => {
                   name={name}
                   useArrowBtn={true}
                   handleClick={() => {
+                    navigate("/coaching/daycare/resultPaper/184");
+                    setSelectedCategoryId(0);
                     // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
-                    if (status === "TTPST_COMPLETE") {
-                      navigate(`/coaching/result/${paper_url}`);
-                    } else {
-                      setOpenModal(true);
-                    }
+                    // if (status === "TTPST_COMPLETE") {
+                    //   navigate("/coaching/daycare/resultPaper/184");
+                    // } else {
+                    //   setOpenModal(true);
+                    // }
                   }}
                 />
                 <S.SharedResultPaperBox isShared={is_open === 1}>
