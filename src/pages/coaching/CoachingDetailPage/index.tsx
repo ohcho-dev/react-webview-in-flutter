@@ -102,7 +102,7 @@ const CoachingDetailPage = () => {
                   name={name}
                   useArrowBtn={true}
                   handleClick={() => {
-                    navigate("/coaching/daycare/resultPaper/184");
+                    navigate(`/coaching/daycare/resultPaper/${id}`);
                     setSelectedCategoryId(0);
                     // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
                     // if (status === "TTPST_COMPLETE") {
