@@ -10,7 +10,7 @@ export const CustomChip = styled.div<{
   justify-content: center;
 
   height: 2.2rem;
-  width: auto;
+  width: fit-content;
   padding: 0rem 0.6rem;
   border-radius: 0.4rem;
 
