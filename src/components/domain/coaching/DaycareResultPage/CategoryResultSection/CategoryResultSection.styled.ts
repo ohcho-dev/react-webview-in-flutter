@@ -42,7 +42,9 @@ export const DecoImageSection = styled.div`
   padding-top: 1rem;
 `;
 
-export const MonthTitle = styled.span`
+export const MonthTitle = styled.span<{ secondLine?: boolean }>`
+  margin-top: ${({ secondLine }) => (secondLine ? "0.2rem" : "0")};
+
   color: ${ColorLightBlack7};
   font-size: 1.6rem;
   font-weight: 400;

@@ -12,6 +12,7 @@ export const OverallSection = styled.div`
 `;
 
 export const OverallSectionChildInfo = styled.span`
+  display: block;
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 2.4rem;
@@ -35,8 +36,13 @@ export const OverallSectionHighlight = styled(OverallSectionText)`
 `;
 
 export const GraphSection = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 100%;
   height: 30rem;
+  margin: 2rem 0;
 `;
 
 export const DividerSection = styled.div`

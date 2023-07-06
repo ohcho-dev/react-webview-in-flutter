@@ -1,5 +1,5 @@
-import { ColorLightPurple8 } from "constants/ldsConstants/global";
-import styled from "styled-components";
+import { ColorLightPurple8, ColorLightSlate7 } from "constants/ldsConstants/global";
+import styled, { css } from "styled-components";
 
 export const LanguageExplanationBtn = styled.div`
   width: 100%;
@@ -17,4 +17,13 @@ export const LanguageExplanationBtn = styled.div`
     font-weight: 600;
     line-height: 2rem;
   }
+`;
+
+export const LanguageLevelInfoSection = styled.div<{ firstSection: boolean }>`
+  ${({ firstSection }) =>
+    firstSection &&
+    css`
+      padding-bottom: 2rem;
+      margin-bottom: 1rem;
+    `}
 `;
