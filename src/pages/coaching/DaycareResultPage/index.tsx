@@ -5,7 +5,9 @@ import LanguageResultSection from "components/domain/coaching/DaycareResultPage/
 import LevelSection from "components/domain/coaching/DaycareResultPage/LevleSection";
 import TabComponent from "components/domain/coaching/DaycareResultPage/TabComponent";
 import {
-  ColorLightEltern2,
+  ColorLightEltern10,
+  ColorLightEltern6,
+  ColorLightEltern7,
   ColorLightEltern9Base,
   ColorLightRed8,
 } from "constants/ldsConstants/global";
@@ -57,9 +59,25 @@ const DaycareResultPage = () => {
   }, [selectedCategoryId]);
 
   const returnLevel = (level: string) => {
-    if (level === "TTRL_LEVEL1") return 1;
+    if (level === "TTRL_LEVEL1") return 3;
     if (level === "TTRL_LEVEL2") return 2;
-    if (level === "TTRL_LEVEL3") return 3;
+    if (level === "TTRL_LEVEL3") return 1;
+  };
+
+  const returnOverallText = () => {
+    const level1_arr = resultPaperInfo?.level_group["TTRL_LEVEL1"];
+    const level2_arr = resultPaperInfo?.level_group["TTRL_LEVEL2"];
+    const level3_arr = resultPaperInfo?.level_group["TTRL_LEVEL3"];
+
+    if (level1_arr && level2_arr && level3_arr) {
+      if (level1_arr.length === 6) {
+        return "good_balance";
+      } else if (level3_arr.length > 0) {
+        return "need_balance";
+      } else {
+        return "well_done";
+      }
+    }
   };
 
   return (
@@ -80,8 +98,7 @@ const DaycareResultPage = () => {
                 {resultPaperInfo?.month_level.month_end}개월) 발달 검사 결과
               </S.OverallSectionChildInfo>
               <S.OverallTitleSection>
-                <S.OverallSectionHighlight>발달 균형</S.OverallSectionHighlight>
-                <S.OverallSectionText>이 필요해요!</S.OverallSectionText>
+                <UseImgix srcUrl={`/images/${returnOverallText()}.svg`} />
               </S.OverallTitleSection>
               <S.GraphSection>
                 <Radar
@@ -90,10 +107,28 @@ const DaycareResultPage = () => {
                     datasets: [
                       {
                         data: resultPaperInfo?.list.map(item => returnLevel(item.level)),
-                        borderColor: ColorLightEltern9Base,
+                        borderColor: ColorLightEltern7,
                         borderWidth: 1,
-                        backgroundColor: "rgba(90, 196, 177, 0.05)",
-                        pointBackgroundColor: ColorLightEltern9Base,
+                        backgroundColor: "rgba(194, 234, 229, 0.5)",
+                        pointBorderWidth: 0,
+                        pointBackgroundColor: function (context) {
+                          switch (context.raw) {
+                            case 3:
+                              return "#00C7B1";
+                            case 2:
+                              return "#FFB937";
+                            case 1:
+                              return "#FD7473";
+                          }
+                        },
+                        pointRadius: 4,
+                      },
+                      {
+                        data: [3, 3, 3, 3, 3, 3],
+                        borderColor: "transparent",
+                        borderWidth: 1,
+                        backgroundColor: "rgba(244, 252, 252, 0.5)",
+                        pointBorderWidth: 0,
                       },
                     ],
                   }}
@@ -103,24 +138,26 @@ const DaycareResultPage = () => {
                         display: false,
                       },
                     },
-
+                    responsive: true,
                     scales: {
                       r: {
-                        // angleLines: {
-                        //   color: "black",
-                        // },
-                        // grid: {
-                        //   color: "black",
-                        // },
+                        angleLines: {
+                          color: ColorLightEltern6,
+                          lineWidth: 1.5,
+                        },
+                        grid: {
+                          color: ColorLightEltern6,
+                          lineWidth: 1.5,
+                        },
                         pointLabels: {
-                          color: "rgba(68, 181, 161, 1)",
+                          color: ColorLightEltern10,
                           font: {
-                            size: 12,
+                            size: 14,
                             weight: "600",
                           },
                         },
                         max: 3,
-                        min: 1,
+                        min: 0,
                         ticks: { display: false, stepSize: 1 },
                       },
                     },
@@ -177,7 +214,7 @@ const DaycareResultPage = () => {
               </S.TitleSection>
               <S.MonthImageSection>
                 <UseImgix
-                  srcUrl={"/images/month_image.svg"}
+                  srcUrl={"/images/development_img.svg"}
                   style={{ width: "100%", height: "22.8rem" }}
                 />
               </S.MonthImageSection>
