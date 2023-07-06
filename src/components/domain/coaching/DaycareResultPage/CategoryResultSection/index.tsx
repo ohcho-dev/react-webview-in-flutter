@@ -38,6 +38,7 @@ const CategoryResultSection = ({
   month_level,
 }: CategoryResultSectionPropsType) => {
   if (!category_info || !month_level) return null;
+
   return (
     <S.Layout>
       <S.PaddingWrapper>
@@ -50,7 +51,11 @@ const CategoryResultSection = ({
             <S.LevelTitle>{`${child_name}의 ${CATEGORY_NAME[category]}발달은`}</S.LevelTitle>
             <S.LevelTitle secondLine>{LEVEL_TEXT[category_info.level]}</S.LevelTitle>
             <S.MonthTitle>{`현재 월령 : ${month_level.month_start} ~ ${month_level.month_end}개월`}</S.MonthTitle>
-            <S.MonthTitle>{`발달 예상 월령 : ${category_info.result_month_level.month_start} ~ ${category_info.result_month_level.month_end}개월`}</S.MonthTitle>
+            {category_info.gap > -3 && (
+              <S.MonthTitle
+                secondLine
+              >{`발달 예상 월령 : ${category_info.result_month_level.month_start} ~ ${category_info.result_month_level.month_end}개월`}</S.MonthTitle>
+            )}
           </S.LevelInfoSection>
           <S.DecoImageSection>
             <UseImgix
@@ -65,31 +70,35 @@ const CategoryResultSection = ({
         />
         <S.CommentSection>{category_info.comment}</S.CommentSection>
       </S.PaddingWrapper>
-      <DividerSection />
-      <S.PaddingWrapper>
-        <S.RecommendedActivitySection>
-          <TitleSection>
-            <UseImgix srcUrl={"/images/heart-filled.svg"} />
-            추천 활동
-          </TitleSection>
-          <S.RecommendActivityImgSection>
-            <UseImgix
-              srcUrl={"/images/recommend_activity.svg"}
-              style={{ width: "100%", height: "22.8rem" }}
-            />
-          </S.RecommendActivityImgSection>
-          <S.RecommendCommentSection>
-            {category_info.activity_content.split("\n").map((content: string) => (
-              <ListItem key={content}>
-                <IconDotSection>
-                  <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
-                </IconDotSection>
-                <ListContent>{content}</ListContent>
-              </ListItem>
-            ))}
-          </S.RecommendCommentSection>
-        </S.RecommendedActivitySection>
-      </S.PaddingWrapper>
+      {category_info.activity_content && (
+        <>
+          <DividerSection />
+          <S.PaddingWrapper>
+            <S.RecommendedActivitySection>
+              <TitleSection>
+                <UseImgix srcUrl={"/images/heart-filled.svg"} />
+                추천 활동
+              </TitleSection>
+              <S.RecommendActivityImgSection>
+                <UseImgix
+                  srcUrl={"/images/recommend_activity.svg"}
+                  style={{ width: "100%", height: "22.8rem" }}
+                />
+              </S.RecommendActivityImgSection>
+              <S.RecommendCommentSection>
+                {category_info.activity_content.split("\n").map((content: string) => (
+                  <ListItem key={content}>
+                    <IconDotSection>
+                      <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
+                    </IconDotSection>
+                    <ListContent>{content}</ListContent>
+                  </ListItem>
+                ))}
+              </S.RecommendCommentSection>
+            </S.RecommendedActivitySection>
+          </S.PaddingWrapper>
+        </>
+      )}
       <DividerSection />
       <S.PaddingWrapper>
         <S.ImportantSection>
