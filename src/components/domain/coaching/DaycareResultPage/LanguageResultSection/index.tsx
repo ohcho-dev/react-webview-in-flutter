@@ -11,7 +11,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { CategoryListType, DaycareMonthLevelType } from "types/apis/coaching";
 import * as S from "../CategoryResultSection/CategoryResultSection.styled";
-import { LanguageExplanationBtn } from "./LanguageResultSection.styled";
+import { LanguageExplanationBtn, LanguageLevelInfoSection } from "./LanguageResultSection.styled";
 
 interface CategoryResultSectionPropsType {
   child_name: string | undefined;
@@ -44,26 +44,35 @@ const LanguageResultSection = ({
           <span>표현 언어, 수용 언어란?</span>
           <Icon icon={"chevron-right"} size={20} fill={ColorLightPurple8} />
         </LanguageExplanationBtn>
-        {category_info_arr.map(category => (
+        {category_info_arr.map((category, index) => (
           <>
-            <S.LevelSection>
-              <S.LevelInfoSection>
-                <S.LevelTitle>{`${child_name}의 ${category.growth_category_name} 발달은`}</S.LevelTitle>
-                <S.LevelTitle secondLine>{LEVEL_TEXT[category.level]}</S.LevelTitle>
-                <S.MonthTitle>{`현재 월령 : ${month_level.month_start} ~ ${month_level.month_end}개월`}</S.MonthTitle>
-                <S.MonthTitle>{`발달 예상 월령 : ${category.result_month_level.month_start} ~ ${category.result_month_level.month_end}개월`}</S.MonthTitle>
-              </S.LevelInfoSection>
-              <S.DecoImageSection>
-                <UseImgix
-                  srcUrl="/images/result_paper_deco.svg"
-                  style={{ width: "7.8rem", height: "5.8rem" }}
-                />
-              </S.DecoImageSection>
-            </S.LevelSection>
-            <UseImgix
-              srcUrl={`/images/${category.level}.svg`}
-              style={{ width: "100%", height: "15.7rem" }}
-            />
+            <LanguageLevelInfoSection key={category.growth_category_id} firstSection={index === 0}>
+              <S.LevelSection>
+                <S.LevelInfoSection>
+                  <S.LevelTitle>{`${child_name}의 ${category.growth_category_name} 발달은`}</S.LevelTitle>
+                  <S.LevelTitle secondLine>{LEVEL_TEXT[category.level]}</S.LevelTitle>
+                  <S.MonthTitle>{`현재 월령 : ${month_level.month_start} ~ ${month_level.month_end}개월`}</S.MonthTitle>
+                  {category.gap > -3 && (
+                    <S.MonthTitle
+                      secondLine
+                    >{`발달 예상 월령 : ${category.result_month_level.month_start} ~ ${category.result_month_level.month_end}개월`}</S.MonthTitle>
+                  )}
+                </S.LevelInfoSection>
+                <S.DecoImageSection>
+                  <UseImgix
+                    srcUrl="/images/result_paper_deco.svg"
+                    style={{ width: "7.8rem", height: "5.8rem" }}
+                  />
+                </S.DecoImageSection>
+              </S.LevelSection>
+              <UseImgix
+                srcUrl={`/images/${category.level}.svg`}
+                style={{ width: "100%", height: "15.7rem" }}
+              />
+            </LanguageLevelInfoSection>
+            {index === 0 && (
+              <UseImgix srcUrl={`/images/dotted_divider.svg`} style={{ width: "100%" }} />
+            )}
           </>
         ))}
         <S.CommentSection>{language_info.comment}</S.CommentSection>
