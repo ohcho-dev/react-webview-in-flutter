@@ -108,7 +108,7 @@ const DaycareResultPage = () => {
                       {
                         data: resultPaperInfo?.list.map(item => returnLevel(item.level)),
                         borderColor: ColorLightEltern7,
-                        borderWidth: 1,
+                        borderWidth: 2,
                         backgroundColor: "rgba(194, 234, 229, 0.5)",
                         pointBorderWidth: 0,
                         pointBackgroundColor: function (context) {
@@ -123,13 +123,6 @@ const DaycareResultPage = () => {
                         },
                         pointRadius: 4,
                       },
-                      {
-                        data: [3, 3, 3, 3, 3, 3],
-                        borderColor: "transparent",
-                        borderWidth: 1,
-                        backgroundColor: "rgba(244, 252, 252, 0.5)",
-                        pointBorderWidth: 0,
-                      },
                     ],
                   }}
                   options={{
@@ -141,6 +134,7 @@ const DaycareResultPage = () => {
                     responsive: true,
                     scales: {
                       r: {
+                        backgroundColor: "rgba(90, 196, 177, 0.05)",
                         angleLines: {
                           color: ColorLightEltern6,
                           lineWidth: 1.5,
