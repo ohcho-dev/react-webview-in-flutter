@@ -35,11 +35,18 @@ export interface GetSurveyAnswerQuestionItemListType {
 
 // 결과지 관련
 
+export interface LanguageInfoType {
+  activity_content: string;
+  comment: string;
+  importance: string;
+  activity_image: string;
+}
+
 export interface DaycareResultResponseType {
   checklist: string[];
   child_id: number;
   child_name: string;
-  language_info: { activity_content: string; comment: string };
+  language_info: LanguageInfoType;
   level_group: { [key: string]: { growth_category_id: number; growth_category_name: string }[] };
   list: CategoryListType[];
   month_level: DaycareMonthLevelType;
@@ -64,4 +71,6 @@ export interface CategoryListType {
   result_month_level: MonthRangeType;
   status: string;
   status_label: string;
+  activity_image: string;
+  importance: string;
 }

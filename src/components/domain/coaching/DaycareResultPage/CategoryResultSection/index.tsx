@@ -38,6 +38,8 @@ const CategoryResultSection = ({
   month_level,
 }: CategoryResultSectionPropsType) => {
   if (!category_info || !month_level) return null;
+  const { level, result_month_level, activity_content, activity_image, importance, gap, comment } =
+    category_info;
 
   return (
     <S.Layout>
@@ -51,10 +53,10 @@ const CategoryResultSection = ({
             <S.LevelTitle>{`${child_name}의 ${CATEGORY_NAME[category]}발달은`}</S.LevelTitle>
             <S.LevelTitle secondLine>{LEVEL_TEXT[category_info.level]}</S.LevelTitle>
             <S.MonthTitle>{`현재 월령 : ${month_level.month_start} ~ ${month_level.month_end}개월`}</S.MonthTitle>
-            {category_info.gap > -3 && (
+            {gap > -3 && (
               <S.MonthTitle
                 secondLine
-              >{`발달 예상 월령 : ${category_info.result_month_level.month_start} ~ ${category_info.result_month_level.month_end}개월`}</S.MonthTitle>
+              >{`발달 예상 월령 : ${result_month_level.month_start} ~ ${result_month_level.month_end}개월`}</S.MonthTitle>
             )}
           </S.LevelInfoSection>
           <S.DecoImageSection>
@@ -64,13 +66,10 @@ const CategoryResultSection = ({
             />
           </S.DecoImageSection>
         </S.LevelSection>
-        <UseImgix
-          srcUrl={`/images/${category_info.level}.svg`}
-          style={{ width: "100%", height: "15.7rem" }}
-        />
-        <S.CommentSection>{category_info.comment}</S.CommentSection>
+        <UseImgix srcUrl={`/images/${level}.svg`} style={{ width: "100%", height: "15.7rem" }} />
+        <S.CommentSection>{comment}</S.CommentSection>
       </S.PaddingWrapper>
-      {category_info.activity_content && (
+      {activity_content && (
         <>
           <DividerSection />
           <S.PaddingWrapper>
@@ -80,10 +79,7 @@ const CategoryResultSection = ({
                 추천 활동
               </TitleSection>
               <S.RecommendActivityImgSection>
-                <UseImgix
-                  srcUrl={"/images/recommend_activity.svg"}
-                  style={{ width: "100%", height: "22.8rem" }}
-                />
+                <UseImgix srcUrl={activity_image} style={{ width: "100%", height: "22.8rem" }} />
               </S.RecommendActivityImgSection>
               <S.RecommendCommentSection>
                 {category_info.activity_content.split("\n").map((content: string) => (
@@ -106,7 +102,7 @@ const CategoryResultSection = ({
             <UseImgix srcUrl={"/images/coaching_star.svg"} />
             {`${CATEGORY_NAME[category]}발달이 중요한 이유`}
           </TitleSection>
-          <S.CommentSection>{`${CATEGORY_NAME[category]} 발달은 중추 신경계나 말초 신경계, 혹은 근골격계의 정상적인 발달에 문제가 있을 때 나타나는 운동 장애와 직접적인 관련이 있으므로 주의 깊게 살펴야 합니다.`}</S.CommentSection>
+          <S.CommentSection>{importance}</S.CommentSection>
         </S.ImportantSection>
       </S.PaddingWrapper>
     </S.Layout>
