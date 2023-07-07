@@ -12,7 +12,6 @@ const CoachingList = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
-
   const { data: coachingList } = useCoachingList(id);
 
   const handleCardClick = (id: number) => {
@@ -21,36 +20,34 @@ const CoachingList = () => {
 
   return (
     <>
-      {coachingList && coachingList[0][0] && (
+      {coachingList && coachingList[0] && (
         <>
           <S.ProgramTitle>
             <UseImgix srcUrl={"/images/test_coaching.svg"} />
             <S.Title>전문 검사와 함께하는 코칭</S.Title>
           </S.ProgramTitle>
           <S.ListWrap>
-            {coachingList[0].map((coaching: coachingType, index: number) => {
+            {coachingList[0].map(({ id, name, base_price, price }: coachingType, index: number) => {
               return (
-                <div key={index}>
-                  <ProgramCard
-                    id={coaching.id}
-                    handleCardClick={() => handleCardClick(coaching.id)}
-                    programImage="/images/coaching/coaching_new_main_0207.png"
-                    programImageAlt="Coaching Thumbnail"
-                    title={coaching.name}
-                    originalPrice={coaching.base_price}
-                    price={coaching.price}
-                    discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
-                    utilVisible={false}
-                  />
-                </div>
+                <ProgramCard
+                  key={index}
+                  id={id}
+                  handleCardClick={() => handleCardClick(id)}
+                  programImage="/images/coaching/coaching_new_main_0207.png"
+                  programImageAlt="Coaching Thumbnail"
+                  title={name}
+                  originalPrice={base_price}
+                  price={price}
+                  discountPercentage={getDiscountPercentage(base_price, price)}
+                  utilVisible={false}
+                />
               );
             })}
           </S.ListWrap>
         </>
       )}
-
       {/* production 서버에 클래스를 숨긴 상태라서 빈페이지로 노출되기 때문에 임시로 넣어둠 */}
-      {!coachingList[0].length && (
+      {/* {!coachingList[0].length && (
         <S.NoCoachingSection>
           <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
           <span>
@@ -59,7 +56,7 @@ const CoachingList = () => {
             프로그램 신청이 가능합니다.
           </span>
         </S.NoCoachingSection>
-      )}
+      )} */}
     </>
   );
 };

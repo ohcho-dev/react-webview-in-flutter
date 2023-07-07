@@ -15,21 +15,24 @@ import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedC
 import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
 import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
+import useSelectedChild from "queries/domain/my/child/useSelectedChild";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
+  const { id: childId } = useRecoilValue(selectedChildInfoState);
+  const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
+  const setSelectedCategoryId = useSetRecoilState(selectedCategoryIdState);
   const { data: coachingInfo } = useAppliedCoachingInfo(id);
   const { mutate: setOpenResultPaper } = useOpenResultPaper();
-  const childInfo = useRecoilValue(selectedChildInfoState);
-  const setCurrentTaskId = useSetRecoilState(currentTaskIdState);
+  const { data: selectedChildInfo } = useSelectedChild(childId.toString());
+
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
-  const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
-  const setSelectedCategoryId = useSetRecoilState(selectedCategoryIdState);
 
   useEffect(() => {
     setTimeout(() => {
@@ -102,33 +105,38 @@ const CoachingDetailPage = () => {
                   name={name}
                   useArrowBtn={true}
                   handleClick={() => {
-                    navigate(`/coaching/daycare/resultPaper/${id}`);
-                    setSelectedCategoryId(0);
-                    // 기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
-                    // if (status === "TTPST_COMPLETE") {
-                    //   navigate("/coaching/daycare/resultPaper/184");
-                    // } else {
-                    //   setOpenModal(true);
-                    // }
+                    //기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
+                    if (status === "TTPST_COMPLETE") {
+                      if (selectedChildInfo[0].has_organization) {
+                        navigate(`/coaching/daycare/resultPaper/${id}`);
+                        setSelectedCategoryId(0);
+                      } else {
+                        navigate(`/coaching/result/${paper_url}`);
+                      }
+                    } else {
+                      setOpenModal(true);
+                    }
                   }}
                 />
-                <S.SharedResultPaperBox isShared={is_open === 1}>
-                  <S.SharedResultPaperBoxTextSection>
-                    <S.SharedResultPaperBoxTitle isShared={is_open === 1}>
-                      결과지 공유
-                    </S.SharedResultPaperBoxTitle>
-                    <S.SharedResultPaperBoxText isShared={is_open === 1}>
-                      담임 선생님이 보육활동 참고를 위해 결과지를 확인하는것에 동의해요.
-                    </S.SharedResultPaperBoxText>
-                  </S.SharedResultPaperBoxTextSection>
-                  <div>
-                    <CustomToggle
-                      value={is_open === 1}
-                      handleValue={() => setOpenResultPaper(id)}
-                      size="sm"
-                    />
-                  </div>
-                </S.SharedResultPaperBox>
+                {selectedChildInfo[0].has_organization && (
+                  <S.SharedResultPaperBox isShared={is_open === 1}>
+                    <S.SharedResultPaperBoxTextSection>
+                      <S.SharedResultPaperBoxTitle isShared={is_open === 1}>
+                        결과지 공유
+                      </S.SharedResultPaperBoxTitle>
+                      <S.SharedResultPaperBoxText isShared={is_open === 1}>
+                        담임 선생님이 보육활동 참고를 위해 결과지를 확인하는것에 동의해요.
+                      </S.SharedResultPaperBoxText>
+                    </S.SharedResultPaperBoxTextSection>
+                    <div>
+                      <CustomToggle
+                        value={is_open === 1}
+                        handleValue={() => setOpenResultPaper(id)}
+                        size="sm"
+                      />
+                    </div>
+                  </S.SharedResultPaperBox>
+                )}
               </>
             ),
           )}
@@ -162,7 +170,7 @@ const CoachingDetailPage = () => {
                     coachingInfo.date_remain >= 0 &&
                       NativeFunction(
                         "routeNativeScreen",
-                        `coachingVideoDetail@${task.id}@${childInfo.id}`,
+                        `coachingVideoDetail@${task.id}@${childId}`,
                       );
                   } else {
                     navigate(`/coaching/videoAssignment/${task.id}`, {

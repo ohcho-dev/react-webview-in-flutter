@@ -40,8 +40,15 @@ export const NoCoachingSection = styled.div`
   }
 `;
 
+export const ProgramListSection = styled.div`
+  display: grid;
+  row-gap: 1.5rem;
+`;
+
 export const TitleBox = styled.div`
   display: flex;
   column-gap: 0.5rem;
   align-items: center;
+
+  margin-bottom: 2rem;
 `;

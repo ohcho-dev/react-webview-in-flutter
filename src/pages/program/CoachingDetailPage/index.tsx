@@ -2,7 +2,6 @@ import useApplyCoaching from "queries/domain/program/useApplyCoaching";
 import useCheckValidCoachingToApply from "queries/domain/program/useCheckValidCoachingToApply";
 import useSelectedCoachingInfo from "queries/domain/program/useSelectedCoachingInfo";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Button from "../../../components/common/Button";
 import CustomBottomModal from "../../../components/common/CustomBottomModal";
@@ -21,7 +20,6 @@ interface DetailCoachingProps {
 }
 
 const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
-  const navigate = useNavigate();
   const { id } = props;
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
@@ -43,7 +41,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
     valid_day: 0,
   });
   const { data: selectedCoachingInfo } = useSelectedCoachingInfo(id);
-  const { data: res } = useCheckValidCoachingToApply(id);
+  const { data: validCoaching } = useCheckValidCoachingToApply(id);
   const { mutate: applyCoaching } = useApplyCoaching(setOpenBottomModal);
 
   useEffect(() => {
@@ -53,35 +51,19 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
   }, [selectedCoachingInfo]);
 
   const handleApplyBtnClick = () => {
-    const { id } = coachingInfo;
-    //TODO: 코드 수정 필요
-    //id=5 -> price>0 이지만 무료 , id=7 -> 유료
-    if (id === 7) {
-      if (res?.message === "OK") {
-        setOpenBottomModal(false);
-        navigate(`/program/coaching/${id}/payment`);
-      } else {
-        if (res?.code === "ONGOING_COACHING") {
-          // 1.구매불가(해당 월령 구매한 동일상품)
-          setOpenSameCoachingModal(true);
-        } else if (res?.code === "ALMOST_MONTH_LIMIT") {
-          // 2.경고(월령 변경까지 얼마 남지 않음)
-          setOpenUsageDuration(true);
-          setLeftDays(res?.detail?.left_days || 0);
-        }
-      }
+    if (validCoaching?.message === "OK") {
+      // 추후 결제 연동
+      // const { id } = coachingInfo;
+      // navigate(`/program/coaching/${id}/payment`);
+      applyCoaching(coachingInfo.id.toString());
     } else {
-      if (res?.message === "OK") {
-        applyCoaching(coachingInfo.id.toString());
-      } else {
-        if (res?.code === "ONGOING_COACHING") {
-          // 1.구매불가(해당 월령 구매한 동일상품)
-          setOpenSameCoachingModal(true);
-        } else if (res?.code === "ALMOST_MONTH_LIMIT") {
-          // 2.경고(월령 변경까지 얼마 남지 않음)
-          setOpenUsageDuration(true);
-          setLeftDays(res?.detail?.left_days || 0);
-        }
+      if (validCoaching?.code === "ONGOING_COACHING") {
+        // 1.구매불가(해당 월령 구매한 동일상품)
+        setOpenSameCoachingModal(true);
+      } else if (validCoaching?.code === "ALMOST_MONTH_LIMIT") {
+        // 2.경고(월령 변경까지 얼마 남지 않음)
+        setOpenUsageDuration(true);
+        setLeftDays(validCoaching?.detail?.left_days || 0);
       }
     }
   };
@@ -101,14 +83,12 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
         }
       >
         <div>
-          {/* {coachingInfo.main_image && ( */}
           <S.Thumbnail>
             <UseImgix
               srcUrl="/images/coaching/coaching_new_main_0207.png"
               alt="Coaching Thumbanil"
             />
           </S.Thumbnail>
-          {/* )} */}
           <S.ProductMainInfo>
             <S.ProductName>{coachingInfo?.name}</S.ProductName>
             <S.PriceWrap>
@@ -136,32 +116,30 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
             />
           </S.ProductDetailInfoSection>
           <S.GreySquare />
-          {coachingInfo.id === 5 && (
-            <S.ImageWrap>
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_01.png"
-                alt="Coaching Detail Page 1"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_02.png"
-                alt="Coaching Detail Page 2"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_03.png"
-                alt="Coaching Detail Page 3"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_04.png"
-                alt="Coaching Detail Page 4"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_05.png"
-                alt="Coaching Detail Page 5"
-              />
-            </S.ImageWrap>
-          )}
+          <S.ImageWrap>
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0220_01.png"
+              alt="Coaching Detail Page 1"
+            />
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0220_02.png"
+              alt="Coaching Detail Page 2"
+            />
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0220_03.png"
+              alt="Coaching Detail Page 3"
+            />
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0220_04.png"
+              alt="Coaching Detail Page 4"
+            />
+            <UseImgix
+              srcUrl="/images/coaching/coaching_new_main_0220_05.png"
+              alt="Coaching Detail Page 5"
+            />
+          </S.ImageWrap>
           {/* 결제 test용 */}
-          {coachingInfo.id === 7 && (
+          {/* {coachingInfo.id === 7 && (
             <S.ImageWrap>
               <UseImgix
                 srcUrl="/images/coaching/coaching_new_main_0220_01.png"
@@ -184,7 +162,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
                 alt="Coaching Detail Page 5"
               />
             </S.ImageWrap>
-          )}
+          )} */}
         </div>
       </LayoutDetailPage>
       <CustomBottomModal

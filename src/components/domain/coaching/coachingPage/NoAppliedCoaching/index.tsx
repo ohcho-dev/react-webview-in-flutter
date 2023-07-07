@@ -41,31 +41,33 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
           </S.NoCoachingSection>
         )}
       </S.InformImageSection>
-      {!!data[0].length && (
-        <S.TitleBox>
-          <UseImgix srcUrl={"/images/coaching_star.svg"} />
-          <S.ProgramTitle>{name}에게 딱 맞는 추천 코칭</S.ProgramTitle>
-        </S.TitleBox>
+      {data[0].length && (
+        <>
+          <S.TitleBox>
+            <UseImgix srcUrl={"/images/coaching_star.svg"} />
+            <S.ProgramTitle>{name}에게 딱 맞는 추천 코칭</S.ProgramTitle>
+          </S.TitleBox>
+          <S.ProgramListSection>
+            {data[0].map((coaching: coachingType, index: number) => {
+              return (
+                <ProgramCard
+                  key={index}
+                  id={coaching.id}
+                  handleCardClick={() => handleCardClick(coaching.id)}
+                  programImage="/images/coaching/coaching_new_main_0207.png"
+                  programImageAlt="Coaching Thumbnail"
+                  isDeadlineComingUp
+                  title={coaching.name}
+                  originalPrice={coaching.base_price}
+                  price={coaching.price}
+                  discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
+                  utilVisible={false}
+                />
+              );
+            })}
+          </S.ProgramListSection>
+        </>
       )}
-      {data[0].map((coaching: coachingType, index: number) => {
-        return (
-          <div key={index}>
-            <ProgramCard
-              id={coaching.id}
-              handleCardClick={() => handleCardClick(coaching.id)}
-              programImage="/images/coaching/coaching_new_main_0207.png"
-              programImageAlt="Coaching Thumbnail"
-              isDeadlineComingUp
-              title={coaching.name}
-              originalPrice={coaching.base_price}
-              price={coaching.price}
-              discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
-              utilVisible={false}
-            />
-            {index !== data[0].length - 1 && <Divider />}
-          </div>
-        );
-      })}
     </div>
   );
 };
