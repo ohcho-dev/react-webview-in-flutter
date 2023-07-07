@@ -27,22 +27,24 @@ const CoachingList = () => {
             <S.Title>전문 검사와 함께하는 코칭</S.Title>
           </S.ProgramTitle>
           <S.ListWrap>
-            {coachingList[0].map(({ id, name, base_price, price }: coachingType, index: number) => {
-              return (
-                <ProgramCard
-                  key={index}
-                  id={id}
-                  handleCardClick={() => handleCardClick(id)}
-                  programImage="/images/coaching/coaching_new_main_0207.png"
-                  programImageAlt="Coaching Thumbnail"
-                  title={name}
-                  originalPrice={base_price}
-                  price={price}
-                  discountPercentage={getDiscountPercentage(base_price, price)}
-                  utilVisible={false}
-                />
-              );
-            })}
+            {coachingList[0].map(
+              ({ id, name, base_price, price, main_image }: coachingType, index: number) => {
+                return (
+                  <ProgramCard
+                    key={index}
+                    id={id}
+                    handleCardClick={() => handleCardClick(id)}
+                    programImage={main_image}
+                    programImageAlt="Coaching Thumbnail"
+                    title={name}
+                    originalPrice={base_price}
+                    price={price}
+                    discountPercentage={getDiscountPercentage(base_price, price)}
+                    utilVisible={false}
+                  />
+                );
+              },
+            )}
           </S.ListWrap>
         </>
       )}

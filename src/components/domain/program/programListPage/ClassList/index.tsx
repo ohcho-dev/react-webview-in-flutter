@@ -29,22 +29,18 @@ const ClassList = () => {
       <S.ListWrap>
         {classList.map((singleClass: { [key: string]: any }, index: number) => {
           return (
-            <div key={index}>
-              <ProgramCard
-                id={singleClass.id}
-                handleCardClick={() => handleCardClick(singleClass.id)}
-                programImage="/images/class/class_04.png"
-                programImageAlt="Class Thumbnail"
-                title={singleClass.name}
-                originalPrice={singleClass.base_price}
-                price={singleClass.price}
-                discountPercentage={getDiscountPercentage(
-                  singleClass.base_price,
-                  singleClass.price,
-                )}
-                utilVisible={false}
-              />
-            </div>
+            <ProgramCard
+              key={index}
+              id={singleClass.id}
+              handleCardClick={() => handleCardClick(singleClass.id)}
+              programImage={singleClass.main_image}
+              programImageAlt="Class Thumbnail"
+              title={singleClass.name}
+              originalPrice={singleClass.base_price}
+              price={singleClass.price}
+              discountPercentage={getDiscountPercentage(singleClass.base_price, singleClass.price)}
+              utilVisible={false}
+            />
           );
         })}
       </S.ListWrap>

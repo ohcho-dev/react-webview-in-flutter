@@ -3,6 +3,10 @@ import * as S from "./CoachingCard.styled";
 import { getDate } from "../../../../../utils/date/getDateTime";
 import UseImgix from "../../../../common/Imgix";
 import { AppliedCoachingType } from "../../../../../types/apis/program";
+import {
+  NoMainImage,
+  NoMainImageText,
+} from "components/domain/program/programListPage/ProgramCard/ProgramCard.styled";
 
 const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JSX.Element => {
   const { status, coaching_name, start_date, end_date, main_image } = props.coaching;
@@ -10,7 +14,13 @@ const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JS
 
   return (
     <S.CoachingCardWrapper progressing={status === "COSTAT_ONGOING"}>
-      {main_image && <UseImgix srcUrl="/images/coaching/coaching_new_main_0207.png" alt={alt} />}
+      {main_image ? (
+        <img src={main_image} alt="program img" style={{ width: "33.5rem", height: "16.8rem" }} />
+      ) : (
+        <NoMainImage>
+          <NoMainImageText>NO IMAGE</NoMainImageText>
+        </NoMainImage>
+      )}
       <S.CoachingTitle>{coaching_name}</S.CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>
         <S.ProgressChip progressing={status === "COSTAT_ONGOING"}>

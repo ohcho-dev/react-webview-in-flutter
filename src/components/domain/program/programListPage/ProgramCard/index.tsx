@@ -55,7 +55,13 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
 
   return (
     <S.ProgramCardWrapper onClick={() => handleCardClick(id)} id={id.toString()}>
-      <UseImgix srcUrl={programImage} alt={programImageAlt || ""} />
+      {programImage ? (
+        <img src={programImage} alt="program img" style={{ width: "33.5rem", height: "16.8rem" }} />
+      ) : (
+        <S.NoMainImage>
+          <S.NoMainImageText>NO IMAGE</S.NoMainImageText>
+        </S.NoMainImage>
+      )}
       {/* {isDeadlineComingUp && <div>마감임박</div>} */}
       {utilVisible && (
         <S.ClassInfoSection>
