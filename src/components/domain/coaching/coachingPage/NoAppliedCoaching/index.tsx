@@ -7,7 +7,6 @@ import { selectedChildInfoState } from "store/common";
 import useCoachingList from "queries/domain/program/useCoachingList";
 import UseImgix from "components/common/Imgix";
 import ProgramCard from "components/domain/program/programListPage/ProgramCard";
-import { Divider } from "components/domain/program/programListPage/programListPage.styled";
 import * as S from "./NoAppliedCoaching.styled";
 
 interface NoAppliedCoachingPropsType {
@@ -48,23 +47,25 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
             <S.ProgramTitle>{name}에게 딱 맞는 추천 코칭</S.ProgramTitle>
           </S.TitleBox>
           <S.ProgramListSection>
-            {data[0].map((coaching: coachingType, index: number) => {
-              return (
-                <ProgramCard
-                  key={index}
-                  id={coaching.id}
-                  handleCardClick={() => handleCardClick(coaching.id)}
-                  programImage="/images/coaching/coaching_new_main_0207.png"
-                  programImageAlt="Coaching Thumbnail"
-                  isDeadlineComingUp
-                  title={coaching.name}
-                  originalPrice={coaching.base_price}
-                  price={coaching.price}
-                  discountPercentage={getDiscountPercentage(coaching.base_price, coaching.price)}
-                  utilVisible={false}
-                />
-              );
-            })}
+            {data[0].map(
+              ({ id, name, price, base_price, main_image }: coachingType, index: number) => {
+                return (
+                  <ProgramCard
+                    key={index}
+                    id={id}
+                    handleCardClick={() => handleCardClick(id)}
+                    programImage={main_image}
+                    programImageAlt="Coaching Thumbnail"
+                    isDeadlineComingUp
+                    title={name}
+                    originalPrice={base_price}
+                    price={price}
+                    discountPercentage={getDiscountPercentage(base_price, price)}
+                    utilVisible={false}
+                  />
+                );
+              },
+            )}
           </S.ProgramListSection>
         </>
       )}
