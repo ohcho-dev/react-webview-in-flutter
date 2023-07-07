@@ -23,6 +23,10 @@ export const DayCareName = styled.span`
   font-size: 1.6rem;
   line-height: 2.2rem;
   color: ${ColorLightBlack9Base};
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export const DayCareInfoSection = styled.div`
@@ -43,4 +47,8 @@ export const DayCareGroupName = styled.span`
   font-weight: 400;
   font-size: 1.4rem;
   color: ${ColorLightBlack6};
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 `;
