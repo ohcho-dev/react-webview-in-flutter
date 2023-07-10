@@ -69,7 +69,8 @@ const App: React.FC = () => {
     if (currentTaskId) {
       window.addEventListener("videoReUpload", async () => {
         await refetchData().then(function () {
-          navigate(`/coaching/coaching-detail/${currentTaskId}`);
+          if (location.pathname !== `/coaching/coaching-detail/${currentTaskId}`)
+            navigate(`/coaching/coaching-detail/${currentTaskId}`);
         });
       });
     }
