@@ -105,7 +105,7 @@ const UpdateChildPage = () => {
   const handleSubmit = () => {
     const foundSameNameObj = childList.find((child: any) => child.name === childData.name);
 
-    if (!nameValidationCheck) return;
+    if (!nameValidationCheck && childData.name !== data[0].name) return;
 
     if (!childData.name) {
       setOpenValidModal(true);
