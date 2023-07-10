@@ -69,7 +69,8 @@ const App: React.FC = () => {
     if (currentTaskId) {
       window.addEventListener("videoReUpload", async () => {
         await refetchData().then(function () {
-          navigate(`/coaching/coaching-detail/${currentTaskId}`, { replace: true });
+          queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
+          //navigate(`/coaching/coaching-detail/${currentTaskId}`, { replace: true });
         });
       });
     }
@@ -94,7 +95,8 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("coachingVideoAssignment", (res: any) => {
-      setVideoId(res.detail.id);
+      navigate(`/coaching/videoAssignment/${res.detail.id}`);
+      // setVideoId(res.detail.id);
     });
   }, []);
 
@@ -115,10 +117,10 @@ const App: React.FC = () => {
     if (resultId) {
       navigate(`/coaching/result/${resultId}`);
     }
-    if (videoId) {
-      navigate(`/coaching/videoAssignment/${videoId}`);
-    }
-  }, [resultId, videoId]);
+    // if (videoId) {
+    //   navigate(`/coaching/videoAssignment/${videoId}`);
+    // }
+  }, [resultId]);
 
   useEffect(() => {
     if (childrenList.length) {

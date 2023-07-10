@@ -27,13 +27,6 @@ const VideoAssignmentPage = (): JSX.Element => {
     }
   };
 
-  // function callNativeFunction() {
-  //   return new Promise(function (resolve, reject) {
-  //     NativeFunction("routeNativeScreen", `coachingVideoDetail@${state.task_id}@${childInfo.id}`);
-  //     resolve("success");
-  //   });
-  // }
-
   return (
     <LayoutDetailPage
       bottomBtn={videoAssignmentResult?.status === "TSST_REJECT"}
