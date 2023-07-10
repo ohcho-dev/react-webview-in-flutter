@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CustomAlarmBadge = styled.div`
+export const CustomAlarmBadge = styled.div<{ newNotification: boolean }>`
   width: 2.8rem;
   height: 2.8rem;
   position: relative;
@@ -11,7 +11,7 @@ export const CustomAlarmBadge = styled.div`
     width: 0.6rem;
     height: 0.6rem;
 
-    display: ${(props: { newNotification: boolean }) => (props.newNotification ? "block" : "none")};
+    display: ${({ newNotification }) => (newNotification ? "block" : "none")};
   }
 
   img:nth-child(2) {

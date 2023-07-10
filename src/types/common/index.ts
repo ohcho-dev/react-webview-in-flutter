@@ -29,12 +29,18 @@ export interface AlarmType {
 export interface NotificationType {
   id: number;
   parent_id: number;
-  type: string;
+  type: "NTCH_RESULT_PAPER" | "NTCH_VIDEO_REJECT" | "NTCH_DATE_END";
   title: string;
   body: string;
   created_at: string;
   updated_at: string;
-  detail: { [key: string]: any };
+  detail: {
+    task_id: number;
+    coaching_id: number;
+    test_id: number;
+    paper_url: string;
+    isOrganization: boolean;
+  };
 }
 
 export interface OptionType {

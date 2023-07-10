@@ -45,11 +45,6 @@ const VideoAssignmentPage = (): JSX.Element => {
           onClick={() => {
             NativeFunction("routeNativeScreen", `coachingVideoDetail@${id}@${childInfo.id}`);
           }}
-          // onClick={async () =>
-          //   await callNativeFunction().then(function () {
-          //     navigate(`/coaching/coaching-detail/${state.coaching_id}`);
-          //   })
-          // }
         />
       }
     >

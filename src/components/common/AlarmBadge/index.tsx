@@ -6,7 +6,7 @@ import { newNotificationFlagstate } from "store/common";
 import UseImgix from "../Imgix";
 import * as S from "./AlarmBadge.styled";
 
-export const AlarmBadge: React.FC = props => {
+export const AlarmBadge: React.FC = () => {
   const navigate = useNavigate();
   const [newNotificationFlag, setNewNotificationFlag] = useRecoilState(newNotificationFlagstate);
   const [newFlag, setNewFlag] = useState(newNotificationFlag);
