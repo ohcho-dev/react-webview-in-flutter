@@ -88,7 +88,7 @@ const LanguageResultSection = ({
             추천 활동
           </TitleSection>
           <S.RecommendActivityImgSection>
-            <UseImgix srcUrl={activity_image} style={{ width: "100%", height: "22.8rem" }} />
+            {activity_image && <S.ActivityImage src={activity_image} alt="activity" />}
           </S.RecommendActivityImgSection>
           <S.RecommendCommentSection>
             {activity_content.split("\n").map((content: string, index: number) => (

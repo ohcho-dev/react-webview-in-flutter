@@ -27,3 +27,9 @@ export const LanguageLevelInfoSection = styled.div<{ firstSection: boolean }>`
       margin-bottom: 1rem;
     `}
 `;
+
+export const ActivityImage = styled.img`
+  width: 100%;
+  height: 22.8rem;
+  object-fit: contain;
+`;

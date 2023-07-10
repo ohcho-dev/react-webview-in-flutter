@@ -82,3 +82,9 @@ export const RecommendCommentSection = styled.div`
 export const ImportantSection = styled.div`
   padding: 2.4rem 0;
 `;
+
+export const ActivityImage = styled.img`
+  width: 100%;
+  height: 22.8rem;
+  object-fit: contain;
+`;
