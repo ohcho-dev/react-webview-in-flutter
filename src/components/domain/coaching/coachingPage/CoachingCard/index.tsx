@@ -4,8 +4,8 @@ import { getDate } from "../../../../../utils/date/getDateTime";
 import UseImgix from "../../../../common/Imgix";
 import { AppliedCoachingType } from "../../../../../types/apis/program";
 import {
-  NoMainImage,
-  NoMainImageText,
+  CustomNoMainImage,
+  CustomNoMainImageText,
 } from "components/domain/program/programListPage/ProgramCard/ProgramCard.styled";
 
 const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JSX.Element => {
@@ -17,9 +17,9 @@ const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JS
       {main_image ? (
         <img src={main_image} alt="program img" style={{ width: "33.5rem", height: "16.8rem" }} />
       ) : (
-        <NoMainImage>
-          <NoMainImageText>NO IMAGE</NoMainImageText>
-        </NoMainImage>
+        <CustomNoMainImage>
+          <CustomNoMainImageText>NO IMAGE</CustomNoMainImageText>
+        </CustomNoMainImage>
       )}
       <S.CoachingTitle>{coaching_name}</S.CoachingTitle>
       <div style={{ display: "flex", columnGap: "0.6rem", alignItems: "center" }}>

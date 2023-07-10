@@ -58,9 +58,9 @@ export const ProgramCard: React.FC<ProgramCardProps> = props => {
       {programImage ? (
         <img src={programImage} alt="program img" style={{ width: "33.5rem", height: "16.8rem" }} />
       ) : (
-        <S.NoMainImage>
-          <S.NoMainImageText>NO IMAGE</S.NoMainImageText>
-        </S.NoMainImage>
+        <S.CustomNoMainImage>
+          <S.CustomNoMainImageText>NO IMAGE</S.CustomNoMainImageText>
+        </S.CustomNoMainImage>
       )}
       {/* {isDeadlineComingUp && <div>마감임박</div>} */}
       {utilVisible && (

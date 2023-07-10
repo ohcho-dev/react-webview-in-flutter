@@ -1,11 +1,9 @@
 import { ColorLightBlack6, ColorLightSlate2 } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
-export const Thumbnail = styled.div`
-  img:nth-child(1) {
-    width: 37.5rem;
-    height: 25rem;
-  }
+export const Thumbnail = styled.img`
+  width: 37.5rem;
+  height: 25rem;
 `;
 
 export const ProductMainInfo = styled.div`

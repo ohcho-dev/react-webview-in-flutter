@@ -1,3 +1,4 @@
+import NoImage from "components/domain/program/NoMainImage";
 import useApplyCoaching from "queries/domain/program/useApplyCoaching";
 import useCheckValidCoachingToApply from "queries/domain/program/useCheckValidCoachingToApply";
 import useSelectedCoachingInfo from "queries/domain/program/useSelectedCoachingInfo";
@@ -19,8 +20,7 @@ interface DetailCoachingProps {
   id: string;
 }
 
-const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
-  const { id } = props;
+const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const [openSameCoachingModal, setOpenSameCoachingModal] = useState(false);
@@ -72,6 +72,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
     setOpenUsageDuration(false);
     setOpenBottomModal(false);
   };
+
   return (
     <>
       <LayoutDetailPage
@@ -83,14 +84,13 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
         }
       >
         <div>
-          <S.Thumbnail>
-            <UseImgix
-              srcUrl="/images/coaching/coaching_new_main_0207.png"
-              alt="Coaching Thumbanil"
-            />
-          </S.Thumbnail>
+          {coachingInfo.main_image ? (
+            <S.Thumbnail src={coachingInfo.main_image} alt="main" />
+          ) : (
+            <NoImage />
+          )}
           <S.ProductMainInfo>
-            <S.ProductName>{coachingInfo?.name}</S.ProductName>
+            <S.ProductName>{coachingInfo.name}</S.ProductName>
             <S.PriceWrap>
               <ProgramPrice
                 discountPercentage={getDiscountPercentage(
@@ -117,6 +117,7 @@ const CoachingDetailPage = (props: DetailCoachingProps): JSX.Element => {
           </S.ProductDetailInfoSection>
           <S.GreySquare />
           <S.ImageWrap>
+            {/* TODO: 동적으로 이미지 받아와서 어떻게 최적화 할건지 고민하기 */}
             <UseImgix
               srcUrl="/images/coaching/coaching_new_main_0220_01.png"
               alt="Coaching Detail Page 1"

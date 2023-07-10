@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const Thumbnail = styled.img`
+  width: 37.5rem;
+  height: 25rem;
+`;
+
 export const ClassWrapper = styled.div`
   display: flex;
   flex-direction: column;

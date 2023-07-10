@@ -14,14 +14,14 @@ import { getDateTime } from "../../../utils/date/getDateTime";
 import { getMonthLevelString } from "../../../utils/date/getMonthLevelString";
 import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
 import * as S from "./classDetailPage.styled";
+import NoImage from "components/domain/program/NoMainImage";
 
 interface ClassDetailPageProps {
   id: string;
 }
 
-const ClassDetailPage: React.FC<ClassDetailPageProps> = props => {
+const ClassDetailPage = ({ id }: ClassDetailPageProps): JSX.Element => {
   const navigate = useNavigate();
-  const { id } = props;
   const { data: selectedClassInfo } = useSelectedClassInfo(id);
   const commonCodeList = useRecoilValue<{ [key: string]: any }>(commonCodeState);
 
@@ -44,7 +44,11 @@ const ClassDetailPage: React.FC<ClassDetailPageProps> = props => {
       }
     >
       <S.ClassWrapper>
-        <UseImgix srcUrl="/images/class/class_04.png" alt="Class Thumbnail" />
+        {selectedClassInfo.main_image ? (
+          <S.Thumbnail src={selectedClassInfo.main_image} alt="main" />
+        ) : (
+          <NoImage />
+        )}
         <S.ClassInfoWrapper>
           <S.ClassInfo>
             <OnlineOffline>{commonCodeList[selectedClassInfo.place_type]}</OnlineOffline>

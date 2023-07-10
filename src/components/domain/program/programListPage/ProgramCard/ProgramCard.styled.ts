@@ -1,5 +1,6 @@
 import { ColorLightGray4, ColorLightSlate9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
+import { NoMainImage, NoMainImageText } from "../../NoMainImage/NoImage.styled";
 
 export const ProgramCardWrapper = styled.div`
   display: flex;
@@ -113,21 +114,12 @@ export const ProceedStatus = styled.span`
   color: ${(props: { color: string }) => props.color};
 `;
 
-export const NoMainImage = styled.div`
+export const CustomNoMainImage = styled(NoMainImage)`
   width: 33.5rem;
   height: 16.9rem;
   border-radius: 1rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: ${ColorLightGray4};
 `;
 
-export const NoMainImageText = styled.span`
+export const CustomNoMainImageText = styled(NoMainImageText)`
   font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 2.2rem;
-  color: ${ColorLightSlate9Base};
 `;
