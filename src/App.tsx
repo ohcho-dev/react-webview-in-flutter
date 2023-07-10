@@ -76,7 +76,6 @@ const App: React.FC = () => {
       window.addEventListener("videoReUpload", async () => {
         await refetchData().then(function () {
           queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
-          //navigate(`/coaching/coaching-detail/${currentTaskId}`, { replace: true });
         });
       });
     }
@@ -100,10 +99,10 @@ const App: React.FC = () => {
       navigate(`/coaching/result/${res.detail.id}`);
     });
 
-    window.addEventListener("coachingVideoAssignment", async (res: any) => {
-      await setNewNotificationFlag(false);
-      await updateNotificationTime();
-      await navigate(`/coaching/videoAssignment/${res.detail.id}`);
+    window.addEventListener("coachingVideoAssignment", (res: any) => {
+      setNewNotificationFlag(false);
+      updateNotificationTime();
+      navigate(`/coaching/videoAssignment/${res.detail.id}`);
     });
   }, []);
 
