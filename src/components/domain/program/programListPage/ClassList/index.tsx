@@ -1,8 +1,10 @@
 import UseImgix from "components/common/Imgix";
 import useClassList from "queries/domain/program/useClassList";
+import { UseQueryResult } from "react-query";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedChildInfoState } from "store/common";
+import { ClassDetailType } from "types/domain/program";
 import { getDiscountPercentage } from "utils/program/getDiscountPercentage";
 import ProgramCard from "../ProgramCard";
 import * as S from "../programListPage.styled";
@@ -11,7 +13,6 @@ const ClassList = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { id } = useRecoilValue(selectedChildInfoState);
-
   const { data: classList } = useClassList(id);
 
   const handleCardClick = (id: number) => {
@@ -20,30 +21,34 @@ const ClassList = () => {
 
   return (
     <>
-      {classList[0] && (
-        <S.ProgramTitle>
-          <UseImgix srcUrl={"/images/expert.svg"} />
-          <S.Title>전문가와 함께하는 클래스</S.Title>
-        </S.ProgramTitle>
+      {classList.length && (
+        <>
+          <S.ProgramTitle>
+            <UseImgix srcUrl={"/images/expert.svg"} />
+            <S.Title>전문가와 함께하는 클래스</S.Title>
+          </S.ProgramTitle>
+          <S.ListWrap>
+            {classList.map(
+              ({ id, main_image, name, base_price, price }: ClassDetailType, index: number) => {
+                return (
+                  <ProgramCard
+                    key={index}
+                    id={id}
+                    handleCardClick={() => handleCardClick(id)}
+                    programImage={main_image}
+                    programImageAlt="Class Thumbnail"
+                    title={name}
+                    originalPrice={base_price}
+                    price={price}
+                    discountPercentage={getDiscountPercentage(base_price, price)}
+                    utilVisible={false}
+                  />
+                );
+              },
+            )}
+          </S.ListWrap>
+        </>
       )}
-      <S.ListWrap>
-        {classList.map((singleClass: { [key: string]: any }, index: number) => {
-          return (
-            <ProgramCard
-              key={index}
-              id={singleClass.id}
-              handleCardClick={() => handleCardClick(singleClass.id)}
-              programImage={singleClass.main_image}
-              programImageAlt="Class Thumbnail"
-              title={singleClass.name}
-              originalPrice={singleClass.base_price}
-              price={singleClass.price}
-              discountPercentage={getDiscountPercentage(singleClass.base_price, singleClass.price)}
-              utilVisible={false}
-            />
-          );
-        })}
-      </S.ListWrap>
     </>
   );
 };
