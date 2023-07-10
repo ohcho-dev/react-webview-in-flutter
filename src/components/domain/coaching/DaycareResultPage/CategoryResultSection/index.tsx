@@ -79,7 +79,13 @@ const CategoryResultSection = ({
                 추천 활동
               </TitleSection>
               <S.RecommendActivityImgSection>
-                <UseImgix srcUrl={activity_image} style={{ width: "100%", height: "22.8rem" }} />
+                {activity_image && (
+                  <img
+                    src={activity_image}
+                    alt="activity"
+                    style={{ width: "100%", height: "22.8rem" }}
+                  />
+                )}
               </S.RecommendActivityImgSection>
               <S.RecommendCommentSection>
                 {category_info.activity_content.split("\n").map((content: string) => (
