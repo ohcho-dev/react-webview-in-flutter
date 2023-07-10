@@ -69,8 +69,7 @@ const App: React.FC = () => {
     if (currentTaskId) {
       window.addEventListener("videoReUpload", async () => {
         await refetchData().then(function () {
-          if (location.pathname !== `/coaching/coaching-detail/${currentTaskId}`)
-            navigate(`/coaching/coaching-detail/${currentTaskId}`);
+          navigate(`/coaching/coaching-detail/${currentTaskId}`, { replace: true });
         });
       });
     }
@@ -95,7 +94,6 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("coachingVideoAssignment", (res: any) => {
-      alert(res.detail.id);
       setVideoId(res.detail.id);
     });
   }, []);
@@ -118,7 +116,7 @@ const App: React.FC = () => {
       navigate(`/coaching/result/${resultId}`);
     }
     if (videoId) {
-      navigate(`/coaching/videoAssignment${videoId}`);
+      navigate(`/coaching/videoAssignment/${videoId}`);
     }
   }, [resultId, videoId]);
 
