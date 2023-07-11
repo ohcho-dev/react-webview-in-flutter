@@ -20,8 +20,9 @@ const ProgramListPage = () => {
 
   return (
     <LayoutMainPage>
-      <S.ProgramPageWrapper>
-        {/* <CarouselSection>
+      <CoachingList />
+      {/* <S.ProgramPageWrapper> */}
+      {/* <CarouselSection>
           <Slider {...settings}>
             <SliderContainer
               onClick={() => {
@@ -39,13 +40,14 @@ const ProgramListPage = () => {
             </SliderContainer>
           </Slider>
         </CarouselSection> */}
-        <S.CouchingSection>
+      {/* <S.CouchingSection>
           <CoachingList />
-        </S.CouchingSection>
-        <S.ClassSection>
+        </S.CouchingSection> */}
+      {/* 당분간 숨김처리  */}
+      {/* <S.ClassSection>
           <ClassList />
-        </S.ClassSection>
-      </S.ProgramPageWrapper>
+        </S.ClassSection> */}
+      {/* </S.ProgramPageWrapper> */}
     </LayoutMainPage>
   );
 };

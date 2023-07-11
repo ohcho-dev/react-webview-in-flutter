@@ -1,4 +1,8 @@
-import { ColorLightBlack9Base } from "constants/ldsConstants/global";
+import {
+  ColorLightBlack12,
+  ColorLightBlack9Base,
+  ColorLightSlate9Base,
+} from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const OnlineOffline = styled.span`
@@ -92,4 +96,38 @@ export const NoCoachingSection = styled.div`
 
 export const Divider = styled.div`
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.15);
+`;
+
+export const CoachingWrapper = styled.div`
+  width: 100%;
+
+  padding: 2rem 2rem 0 2rem;
+`;
+
+export const NoProgramSection = styled.div`
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 19.2rem;
+
+  span:nth-child(2) {
+    margin: 2.4rem 0 0.5rem 0;
+
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: 2.6rem;
+    color: ${ColorLightBlack12};
+  }
+
+  span:nth-child(3) {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 2rem;
+    color: ${ColorLightSlate9Base};
+  }
 `;

@@ -19,8 +19,8 @@ const CoachingList = () => {
   };
 
   return (
-    <>
-      {coachingList && coachingList[0] && (
+    <S.CoachingWrapper>
+      {coachingList && coachingList[0].length > 0 ? (
         <>
           <S.ProgramTitle>
             <UseImgix srcUrl={"/images/test_coaching.svg"} />
@@ -47,19 +47,18 @@ const CoachingList = () => {
             )}
           </S.ListWrap>
         </>
+      ) : (
+        <S.NoProgramSection>
+          <UseImgix
+            alt="inform-img"
+            srcUrl="/images/no-coaching-img.png"
+            style={{ width: "26rem", height: "9rem" }}
+          />
+          <span>아직 신청할 수 있는 프로그램이 없어요.</span>
+          <span>다양한 프로그램 등록을 기다려주세요.</span>
+        </S.NoProgramSection>
       )}
-      {/* production 서버에 클래스를 숨긴 상태라서 빈페이지로 노출되기 때문에 임시로 넣어둠 */}
-      {/* {!coachingList[0].length && (
-        <S.NoCoachingSection>
-          <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
-          <span>
-            태어난 지 12개월 이후부터
-            <br />
-            프로그램 신청이 가능합니다.
-          </span>
-        </S.NoCoachingSection>
-      )} */}
-    </>
+    </S.CoachingWrapper>
   );
 };
 
