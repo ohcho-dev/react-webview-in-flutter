@@ -47,9 +47,10 @@ const App: React.FC = () => {
   const { mutate: updateNotificationTime } = useUpdateNotificationCheckTime();
   const data = useGetBaseDate();
 
-  function refetchCoachingData() {
+  function refetchData() {
     return new Promise(function (resolve, reject) {
-      queryClient.invalidateQueries(coachingQueryKeys.appliedCoachingInfo);
+      queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
+
       resolve("success");
     });
   }
@@ -74,8 +75,8 @@ const App: React.FC = () => {
   useEffect(() => {
     if (currentTaskId) {
       window.addEventListener("videoReUpload", async () => {
-        await refetchCoachingData().then(function () {
-          queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
+        await refetchData().then(function () {
+          queryClient.invalidateQueries(coachingQueryKeys.appliedCoachingInfo);
         });
       });
     }
