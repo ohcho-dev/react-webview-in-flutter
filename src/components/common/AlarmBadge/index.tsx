@@ -1,5 +1,5 @@
 import useNotificationList from "queries/common/notification/useNotificationList";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { newNotificationFlagstate } from "store/common";
 import UseImgix from "../Imgix";
@@ -7,8 +7,9 @@ import * as S from "./AlarmBadge.styled";
 
 export const AlarmBadge: React.FC = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const newNotificationFlag = useRecoilValue(newNotificationFlagstate);
-  const { status, isFetching } = useNotificationList();
+  const { status, isFetching } = useNotificationList(pathname);
 
   return (
     <>

@@ -1,6 +1,6 @@
 import UseImgix from "components/common/Imgix";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSetRecoilState } from "recoil";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import LayoutDetailPage from "../../../../layouts/LayoutDetailPage";
@@ -13,8 +13,9 @@ import * as S from "./AlarmListPage.styled";
 
 const AlarmListPage = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
-  const { data } = useNotificationList();
+  const { data } = useNotificationList(pathname);
   const { mutate: updateNotificationTime } = useUpdateNotificationCheckTime();
 
   useEffect(() => {

@@ -4,7 +4,6 @@ import { useQuery } from "react-query";
 import { NotificationType } from "../../../types/common";
 import { request } from "../../axiosInstance";
 import { commonQueryKeys } from "../commonQueryKeys";
-import { Dispatch, SetStateAction } from "react";
 import { useSetRecoilState } from "recoil";
 import { newNotificationFlagstate } from "store/common";
 
@@ -13,23 +12,23 @@ const getNotificationList = () => {
   return request({ method: "GET" as Method, url: `/v1/notification/list` });
 };
 
-const useNotificationList = () => {
+const useNotificationList = (pathname: string) => {
   const setNewNotificationFlag = useSetRecoilState(newNotificationFlagstate);
-  return useQuery(commonQueryKeys.notificationList, getNotificationList, {
+  return useQuery([commonQueryKeys.notificationList, pathname], getNotificationList, {
     refetchOnWindowFocus: true,
     onSuccess: data => {
       if (data.last_checked_at) {
         data.list.map((noti: NotificationType) => {
-          if (new Date(noti.created_at) > new Date(data.last_checked_at)) {
+          if (
+            new Date(noti.created_at) > new Date(data.last_checked_at) &&
+            pathname !== "/my/alarm-list"
+          ) {
             setNewNotificationFlag(true);
           }
           return null;
         });
       } else {
-        let flag = false;
-
-        flag = data.list.length ? true : false;
-        setNewNotificationFlag(flag);
+        setNewNotificationFlag(data.list.length > 0 ? true : false);
       }
     },
     enabled: !!Cookies.get("token"),
