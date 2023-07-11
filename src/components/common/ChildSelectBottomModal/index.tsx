@@ -52,8 +52,12 @@ const ChildSelectBottomModal: React.FC<ChildSelectBottomModalProps> = props => {
         })}
         <S.GoToChildManagementBtn
           onClick={() => {
-            toggleModal();
-            navigate("/my/management-child");
+            new Promise<void>(resolve => {
+              toggleModal();
+              setTimeout(() => {
+                resolve();
+              }, 100);
+            }).then(() => navigate("/my/management-child"));
           }}
         >
           <span>아이 관리로 이동하기</span>
