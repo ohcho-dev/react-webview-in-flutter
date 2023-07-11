@@ -50,7 +50,6 @@ const App: React.FC = () => {
   function refetchData() {
     return new Promise(function (resolve, reject) {
       queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
-
       resolve("success");
     });
   }

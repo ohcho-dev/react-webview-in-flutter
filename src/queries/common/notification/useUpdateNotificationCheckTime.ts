@@ -8,7 +8,6 @@ const updateNotificationCheckTime = () => {
 };
 
 const useUpdateNotificationCheckTime = () => {
-  alert("call");
   return useMutation(updateNotificationCheckTime);
 };
 
