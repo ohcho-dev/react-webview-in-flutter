@@ -47,7 +47,7 @@ const App: React.FC = () => {
   const { mutate: updateNotificationTime } = useUpdateNotificationCheckTime();
   const data = useGetBaseDate();
 
-  function refetchData() {
+  function refetchCoachingData() {
     return new Promise(function (resolve, reject) {
       queryClient.invalidateQueries(coachingQueryKeys.appliedCoachingInfo);
       resolve("success");
@@ -74,7 +74,7 @@ const App: React.FC = () => {
   useEffect(() => {
     if (currentTaskId) {
       window.addEventListener("videoReUpload", async () => {
-        await refetchData().then(function () {
+        await refetchCoachingData().then(function () {
           queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
         });
       });
@@ -99,10 +99,13 @@ const App: React.FC = () => {
       navigate(`/coaching/result/${res.detail.id}`);
     });
 
-    window.addEventListener("coachingVideoAssignment", (res: any) => {
-      setNewNotificationFlag(false);
-      updateNotificationTime();
-      navigate(`/coaching/videoAssignment/${res.detail.id}`);
+    // 동영상 반려 푸시 메세지 클릭
+    window.addEventListener("coachingVideoAssignment", async (res: any) => {
+      await new Promise(function (resolve, reject) {
+        setNewNotificationFlag(false);
+        updateNotificationTime();
+        resolve("success");
+      }).then(() => navigate(`/coaching/videoAssignment/${res.detail.id}`));
     });
   }, []);
 
