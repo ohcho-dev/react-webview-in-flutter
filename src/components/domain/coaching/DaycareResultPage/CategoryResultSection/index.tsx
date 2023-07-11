@@ -50,7 +50,7 @@ const CategoryResultSection = ({
         />
         <S.LevelSection>
           <S.LevelInfoSection>
-            <S.LevelTitle>{`${child_name}의 ${CATEGORY_NAME[category]}발달은`}</S.LevelTitle>
+            <S.LevelTitle>{`${child_name}의 ${CATEGORY_NAME[category]} 발달은`}</S.LevelTitle>
             <S.LevelTitle secondLine>{LEVEL_TEXT[category_info.level]}</S.LevelTitle>
             <S.MonthTitle>{`현재 월령 : ${month_level.month_start} ~ ${month_level.month_end}개월`}</S.MonthTitle>
             {gap > -3 && (
