@@ -91,14 +91,12 @@ const LanguageResultSection = ({
             {activity_image && <S.ActivityImage src={activity_image} alt="activity" />}
           </S.RecommendActivityImgSection>
           <S.RecommendCommentSection>
-            {activity_content.split("\n").map((content: string, index: number) => (
-              <ListItem key={index}>
-                <IconDotSection>
-                  <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
-                </IconDotSection>
-                <ListContent>{content}</ListContent>
-              </ListItem>
-            ))}
+            <ListItem>
+              <IconDotSection>
+                <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
+              </IconDotSection>
+              <ListContent>{activity_content}</ListContent>
+            </ListItem>
           </S.RecommendCommentSection>
         </S.RecommendedActivitySection>
       </S.PaddingWrapper>
@@ -107,7 +105,7 @@ const LanguageResultSection = ({
         <S.ImportantSection>
           <TitleSection>
             <UseImgix srcUrl={"/images/coaching_star.svg"} />
-            {`언어발달이 중요한 이유`}
+            {`언어 발달이 중요한 이유`}
           </TitleSection>
           <S.CommentSection>{importance}</S.CommentSection>
         </S.ImportantSection>

@@ -40,7 +40,7 @@ const CategoryResultSection = ({
   if (!category_info || !month_level) return null;
   const { level, result_month_level, activity_content, activity_image, importance, gap, comment } =
     category_info;
-
+  console.log(importance.replace(/["]+/g, "`"));
   return (
     <S.Layout>
       <S.PaddingWrapper>
@@ -82,14 +82,12 @@ const CategoryResultSection = ({
                 {activity_image && <S.ActivityImage src={activity_image} alt="activity" />}
               </S.RecommendActivityImgSection>
               <S.RecommendCommentSection>
-                {category_info.activity_content.split("\n").map((content: string) => (
-                  <ListItem key={content}>
-                    <IconDotSection>
-                      <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
-                    </IconDotSection>
-                    <ListContent>{content}</ListContent>
-                  </ListItem>
-                ))}
+                <ListItem>
+                  <IconDotSection>
+                    <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
+                  </IconDotSection>
+                  <ListContent>{activity_content}</ListContent>
+                </ListItem>
               </S.RecommendCommentSection>
             </S.RecommendedActivitySection>
           </S.PaddingWrapper>
@@ -100,7 +98,7 @@ const CategoryResultSection = ({
         <S.ImportantSection>
           <TitleSection>
             <UseImgix srcUrl={"/images/coaching_star.svg"} />
-            {`${CATEGORY_NAME[category]}발달이 중요한 이유`}
+            {`${CATEGORY_NAME[category]} 발달이 중요한 이유`}
           </TitleSection>
           <S.CommentSection>{importance}</S.CommentSection>
         </S.ImportantSection>

@@ -35,6 +35,7 @@ export const ListContent = styled.div`
   font-weight: 400;
   line-height: 2.6rem;
   color: ${ColorLightSlate11};
+  white-space: pre-wrap;
 `;
 
 export const IconDotSection = styled.div`
