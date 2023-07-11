@@ -39,7 +39,7 @@ export interface NotificationType {
     coaching_id: number;
     test_id: number;
     paper_url: string;
-    isOrganization: boolean;
+    paper_type: "TTPTY_EXTERNAL_URL" | "TTPTY_INTERNAL_PAGE";
   };
 }
 

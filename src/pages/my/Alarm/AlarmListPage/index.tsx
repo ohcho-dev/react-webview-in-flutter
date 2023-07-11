@@ -27,32 +27,41 @@ const AlarmListPage = () => {
       <PageTitle title={"알림"} />
       {data.list.length ? (
         <S.AlarmListWrap>
-          {data.list.map(({ created_at, detail, id, title, body, type }: NotificationType) => (
-            <S.AlarmWrap
-              new={new Date(created_at) > new Date(data.last_checked_at)}
-              onClick={() => {
-                navigate(`/coaching/videoAssignment/${detail.task_id}`);
-                // if (type === "NTCH_VIDEO_REJECT") {
-                //   navigate(`/coaching/videoAssignment/${detail.task_id}`);
-                // } else if (type === "NTCH_RESULT_PAPER") {
-                //   if (!detail.isOrganization) {
-                //     navigate(detail.paper_url);
-                //   } else {
-                //     navigate(`/coaching/daycare/resultPaper/${detail.test_id}`);
-                //   }
-                // }
-              }}
-              key={id}
-            >
-              {/* 아이콘 하나로 통일했습니다. 추후 알림 종류가 여러개로 나눠질 경우 그에 맞게 수정 필요합니다. */}
-              <UseImgix srcUrl={`/images/icon-alarm-NTCH_VIDEO_REJECT.svg`} alt="alarm icon" />
-              <div>
-                <S.Title>{title}</S.Title>
-                <S.Desc>{body}</S.Desc>
-                <S.DateTime>{getDate(created_at.substring(0, 10))}</S.DateTime>
-              </div>
-            </S.AlarmWrap>
-          ))}
+          {data.list.map(
+            ({
+              created_at,
+              detail: { task_id, paper_type, paper_url, test_id },
+              id,
+              title,
+              body,
+              type,
+            }: NotificationType) => (
+              <S.AlarmWrap
+                new={new Date(created_at) > new Date(data.last_checked_at)}
+                onClick={() => {
+                  navigate(`/coaching/videoAssignment/${task_id}`);
+                  if (type === "NTCH_VIDEO_REJECT") {
+                    navigate(`/coaching/videoAssignment/${task_id}`);
+                  } else if (type === "NTCH_RESULT_PAPER") {
+                    if (paper_type === "TTPTY_EXTERNAL_URL") {
+                      navigate(paper_url);
+                    } else {
+                      navigate(`/coaching/daycare/resultPaper/${test_id}`);
+                    }
+                  }
+                }}
+                key={id}
+              >
+                {/* 아이콘 하나로 통일했습니다. 추후 알림 종류가 여러개로 나눠질 경우 그에 맞게 수정 필요합니다. */}
+                <UseImgix srcUrl={`/images/icon-alarm-NTCH_VIDEO_REJECT.svg`} alt="alarm icon" />
+                <div>
+                  <S.Title>{title}</S.Title>
+                  <S.Desc>{body}</S.Desc>
+                  <S.DateTime>{getDate(created_at.substring(0, 10))}</S.DateTime>
+                </div>
+              </S.AlarmWrap>
+            ),
+          )}
         </S.AlarmListWrap>
       ) : (
         <S.ImgWrap>

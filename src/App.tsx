@@ -95,8 +95,11 @@ const App: React.FC = () => {
       queryClient.invalidateQueries(commonQueryKeys.notificationList);
     });
 
-    window.addEventListener("coachingResult", (res: any) => {
-      navigate(`/coaching/result/${res.detail.id}`);
+    // 결과지 푸시 메세지 클릭
+    window.addEventListener("coachingResult", ({ detail }: any) => {
+      detail.paper_type === "TTPTY_EXTERNAL_URL"
+        ? navigate(detail.url)
+        : navigate(`/coaching/daycare/resultPaper/${detail.id}`);
     });
 
     // 동영상 반려 푸시 메세지 클릭
