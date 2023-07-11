@@ -39,7 +39,6 @@ const AlarmListPage = () => {
               <S.AlarmWrap
                 new={new Date(created_at) > new Date(data.last_checked_at)}
                 onClick={() => {
-                  navigate(`/coaching/videoAssignment/${task_id}`);
                   if (type === "NTCH_VIDEO_REJECT") {
                     navigate(`/coaching/videoAssignment/${task_id}`);
                   } else if (type === "NTCH_RESULT_PAPER") {

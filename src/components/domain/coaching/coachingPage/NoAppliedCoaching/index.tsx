@@ -40,7 +40,7 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
           </S.NoCoachingSection>
         )}
       </S.InformImageSection>
-      {data[0].length && (
+      {data[0].length > 0 && (
         <>
           <S.TitleBox>
             <UseImgix srcUrl={"/images/coaching_star.svg"} />

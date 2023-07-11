@@ -97,6 +97,7 @@ const App: React.FC = () => {
 
     // 결과지 푸시 메세지 클릭
     window.addEventListener("coachingResult", ({ detail }: any) => {
+      alert(`call ${detail.paper_type} ${detail.url} ${detail.id}`);
       detail.paper_type === "TTPTY_EXTERNAL_URL"
         ? navigate(detail.url)
         : navigate(`/coaching/daycare/resultPaper/${detail.id}`);
