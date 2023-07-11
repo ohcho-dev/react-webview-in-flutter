@@ -84,6 +84,15 @@ export const CoachingProgramDuration = styled.span`
   color: ${ColorLightSlate9Base};
 `;
 
+export const ContentSection = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  padding: 0.8rem 2rem;
+  row-gap: 1.2rem;
+`;
+
 export const SharedResultPaperBox = styled.div<{ isShared: boolean }>`
   display: flex;
   align-items: center;
@@ -91,7 +100,6 @@ export const SharedResultPaperBox = styled.div<{ isShared: boolean }>`
   gap: 1.8rem;
   width: 33.5rem;
   height: 9.8rem;
-  margin: 1rem 0 0 2rem;
 
   background: ${({ isShared }) => (isShared ? ColorLightEltern2 : ColorLightSlate2)};
 

@@ -35,9 +35,9 @@ const ContentItem: React.FC<ContentItemProps> = ({
         <S.ItemTitle>{name}</S.ItemTitle>
       </S.ItemDesc>
       {useArrowBtn && (
-        <S.ArrowBtn>
+        <S.ArrowBtnSection>
           <Icon icon={"chevron-right"} size={24} fill={ColorLightSlate10} />
-        </S.ArrowBtn>
+        </S.ArrowBtnSection>
       )}
     </S.ItemWrap>
   );

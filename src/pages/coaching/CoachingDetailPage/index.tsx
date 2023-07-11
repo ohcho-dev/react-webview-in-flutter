@@ -96,7 +96,7 @@ const CoachingDetailPage = () => {
           </S.CoachingDetailTitleBox>
           {coachingInfo.result_paper.map(
             ({ name, status, paper_url, is_open, id }: CoachingStatusType, index: number) => (
-              <>
+              <S.ContentSection key={id}>
                 <ContentItem
                   style={{ marginBottom: "0" }}
                   key={index + name}
@@ -137,50 +137,54 @@ const CoachingDetailPage = () => {
                     </div>
                   </S.SharedResultPaperBox>
                 )}
-              </>
+              </S.ContentSection>
             ),
           )}
           <S.CoachingDetailTitleBox>
             <UseImgix srcUrl={"/images/books.svg"} />
             <S.DetailTitle>과제</S.DetailTitle>
           </S.CoachingDetailTitleBox>
-          {coachingInfo.task.map((task: TaskStatusType, index: number) => (
-            <ContentItem
-              key={index + task.name}
-              coachingMethod={task.task_type}
-              chipStatus={
-                coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
-                  ? [task.task_type, "EXPIRED"]
-                  : [task.task_type, task.status]
-              }
-              name={task.name}
-              useArrowBtn={
-                coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
-              }
-              handleClick={() => {
-                if (task.task_type === "TSTY_SURVEY") {
-                  if (task.status === "TSST_ONGOING") {
-                    coachingInfo.date_remain >= 0 &&
-                      navigate(`/coaching/questionnarie/${task.id}`, { state: { coachingId: id } });
-                  } else if (task.status === "TSST_COMPLETE") {
-                    navigate(`/coaching/questionnarie/detail/${task.id}`);
-                  }
-                } else if (task.task_type === "TSTY_VIDEO") {
-                  if (task.status === "TSST_ONGOING") {
-                    coachingInfo.date_remain >= 0 &&
-                      NativeFunction(
-                        "routeNativeScreen",
-                        `coachingVideoDetail@${task.id}@${childId}`,
-                      );
-                  } else {
-                    navigate(`/coaching/videoAssignment/${task.id}`, {
-                      state: { task_id: task.id, coaching_id: id },
-                    });
-                  }
+          <S.ContentSection>
+            {coachingInfo.task.map((task: TaskStatusType, index: number) => (
+              <ContentItem
+                key={index + task.name}
+                coachingMethod={task.task_type}
+                chipStatus={
+                  coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
+                    ? [task.task_type, "EXPIRED"]
+                    : [task.task_type, task.status]
                 }
-              }}
-            />
-          ))}
+                name={task.name}
+                useArrowBtn={
+                  coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
+                }
+                handleClick={() => {
+                  if (task.task_type === "TSTY_SURVEY") {
+                    if (task.status === "TSST_ONGOING") {
+                      coachingInfo.date_remain >= 0 &&
+                        navigate(`/coaching/questionnarie/${task.id}`, {
+                          state: { coachingId: id },
+                        });
+                    } else if (task.status === "TSST_COMPLETE") {
+                      navigate(`/coaching/questionnarie/detail/${task.id}`);
+                    }
+                  } else if (task.task_type === "TSTY_VIDEO") {
+                    if (task.status === "TSST_ONGOING") {
+                      coachingInfo.date_remain >= 0 &&
+                        NativeFunction(
+                          "routeNativeScreen",
+                          `coachingVideoDetail@${task.id}@${childId}`,
+                        );
+                    } else {
+                      navigate(`/coaching/videoAssignment/${task.id}`, {
+                        state: { task_id: task.id, coaching_id: id },
+                      });
+                    }
+                  }
+                }}
+              />
+            ))}
+          </S.ContentSection>
         </S.ListScroll>
         <CustomModal
           cancelBtn={false}
