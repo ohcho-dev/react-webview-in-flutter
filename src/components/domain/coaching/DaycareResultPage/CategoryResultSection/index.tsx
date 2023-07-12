@@ -40,7 +40,7 @@ const CategoryResultSection = ({
   if (!category_info || !month_level) return null;
   const { level, result_month_level, activity_content, activity_image, importance, gap, comment } =
     category_info;
-  console.log(importance.replace(/["]+/g, "`"));
+
   return (
     <S.Layout>
       <S.PaddingWrapper>
