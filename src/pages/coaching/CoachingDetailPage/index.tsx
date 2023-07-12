@@ -15,7 +15,6 @@ import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedC
 import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
 import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
-import useSelectedChild from "queries/domain/my/child/useSelectedChild";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -26,7 +25,6 @@ const CoachingDetailPage = () => {
   const setSelectedCategoryId = useSetRecoilState(selectedCategoryIdState);
   const { data: coachingInfo } = useAppliedCoachingInfo(id);
   const { mutate: setOpenResultPaper } = useOpenResultPaper();
-  const { data: selectedChildInfo } = useSelectedChild(childId.toString());
 
   const [openModal, setOpenModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -107,7 +105,7 @@ const CoachingDetailPage = () => {
                   handleClick={() => {
                     //기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
                     if (status === "TTPST_COMPLETE") {
-                      if (selectedChildInfo[0].has_organization) {
+                      if (coachingInfo.has_organization) {
                         navigate(`/coaching/daycare/resultPaper/${id}`);
                         setSelectedCategoryId(0);
                       } else {
@@ -118,7 +116,7 @@ const CoachingDetailPage = () => {
                     }
                   }}
                 />
-                {selectedChildInfo[0].has_organization && (
+                {coachingInfo.has_organization && (
                   <S.SharedResultPaperBox isShared={is_open === 1}>
                     <S.SharedResultPaperBoxTextSection>
                       <S.SharedResultPaperBoxTitle isShared={is_open === 1}>

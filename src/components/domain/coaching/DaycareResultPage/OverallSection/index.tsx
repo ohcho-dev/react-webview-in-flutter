@@ -58,14 +58,27 @@ const OverallSection = ({ resultPaperInfo }: OverallSectionPropsType) => {
           <UseImgix srcUrl={"/clinic/images/icon_warning.svg"} />
           주의가 필요해요
         </S.ChecklistTitleSection>
-        {resultPaperInfo?.checklist.map((content: string) => (
-          <ListItem key={content}>
-            <IconDotSection>
-              <Icon icon={"point-filled"} size={16} fill={ColorLightRed8} />
-            </IconDotSection>
-            <ListContent>{content}</ListContent>
-          </ListItem>
-        ))}
+        {resultPaperInfo.checklist.length > 0 && (
+          <>
+            <ListItem>
+              <IconDotSection>
+                <Icon icon={"point-filled"} size={16} fill={ColorLightRed8} />
+              </IconDotSection>
+              <ListContent>
+                아래와 같은 행동을 보인다면 좀 더 주의깊은 관찰이 필요합니다. 일시적인 행동이 아닌
+                지속적으로 관찰되는 경우는 소아과 등의 병원 진료를 권유합니다.
+              </ListContent>
+            </ListItem>
+            {resultPaperInfo.checklist.map((content: string) => (
+              <ListItem key={content}>
+                <IconDotSection>
+                  <Icon icon={"point-filled"} size={16} fill={ColorLightRed8} />
+                </IconDotSection>
+                <ListContent>{content}</ListContent>
+              </ListItem>
+            ))}
+          </>
+        )}
       </S.ChecklistSection>
       <DividerSection />
       <Section>
