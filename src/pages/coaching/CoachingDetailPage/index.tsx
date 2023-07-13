@@ -67,7 +67,7 @@ const CoachingDetailPage = () => {
   }, [coachingInfo]);
   return (
     <>
-      <LayoutDetailPage handleBackBtnClick={() => navigate(-1)}>
+      <LayoutDetailPage handleBackBtnClick={() => navigate("/coaching")}>
         <S.StickyTopSection>
           <S.PageTitleWrap>
             <S.Title>{coachingInfo.name}</S.Title>
