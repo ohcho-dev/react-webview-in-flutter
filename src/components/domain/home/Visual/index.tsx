@@ -4,7 +4,7 @@ import * as S from "./Visual.styled";
 const Visual = () => {
   return (
     <S.Wrap>
-      <UseImgix srcUrl="/images/home_img.svg" alt="Home Background" />
+      <UseImgix srcUrl="/images/home.svg" alt="Home Background" />
     </S.Wrap>
   );
 };
