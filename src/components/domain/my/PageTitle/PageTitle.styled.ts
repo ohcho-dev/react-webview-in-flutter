@@ -1,3 +1,4 @@
+import { ColorLightBlack9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const TitleWrap = styled.div`
@@ -5,11 +6,11 @@ export const TitleWrap = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 2.2rem;
   line-height: 3.2rem;
   letter-spacing: -0.04rem;
-  color: #000000;
+  color: ${ColorLightBlack9Base};
   background: #fff;
 `;
 export const Container = styled.div`
