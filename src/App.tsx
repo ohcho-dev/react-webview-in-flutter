@@ -48,7 +48,7 @@ const App: React.FC = () => {
   const data = useGetBaseDate();
 
   function refetchData() {
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
       queryClient.invalidateQueries(coachingQueryKeys.videoAssignmentResult);
       resolve("success");
     });
@@ -87,7 +87,6 @@ const App: React.FC = () => {
     });
 
     window.addEventListener("refetchSelectedChildDate", () => {
-      console.log("refetchSelectedChildDate 함수 실행");
       queryClient.invalidateQueries(myQueryKeys.selectedChildInfo);
     });
 
@@ -97,7 +96,8 @@ const App: React.FC = () => {
 
     // 결과지 푸시 메세지 클릭
     window.addEventListener("coachingResult", ({ detail }: any) => {
-      alert(`call ${detail.paper_type} ${detail.url} ${detail.id}`);
+      setNewNotificationFlag(false);
+      updateNotificationTime();
       detail.paper_type === "TTPTY_EXTERNAL_URL"
         ? navigate(detail.url)
         : navigate(`/coaching/daycare/resultPaper/${detail.id}`);
@@ -105,7 +105,7 @@ const App: React.FC = () => {
 
     // 동영상 반려 푸시 메세지 클릭
     window.addEventListener("coachingVideoAssignment", async (res: any) => {
-      await new Promise(function (resolve, reject) {
+      await new Promise(function (resolve) {
         setNewNotificationFlag(false);
         updateNotificationTime();
         resolve("success");
