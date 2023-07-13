@@ -32,6 +32,14 @@ const CoachingDetailPage = () => {
   const [modalContent, setModalContent] = useState("");
   const [scrollY, setScrollY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
+  const statusPriority: {
+    [key: string]: number;
+  } = {
+    TSST_ONGOING: 1,
+    TSST_REJECT: 2,
+    TSST_UPLOAD: 3,
+    TSST_COMPLETE: 4,
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -65,6 +73,7 @@ const CoachingDetailPage = () => {
       setModalContent("과제를 확인하여 결과지를 작성 중입니다. 잠시만 기다려주세요.");
     }
   }, [coachingInfo]);
+
   return (
     <>
       <LayoutDetailPage handleBackBtnClick={() => navigate("/coaching")}>
@@ -154,45 +163,50 @@ const CoachingDetailPage = () => {
             <S.DetailTitle>과제</S.DetailTitle>
           </S.CoachingDetailTitleBox>
           <S.ContentSection>
-            {coachingInfo.task.map((task: TaskStatusType, index: number) => (
-              <ContentItem
-                key={index + task.name}
-                coachingMethod={task.task_type}
-                chipStatus={
-                  coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
-                    ? [task.task_type, "EXPIRED"]
-                    : [task.task_type, task.status]
-                }
-                name={task.name}
-                useArrowBtn={
-                  coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
-                }
-                handleClick={() => {
-                  if (task.task_type === "TSTY_SURVEY") {
-                    if (task.status === "TSST_ONGOING") {
-                      coachingInfo.date_remain >= 0 &&
-                        navigate(`/coaching/questionnarie/${task.id}`, {
-                          state: { coachingId: id },
-                        });
-                    } else if (task.status === "TSST_COMPLETE") {
-                      navigate(`/coaching/questionnarie/detail/${task.id}`);
-                    }
-                  } else if (task.task_type === "TSTY_VIDEO") {
-                    if (task.status === "TSST_ONGOING") {
-                      coachingInfo.date_remain >= 0 &&
-                        NativeFunction(
-                          "routeNativeScreen",
-                          `coachingVideoDetail@${task.id}@${childId}`,
-                        );
-                    } else {
-                      navigate(`/coaching/videoAssignment/${task.id}`, {
-                        state: { task_id: task.id, coaching_id: id },
-                      });
-                    }
+            {coachingInfo.task
+              .sort(
+                (prev: TaskStatusType, next: TaskStatusType) =>
+                  statusPriority[prev.status] - statusPriority[next.status],
+              )
+              .map((task: TaskStatusType, index: number) => (
+                <ContentItem
+                  key={index + task.name}
+                  coachingMethod={task.task_type}
+                  chipStatus={
+                    coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING"
+                      ? [task.task_type, "EXPIRED"]
+                      : [task.task_type, task.status]
                   }
-                }}
-              />
-            ))}
+                  name={task.name}
+                  useArrowBtn={
+                    coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
+                  }
+                  handleClick={() => {
+                    if (task.task_type === "TSTY_SURVEY") {
+                      if (task.status === "TSST_ONGOING") {
+                        coachingInfo.date_remain >= 0 &&
+                          navigate(`/coaching/questionnarie/${task.id}`, {
+                            state: { coachingId: id },
+                          });
+                      } else if (task.status === "TSST_COMPLETE") {
+                        navigate(`/coaching/questionnarie/detail/${task.id}`);
+                      }
+                    } else if (task.task_type === "TSTY_VIDEO") {
+                      if (task.status === "TSST_ONGOING") {
+                        coachingInfo.date_remain >= 0 &&
+                          NativeFunction(
+                            "routeNativeScreen",
+                            `coachingVideoDetail@${task.id}@${childId}`,
+                          );
+                      } else {
+                        navigate(`/coaching/videoAssignment/${task.id}`, {
+                          state: { task_id: task.id, coaching_id: id },
+                        });
+                      }
+                    }
+                  }}
+                />
+              ))}
           </S.ContentSection>
         </S.ListScroll>
         <CustomModal
