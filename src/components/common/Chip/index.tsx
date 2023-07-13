@@ -18,7 +18,6 @@ import * as S from "./Chip.styled";
 
 interface chipProps {
   status: string;
-  style?: object;
 }
 
 const STATUS: {
@@ -81,13 +80,12 @@ const STATUS: {
 };
 
 const Chip = (props: chipProps) => {
-  const { status, style } = props;
+  const { status } = props;
   return (
     <S.CustomChip
       color={STATUS[status].color}
       borderColor={STATUS[status].borderColor}
       backgroundColor={STATUS[status].backgroundColor}
-      style={style}
     >
       {STATUS[status].name}
     </S.CustomChip>

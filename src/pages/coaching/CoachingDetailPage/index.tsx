@@ -15,6 +15,7 @@ import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedC
 import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
 import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
+import OrganizationRow from "components/domain/coaching/coachingDetailPage/OrganizationRow";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -67,17 +68,27 @@ const CoachingDetailPage = () => {
   return (
     <>
       <LayoutDetailPage handleBackBtnClick={() => navigate(-1)}>
-        <S.PageTitleWrap>
-          <S.Title>{coachingInfo.name}</S.Title>
-          <S.ProgramStatus>
-            <ProgressStatusBadge isFinished={coachingInfo.date_remain === 0} />
-            <S.CoachingProgramDuration>~{getDate(coachingInfo.end_date)}</S.CoachingProgramDuration>
-            <S.CoachingProgramDuration>
-              {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
-              {coachingInfo.date_remain === 0 && "오늘까지!"}
-            </S.CoachingProgramDuration>
-          </S.ProgramStatus>
-        </S.PageTitleWrap>
+        <S.StickyTopSection>
+          <S.PageTitleWrap>
+            <S.Title>{coachingInfo.name}</S.Title>
+            <S.ProgramStatus>
+              <ProgressStatusBadge isFinished={coachingInfo.date_remain === 0} />
+              <S.CoachingProgramDuration>
+                ~{getDate(coachingInfo.end_date)}
+              </S.CoachingProgramDuration>
+              <S.CoachingProgramDuration>
+                {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
+                {coachingInfo.date_remain === 0 && "오늘까지!"}
+              </S.CoachingProgramDuration>
+            </S.ProgramStatus>
+          </S.PageTitleWrap>
+          {coachingInfo.has_organization && (
+            <S.OrganizationSection>
+              <OrganizationRow title={"제휴 기관"} name={coachingInfo.organization_name} />
+              <OrganizationRow title={"반 이름"} name={coachingInfo.group_name} />
+            </S.OrganizationSection>
+          )}
+        </S.StickyTopSection>
         <S.ShadowBox scrolling={scrolling} />
         <S.ListScroll
           ref={scrollRef}

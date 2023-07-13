@@ -1,23 +1,20 @@
 import {
+  ColorLight1,
+  ColorLightBlack5,
   ColorLightBlack9Base,
   ColorLightEltern10,
   ColorLightEltern2,
   ColorLightEltern6,
+  ColorLightSlate1,
   ColorLightSlate2,
+  ColorLightSlate3,
   ColorLightSlate7,
   ColorLightSlate9Base,
 } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const PageTitleWrap = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: #fff;
-  border-bottom: solid 0.2rem #f5f5f5;
   padding: 1.5rem 2.5rem;
-  z-index: 100;
 `;
 
 export const ShadowBox = styled.div<{ scrolling: boolean }>`
@@ -31,8 +28,6 @@ export const ShadowBox = styled.div<{ scrolling: boolean }>`
 `;
 export const ListScroll = styled.div`
   width: 100%;
-  height: calc(100vh - 16rem);
-  margin-top: 10rem;
   overflow-y: scroll;
 `;
 export const Title = styled.div`
@@ -125,4 +120,25 @@ export const SharedResultPaperBoxText = styled.span<{ isShared: boolean }>`
   font-size: 1.4rem;
   line-height: 2rem;
   color: ${({ isShared }) => (isShared ? ColorLightEltern10 : ColorLightSlate9Base)};
+`;
+
+export const StickyTopSection = styled.div`
+  position: sticky;
+  top: 0;
+
+  background-color: ${ColorLight1};
+
+  border-bottom: 1px solid ${ColorLightSlate3};
+  z-index: 50;
+`;
+
+export const OrganizationSection = styled.div`
+  padding: 1.2rem 2.5rem;
+  background-color: ${ColorLightSlate1};
+
+  border-top: 1px solid ${ColorLightSlate3};
+
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.4rem;
 `;
