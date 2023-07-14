@@ -116,8 +116,8 @@ const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
             />
           </S.ProductDetailInfoSection>
           <S.GreySquare />
-          <S.ImageWrap>
-            {/* TODO: 동적으로 이미지 받아와서 어떻게 최적화 할건지 고민하기 */}
+          <img src={coachingInfo.content_image} alt="content" style={{ width: "100%" }} />
+          {/* <S.ImageWrap>
             <UseImgix
               srcUrl="/images/coaching/coaching_new_main_0220_01.png"
               alt="Coaching Detail Page 1"
@@ -138,32 +138,7 @@ const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
               srcUrl="/images/coaching/coaching_new_main_0220_05.png"
               alt="Coaching Detail Page 5"
             />
-          </S.ImageWrap>
-          {/* 결제 test용 */}
-          {/* {coachingInfo.id === 7 && (
-            <S.ImageWrap>
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_01.png"
-                alt="Coaching Detail Page 1"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_02.png"
-                alt="Coaching Detail Page 2"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_03.png"
-                alt="Coaching Detail Page 3"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_04.png"
-                alt="Coaching Detail Page 4"
-              />
-              <UseImgix
-                srcUrl="/images/coaching/coaching_new_main_0220_05_test2.png"
-                alt="Coaching Detail Page 5"
-              />
-            </S.ImageWrap>
-          )} */}
+          </S.ImageWrap> */}
         </div>
       </LayoutDetailPage>
       <CustomBottomModal
