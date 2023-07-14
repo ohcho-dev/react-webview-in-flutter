@@ -1,22 +1,20 @@
 import React, { useEffect } from "react";
-import { useMutation } from "react-query";
 import { useLocation } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import styled from "styled-components";
-
-import { updateSelectedChildIdApi } from "../api/childApi";
-import BottomNav from "../components/BottomNav";
-import ChildSelectBottomModal from "../components/ChildSelectBottomModal";
-import MainTitleBar from "../components/TitleBar";
+import BottomNav from "../components/layout/BottomNav";
+import ChildSelectBottomModal from "../components/common/ChildSelectBottomModal";
+import MainTitleBar from "../components/domain/my/TitleBar";
 import { CHILD_ID_FIELD } from "../constants/localStorage";
 import {
   childrenListState,
   mainPageScrollValueState,
   openBottomModalState,
   selectedChildInfoState,
-} from "../recoil/atom";
-import { childType } from "../utils/type";
+} from "../store/common";
+import { ChildType } from "../types/common";
 import LayoutBasePage from "./LayoutBasePage";
+import useUpdateSelectedChildId from "../queries/domain/my/child/useUpdateSelectedChildId";
 
 const MainPage = styled.main`
   width: 100%;
@@ -73,20 +71,16 @@ const LayoutMainPage: React.FC<LayoutMainPageProps> = ({
   const childrenList = useRecoilValue(childrenListState);
   const [scroll, setScroll] = useRecoilState(mainPageScrollValueState);
 
-  const updateSelectedChildId = useMutation(updateSelectedChildIdApi, {
-    onSuccess: res => {
-      console.log("아이번호 저장 완료");
-    },
-  });
+  const { mutate: updateChildId } = useUpdateSelectedChildId();
 
   const handleChildClick = (evt: React.MouseEvent<HTMLElement>) => {
     const childId = (evt.currentTarget as HTMLButtonElement).id;
     setSelectedChildInfo(
-      childrenList.filter((child: childType) => child.id.toString() === childId)[0],
+      childrenList.filter((child: ChildType) => child.id.toString() === childId)[0],
     );
 
     window.localStorage.setItem(CHILD_ID_FIELD, childId);
-    updateSelectedChildId.mutate({ id: childId });
+    updateChildId(childId);
     setOpenModal(false);
   };
 

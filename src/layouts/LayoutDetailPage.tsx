@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 
 import styled from "styled-components";
-import { DetailTitleBar } from "../components/TitleBar";
-import { BottomBtnWrap } from "../pages/ProgramPage/components/styled";
+import { DetailTitleBar } from "../components/domain/my/TitleBar";
+import { BottomBtnWrap } from "../components/domain/program/programListPage/programListPage.styled";
 
 import LayoutBasePage from "./LayoutBasePage";
 

@@ -3,7 +3,7 @@ import React, { useState, useRef, TouchEvent, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
 import { isIOS } from "react-device-detect";
-import useWindowSize from "../utils/useWindowSize";
+import useWindowSize from "../hooks/useWindowSize";
 
 const BasePage = styled.div`
   height: 100vh;
