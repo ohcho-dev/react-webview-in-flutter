@@ -50,7 +50,10 @@ const OverallSection = ({ resultPaperInfo }: OverallSectionPropsType) => {
         <S.GraphSection>
           <CustomRadarChart categoryList={resultPaperInfo?.list} />
         </S.GraphSection>
-        <UseImgix srcUrl={"/images/must_check.svg"} style={{ width: "100%", height: "22.1rem" }} />
+        <UseImgix
+          srcUrl={"/images/new_must_check.svg"}
+          style={{ width: "100%", height: "22.1rem" }}
+        />
       </S.OverallSection>
       <DividerSection />
       <S.ChecklistSection>
