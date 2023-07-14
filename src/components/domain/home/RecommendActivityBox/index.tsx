@@ -53,7 +53,8 @@ const RecommendActivityBox = () => {
         {homeData.month_level_content.length > 0 && (
           <>
             <S.ActivityTitle>
-              👍 <span>이 시기에 도움이 되는 활동</span>
+              <UseImgix srcUrl={"/images/playy.svg"} />
+              <span>이 시기에 도움이 되는 활동</span>
             </S.ActivityTitle>
             <S.ActivityContent>
               <>
