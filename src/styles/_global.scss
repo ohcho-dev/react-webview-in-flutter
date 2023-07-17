@@ -38,6 +38,11 @@ code {
   -webkit-touch-callout: none;
 }
 
+textarea {
+  -webkit-user-select: auto;
+  user-select: auto;
+}
+
 input {
   -webkit-user-select: auto;
   user-select: auto;
