@@ -111,8 +111,9 @@ const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
           </S.ProductMainInfo>
           <S.ProductDetailInfoSection>
             <UseImgix
-              srcUrl="/images/coaching/coaching-detail-info.png"
+              srcUrl="/images/new_coaching_detail_info.svg"
               alt="Coaching Detail Info"
+              style={{ width: "33.5rem", height: "15.8rem" }}
             />
           </S.ProductDetailInfoSection>
           <S.GreySquare />
