@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/react";
+import { init } from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -10,7 +10,7 @@ import App from "./App";
 // connect react-sentry
 // Sentry:: stage, product 서버 모두 적용, 앱에서 추가해준 userAgent값(InApp)을 기준으로 웹/앱 접속을 구분하여 앱에서 접속했을 경우에만 sentry 실행
 if (window.navigator.userAgent.indexOf("InApp") > -1) {
-  Sentry.init({
+  init({
     dsn: process.env.NODE_ENV === "production" ? process.env.REACT_APP_SENTRY_DSN : "",
     release: "0.1.0",
     environment: process.env.NODE_ENV,

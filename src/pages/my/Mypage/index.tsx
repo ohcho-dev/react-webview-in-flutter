@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import * as Sentry from "@sentry/react";
+import { withScope, captureException } from "@sentry/react";
 import { useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { flutterInAppWebViewPlatformReady } from "../../..";
@@ -97,11 +97,11 @@ const MyPage = () => {
     } else {
       if (process.env.NODE_ENV === "production") {
         if (window.navigator.userAgent.indexOf("InApp") > -1) {
-          Sentry.withScope(scope => {
+          withScope(scope => {
             scope.setTag("type", "flutter.callHandler");
             scope.setLevel("error");
             scope.setFingerprint(["routeNativeScreen", value]);
-            Sentry.captureException("flutter callHandler Error");
+            captureException("flutter callHandler Error");
           });
         }
       }

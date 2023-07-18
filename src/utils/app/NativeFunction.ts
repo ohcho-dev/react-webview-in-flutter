@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import * as Sentry from "@sentry/react";
+import { withScope, captureException } from "@sentry/react";
 import { flutterInAppWebViewPlatformReady } from "../../index";
 
 export const NativeFunction = (funcName: string, value: any) => {
@@ -17,11 +17,11 @@ export const NativeFunction = (funcName: string, value: any) => {
   } else {
     if (process.env.NODE_ENV === "production") {
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
-        Sentry.withScope(scope => {
+        withScope(scope => {
           scope.setTag("type", "flutter.callHandler");
           scope.setLevel("error");
           scope.setFingerprint([funcName, value]);
-          Sentry.captureException("flutter callHandler Error");
+          captureException("flutter callHandler Error");
         });
       }
     }
