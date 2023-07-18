@@ -185,7 +185,7 @@ const CoachingDetailPage = () => {
                   handleClick={() => {
                     if (task.task_type === "TSTY_SURVEY") {
                       if (task.status === "TSST_ONGOING") {
-                        coachingInfo.date_remain >= 0 &&
+                        coachingInfo.status !== "COSTAT_END" &&
                           navigate(`/coaching/questionnarie/${task.id}`, {
                             state: { coachingId: id },
                           });
@@ -194,7 +194,7 @@ const CoachingDetailPage = () => {
                       }
                     } else if (task.task_type === "TSTY_VIDEO") {
                       if (task.status === "TSST_ONGOING") {
-                        coachingInfo.date_remain >= 0 &&
+                        coachingInfo.status !== "COSTAT_END" &&
                           NativeFunction(
                             "routeNativeScreen",
                             `coachingVideoDetail@${task.id}@${childId}`,
