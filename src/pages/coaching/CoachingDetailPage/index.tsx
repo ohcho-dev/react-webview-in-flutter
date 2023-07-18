@@ -81,7 +81,7 @@ const CoachingDetailPage = () => {
           <S.PageTitleWrap>
             <S.Title>{coachingInfo.name}</S.Title>
             <S.ProgramStatus>
-              <ProgressStatusBadge isFinished={coachingInfo.date_remain === 0} />
+              <ProgressStatusBadge isFinished={coachingInfo.status === "COSTAT_END"} />
               <S.CoachingProgramDuration>
                 ~{getDate(coachingInfo.end_date)}
               </S.CoachingProgramDuration>
@@ -121,9 +121,8 @@ const CoachingDetailPage = () => {
                   coachingMethod="result"
                   chipStatus={[status]}
                   name={name}
-                  useArrowBtn={true}
+                  useArrowBtn
                   handleClick={() => {
-                    //기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
                     if (status === "TTPST_COMPLETE") {
                       if (coachingInfo.has_organization) {
                         navigate(`/coaching/daycare/resultPaper/${id}`);
@@ -179,7 +178,7 @@ const CoachingDetailPage = () => {
                   }
                   name={task.name}
                   useArrowBtn={
-                    coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
+                    coachingInfo.status !== "COSTAT_END" && task.status === "TSST_ONGOING"
                   }
                   handleClick={() => {
                     if (task.task_type === "TSTY_SURVEY") {

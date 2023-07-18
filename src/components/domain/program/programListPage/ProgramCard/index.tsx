@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 
 import ProgramPrice from "../ProgramPrice";
 import { AgeRange, OnlineOffline } from "../programListPage.styled";
-import UseImgix from "../../../../../components/common/Imgix";
 import getDday from "../../../../../utils/date/getDday";
 import * as S from "./ProgramCard.styled";
 
