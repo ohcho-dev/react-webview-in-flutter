@@ -16,6 +16,7 @@ import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/P
 import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
 import OrganizationRow from "components/domain/coaching/coachingDetailPage/OrganizationRow";
+import { getLeftDayString } from "utils/date/getLeftDayString";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -85,10 +86,11 @@ const CoachingDetailPage = () => {
               <S.CoachingProgramDuration>
                 ~{getDate(coachingInfo.end_date)}
               </S.CoachingProgramDuration>
-              <S.CoachingProgramDuration>
-                {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
-                {coachingInfo.date_remain === 0 && "오늘까지!"}
-              </S.CoachingProgramDuration>
+              {coachingInfo.status !== "COSTAT_END" && (
+                <S.CoachingProgramDuration>
+                  {getLeftDayString(coachingInfo.date_remain)}
+                </S.CoachingProgramDuration>
+              )}
             </S.ProgramStatus>
           </S.PageTitleWrap>
           {coachingInfo.has_organization && (
