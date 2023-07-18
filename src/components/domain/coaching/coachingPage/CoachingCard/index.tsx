@@ -1,16 +1,19 @@
 import getDday from "../../../../../utils/date/getDday";
 import * as S from "./CoachingCard.styled";
 import { getDate } from "../../../../../utils/date/getDateTime";
-import UseImgix from "../../../../common/Imgix";
 import { AppliedCoachingType } from "../../../../../types/apis/program";
 import {
   CustomNoMainImage,
   CustomNoMainImageText,
 } from "components/domain/program/programListPage/ProgramCard/ProgramCard.styled";
+import { getLeftDayString } from "utils/date/getLeftDayString";
 
-const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JSX.Element => {
-  const { status, coaching_name, start_date, end_date, main_image } = props.coaching;
-  const { alt } = props;
+interface CoachingCardProps {
+  coaching: AppliedCoachingType;
+}
+
+const CoachingCard = ({ coaching }: CoachingCardProps): JSX.Element => {
+  const { status, coaching_name, start_date, end_date, main_image } = coaching;
 
   return (
     <S.CoachingCardWrapper progressing={status === "COSTAT_ONGOING"}>
@@ -27,8 +30,7 @@ const CoachingCard = (props: { coaching: AppliedCoachingType; alt: string }): JS
           {status === "COSTAT_ONGOING" ? "진행중" : "종료"}
         </S.ProgressChip>
         <S.Duration>{`${getDate(start_date)}~${getDate(end_date)}`}</S.Duration>
-        {getDday(end_date) > 0 && <S.LeftDays>{getDday(end_date)}일 남음</S.LeftDays>}
-        {getDday(end_date) === 0 && <S.LeftDays>오늘까지!</S.LeftDays>}
+        {status !== "COSTAT_END" && <S.LeftDays>{getLeftDayString(getDday(end_date))}</S.LeftDays>}
       </div>
     </S.CoachingCardWrapper>
   );

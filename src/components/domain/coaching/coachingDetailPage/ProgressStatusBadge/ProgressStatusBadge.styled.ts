@@ -1,19 +1,24 @@
-import { ColorLightEltern3, ColorLightEltern9Base } from "constants/ldsConstants/global";
+import {
+  ColorLightEltern3,
+  ColorLightEltern9Base,
+  ColorLightSlate4,
+  ColorLightSlate9Base,
+} from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const BadgeWrapper = styled.div<{ isFinished: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 4rem;
-  height: 2.2rem;
+  padding: 0.2rem 0.5rem;
+  width: fit-content;
 
-  background: ${ColorLightEltern3};
+  background: ${({ isFinished }) => (isFinished ? ColorLightSlate4 : ColorLightEltern3)};
   border-radius: 0.4rem;
 
   font-weight: 500;
   font-size: 1.2rem;
   line-height: 1.8rem;
 
-  color: ${ColorLightEltern9Base};
+  color: ${({ isFinished }) => (isFinished ? ColorLightSlate9Base : ColorLightEltern9Base)};
 `;

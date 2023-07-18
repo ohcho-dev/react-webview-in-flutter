@@ -16,6 +16,7 @@ import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/P
 import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
 import OrganizationRow from "components/domain/coaching/coachingDetailPage/OrganizationRow";
+import { getLeftDayString } from "utils/date/getLeftDayString";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -81,14 +82,15 @@ const CoachingDetailPage = () => {
           <S.PageTitleWrap>
             <S.Title>{coachingInfo.name}</S.Title>
             <S.ProgramStatus>
-              <ProgressStatusBadge isFinished={coachingInfo.date_remain === 0} />
+              <ProgressStatusBadge isFinished={coachingInfo.status === "COSTAT_END"} />
               <S.CoachingProgramDuration>
                 ~{getDate(coachingInfo.end_date)}
               </S.CoachingProgramDuration>
-              <S.CoachingProgramDuration>
-                {coachingInfo.date_remain > 0 && coachingInfo.date_remain + "일 남음"}
-                {coachingInfo.date_remain === 0 && "오늘까지!"}
-              </S.CoachingProgramDuration>
+              {coachingInfo.status !== "COSTAT_END" && (
+                <S.CoachingProgramDuration>
+                  {getLeftDayString(coachingInfo.date_remain)}
+                </S.CoachingProgramDuration>
+              )}
             </S.ProgramStatus>
           </S.PageTitleWrap>
           {coachingInfo.has_organization && (
@@ -121,9 +123,8 @@ const CoachingDetailPage = () => {
                   coachingMethod="result"
                   chipStatus={[status]}
                   name={name}
-                  useArrowBtn={true}
+                  useArrowBtn
                   handleClick={() => {
-                    //기간 및 과제 완성과 별개로 결과지가 발행되면 페이지 링크
                     if (status === "TTPST_COMPLETE") {
                       if (coachingInfo.has_organization) {
                         navigate(`/coaching/daycare/resultPaper/${id}`);
@@ -179,7 +180,7 @@ const CoachingDetailPage = () => {
                   }
                   name={task.name}
                   useArrowBtn={
-                    coachingInfo.date_remain < 0 && task.status === "TSST_ONGOING" ? false : true
+                    coachingInfo.status !== "COSTAT_END" && task.status === "TSST_ONGOING"
                   }
                   handleClick={() => {
                     if (task.task_type === "TSTY_SURVEY") {

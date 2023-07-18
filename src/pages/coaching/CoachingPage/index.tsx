@@ -129,7 +129,7 @@ const CoachingPage = () => {
                       handleCardClick(coaching.id);
                     }}
                   >
-                    <CoachingCard coaching={coaching} alt="Coaching Thumbnail" />
+                    <CoachingCard coaching={coaching} />
                     {index !== lastIndex - 1 && <Divider style={{ margin: "2rem 0" }} />}
                   </div>
                 ))}

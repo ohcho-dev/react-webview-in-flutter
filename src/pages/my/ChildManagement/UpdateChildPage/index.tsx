@@ -71,10 +71,6 @@ const UpdateChildPage = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    setDueDate(dayjs(birthDate).add(1, "day").toDate());
-  }, [birthDate]);
-
   const handleGenderValue = (evt: React.ChangeEvent<HTMLInputElement>) => {
     setChildData({ ...childData, gender: evt.target.value });
     setUpdateStatus(true);
@@ -182,6 +178,7 @@ const UpdateChildPage = () => {
               }
               onChange={(date: Date | null) => {
                 setBirthDate(date);
+                setDueDate(dayjs(date).add(1, "day").toDate());
                 setUpdateStatus(true);
               }}
             />

@@ -1,4 +1,4 @@
-import * as Sentry from "@sentry/react";
+import { setUser, withProfiler } from "@sentry/react";
 import Cookies from "js-cookie";
 import React, { Suspense, useEffect, useState } from "react";
 import { useQueryClient, useQueryErrorResetBoundary } from "react-query";
@@ -117,7 +117,7 @@ const App: React.FC = () => {
     const { name, id } = selectedChild;
     if (window.localStorage.getItem(USER_KEY) && selectedChild.id) {
       if (window.navigator.userAgent.indexOf("InApp") > -1) {
-        Sentry.setUser({
+        setUser({
           id: window.localStorage.getItem(USER_KEY) || "",
           child_id: id,
           child_name: name,
@@ -199,4 +199,4 @@ const App: React.FC = () => {
   );
 };
 
-export default Sentry.withProfiler(App);
+export default withProfiler(App);

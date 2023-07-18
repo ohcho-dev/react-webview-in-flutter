@@ -170,6 +170,7 @@ export const InputBox = styled.input`
     background: none;
   }
 `;
+
 export const TextWrap = styled.div`
   width: 100%;
   box-sizing: border-box;
@@ -185,6 +186,7 @@ export const TextWrap = styled.div`
 
   padding: 1.6rem 2rem;
 `;
+
 export const TextAreaBox = styled.textarea`
   width: 100%;
   box-sizing: border-box;
@@ -202,7 +204,11 @@ export const TextAreaBox = styled.textarea`
   resize: none;
 
   :focus {
-    outline: 1px solid #5ac4b1;
+    box-shadow: 0 0 0 1px ${ColorLightEltern9Base}; /* 아웃라인 스타일 설정 */
+    outline: none;
+    /* outline: 1px solid ${ColorLightEltern9Base}; */
+    border-radius: 0.8rem;
+    -webkit-appearance: none;
   }
 
   ::placeholder {
