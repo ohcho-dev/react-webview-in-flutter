@@ -204,7 +204,9 @@ export const TextAreaBox = styled.textarea`
   resize: none;
 
   :focus {
-    outline: 1px solid ${ColorLightEltern9Base};
+    box-shadow: 0 0 0 1px ${ColorLightEltern9Base}; /* 아웃라인 스타일 설정 */
+    outline: none;
+    /* outline: 1px solid ${ColorLightEltern9Base}; */
     border-radius: 0.8rem;
   }
 
