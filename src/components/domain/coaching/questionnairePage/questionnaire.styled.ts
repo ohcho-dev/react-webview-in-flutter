@@ -208,6 +208,7 @@ export const TextAreaBox = styled.textarea`
     outline: none;
     /* outline: 1px solid ${ColorLightEltern9Base}; */
     border-radius: 0.8rem;
+    -webkit-appearance: none;
   }
 
   ::placeholder {
