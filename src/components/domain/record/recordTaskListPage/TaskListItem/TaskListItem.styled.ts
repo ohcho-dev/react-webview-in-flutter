@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import * as DT from "../../../../../constants/ldsConstants/global";
-import { convertStrToRem } from "../../../../../utils/design-system/convertStrToRem";
+import { FontSize2, ColorLightBlack9Base } from "../../../../../constants/ldsConstants/global";
+import { convertNumToRem } from "../../../../../utils/design-system/convertStrToRem";
 
 export const ListItemWrapper = styled.div`
   padding: 0 2rem;
@@ -32,10 +32,10 @@ export const ChipWrap = styled.div`
 
 export const Title = styled.div`
   font-weight: 600;
-  font-size: ${convertStrToRem(DT.FontSize2)};
+  font-size: ${convertNumToRem(FontSize2)};
   line-height: 2.2rem;
   letter-spacing: -0.04rem;
-  color: ${DT.ColorLightBlack9Base};
+  color: ${ColorLightBlack9Base};
 `;
 export const ArrowIcon = styled.div`
   img {

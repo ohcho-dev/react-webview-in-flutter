@@ -1,12 +1,18 @@
 import styled from "styled-components";
-import * as DT from "../../../constants/ldsConstants/global";
-import { convertStrToRem } from "../../../utils/design-system/convertStrToRem";
+import {
+  FontSize2,
+  FontSize3,
+  LineHeights2,
+  ColorLightBlack5,
+  ColorLightBlack9Base,
+} from "../../../constants/ldsConstants/global";
+import { convertNumToRem } from "../../../utils/design-system/convertStrToRem";
 
 export const Title = styled.div`
   font-weight: 600;
-  font-size: ${convertStrToRem(DT.FontSize3)};
-  line-height: ${convertStrToRem(DT.LineHeights2)};
-  color: ${DT.ColorLightBlack9Base};
+  font-size: ${convertNumToRem(FontSize3)};
+  line-height: ${convertNumToRem(LineHeights2)};
+  color: ${ColorLightBlack9Base};
   padding: 0.8rem 2rem;
 `;
 
@@ -39,9 +45,9 @@ export const StampImage = styled.div`
 `;
 
 export const StampTitle = styled.div`
-  font-size: ${convertStrToRem(DT.FontSize2)};
-  line-height: ${convertStrToRem(DT.LineHeights2)};
+  font-size: ${convertNumToRem(FontSize2)};
+  line-height: ${convertNumToRem(LineHeights2)};
   letter-spacing: -0.04rem;
-  color: ${DT.ColorLightBlack5};
+  color: ${ColorLightBlack5};
   text-align: center;
 `;
