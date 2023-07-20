@@ -77,6 +77,24 @@ const STATUS: {
     borderColor: ColorLight1,
     backgroundColor: ColorLight1,
   },
+  PYST_BEFORE: {
+    name: "결제 전",
+    color: ColorLightEltern9Base,
+    borderColor: ColorLightEltern7,
+    backgroundColor: ColorLight1,
+  },
+  PYST_COMPLETE: {
+    name: "결제 완료",
+    color: ColorLightEltern9Base,
+    borderColor: ColorLightEltern7,
+    backgroundColor: ColorLight1,
+  },
+  PYST_CANCEL: {
+    name: "결제 취소",
+    color: ColorLightSage9Base,
+    borderColor: ColorLightSlate7,
+    backgroundColor: ColorLight1,
+  },
 };
 
 const Chip = (props: chipProps) => {
