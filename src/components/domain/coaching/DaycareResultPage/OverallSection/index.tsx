@@ -1,6 +1,11 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
-import { ColorLightRed8, ColorLightEltern9Base } from "constants/ldsConstants/global";
+import {
+  ColorLightRed8,
+  ColorLightEltern9Base,
+  ContentsBase1626Regular,
+  ColorLightSlate11,
+} from "constants/ldsConstants/global";
 import {
   DividerSection,
   IconDotSection,
@@ -13,6 +18,7 @@ import { DaycareResultResponseType } from "types/apis/coaching";
 import CustomRadarChart from "../CustomRadarChart";
 import LevelSection from "../LevleSection";
 import * as S from "./OverallSection.styled";
+import Text from "components/common/Text";
 
 interface OverallSectionPropsType {
   resultPaperInfo: DaycareResultResponseType;
@@ -67,17 +73,27 @@ const OverallSection = ({ resultPaperInfo }: OverallSectionPropsType) => {
               <IconDotSection>
                 <Icon icon={"point-filled"} size={16} fill={ColorLightRed8} />
               </IconDotSection>
-              <ListContent>
+              <Text
+                variant={{ ...ContentsBase1626Regular }}
+                color={ColorLightSlate11}
+                style={{ whiteSpace: "pre-wrap" }}
+              >
                 아래와 같은 행동을 보인다면 좀 더 주의깊은 관찰이 필요합니다. 일시적인 행동이 아닌
                 지속적으로 관찰되는 경우는 소아과 등의 병원 진료를 권유합니다.
-              </ListContent>
+              </Text>
             </ListItem>
             {resultPaperInfo.checklist.map((content: string) => (
               <ListItem key={content}>
                 <IconDotSection>
                   <Icon icon={"point-filled"} size={16} fill={ColorLightRed8} />
                 </IconDotSection>
-                <ListContent>{content}</ListContent>
+                <Text
+                  variant={{ ...ContentsBase1626Regular }}
+                  color={ColorLightSlate11}
+                  style={{ whiteSpace: "pre-wrap" }}
+                >
+                  {content}
+                </Text>
               </ListItem>
             ))}
           </>
@@ -120,7 +136,13 @@ const OverallSection = ({ resultPaperInfo }: OverallSectionPropsType) => {
               <IconDotSection>
                 <Icon icon={"point-filled"} size={16} fill={ColorLightEltern9Base} />
               </IconDotSection>
-              <ListContent>{content}</ListContent>
+              <Text
+                variant={{ ...ContentsBase1626Regular }}
+                color={ColorLightSlate11}
+                style={{ whiteSpace: "pre-wrap" }}
+              >
+                {content}
+              </Text>
             </ListItem>
           ))}
         </S.MonthContentSection>

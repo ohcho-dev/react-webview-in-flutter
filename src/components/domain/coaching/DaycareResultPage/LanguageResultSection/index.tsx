@@ -1,6 +1,11 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
-import { ColorLightEltern9Base, ColorLightPurple8 } from "constants/ldsConstants/global";
+import {
+  ColorLightEltern9Base,
+  ColorLightPurple8,
+  ColorLightSlate11,
+  ContentsBase1626Regular,
+} from "constants/ldsConstants/global";
 import {
   DividerSection,
   IconDotSection,
@@ -12,6 +17,7 @@ import { useNavigate } from "react-router-dom";
 import { CategoryListType, DaycareMonthLevelType, LanguageInfoType } from "types/apis/coaching";
 import * as S from "../CategoryResultSection/CategoryResultSection.styled";
 import { LanguageExplanationBtn, LanguageLevelInfoSection } from "./LanguageResultSection.styled";
+import Text from "components/common/Text";
 
 interface CategoryResultSectionPropsType {
   child_name: string | undefined;
@@ -78,7 +84,15 @@ const LanguageResultSection = ({
             </div>
           ),
         )}
-        <S.CommentSection>{comment}</S.CommentSection>
+        <S.CommentSection>
+          <Text
+            variant={{ ...ContentsBase1626Regular }}
+            color={ColorLightSlate11}
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            {comment}
+          </Text>
+        </S.CommentSection>
       </S.PaddingWrapper>
       <DividerSection />
       <S.PaddingWrapper>
@@ -107,7 +121,15 @@ const LanguageResultSection = ({
             <UseImgix srcUrl={"/images/coaching_star.svg"} />
             {`언어 발달이 중요한 이유`}
           </TitleSection>
-          <S.CommentSection>{importance}</S.CommentSection>
+          <S.CommentSection>
+            <Text
+              variant={{ ...ContentsBase1626Regular }}
+              color={ColorLightSlate11}
+              style={{ whiteSpace: "pre-wrap" }}
+            >
+              {importance}
+            </Text>
+          </S.CommentSection>
         </S.ImportantSection>
       </S.PaddingWrapper>
     </S.Layout>

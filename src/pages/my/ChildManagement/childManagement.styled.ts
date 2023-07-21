@@ -1,4 +1,4 @@
-import { ColorLightEltern9Base, ColorLightSlate11 } from "constants/ldsConstants/global";
+import { ColorLightEltern9Base } from "constants/ldsConstants/global";
 import styled from "styled-components";
 
 export const InputBox = styled.input`
@@ -26,11 +26,6 @@ export const InputBox = styled.input`
 
 export const InputTitle = styled.div`
   margin-bottom: 1rem;
-  font-weight: 500;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  letter-spacing: -0.04rem;
-  color: ${ColorLightSlate11};
 `;
 
 export const PageLayout = styled.div`

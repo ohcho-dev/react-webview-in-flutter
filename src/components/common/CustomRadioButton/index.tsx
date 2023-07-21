@@ -1,4 +1,11 @@
+import {
+  ColorLightBlack7,
+  ColorLightEltern9Base,
+  TextBase1624Medium,
+  TextBase1624Regular,
+} from "constants/ldsConstants/global";
 import React from "react";
+import Text from "../Text";
 import * as S from "./CustomRadioButton.styled";
 
 type TypeProps = {
@@ -8,7 +15,7 @@ type TypeProps = {
 
 interface CustonRadioButtonProps {
   selectedValue: string | number;
-  onChangeFunction: (e: any) => void;
+  onChangeFunction: (e: React.ChangeEvent<HTMLInputElement>) => void;
   options: TypeProps[];
   id: string;
   modifiable?: boolean;
@@ -43,7 +50,14 @@ export function CustomRadioButton({
                 onChangeFunction(e);
               }}
             />
-            <S.Label htmlFor={item.name}>{item.name}</S.Label>
+            <S.Label htmlFor={item.name}>
+              <Text
+                variant={item.value === selectedValue ? TextBase1624Medium : TextBase1624Regular}
+                color={item.value === selectedValue ? ColorLightEltern9Base : ColorLightBlack7}
+              >
+                {item.name}
+              </Text>
+            </S.Label>
           </S.RadioWrap>
         ))}
       </S.ColorSelectorContainer>

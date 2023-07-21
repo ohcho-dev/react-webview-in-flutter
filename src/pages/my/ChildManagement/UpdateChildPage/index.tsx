@@ -27,6 +27,8 @@ import NoAffiliatedOrganizationBox from "components/domain/my/NoAffilatedOrganiz
 import useDeleteGroup from "queries/domain/my/child/useDeleteGroup";
 import { NativeFunction } from "utils/app/NativeFunction";
 import NameInput from "components/domain/my/NameInput";
+import Text from "components/common/Text";
+import { ColorLightSlate11, TextSm1420Medium } from "constants/ldsConstants/global";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },
@@ -138,7 +140,11 @@ const UpdateChildPage = () => {
       <S.PageLayout>
         <S.FormWrap>
           <div>
-            <S.InputTitle>아이 이름</S.InputTitle>
+            <S.InputTitle>
+              <Text variant={TextSm1420Medium} color={ColorLightSlate11}>
+                아이 이름
+              </Text>
+            </S.InputTitle>
             <NameInput
               placeholder="이름을 입력해주세요."
               id="childName"
@@ -148,7 +154,11 @@ const UpdateChildPage = () => {
             />
           </div>
           <div>
-            <S.InputTitle>아이 성별</S.InputTitle>
+            <S.InputTitle>
+              <Text variant={TextSm1420Medium} color={ColorLightSlate11}>
+                아이 성별
+              </Text>
+            </S.InputTitle>
             <CustomRadioButton
               id="childGender"
               options={GenderOption}
@@ -157,7 +167,11 @@ const UpdateChildPage = () => {
             />
           </div>
           <div>
-            <S.InputTitle>아이 생년월일</S.InputTitle>
+            <S.InputTitle>
+              <Text variant={TextSm1420Medium} color={ColorLightSlate11}>
+                아이 생년월일
+              </Text>
+            </S.InputTitle>
             <DatePicker
               withPortal
               showYearDropdown
@@ -184,7 +198,11 @@ const UpdateChildPage = () => {
             />
           </div>
           <div>
-            <S.InputTitle>이른둥이 여부</S.InputTitle>
+            <S.InputTitle>
+              <Text variant={TextSm1420Medium} color={ColorLightSlate11}>
+                이른둥이 여부
+              </Text>
+            </S.InputTitle>
             <CustomRadioButton
               id="childPremeture"
               options={PrematureOption}
@@ -196,7 +214,11 @@ const UpdateChildPage = () => {
 
           {childData.premature_flag === 1 && (
             <div>
-              <S.InputTitle>기존 출산 예정일</S.InputTitle>
+              <S.InputTitle>
+                <Text variant={TextSm1420Medium} color={ColorLightSlate11}>
+                  기존 출산 예정일
+                </Text>
+              </S.InputTitle>
               <DatePicker
                 withPortal
                 showYearDropdown
@@ -224,7 +246,11 @@ const UpdateChildPage = () => {
             </div>
           )}
           <div>
-            <S.InputTitle>제휴 기관</S.InputTitle>
+            <S.InputTitle>
+              <Text variant={TextSm1420Medium} color={ColorLightSlate11}>
+                제휴 기관
+              </Text>
+            </S.InputTitle>
             {childData.has_organization ? (
               <AffiliatedOrganizationBox
                 group_name={childData.group_name}
