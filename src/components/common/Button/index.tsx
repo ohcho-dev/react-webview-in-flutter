@@ -69,8 +69,10 @@ const Button = (props: buttonProps) => {
       ...colorPalette,
       width: "100%",
       height: "4.5rem",
-      fontSize: "1.6rem",
       borderRadius: "0.6rem",
+      fontSize: "1.6rem",
+      fontWeight: 500,
+      lineHieght: "2.4rem",
     });
   }, [theme]);
 

@@ -18,4 +18,5 @@ export type iconName =
   | "big-chevron"
   | "chevron-down"
   | "x"
-  | "point-filled";
+  | "point-filled"
+  | "clipboard-list";

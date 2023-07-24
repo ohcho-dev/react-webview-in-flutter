@@ -12,7 +12,7 @@ const UseImgix: React.FC<UseImgixProps> = props => {
     <>
       {srcUrl && (
         <Imgix
-          src={`${process.env.REACT_APP_IMGIX_URL}${srcUrl}?auto=format&q=100&dpr=2`}
+          src={`${import.meta.env.REACT_APP_IMGIX_URL}${srcUrl}?auto=format&q=100&dpr=2`}
           sizes="100vw"
           attributeConfig={{
             src: "data-src",
@@ -23,7 +23,7 @@ const UseImgix: React.FC<UseImgixProps> = props => {
           htmlAttributes={{
             alt: alt,
             style: style,
-            src: process.env.REACT_APP_IMGIX_URL + srcUrl + "?auto=compress&q=0&dpr=0", // low quality image here
+            src: import.meta.env.REACT_APP_IMGIX_URL + srcUrl + "?auto=compress&q=0&dpr=0", // low quality image here
           }}
         />
       )}

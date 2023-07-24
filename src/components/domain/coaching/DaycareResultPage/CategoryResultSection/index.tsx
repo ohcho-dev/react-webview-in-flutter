@@ -1,6 +1,10 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
-import { ColorLightEltern9Base } from "constants/ldsConstants/global";
+import {
+  ColorLightEltern9Base,
+  ColorLightSlate11,
+  ContentsBase1626Regular,
+} from "constants/ldsConstants/global";
 import {
   DividerSection,
   IconDotSection,
@@ -10,6 +14,7 @@ import {
 } from "pages/coaching/DaycareResultPage/DaycareResultPage.styled";
 import { CategoryListType, DaycareMonthLevelType } from "types/apis/coaching";
 import * as S from "./CategoryResultSection.styled";
+import Text from "components/common/Text";
 
 interface CategoryResultSectionPropsType {
   category: "social_skills" | "cognition" | "gross_motor_skills" | "fine_motor_skills";
@@ -67,7 +72,15 @@ const CategoryResultSection = ({
           </S.DecoImageSection>
         </S.LevelSection>
         <UseImgix srcUrl={`/images/${level}.svg`} style={{ width: "100%", height: "15.7rem" }} />
-        <S.CommentSection>{comment}</S.CommentSection>
+        <S.CommentSection>
+          <Text
+            variant={{ ...ContentsBase1626Regular }}
+            color={ColorLightSlate11}
+            style={{ whiteSpace: "pre-wrap" }}
+          >
+            {comment}
+          </Text>
+        </S.CommentSection>
       </S.PaddingWrapper>
       {activity_content && (
         <>
@@ -100,7 +113,15 @@ const CategoryResultSection = ({
             <UseImgix srcUrl={"/images/coaching_star.svg"} />
             {`${CATEGORY_NAME[category]} 발달이 중요한 이유`}
           </TitleSection>
-          <S.CommentSection>{importance}</S.CommentSection>
+          <S.CommentSection>
+            <Text
+              variant={{ ...ContentsBase1626Regular }}
+              color={ColorLightSlate11}
+              style={{ whiteSpace: "pre-wrap" }}
+            >
+              {importance}
+            </Text>
+          </S.CommentSection>
         </S.ImportantSection>
       </S.PaddingWrapper>
     </S.Layout>

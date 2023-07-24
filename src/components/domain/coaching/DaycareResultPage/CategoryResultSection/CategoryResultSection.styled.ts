@@ -56,14 +56,8 @@ export const CommentSection = styled.div`
   padding: 1.6rem 2rem;
   border-radius: 0.8rem;
   background-color: ${ColorLightSlate2};
-  white-space: pre-wrap;
 
   margin: 2.5rem 0 3rem 0;
-  color: ${ColorLightSlate11};
-
-  font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 2.6rem;
 `;
 
 export const RecommendedActivitySection = styled.div`
