@@ -21,7 +21,7 @@ const RecordPage = () => {
       <RecordList />
       <FloatingButton
         page="main"
-        iconUrl={`${process.env.REACT_APP_IMGIX_URL}/images/record/record_icon_pencil.svg`}
+        iconUrl={`${import.meta.env.REACT_APP_IMGIX_URL}/images/record/record_icon_pencil.svg`}
         onClick={() => navigate("/record/record-task-list")}
       />
     </LayoutMainPage>

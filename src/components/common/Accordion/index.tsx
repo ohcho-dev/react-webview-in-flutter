@@ -15,7 +15,7 @@ const Accordion: React.FC<AccordionProps> = ({ children, title, ...props }) => {
         <S.AccordionTitle>{title}</S.AccordionTitle>
         <S.AccordionIcon
           isOpen={isOpen}
-          background={process.env.REACT_APP_IMGIX_URL + "/images/icon-arrow-down.svg"}
+          background={import.meta.env.REACT_APP_IMGIX_URL + "/images/icon-arrow-down.svg"}
         />
       </S.AccordionHeader>
       <S.AccordionBody isOpen={isOpen}>{children}</S.AccordionBody>

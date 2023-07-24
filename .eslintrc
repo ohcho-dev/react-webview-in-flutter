@@ -16,6 +16,7 @@
   "parserOptions": {
     "project": "./tsconfig.json"
   },
+  "ignorePatterns": ["vite.config.ts"],
   "rules": {
     "react/react-in-jsx-scope": "off", // JSX 표현식을 사용하는 모든 파일 최상단에 import React from 'react'; 명시
     "react-hooks/exhaustive-deps": "off", // 비효율적인 useEffect dependency에서 에러를 띄움

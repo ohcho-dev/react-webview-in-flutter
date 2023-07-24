@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { CHILD_ID_FIELD } from "../constants/localStorage";
 
 // axios 기본 설정
-axios.defaults.baseURL = process.env.REACT_APP_API_URL;
+axios.defaults.baseURL = import.meta.env.REACT_APP_API_URL;
 axios.defaults.headers.common["Access-Control-Allow-Origin"] = "*";
 
 export const request = async (config: AxiosRequestConfig) => {
