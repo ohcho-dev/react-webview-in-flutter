@@ -1,5 +1,12 @@
 import * as S from "./RecordListItem";
 import UseImgix from "../../../../../components/common/Imgix";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack6,
+  ColorLightBlack9Base,
+  TextBase1624Semibold,
+  TextSm1420Regular,
+} from "lds-common/src/constants/tokens/global";
 
 interface RecordListItemProps {
   data?: object[];
@@ -38,9 +45,27 @@ const RecordListItem: React.FC<RecordListItemProps> = ({ data = [] }) => {
             <UseImgix srcUrl={item.imgUrl} alt={item.title} />
           </S.ImageWrap>
           <S.TextWrap>
-            <S.Title>{item.title}</S.Title>
-            <S.Description>{item.desc}</S.Description>
-            <S.Date>{item.date}</S.Date>
+            <Text
+              variant={TextBase1624Semibold}
+              color={ColorLightBlack9Base}
+              style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {item.title}
+            </Text>
+            <Text
+              variant={TextSm1420Regular}
+              color={ColorLightBlack6}
+              style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {item.desc}
+            </Text>
+            <Text
+              variant={TextSm1420Regular}
+              color={ColorLightBlack6}
+              style={{ whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}
+            >
+              {item.date}
+            </Text>
           </S.TextWrap>
         </S.ListItemCard>
       ))}

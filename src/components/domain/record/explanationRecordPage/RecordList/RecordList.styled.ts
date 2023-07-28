@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const CoachingTabWrapper = styled.div`
+export const RecordTabWrapper = styled.div`
   padding: 1.6rem 0;
 `;
 
@@ -21,7 +21,7 @@ export const ProgressChip = styled.div`
 export const ChipWrapper = styled.div`
   display: flex;
   column-gap: 0.8rem;
-  padding: 0 2rem;
+  padding: 0 2rem 2rem;
 `;
 
 export const MoreBtn = styled.div`

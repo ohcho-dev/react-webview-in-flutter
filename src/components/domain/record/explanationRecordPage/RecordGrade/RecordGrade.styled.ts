@@ -1,18 +1,25 @@
 import styled from "styled-components";
 import {
   ColorLightBlack9Base,
+  ColorLightEltern3,
   ColorLightEltern8,
-} from "../../../../../constants/ldsConstants/global";
+  ColorLightEltern9Base,
+} from "lds-common/src/constants/tokens/global";
 
 export const Container = styled.div`
   width: 100%;
   padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
 `;
+
 export const FlexBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
+
 export const Title = styled.div`
   font-size: 1.6rem;
   line-height: 2rem;
@@ -30,6 +37,7 @@ export const QuestionButton = styled.div`
     height: 2rem;
   }
 `;
+
 export const QuestionText = styled.div`
   font-size: 1.4rem;
   color: ${ColorLightEltern8};
@@ -68,11 +76,11 @@ export const UtilWrap = styled.div`
 
 export const CountChip = styled.div`
   padding: 0.4rem 0.8rem;
-  background: #ebfaf6;
+  background: ${ColorLightEltern3};
   border-radius: 1.8rem;
   font-weight: 600;
   font-size: 1.4rem;
   line-height: 2rem;
   letter-spacing: -0.04rem;
-  color: #00c7b1;
+  color: ${ColorLightEltern9Base};
 `;

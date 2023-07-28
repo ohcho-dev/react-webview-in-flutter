@@ -2,88 +2,105 @@ import * as S from "./StampReward.styled";
 import UseImgix from "../../../components/common/Imgix";
 import EmptyBox from "../../../components/common/EmptyBox";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-
-import { ColorLightEltern4 } from "../../../constants/ldsConstants/global";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack9Base,
+  TextBase1624Semibold,
+  TextLg1826Semibold,
+} from "lds-common/src/constants/tokens/global";
 
 const StampRewardPage = () => {
   const StampList = [
     {
       id: 0,
-      imgUrl: "/images/record/record_muscle.svg",
+      imgUrl: "/images/active_gross_motor_stamp.svg",
       title: "대근육 아이",
+      active: true,
     },
     {
       id: 1,
-      imgUrl: "/images/record/record_daily.svg",
-      title: "대근육 아이",
+      imgUrl: "/images/active_daily_stamp.svg",
+      title: "#데일리",
+      active: true,
     },
     {
       id: 2,
-      imgUrl: "/images/record/record_play.svg",
-      title: "대근육 아이",
+      imgUrl: "/images/active_play_stamp.svg",
+      title: "놀이 마스터",
+      active: true,
     },
     {
       id: 3,
-      imgUrl: "/images/record/record_muscle.svg",
+      imgUrl: "/images/inactive_gross_motor_stamp.svg",
       title: "대근육 아이",
+      active: false,
     },
     {
       id: 4,
-      imgUrl: "/images/record/record_daily.svg",
-      title: "대근육 아이",
+      imgUrl: "/images/inactive_daily_stamp.svg",
+      title: "#데일리",
+      active: false,
     },
     {
       id: 5,
-      imgUrl: "/images/record/record_play.svg",
-      title: "대근육 아이",
+      imgUrl: "/images/inactive_play_stamp.svg",
+      title: "놀이 마스터",
+      active: false,
+    },
+  ];
+
+  const rewardStampList = [
+    {
+      id: 0,
+      imgUrl: "/images/active_seed_stamp.svg",
+      title: "씨앗",
+      active: true,
     },
     {
-      id: 6,
-      imgUrl: "/images/record/record_muscle.svg",
-      title: "대근육 아이",
-    },
-    {
-      id: 7,
-      imgUrl: "/images/record/record_daily.svg",
-      title: "대근육 아이",
-    },
-    {
-      id: 8,
-      imgUrl: "/images/record/record_play.svg",
-      title: "대근육 아이",
+      id: 1,
+      imgUrl: "/images/active_new_sprout_stamp.svg",
+      title: "새싹",
+      active: true,
     },
   ];
 
   return (
     <LayoutDetailPage titleType="close">
-      <S.Title>기록 목록</S.Title>
-      <S.StampContainer>
-        {StampList.map((stampItem, index) => {
-          let backgroundColor = "";
-          if (index === 2) console.log((index + 1) % 3);
-          switch ((index + 1) % 3) {
-            case 0:
-              backgroundColor = "#FFE6E6";
-              break;
-            case 1:
-              backgroundColor = "#FFF3DB";
-              break;
-            case 2:
-              backgroundColor = ColorLightEltern4;
-              break;
-          }
-          return (
-            <S.StampListWrap key={index}>
-              <S.StampImage style={{ backgroundColor }}>
+      <S.StampSection>
+        <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
+          기록 달성
+        </Text>
+        <S.StampContainer>
+          {StampList.map((stampItem, index) => (
+            <S.StampWrap key={index}>
+              <S.StampImage active={stampItem.active}>
                 <UseImgix srcUrl={stampItem.imgUrl} alt={stampItem.title} />
               </S.StampImage>
-              <S.StampTitle style={{ width: "10rem" }}>{stampItem.title}</S.StampTitle>
-            </S.StampListWrap>
-          );
-        })}
-      </S.StampContainer>
-      <EmptyBox height="2.4rem" />
-      <S.Title>기록 여정</S.Title>
+              <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
+                {stampItem.title}
+              </Text>
+            </S.StampWrap>
+          ))}
+        </S.StampContainer>
+      </S.StampSection>
+      <S.StampSection lastOne>
+        <EmptyBox height="2.5rem" />
+        <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
+          발달 챌린지
+        </Text>
+        <S.StampContainer>
+          {rewardStampList.map(stampItem => (
+            <S.StampWrap key={stampItem.id}>
+              <S.StampImage active={stampItem.active}>
+                <UseImgix srcUrl={stampItem.imgUrl} alt={stampItem.title} />
+              </S.StampImage>
+              <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
+                {stampItem.title}
+              </Text>
+            </S.StampWrap>
+          ))}
+        </S.StampContainer>
+      </S.StampSection>
     </LayoutDetailPage>
   );
 };

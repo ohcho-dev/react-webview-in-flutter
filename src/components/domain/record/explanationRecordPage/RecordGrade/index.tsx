@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 import * as S from "./RecordGrade.styled";
 import UseImgix from "../../../../../components/common/Imgix";
+import Icon from "components/common/Icon";
+import { ColorLightSlate8 } from "lds-common/src/constants/tokens/global";
 
 const RecordGrade = () => {
   const navigate = useNavigate();
@@ -23,7 +25,7 @@ const RecordGrade = () => {
         </S.GradeWrap>
         <S.UtilWrap onClick={() => navigate("/record/stamp-reward")}>
           <S.CountChip>10개 기록</S.CountChip>
-          <UseImgix srcUrl="/images/common/chevron-right.svg" />
+          <Icon fill={ColorLightSlate8} icon={"chevron-right"} size={24} />
         </S.UtilWrap>
       </S.FlexBox>
     </S.Container>

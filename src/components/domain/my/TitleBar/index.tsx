@@ -87,7 +87,7 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
             handleBackBtnClick ? handleBackBtnClick() : navigate(-1);
           }}
         >
-          <UseImgix srcUrl="/images/icon-close.svg" alt="close icon" style={{ width: "2.8rem" }} />
+          <Icon icon={"x"} size={28} fill={ColorLight2} />
         </div>
       )}
     </S.TitleBarWrap>

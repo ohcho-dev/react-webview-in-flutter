@@ -1,3 +1,4 @@
+import { ColorLightSlate1, ColorLightSlate7 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const ListItemWrapper = styled.div`
@@ -7,9 +8,9 @@ export const ListItemWrapper = styled.div`
 export const ListItemCard = styled.div`
   padding: 1.2rem;
   margin-bottom: 1.2rem;
-  background: #fbfcfd;
-  border: 1px solid #d7dbdf;
-  border-radius: 8px;
+  background: ${ColorLightSlate1};
+  border: 1px solid ${ColorLightSlate7};
+  border-radius: 1.2rem;
   display: flex;
   align-items: center;
   column-gap: 1.6rem;
@@ -38,41 +39,9 @@ export const ImageWrap = styled.div`
 `;
 
 export const TextWrap = styled.div`
-  width: 100%;
+  width: 20.5rem;
   padding: 0.8rem 0;
   display: flex;
   flex-direction: column;
   row-gap: 0.4rem;
-`;
-
-export const Title = styled.div`
-  width: 20rem;
-  font-weight: 600;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.04rem;
-  color: #11181c;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const Description = styled.div`
-  width: 20rem;
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  letter-spacing: -0.04rem;
-  color: #798088;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const Date = styled.div`
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  letter-spacing: -0.04rem;
-  color: #798088;
 `;

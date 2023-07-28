@@ -1,6 +1,12 @@
 import * as S from "./NoListRecord.styled";
 import UseImgix from "../../../../../components/common/Imgix";
-import EmptyBox from "../../../../../components/common/EmptyBox";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack12,
+  ColorLightBlack5,
+  ContentsSm1424Regular,
+  TextLg1826Medium,
+} from "lds-common/src/constants/tokens/global";
 
 const INFO_MESSAGE = [
   "아이의 발달을 위한 연습을 영상으로 기록해 보세요.",
@@ -10,22 +16,25 @@ const INFO_MESSAGE = [
 
 const NoListRecord = () => {
   return (
-    <>
-      <EmptyBox height="4rem" />
+    <S.NoRecordWrapper>
       <S.ImageWrap>
         <UseImgix srcUrl="/images/common/charactor_empty.svg" />
       </S.ImageWrap>
-      <S.EmptyTitle>아직 기록이 없어요.</S.EmptyTitle>
+      <Text variant={TextLg1826Medium} color={ColorLightBlack12}>
+        아직 기록이 없어요.
+      </Text>
       <S.EmptyDesc>
         <ol>
           {INFO_MESSAGE.map((item, index) => (
             <li key={item} value={item}>
-              {index + 1}. {item}
+              <Text variant={ContentsSm1424Regular} color={ColorLightBlack5}>
+                {`${index + 1}. ${item}`}
+              </Text>
             </li>
           ))}
         </ol>
       </S.EmptyDesc>
-    </>
+    </S.NoRecordWrapper>
   );
 };
 

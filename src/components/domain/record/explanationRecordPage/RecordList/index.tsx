@@ -6,7 +6,6 @@ import { useRecoilValue } from "recoil";
 import * as S from "./RecordList.styled";
 import RecordListItem from "../RecordListItem";
 import NoListRecord from "../NoListRecord";
-import EmptyBox from "../../../../../components/common/EmptyBox";
 
 export type MenuType = "all" | "practice" | "daily" | "play";
 
@@ -16,46 +15,46 @@ export type MenuType = "all" | "practice" | "daily" | "play";
 const RecordList = () => {
   const navigate = useNavigate();
   const [selectedMenu, setSelectedMenu] = useState<MenuType>("all");
-  const [lastIndex, setLastIndex] = useState<number>(0);
-
-  const handleCardClick = (id: number) => {
-    navigate(`/coaching/coaching-detail/${id}`);
-  };
+  const recordList: any[] = [""];
 
   return (
     <>
-      <S.CoachingTabWrapper>
-        <S.ChipWrapper>
-          <S.ProgressChip
-            isSelected={selectedMenu === "all"}
-            onClick={() => setSelectedMenu("all")}
-          >
-            전체
-          </S.ProgressChip>
-          <S.ProgressChip
-            isSelected={selectedMenu === "practice"}
-            onClick={() => setSelectedMenu("practice")}
-          >
-            발달연습
-          </S.ProgressChip>
-          <S.ProgressChip
-            isSelected={selectedMenu === "daily"}
-            onClick={() => setSelectedMenu("daily")}
-          >
-            일상
-          </S.ProgressChip>
-          <S.ProgressChip
-            isSelected={selectedMenu === "play"}
-            onClick={() => setSelectedMenu("play")}
-          >
-            놀이
-          </S.ProgressChip>
-        </S.ChipWrapper>
-        <EmptyBox height="2rem" />
-        {/* 리스트 있을 때 / 없을 때 */}
-        <RecordListItem />
-        <NoListRecord />
-      </S.CoachingTabWrapper>
+      <S.RecordTabWrapper>
+        {recordList.map.length !== 0 ? (
+          //TODO: 좌우로 스크롤 되게 바꾸기
+          <>
+            <S.ChipWrapper>
+              <S.ProgressChip
+                isSelected={selectedMenu === "all"}
+                onClick={() => setSelectedMenu("all")}
+              >
+                전체
+              </S.ProgressChip>
+              <S.ProgressChip
+                isSelected={selectedMenu === "practice"}
+                onClick={() => setSelectedMenu("practice")}
+              >
+                발달연습
+              </S.ProgressChip>
+              <S.ProgressChip
+                isSelected={selectedMenu === "daily"}
+                onClick={() => setSelectedMenu("daily")}
+              >
+                일상
+              </S.ProgressChip>
+              <S.ProgressChip
+                isSelected={selectedMenu === "play"}
+                onClick={() => setSelectedMenu("play")}
+              >
+                놀이
+              </S.ProgressChip>
+            </S.ChipWrapper>
+            <RecordListItem />
+          </>
+        ) : (
+          <NoListRecord />
+        )}
+      </S.RecordTabWrapper>
     </>
   );
 };
