@@ -1,16 +1,16 @@
 import * as S from "./StampReward.styled";
-import UseImgix from "../../../components/common/Imgix";
 import EmptyBox from "../../../components/common/EmptyBox";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import Text from "components/common/Text";
-import {
-  ColorLightBlack9Base,
-  TextBase1624Semibold,
-  TextLg1826Semibold,
-} from "lds-common/src/constants/tokens/global";
+import { ColorLightBlack9Base, TextLg1826Semibold } from "lds-common/src/constants/tokens/global";
 import Stamp from "components/domain/record/Stamp";
+import { useState } from "react";
+import RewardStatusModal from "components/domain/record/RewardStatusModal";
+import RewardReceivedModal from "components/domain/record/RewardReceivedModal";
 
 const StampRewardPage = () => {
+  const [openStampModal, setOpenStampModal] = useState(false);
+  const [openRewardReceivedModal, setOpenRewardReceivedModal] = useState(false);
   const StampList = [
     {
       id: 0,
@@ -66,39 +66,59 @@ const StampRewardPage = () => {
   ];
 
   return (
-    <LayoutDetailPage titleType="close">
-      <S.StampSection>
-        <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
-          기록 달성
-        </Text>
-        <S.StampContainer>
-          {StampList.map(stampItem => (
-            <Stamp
-              active={stampItem.active}
-              imgUrl={stampItem.imgUrl}
-              title={stampItem.title}
-              key={stampItem.id}
-            />
-          ))}
-        </S.StampContainer>
-      </S.StampSection>
-      <S.StampSection lastOne>
-        <EmptyBox height="2.5rem" />
-        <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
-          발달 챌린지
-        </Text>
-        <S.StampContainer>
-          {rewardStampList.map(stampItem => (
-            <Stamp
-              active={stampItem.active}
-              imgUrl={stampItem.imgUrl}
-              title={stampItem.title}
-              key={stampItem.id}
-            />
-          ))}
-        </S.StampContainer>
-      </S.StampSection>
-    </LayoutDetailPage>
+    <>
+      <LayoutDetailPage titleType="close">
+        <S.StampSection>
+          <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
+            기록 달성
+          </Text>
+          <S.StampContainer>
+            {StampList.map(stampItem => (
+              <Stamp
+                handleClick={() => setOpenStampModal(true)}
+                active={stampItem.active}
+                imgUrl={stampItem.imgUrl}
+                title={stampItem.title}
+                key={stampItem.id}
+              />
+            ))}
+          </S.StampContainer>
+        </S.StampSection>
+        <S.StampSection lastOne>
+          <EmptyBox height="2.5rem" />
+          <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
+            발달 챌린지
+          </Text>
+          <S.StampContainer>
+            {rewardStampList.map(stampItem => (
+              <Stamp
+                handleClick={() => setOpenStampModal(true)}
+                active={stampItem.active}
+                imgUrl={stampItem.imgUrl}
+                title={stampItem.title}
+                key={stampItem.id}
+              />
+            ))}
+          </S.StampContainer>
+        </S.StampSection>
+      </LayoutDetailPage>
+      <RewardStatusModal
+        ableToGetReward
+        openRewardStatusModal={openStampModal}
+        toggleModal={() => setOpenStampModal(prev => !prev)}
+        stampName={"대근육 아이"}
+        imgUrl={"/images/active_gross_motor_stamp.svg"}
+        condition={"대근육 영상 10번 공유시 획득"}
+        achievementDate={"2023.04.16 달성"}
+        handleClickGettingRewardBtn={() => {
+          setOpenRewardReceivedModal(true);
+        }}
+      />
+      <RewardReceivedModal
+        openModal={openRewardReceivedModal}
+        toggleModal={() => setOpenRewardReceivedModal(prev => !prev)}
+      />
+    </>
   );
 };
 

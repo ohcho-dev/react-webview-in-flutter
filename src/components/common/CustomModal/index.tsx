@@ -10,7 +10,7 @@ interface ModalProps {
   topImage?: ReactElement;
   title?: string;
   content?: string;
-  contentMarkup?: ReactElement;
+  children: ReactElement;
   okBtnName?: string;
   cancelBtnName?: string;
   okBtnClick?: () => void;
@@ -41,7 +41,6 @@ const CustomModal = (props: ModalProps) => {
   const {
     isOpen,
     title,
-    content,
     toggleModal,
     okBtnName,
     cancelBtnName,
@@ -51,7 +50,7 @@ const CustomModal = (props: ModalProps) => {
     cancelBtn = false,
     deleteBtn = false,
     topImage,
-    contentMarkup,
+    children,
   } = props;
 
   // 컴포넌트가 사라지는 시점을 지연시키기 위한 상태
@@ -98,7 +97,7 @@ const CustomModal = (props: ModalProps) => {
         <S.ModalContentWrapper>
           {topImage && <S.ModalImageWrapper>{topImage}</S.ModalImageWrapper>}
           <S.ModalTitle>{title}</S.ModalTitle>
-          <S.ModalContent>{content ? content : contentMarkup}</S.ModalContent>
+          <S.ModalContent>{children}</S.ModalContent>
         </S.ModalContentWrapper>
         <S.ModalBtnsWrapper>
           {cancelBtn && (

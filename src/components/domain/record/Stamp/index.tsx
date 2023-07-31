@@ -11,11 +11,12 @@ interface StampProps {
   active: boolean;
   imgUrl: string;
   title: string;
+  handleClick: () => void;
 }
 
-const Stamp = ({ active, imgUrl, title }: StampProps) => {
+const Stamp = ({ active, imgUrl, title, handleClick }: StampProps) => {
   return (
-    <S.StampWrap>
+    <S.StampWrap onClick={handleClick}>
       <S.StampImage active={active}>
         <UseImgix srcUrl="/images/badge.svg" alt="markAsRead" style={{ width: "0.5rem" }} />
         <UseImgix srcUrl={imgUrl} alt={title} />
