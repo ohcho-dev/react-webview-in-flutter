@@ -10,13 +10,13 @@ const bottomNavData = [
     selectedImgUrl: "/images/home_on.svg",
     link: "/home",
   },
-  {
-    id: 1,
-    name: "기록",
-    imgUrl: "/images/note_off.svg",
-    selectedImgUrl: "/images/note_on.svg",
-    link: "/record",
-  },
+  // {
+  //   id: 1,
+  //   name: "기록",
+  //   imgUrl: "/images/note_off.svg",
+  //   selectedImgUrl: "/images/note_on.svg",
+  //   link: "/record",
+  // },
   {
     id: 2,
     name: "코칭",
