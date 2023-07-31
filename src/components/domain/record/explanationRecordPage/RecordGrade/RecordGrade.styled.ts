@@ -69,7 +69,12 @@ export const UtilWrap = styled.div`
 `;
 
 export const CountChip = styled.div`
-  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 7rem;
+  height: 3rem;
   padding: 0.4rem 0.8rem;
   background: ${ColorLightEltern3};
   border-radius: 1.8rem;
