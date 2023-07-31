@@ -22,7 +22,7 @@ const ActivityDetail = React.lazy(() => import("./components/domain/home/Activit
 const ExplanationRecord = React.lazy(() => import("./pages/record/ExplanationRecordPage"));
 const StampReward = React.lazy(() => import("./pages/record/StampRewardPage"));
 const RecordTaskList = React.lazy(() => import("./pages/record/RecordTaskListPage"));
-
+const RecordDetailPage = React.lazy(() => import("./pages/record/RecordDetailPage"));
 /**
  * 코칭메뉴
  */
@@ -334,6 +334,14 @@ export const RouterConfig = [
   {
     path: "/coaching/daycare/resultPaper/languageDesc",
     element: <LanguageExplanationPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/record/:recordId",
+    element: <RecordDetailPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

@@ -7,6 +7,7 @@ import {
   TextBase1624Semibold,
   TextSm1420Regular,
 } from "lds-common/src/constants/tokens/global";
+import { useNavigate } from "react-router-dom";
 
 interface RecordListItemProps {
   data?: object[];
@@ -37,10 +38,11 @@ const tempData = [
 ];
 
 const RecordListItem: React.FC<RecordListItemProps> = ({ data = [] }) => {
+  const navigate = useNavigate();
   return (
     <S.ListItemWrapper>
       {tempData.map(item => (
-        <S.ListItemCard key={item.id}>
+        <S.ListItemCard key={item.id} onClick={() => navigate("/record/1")}>
           <S.ImageWrap>
             <UseImgix srcUrl={item.imgUrl} alt={item.title} />
           </S.ImageWrap>
