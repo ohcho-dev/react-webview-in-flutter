@@ -18,6 +18,7 @@ import * as S from "./Chip.styled";
 
 interface chipProps {
   status: string;
+  month?: number;
 }
 
 const STATUS: {
@@ -95,17 +96,28 @@ const STATUS: {
     borderColor: ColorLightSlate7,
     backgroundColor: ColorLight1,
   },
+  MONTH: {
+    name: "월령",
+    color: ColorLightBrandBlue8,
+    borderColor: ColorLightBrandBlue8,
+    backgroundColor: ColorLight1,
+  },
+  PRACTICE: {
+    name: "발달연습",
+    color: ColorLightAmber10,
+    borderColor: ColorLightAmber6,
+    backgroundColor: ColorLight1,
+  },
 };
 
-const Chip = (props: chipProps) => {
-  const { status } = props;
+const Chip = ({ status, month }: chipProps) => {
   return (
     <S.CustomChip
       color={STATUS[status].color}
       borderColor={STATUS[status].borderColor}
       backgroundColor={STATUS[status].backgroundColor}
     >
-      {STATUS[status].name}
+      {STATUS[status].name !== "월령" ? STATUS[status].name : `#${month}개월~`}
     </S.CustomChip>
   );
 };

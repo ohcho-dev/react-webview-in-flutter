@@ -1,8 +1,13 @@
 import * as S from "./RecordTaskList.styled";
 
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import EmptyBox from "../../../components/common/EmptyBox";
 import TaskListItem from "../../../components/domain/record/recordTaskListPage/TaskListItem";
+import RecordTitle from "components/domain/record/RecordTitle";
+import {
+  ColorLightBlack9Base,
+  ContentsXxl2232Semibold,
+} from "lds-common/src/constants/tokens/global";
+import Text from "components/common/Text";
 
 const data = {
   practice: [
@@ -98,11 +103,26 @@ const RecordTaskListPage = () => {
   const { practice, daily, play } = data;
   return (
     <LayoutDetailPage>
-      <S.Title>무엇을 기록할까요?</S.Title>
-      <EmptyBox height="2rem" />
-      {practice.map((practiceItem: any) => (
-        <TaskListItem key={practiceItem.id + practiceItem.title} data={practiceItem} />
-      ))}
+      <Text
+        variant={ContentsXxl2232Semibold}
+        color={ColorLightBlack9Base}
+        style={{ marginLeft: "2rem", marginTop: "0.8rem" }}
+      >
+        무엇을 기록할까요?
+      </Text>
+      <S.TaskSection>
+        <RecordTitle
+          imgUrl={"/images/record/record_muscle.svg"}
+          title={"12개월을 위한 발달 연습"}
+        />
+        {data.practice.map(practice => (
+          <TaskListItem
+            key={practice.id}
+            title={practice.title}
+            chips={[{ status: "MONTH", month: 4 }, { status: "PRACTICE" }]}
+          />
+        ))}
+      </S.TaskSection>
     </LayoutDetailPage>
   );
 };
