@@ -14,24 +14,3 @@ export const StampContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   row-gap: 3rem;
 `;
-
-export const StampWrap = styled.div`
-  width: 100%;
-  flex: 0 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-export const StampImage = styled.div<{ active: boolean }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 0.8rem;
-
-  img {
-    filter: ${({ active }) => (active ? "grayscale(0%)" : "grayscale(100%)")};
-    width: 9.6rem;
-    height: 9.6rem;
-  }
-`;

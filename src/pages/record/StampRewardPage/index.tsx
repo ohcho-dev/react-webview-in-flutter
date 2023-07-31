@@ -8,6 +8,7 @@ import {
   TextBase1624Semibold,
   TextLg1826Semibold,
 } from "lds-common/src/constants/tokens/global";
+import Stamp from "components/domain/record/Stamp";
 
 const StampRewardPage = () => {
   const StampList = [
@@ -71,15 +72,13 @@ const StampRewardPage = () => {
           기록 달성
         </Text>
         <S.StampContainer>
-          {StampList.map((stampItem, index) => (
-            <S.StampWrap key={index}>
-              <S.StampImage active={stampItem.active}>
-                <UseImgix srcUrl={stampItem.imgUrl} alt={stampItem.title} />
-              </S.StampImage>
-              <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
-                {stampItem.title}
-              </Text>
-            </S.StampWrap>
+          {StampList.map(stampItem => (
+            <Stamp
+              active={stampItem.active}
+              imgUrl={stampItem.imgUrl}
+              title={stampItem.title}
+              key={stampItem.id}
+            />
           ))}
         </S.StampContainer>
       </S.StampSection>
@@ -90,14 +89,12 @@ const StampRewardPage = () => {
         </Text>
         <S.StampContainer>
           {rewardStampList.map(stampItem => (
-            <S.StampWrap key={stampItem.id}>
-              <S.StampImage active={stampItem.active}>
-                <UseImgix srcUrl={stampItem.imgUrl} alt={stampItem.title} />
-              </S.StampImage>
-              <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
-                {stampItem.title}
-              </Text>
-            </S.StampWrap>
+            <Stamp
+              active={stampItem.active}
+              imgUrl={stampItem.imgUrl}
+              title={stampItem.title}
+              key={stampItem.id}
+            />
           ))}
         </S.StampContainer>
       </S.StampSection>
