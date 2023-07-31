@@ -12,7 +12,7 @@ import {
 import * as S from "./TitleBar.styled";
 import useAuthMe from "queries/common/auth/useAuthMe";
 import Icon from "components/common/Icon";
-import { ColorLight2, ColorLightSlate9Base } from "constants/ldsConstants/global";
+import { ColorLight2, ColorLightSlate9Base } from "lds-common/src/constants/tokens/global";
 
 interface MainTitleBarProps {
   style?: object;

@@ -1,7 +1,7 @@
-import { ColorLightBlack8 } from "constants/ldsConstants/global";
 import React from "react";
 import Icon from "../Icon";
 import * as S from "./DatePickerInput.styled";
+import { ColorLightBlack8 } from "lds-common/src/constants/tokens/global";
 
 interface InputProps {
   className: string;

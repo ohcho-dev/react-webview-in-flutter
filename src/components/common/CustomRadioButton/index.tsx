@@ -3,7 +3,7 @@ import {
   ColorLightEltern9Base,
   TextBase1624Medium,
   TextBase1624Regular,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import React from "react";
 import Text from "../Text";
 import * as S from "./CustomRadioButton.styled";

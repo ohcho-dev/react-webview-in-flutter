@@ -10,7 +10,7 @@ interface ModalProps {
   topImage?: ReactElement;
   title?: string;
   content?: string;
-  children: ReactElement;
+  children?: ReactElement;
   okBtnName?: string;
   cancelBtnName?: string;
   okBtnClick?: () => void;

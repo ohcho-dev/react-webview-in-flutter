@@ -1,11 +1,6 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
 import {
-  ColorLightEltern9Base,
-  ColorLightSlate11,
-  ContentsBase1626Regular,
-} from "constants/ldsConstants/global";
-import {
   DividerSection,
   IconDotSection,
   ListContent,
@@ -15,6 +10,11 @@ import {
 import { CategoryListType, DaycareMonthLevelType } from "types/apis/coaching";
 import * as S from "./CategoryResultSection.styled";
 import Text from "components/common/Text";
+import {
+  ColorLightEltern9Base,
+  ColorLightSlate11,
+  ContentsBase1626Regular,
+} from "lds-common/src/constants/tokens/global";
 
 interface CategoryResultSectionPropsType {
   category: "social_skills" | "cognition" | "gross_motor_skills" | "fine_motor_skills";

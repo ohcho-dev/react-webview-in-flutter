@@ -3,11 +3,12 @@ import * as S from "./RecordTaskList.styled";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import TaskListItem from "../../../components/domain/record/recordTaskListPage/TaskListItem";
 import RecordTitle from "components/domain/record/RecordTitle";
+
+import Text from "components/common/Text";
 import {
   ColorLightBlack9Base,
   ContentsXxl2232Semibold,
 } from "lds-common/src/constants/tokens/global";
-import Text from "components/common/Text";
 
 const data = {
   practice: [

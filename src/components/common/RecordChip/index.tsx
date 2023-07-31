@@ -1,4 +1,4 @@
-import * as DT from "../../../constants/ldsConstants/global";
+import * as DT from "lds-common/src/constants/tokens/global";
 import * as S from "./RecordChip.styled";
 
 interface chipProps {

@@ -5,7 +5,7 @@ import {
   ColorLightBlack9Base,
   ColorLightRed7,
   ColorLightRed9Base,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import { useEffect, useState } from "react";
 
 interface buttonProps {

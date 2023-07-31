@@ -1,12 +1,6 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
 import {
-  ColorLightEltern9Base,
-  ColorLightPurple8,
-  ColorLightSlate11,
-  ContentsBase1626Regular,
-} from "constants/ldsConstants/global";
-import {
   DividerSection,
   IconDotSection,
   ListContent,
@@ -18,6 +12,12 @@ import { CategoryListType, DaycareMonthLevelType, LanguageInfoType } from "types
 import * as S from "../CategoryResultSection/CategoryResultSection.styled";
 import { LanguageExplanationBtn, LanguageLevelInfoSection } from "./LanguageResultSection.styled";
 import Text from "components/common/Text";
+import {
+  ColorLightEltern9Base,
+  ColorLightPurple8,
+  ColorLightSlate11,
+  ContentsBase1626Regular,
+} from "lds-common/src/constants/tokens/global";
 
 interface CategoryResultSectionPropsType {
   child_name: string | undefined;

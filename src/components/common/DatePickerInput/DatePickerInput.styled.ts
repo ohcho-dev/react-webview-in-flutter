@@ -1,4 +1,4 @@
-import { ColorLightBlack9Base, ColorLightSlate7 } from "constants/ldsConstants/global";
+import { ColorLightBlack9Base, ColorLightSlate7 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const DatepickerWrapper = styled.div`

@@ -1,4 +1,4 @@
-import { ColorLightSlate2, ContentsBase1626Regular } from "lds-common/src/constants/tokens/global";
+import { ColorLightSlate2 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const RecordDetailPageWrapper = styled.div`

@@ -1,4 +1,4 @@
-import { ColorLightEltern9Base, ColorLightSlate7 } from "constants/ldsConstants/global";
+import { ColorLightEltern9Base, ColorLightSlate7 } from "lds-common/src/constants/tokens/global";
 import styled, { css } from "styled-components";
 
 export const StyledLabel = styled.label<{

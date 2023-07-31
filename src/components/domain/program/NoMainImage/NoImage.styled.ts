@@ -1,4 +1,4 @@
-import { ColorLightGray4, ColorLightSlate9Base } from "constants/ldsConstants/global";
+import { ColorLightGray4, ColorLightSlate9Base } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const NoMainImage = styled.div`

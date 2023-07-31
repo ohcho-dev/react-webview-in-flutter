@@ -1,4 +1,4 @@
-import { ColorLightSlate7, ColorLightSlate8 } from "constants/ldsConstants/global";
+import { ColorLightSlate7, ColorLightSlate8 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const BoxWrapper = styled.div`

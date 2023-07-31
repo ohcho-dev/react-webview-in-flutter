@@ -2,11 +2,11 @@ import * as S from "./StampReward.styled";
 import EmptyBox from "../../../components/common/EmptyBox";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import Text from "components/common/Text";
-import { ColorLightBlack9Base, TextLg1826Semibold } from "lds-common/src/constants/tokens/global";
 import Stamp from "components/domain/record/Stamp";
 import { useState } from "react";
 import RewardStatusModal from "components/domain/record/RewardStatusModal";
 import RewardReceivedModal from "components/domain/record/RewardReceivedModal";
+import { ColorLightBlack9Base, TextLg1826Semibold } from "lds-common/src/constants/tokens/global";
 
 const StampRewardPage = () => {
   const [openStampModal, setOpenStampModal] = useState(false);

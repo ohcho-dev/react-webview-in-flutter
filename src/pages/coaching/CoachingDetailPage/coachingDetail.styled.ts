@@ -10,7 +10,7 @@ import {
   ColorLightSlate3,
   ColorLightSlate7,
   ColorLightSlate9Base,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const PageTitleWrap = styled.div`

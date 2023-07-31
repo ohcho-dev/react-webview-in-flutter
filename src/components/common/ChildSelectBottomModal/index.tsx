@@ -6,7 +6,7 @@ import UseImgix from "../Imgix";
 import CustomBottomModal from "../CustomBottomModal";
 import * as S from "./ChildSelectBottomModal.styled";
 import Icon from "../Icon";
-import { ColorLightBlack4, ColorLightBlack9Base } from "constants/ldsConstants/global";
+import { ColorLightBlack4, ColorLightBlack9Base } from "lds-common/src/constants/tokens/global";
 
 interface ChildSelectBottomModalProps {
   selectedChildInfo: ChildType;

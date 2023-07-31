@@ -2,7 +2,7 @@ import {
   ColorLightBlack12,
   ColorLightBlack9Base,
   ColorLightSlate9Base,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const OnlineOffline = styled.span`

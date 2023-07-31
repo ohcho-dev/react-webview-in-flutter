@@ -1,9 +1,8 @@
 import {
   ColorLight2,
   ColorLightBlack7,
-  ColorLightSlate11,
   ColorLightSlate2,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const Layout = styled.div`

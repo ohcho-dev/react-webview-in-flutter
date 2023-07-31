@@ -1,4 +1,4 @@
-import { ColorLightBlack6, ColorLightSlate2 } from "constants/ldsConstants/global";
+import { ColorLightBlack6, ColorLightSlate2 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const Thumbnail = styled.img`

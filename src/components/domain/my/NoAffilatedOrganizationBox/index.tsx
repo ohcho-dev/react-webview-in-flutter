@@ -1,5 +1,5 @@
 import Icon from "components/common/Icon";
-import { ColorLightBlack8 } from "constants/ldsConstants/global";
+import { ColorLightBlack8 } from "lds-common/src/constants/tokens/global";
 import { NativeFunction } from "utils/app/NativeFunction";
 import * as S from "./NoAffiliatedOrganizationBox.styled";
 

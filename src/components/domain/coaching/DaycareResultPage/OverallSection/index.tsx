@@ -1,12 +1,6 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
 import {
-  ColorLightRed8,
-  ColorLightEltern9Base,
-  ContentsBase1626Regular,
-  ColorLightSlate11,
-} from "constants/ldsConstants/global";
-import {
   DividerSection,
   IconDotSection,
   ListContent,
@@ -19,6 +13,12 @@ import CustomRadarChart from "../CustomRadarChart";
 import LevelSection from "../LevleSection";
 import * as S from "./OverallSection.styled";
 import Text from "components/common/Text";
+import {
+  ColorLightEltern9Base,
+  ColorLightRed8,
+  ColorLightSlate11,
+  ContentsBase1626Regular,
+} from "lds-common/src/constants/tokens/global";
 
 interface OverallSectionPropsType {
   resultPaperInfo: DaycareResultResponseType;

@@ -3,7 +3,7 @@ import {
   ColorLightEltern9Base,
   ColorLightSlate7,
   ColorLightSlate8,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const InputBox = styled.input<{ warning: boolean }>`

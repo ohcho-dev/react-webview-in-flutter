@@ -8,12 +8,12 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
+import { CategoryListType } from "types/apis/coaching";
 import {
   ColorLightEltern10,
   ColorLightEltern6,
   ColorLightEltern7,
-} from "constants/ldsConstants/global";
-import { CategoryListType } from "types/apis/coaching";
+} from "lds-common/src/constants/tokens/global";
 
 ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 

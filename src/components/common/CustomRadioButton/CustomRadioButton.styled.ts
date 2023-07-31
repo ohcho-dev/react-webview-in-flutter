@@ -1,4 +1,4 @@
-import { ColorLightEltern3, ColorLightEltern9Base } from "constants/ldsConstants/global";
+import { ColorLightEltern3, ColorLightEltern9Base } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const ColorSelectorContainer = styled.div`

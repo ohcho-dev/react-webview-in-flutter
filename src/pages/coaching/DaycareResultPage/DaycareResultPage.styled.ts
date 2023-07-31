@@ -1,4 +1,8 @@
-import { ColorLight2, ColorLightSlate11, ColorLightSlate2 } from "constants/ldsConstants/global";
+import {
+  ColorLight2,
+  ColorLightSlate11,
+  ColorLightSlate2,
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const DividerSection = styled.div`

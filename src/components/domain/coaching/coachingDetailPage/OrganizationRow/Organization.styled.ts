@@ -1,4 +1,4 @@
-import { ColorLightBlack5 } from "constants/ldsConstants/global";
+import { ColorLightBlack5 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const OrganizationRow = styled.div`

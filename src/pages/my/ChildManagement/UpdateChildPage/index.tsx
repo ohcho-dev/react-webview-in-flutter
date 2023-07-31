@@ -28,7 +28,7 @@ import useDeleteGroup from "queries/domain/my/child/useDeleteGroup";
 import { NativeFunction } from "utils/app/NativeFunction";
 import NameInput from "components/domain/my/NameInput";
 import Text from "components/common/Text";
-import { ColorLightSlate11, TextSm1420Medium } from "constants/ldsConstants/global";
+import { ColorLightSlate11, TextSm1420Medium } from "lds-common/src/constants/tokens/global";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },

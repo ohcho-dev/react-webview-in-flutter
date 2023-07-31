@@ -1,4 +1,4 @@
-import { ColorLightBlack7, ColorLightBlack8 } from "constants/ldsConstants/global";
+import { ColorLightBlack7, ColorLightBlack8 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const Wrapper = styled.div`

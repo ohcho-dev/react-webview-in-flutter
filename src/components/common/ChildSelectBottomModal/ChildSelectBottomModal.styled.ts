@@ -1,4 +1,4 @@
-import { ColorLightBlack6 } from "constants/ldsConstants/global";
+import { ColorLightBlack6 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const ChildrenListModalTitleSection = styled.div`

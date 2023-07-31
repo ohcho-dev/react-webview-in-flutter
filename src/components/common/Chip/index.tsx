@@ -13,7 +13,7 @@ import {
   ColorLightRed6,
   ColorLightSage9Base,
   ColorLightSlate7,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import * as S from "./Chip.styled";
 
 interface chipProps {

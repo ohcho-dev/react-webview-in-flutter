@@ -9,7 +9,7 @@ import getGender from "../../../../utils/user/getGender";
 import UseImgix from "../../../../components/common/Imgix";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import useChildrenList from "../../../../queries/domain/my/child/useChildrenList";
-import { ColorLightSlate8 } from "constants/ldsConstants/global";
+import { ColorLightSlate8 } from "lds-common/src/constants/tokens/global";
 import Icon from "components/common/Icon";
 import * as S from "./ChildrenListPage.styeld";
 

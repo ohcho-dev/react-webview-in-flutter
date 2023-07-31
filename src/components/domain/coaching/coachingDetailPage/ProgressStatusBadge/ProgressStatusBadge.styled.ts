@@ -3,7 +3,7 @@ import {
   ColorLightEltern9Base,
   ColorLightSlate4,
   ColorLightSlate9Base,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const BadgeWrapper = styled.div<{ isFinished: boolean }>`

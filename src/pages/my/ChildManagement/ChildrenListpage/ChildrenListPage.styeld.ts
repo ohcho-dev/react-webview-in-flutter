@@ -3,7 +3,7 @@ import {
   ColorLightBlack9Base,
   ColorLightSlate1,
   ColorLightSlate7,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const PageLayout = styled.div`

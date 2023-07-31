@@ -1,4 +1,4 @@
-import { ColorLightSlate11 } from "constants/ldsConstants/global";
+import { ColorLightSlate11 } from "lds-common/src/constants/tokens/global";
 import { icon, iconName } from "types/common/icon";
 
 export const iconSet: Record<iconName, icon> = {

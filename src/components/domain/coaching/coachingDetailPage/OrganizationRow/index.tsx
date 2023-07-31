@@ -3,7 +3,7 @@ import {
   ColorLightBlack5,
   ColorTransparentTransparent,
   ColorLightSlate3,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import * as S from "./Organization.styled";
 
 interface OrganizationRowProps {

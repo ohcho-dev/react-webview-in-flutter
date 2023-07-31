@@ -1,8 +1,9 @@
 import Icon from "components/common/Icon";
-import { ColorLightSlate10 } from "constants/ldsConstants/global";
+
 import Chip from "../../../../common/Chip";
 import UseImgix from "../../../../common/Imgix";
 import * as S from "./ContentItem.styled";
+import { ColorLightSlate10 } from "lds-common/src/constants/tokens/global";
 
 interface ContentItemProps {
   chipStatus: Array<string>;

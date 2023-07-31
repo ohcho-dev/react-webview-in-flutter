@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ColorLightBlack9Base } from "../../../constants/ldsConstants/global";
+import { ColorLightBlack9Base } from "../../../lds-common/src/constants/tokens/global";
 
 export const Container = styled.div`
   position: fixed;

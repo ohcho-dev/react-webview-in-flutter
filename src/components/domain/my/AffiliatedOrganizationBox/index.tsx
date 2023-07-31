@@ -1,7 +1,7 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
-import { ColorLightSlate8 } from "constants/ldsConstants/global";
 import * as S from "./affiliatedOrganizationBox.styled";
+import { ColorLightSlate8 } from "lds-common/src/constants/tokens/global";
 
 interface AffiliatedOrganizationBoxPropType {
   group_name: string;

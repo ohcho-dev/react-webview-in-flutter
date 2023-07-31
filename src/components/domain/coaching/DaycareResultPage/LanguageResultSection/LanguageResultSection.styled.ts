@@ -1,4 +1,4 @@
-import { ColorLightPurple8, ColorLightSlate7 } from "constants/ldsConstants/global";
+import { ColorLightPurple8 } from "lds-common/src/constants/tokens/global";
 import styled, { css } from "styled-components";
 
 export const LanguageExplanationBtn = styled.div`

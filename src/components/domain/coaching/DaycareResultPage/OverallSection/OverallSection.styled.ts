@@ -1,4 +1,4 @@
-import { ColorLightBlack9Base } from "constants/ldsConstants/global";
+import { ColorLightBlack9Base } from "lds-common/src/constants/tokens/global";
 import { Section, TitleSection } from "pages/coaching/DaycareResultPage/DaycareResultPage.styled";
 import styled from "styled-components";
 

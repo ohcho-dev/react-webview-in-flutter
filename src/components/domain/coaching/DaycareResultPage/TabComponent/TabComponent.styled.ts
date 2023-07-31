@@ -3,7 +3,7 @@ import {
   ColorLightBlack9Base,
   ColorLightSlate3,
   ColorLightSlate9Base,
-} from "constants/ldsConstants/global";
+} from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const TabWrapper = styled.div`

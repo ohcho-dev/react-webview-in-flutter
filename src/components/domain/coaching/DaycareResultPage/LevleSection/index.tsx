@@ -1,10 +1,11 @@
 import Icon from "components/common/Icon";
 import UseImgix from "components/common/Imgix";
-import { ColorLightBlack6 } from "constants/ldsConstants/global";
+
 import { GROWTH_CATEGORY_INFO } from "pages/coaching/DaycareResultPage";
 import { useSetRecoilState } from "recoil";
 import { selectedCategoryIdState } from "store/domain/coaching";
 import * as S from "./LevelSection.styled";
+import { ColorLightBlack6 } from "lds-common/src/constants/tokens/global";
 
 interface LevelSectionPropsType {
   level_title: "TTRL_LEVEL1" | "TTRL_LEVEL2" | "TTRL_LEVEL3";
