@@ -23,7 +23,7 @@ const RecordDetailPage = () => {
     <LayoutDetailPage>
       <S.RecordDetailPageWrapper>
         <VideoSection
-          collapse={"open"}
+          collapse={""}
           videoUrl={
             "https://eltern-data.s3.ap-northeast-2.amazonaws.com/biz-develop/user/task/202307/20230704-053621-89.mp4"
           }

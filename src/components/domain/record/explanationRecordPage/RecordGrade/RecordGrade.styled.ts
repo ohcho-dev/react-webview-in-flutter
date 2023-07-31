@@ -67,20 +67,11 @@ export const UtilWrap = styled.div`
   align-items: center;
   justify-content: flex-end;
   column-gap: 0.2rem;
-
-  img {
-    width: 2.4rem;
-    height: 2.4rem;
-  }
 `;
 
 export const CountChip = styled.div`
+  width: fit-content;
   padding: 0.4rem 0.8rem;
   background: ${ColorLightEltern3};
   border-radius: 1.8rem;
-  font-weight: 600;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  letter-spacing: -0.04rem;
-  color: ${ColorLightEltern9Base};
 `;
