@@ -65,7 +65,6 @@ export const GradeText = styled.div`
 export const UtilWrap = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   column-gap: 0.2rem;
 `;
 
