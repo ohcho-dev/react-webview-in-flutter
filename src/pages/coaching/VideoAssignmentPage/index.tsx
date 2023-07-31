@@ -3,14 +3,18 @@ import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import Button from "../../../components/common/Button";
-import { BODY_1, STB_20 } from "../../../constants/font";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
 import { NativeFunction } from "../../../utils/app/NativeFunction";
-import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../components/common/Imgix";
 import { selectedChildInfoState } from "../../../store/common";
 import * as S from "./videoAssignmentPage.styled";
 import useVideoAssignmentResult from "../../../queries/domain/coaching/useVideoAssignmentResult";
+import VideoSection from "components/domain/coaching/videoAssignmentPage/VideoSection";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack9Base,
+  ContentsXxl2232Semibold,
+} from "lds-common/src/constants/tokens/global";
 export type collapseType = "" | "open" | "close";
 
 const VideoAssignmentPage = (): JSX.Element => {
@@ -43,7 +47,9 @@ const VideoAssignmentPage = (): JSX.Element => {
     >
       <S.PageWrapper>
         <S.PageTitleWrapper>
-          <STB_20>촬영 영상</STB_20>
+          <Text variant={ContentsXxl2232Semibold} color={ColorLightBlack9Base}>
+            촬영 영상
+          </Text>
           <div onClick={handleArrowClick}>
             <UseImgix
               alt="arrow"
@@ -55,23 +61,15 @@ const VideoAssignmentPage = (): JSX.Element => {
             />
           </div>
         </S.PageTitleWrapper>
-        <S.VideoSection collapse={collapse}>
-          <S.VideoWrapper collapse={collapse}>
-            <video controls width={"100%"} height={"100%"} playsInline>
-              <source src={videoAssignmentResult?.video} type="video/mp4"></source>
-            </video>
-          </S.VideoWrapper>
-          <S.VideoInfoSection collapse={collapse}>
-            <BODY_1 style={{ color: "rgba(0, 0, 0, 0.8)" }}>{videoAssignmentResult?.name}</BODY_1>
-            <S.RecordDate>
-              촬영일:{" "}
-              {videoAssignmentResult &&
-                videoAssignmentResult.video_at &&
-                getDate(videoAssignmentResult.video_at)}{" "}
-              ({videoAssignmentResult?.days_from_birth}일)
-            </S.RecordDate>
-          </S.VideoInfoSection>
-        </S.VideoSection>
+        <VideoSection
+          collapse={collapse}
+          videoUrl={""}
+          videoName={videoAssignmentResult?.name ? videoAssignmentResult.name : ""}
+          videoAt={videoAssignmentResult?.video_at ? videoAssignmentResult.video_at : ""}
+          days_from_birth={
+            videoAssignmentResult?.days_from_birth ? videoAssignmentResult.days_from_birth : 0
+          }
+        />
         <S.FileInformSection>
           <UseImgix
             alt="inform img"
