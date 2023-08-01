@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import LayoutMainPage from "../../../layouts/LayoutMainPage";
@@ -15,9 +14,6 @@ import { Divider } from "components/domain/program/programListPage/programListPa
 
 export type MenuType = "ongoing" | "all" | "end";
 
-// TODO: 1.코칭 리스트에서 진행중 선택 > 코칭 상세 페이지로 이동 > 상세 페이지 상단의 뒤로가기 선택 > 다시 코칭 리스트로 돌아왔을 때 : 진행중
-// 2. 코칭 리스트에서 진행중 선택 > 하단 다른 메뉴 선택하여 메뉴 이동 > 하단 메뉴 선택하여 코칭 리스트로 돌아왔을 때 : 기본 전체
-// 공수 많이 들어가면 디폴트 '전체'
 const CoachingPage = () => {
   const navigate = useNavigate();
   const commonCode = useRecoilValue<{ [key: string]: any }>(commonCodeState);
@@ -43,12 +39,6 @@ const CoachingPage = () => {
 
     setLastIndex(index);
   };
-
-  // useEffect(() => {
-  //   if (id) {
-  //     refetch();
-  //   }
-  // }, [id]);
 
   useEffect(() => {
     let newList: AppliedCoachingType[] = [];

@@ -64,7 +64,7 @@ const RecordDetailPage = () => {
           sliderInfoArr={[
             {
               id: 1,
-              imgUrl: "/images/banner_to_program.svg",
+              imgUrl: "/images/new_banner_to_program.svg",
               handleClick: () => navigate("/program"),
             },
           ]}

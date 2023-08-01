@@ -9,6 +9,7 @@ import React from "react";
 const HomePage = React.lazy(() => import("./pages/home/HomePage"));
 const RecordPage = React.lazy(() => import("./pages/record/RecordPage"));
 const CoachingPage = React.lazy(() => import("./pages/coaching/CoachingPage"));
+const NewCoachingPage = React.lazy(() => import("./pages/coaching/NewCoachingPage"));
 const ProgramPage = React.lazy(() => import("./pages/program/ProgramListPage"));
 const MyPage = React.lazy(() => import("./pages/my/Mypage"));
 /**
@@ -342,6 +343,14 @@ export const RouterConfig = [
   {
     path: "/record/:recordId",
     element: <RecordDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/new-coaching",
+    element: <NewCoachingPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
