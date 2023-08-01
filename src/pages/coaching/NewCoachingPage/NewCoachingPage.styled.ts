@@ -20,5 +20,21 @@ export const Section = styled.div`
   border-radius: 1.2rem;
   background-color: ${ColorLight1};
 
-  padding: 0 1.2rem;
+  padding: 1.8rem 1.2rem;
+`;
+
+export const TopSection = styled(Section)`
+  justify-content: space-between;
+`;
+
+export const TopSectionWrapper = styled.div`
+  display: flex;
+  column-gap: 1.2rem;
+`;
+
+export const TestSection = styled(Section)`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 1.2rem;
 `;
