@@ -53,7 +53,7 @@ export const CommentListSection = styled.div`
   display: flex;
   flex-direction: column;
 
-  row-gap: 1.2rem;
+  row-gap: 3rem;
 `;
 
 export const CustomInput = styled.div`

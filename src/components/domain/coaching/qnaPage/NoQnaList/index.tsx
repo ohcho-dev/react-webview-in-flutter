@@ -11,7 +11,10 @@ import * as S from "./NoQnaList.styled";
 const NoQnaList = () => {
   return (
     <S.NoQna>
-      <UseImgix srcUrl="/images/common/charactor_empty.svg" />
+      <UseImgix
+        srcUrl="/images/icon-sparkle.svg"
+        style={{ width: "25.9rem", height: "9rem", marginBottom: "2.4rem" }}
+      />
       <Text variant={TextLg1826Medium} color={ColorLightBlack12} style={{ marginBottom: "0.5rem" }}>
         아직 작성한 질문이 없어요.
       </Text>

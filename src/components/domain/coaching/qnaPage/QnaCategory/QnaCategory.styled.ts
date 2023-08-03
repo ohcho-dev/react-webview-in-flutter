@@ -12,4 +12,8 @@ export const MenuItem = styled.div<{ selected: boolean }>`
   border-radius: 10rem;
   padding: 0.6rem 1.2rem;
   background-color: ${({ selected }) => (selected ? ColorLightBlack11 : ColorLightSlate3)};
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
