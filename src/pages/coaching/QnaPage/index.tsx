@@ -20,8 +20,8 @@ import * as S from "./QnaPage.styled";
 
 const QnaPage = () => {
   const navigate = useNavigate();
-  const qnaList = ["d"];
-  const [questionNum, setQuestionNum] = useState(0);
+  const qnaList = [];
+  const [questionNum, setQuestionNum] = useState(10);
   const [openNoQuestionModal, setOpenNoQuestionModal] = useState(false);
   return (
     <>
