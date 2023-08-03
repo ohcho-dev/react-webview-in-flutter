@@ -1,4 +1,4 @@
-import { ContentListHeader } from "components/domain/coaching/newCoachingPage/ContentListHeader";
+import { ContentHeader } from "components/domain/coaching/newCoachingPage/ContentHeader";
 import ContentPlayList from "components/domain/coaching/newCoachingPage/ContentPlayList";
 import LayoutDetailPage from "layouts/LayoutDetailPage";
 import * as S from "./ContentListPage.styled";
@@ -67,7 +67,7 @@ const ContentListPage = () => {
   };
   return (
     <LayoutDetailPage>
-      <ContentListHeader></ContentListHeader>
+      <ContentHeader type="LIST" />
       <S.CarouselWrapper>
         <ContentPlayList settings={CarouselSettings} data={CAROUSEL_DATA} />
       </S.CarouselWrapper>

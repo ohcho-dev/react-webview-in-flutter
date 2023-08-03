@@ -51,7 +51,7 @@ export const HeaderStatusValue = styled.div`
   letter-spacing: ${convertNumToRem(LetterSpacingBase)};
   color: ${ColorLightEltern9Base};
 `;
-export const HeaderDateValue = styled.div`
+export const HeaderDesc = styled.div`
   font-size: ${convertNumToRem(FontSize0)};
   font-weight: ${FontWeightsRegular};
   line-height: ${convertNumToRem(LineHeights0)};

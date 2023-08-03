@@ -1,5 +1,5 @@
 import EmptyBox from "components/common/EmptyBox";
-import * as S from "./ContentListHeader.styled";
+import * as S from "./ContentHeader.styled";
 import { ColorLight1 } from "lds-common/src/constants/tokens/global";
 import { useEffect, useState } from "react";
 
@@ -9,7 +9,9 @@ interface TabMenuProps {
   status?: number;
 }
 
-interface ContentListHeaderProps {}
+interface ContentHeaderProps {
+  type: "LIST" | "DETAIL";
+}
 
 const TAB_MENU = [
   { name: "1주차", id: 1, status: 0 },
@@ -26,7 +28,7 @@ const TAB_MENU = [
   { name: "12주차", id: 12, status: 1 },
 ];
 
-export const ContentListHeader = ({}: ContentListHeaderProps) => {
+export const ContentHeader = ({ type }: ContentHeaderProps) => {
   const [selectedWeek, setSelectedWeek] = useState<number>(1);
 
   const handleSelectWeek = (item: TabMenuProps) => {
@@ -35,28 +37,41 @@ export const ContentListHeader = ({}: ContentListHeaderProps) => {
 
   return (
     <S.HeaderWrap>
+      <EmptyBox height="0.8rem" backgroundColor={ColorLight1} />
       <S.HeaderName>컨텐츠 리스트 이름</S.HeaderName>
       <S.HeaderStatusWrap>
-        <S.HeaderStatusValue>진행중</S.HeaderStatusValue>
-        <S.HeaderDateValue>2023.04.03~2023.05.29</S.HeaderDateValue>
+        {type === "LIST" && (
+          <>
+            <S.HeaderStatusValue>진행중</S.HeaderStatusValue>
+            <S.HeaderDesc>2023.04.03~2023.05.29</S.HeaderDesc>
+          </>
+        )}
+        {type === "DETAIL" && (
+          <>
+            <S.HeaderStatusValue>대근육</S.HeaderStatusValue>
+            <S.HeaderDesc>균형감각</S.HeaderDesc>
+          </>
+        )}
       </S.HeaderStatusWrap>
       <EmptyBox height="2rem" backgroundColor={ColorLight1} />
 
-      <S.WeekTab>
-        {TAB_MENU.map(item => {
-          console.log(item);
-          return (
-            <S.WeekItem
-              key={item.id}
-              isOpen={item.status === 0}
-              isSelected={selectedWeek === item.id}
-              onClick={() => handleSelectWeek(item)}
-            >
-              {item.name}
-            </S.WeekItem>
-          );
-        })}
-      </S.WeekTab>
+      {type === "LIST" && (
+        <S.WeekTab>
+          {TAB_MENU.map(item => {
+            console.log(item);
+            return (
+              <S.WeekItem
+                key={item.id}
+                isOpen={item.status === 0}
+                isSelected={selectedWeek === item.id}
+                onClick={() => handleSelectWeek(item)}
+              >
+                {item.name}
+              </S.WeekItem>
+            );
+          })}
+        </S.WeekTab>
+      )}
     </S.HeaderWrap>
   );
 };
