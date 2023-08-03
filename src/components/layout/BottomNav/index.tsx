@@ -22,7 +22,7 @@ const bottomNavData = [
     name: "코칭",
     imgUrl: "/images/coaching_off.svg",
     selectedImgUrl: "/images/coaching_on.svg",
-    link: "/coaching",
+    link: "/new-coaching",
   },
   {
     id: 3,

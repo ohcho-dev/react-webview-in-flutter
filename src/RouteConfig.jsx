@@ -44,7 +44,14 @@ const VideoAssignmentPage = React.lazy(() => import("./pages/coaching/VideoAssig
 
 const ContentListPage = React.lazy(() => import("./pages/coaching/ContentListPage"));
 const ContentDetailPage = React.lazy(() => import("./pages/coaching/ContentDetailPage"));
+
+/**
+ * QnA 메뉴
+ */
 const QnaPage = React.lazy(() => import("./pages/coaching/QnaPage"));
+const PreQuestionPage = React.lazy(() => import("./pages/coaching/PreQuestionPage"));
+const QuestionFormPage = React.lazy(() => import("./pages/coaching/QuestionFormPage"));
+const QuestionDetailPage = React.lazy(() => import("./pages/coaching/QuestionDetailPage"));
 
 /**
  * 프로그램 메뉴
@@ -377,8 +384,32 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/qna/:id",
+    path: "/coaching/qna",
     element: <QnaPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/qna/pre-question",
+    element: <PreQuestionPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/qna/question-form",
+    element: <QuestionFormPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/coaching/qna/question-detail/:id",
+    element: <QuestionDetailPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",

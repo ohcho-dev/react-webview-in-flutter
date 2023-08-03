@@ -19,4 +19,6 @@ export type iconName =
   | "chevron-down"
   | "x"
   | "point-filled"
-  | "clipboard-list";
+  | "clipboard-list"
+  | "message-circle-2"
+  | "send";

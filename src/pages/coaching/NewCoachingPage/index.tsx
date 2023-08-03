@@ -34,7 +34,7 @@ const NewCoachingPage = () => {
           </S.TopSectionWrapper>
           <Icon icon={"chevron-down"} size={24} fill={ColorLightSlate8} />
         </S.TopSection>
-        <S.Section onClick={() => navigate("/coaching/qna/1")}>
+        <S.Section onClick={() => navigate("/coaching/qna")}>
           <UseImgix srcUrl={"/images/record/record_information.svg"} />
           <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
             Q&A

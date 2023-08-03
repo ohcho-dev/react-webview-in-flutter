@@ -9,7 +9,6 @@ interface ModalProps {
   toggleModal: () => void;
   topImage?: ReactElement;
   title?: string;
-  content?: string;
   children?: ReactElement;
   okBtnName?: string;
   cancelBtnName?: string;
