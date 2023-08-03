@@ -12,7 +12,7 @@ const NoQnaList = () => {
   return (
     <S.NoQna>
       <UseImgix
-        srcUrl="/images/icon-sparkle.svg"
+        srcUrl="/images/icon-sparkle.png"
         style={{ width: "25.9rem", height: "9rem", marginBottom: "2.4rem" }}
       />
       <Text variant={TextLg1826Medium} color={ColorLightBlack12} style={{ marginBottom: "0.5rem" }}>

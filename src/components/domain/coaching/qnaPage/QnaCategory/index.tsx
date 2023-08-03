@@ -24,6 +24,7 @@ const QnaCategory = ({ selectedCategory, CategoryList, handleCategoryClick }: Qn
           <Text
             variant={TextSm1420Medium}
             color={selectedCategory === item ? ColorLight1 : ColorLightSlate10}
+            style={{ lineHeight: "none" }}
           >
             {item}
           </Text>

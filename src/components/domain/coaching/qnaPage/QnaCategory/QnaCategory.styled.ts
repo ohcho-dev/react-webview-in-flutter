@@ -10,7 +10,7 @@ export const MenuWrapper = styled.div`
 export const MenuItem = styled.div<{ selected: boolean }>`
   width: fit-content;
   border-radius: 10rem;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   background-color: ${({ selected }) => (selected ? ColorLightBlack11 : ColorLightSlate3)};
 
   display: flex;
