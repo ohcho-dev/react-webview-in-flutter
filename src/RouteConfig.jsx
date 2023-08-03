@@ -376,7 +376,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/conetent/:contentId",
+    path: "/coaching/content/:contentId",
     element: <ContentDetailPage />,
     sceneConfig: {
       enter: "from-right",
