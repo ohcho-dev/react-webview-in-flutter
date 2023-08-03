@@ -5,6 +5,8 @@ import * as S from "./ContentListPage.styled";
 import EmptyBox from "components/common/EmptyBox";
 import { ColorLight1, ColorLightSlate2 } from "lds-common/src/constants/tokens/global";
 import ContentAccordionTip from "components/domain/coaching/newCoachingPage/ContentAccordionTip";
+import { useRecoilState } from "recoil";
+import { contentCarouselSlideNumberState } from "store/domain/coaching";
 
 export interface SlickDataProps {
   id: number;
@@ -54,6 +56,9 @@ const PLAY_TIP_DATA = [
 ];
 
 const ContentListPage = () => {
+  const [contentCarouselSlideNumber, setContentCarouselSlideNumber] = useRecoilState(
+    contentCarouselSlideNumberState,
+  );
   const CarouselSettings = {
     dots: true,
     infinite: false,
@@ -64,6 +69,8 @@ const ContentListPage = () => {
     appendDots: (dots: any) => <S.CustomDotsWrapper>{dots}</S.CustomDotsWrapper>,
     dotsClass: "dots_custom",
     swipeToSilde: true,
+    initialSlide: contentCarouselSlideNumber,
+    afterChange: (currentSlide: number) => setContentCarouselSlideNumber(currentSlide),
   };
   return (
     <LayoutDetailPage>

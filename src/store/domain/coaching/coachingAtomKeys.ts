@@ -7,4 +7,5 @@ export const coachingAtomKeys = {
   currentTaskId: "currentTaskId",
   currentSurveyId: "currentSurveyId",
   selectedCategoryId: "selectedCategoryId",
+  contentCarouselSlideNumber: "contentCarouselSlideNumber",
 };

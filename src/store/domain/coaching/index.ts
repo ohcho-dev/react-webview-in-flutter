@@ -43,3 +43,7 @@ export const selectedCategoryIdState = atom({
   key: coachingAtomKeys.selectedCategoryId,
   default: 0,
 });
+export const contentCarouselSlideNumberState = atom({
+  key: coachingAtomKeys.contentCarouselSlideNumber,
+  default: 0,
+});
