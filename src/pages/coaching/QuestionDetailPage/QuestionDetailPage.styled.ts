@@ -66,11 +66,12 @@ export const CustomInput = styled.div`
 
   width: 100%;
 
-  input {
+  textarea {
     background-color: ${ColorLightSlate3};
     border: none;
     outline: none;
     width: 100%;
+    max-height: 7.8rem;
 
     font-size: 1.6rem;
     font-weight: 400;
@@ -80,4 +81,27 @@ export const CustomInput = styled.div`
       color: ${ColorLightSlate9Base};
     }
   }
+`;
+
+export const SendBtnSection = styled.div`
+  display: flex;
+  align-items: end;
+  padding-bottom: 0.5rem;
+`;
+
+export const BottomBtnWrap = styled.div`
+  width: 100%;
+  padding: 1.2rem 2rem;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  background: #fff;
+
+  transition: box-shadow 0.5s ease;
+  display: flex;
+  align-items: center;
+
+  box-shadow: ${(prop: { $scrolling?: boolean }) =>
+    prop.$scrolling ? "0px -5px 15px rgba(0, 0, 0, 0.05)" : "none"};
+  z-index: 110;
 `;

@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { layoutDetailScrollYState } from "store/common";
 
@@ -36,13 +36,15 @@ interface LayoutDetailPageProps {
   titleBarBorder?: boolean;
   children?: React.ReactNode;
   bottomBtn?: boolean;
-  bottomBtnElement?: ReactElement;
+  bottomBtnElement?: React.ReactNode;
   style?: object;
   title?: string;
   leftBtn?: React.ReactNode;
   bottomScrollAnimationEffect?: boolean;
   handleBackBtnClick?: () => void | undefined;
   titleType?: "back" | "close";
+  customBottomSection?: boolean;
+  customBottomSectionElement?: React.ReactNode;
 }
 
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
@@ -57,6 +59,8 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   leftBtn,
   handleBackBtnClick,
   titleType,
+  customBottomSection,
+  customBottomSectionElement,
 }) => {
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
@@ -98,6 +102,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
       >
         {children}
       </DetailPage>
+      {customBottomSection && customBottomSectionElement}
       {bottomBtn && (
         <BottomBtnWrap $scrolling={bottomScrollAnimationEffect && scrolling}>
           {bottomBtnElement}
