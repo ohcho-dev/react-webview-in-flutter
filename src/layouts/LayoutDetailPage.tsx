@@ -1,4 +1,6 @@
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { layoutDetailScrollYState } from "store/common";
 
 import styled from "styled-components";
 import { DetailTitleBar } from "../components/domain/my/TitleBar";
@@ -59,6 +61,7 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
   const [scrolling, setScrolling] = useState(false);
+  const setLayoutDetailScrollY = useSetRecoilState(layoutDetailScrollYState);
 
   useEffect(() => {
     setTimeout(() => {
@@ -85,7 +88,9 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
         style={{ ...style }}
         ref={scrollRef}
         onScroll={() => {
-          setScrollY(scrollRef?.current?.scrollTop);
+          const scrollY = scrollRef?.current?.scrollTop;
+          setLayoutDetailScrollY(scrollY);
+          setScrollY(scrollY);
           if (!scrolling) {
             setScrolling(true);
           }

@@ -54,3 +54,8 @@ export const newNotificationFlagstate = atom({
   key: commonAtomKeys.newNotificationFlag,
   default: false,
 });
+
+export const layoutDetailScrollYState = atom({
+  key: commonAtomKeys.layoutDetailScrollY,
+  default: 0,
+});

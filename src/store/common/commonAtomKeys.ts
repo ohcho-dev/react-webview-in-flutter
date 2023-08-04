@@ -8,4 +8,5 @@ export const commonAtomKeys = {
   visibleShare: "visibleShare",
   mainPageScrollValue: "mainPageScrollValue",
   newNotificationFlag: "newNotificationFlag",
+  layoutDetailScrollY: "layoutDetailScrollY",
 };

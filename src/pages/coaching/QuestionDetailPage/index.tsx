@@ -2,6 +2,7 @@ import CustomModal from "components/common/CustomModal";
 import EmptyBox from "components/common/EmptyBox";
 import Icon from "components/common/Icon";
 import Text from "components/common/Text";
+import ToastPopup from "components/common/ToastPopup";
 import Comment from "components/domain/coaching/questionDetailPage/Comment";
 import LayoutDetailPage from "layouts/LayoutDetailPage";
 import {
@@ -28,6 +29,7 @@ const QuestionDetailPage = () => {
   const { id } = useParams();
   const [content, setContent] = useState("");
   const [commentList, setCommentList] = useState([""]);
+  const [displayPopup, setDisplayPopup] = useState(false);
   const [openConfirmRegistrationCommentModal, setOpenConfirmRegistrationCommentModal] =
     useState(false);
 
@@ -48,7 +50,8 @@ const QuestionDetailPage = () => {
             <div
               onClick={() => {
                 if (content) {
-                  setOpenConfirmRegistrationCommentModal(true);
+                  setDisplayPopup(true);
+                  //setOpenConfirmRegistrationCommentModal(true);
                 }
               }}
             >
@@ -113,6 +116,13 @@ const QuestionDetailPage = () => {
             </S.CommentListSection>
           )}
         </S.CommentSection>
+        {displayPopup && (
+          <ToastPopup
+            toastPopup={displayPopup}
+            setToastPopup={setDisplayPopup}
+            content="질문권 1개를 사용해 댓글을 등록했어요."
+          />
+        )}
       </LayoutDetailPage>
       <CustomModal
         title={"질문권을 사용하시겠어요?"}

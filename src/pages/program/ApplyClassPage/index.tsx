@@ -5,7 +5,7 @@ import ChildSelectBottomModal from "../../../components/common/ChildSelectBottom
 import Button from "../../../components/common/Button";
 import CustomModal from "../../../components/common/CustomModal";
 import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-
+import Text from "../../../components/common/Text";
 import { ChildType } from "../../../types/common";
 import { getDate } from "../../../utils/date/getDateTime";
 import UseImgix from "../../../components/common/Imgix";
@@ -22,6 +22,7 @@ import ClassRejectModal from "../../../components/domain/program/applyClassPage/
 import useSelectedClassInfo from "queries/domain/program/useSelectedClassInfo";
 import useApplyClass from "queries/domain/program/useApplyClass";
 import { DEFAULT_CHILD_VALUE } from "utils/default";
+import { ColorLightBlack7, TextSm1420Regular } from "lds-common/src/constants/tokens/global";
 
 const USER_SECTION_HEIGHT = 37;
 
@@ -224,10 +225,13 @@ const ApplyClassPage = () => {
       <CustomModal
         cancelBtn={false}
         title="필수 정보를 모두 입력해주세요."
-        content="필수 정보를 모두 입력해야 신청이 가능해요."
         isOpen={openValidationMoadl}
         toggleModal={() => setOpenValidationModal(!openValidationMoadl)}
-      />
+      >
+        <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+          필수 정보를 모두 입력해야 신청이 가능해요.
+        </Text>
+      </CustomModal>
 
       <ClassRejectModal
         theme={errorCode}
