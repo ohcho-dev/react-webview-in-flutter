@@ -1,8 +1,9 @@
+import { TITLE_BAR_HEIGHT_REM } from "constants/size";
 import styled from "styled-components";
 
 export const TitleBarWrap = styled.section`
   width: 100%;
-  height: 6.1rem;
+  height: ${TITLE_BAR_HEIGHT_REM}rem;
   padding: 2rem;
   display: flex;
   align-items: center;

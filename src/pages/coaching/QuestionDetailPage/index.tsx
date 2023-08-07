@@ -27,10 +27,11 @@ import * as S from "./QuestionDetailPage.styled";
 
 const QuestionDetailPage = () => {
   const { id } = useParams();
+  const BottomSectionRef = useRef<HTMLDivElement>(null);
   const TextAreaRef = useRef<HTMLTextAreaElement>(null);
   const [content, setContent] = useState("");
   const [commentList, setCommentList] = useState([""]);
-  const [displayPopup, setDisplayPopup] = useState(false);
+  const [displayPopup, setDisplayPopup] = useState(true);
   const [openConfirmRegistrationCommentModal, setOpenConfirmRegistrationCommentModal] =
     useState(false);
 
@@ -38,8 +39,11 @@ const QuestionDetailPage = () => {
     <>
       <LayoutDetailPage
         customBottomSection
+        customBottmoSectionHeight={
+          BottomSectionRef.current ? BottomSectionRef.current.clientHeight / 10 : 0
+        }
         customBottomSectionElement={
-          <S.BottomBtnWrap>
+          <S.BottomSectionWrapper ref={BottomSectionRef}>
             <S.CustomInput>
               <textarea
                 ref={TextAreaRef}
@@ -51,8 +55,9 @@ const QuestionDetailPage = () => {
                   setContent(value);
                   if (TextAreaRef.current) {
                     TextAreaRef.current.style.height = "auto";
-                    TextAreaRef.current.style.height =
-                      TextAreaRef.current.scrollHeight / 10 + "rem";
+                    if (TextAreaRef.current.scrollHeight > 45)
+                      TextAreaRef.current.style.height =
+                        TextAreaRef.current.scrollHeight / 10 + "rem";
                   }
                 }}
               />
@@ -71,7 +76,7 @@ const QuestionDetailPage = () => {
                 />
               </S.SendBtnSection>
             </S.CustomInput>
-          </S.BottomBtnWrap>
+          </S.BottomSectionWrapper>
         }
       >
         <S.QuestionSection>

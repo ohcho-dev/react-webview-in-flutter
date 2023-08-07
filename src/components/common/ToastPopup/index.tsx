@@ -23,7 +23,7 @@ const ToastPopup = ({ content, toastPopup, setToastPopup }: ToastPopupProps) => 
   }, [toastPopup]);
 
   return (
-    <S.ToastPopupWrapper display={toastPopup} scrollY={scrollY}>
+    <S.ToastPopupWrapper scrollY={scrollY - 20}>
       <UseImgix srcUrl="/images/checking.svg" style={{ width: "2.8rem" }} />
       <Text variant={TextSm1420Semibold} color={ColorLight1}>
         {content}

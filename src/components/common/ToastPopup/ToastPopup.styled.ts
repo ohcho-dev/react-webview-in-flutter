@@ -16,7 +16,7 @@ const fadeInOut = keyframes`
   }
 `;
 
-export const ToastPopupWrapper = styled.div<{ display?: boolean; scrollY: number }>`
+export const ToastPopupWrapper = styled.div<{ scrollY: number }>`
   width: 30rem;
   left: 50%;
   transform: translateX(-50%);
@@ -24,7 +24,7 @@ export const ToastPopupWrapper = styled.div<{ display?: boolean; scrollY: number
   position: absolute;
   bottom: ${({ scrollY }) => `-${scrollY}px`};
 
-  display: ${({ display }) => (display ? "flex" : "none")};
+  display: flex;
   justify-content: center;
   align-items: center;
 

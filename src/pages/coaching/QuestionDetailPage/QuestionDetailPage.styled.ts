@@ -89,7 +89,7 @@ export const SendBtnSection = styled.div`
   padding-bottom: 0.5rem;
 `;
 
-export const BottomBtnWrap = styled.div`
+export const BottomSectionWrapper = styled.div`
   width: 100%;
   padding: 1.2rem 2rem;
   box-sizing: border-box;
