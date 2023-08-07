@@ -26,6 +26,8 @@ export const TitleSection = styled.div`
 export const BottomSection = styled.div`
   display: flex;
   justify-content: space-between;
+
+  margin-top: 0.8rem;
 `;
 
 export const BottomItem = styled.div`

@@ -17,6 +17,8 @@ import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
 import OrganizationRow from "components/domain/coaching/coachingDetailPage/OrganizationRow";
 import { getLeftDayString } from "utils/date/getLeftDayString";
+import Text from "components/common/Text";
+import { ColorLightBlack7, TextSm1420Regular } from "lds-common/src/constants/tokens/global";
 
 const CoachingDetailPage = () => {
   const navigate = useNavigate();
@@ -220,12 +222,15 @@ const CoachingDetailPage = () => {
             />
           }
           title={modalTitle}
-          content={modalContent}
           isOpen={openModal}
           toggleModal={() => setOpenModal(!openModal)}
           okBtnName="확인"
           okBtnClick={() => setOpenModal(!openModal)}
-        />
+        >
+          <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+            {modalContent}
+          </Text>
+        </CustomModal>
       </LayoutDetailPage>
     </>
   );
