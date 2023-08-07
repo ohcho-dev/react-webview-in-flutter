@@ -1,10 +1,9 @@
 import CustomModal from "components/common/CustomModal";
 import EmptyBox from "components/common/EmptyBox";
-import Icon from "components/common/Icon";
 import Text from "components/common/Text";
 import ToastPopup from "components/common/ToastPopup";
 import Comment from "components/domain/coaching/questionDetailPage/Comment";
-import LayoutDetailPage from "layouts/LayoutDetailPage";
+import QnaDetailLayout from "layouts/QnaDetailLayout.tsx";
 import {
   ColorLightBlack6,
   ColorLightBlack7,
@@ -21,63 +20,24 @@ import {
   TextXs1218Regular,
   TextXs1218Semibold,
 } from "lds-common/src/constants/tokens/global";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import * as S from "./QuestionDetailPage.styled";
 
 const QuestionDetailPage = () => {
   const { id } = useParams();
-  const BottomSectionRef = useRef<HTMLDivElement>(null);
-  const TextAreaRef = useRef<HTMLTextAreaElement>(null);
   const [content, setContent] = useState("");
+  const [scrollY, setScrollY] = useState(0);
   const [commentList, setCommentList] = useState([""]);
-  const [displayPopup, setDisplayPopup] = useState(true);
+  const [displayPopup, setDisplayPopup] = useState(false);
   const [openConfirmRegistrationCommentModal, setOpenConfirmRegistrationCommentModal] =
     useState(false);
 
   return (
     <>
-      <LayoutDetailPage
-        customBottomSection
-        customBottmoSectionHeight={
-          BottomSectionRef.current ? BottomSectionRef.current.clientHeight / 10 : 0
-        }
-        customBottomSectionElement={
-          <S.BottomSectionWrapper ref={BottomSectionRef}>
-            <S.CustomInput>
-              <textarea
-                ref={TextAreaRef}
-                rows={1}
-                placeholder="댓글을 입력해 주세요."
-                value={content}
-                onChange={evt => {
-                  const { value } = evt.target;
-                  setContent(value);
-                  if (TextAreaRef.current) {
-                    TextAreaRef.current.style.height = "auto";
-                    if (TextAreaRef.current.scrollHeight > 45)
-                      TextAreaRef.current.style.height =
-                        TextAreaRef.current.scrollHeight / 10 + "rem";
-                  }
-                }}
-              />
-              <S.SendBtnSection
-                onClick={() => {
-                  if (content) {
-                    setDisplayPopup(true);
-                    //setOpenConfirmRegistrationCommentModal(true);
-                  }
-                }}
-              >
-                <Icon
-                  icon="send"
-                  size={24}
-                  fill={content.length ? ColorLightEltern9Base : ColorLightSlate9Base}
-                />
-              </S.SendBtnSection>
-            </S.CustomInput>
-          </S.BottomSectionWrapper>
-        }
+      <QnaDetailLayout
+        handleScroll={y => setScrollY(y)}
+        handleSendBtnClick={() => setDisplayPopup(true)}
       >
         <S.QuestionSection>
           <Text variant={ContentsXxl2232Semibold} color={ColorLightBlack9Base}>
@@ -136,9 +96,10 @@ const QuestionDetailPage = () => {
             toastPopup={displayPopup}
             setToastPopup={setDisplayPopup}
             content="질문권 1개를 사용해 댓글을 등록했어요."
+            positionY={scrollY}
           />
         )}
-      </LayoutDetailPage>
+      </QnaDetailLayout>
       <CustomModal
         title={"질문권을 사용하시겠어요?"}
         isOpen={openConfirmRegistrationCommentModal}

@@ -10,25 +10,15 @@ import { BottomBtnWrap } from "../components/domain/program/programListPage/prog
 
 import LayoutBasePage from "./LayoutBasePage";
 
-const DetailPage = styled.main`
+export const DetailPage = styled.main`
   background: ${ColorLight1};
   position: fixed;
   top: ${TITLE_BAR_HEIGHT_REM}rem;
   left: 0;
   width: 100%;
-  height: ${({
-    bottomBtn,
-    customBottomSection,
-    customBottomSectionHeight,
-  }: {
-    bottomBtn?: boolean;
-    customBottomSection?: boolean;
-    customBottomSectionHeight?: number;
-  }) =>
+  height: ${({ bottomBtn }: { bottomBtn?: boolean }) =>
     bottomBtn
       ? `calc(100vh - ${TITLE_BAR_HEIGHT_REM}rem - ${BOTTOM_BTN_WRAP_HEIGHT_REM}rem)`
-      : customBottomSection
-      ? `calc(100vh - ${TITLE_BAR_HEIGHT_REM}rem - ${customBottomSectionHeight}rem)`
       : `calc(100vh - ${TITLE_BAR_HEIGHT_REM}rem)`};
   z-index: 100;
   transform: translate3d(0, 0, 0);
@@ -57,9 +47,6 @@ interface LayoutDetailPageProps {
   bottomScrollAnimationEffect?: boolean;
   handleBackBtnClick?: () => void | undefined;
   titleType?: "back" | "close";
-  customBottomSection?: boolean;
-  customBottomSectionElement?: React.ReactNode;
-  customBottmoSectionHeight?: number;
 }
 
 const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
@@ -74,9 +61,6 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
   leftBtn,
   handleBackBtnClick,
   titleType,
-  customBottomSection,
-  customBottomSectionElement,
-  customBottmoSectionHeight,
 }) => {
   const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [scrollY, setScrollY] = useState(0);
@@ -92,15 +76,6 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
     }, 500);
   }, [scrollY]);
 
-  useEffect(() => {
-    // 댓글창의 크기가 커질때 스크롤이 제일 아래로 오게 함
-    if (scrollRef.current) {
-      if (scrollAtBottom) {
-        scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-      }
-    }
-  }, [customBottmoSectionHeight, scrollAtBottom]);
-
   return (
     <LayoutBasePage>
       {!hideTitleBar && (
@@ -115,8 +90,6 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
       <DetailPage
         id="main"
         bottomBtn={bottomBtn}
-        customBottomSection={customBottomSection}
-        customBottomSectionHeight={customBottmoSectionHeight}
         style={{ ...style }}
         ref={scrollRef}
         onScroll={() => {
@@ -132,7 +105,6 @@ const LayoutDetailPage: React.FC<LayoutDetailPageProps> = ({
       >
         {children}
       </DetailPage>
-      {customBottomSection && customBottomSectionElement}
       {bottomBtn && (
         <BottomBtnWrap $scrolling={bottomScrollAnimationEffect && scrolling}>
           {bottomBtnElement}

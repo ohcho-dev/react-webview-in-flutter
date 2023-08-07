@@ -22,7 +22,7 @@ export const ToastPopupWrapper = styled.div<{ scrollY: number }>`
   transform: translateX(-50%);
 
   position: absolute;
-  bottom: ${({ scrollY }) => `-${scrollY}px`};
+  bottom: ${({ scrollY }) => (scrollY ? `-${scrollY}px` : "20px")};
 
   display: flex;
   justify-content: center;

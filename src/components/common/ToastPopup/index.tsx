@@ -1,7 +1,5 @@
 import { ColorLight1, TextSm1420Semibold } from "lds-common/src/constants/tokens/global";
 import { Dispatch, SetStateAction, useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { layoutDetailScrollYState } from "store/common";
 import UseImgix from "../Imgix";
 import Text from "../Text";
 import * as S from "./ToastPopup.styled";
@@ -10,10 +8,10 @@ interface ToastPopupProps {
   content: string;
   toastPopup: boolean;
   setToastPopup: Dispatch<SetStateAction<boolean>>;
+  positionY: number;
 }
 
-const ToastPopup = ({ content, toastPopup, setToastPopup }: ToastPopupProps) => {
-  const scrollY = useRecoilValue(layoutDetailScrollYState);
+const ToastPopup = ({ content, toastPopup, setToastPopup, positionY }: ToastPopupProps) => {
   useEffect(() => {
     if (toastPopup) {
       setTimeout(() => {
@@ -23,7 +21,7 @@ const ToastPopup = ({ content, toastPopup, setToastPopup }: ToastPopupProps) => 
   }, [toastPopup]);
 
   return (
-    <S.ToastPopupWrapper scrollY={scrollY - 20}>
+    <S.ToastPopupWrapper scrollY={positionY ? positionY - 20 : 0}>
       <UseImgix srcUrl="/images/checking.svg" style={{ width: "2.8rem" }} />
       <Text variant={TextSm1420Semibold} color={ColorLight1}>
         {content}
