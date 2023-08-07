@@ -14,6 +14,7 @@ export const PageWrapper = styled.div`
 export const Section = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   column-gap: 1.2rem;
 
   width: 100%;
@@ -23,12 +24,9 @@ export const Section = styled.div`
   padding: 1.8rem 1.2rem;
 `;
 
-export const TopSection = styled(Section)`
-  justify-content: space-between;
-`;
-
-export const TopSectionWrapper = styled.div`
+export const SectionTitle = styled.div`
   display: flex;
+  align-items: center;
   column-gap: 1.2rem;
 `;
 
@@ -36,5 +34,7 @@ export const TestSection = styled(Section)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.5rem 1.2rem;
+
+  row-gap: 2.4rem;
+  padding: 2.4rem 1.2rem;
 `;

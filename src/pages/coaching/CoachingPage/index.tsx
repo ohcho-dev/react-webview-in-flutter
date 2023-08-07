@@ -105,9 +105,7 @@ const CoachingPage = () => {
                 {commonCode["COSTAT_END"]}
               </S.ProgressChip>
             </S.ChipWrapper>
-            {!coachingList.length && selectedMenu === "end" && (
-              <NoAppliedCoaching selectedMenu="end" />
-            )}
+            {!coachingList.length && selectedMenu === "end" && <NoAppliedCoaching />}
             {!coachingList.length && selectedMenu === "ongoing" && <NoAppliedCoaching />}
             {coachingList.length > 0 &&
               coachingList

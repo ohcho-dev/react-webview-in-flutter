@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
-import { MenuType } from "pages/coaching/CoachingPage";
 import { coachingType } from "types/domain/coaching";
 import { getDiscountPercentage } from "utils/program/getDiscountPercentage";
 import { selectedChildInfoState } from "store/common";
@@ -8,13 +7,16 @@ import useCoachingList from "queries/domain/program/useCoachingList";
 import UseImgix from "components/common/Imgix";
 import ProgramCard from "components/domain/program/programListPage/ProgramCard";
 import * as S from "./NoAppliedCoaching.styled";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack12,
+  ColorLightSlate9Base,
+  TextLg1826Medium,
+  TextLg1826Semibold,
+  TextSm1420Regular,
+} from "lds-common/src/constants/tokens/global";
 
-interface NoAppliedCoachingPropsType {
-  selectedMenu?: MenuType;
-}
-
-const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
-  const { selectedMenu } = props;
+const NoAppliedCoaching = () => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const { id, name } = useRecoilValue(selectedChildInfoState);
@@ -26,25 +28,23 @@ const NoAppliedCoaching = (props: NoAppliedCoachingPropsType) => {
   return (
     <div>
       <S.InformImageSection>
-        {selectedMenu === "end" ? (
-          <S.NoCoachingSection>
-            <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
-            <span>아직 종료한 코칭이 없어요.</span>
-            <span>코칭 종료까지 응원할게요!</span>
-          </S.NoCoachingSection>
-        ) : (
-          <S.NoCoachingSection>
-            <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
-            <span>아직 신청한 코칭이 없어요.</span>
-            <span>우리 아이 맞춤 코칭을 바로 신청해 보세요.</span>
-          </S.NoCoachingSection>
-        )}
+        <S.NoCoachingSection>
+          <UseImgix alt="inform-img" srcUrl="/images/no-coaching-img.png" />
+          <Text variant={TextLg1826Medium} color={ColorLightBlack12}>
+            아직 신청한 코칭이 없어요.
+          </Text>
+          <Text variant={TextSm1420Regular} color={ColorLightSlate9Base}>
+            프로그램 메뉴에서 다양한 코칭을 신청해 보세요.
+          </Text>
+        </S.NoCoachingSection>
       </S.InformImageSection>
       {data[0].length > 0 && (
         <>
           <S.TitleBox>
             <UseImgix srcUrl={"/images/coaching_star.svg"} />
-            <S.ProgramTitle>{name}에게 딱 맞는 추천 코칭</S.ProgramTitle>
+            <Text variant={TextLg1826Semibold} color={ColorLightBlack12}>
+              {`${name}에게 딱 맞는 추천 코칭`}
+            </Text>
           </S.TitleBox>
           <S.ProgramListSection>
             {data[0].map(

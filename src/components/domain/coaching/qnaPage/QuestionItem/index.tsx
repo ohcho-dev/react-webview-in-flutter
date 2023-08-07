@@ -54,8 +54,13 @@ const QuestionItem = ({
           </Text>
         </S.BottomItem>
         <S.BottomItem>
-          <Icon icon={"message-circle-2"} size={16} />
-          <Text variant={TextSm1420Regular} color={ColorLightBlack6}>
+          <Icon icon={"message-circle-2"} size={18} />
+
+          <Text
+            variant={TextSm1420Regular}
+            color={ColorLightBlack6}
+            style={{ lineHeight: "none", paddingTop: "0.15rem" }}
+          >
             {`${commentNum}`}
           </Text>
         </S.BottomItem>

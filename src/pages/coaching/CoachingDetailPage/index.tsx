@@ -12,7 +12,7 @@ import { selectedChildInfoState } from "../../../store/common";
 import { currentTaskIdState, selectedCategoryIdState } from "../../../store/domain/coaching";
 import * as S from "./coachingDetail.styled";
 import useAppliedCoachingInfo from "../../../queries/domain/coaching/useAppliedCoachingInfo";
-import ProgressStatusBadge from "components/domain/coaching/coachingDetailPage/ProgressStatusBadge";
+import ProgressStatusBadge from "components/common/ProgressStatusBadge";
 import CustomToggle from "components/common/CustomToggle";
 import useOpenResultPaper from "queries/domain/coaching/useOpenResultPaper";
 import OrganizationRow from "components/domain/coaching/coachingDetailPage/OrganizationRow";

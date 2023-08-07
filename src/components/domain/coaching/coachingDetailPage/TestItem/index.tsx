@@ -9,48 +9,43 @@ import {
   TextXs1218Regular,
   TextXs1218Semibold,
 } from "lds-common/src/constants/tokens/global";
+import ProgressStatusBadge from "../../../../common/ProgressStatusBadge";
 import * as S from "./TestItem.styled";
 
 interface TestItemProps {
   imgUrl: string;
-  coachingName: string;
   testName: string;
   status: string;
   expirationDate: string;
   daysleft: number;
 }
 
-const TestItem = ({
-  imgUrl,
-  coachingName,
-  testName,
-  status,
-  expirationDate,
-  daysleft,
-}: TestItemProps) => {
+const TestItem = ({ imgUrl, testName, status, expirationDate, daysleft }: TestItemProps) => {
   return (
     <S.ItemWrapper finishedTest={daysleft <= 0}>
-      <UseImgix srcUrl={imgUrl} />
-      <S.ItemInfoSection>
-        <Text variant={TextXs1218Semibold} color={ColorLightBlack6}>
-          {coachingName}
-        </Text>
-        <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
-          {testName}
-        </Text>
-        <div>
-          <Text variant={TextXs1218Regular} color={ColorLightBlack5}>
-            {`${status} ${expirationDate}`}
+      <S.MainSection>
+        <UseImgix srcUrl={imgUrl} />
+        <S.ItemInfoSection>
+          <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
+            {testName}
           </Text>
-          <Text
-            variant={TextXs1218Regular}
-            color={ColorLightEltern9Base}
-            style={{ marginLeft: "0.5rem" }}
-          >
-            {`${daysleft}일 남음`}
-          </Text>
-        </div>
-      </S.ItemInfoSection>
+          <div>
+            <Text variant={TextXs1218Regular} color={ColorLightBlack5}>
+              {expirationDate}
+            </Text>
+            {daysleft > 0 && (
+              <Text
+                variant={TextXs1218Regular}
+                color={ColorLightEltern9Base}
+                style={{ marginLeft: "0.5rem" }}
+              >
+                {`${daysleft}일 남음`}
+              </Text>
+            )}
+          </div>
+        </S.ItemInfoSection>
+      </S.MainSection>
+      <ProgressStatusBadge isFinished={daysleft <= 0} />
     </S.ItemWrapper>
   );
 };
