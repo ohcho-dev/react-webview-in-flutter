@@ -2,6 +2,14 @@ import ContentCarousel from "components/common/ContentCarousel";
 import * as S from "./ContentPlayList.styled";
 import { SlickDataProps } from "pages/coaching/ContentListPage";
 import { useNavigate } from "react-router-dom";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack6,
+  ColorLightBlack9Base,
+  TextLg1826Semibold,
+  TextSm1420Regular,
+} from "lds-common/src/constants/tokens/global";
+import GrowthChip from "components/common/GrowthChip";
 
 interface ContentPlayListProps {
   data: SlickDataProps[];
@@ -16,9 +24,13 @@ const ContentPlayList = ({ data, settings }: ContentPlayListProps) => {
         <S.ContentWrapper key={item.id} onClick={() => navigate(`/coaching/content/${1}`)}>
           <S.CardWrapper>
             <S.CardImg src={item.img} alt="이미지" />
-            <S.CardChip>{item.category}</S.CardChip>
-            <S.CardTitle>{item.title}</S.CardTitle>
-            <S.CardDesc>{item.desc}</S.CardDesc>
+            <GrowthChip label="언어" />
+            <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base} isEllipsis>
+              {item.title}
+            </Text>
+            <Text variant={TextSm1420Regular} color={ColorLightBlack6} isEllipsis>
+              {item.desc}
+            </Text>
           </S.CardWrapper>
         </S.ContentWrapper>
       ))}

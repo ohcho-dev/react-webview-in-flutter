@@ -1,5 +1,7 @@
 import { useState } from "react";
 import * as S from "./ContentAccordionTip.styled";
+import Text from "components/common/Text";
+import { ColorLightBlack7, TextBase1624Regular } from "lds-common/src/constants/tokens/global";
 
 interface AccordionProps {
   title: string;
@@ -12,7 +14,9 @@ const ContentAccordionTip: React.FC<AccordionProps> = ({ children, title, ...pro
   return (
     <S.AccordionWrap {...props}>
       <S.AccordionHeader isOpen={isOpen} onClick={toggle}>
-        <S.AccordionTitle>{title}</S.AccordionTitle>
+        <Text variant={TextBase1624Regular} color={ColorLightBlack7}>
+          {title}
+        </Text>
         <S.AccordionIcon
           isOpen={isOpen}
           background={import.meta.env.REACT_APP_IMGIX_URL + "/images/icon-arrow-down.svg"}

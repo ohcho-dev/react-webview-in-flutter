@@ -1,11 +1,21 @@
 import EmptyBox from "components/common/EmptyBox";
 import { ContentHeader } from "components/domain/coaching/newCoachingPage/ContentHeader";
 import LayoutDetailPage from "layouts/LayoutDetailPage";
-import { ColorLight1, ColorLightSlate2 } from "lds-common/src/constants/tokens/global";
+import {
+  ColorLight1,
+  ColorLightBlack6,
+  ColorLightBlack7,
+  ColorLightBlack9Base,
+  ColorLightSlate2,
+  ContentsBase1626Regular,
+  TextLg1826Semibold,
+  TextSm1420Bold,
+} from "lds-common/src/constants/tokens/global";
 import { useParams } from "react-router-dom";
 import * as S from "./ContentDetailPage.styled";
 import UseImgix from "components/common/Imgix";
 import { useState } from "react";
+import Text from "components/common/Text";
 
 const CATEGORY_BUTTON = [
   { id: 0, img: "/images/new-coaching/sprout.svg", title: "놀이를 어려워해요" },
@@ -32,7 +42,9 @@ const ContentDetailPage = () => {
       <EmptyBox height="1rem" backgroundColor={ColorLightSlate2} />
       <EmptyBox height="3.2rem" backgroundColor={ColorLight1} />
       <S.ActivityWrapper>
-        <S.ActivityTitle>우리 아이를 위한 확장 활동</S.ActivityTitle>
+        <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
+          우리 아이를 위한 확장 활동
+        </Text>
         <S.ActivityCategoryWrapper>
           {CATEGORY_BUTTON.map(item => (
             <S.ActivityCategoryButton
@@ -41,15 +53,25 @@ const ContentDetailPage = () => {
               onClick={() => setSelectedCategory(item.id)}
             >
               <UseImgix srcUrl={item.img} />
-              {item.title}
+              <Text variant={ContentsBase1626Regular} color={ColorLightBlack6}>
+                {item.title}
+              </Text>
             </S.ActivityCategoryButton>
           ))}
         </S.ActivityCategoryWrapper>
         <S.ActivityList>
           {LIST_ITEM.map(item => (
-            <div>
-              <S.ActivityItemIndex>{item.id}</S.ActivityItemIndex>
-              <S.ActivityItem key={item.id + item.content}>{item.content}</S.ActivityItem>
+            <div key={item.id + item.content}>
+              <S.ActivityItemIndex>
+                <Text variant={TextSm1420Bold} color={ColorLightBlack6}>
+                  {item.id.toString()}
+                </Text>
+              </S.ActivityItemIndex>
+              <S.ActivityItem>
+                <Text variant={ContentsBase1626Regular} color={ColorLightBlack7}>
+                  {item.content}
+                </Text>
+              </S.ActivityItem>
             </div>
           ))}
         </S.ActivityList>

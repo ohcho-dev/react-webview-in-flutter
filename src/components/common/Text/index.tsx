@@ -16,9 +16,16 @@ interface TextProps {
   variant: textObjType;
   color: string;
   style?: React.CSSProperties;
+  isEllipsis?: boolean;
 }
 
-const Text = ({ children, variant, color = ColorLightBlack9Base, style }: TextProps) => {
+const Text = ({
+  children,
+  variant,
+  color = ColorLightBlack9Base,
+  isEllipsis,
+  style,
+}: TextProps) => {
   const convertedStyle = convertToRem(variant);
   function convertToRem(obj: { [key: string]: number | string }) {
     const remObject: { [key: string]: number | string } = {};
@@ -34,6 +41,23 @@ const Text = ({ children, variant, color = ColorLightBlack9Base, style }: TextPr
     return remObject;
   }
 
+  if (isEllipsis) {
+    return (
+      <span
+        style={{
+          ...convertedStyle,
+          color: color,
+          overflow: "hidden",
+          width: "100%",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+          ...style,
+        }}
+      >
+        {children}
+      </span>
+    );
+  }
   return <span style={{ ...convertedStyle, color: color, ...style }}>{children}</span>;
 };
 

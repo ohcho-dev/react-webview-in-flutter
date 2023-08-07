@@ -1,7 +1,18 @@
 import EmptyBox from "components/common/EmptyBox";
 import * as S from "./ContentHeader.styled";
-import { ColorLight1 } from "lds-common/src/constants/tokens/global";
-import { useEffect, useState } from "react";
+import {
+  ColorLight1,
+  ColorLightBlack9Base,
+  ColorLightSlate9Base,
+  ContentsXxl2232Semibold,
+  TextLg1826Semibold,
+  TextXs1218Regular,
+} from "lds-common/src/constants/tokens/global";
+import { useState } from "react";
+
+import GrowthChip from "components/common/GrowthChip";
+import Text from "components/common/Text";
+import ProgressStatusBadge from "components/common/ProgressStatusBadge";
 
 interface TabMenuProps {
   name: string;
@@ -38,21 +49,29 @@ export const ContentHeader = ({ type }: ContentHeaderProps) => {
   return (
     <S.HeaderWrap>
       <EmptyBox height="0.8rem" backgroundColor={ColorLight1} />
-      <S.HeaderName>컨텐츠 리스트 이름</S.HeaderName>
-      <S.HeaderStatusWrap>
-        {type === "LIST" && (
-          <>
-            <S.HeaderStatusValue>진행중</S.HeaderStatusValue>
-            <S.HeaderDesc>2023.04.03~2023.05.29</S.HeaderDesc>
-          </>
-        )}
-        {type === "DETAIL" && (
-          <>
-            <S.HeaderStatusValue>대근육</S.HeaderStatusValue>
-            <S.HeaderDesc>균형감각</S.HeaderDesc>
-          </>
-        )}
-      </S.HeaderStatusWrap>
+      <S.HeaderInfoSection>
+        <Text variant={ContentsXxl2232Semibold} color={ColorLightBlack9Base} isEllipsis>
+          킥보드 타기
+        </Text>
+        <S.HeaderStatusWrap>
+          {type === "LIST" && (
+            <>
+              <ProgressStatusBadge isFinished={false} />
+              <Text variant={TextXs1218Regular} color={ColorLightSlate9Base}>
+                2023.04.03~2023.05.29
+              </Text>
+            </>
+          )}
+          {type === "DETAIL" && (
+            <>
+              <GrowthChip label="언어" style={{ minWidth: "fit-content" }} />
+              <Text variant={TextXs1218Regular} color={ColorLightSlate9Base} isEllipsis>
+                균형 감각
+              </Text>
+            </>
+          )}
+        </S.HeaderStatusWrap>
+      </S.HeaderInfoSection>
       <EmptyBox height="2rem" backgroundColor={ColorLight1} />
 
       {type === "LIST" && (
@@ -66,7 +85,12 @@ export const ContentHeader = ({ type }: ContentHeaderProps) => {
                 isSelected={selectedWeek === item.id}
                 onClick={() => handleSelectWeek(item)}
               >
-                {item.name}
+                <Text
+                  variant={TextLg1826Semibold}
+                  color={item.status === 0 ? ColorLightBlack9Base : ColorLightSlate9Base}
+                >
+                  {item.name}
+                </Text>
               </S.WeekItem>
             );
           })}

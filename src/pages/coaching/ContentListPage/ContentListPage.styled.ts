@@ -1,16 +1,10 @@
 import styled from "styled-components";
 import {
   ColorLight1,
-  ColorLightBlack9Base,
   ColorLightEltern3,
   ColorLightEltern9Base,
   ColorLightSlate7,
-  FontSize3,
-  FontWeightsSemibold,
-  LetterSpacingBase,
-  LineHeights3,
 } from "lds-common/src/constants/tokens/global";
-import { convertNumToRem } from "utils/design-system/convertStrToRem";
 
 export const CarouselWrapper = styled.div`
   width: 100%;
@@ -86,25 +80,14 @@ export const PeriodInfoCard = styled.ul`
   list-style-type: disc;
 `;
 export const PeriodInfoItem = styled.li`
-  font-size: 1.4rem;
-  font-weight: 400;
-  line-height: 2rem;
-  letter-spacing: -0.04rem;
   color: ${ColorLightEltern9Base};
   margin-left: 2rem;
+
+  &::marker {
+    font-size: 1rem;
+  }
 `;
 
-export const PlayTipTitle = styled.div`
-  display: flex;
-  padding: 0.4rem 2rem;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.8rem;
-  align-self: stretch;
-  color: ${ColorLightBlack9Base};
-  /* text-lg · 18 · 26/semibold */
-  font-size: ${convertNumToRem(FontSize3)};
-  font-weight: ${FontWeightsSemibold};
-  line-height: ${convertNumToRem(LineHeights3)};
-  letter-spacing: ${convertNumToRem(LetterSpacingBase)};
+export const TipSection = styled.div`
+  padding: 0 2rem;
 `;
