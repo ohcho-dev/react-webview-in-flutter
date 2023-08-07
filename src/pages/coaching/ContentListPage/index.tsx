@@ -74,6 +74,7 @@ const ContentListPage = () => {
     infinite: false,
     className: "center",
     centerMode: true,
+    centerPadding: "30px 0",
     slidesToShow: 1,
     speed: 500,
     appendDots: (dots: any) => <S.CustomDotsWrapper>{dots}</S.CustomDotsWrapper>,
