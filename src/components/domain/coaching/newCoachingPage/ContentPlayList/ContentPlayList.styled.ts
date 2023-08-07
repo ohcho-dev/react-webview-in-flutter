@@ -9,7 +9,6 @@ export const ContentWrapper = styled.div`
 export const CardWrapper = styled.div`
   display: flex;
   width: 100%;
-  height: 29.6rem;
   padding: 2rem;
   flex-direction: column;
   align-items: flex-start;

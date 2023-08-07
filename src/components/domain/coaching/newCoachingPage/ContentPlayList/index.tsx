@@ -29,6 +29,19 @@ const ContentPlayList = ({ data, settings }: ContentPlayListProps) => {
             {/* <S.CardImg src={item.img} alt="이미지" /> */}
             <UseImgix srcUrl="/images/new-coaching/icon_block.svg" />
 
+            <GrowthChip label="언어" style={{ marginTop: "1.6rem" }} />
+            <Text
+              variant={TextLg1826Semibold}
+              color={ColorLightBlack9Base}
+              style={{ marginTop: "0.8rem" }}
+              isEllipsis
+            >
+              {item.title}
+            </Text>
+            <Text variant={TextSm1420Regular} color={ColorLightBlack6} isEllipsis>
+              {item.desc}
+            </Text>
+
             <S.CardBlur style={{ backdropFilter: "blur(6px)" }}>
               <UseImgix srcUrl="/images/icon-sad-circle.svg" />
               <EmptyBox height="1.2rem" />
@@ -44,19 +57,6 @@ const ContentPlayList = ({ data, settings }: ContentPlayListProps) => {
                 3주차 놀이는 23.05.22일 오전 9시부터 확인하실 수 있어요.
               </Text>
             </S.CardBlur>
-
-            <GrowthChip label="언어" style={{ marginTop: "1.6rem" }} />
-            <Text
-              variant={TextLg1826Semibold}
-              color={ColorLightBlack9Base}
-              style={{ marginTop: "0.8rem" }}
-              isEllipsis
-            >
-              {item.title}
-            </Text>
-            <Text variant={TextSm1420Regular} color={ColorLightBlack6} isEllipsis>
-              {item.desc}
-            </Text>
           </S.CardWrapper>
         </S.ContentWrapper>
       ))}
