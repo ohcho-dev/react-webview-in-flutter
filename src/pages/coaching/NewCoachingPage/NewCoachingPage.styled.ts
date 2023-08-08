@@ -45,3 +45,11 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const Wrapper2 = styled.div`
+  height: 5rem;
+  padding: 0.6rem 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -32,24 +32,24 @@ const NewCoachingPage = () => {
               toggleSwitch={() => setToggle(prev => !prev)}
               checked={toggle}
               leftSection={
-                <Text variant={ContentsBase1626Medium} color={ColorLightBlack6}>
-                  진행 중인 코칭
-                </Text>
+                <S.Wrapper2>
+                  <Text
+                    variant={ContentsBase1626Medium}
+                    color={toggle ? ColorLightBlack9Base : ColorLightBlack6}
+                  >
+                    진행 중인 코칭
+                  </Text>
+                </S.Wrapper2>
               }
               rightSection={
-                <Text variant={ContentsBase1626Medium} color={ColorLightBlack6}>
-                  종료된 코칭
-                </Text>
-              }
-              customSelectedLeftSection={
-                <Text variant={ContentsBase1626Semibold} color={ColorLightBlack9Base}>
-                  진행 중인 코칭
-                </Text>
-              }
-              customSelectedRightSection={
-                <Text variant={ContentsBase1626Semibold} color={ColorLightBlack9Base}>
-                  종료된 코칭
-                </Text>
+                <S.Wrapper2>
+                  <Text
+                    variant={ContentsBase1626Medium}
+                    color={toggle ? ColorLightBlack6 : ColorLightBlack9Base}
+                  >
+                    종료된 코칭
+                  </Text>
+                </S.Wrapper2>
               }
             />
             <Switch
