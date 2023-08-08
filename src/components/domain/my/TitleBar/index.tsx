@@ -174,13 +174,13 @@ export const MypageTitleBar: React.FC = () => {
               프로그램 내역
             </Text>
           </S.GrayButton>
-          <S.GrayButton>
+          <S.GrayButton onClick={() => navigate("/my/stamp")}>
             <Icon icon="rubber-stamp" size={24} />
             <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
               스탬프
             </Text>
           </S.GrayButton>
-          <S.GrayButton>
+          <S.GrayButton onClick={() => navigate("/my/coupon")}>
             <Icon icon="ticket" size={24} />
             <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
               쿠폰

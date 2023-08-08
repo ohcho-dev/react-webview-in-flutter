@@ -76,6 +76,8 @@ const NoticeDetail = React.lazy(() => import("./pages/my/Notice/NoticeDetailPage
 const Terms = React.lazy(() => import("./pages/my/TermsPage"));
 const Privacy = React.lazy(() => import("./pages/my/PrivacyPage"));
 const Sensitive = React.lazy(() => import("./pages/my/SensitivePage"));
+const Stamp = React.lazy(() => import("./pages/my/Stamp"));
+const Coupon = React.lazy(() => import("./pages/my/Coupon"));
 
 export const RouterConfig = [
   {
@@ -322,6 +324,22 @@ export const RouterConfig = [
   {
     path: "/my/sensitive",
     element: <Sensitive />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/my/stamp",
+    element: <Stamp />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/my/coupon",
+    element: <Coupon />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
