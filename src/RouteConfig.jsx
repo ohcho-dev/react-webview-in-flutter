@@ -381,7 +381,7 @@ export const RouterConfig = [
     path: "/new-coaching",
     element: <NewCoachingPage />,
     sceneConfig: {
-      enter: "from-right",
+      enter: "from-fade",
       exit: "to-right",
     },
   },
