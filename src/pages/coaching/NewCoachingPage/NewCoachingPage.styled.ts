@@ -39,17 +39,13 @@ export const TestSection = styled(Section)`
   padding: 2.4rem 1.2rem;
 `;
 
-export const Wrapper = styled.div`
-  padding: 0.6rem 1.2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
+export const NoFinishedCoaching = styled.div`
+  width: 100%;
+  height: 100%;
 
-export const Wrapper2 = styled.div`
-  height: 5rem;
-  padding: 0.6rem 1.2rem;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  margin-top: 13.6rem;
 `;
