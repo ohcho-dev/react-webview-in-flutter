@@ -10,8 +10,8 @@ interface SwitchProps {
 const Switch = ({ checked, toggleSwitch, rightSection, leftSection }: SwitchProps) => {
   return (
     <S.SwitchWrapper onClick={toggleSwitch}>
-      <S.Section location="left">{leftSection}</S.Section>
-      <S.Section location="right">{rightSection}</S.Section>
+      <S.Section>{leftSection}</S.Section>
+      <S.Section>{rightSection}</S.Section>
       <S.Switch checked={checked} />
     </S.SwitchWrapper>
   );

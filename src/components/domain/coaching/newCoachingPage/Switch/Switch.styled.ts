@@ -63,7 +63,9 @@ export const Switch = styled.div<{ checked: boolean }>`
   z-index: 10;
 `;
 
-export const Section = styled.div<{ location: "left" | "right" }>`
+export const Section = styled.div`
+  position: relative;
+
   display: flex;
   align-items: center;
   justify-content: center;
