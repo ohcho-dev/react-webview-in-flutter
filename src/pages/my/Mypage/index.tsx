@@ -15,53 +15,54 @@ import UseImgix from "../../../components/common/Imgix";
 import * as S from "./myPage.styled";
 import useWithdrawAccount from "../../../queries/common/auth/useWithdrawAccount";
 import useLogout from "../../../queries/common/auth/useLogout";
+import Icon from "lds-common/src/components/Icon";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack5,
+  ColorLightBlack7,
+  ColorLightBlack8,
+  ColorLightSlate8,
+  TextBase1624Medium,
+  TextSm1420Regular,
+  TextXs1218Regular,
+  TextXs1218UnderlineMedium,
+} from "lds-common/src/constants/tokens/global";
+import { iconName } from "lds-common/src/components/Icon/Icon.type";
 
-const linkItem = [
-  {
-    id: 0,
-    imgUrl: "/images/icon-mypage-child.svg",
-    name: "아이 관리",
-    url: "/my/management-child",
-  },
+const linkItem: { id: number; icon: iconName; name: string; url: string; link?: string }[] = [
   {
     id: 1,
-    imgUrl: "/images/icon-mypage-alarm.svg",
+    icon: "bell-black",
     name: "알림 설정",
     url: "/my/management-alarm",
   },
   {
-    id: 2,
-    imgUrl: "/images/icon-mypage-doc2.svg",
-    name: "프로그램 신청 내역",
-    url: "/my/applied-program-list",
-  },
-  {
     id: 3,
-    imgUrl: "/images/icon-mypage-notice.svg",
+    icon: "speakerphone",
     name: "공지사항",
     url: "/my/notice",
   },
   {
     id: 4,
-    imgUrl: "/images/icon-mypage-docs.svg",
+    icon: "vocablary",
     name: "이용 약관",
     url: "/my/terms",
   },
   {
     id: 5,
-    imgUrl: "/images/icon-mypage-docs.svg",
+    icon: "vocablary",
     name: "개인정보 처리방침",
     url: "/my/privacy",
   },
   {
     id: 6,
-    imgUrl: "/images/icon-mypage-docs.svg",
+    icon: "vocablary",
     name: "민감정보 처리방침",
     url: "/my/sensitive",
   },
   {
     id: 7,
-    imgUrl: "/images/icon-mypage-chat.svg",
+    icon: "message-circle",
     name: "문의하기",
     link: "kakaoTalk@_xnAxjxfxj@chat",
     url: "#",
@@ -70,7 +71,9 @@ const linkItem = [
 
 const MyPage = () => {
   const navigate = useNavigate();
+  const [openLogoutModal, setOpenLogoutModal] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [openSuccessModal, setOpenSuccessModal] = useState(false);
   const [version, setVersion] = useState("");
   const { mutate: withdrawAccount } = useWithdrawAccount();
   const { mutate: logout } = useLogout();
@@ -117,58 +120,100 @@ const MyPage = () => {
   const clickWithDrawal = async () => {
     await withdrawAccount();
     await NativeFunction("ga4logNativeEventLog", `${withdrawalSuccessedAction}`);
+    await setOpenSuccessModal(true);
+  };
+
+  const closeApp = async () => {
+    await setOpenSuccessModal(!openSuccessModal);
     await NativeFunction("routeNativeScreen", "reset");
   };
 
   return (
     <LayoutMainPage bgColor="#f6f6f6" hideTitleBar>
       <MypageTitleBar />
-      {linkItem.map(item => (
-        <S.LinkItemWrap
-          key={item.id}
-          onClick={() =>
-            item.link ? NativeFunction("routeNativeScreen", item.link) : navigate(item.url)
-          }
-        >
-          <div>
+      <S.LinkSection>
+        {linkItem.map(item => (
+          <S.LinkItemWrap
+            key={item.id}
+            onClick={() =>
+              item.link ? NativeFunction("routeNativeScreen", item.link) : navigate(item.url)
+            }
+          >
             <S.IconTextGroup>
-              <UseImgix srcUrl={item.imgUrl} alt={item.name} />
-              <span>{item.name}</span>
+              <Icon icon={item.icon} size={20} />
+              <Text variant={TextBase1624Medium} color={ColorLightBlack8}>
+                {item.name}
+              </Text>
             </S.IconTextGroup>
-            <UseImgix
-              srcUrl="/images/icon-mypage-arrow.svg"
-              alt="right arrow"
-              style={{ width: "2.8rem" }}
-            />
-          </div>
-        </S.LinkItemWrap>
-      ))}
+            <Icon icon="chevron-right" size={20} fill={ColorLightSlate8} />
+          </S.LinkItemWrap>
+        ))}
+      </S.LinkSection>
 
       <S.BottomArea>
-        <span>앱 버전 {version}</span>
+        <Text variant={TextXs1218Regular} color={ColorLightBlack5}>
+          {"앱 버전 " + version}
+        </Text>
         <S.BtnWrap>
-          <div onClick={clickLogout}>로그아웃</div>
-          <div onClick={() => setOpenModal(!openModal)}>탈퇴하기</div>
+          <div onClick={() => setOpenLogoutModal(prev => !prev)}>
+            <Text variant={TextXs1218UnderlineMedium} color={ColorLightBlack5}>
+              로그아웃
+            </Text>
+          </div>
+          <div onClick={() => setOpenModal(!openModal)}>
+            <Text variant={TextXs1218UnderlineMedium} color={ColorLightBlack5}>
+              탈퇴하기
+            </Text>
+          </div>
         </S.BtnWrap>
       </S.BottomArea>
 
+      <CustomModal
+        cancelBtn
+        isOpen={openLogoutModal}
+        toggleModal={() => setOpenLogoutModal(!openLogoutModal)}
+        title="로그아웃 하시겠어요?"
+        okBtnName="로그아웃"
+        okBtnClick={() => clickLogout()}
+        cancelBtnName="취소"
+        cancelBtnClick={() => setOpenLogoutModal(!openLogoutModal)}
+      >
+        <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+          안전하게 로그아웃 돼요.
+        </Text>
+      </CustomModal>
       <CustomModal
         cancelBtn
         isOpen={openModal}
         toggleModal={() => setOpenModal(!openModal)}
         topImage={<UseImgix srcUrl="/images/icon-sad-circle.svg" alt="sad icon" />}
         title="정말로 탈퇴하시겠어요?"
-        contentMarkup={
-          <>
-            <div>탈퇴 시 입력하신 모든 정보와 기록이 삭제되고 복구할 수 없습니다.</div>
-            <div>그래도 탈퇴하시겠어요?</div>
-          </>
-        }
         cancelBtnName="탈퇴"
         cancelBtnClick={() => clickWithDrawal()}
         okBtnName="취소"
         okBtnClick={() => setOpenModal(!openModal)}
-      />
+      >
+        <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+          탈퇴 시 입력하신 모든 정보와 기록이 삭제되고 이후 복구할 수 없어요.
+        </Text>
+      </CustomModal>
+      <CustomModal
+        isOpen={openSuccessModal}
+        toggleModal={() => setOpenSuccessModal(!openSuccessModal)}
+        topImage={<UseImgix srcUrl="/images/icon-sad-circle.svg" alt="sad icon" />}
+        title="탈퇴되었어요."
+        okBtnName="확인"
+        okBtnClick={closeApp}
+      >
+        <>
+          <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+            모든 정보가 안전하게 삭제되었어요.
+          </Text>
+          <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+            다음에 또 만나요.
+          </Text>
+        </>
+      </CustomModal>
     </LayoutMainPage>
   );
 };

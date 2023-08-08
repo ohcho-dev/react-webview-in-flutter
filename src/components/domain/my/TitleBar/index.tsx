@@ -11,8 +11,21 @@ import {
 } from "../../../../store/common";
 import * as S from "./TitleBar.styled";
 import useAuthMe from "queries/common/auth/useAuthMe";
-import Icon from "components/common/Icon";
-import { ColorLight2, ColorLightSlate9Base } from "lds-common/src/constants/tokens/global";
+
+import {
+  ColorLight2,
+  ColorLightBlack7,
+  ColorLightBlack9Base,
+  ColorLightSlate2,
+  ColorLightSlate9Base,
+  ContentsXxl2232Semibold,
+  TextSm1420Regular,
+  TextSm1420Semibold,
+} from "lds-common/src/constants/tokens/global";
+import EmptyBox from "components/common/EmptyBox";
+import Text from "components/common/Text";
+import Button from "components/common/Button";
+import Icon from "lds-common/src/components/Icon";
 
 interface MainTitleBarProps {
   style?: object;
@@ -95,8 +108,9 @@ export const DetailTitleBar: React.FC<DetailTitleBarProps> = ({
 };
 
 export const MypageTitleBar: React.FC = () => {
+  const navigate = useNavigate();
   const [firstRegistChildInfo, setFirstRegistChildInfo] = useState({ name: "" });
-  const [sns, setSns] = useState("");
+  const [sns, setSns] = useState<string>("");
   const [icon, setIcon] = useState("");
   const childrenList = useRecoilValue(childrenListState);
 
@@ -128,14 +142,54 @@ export const MypageTitleBar: React.FC = () => {
 
   return (
     <S.MypageTitleWrap>
-      <S.Title>
-        <S.ChildName>{firstRegistChildInfo.name}</S.ChildName>
-        <span>보호자님, 안녕하세요.</span>
-      </S.Title>
-      <S.LoginInfo>
-        <UseImgix srcUrl={icon} alt="socal login logo" />
-        <span>{sns} 로그인</span>
-      </S.LoginInfo>
+      <EmptyBox height="4.4rem" />
+      <S.TitleSection>
+        <Text variant={ContentsXxl2232Semibold} color={ColorLightBlack9Base}>
+          보호자님 안녕하세요.
+        </Text>
+
+        <S.LoginInfo>
+          <UseImgix srcUrl={icon} alt="socal login logo" />
+          <Text variant={TextSm1420Regular} color={ColorLightBlack7}>
+            {sns + " 로그인"}
+          </Text>
+        </S.LoginInfo>
+      </S.TitleSection>
+      <EmptyBox height="2rem" />
+      <S.ButtonSection>
+        <S.GrayButton
+          style={{ flexDirection: "row" }}
+          onClick={() => navigate("/my/management-child")}
+        >
+          <Icon icon="mood-kid" size={24} />
+          <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
+            아이 관리
+          </Text>
+        </S.GrayButton>
+        <EmptyBox height="1.2rem" />
+        <S.ButtonGroup>
+          <S.GrayButton onClick={() => navigate("/my/applied-program-list")}>
+            <Icon icon="file-text" size={24} />
+            <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
+              프로그램 내역
+            </Text>
+          </S.GrayButton>
+          <S.GrayButton>
+            <Icon icon="rubber-stamp" size={24} />
+            <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
+              스탬프
+            </Text>
+          </S.GrayButton>
+          <S.GrayButton>
+            <Icon icon="ticket" size={24} />
+            <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
+              쿠폰
+            </Text>
+          </S.GrayButton>
+        </S.ButtonGroup>
+      </S.ButtonSection>
+      <EmptyBox height="2rem" />
+      <EmptyBox height="1rem" backgroundColor={ColorLightSlate2} />
     </S.MypageTitleWrap>
   );
 };

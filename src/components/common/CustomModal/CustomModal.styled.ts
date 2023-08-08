@@ -48,7 +48,7 @@ export const ModalContentWrapper = styled.div`
 export const ModalImageWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
 `;
 
 export const ModalBtnsWrapper = styled.div`
@@ -56,18 +56,8 @@ export const ModalBtnsWrapper = styled.div`
   column-gap: 1rem;
 `;
 
-export const ModalTitle = styled.span`
-  font-weight: 700;
-  font-size: 2rem;
-  line-height: 3rem;
-  margin-bottom: 1.2rem;
-  color: ${ColorLightBlack8};
-`;
-
 export const ModalContent = styled.span`
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2.4rem;
+  margin-top: 0.8rem;
   color: ${ColorLightBlack7};
 `;

@@ -3,6 +3,8 @@ import Modal from "react-modal";
 
 import Button from "../Button";
 import * as S from "./CustomModal.styled";
+import { ColorLightBlack8, TextXl2030Bold } from "lds-common/src/constants/tokens/global";
+import Text from "lds-common/src/components/Text";
 
 interface ModalProps {
   isOpen: boolean;
@@ -95,7 +97,7 @@ const CustomModal = (props: ModalProps) => {
       <S.ModalWrapper>
         <S.ModalContentWrapper>
           {topImage && <S.ModalImageWrapper>{topImage}</S.ModalImageWrapper>}
-          <S.ModalTitle>{title}</S.ModalTitle>
+          <Text variant={TextXl2030Bold} color={ColorLightBlack8}>{`${title}`}</Text>
           <S.ModalContent>{children}</S.ModalContent>
         </S.ModalContentWrapper>
         <S.ModalBtnsWrapper>

@@ -1,4 +1,5 @@
 import { TITLE_BAR_HEIGHT_REM } from "constants/size";
+import { ColorLightSlate2 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const TitleBarWrap = styled.section`
@@ -73,11 +74,32 @@ export const ButtonWrap = styled.div`
 
 export const MypageTitleWrap = styled.div`
   width: 100%;
-  height: 14.5rem;
-
   background: #fff;
-  padding: 3.5rem 2.5rem 2rem;
-  border-bottom: solid 1rem #f6f6f6;
+`;
+
+export const TitleSection = styled.div`
+  padding: 0 2.5rem;
+`;
+
+export const ButtonSection = styled.div`
+  padding: 0 2rem;
+`;
+export const ButtonGroup = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+`;
+
+export const GrayButton = styled.div`
+  width: 100%;
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  background: ${ColorLightSlate2};
 `;
 
 export const Title = styled.div`
@@ -105,16 +127,6 @@ export const LoginInfo = styled.div`
   img {
     width: 2.8rem;
     height: 2.8rem;
-  }
-
-  span {
-    font-weight: 400;
-    font-size: 1.4rem;
-    line-height: 2rem;
-    display: flex;
-    align-items: center;
-    letter-spacing: -0.04rem;
-    color: rgba(10, 10, 10, 0.8);
   }
 `;
 
