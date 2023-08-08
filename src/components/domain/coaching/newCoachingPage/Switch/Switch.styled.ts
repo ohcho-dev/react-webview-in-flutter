@@ -21,11 +21,12 @@ const slideLeft = keyframes`
 
 export const SwitchWrapper = styled.div`
   position: relative;
+  display: flex;
 
-  display: grid;
+  /* display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, 1fr); */
   width: 100%;
   border-radius: 1.8rem;
   background-color: ${ColorLightSlate3};
@@ -64,8 +65,6 @@ export const Switch = styled.div<{ checked: boolean }>`
 `;
 
 export const Section = styled.div`
-  position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
