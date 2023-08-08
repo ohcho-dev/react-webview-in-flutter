@@ -22,11 +22,6 @@ const slideLeft = keyframes`
 export const SwitchWrapper = styled.div`
   position: relative;
   display: flex;
-
-  /* display: grid;
-  justify-content: center;
-  align-items: center;
-  grid-template-columns: repeat(2, 1fr); */
   width: 100%;
   border-radius: 1.8rem;
   background-color: ${ColorLightSlate3};
