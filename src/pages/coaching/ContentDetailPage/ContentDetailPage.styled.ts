@@ -9,16 +9,7 @@ export const ActivityWrapper = styled.div`
   background-color: ${ColorLight1};
   padding: 0 2rem;
 `;
-export const ActivityCategoryWrapper = styled.div`
-  display: flex;
-  width: 100%;
-  padding: 0.8rem;
-  align-items: flex-start;
-  justify-content: space-between;
-  border-radius: 1.8rem;
-  background: ${ColorLightSlate3};
-  margin-top: 1.2rem;
-`;
+
 export const ActivityCategoryButton = styled.div<{ selected: boolean }>`
   width: 100%;
   display: flex;

@@ -13,9 +13,9 @@ import {
 } from "lds-common/src/constants/tokens/global";
 import { useParams } from "react-router-dom";
 import * as S from "./ContentDetailPage.styled";
-import UseImgix from "components/common/Imgix";
 import { useState } from "react";
 import Text from "components/common/Text";
+import ActivityLevelSwitch from "components/domain/coaching/newCoachingPage/ActivityLevelSwitch";
 
 const CATEGORY_BUTTON = [
   { id: 0, img: "/images/new-coaching/sprout.svg", title: "놀이를 어려워해요" },
@@ -31,7 +31,7 @@ const LIST_ITEM = [
 ];
 const ContentDetailPage = () => {
   const { contentId } = useParams();
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const [toggle, setToggle] = useState<boolean>(true);
 
   return (
     <LayoutDetailPage>
@@ -45,20 +45,10 @@ const ContentDetailPage = () => {
         <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
           우리 아이를 위한 확장 활동
         </Text>
-        <S.ActivityCategoryWrapper>
-          {CATEGORY_BUTTON.map(item => (
-            <S.ActivityCategoryButton
-              key={item.id}
-              selected={selectedCategory === item.id}
-              onClick={() => setSelectedCategory(item.id)}
-            >
-              <UseImgix srcUrl={item.img} />
-              <Text variant={ContentsBase1626Regular} color={ColorLightBlack6}>
-                {item.title}
-              </Text>
-            </S.ActivityCategoryButton>
-          ))}
-        </S.ActivityCategoryWrapper>
+
+        <EmptyBox height="1.2rem" backgroundColor={ColorLight1} />
+        <ActivityLevelSwitch toggle={toggle} handleToggle={() => setToggle(prev => !prev)} />
+
         <S.ActivityList>
           {LIST_ITEM.map(item => (
             <div key={item.id + item.content}>
