@@ -161,7 +161,7 @@ export const MypageTitleBar: React.FC = () => {
           style={{ flexDirection: "row" }}
           onClick={() => navigate("/my/management-child")}
         >
-          <Icon icon="mood-kid" size={24} />
+          <Icon icon="mood-kid" size={20} />
           <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
             아이 관리
           </Text>
@@ -169,19 +169,19 @@ export const MypageTitleBar: React.FC = () => {
         <EmptyBox height="1.2rem" />
         <S.ButtonGroup>
           <S.GrayButton onClick={() => navigate("/my/applied-program-list")}>
-            <Icon icon="file-text" size={24} />
+            <Icon icon="file-text" size={20} />
             <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
               프로그램 내역
             </Text>
           </S.GrayButton>
           <S.GrayButton onClick={() => navigate("/my/stamp")}>
-            <Icon icon="rubber-stamp" size={24} />
+            <Icon icon="rubber-stamp" size={20} />
             <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
               스탬프
             </Text>
           </S.GrayButton>
           <S.GrayButton onClick={() => navigate("/my/coupon")}>
-            <Icon icon="ticket" size={24} />
+            <Icon icon="ticket" size={20} />
             <Text variant={TextSm1420Semibold} color={ColorLightBlack9Base}>
               쿠폰
             </Text>
