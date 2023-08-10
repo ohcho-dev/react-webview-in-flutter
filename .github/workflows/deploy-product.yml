@@ -3,6 +3,8 @@ name: Deploy - b/Product a/Deploy
 on:
   pull_request:
     branches: product
+  push:
+    branches: product
 
 jobs:
   build:
