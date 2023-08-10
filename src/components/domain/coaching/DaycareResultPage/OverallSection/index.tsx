@@ -61,14 +61,15 @@ const OverallSection = ({ resultPaperInfo }: OverallSectionPropsType) => {
           style={{ width: "100%", height: "22.1rem" }}
         />
       </S.OverallSection>
-      <DividerSection />
-      <S.ChecklistSection>
-        <S.ChecklistTitleSection>
-          <UseImgix srcUrl={"/clinic/images/icon_warning.svg"} />
-          주의가 필요해요
-        </S.ChecklistTitleSection>
-        {resultPaperInfo.checklist.length > 0 && (
-          <>
+      {resultPaperInfo.checklist.length > 0 && (
+        <>
+          <DividerSection />
+          <S.ChecklistSection>
+            <S.ChecklistTitleSection>
+              <UseImgix srcUrl={"/clinic/images/icon_warning.svg"} />
+              주의가 필요해요
+            </S.ChecklistTitleSection>
+
             <ListItem>
               <IconDotSection>
                 <Icon icon={"point-filled"} size={16} fill={ColorLightRed8} />
@@ -96,9 +97,9 @@ const OverallSection = ({ resultPaperInfo }: OverallSectionPropsType) => {
                 </Text>
               </ListItem>
             ))}
-          </>
-        )}
-      </S.ChecklistSection>
+          </S.ChecklistSection>
+        </>
+      )}
       <DividerSection />
       <Section>
         <TitleSection>
