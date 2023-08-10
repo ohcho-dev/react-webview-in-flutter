@@ -1,4 +1,5 @@
 import NoMainImage from "components/domain/program/NoMainImage";
+import { ColorLightSlate5 } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const ListWrap = styled.div`
@@ -74,10 +75,12 @@ export const ThumbnailImg = styled.img`
   border-radius: 0.5rem;
 `;
 
-export const NoThumbnailImg = styled(NoMainImage)`
+export const NoThumbnailImg = styled.div`
   width: 8.5rem;
   height: 7rem;
   border-radius: 0.5rem;
+
+  background-color: ${ColorLightSlate5};
 `;
 
 export const ThumbnailWrapper = styled.div`
