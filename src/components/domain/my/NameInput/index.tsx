@@ -12,6 +12,7 @@ interface NameInputProps {
   type: "create" | "modify";
   handleKeyDown?: (evt: React.KeyboardEvent<HTMLDivElement>) => void;
   handleFocus?: () => void;
+  style?: object;
 }
 
 const NameInput = ({
@@ -22,6 +23,7 @@ const NameInput = ({
   type,
   handleKeyDown,
   handleFocus,
+  style,
 }: NameInputProps) => {
   const [startTyping, setStartTyping] = useState(type === "create" ? false : true);
   const [nameLengthCheck, setNameLengthCheck] = useState(false);
@@ -36,6 +38,7 @@ const NameInput = ({
         value={value}
         onKeyDown={handleKeyDown}
         onFocus={handleFocus}
+        style={{ ...style }}
         onChange={(evt: React.ChangeEvent<HTMLInputElement>) => {
           const value = evt.target.value;
           setStartTyping(true);

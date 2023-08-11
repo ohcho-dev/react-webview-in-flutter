@@ -34,3 +34,9 @@ export interface AppliedClassType extends ApplyProgramPayment {
   child_gender: "M" | "F";
   main_image: string;
 }
+
+export interface CouponItemType {
+  title: string;
+  desc: string;
+  date: string;
+}

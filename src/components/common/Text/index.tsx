@@ -17,6 +17,7 @@ interface TextProps {
   color: string;
   style?: React.CSSProperties;
   isEllipsis?: boolean;
+  ellipsisRow?: number;
 }
 
 const Text = ({
@@ -24,6 +25,7 @@ const Text = ({
   variant,
   color = ColorLightBlack9Base,
   isEllipsis,
+  ellipsisRow = 1,
   style,
 }: TextProps) => {
   const convertedStyle = convertToRem(variant);
@@ -49,8 +51,11 @@ const Text = ({
           color: color,
           overflow: "hidden",
           width: "100%",
-          whiteSpace: "nowrap",
+          whiteSpace: ellipsisRow === 1 ? "nowrap" : "normal",
           textOverflow: "ellipsis",
+          display: ellipsisRow !== 1 ? "-webkit-box" : "",
+          WebkitLineClamp: ellipsisRow !== 1 ? ellipsisRow : "",
+          WebkitBoxOrient: ellipsisRow !== 1 ? "vertical" : "horizontal",
           ...style,
         }}
       >
