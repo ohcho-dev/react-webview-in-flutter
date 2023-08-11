@@ -100,6 +100,7 @@ export const GrayButton = styled.div`
   align-items: center;
   gap: 0.4rem;
   background: ${ColorLightSlate2};
+  border-radius: 0.8rem;
 `;
 
 export const Title = styled.div`
