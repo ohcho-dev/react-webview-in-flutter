@@ -54,8 +54,8 @@ const CoachingList = () => {
             srcUrl="/images/no-coaching-img.png"
             style={{ width: "26rem", height: "9rem" }}
           />
-          <span>아직 신청할 수 있는 프로그램이 없어요.</span>
-          <span>다양한 프로그램 등록을 기다려주세요.</span>
+          <span>신청할 수 있는 프로그램이 없습니다.</span>
+          <span>발달검사는 12~35개월만 신청할 수 있습니다.</span>
         </S.NoProgramSection>
       )}
     </S.CoachingWrapper>
