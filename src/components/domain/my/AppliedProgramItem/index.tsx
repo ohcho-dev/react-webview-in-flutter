@@ -3,6 +3,17 @@ import { AppliedClassType, AppliedCoachingType } from "types/domain/my";
 import { getDate } from "utils/date/getDateTime";
 import getGender from "utils/user/getGender";
 import * as S from "./AppliedProgram.styled";
+import Text from "components/common/Text";
+import {
+  ColorLightBlack12,
+  ColorLightBlack8,
+  ColorLightSlate11,
+  ColorLightSlate9Base,
+  TextBase1624Semibold,
+  TextSm1420Regular,
+  TextSm1420Semibold,
+} from "lds-common/src/constants/tokens/global";
+import EmptyBox from "components/common/EmptyBox";
 
 interface AppliedProgramItemProps {
   programInfo: AppliedClassType | AppliedCoachingType;
@@ -25,22 +36,53 @@ const AppliedProgramItem = ({ programInfo, purchase_date, name }: AppliedProgram
     <S.ListWrap key={id}>
       <S.ListHeader>
         <S.DateAndChipWrapper>
-          <S.PurchaseDate>{getDate(purchase_date)}</S.PurchaseDate>
-          <Chip status={payment_status} />
+          <Chip status="PYST_CANCEL" />
+          <Text variant={TextSm1420Semibold} color={ColorLightSlate9Base}>
+            20230903-1234(데이터 필요!)
+          </Text>
         </S.DateAndChipWrapper>
-        <S.PaymentCode>{payment_code}</S.PaymentCode>
       </S.ListHeader>
       <S.ListContent>
         <div>
-          <S.Title>{name}</S.Title>
-          {payment_price ? (
-            <S.Price>{payment_price.toLocaleString("ko-KR")}원</S.Price>
-          ) : (
-            <S.Price>무료</S.Price>
-          )}
-          <S.ChildInfo>
-            신청 아이 : {child_name} ({getDate(child_birth_date)}) {getGender(child_gender)}아
-          </S.ChildInfo>
+          <Text variant={TextBase1624Semibold} color={ColorLightBlack12}>
+            {name}
+          </Text>
+          <EmptyBox height="0.8rem" />
+          <div>
+            {payment_price ? (
+              <>
+                <Text variant={TextSm1420Semibold} color={ColorLightBlack8}>
+                  {payment_price.toLocaleString("ko-KR") + "원"}
+                </Text>
+                <EmptyBox height="0.4rem" />
+              </>
+            ) : (
+              <>
+                <Text variant={TextSm1420Semibold} color={ColorLightBlack8}>
+                  무료
+                </Text>
+                <EmptyBox height="0.4rem" />
+              </>
+            )}
+          </div>
+          <div>
+            <Text variant={TextSm1420Regular} color={ColorLightSlate11}>
+              {"신청 아이 : " +
+                child_name.substring(0, 5) +
+                "(" +
+                getDate(child_birth_date) +
+                ")" +
+                getGender(child_gender) +
+                "아"}
+            </Text>
+          </div>
+          <EmptyBox height="0.4rem" />
+          <div>
+            <Text variant={TextSm1420Regular} color={ColorLightSlate11}>
+              {"신청 날짜 : " + purchase_date}
+            </Text>
+          </div>
+          <EmptyBox height="2.4rem" />
         </div>
         <S.ThumbnailWrapper>
           {main_image ? (

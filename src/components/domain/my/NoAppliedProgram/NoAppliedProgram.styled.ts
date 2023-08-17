@@ -1,3 +1,4 @@
+import { ColorLightEltern3, ColorLightEltern9Base } from "lds-common/src/constants/tokens/global";
 import styled from "styled-components";
 
 export const NotFoundData = styled.div`
@@ -11,37 +12,16 @@ export const NotFoundData = styled.div`
   }
 `;
 
-export const NotFoundTitle = styled.div`
-  font-weight: 500;
-  font-size: 1.8rem;
-  line-height: 2.4rem;
-  letter-spacing: -0.04rem;
-  color: #0a0a0a;
-  margin-top: 2.9rem;
-`;
-
-export const NotFoundDesc = styled.div`
-  font-weight: 400;
-  font-size: 1.4rem;
-  line-height: 2rem;
-  letter-spacing: -0.04rem;
-  color: rgba(10, 10, 10, 0.45);
-  margin-top: 0.6rem;
-`;
+export const TextSection = styled.div``;
 
 export const LinkBtn = styled.div`
-  width: 100%;
-  height: 5rem;
-  background: #000;
-  border-radius: 0.4rem;
   display: flex;
-  align-items: center;
+  height: 4.8rem;
+  padding: 1.4rem 3.8rem;
   justify-content: center;
-
-  font-weight: 500;
-  font-size: 1.6rem;
-  line-height: 2.2rem;
-  letter-spacing: -0.04rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-top: 2.5rem;
+  align-items: center;
+  flex: 1 0 0;
+  border-radius: 0.6rem;
+  border: 1px solid ${ColorLightEltern9Base};
+  background: ${ColorLightEltern3};
 `;

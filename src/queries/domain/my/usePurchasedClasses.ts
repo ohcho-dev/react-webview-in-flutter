@@ -9,10 +9,8 @@ const getPurchaseClasses = () => {
   });
 };
 
-const usePurchasedClasses = (selectedTab: string) => {
-  return useQuery(myQueryKeys.purchaseClasses, getPurchaseClasses, {
-    enabled: selectedTab === "클래스",
-  });
+const usePurchasedClasses = () => {
+  return useQuery(myQueryKeys.purchaseClasses, getPurchaseClasses);
 };
 
 export default usePurchasedClasses;

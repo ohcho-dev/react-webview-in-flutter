@@ -9,10 +9,8 @@ const getPurchaseCoaching = () => {
   });
 };
 
-const usePurchasedCoaching = (selectedTab: string) => {
-  return useQuery(myQueryKeys.purchaseCoaching, getPurchaseCoaching, {
-    enabled: selectedTab === "코칭",
-  });
+const usePurchasedCoaching = () => {
+  return useQuery(myQueryKeys.purchaseCoaching, getPurchaseCoaching);
 };
 
 export default usePurchasedCoaching;

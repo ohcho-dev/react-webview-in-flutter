@@ -1,8 +1,12 @@
-import { NoMainImage } from "components/domain/program/NoMainImage/NoImage.styled";
 import styled from "styled-components";
 
 export const PageLayout = styled.div`
   margin-top: 7rem;
+`;
+
+export const TitleSection = styled.div`
+  text-align: center;
+  padding: 0 2rem;
 `;
 
 export const TabWrapper = styled.div`
@@ -36,7 +40,7 @@ export const TabItem = styled.div`
 
 export const ListScroll = styled.div`
   padding: 0 2.5rem 1rem;
-  height: calc(100vh - 20rem);
+  height: calc(100vh - 16.3rem);
   overflow-x: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none; /* IE and Edge */
