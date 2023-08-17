@@ -23,7 +23,6 @@ const AlarmListPage = () => {
     updateNotificationTime();
   }, []);
 
-  console.log(data);
   return (
     <LayoutDetailPage style={{ overflowY: "hidden" }}>
       <PageTitle title={"알림"} />
