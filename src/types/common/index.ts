@@ -29,18 +29,20 @@ export interface AlarmType {
 export interface NotificationType {
   id: number;
   parent_id: number;
-  type: "NTCH_RESULT_PAPER" | "NTCH_VIDEO_REJECT" | "NTCH_DATE_END";
+  type: "NTCH_RESULT_PAPER" | "NTCH_VIDEO_REJECT" | "NTCH_DATE_END" | "NTCH_TASK_REMIND";
   title: string;
   body: string;
   created_at: string;
   updated_at: string;
-  detail: {
-    task_id: number;
-    coaching_id: number;
-    test_id: number;
-    paper_url: string;
-    paper_type: "TTPTY_EXTERNAL_URL" | "TTPTY_INTERNAL_PAGE";
-  };
+  detail: NotificationDetailType | null;
+}
+
+export interface NotificationDetailType {
+  task_id: number;
+  coaching_id: number;
+  test_id: number;
+  paper_url: string;
+  paper_type: "TTPTY_EXTERNAL_URL" | "TTPTY_INTERNAL_PAGE";
 }
 
 export interface OptionType {
