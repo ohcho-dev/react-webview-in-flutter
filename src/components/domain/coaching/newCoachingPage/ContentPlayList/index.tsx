@@ -42,7 +42,7 @@ const ContentPlayList = ({ data, settings }: ContentPlayListProps) => {
               {item.desc}
             </Text>
 
-            <S.CardBlur style={{ backdropFilter: "blur(6px)" }}>
+            <S.CardBlur style={{ backdropFilter: "blur(6px)", WebkitBackdropFilter: "blur(5px)" }}>
               <UseImgix srcUrl="/images/icon-sad-circle.svg" />
               <EmptyBox height="1.2rem" />
               <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
