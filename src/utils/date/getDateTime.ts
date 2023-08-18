@@ -16,3 +16,14 @@ export const getDate: getDateFuncType = date => {
   const d = new Date(date.replace(/-/g, "/"));
   return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(d.getDate())}`;
 };
+
+export const getDateTimeMeridiem: getDateTimeFuncType = date => {
+  const d = new Date(date);
+  const hours = Number(pad(d.getHours()));
+  const meridiem = hours < 12 ? "오전" : "오후";
+  const formattedHours = hours > 12 ? hours - 12 : hours;
+
+  return `${d.getFullYear()}.${pad(d.getMonth() + 1)}.${pad(
+    d.getDate(),
+  )}일 ${meridiem} ${formattedHours}시`;
+};
