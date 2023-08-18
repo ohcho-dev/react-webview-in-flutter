@@ -1,14 +1,11 @@
-import { ColorLightEltern3, ColorLightSlate4 } from "lds-common/src/constants/tokens/global";
+import {
+  ColorLightEltern3,
+  ColorLightEltern9Base,
+  ColorLightSlate4,
+  TextSm1420Regular,
+} from "lds-common/src/constants/tokens/global";
 import styled, { keyframes } from "styled-components";
-
-const floatingMove = keyframes`
-	 0%{
-        transform:translate(0,0);
-    }
-   100%{
-    transform:translate(0,-1rem);
-    }
-`;
+import { convertToRem } from "utils/style";
 
 export const SuccessWrapper = styled.div`
   margin-top: 5rem;
@@ -32,6 +29,7 @@ export const InformBox = styled.div`
   padding: 1.6rem 1.2rem;
   background-color: ${ColorLightEltern3};
   border-radius: 0.8rem;
+  height: 5.2rem;
 `;
 
 export const AccountInfoItemWrapper = styled.div`
@@ -47,4 +45,13 @@ export const ItemWrapper = styled.div<{ lastItem?: boolean }>`
 
   padding-bottom: 0.8rem;
   border-bottom: ${({ lastItem }) => (lastItem ? "none" : `1px solid ${ColorLightSlate4}`)};
+`;
+
+export const InformText = styled.div`
+  height: 1.2rem;
+  font-family: Pretendard;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  font-size: 1.4rem;
+  color: ${ColorLightEltern9Base};
 `;

@@ -1,4 +1,5 @@
 import { ColorLightBlack9Base } from "lds-common/src/constants/tokens/global";
+import { convertToRem } from "utils/style";
 
 type textObjType = {
   fontFamily: string;
@@ -29,20 +30,6 @@ const Text = ({
   style,
 }: TextProps) => {
   const convertedStyle = convertToRem(variant);
-  function convertToRem(obj: { [key: string]: number | string }) {
-    const remObject: { [key: string]: number | string } = {};
-    for (const key in obj) {
-      const value = obj[key];
-
-      if (typeof value === "number") {
-        remObject[key] = key !== "fontWeight" ? value / 10 + "rem" : value;
-      } else {
-        remObject[key] = value;
-      }
-    }
-    return remObject;
-  }
-
   if (isEllipsis) {
     return (
       <span

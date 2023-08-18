@@ -17,6 +17,7 @@ import EmptyBox from "components/common/EmptyBox";
 import Button from "lds-common/src/components/Button/Button";
 import FloatingImgForCoaching from "components/domain/program/FloatingImgForCoaching";
 import Icon from "lds-common/src/components/Icon";
+import { convertToRem } from "utils/style";
 
 const AccountPaymentSuccessPage = () => {
   return (
@@ -84,9 +85,7 @@ const AccountPaymentSuccessPage = () => {
         </S.AccountInfoItemWrapper>
         <S.InformBox>
           <Icon icon={"info-circle"} size={20} fill={ColorLightEltern8} />
-          <Text variant={TextSm1420Regular} color={ColorLightEltern9Base}>
-            3일 내에 입금이 되지 않으면 신청이 자동 취소 됩니다.
-          </Text>
+          <S.InformText>3일 내에 입금이 되지 않으면 신청이 자동 취소 됩니다.</S.InformText>
         </S.InformBox>
       </S.AccountInfoWrapper>
       <FloatingImgForCoaching />
