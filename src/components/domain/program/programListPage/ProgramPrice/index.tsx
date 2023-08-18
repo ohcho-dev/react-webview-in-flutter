@@ -1,3 +1,12 @@
+import Text from "components/common/Text";
+import {
+  ColorLightBlack8,
+  ColorLightRed9Base,
+  ColorLightSlate9Base,
+  TextBase1624Medium,
+  TextBase1624Regular,
+} from "lds-common/src/constants/tokens/global";
+import { getKoreanCurrencyNumberFormat } from "utils/numberFormat";
 import * as S from "./ProgramPrice.styled";
 
 interface ProgramPriceProps {
@@ -22,7 +31,6 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
     perNum,
     id,
   } = props;
-  const numberFormatter = new Intl.NumberFormat("ko");
 
   return (
     <>
@@ -31,17 +39,20 @@ const ProgramPrice: React.FC<ProgramPriceProps> = props => {
       ) : (
         <S.ProgramPriceSection>
           {discountPercentage > 0 && (
-            <S.DiscountPercentage style={{ ...percentageStyle }}>
-              {discountPercentage}%
-            </S.DiscountPercentage>
+            <Text color={ColorLightRed9Base} variant={TextBase1624Medium}>
+              {`${discountPercentage}%`}
+            </Text>
           )}
-          <S.Price style={{ ...priceStyle }}>
-            {numberFormatter.format(price)}원{perNum && <S.PerActivity>({perNum}회)</S.PerActivity>}
-          </S.Price>
+          <Text variant={TextBase1624Medium} color={ColorLightBlack8}>
+            {`${getKoreanCurrencyNumberFormat(price)}원`}
+          </Text>
+          {perNum && <S.PerActivity>({perNum}회)</S.PerActivity>}
           {originalPrice > 0 && (
-            <S.OriginalPrice style={{ ...originalPriceStyle }}>
-              {numberFormatter.format(originalPrice)}원
-            </S.OriginalPrice>
+            <Text
+              variant={TextBase1624Regular}
+              color={ColorLightSlate9Base}
+              style={{ textDecoration: "line-through" }}
+            >{`${getKoreanCurrencyNumberFormat(originalPrice)}원`}</Text>
           )}
         </S.ProgramPriceSection>
       )}

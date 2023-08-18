@@ -1,26 +1,31 @@
+import Text from "components/common/Text";
 import NoImage from "components/domain/program/NoMainImage";
 import useApplyCoaching from "queries/domain/program/useApplyCoaching";
 import useCheckValidCoachingToApply from "queries/domain/program/useCheckValidCoachingToApply";
 import useSelectedCoachingInfo from "queries/domain/program/useSelectedCoachingInfo";
+import Button from "components/common/Button";
+import CustomBottomModal from "components/common/CustomBottomModal";
+import CustomModal from "components/common/CustomModal";
+import UseImgix from "components/common/Imgix";
+import ProgramPrice from "components/domain/program/programListPage/ProgramPrice";
+import LayoutDetailPage from "layouts/LayoutDetailPage";
+
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
-import Button from "../../../components/common/Button";
-import CustomBottomModal from "../../../components/common/CustomBottomModal";
-import CustomModal from "../../../components/common/CustomModal";
-import UseImgix from "../../../components/common/Imgix";
-import ProgramPrice from "../../../components/domain/program/programListPage/ProgramPrice";
-import LayoutDetailPage from "../../../layouts/LayoutDetailPage";
-import { openBottomModalState, selectedChildInfoState } from "../../../store/common";
-import { coachingType } from "../../../types/domain/coaching";
-import { getDate } from "../../../utils/date/getDateTime";
-import { getDiscountPercentage } from "../../../utils/program/getDiscountPercentage";
+import { ColorLightBlack7, TextSm1420Regular } from "lds-common/src/constants/tokens/global";
+import { openBottomModalState, selectedChildInfoState } from "store/common";
+import { coachingType } from "types/domain/coaching";
+import { getDate } from "utils/date/getDateTime";
+import { getDiscountPercentage } from "utils/program/getDiscountPercentage";
 import * as S from "./coachingDetailPage.styled";
+import { useNavigate } from "react-router-dom";
 
 interface DetailCoachingProps {
   id: string;
 }
 
 const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
+  const navigate = useNavigate();
   const [leftDays, setLeftDays] = useState<number>(0);
   const [openBottomModal, setOpenBottomModal] = useRecoilState(openBottomModalState);
   const [openSameCoachingModal, setOpenSameCoachingModal] = useState(false);
@@ -50,22 +55,32 @@ const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
     }
   }, [selectedCoachingInfo]);
 
-  const handleApplyBtnClick = () => {
-    if (validCoaching?.message === "OK") {
-      // 추후 결제 연동
-      // const { id } = coachingInfo;
-      // navigate(`/program/coaching/${id}/payment`);
-      applyCoaching(coachingInfo.id.toString());
-    } else {
-      if (validCoaching?.code === "ONGOING_COACHING") {
-        // 1.구매불가(해당 월령 구매한 동일상품)
-        setOpenSameCoachingModal(true);
-      } else if (validCoaching?.code === "ALMOST_MONTH_LIMIT") {
-        // 2.경고(월령 변경까지 얼마 남지 않음)
-        setOpenUsageDuration(true);
-        setLeftDays(validCoaching?.detail?.left_days || 0);
-      }
-    }
+  const navigateToPaymentPage = (id: number) => {
+    return new Promise<void>(resolve => {
+      setOpenBottomModal(prev => !prev);
+      setTimeout(() => {
+        resolve();
+      }, 100);
+    }).then(() => navigate(`/program/payment/${id}`));
+  };
+
+  const handleApplyBtnClick = async () => {
+    const { id } = coachingInfo;
+    navigateToPaymentPage(id);
+
+    // if (validCoaching?.message === "OK") {
+    //   // 추후 결제 연동
+    //   applyCoaching(coachingInfo.id.toString());
+    // } else {
+    //   if (validCoaching?.code === "ONGOING_COACHING") {
+    //     // 1.구매불가(해당 월령 구매한 동일상품)
+    //     setOpenSameCoachingModal(true);
+    //   } else if (validCoaching?.code === "ALMOST_MONTH_LIMIT") {
+    //     // 2.경고(월령 변경까지 얼마 남지 않음)
+    //     setOpenUsageDuration(true);
+    //     setLeftDays(validCoaching?.detail?.left_days || 0);
+    //   }
+    // }
   };
 
   const handleUsageDurationModalBtnClick = () => {
@@ -118,28 +133,6 @@ const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
           </S.ProductDetailInfoSection>
           <S.GreySquare />
           <img src={coachingInfo.content_image} alt="content" style={{ width: "100%" }} />
-          {/* <S.ImageWrap>
-            <UseImgix
-              srcUrl="/images/coaching/coaching_new_main_0220_01.png"
-              alt="Coaching Detail Page 1"
-            />
-            <UseImgix
-              srcUrl="/images/coaching/coaching_new_main_0220_02.png"
-              alt="Coaching Detail Page 2"
-            />
-            <UseImgix
-              srcUrl="/images/coaching/coaching_new_main_0220_03.png"
-              alt="Coaching Detail Page 3"
-            />
-            <UseImgix
-              srcUrl="/images/coaching/coaching_new_main_0220_04.png"
-              alt="Coaching Detail Page 4"
-            />
-            <UseImgix
-              srcUrl="/images/coaching/coaching_new_main_0220_05.png"
-              alt="Coaching Detail Page 5"
-            />
-          </S.ImageWrap> */}
         </div>
       </LayoutDetailPage>
       <CustomBottomModal
@@ -166,31 +159,34 @@ const CoachingDetailPage = ({ id }: DetailCoachingProps): JSX.Element => {
       <CustomModal
         cancelBtn={false}
         title="진행 중인 코칭이 있어요!"
-        content="동일한 코칭은 동시에 진행할 수 없어요. 진행 중인 코칭 완료 후 다음 월령에 다시 신청해주세요."
         isOpen={openSameCoachingModal}
         toggleModal={() => {
           setOpenBottomModal(!openBottomModal);
           setOpenSameCoachingModal(!openSameCoachingModal);
         }}
-      />
+      >
+        <Text color={ColorLightBlack7} variant={TextSm1420Regular}>
+          동일한 코칭은 동시에 진행할 수 없어요. 진행 중인 코칭 완료 후 다음 월령에 다시
+          신청해주세요.
+        </Text>
+      </CustomModal>
       <CustomModal
         cancelBtn={false}
         topImage={<UseImgix alt="warning icon" srcUrl="/images/icon-alert.svg" />}
         title="이용기간을 확인해주세요!"
-        contentMarkup={
-          <div style={{ lineHeight: "2.2rem" }}>
-            {`${leftDays}일 내에 아이 검사 월령 구간이 변경됩니다. 지금 신청하시는 경우, 코칭 종료 전 월령이
-            변경되더라도 신청 지점 월령을 기준으로 결과지가 작성됩니다. 위의 내용에 동의하신다면
-            신청을 선택해주세요.`}
-          </div>
-        }
         isOpen={openCheckUsageDuration}
         toggleModal={() => setOpenUsageDuration(!openCheckUsageDuration)}
         okBtnClick={() => applyCoaching(coachingInfo.id.toString())}
         cancelBtnClick={handleUsageDurationModalBtnClick}
         cancelBtnName="취소"
         okBtnName="신청하기"
-      />
+      >
+        <div style={{ lineHeight: "2.2rem" }}>
+          {`${leftDays}일 내에 아이 검사 월령 구간이 변경됩니다. 지금 신청하시는 경우, 코칭 종료 전 월령이
+            변경되더라도 신청 지점 월령을 기준으로 결과지가 작성됩니다. 위의 내용에 동의하신다면
+            신청을 선택해주세요.`}
+        </div>
+      </CustomModal>
     </>
   );
 };

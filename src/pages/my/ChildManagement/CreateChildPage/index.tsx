@@ -20,7 +20,7 @@ import { CreateChildObjType } from "types/domain/my";
 import { DEFAULT_CREATE_CHILD_VALUE } from "utils/default";
 import NameInput from "components/domain/my/NameInput";
 import Text from "components/common/Text";
-import { TextSm1420Medium, ColorLightSlate11 } from "lds-common/src/constants/tokens/global";
+import { ColorLightSlate11, TextSm1420Medium } from "lds-common/src/constants/tokens/global";
 
 const GenderOption: OptionType[] = [
   { name: "여아", value: "F" },

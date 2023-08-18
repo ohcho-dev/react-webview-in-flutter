@@ -15,7 +15,6 @@ import UseImgix from "../../../components/common/Imgix";
 import * as S from "./myPage.styled";
 import useWithdrawAccount from "../../../queries/common/auth/useWithdrawAccount";
 import useLogout from "../../../queries/common/auth/useLogout";
-import Icon from "lds-common/src/components/Icon";
 import Text from "components/common/Text";
 import {
   ColorLightBlack5,
@@ -28,11 +27,12 @@ import {
   TextXs1218UnderlineMedium,
 } from "lds-common/src/constants/tokens/global";
 import { iconName } from "lds-common/src/components/Icon/Icon.type";
+import Icon from "lds-common/src/components/Icon";
 
 const linkItem: { id: number; icon: iconName; name: string; url: string; link?: string }[] = [
   {
     id: 1,
-    icon: "bell-black",
+    icon: "bell",
     name: "알림 설정",
     url: "/my/management-alarm",
   },
@@ -44,19 +44,19 @@ const linkItem: { id: number; icon: iconName; name: string; url: string; link?: 
   },
   {
     id: 4,
-    icon: "vocablary",
+    icon: "vocabulary",
     name: "이용 약관",
     url: "/my/terms",
   },
   {
     id: 5,
-    icon: "vocablary",
+    icon: "vocabulary",
     name: "개인정보 처리방침",
     url: "/my/privacy",
   },
   {
     id: 6,
-    icon: "vocablary",
+    icon: "vocabulary",
     name: "민감정보 처리방침",
     url: "/my/sensitive",
   },
@@ -140,8 +140,8 @@ const MyPage = () => {
             }
           >
             <S.IconTextGroup>
-              <Icon icon={item.icon} size={20} />
-              <Text variant={TextBase1624Medium} color={ColorLightBlack8} isEllipsis>
+              <Icon icon={item.icon} size={20} fill={ColorLightBlack8} />
+              <Text variant={TextBase1624Medium} color={ColorLightBlack8}>
                 {item.name}
               </Text>
             </S.IconTextGroup>

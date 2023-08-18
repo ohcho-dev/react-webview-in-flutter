@@ -61,6 +61,11 @@ const ApplyClassPage = React.lazy(() => import("./pages/program/ApplyClassPage")
 const ApplySuccessPage = React.lazy(() => import("./pages/program/ApplySuccessPage"));
 const ApplyCoachingSuccess = React.lazy(() => import("./pages/program/ApplyCoachingSuccessPage"));
 const ProgramDetailPage = React.lazy(() => import("./pages/program/ProgramDetailPage"));
+const PaymentPage = React.lazy(() => import("./pages/program/PaymentPage"));
+const PaymentSuccessPage = React.lazy(() => import("./pages/program/PaymentSuccessPage"));
+const AccountPaymentSuccessPage = React.lazy(() =>
+  import("./pages/program/AccountPaymentSuccessPage"),
+);
 
 /**
  * My 메뉴
@@ -428,6 +433,30 @@ export const RouterConfig = [
   {
     path: "/coaching/qna/question-detail/:id",
     element: <QuestionDetailPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/program/payment/:id",
+    element: <PaymentPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/program/payment/success",
+    element: <PaymentSuccessPage />,
+    sceneConfig: {
+      enter: "from-right",
+      exit: "to-right",
+    },
+  },
+  {
+    path: "/program/payment/account/success",
+    element: <AccountPaymentSuccessPage />,
     sceneConfig: {
       enter: "from-right",
       exit: "to-right",
