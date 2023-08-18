@@ -74,3 +74,32 @@ export interface CategoryListType {
   activity_image: string;
   importance: string;
 }
+
+export interface PlayTipType {
+  id: number;
+  title: string;
+  content: string;
+}
+
+export interface PlayContentsListType {
+  start_at: string;
+  end_at: string;
+  next_opened_at: string;
+  weekly_list: PlayContentsListWeeklyItemType[];
+}
+
+export interface PlayContentsListWeeklyItemType {
+  week_index: number;
+  is_opened: boolean;
+  open_at: string;
+  content_list: PlayContentsListWeeklyContentItemType[];
+}
+
+export interface PlayContentsListWeeklyContentItemType {
+  id: number;
+  growth_category_id: number;
+  growth_category_name: string;
+  title: string;
+  theme: string;
+  image: null;
+}

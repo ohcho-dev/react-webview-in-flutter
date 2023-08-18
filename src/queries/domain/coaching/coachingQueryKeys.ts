@@ -8,4 +8,7 @@ export const coachingQueryKeys = {
   surveyAnswerList: "survey-answer-list",
   videoAssignmentResult: "video-assignment-result",
   daycareResultPaper: "daycare-result-paper",
+  playTip: "play-tip",
+  playContentsList: "play-contents-list",
+  playContentsInfo: "play-contents-info",
 };
