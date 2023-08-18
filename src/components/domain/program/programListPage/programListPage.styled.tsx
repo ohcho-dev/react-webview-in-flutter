@@ -100,8 +100,7 @@ export const Divider = styled.div`
 
 export const CoachingWrapper = styled.div`
   width: 100%;
-
-  padding: 2rem 2rem 0 2rem;
+  padding: 2rem;
 `;
 
 export const NoProgramSection = styled.div`

@@ -1,0 +1,122 @@
+.custom-style {
+  .remirror-contents {
+    font-size: 1.6em !important;
+    margin: 0 2rem;
+    b,
+    strong,
+    p,
+    br,
+    span {
+      line-height: 1.4em;
+    }
+
+    code {
+      background-color: var(--ifm-code-background);
+      border: 0.1rem solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--ifm-code-border-radius);
+      font-family: var(--ifm-font-family-monospace);
+      font-size: var(--ifm-code-font-size);
+      padding: var(--ifm-code-padding-vertical) var(--ifm-code-padding-horizontal);
+      vertical-align: middle;
+    }
+
+    blockquote {
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 40px;
+      margin-inline-end: 40px;
+      border-left: 3px solid #cccccc;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 10px;
+      font-style: italic;
+    }
+
+    blockquote p {
+      color: #888;
+    }
+
+    div[data-callout-type="info"],
+    div[data-callout-type="warning"],
+    div[data-callout-type="error"],
+    div[data-callout-type="success"] {
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    div[data-callout-type="info"] p,
+    div[data-callout-type="warning"] p,
+    div[data-callout-type="error"] p,
+    div[data-callout-type="success"] p {
+      margin: 0.1rem;
+    }
+    div[data-callout-type="info"] {
+      background: #eef6fc;
+      border-left: 2px solid #3298dc;
+    }
+    div[data-callout-type="warning"] {
+      background: #fffbeb;
+      border-left: 2px solid #ffdd57;
+    }
+    div[data-callout-type="error"] {
+      background: #feecf0;
+      border-left: 2px solid #f14668;
+    }
+    div[data-callout-type="success"] {
+      background: #effaf3;
+      border-left: 2px solid #48c774;
+    }
+    img {
+      max-width: 100%;
+    }
+    ol {
+      padding-left: 2rem;
+    }
+    ul {
+      padding-left: 2rem;
+    }
+
+    blockquote {
+      font-size: 2rem;
+    }
+
+    h1 {
+      font-size: 4rem;
+      line-height: 5rem;
+    }
+    h2 {
+      font-size: 3.2rem;
+      line-height: 4rem;
+    }
+    h3 {
+      font-size: 2.6rem;
+      line-height: 3.2rem;
+    }
+    h4 {
+      font-size: 2.4rem;
+      line-height: 3rem;
+    }
+    h5 {
+      font-size: 2rem;
+      line-height: 2.6rem;
+    }
+    h6 {
+      font-size: 1.8rem;
+      line-height: 2.4rem;
+    }
+
+    strong,
+    span,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    br {
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+}

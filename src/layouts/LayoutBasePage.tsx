@@ -27,9 +27,14 @@ const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
   const windowSize = useWindowSize();
   const bodyRef = useRef() as React.MutableRefObject<HTMLDivElement>;
   const [gestureBack, setGestureBack] = useState(true);
+  const [resetStyle, setResetStyle] = useState(true);
   const [touchStartTime, setTouchStartTime] = useState(0);
   useEffect(() => {
     const path = pathname.split("/");
+
+    if (path.length === 5 && pathname.substring(0, 18) === "/coaching/content/") {
+      setResetStyle(false);
+    }
     if (pathname.indexOf("/my/management-child/") !== -1) {
       setGestureBack(false);
       return;
@@ -68,7 +73,7 @@ const LayoutBasePage: React.FC<LayoutBasePageProps> = ({ children }) => {
   };
 
   return (
-    <BasePage id="body" ref={bodyRef}>
+    <BasePage id="body" ref={bodyRef} className={resetStyle ? "reset-style" : "custom-style"}>
       <LeftSwipe
         id="left-swipe"
         onTouchStart={handleTouchStart}

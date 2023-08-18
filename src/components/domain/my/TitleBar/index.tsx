@@ -13,6 +13,7 @@ import * as S from "./TitleBar.styled";
 import useAuthMe from "queries/common/auth/useAuthMe";
 
 import {
+  ColorLight1,
   ColorLight2,
   ColorLightBlack7,
   ColorLightBlack9Base,
@@ -142,7 +143,7 @@ export const MypageTitleBar: React.FC = () => {
 
   return (
     <S.MypageTitleWrap>
-      <EmptyBox height="4.4rem" />
+      <EmptyBox height="4.4rem" backgroundColor={ColorLight1} />
       <S.TitleSection>
         <Text variant={ContentsXxl2232Semibold} color={ColorLightBlack9Base}>
           보호자님 안녕하세요.
@@ -155,7 +156,7 @@ export const MypageTitleBar: React.FC = () => {
           </Text>
         </S.LoginInfo>
       </S.TitleSection>
-      <EmptyBox height="2rem" />
+      <EmptyBox height="2rem" backgroundColor={ColorLight1} />
       <S.ButtonSection>
         <S.GrayButton
           style={{ flexDirection: "row" }}
@@ -166,7 +167,7 @@ export const MypageTitleBar: React.FC = () => {
             아이 관리
           </Text>
         </S.GrayButton>
-        <EmptyBox height="1.2rem" />
+        <EmptyBox height="1.2rem" backgroundColor={ColorLight1} />
         <S.ButtonGroup>
           <S.GrayButton onClick={() => navigate("/my/applied-program-list")}>
             <Icon icon="file-text" size={20} />
@@ -188,7 +189,7 @@ export const MypageTitleBar: React.FC = () => {
           </S.GrayButton>
         </S.ButtonGroup>
       </S.ButtonSection>
-      <EmptyBox height="2rem" />
+      <EmptyBox height="2rem" backgroundColor={ColorLight1} />
       <EmptyBox height="1rem" backgroundColor={ColorLightSlate2} />
     </S.MypageTitleWrap>
   );

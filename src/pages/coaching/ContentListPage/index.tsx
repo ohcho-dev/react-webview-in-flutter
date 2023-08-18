@@ -1,4 +1,5 @@
-import { ContentHeader } from "components/domain/coaching/newCoachingPage/ContentHeader";
+import { useParams } from "react-router-dom";
+
 import LayoutDetailPage from "layouts/LayoutDetailPage";
 import * as S from "./ContentListPage.styled";
 import EmptyBox from "components/common/EmptyBox";
@@ -18,14 +19,16 @@ import usePlayTip from "queries/domain/coaching/usePlayTip";
 import { PlayTipType } from "types/apis/coaching";
 import usePlayContentsList from "queries/domain/coaching/usePlayContentsList";
 import { getDateTimeMeridiem } from "utils/date/getDateTime";
+import { ContentListHeader } from "components/domain/coaching/newCoachingPage/ContentHeader";
 
 const ContentListPage = () => {
+  const { coachingId } = useParams();
   const { data: playTipData } = usePlayTip();
-  const { data: playContentsData } = usePlayContentsList("286");
+  const { data: playContentsData } = usePlayContentsList(coachingId);
 
   return (
     <LayoutDetailPage>
-      {playContentsData && <ContentHeader type="LIST" data={playContentsData} />}
+      {playContentsData && <ContentListHeader data={playContentsData} />}
       <S.PeriodInfoWrap>
         <S.PeriodInfoCard>
           <S.PeriodInfoItem>

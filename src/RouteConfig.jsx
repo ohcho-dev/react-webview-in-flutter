@@ -391,7 +391,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/content-list",
+    path: "/coaching/content/:coachingId",
     element: <ContentListPage />,
     sceneConfig: {
       enter: "from-right",
@@ -399,7 +399,7 @@ export const RouterConfig = [
     },
   },
   {
-    path: "/coaching/content/:contentId",
+    path: "/coaching/content/:coachingId/:contentId",
     element: <ContentDetailPage />,
     sceneConfig: {
       enter: "from-right",

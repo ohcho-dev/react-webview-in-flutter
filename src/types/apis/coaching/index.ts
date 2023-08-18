@@ -101,5 +101,22 @@ export interface PlayContentsListWeeklyContentItemType {
   growth_category_name: string;
   title: string;
   theme: string;
-  image: null;
+  image: string | null;
+}
+
+export interface PlayContentsInfoType {
+  id: number;
+  content: string;
+  growth_category_id: number;
+  growth_category_name: string;
+  image: string | null;
+  sub_content_easy: string;
+  sub_content_hard: string;
+  theme: string;
+  title: string;
+  month_level: {
+    id: number;
+    month_end: number;
+    month_start: number;
+  };
 }

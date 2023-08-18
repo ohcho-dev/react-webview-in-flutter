@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ContentCarousel from "components/common/ContentCarousel";
 import * as S from "./ContentPlayList.styled";
 import Text from "components/common/Text";
@@ -22,6 +22,7 @@ interface ContentPlayListProps {
 }
 
 const ContentPlayList = ({ settings, data, selectedWeek }: ContentPlayListProps) => {
+  const { coachingId } = useParams();
   const navigate = useNavigate();
 
   return (
@@ -30,7 +31,8 @@ const ContentPlayList = ({ settings, data, selectedWeek }: ContentPlayListProps)
         <S.ContentWrapper
           key={contentList.id + contentList.title}
           onClick={() => {
-            if (data[selectedWeek].is_opened) navigate(`/coaching/content/${contentList.id}`);
+            if (data[selectedWeek].is_opened)
+              navigate(`/coaching/content/${coachingId}/${contentList.id}`);
           }}
         >
           <S.CardWrapper>

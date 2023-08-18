@@ -7,6 +7,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import "./styles/_reset.scss";
 import "./styles/_global.scss";
+import "./styles/_remirror.scss";
 import "./styles/_slideTransition.scss";
 import "./styles/_customReactDatepicker.scss";
 

@@ -38,7 +38,7 @@ const NewCoachingPage = () => {
             </S.Section>
             {toggle ? (
               <>
-                <S.Section onClick={() => navigate("/coaching/content-list")}>
+                <S.Section onClick={() => navigate(`/coaching/content/${286}`)}>
                   <S.SectionTitle>
                     <UseImgix srcUrl={"/images/playy.svg"} />
                     <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
