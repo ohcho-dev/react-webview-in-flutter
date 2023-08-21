@@ -12,28 +12,42 @@ import {
 } from "lds-common/src/constants/tokens/global";
 import { useParams } from "react-router-dom";
 import * as S from "./ContentDetailPage.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Text from "components/common/Text";
 import ActivityLevelSwitch from "components/domain/coaching/newCoachingPage/ActivityLevelSwitch";
 import usePlayContentsInfo from "queries/domain/coaching/usePlayContentsInfo";
 import { ContentInfoHeader } from "components/domain/coaching/newCoachingPage/ContentHeader";
 
-import { useCallback } from "react";
-import type { RemirrorJSON } from "remirror";
-import { OnChangeJSON } from "@remirror/react";
-import { WysiwygEditor } from "@remirror/react-editors/wysiwyg";
-
-const STORAGE_KEY = "remirror-editor-content";
-
 const ContentDetailPage = () => {
   const { coachingId, contentId } = useParams();
   const [toggle, setToggle] = useState<boolean>(true);
+  const [updateHtmlCode, setUpdateHtmlCode] = useState<string>("");
   const { data: playContentsInfo } = usePlayContentsInfo(coachingId, contentId);
 
-  const handleEditorChange = useCallback((json: RemirrorJSON) => {
-    // Store the JSON in localstorage
-    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(json));
-  }, []);
+  // span의 인라인 스타일 font-size 값을 rem으로 변경
+  useEffect(() => {
+    // 가져올 HTML 코드를 선택합니다.
+    if (playContentsInfo?.content) {
+      const htmlCode = playContentsInfo?.content;
+
+      // HTML 문자열을 파싱하여 DocumentFragment를 만듭니다.
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(htmlCode, "text/html");
+      const fragment = doc.body;
+      // <span> 태그를 찾아서 폰트 크기를 변경합니다.
+      const spanElements = fragment.querySelectorAll("span");
+      spanElements.forEach(span => {
+        const fontSizeAttr = span.getAttribute("style")?.match(/font-size:\s*([\d\.]+)px/);
+        if (fontSizeAttr && fontSizeAttr[1]) {
+          const fontSizePx = parseFloat(fontSizeAttr[1]);
+          const fontSizeRem = `${fontSizePx / 10}rem`;
+          span.style.fontSize = fontSizeRem;
+        }
+      });
+      setUpdateHtmlCode(fragment.innerHTML);
+    }
+  }, [playContentsInfo]);
+
   return (
     <LayoutDetailPage>
       <EmptyBox height="0.8rem" backgroundColor={ColorLight1} />
@@ -46,10 +60,12 @@ const ContentDetailPage = () => {
             )}
           </div>
           <EmptyBox height="4" backgroundColor={ColorLight1} />
-          <div
-            className="remirror-contents"
-            dangerouslySetInnerHTML={{ __html: playContentsInfo.content }}
-          />
+          {updateHtmlCode && (
+            <div
+              className="remirror-contents"
+              dangerouslySetInnerHTML={{ __html: updateHtmlCode }}
+            />
+          )}
         </>
       )}
       <EmptyBox height="2.4rem" backgroundColor={ColorLight1} />
