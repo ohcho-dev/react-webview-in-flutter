@@ -155,7 +155,6 @@ const PaymentPage = () => {
             placeholderColor={ColorLightSlate7}
             warning={phoneNumberStartTyping && !numberValid}
             warningText={phoneNumberWarningText}
-            hintText={value}
           />
         </S.InputSection>
       </S.Section>
