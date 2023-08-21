@@ -30,6 +30,8 @@ export const ActivityList = styled.div`
   }
 `;
 export const ActivityItemIndex = styled.div`
+  min-width: 2rem;
+  min-height: 2rem;
   width: 2rem;
   height: 2rem;
   display: flex;

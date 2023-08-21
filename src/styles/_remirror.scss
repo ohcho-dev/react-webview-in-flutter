@@ -10,6 +10,10 @@
       line-height: 1.4em;
     }
 
+    p {
+      min-height: 1.6rem;
+    }
+
     code {
       background-color: var(--ifm-code-background);
       border: 0.1rem solid rgba(0, 0, 0, 0.1);
