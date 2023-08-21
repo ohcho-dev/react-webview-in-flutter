@@ -165,7 +165,7 @@ const PaymentPage = () => {
               }
               color={paymentMethod === "virtualAccount" ? ColorLightEltern9Base : ColorLightBlack7}
             >
-              무통장입금(가상계좌)
+              무통장입금
             </Text>
           </S.PaymentBtn>
         </S.PaymentMethodSection>
