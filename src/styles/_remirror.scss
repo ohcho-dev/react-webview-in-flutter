@@ -1,13 +1,15 @@
 .custom-style {
   .remirror-contents {
-    font-size: 1.6em !important;
+    font-size: 1.6rem !important;
     margin: 0 2rem;
+
     b,
     strong,
     p,
     br,
     span {
-      line-height: 1.4em;
+      line-height: 1.6em;
+      word-break: keep-all;
     }
 
     p {
@@ -22,23 +24,6 @@
       font-size: var(--ifm-code-font-size);
       padding: var(--ifm-code-padding-vertical) var(--ifm-code-padding-horizontal);
       vertical-align: middle;
-    }
-
-    blockquote {
-      display: block;
-      margin-block-start: 1em;
-      margin-block-end: 1em;
-      margin-inline-start: 40px;
-      margin-inline-end: 40px;
-      border-left: 3px solid #cccccc;
-      margin-left: 0;
-      margin-right: 0;
-      padding-left: 10px;
-      font-style: italic;
-    }
-
-    blockquote p {
-      color: #888;
     }
 
     div[data-callout-type="info"],
@@ -74,6 +59,7 @@
     img {
       max-width: 100%;
     }
+
     ol {
       padding-left: 2rem;
     }
@@ -82,45 +68,56 @@
     }
 
     blockquote {
-      font-size: 2rem;
+      display: block;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 40px;
+      margin-inline-end: 40px;
+      border-left: 3px solid #cccccc;
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 10px;
+      font-style: italic;
+      font-size: 1.6rem;
     }
-
-    h1 {
-      font-size: 4rem;
-      line-height: 5rem;
-    }
-    h2 {
-      font-size: 3.2rem;
-      line-height: 4rem;
-    }
-    h3 {
-      font-size: 2.6rem;
-      line-height: 3.2rem;
-    }
-    h4 {
-      font-size: 2.4rem;
-      line-height: 3rem;
-    }
-    h5 {
-      font-size: 2rem;
-      line-height: 2.6rem;
-    }
-    h6 {
-      font-size: 1.8rem;
-      line-height: 2.4rem;
+    blockquote p {
+      color: #888;
     }
 
     strong,
-    span,
     h1,
     h2,
     h3,
     h4,
     h5,
-    h6,
-    br {
+    h6 {
       font-weight: 700;
-      line-height: normal;
+      word-break: keep-all;
+    }
+
+    h1 {
+      font-size: 4rem;
+      line-height: 6rem;
+    }
+    h2 {
+      font-size: 3.2rem;
+      line-height: 4.8rem;
+    }
+    h3 {
+      font-size: 2.6rem;
+      line-height: 4rem;
+    }
+    h4 {
+      font-size: 2.4rem;
+      line-height: 3.6rem;
+    }
+    h5 {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+    h6 {
+      font-size: 1.8rem;
+      line-height: 2.8rem;
     }
   }
 }
