@@ -5,17 +5,18 @@ import { useNavigate, useParams } from "react-router-dom";
 import Text from "components/common/Text";
 import {
   ColorDark1,
-  ColorDarkRed9Base,
   ColorLightBlack6,
   ColorLightBlack7,
   ColorLightBlack8,
   ColorLightBlack9Base,
   ColorLightEltern9Base,
   ColorLightSlate2,
+  ColorLightSlate7,
   ColorLightSlate8,
   TextBase1624Medium,
   TextBase1624Regular,
   TextBase1624Semibold,
+  TextLg1826Medium,
   TextLg1826Semibold,
   TextSm1420Regular,
   TextXl2030Bold,
@@ -32,6 +33,9 @@ import DiscountItem from "./components/DiscountItem";
 import Icon from "lds-common/src/components/Icon";
 import CustomModal from "components/common/CustomModal";
 import CouponItem from "./components/CouponItem";
+import Input from "lds-common/src/components/Input";
+import useCheckValidText from "hooks/useCheckValidText";
+import useCheckValidPhoneNumber from "hooks/useCheckValidPhoneNumber";
 
 const coupon_list: { name: string; desc: string; id: number }[] = [
   {
@@ -55,6 +59,18 @@ const PaymentPage = () => {
   const [openDiscountSection, setOpenDiscountSection] = useState(true);
   const { data: coachingInfo } = useSelectedCoachingInfo(id);
   const { name, gender, birth_date } = useRecoilValue(selectedChildInfoState);
+  const { valid, textValue, handleChange, warningText, startTyping } = useCheckValidText({
+    initialValue: "",
+  });
+  const {
+    valid: numberValid,
+    value,
+    handleChange: handleNumberValueChange,
+    warningText: phoneNumberWarningText,
+    startTyping: phoneNumberStartTyping,
+  } = useCheckValidPhoneNumber({
+    initialValue: "",
+  });
 
   return (
     <LayoutDetailPage
@@ -112,9 +128,35 @@ const PaymentPage = () => {
         <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
           보호자 정보
         </Text>
-        <Text variant={TextBase1624Semibold} color={ColorDarkRed9Base}>
-          *
-        </Text>
+        <S.InputSection>
+          <Input
+            inputType={"text"}
+            value={textValue}
+            handleChange={val => handleChange(val)}
+            required={true}
+            label={"이름"}
+            placeholder="이름을 입력해주세요."
+            textFontStyle={TextLg1826Medium}
+            placeholderFontStyle={TextLg1826Medium}
+            placeholderColor={ColorLightSlate7}
+            warning={startTyping && !valid}
+            warningText={warningText}
+            maxLength={10}
+          />
+          <Input
+            pattern="[0-9]*"
+            inputType={"number"}
+            value={value}
+            handleChange={val => handleNumberValueChange(val)}
+            required={true}
+            label={"휴대전화 번호"}
+            placeholder="휴대전화 번호를 입력해주세요."
+            placeholderFontStyle={TextLg1826Medium}
+            placeholderColor={ColorLightSlate7}
+            warning={phoneNumberStartTyping && !numberValid}
+            warningText={phoneNumberWarningText}
+          />
+        </S.InputSection>
       </S.Section>
       <EmptyBox backgroundColor={ColorLightSlate2} />
       <S.Section>

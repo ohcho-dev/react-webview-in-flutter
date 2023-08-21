@@ -130,3 +130,11 @@ export const CouponModalWrapper = styled.div`
   flex-direction: column;
   row-gap: 1.2rem;
 `;
+
+export const InputSection = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  row-gap: 1.8rem;
+  margin: 1.5rem 0 0;
+`;

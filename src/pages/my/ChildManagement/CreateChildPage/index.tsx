@@ -14,7 +14,7 @@ import { ForwardedInput } from "../../../../components/common/DatePickerInput";
 import PageTitle from "../../../../components/domain/my/PageTitle";
 import useCreateChild from "../../../../queries/domain/my/child/useCreateChild";
 import * as S from "../childManagement.styled";
-import useValidChildInfo from "hooks/my/useValidChildInfo";
+import useValidChildInfo from "hooks/domain/my/useValidChildInfo";
 import { OptionType } from "types/common";
 import { CreateChildObjType } from "types/domain/my";
 import { DEFAULT_CREATE_CHILD_VALUE } from "utils/default";
