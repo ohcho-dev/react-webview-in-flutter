@@ -112,7 +112,7 @@ const PaymentPage = () => {
         </S.ProgramInfoSection>
       </S.Section>
       <EmptyBox backgroundColor={ColorLightSlate2} />
-      <S.Section>
+      <S.Section style={{ padding: "1.2rem 2rem 3.2rem" }}>
         <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
           아이 정보
         </Text>
@@ -155,6 +155,7 @@ const PaymentPage = () => {
             placeholderColor={ColorLightSlate7}
             warning={phoneNumberStartTyping && !numberValid}
             warningText={phoneNumberWarningText}
+            hintText={value}
           />
         </S.InputSection>
       </S.Section>
