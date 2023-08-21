@@ -141,7 +141,7 @@ const MyPage = () => {
           >
             <S.IconTextGroup>
               <Icon icon={item.icon} size={20} fill={ColorLightBlack8} />
-              <Text variant={TextBase1624Medium} color={ColorLightBlack8}>
+              <Text variant={TextBase1624Medium} color={ColorLightBlack8} isEllipsis>
                 {item.name}
               </Text>
             </S.IconTextGroup>
