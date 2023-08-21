@@ -11,6 +11,7 @@ import {
   ColorLightBlack8,
   ColorLightBlack9Base,
   ColorLightEltern9Base,
+  ColorLightSlate2,
   ColorLightSlate8,
   TextBase1624Medium,
   TextBase1624Regular,
@@ -94,7 +95,7 @@ const PaymentPage = () => {
           </S.MainImageWrapper>
         </S.ProgramInfoSection>
       </S.Section>
-      <EmptyBox />
+      <EmptyBox backgroundColor={ColorLightSlate2} />
       <S.Section>
         <Text variant={TextBase1624Semibold} color={ColorLightBlack9Base}>
           아이 정보
@@ -115,7 +116,7 @@ const PaymentPage = () => {
           *
         </Text>
       </S.Section>
-      <EmptyBox />
+      <EmptyBox backgroundColor={ColorLightSlate2} />
       <S.Section>
         <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
           쿠폰
@@ -138,7 +139,7 @@ const PaymentPage = () => {
           <Icon icon={"chevron-down"} size={24} fill={ColorLightSlate8} />
         </S.CouponBox>
       </S.Section>
-      <EmptyBox />
+      <EmptyBox backgroundColor={ColorLightSlate2} />
       <S.Section>
         <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
           결제 방법
@@ -170,7 +171,7 @@ const PaymentPage = () => {
           </S.PaymentBtn>
         </S.PaymentMethodSection>
       </S.Section>
-      <EmptyBox />
+      <EmptyBox backgroundColor={ColorLightSlate2} />
       <S.Section>
         <S.TitleSection>
           <Text variant={TextLg1826Semibold} color={ColorLightBlack9Base}>
@@ -212,7 +213,7 @@ const PaymentPage = () => {
           </S.Price>
         </S.TotalPriceSection>
       </S.Section>
-      <EmptyBox />
+      <EmptyBox backgroundColor={ColorLightSlate2} />
       <S.Section style={{ padding: "1.6rem 0 3rem 0" }}>
         <UseImgix srcUrl={"/images/checklist_before_payment.svg"} style={{ width: "100%" }} />
       </S.Section>
