@@ -119,5 +119,38 @@
       font-size: 1.8rem;
       line-height: 2.8rem;
     }
+
+    ul[data-task-list] {
+      padding-left: 2.6rem;
+    }
+    li[data-task-list-item] {
+      list-style-type: none;
+      position: relative;
+    }
+    li[data-task-list-item] p {
+      min-height: 2.8rem;
+    }
+    li[data-task-list-item]::before {
+      content: "";
+      position: absolute;
+      top: 0.4rem;
+      left: -2.6rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 0.6rem;
+      border: 0.1rem solid #d7dbdf;
+    }
+    li[data-checked]::before {
+      content: "";
+      position: absolute;
+      top: 0.4rem;
+      left: -2.6rem;
+      width: 1.8rem;
+      height: 1.8rem;
+      border-radius: 0.6rem;
+      border: 0.1rem solid #00c7b1;
+      background: url("https://lumanlab.imgix.net/eltern/images/check.svg") no-repeat 45% 40%;
+      background-color: #00c7b1;
+    }
   }
 }
