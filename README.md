@@ -17,7 +17,7 @@
 **프로젝트 clone**
 
 ```
-$ git clone git@github.com:dev-lumanlab/eltern-mobile-web-biz.git --recurse-submodules
+$ git clone ...
 $ git checkout dev
 ```
 
