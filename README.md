@@ -1,12 +1,6 @@
 # Repo 소개
 
-![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/e645e2d89e6d4a418f199e543c336332)](https://www.codacy.com?utm_source=github.com&utm_medium=referral&utm_content=dev-lumanlab/eltern-mobile-web&utm_campaign=Badge_Grade)
-
-[![Deploy - b/Product a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web/actions/workflows/deploy-product.yml) [![Deploy - b/Dev a/Deploy](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/deploy-dev.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/deploy-dev.yml) [![Monitor - b/feature(fix) a/Build](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/monitor-feat-fix.yml/badge.svg)](https://github.com/dev-lumanlab/eltern-mobile-web-biz/actions/workflows/monitor-feat-fix.yml)
-
-### 엘턴 B2C(Biz)앱 웹뷰를 위한 repository입니다. ✨
+### Flutter 앱 내에 사용할 React 기반 Webview repository입니다. ✨
 
 ## 목차
 
@@ -90,10 +84,6 @@ npm run build
 - html { font-size: 2.6666vw } 적용 (핸드폰 가로일 경우는 font-size: 62.5%)
 - rem 단위 사용 (1rem = 10px)
 
-## 엘턴 피그마
-
-- 설계: https://www.figma.com/file/J9CtDX2VB2OoFyCoF8cVYK/%EA%B8%B0%ED%9A%8D
-- 디자인: https://www.figma.com/file/A6oZ2ekhqiuwF4UZMSKjoS/%EB%94%94%EC%9E%90%EC%9D%B8?node-id=103%3A18&t=PadbO6Py0kOBOyvz-0
 
 ## .gitmodules 파일은 있지만 경로에 폴더나 파일이 없을때 명령어
 
